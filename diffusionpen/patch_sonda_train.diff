@@ -1,0 +1,68 @@
+diff --git a/train.py b/train.py
+index 7a7cb08..9cdb435 100644
+--- a/train.py
++++ b/train.py
+@@ -578,6 +578,13 @@ def main():
+     parser.add_argument('--stable_dif_path', type=str, default='./stable-diffusion-v1-5')
+     parser.add_argument('--train_mode', type=str, default='train', help='train, sampling')
+     parser.add_argument('--sampling_mode', type=str, default='single_sampling', help='single_sampling (generate single image), paragraph (generate paragraph)')
++    # --- adicionado para a sonda de diacriticos (Fase 2) ---
++    parser.add_argument('--sonda_manifest', type=str, default=None,
++                        help='JSON com a lista de itens da sonda a gerar')
++    parser.add_argument('--sonda_out', type=str, default='./sonda_out',
++                        help='diretorio de saida das imagens da sonda')
++    parser.add_argument('--sonda_style', type=int, default=12,
++                        help='indice fixo da classe de estilo (mesmo estilo p/ todas as palavras)')
+     
+     args = parser.parse_args()
+     
+@@ -740,6 +747,49 @@ def main():
+                 save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
+ 
+         
++        elif args.sampling_mode == 'sonda':
++            # Sonda de diacriticos (Fase 2). Le um manifesto JSON e gera cada
++            # item com estilo FIXO e seed controlada, para que a unica variavel
++            # entre imagens seja o texto pedido (e a seed, quando comparando
++            # variacao aleatoria).
++            with open(args.sonda_manifest, 'r', encoding='utf-8') as f:
++                sonda_itens = json.load(f)
++
++            out_dir = args.sonda_out
++            os.makedirs(out_dir, exist_ok=True)
++            print(f'sonda: {len(sonda_itens)} itens -> {out_dir}')
++
++            s = args.sonda_style
++            labels = torch.tensor([s]).long().to(args.device)
++
++            for i, item in enumerate(sonda_itens, 1):
++                palavra = item['palavra']
++                seed = int(item['seed'])
++                destino = os.path.join(out_dir, item['arquivo'])
++                if os.path.exists(destino):
++                    print(f"[{i}/{len(sonda_itens)}] pulando (ja existe) {item['arquivo']}")
++                    continue
++
++                # random.seed fixo -> as 5 imagens de estilo escolhidas em
++                # sampling() sao SEMPRE as mesmas. torch.manual_seed(seed) ->
++                # varia so o ruido inicial da difusao.
++                random.seed(args.sonda_style)
++                np.random.seed(args.sonda_style)
++                torch.manual_seed(seed)
++                if torch.cuda.is_available():
++                    torch.cuda.manual_seed_all(seed)
++
++                print(f"[{i}/{len(sonda_itens)}] '{palavra}' seed={seed} estilo={s}")
++                imgs = diffusion.sampling(
++                    ema_model, vae, n=len(labels), x_text=palavra, labels=labels,
++                    args=args, style_extractor=feature_extractor,
++                    noise_scheduler=ddim, transform=transform,
++                    character_classes=None, tokenizer=tokenizer,
++                    text_encoder=text_encoder, run_idx=None)
++                save_single_images(imgs, destino, args)
++
++            print('sonda concluida')
++
+         elif args.sampling_mode == 'paragraph':
+             print('Sampling paragraph')
+             #make the code to generate lines

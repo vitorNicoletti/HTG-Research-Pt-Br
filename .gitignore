@@ -1,0 +1,19 @@
+# repos clonados dos geradores (clonar via LOG.md, nao versionar)
+diffusionpen/DiffusionPen/
+vatr/VATr-pp/
+
+# pesos e datasets
+*.pth
+*.pt
+*.pickle
+saved_iam_data/
+style_models/
+diffusionpen_iam_model_path/
+
+# saidas geradas
+saidas/**/*.png
+saidas/**/*.json
+
+# ambientes
+venv-*/
+__pycache__/
