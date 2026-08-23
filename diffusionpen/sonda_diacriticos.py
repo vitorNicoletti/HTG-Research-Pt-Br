@@ -13,6 +13,7 @@ Uso (a partir da raiz do projeto):
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -35,6 +36,41 @@ def construir_manifesto():
         }
         for grupo, palavra, seed in P.itens()
     ]
+
+
+def _env_rocm():
+    """Ambiente necessario para o ROCm nesta maquina (WSL, instalacao minima,
+    sem sudo). Ver LOG.md secao 'MIOpen JIT'.
+
+    - LD_LIBRARY_PATH: libgomp.so.1, que o torch exige e o WSL nao traz.
+    - CPLUS_INCLUDE_PATH: nao ha kernel de batch_norm pre-compilado para
+      gfx1200, entao o MIOpen compila em runtime via HIPRTC e precisa dos
+      headers de C++ e da glibc. O clang do HIPRTC honra esta variavel.
+
+    Todos extraidos em ~/htg-tcc/syslibs com `apt-get download` + `dpkg -x`
+    (nenhum exige root).
+    """
+    env = os.environ.copy()
+    r = Path.home() / "htg-tcc" / "syslibs" / "root"
+    if not r.exists():
+        return env
+
+    libs = r / "usr" / "lib" / "x86_64-linux-gnu"
+    if libs.exists():
+        ant = env.get("LD_LIBRARY_PATH", "")
+        env["LD_LIBRARY_PATH"] = f"{libs}:{ant}" if ant else str(libs)
+
+    incs = [d for d in (
+        r / "usr" / "include" / "c++" / "16",
+        r / "usr" / "include" / "x86_64-linux-gnu" / "c++" / "16",
+        r / "usr" / "include" / "x86_64-linux-gnu",
+        r / "usr" / "include",
+    ) if d.exists()]
+    if incs:
+        ant = env.get("CPLUS_INCLUDE_PATH", "")
+        cam = ":".join(str(d) for d in incs)
+        env["CPLUS_INCLUDE_PATH"] = f"{cam}:{ant}" if ant else cam
+    return env
 
 
 def main():
@@ -88,7 +124,7 @@ def main():
         return
 
     print(f"\nexecutando em {REPO} ...\n")
-    r = subprocess.run(cmd, cwd=REPO)
+    r = subprocess.run(cmd, cwd=REPO, env=_env_rocm())
     if r.returncode != 0:
         sys.exit(f"FALHA: train.py saiu com codigo {r.returncode}")
 

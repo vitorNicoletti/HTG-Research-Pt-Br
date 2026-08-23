@@ -89,76 +89,71 @@ Duas causas independentes:
    `repo.radeon.com` (verificado em `rocm/apt/{latest,7.2.4,7.2.3,7.2.1}` e em
    `amdgpu/latest/ubuntu`). Só `noble` (24.04) e `jammy` (22.04) existem.
 
-### Solução: **Docker** (revisada — supera a ideia de instalar outra distro)
+### Solução adotada: **ROCm via pip, sem Docker** (revisão 2)
 
-O caminho documentado pela AMD em `github.com/ROCm/librocdxg` dispensa trocar de
-distro. O host precisa apenas de **uma biblioteca**, não da pilha ROCm inteira.
-
-Inspecionado o pacote `rocdxg-roct_1.2.2_amd64.deb` (181 KB, release de
-2026-08-05): **não tem campo `Depends:`** e instala exatamente três coisas —
-as mesmas que o container monta:
+A imagem `rocm/pytorch` de 19,3 GB foi **descartada**. Inspeção do config da
+imagem revelou a causa do tamanho:
 
 ```
-/opt/rocm/lib/librocdxg.so
-/opt/rocm/share/rocdxg/dids.conf
-/etc/ld.so.conf.d/x86_64-libhsakmt.conf
+AMDGPU_FAMILY=device-all
+INDEX_URL=https://repo.amd.com/rocm/whl-multi-arch
 ```
 
-Ou seja: o problema do repositório ausente para `resolute` **deixa de existir**,
-porque o host não precisa do apt da AMD. Toda a pilha ROCm + PyTorch vem dentro
-da imagem, que é construída sobre Ubuntu 24.04 (uma distro suportada).
+`device-all` = kernels de GPU pré-compilados para **todas** as arquiteturas AMD
+(Instinct gfx90a/942/950, RDNA2, RDNA3, APUs Strix...). Uma única camada da
+imagem tem 18,82 GB. Precisamos de exatamente uma arquitetura: gfx1200.
+
+A AMD publica índices **por família** em `repo.amd.com/rocm/whl/`. O nosso é
+`gfx120X-all` (RDNA4). Tamanhos medidos individualmente:
+
+| pacote | tamanho |
+|---|---|
+| `torch-2.9.1+rocm7.13.0` (cp312) | 340 MB |
+| `rocm_sdk_libraries_gfx120x_all` | 1062 MB |
+| `rocm_sdk_core` | 414 MB |
+| `pytorch_triton_rocm` | 320 MB |
+| `torchvision-0.26.0` | 1 MB |
+| **total** | **≈ 2,2 GB** (9× menor) |
+
+**Consequência importante:** `rocm-sdk-core` e `rocm-sdk-libraries` são wheels
+Python. O ROCm vem pelo **pip**, não pelo apt — logo o repositório ausente para
+`resolute` (Ubuntu 26.04) **deixa de ser um problema**, e o Docker torna-se
+desnecessário. Sem Docker Desktop, sem integração WSL, sem segunda distro.
 
 #### Passos
 
 ```bash
-# 1. No host (Ubuntu 26.04 atual) - EXIGE SUDO, mas e um comando so
+# 1. Unico passo com sudo (181 KB, sem dependencias) - FEITO em 2026-08-20
 wget https://github.com/ROCm/librocdxg/releases/download/v1.2.2/rocdxg-roct_1.2.2_amd64.deb
 sudo dpkg -i rocdxg-roct_1.2.2_amd64.deb
 
-# 2. Docker precisa estar operacional dentro desta distro
-#    O Docker Desktop esta instalado no Windows mas PARADO e sem integracao WSL.
-#    Iniciar o Docker Desktop e marcar a integracao para a distro "Ubuntu",
-#    ou instalar docker.io na distro (tambem exige sudo).
-
-# 3. Rodar o container
-docker run -it \
-    -v /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so \
-    -v /opt/rocm/lib/librocdxg.so:/usr/lib/librocdxg.so \
-    -v /opt/rocm/share/rocdxg/dids.conf:/usr/share/rocdxg/dids.conf \
-    --device=/dev/dxg \
-    --cap-add=SYS_PTRACE \
-    --security-opt seccomp=unconfined \
-    --ipc=host \
-    --shm-size 8G \
-    -v $HOME/htg-tcc:/workspace \
-    rocm/pytorch:rocm7.14_ubuntu24.04_py3.12_pytorch_release_2.11.0
+# 2. Resto em user-space
+uv venv --clear --python 3.12 venv-diffpen
+uv pip install --python ./venv-diffpen/bin/python \
+  torch torchvision pytorch-triton-rocm \
+  --index-url https://repo.amd.com/rocm/whl/gfx120X-all/
 ```
 
-#### Imagem escolhida e por quê
+Verificado no host em 2026-08-20:
 
-`rocm/pytorch:rocm7.14_ubuntu24.04_py3.12_pytorch_release_2.11.0` (19.3 GB)
+```
+ii  rocdxg-roct  1.2.2  amd64  ROCDXG runtime libraries
+OK  /opt/rocm/lib/librocdxg.so
+OK  /opt/rocm/share/rocdxg/dids.conf
+OK  /etc/ld.so.conf.d/x86_64-libhsakmt.conf
+OK  /dev/dxg
+```
 
-| critério | situação |
-|---|---|
-| ROCm 7.14 | ≥ 7.2.1 exigido para gfx1200 ✅ |
-| ROCm ≥ 7.13 | dispensa `HSA_ENABLE_DXG_DETECTION=1` ✅ |
-| Ubuntu 24.04 | distro suportada pela AMD ✅ |
-| Python 3.12 | melhor cobertura de wheels da stack de ML ✅ |
-| PyTorch 2.11 | recente, compatível com diffusers/transformers atuais ✅ |
+#### Risco assumido
 
-Alternativa menor: `rocm7.2.4_ubuntu24.04_py3.12_pytorch_2.10.0_ORT_1.23.2` (10.7 GB).
+Este caminho (ROCm via pip + `librocdxg` no host) **não é o documentado pela
+AMD** — a documentação oficial descreve o fluxo Docker. É dedução a partir da
+organização dos pacotes. Ponto de falha possível: o `librocdxg` localizar o
+ROCm dentro do `site-packages` em vez de `/opt/rocm`.
 
-#### O que ainda exige o orientando
-
-- **`sudo dpkg -i`** do pacote rocdxg (1 comando)
-- **Docker operacional** na distro (iniciar Docker Desktop + integração WSL, ou
-  `apt install docker.io`)
-
-#### Riscos a validar quando destravar
-
-- Passagem de `/dev/dxg` através do Docker Desktop não foi testada nesta máquina.
-- `torch 2.13.0+rocm7.2` instalado em `venv-diffpen` é o **wheel errado** para
-  WSL; com o container ele deixa de ser usado (o venv pode ser descartado).
+Fallback caso falhe: Docker com a imagem menor
+`rocm/pytorch:rocm7.2.4_ubuntu24.04_py3.12_pytorch_2.10.0_ORT_1.23.2` (10,7 GB),
+com os mounts documentados em `github.com/ROCm/librocdxg`.
 
 ### Critério de destravamento
 Dentro do container: `python env/check_env.py` imprimir `gfx1200` e ~16 GB de

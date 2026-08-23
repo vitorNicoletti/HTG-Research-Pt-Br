@@ -1,5 +1,5 @@
 diff --git a/train.py b/train.py
-index 7a7cb08..9cdb435 100644
+index 7a7cb08..7247926 100644
 --- a/train.py
 +++ b/train.py
 @@ -578,6 +578,13 @@ def main():
@@ -16,7 +16,29 @@ index 7a7cb08..9cdb435 100644
      
      args = parser.parse_args()
      
-@@ -740,6 +747,49 @@ def main():
+@@ -680,9 +687,9 @@ def main():
+     #load from last checkpoint
+     
+     if args.load_check==True:
+-        unet.load_state_dict(torch.load(f'{args.save_path}/models/ckpt.pt'))
+-        optimizer.load_state_dict(torch.load(f'{args.save_path}/models/optim.pt'))
+-        ema_model.load_state_dict(torch.load(f'{args.save_path}/models/ema_ckpt.pt'))
++        unet.load_state_dict(torch.load(f'{args.save_path}/models/ckpt.pt', map_location=args.device))
++        optimizer.load_state_dict(torch.load(f'{args.save_path}/models/optim.pt', map_location=args.device))
++        ema_model.load_state_dict(torch.load(f'{args.save_path}/models/ema_ckpt.pt', map_location=args.device))
+         print('Loaded models and optimizer')
+     
+     if args.latent==True:
+@@ -725,7 +732,7 @@ def main():
+         
+         ema = EMA(0.995)
+         ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
+-        ema_model.load_state_dict(torch.load(f'{args.save_path}/models/ema_ckpt.pt'))
++        ema_model.load_state_dict(torch.load(f'{args.save_path}/models/ema_ckpt.pt', map_location=args.device))
+         ema_model.eval()
+         
+         if args.sampling_mode == 'single_sampling':
+@@ -740,6 +747,53 @@ def main():
                  save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
  
          
@@ -32,12 +54,13 @@ index 7a7cb08..9cdb435 100644
 +            os.makedirs(out_dir, exist_ok=True)
 +            print(f'sonda: {len(sonda_itens)} itens -> {out_dir}')
 +
-+            s = args.sonda_style
-+            labels = torch.tensor([s]).long().to(args.device)
-+
 +            for i, item in enumerate(sonda_itens, 1):
 +                palavra = item['palavra']
 +                seed = int(item['seed'])
++                # estilo por item (default = --sonda_style), para diagnostico
++                # comparativo sem recarregar o modelo a cada estilo
++                s = int(item.get('estilo', args.sonda_style))
++                labels = torch.tensor([s]).long().to(args.device)
 +                destino = os.path.join(out_dir, item['arquivo'])
 +                if os.path.exists(destino):
 +                    print(f"[{i}/{len(sonda_itens)}] pulando (ja existe) {item['arquivo']}")
@@ -46,8 +69,8 @@ index 7a7cb08..9cdb435 100644
 +                # random.seed fixo -> as 5 imagens de estilo escolhidas em
 +                # sampling() sao SEMPRE as mesmas. torch.manual_seed(seed) ->
 +                # varia so o ruido inicial da difusao.
-+                random.seed(args.sonda_style)
-+                np.random.seed(args.sonda_style)
++                random.seed(s)
++                np.random.seed(s)
 +                torch.manual_seed(seed)
 +                if torch.cuda.is_available():
 +                    torch.cuda.manual_seed_all(seed)
@@ -59,10 +82,31 @@ index 7a7cb08..9cdb435 100644
 +                    noise_scheduler=ddim, transform=transform,
 +                    character_classes=None, tokenizer=tokenizer,
 +                    text_encoder=text_encoder, run_idx=None)
-+                save_single_images(imgs, destino, args)
++                # save_single_images() e referenciada em train.py:747 mas nunca
++                # definida no repo - o single_sampling original nao roda.
++                # save_images() e a funcao equivalente que existe de fato.
++                save_images(imgs, destino, args)
 +
 +            print('sonda concluida')
 +
          elif args.sampling_mode == 'paragraph':
              print('Sampling paragraph')
              #make the code to generate lines
+diff --git a/utils/word_dataset.py b/utils/word_dataset.py
+index 0b462b5..9e9becd 100644
+--- a/utils/word_dataset.py
++++ b/utils/word_dataset.py
+@@ -106,7 +106,12 @@ class WordLineDataset(Dataset):
+             data = self.main_loader(self.subset, self.segmentation_level)
+             torch.save(data, save_file)   #Uncomment this in 'release' version
+         else:
+-            data = torch.load(save_file)
++            # COMPAT PyTorch >= 2.6: o default de weights_only virou True.
++            # Este .pt e o dataset IAM pre-processado e contem objetos
++            # PIL.Image, que o unpickler restrito rejeita. Arquivo baixado
++            # do repo oficial dos autores (hf.co/konnik/DiffusionPen).
++            # Nao altera comportamento generativo.
++            data = torch.load(save_file, weights_only=False)
+         
+         #data = self.main_loader(self.subset, self.segmentation_level)
+         self.data = data
