@@ -1,0 +1,32 @@
+[
+  {
+    "grupo": "smoke",
+    "palavra": "hello",
+    "seed": 0,
+    "arquivo": "hello.png"
+  },
+  {
+    "grupo": "smoke",
+    "palavra": "world",
+    "seed": 0,
+    "arquivo": "world.png"
+  },
+  {
+    "grupo": "smoke",
+    "palavra": "research",
+    "seed": 0,
+    "arquivo": "research.png"
+  },
+  {
+    "grupo": "smoke",
+    "palavra": "handwriting",
+    "seed": 0,
+    "arquivo": "handwriting.png"
+  },
+  {
+    "grupo": "smoke",
+    "palavra": "sample",
+    "seed": 0,
+    "arquivo": "sample.png"
+  }
+]

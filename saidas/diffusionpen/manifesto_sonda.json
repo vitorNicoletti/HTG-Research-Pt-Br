@@ -1,0 +1,362 @@
+[
+  {
+    "grupo": "controle",
+    "palavra": "casa",
+    "seed": 0,
+    "arquivo": "controle__casa__seed0.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "casa",
+    "seed": 1,
+    "arquivo": "controle__casa__seed1.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "casa",
+    "seed": 2,
+    "arquivo": "controle__casa__seed2.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "pato",
+    "seed": 0,
+    "arquivo": "controle__pato__seed0.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "pato",
+    "seed": 1,
+    "arquivo": "controle__pato__seed1.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "pato",
+    "seed": 2,
+    "arquivo": "controle__pato__seed2.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "vento",
+    "seed": 0,
+    "arquivo": "controle__vento__seed0.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "vento",
+    "seed": 1,
+    "arquivo": "controle__vento__seed1.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "vento",
+    "seed": 2,
+    "arquivo": "controle__vento__seed2.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "nacao",
+    "seed": 0,
+    "arquivo": "controle__nacao__seed0.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "nacao",
+    "seed": 1,
+    "arquivo": "controle__nacao__seed1.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "nacao",
+    "seed": 2,
+    "arquivo": "controle__nacao__seed2.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "coracao",
+    "seed": 0,
+    "arquivo": "controle__coracao__seed0.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "coracao",
+    "seed": 1,
+    "arquivo": "controle__coracao__seed1.png"
+  },
+  {
+    "grupo": "controle",
+    "palavra": "coracao",
+    "seed": 2,
+    "arquivo": "controle__coracao__seed2.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "mão",
+    "seed": 0,
+    "arquivo": "til__mu00e3o__seed0.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "mão",
+    "seed": 1,
+    "arquivo": "til__mu00e3o__seed1.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "mão",
+    "seed": 2,
+    "arquivo": "til__mu00e3o__seed2.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "pão",
+    "seed": 0,
+    "arquivo": "til__pu00e3o__seed0.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "pão",
+    "seed": 1,
+    "arquivo": "til__pu00e3o__seed1.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "pão",
+    "seed": 2,
+    "arquivo": "til__pu00e3o__seed2.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "nação",
+    "seed": 0,
+    "arquivo": "til__nau00e7u00e3o__seed0.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "nação",
+    "seed": 1,
+    "arquivo": "til__nau00e7u00e3o__seed1.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "nação",
+    "seed": 2,
+    "arquivo": "til__nau00e7u00e3o__seed2.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "irmã",
+    "seed": 0,
+    "arquivo": "til__irmu00e3__seed0.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "irmã",
+    "seed": 1,
+    "arquivo": "til__irmu00e3__seed1.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "irmã",
+    "seed": 2,
+    "arquivo": "til__irmu00e3__seed2.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "põe",
+    "seed": 0,
+    "arquivo": "til__pu00f5e__seed0.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "põe",
+    "seed": 1,
+    "arquivo": "til__pu00f5e__seed1.png"
+  },
+  {
+    "grupo": "til",
+    "palavra": "põe",
+    "seed": 2,
+    "arquivo": "til__pu00f5e__seed2.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "coração",
+    "seed": 0,
+    "arquivo": "cedilha__corau00e7u00e3o__seed0.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "coração",
+    "seed": 1,
+    "arquivo": "cedilha__corau00e7u00e3o__seed1.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "coração",
+    "seed": 2,
+    "arquivo": "cedilha__corau00e7u00e3o__seed2.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "ação",
+    "seed": 0,
+    "arquivo": "cedilha__au00e7u00e3o__seed0.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "ação",
+    "seed": 1,
+    "arquivo": "cedilha__au00e7u00e3o__seed1.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "ação",
+    "seed": 2,
+    "arquivo": "cedilha__au00e7u00e3o__seed2.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "março",
+    "seed": 0,
+    "arquivo": "cedilha__maru00e7o__seed0.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "março",
+    "seed": 1,
+    "arquivo": "cedilha__maru00e7o__seed1.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "março",
+    "seed": 2,
+    "arquivo": "cedilha__maru00e7o__seed2.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "praça",
+    "seed": 0,
+    "arquivo": "cedilha__prau00e7a__seed0.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "praça",
+    "seed": 1,
+    "arquivo": "cedilha__prau00e7a__seed1.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "praça",
+    "seed": 2,
+    "arquivo": "cedilha__prau00e7a__seed2.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "força",
+    "seed": 0,
+    "arquivo": "cedilha__foru00e7a__seed0.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "força",
+    "seed": 1,
+    "arquivo": "cedilha__foru00e7a__seed1.png"
+  },
+  {
+    "grupo": "cedilha",
+    "palavra": "força",
+    "seed": 2,
+    "arquivo": "cedilha__foru00e7a__seed2.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "você",
+    "seed": 0,
+    "arquivo": "agudo_circunflexo__vocu00ea__seed0.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "você",
+    "seed": 1,
+    "arquivo": "agudo_circunflexo__vocu00ea__seed1.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "você",
+    "seed": 2,
+    "arquivo": "agudo_circunflexo__vocu00ea__seed2.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "café",
+    "seed": 0,
+    "arquivo": "agudo_circunflexo__cafu00e9__seed0.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "café",
+    "seed": 1,
+    "arquivo": "agudo_circunflexo__cafu00e9__seed1.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "café",
+    "seed": 2,
+    "arquivo": "agudo_circunflexo__cafu00e9__seed2.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "três",
+    "seed": 0,
+    "arquivo": "agudo_circunflexo__tru00eas__seed0.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "três",
+    "seed": 1,
+    "arquivo": "agudo_circunflexo__tru00eas__seed1.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "três",
+    "seed": 2,
+    "arquivo": "agudo_circunflexo__tru00eas__seed2.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "histórico",
+    "seed": 0,
+    "arquivo": "agudo_circunflexo__histu00f3rico__seed0.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "histórico",
+    "seed": 1,
+    "arquivo": "agudo_circunflexo__histu00f3rico__seed1.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "histórico",
+    "seed": 2,
+    "arquivo": "agudo_circunflexo__histu00f3rico__seed2.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "português",
+    "seed": 0,
+    "arquivo": "agudo_circunflexo__portuguu00eas__seed0.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "português",
+    "seed": 1,
+    "arquivo": "agudo_circunflexo__portuguu00eas__seed1.png"
+  },
+  {
+    "grupo": "agudo_circunflexo",
+    "palavra": "português",
+    "seed": 2,
+    "arquivo": "agudo_circunflexo__portuguu00eas__seed2.png"
+  }
+]
