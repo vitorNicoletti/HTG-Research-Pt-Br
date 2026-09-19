@@ -29,9 +29,8 @@ from torch.nn import DataParallel
 
 # O train.py faz "from unet import UNetModel", entao o diretorio dele
 # precisa estar no path.
-REPO = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "diffusionpen", "DiffusionPen"
-)
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO = os.path.join(RAIZ, "DiffusionPen")
 sys.path.insert(0, REPO)
 
 from unet import UNetModel
@@ -42,9 +41,9 @@ from utils.bressay_dataset import BRESSAY_Dataset
 # ============================ CONFIGURACAO ============================
 # Caminhos e saida vem da linha de comando (--ckpt / --out). Aqui ficam so as
 # constantes que precisam casar com o treino.
-STYLE_PATH = "./style_models/mixed_bressay_mobilenetv2_100.pth"
+STYLE_PATH = os.path.join(RAIZ, "style_models", "mixed_bressay_mobilenetv2_100.pth")
 STABLE_DIF = "runwayml/stable-diffusion-v1-5"
-DATASET_FOLDER = "./bressay_split"
+DATASET_FOLDER = os.path.join(RAIZ, "bressay_split")
 
 # Palavras de teste: as cinco primeiras exercitam os diacriticos (til, cedilha,
 # agudo, circunflexo), que sao o objetivo do trabalho; "text" e controle ASCII.

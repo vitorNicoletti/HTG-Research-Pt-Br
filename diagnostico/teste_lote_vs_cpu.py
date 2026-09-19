@@ -8,8 +8,9 @@ import os, sys, argparse, torch, torch.nn as nn
 from torch.nn import DataParallel
 from transformers import CanineModel, CanineTokenizer
 
-sys.path.insert(0, "/home/leo/repos/htg-tcc/diffusionpen/DiffusionPen")
-os.chdir("/home/leo/repos/htg-tcc")
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(RAIZ, "DiffusionPen"))
+os.chdir(RAIZ)
 from unet import UNetModel
 
 CKPT = os.environ.get("CKPT", "")

@@ -759,7 +759,7 @@ class BressayDataset_style(WordLineDataset):
         
         # O basefolder passado será './bressay_split'
         self.tsv_file = os.path.join(self.basefolder, 'splits', f'{subset}.tsv')
-        self.images_root = '/home/leo/repos/htg-tcc/bressay/data/words'
+        self.images_root = os.environ.get("BRESSAY_IMAGES", "./bressay/data/words")
         
         super().__finalize__()
 

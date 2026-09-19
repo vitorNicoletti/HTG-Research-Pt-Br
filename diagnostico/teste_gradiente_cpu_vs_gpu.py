@@ -28,7 +28,8 @@ import os
 import sys
 import argparse
 
-REPO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "diffusionpen", "DiffusionPen")
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO = os.path.join(RAIZ, "DiffusionPen")
 sys.path.insert(0, REPO)
 
 import torch

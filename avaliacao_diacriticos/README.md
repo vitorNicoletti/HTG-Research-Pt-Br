@@ -4,7 +4,7 @@ Instrumento para medir se um gerador de manuscrito desenha os diacríticos do
 português. Não depende de o fine-tune ter dado certo: ele mede, e o resultado
 pode perfeitamente ser "não deu".
 
-Nada aqui toca o treino nem `diffusionpen/DiffusionPen/train.py`.
+Nada aqui toca o treino nem `DiffusionPen/train.py`.
 
 ## A ideia
 

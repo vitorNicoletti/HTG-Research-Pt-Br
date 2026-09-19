@@ -52,17 +52,19 @@ em inglês, as amostras geradas são quase indistinguíveis das reais do IAM.
 env/check_env.py              verificação de GPU/ROCm (aborta se cair para CPU)
 comum/palavras.py             lista canônica da sonda (4 grupos, pares mínimos, 3 seeds)
 comum/folha_contato.py        monta a folha de contato para inspeção visual
-diffusionpen/smoke_test.py    Fase 1 — 5 palavras em inglês
-diffusionpen/sonda_diacriticos.py   Fase 2 — 60 imagens da sonda
-diffusionpen/patches_diffusionpen.diff   patch aditivo do DiffusionPen (sonda)
+sonda/smoke_test.py           Fase 1 — 5 palavras em inglês
+sonda/sonda_diacriticos.py    Fase 2 — 60 imagens da sonda
+sonda/patches_diffusionpen.diff   patch aditivo do DiffusionPen (sonda)
 saidas/                       imagens geradas, manifestos e folhas de contato
 
+DiffusionPen/                 o clone do gerador (não versionado)
 bressay_split/                splits do BRESSAY (disjuntos por escritor)
 diffusionpen_mods/            correções do DiffusionPen para o fine-tune
 diagnostico/                  testes de sanidade numérica da GPU
 avaliacao_diacriticos/        métrica de diacríticos (E1, E2, kappa)
-treinar_v2.sh                 fine-tune em blocos, com verificação por geração
-gerar_amostras.py             geração a partir de um checkpoint
+scripts/treinar.sh            fine-tune em blocos, com verificação por geração
+scripts/gerar_amostras.py     geração a partir de um checkpoint
+scripts/preparar_split.py     monta os splits do BRESSAY
 
 LOG.md                        diário de execução (reprodutibilidade)
 ACHADOS.md                    achados técnicos consolidados
@@ -105,14 +107,14 @@ python env/check_env.py        # deve imprimir gfx1200 e sair com código 0
 python diagnostico/teste_conv_isolada.py   # sanidade numérica
 
 # 3. clonar o DiffusionPen e aplicar o patch
-git clone --depth 1 https://github.com/koninik/DiffusionPen.git diffusionpen/DiffusionPen
-cd diffusionpen/DiffusionPen && git apply ../patches_diffusionpen.diff && cd ../..
+git clone --depth 1 https://github.com/koninik/DiffusionPen.git DiffusionPen
+cd DiffusionPen && git apply ../sonda/patches_diffusionpen.diff && cd ..
 
 # 4. artefatos externos (não versionados — ver "Pesos e dados" abaixo)
 
 # 5. executar
-python diffusionpen/smoke_test.py            # Fase 1 (inspecionar as 5 imagens)
-python diffusionpen/sonda_diacriticos.py     # Fase 2
+python sonda/smoke_test.py            # Fase 1 (inspecionar as 5 imagens)
+python sonda/sonda_diacriticos.py     # Fase 2
 python comum/folha_contato.py saidas/diffusionpen/sonda
 ```
 
@@ -125,8 +127,8 @@ Não são commitados por tamanho (~7,4 GB). Procedência:
 
 | Artefato | Origem | Destino |
 |---|---|---|
-| Pesos do DiffusionPen | `huggingface.co/konnik/DiffusionPen` | raiz de `diffusionpen/DiffusionPen/` |
-| IAM `words.tgz` | `fki.tic.heia-fr.ch` (exige registro) | `diffusionpen/DiffusionPen/iam_data/words/` |
+| Pesos do DiffusionPen | `huggingface.co/konnik/DiffusionPen` | raiz de `DiffusionPen/` |
+| IAM `words.tgz` | `fki.tic.heia-fr.ch` (exige registro) | `DiffusionPen/iam_data/words/` |
 | VAE + scheduler do SD 1.5 | `huggingface.co/stable-diffusion-v1-5` | apontar com `--stable_dif_path` |
 
 Arquivos necessários para amostragem: `saved_iam_data/train_word_IAM.pt`,

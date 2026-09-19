@@ -37,7 +37,7 @@ from diffusers import AutoencoderKL, DDIMScheduler
 from transformers import CanineModel, CanineTokenizer
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-REPO = os.path.join(RAIZ, "diffusionpen", "DiffusionPen")
+REPO = os.path.join(RAIZ, "DiffusionPen")
 sys.path.insert(0, REPO)
 
 from unet import UNetModel                      # noqa: E402

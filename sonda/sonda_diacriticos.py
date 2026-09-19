@@ -1,11 +1,14 @@
-"""Fase 1 - smoke test do DiffusionPen (ingles, pesos IAM prontos).
+"""Fase 2 - sonda de diacriticos do DiffusionPen.
 
-Gera 5 palavras em ingles. Se isto funcionar, VAE + UNet + encoder CANINE +
-sampler DDIM estao todos operacionais, e qualquer falha na Fase 2 pode ser
-atribuida ao diacritico e nao ao setup.
+Gera o manifesto da sonda a partir de comum/palavras.py e invoca o
+sampling_mode 'sonda' adicionado ao train.py (ver patch_sonda_train.diff).
+
+Roda o modelo UMA vez para todos os 60 itens - carregar UNet + VAE + CANINE por
+palavra seria absurdamente lento.
 
 Uso (a partir da raiz do projeto):
-    python diffusionpen/smoke_test.py
+    python diffusionpen/sonda_diacriticos.py
+    python diffusionpen/sonda_diacriticos.py --style 12 --dry-run
 """
 
 import argparse
@@ -16,10 +19,23 @@ import sys
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
-REPO = RAIZ / "diffusionpen" / "DiffusionPen"
-SAIDA = RAIZ / "saidas" / "diffusionpen" / "smoke"
+sys.path.insert(0, str(RAIZ / "comum"))
+import palavras as P  # noqa: E402
 
-PALAVRAS = ["hello", "world", "research", "handwriting", "sample"]
+REPO = RAIZ / "DiffusionPen"
+SAIDA = RAIZ / "saidas" / "diffusionpen" / "sonda"
+
+
+def construir_manifesto():
+    return [
+        {
+            "grupo": grupo,
+            "palavra": palavra,
+            "seed": seed,
+            "arquivo": P.nome_arquivo(grupo, palavra, seed),
+        }
+        for grupo, palavra, seed in P.itens()
+    ]
 
 
 def _env_rocm():
@@ -59,16 +75,18 @@ def _env_rocm():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--style", type=int, default=-1,
-                    help="indice da classe de estilo (0-338). -1 = aleatorio "
-                         "por palavra, como fazia o single_sampling original")
+    ap.add_argument("--style", type=int, default=12,
+                    help="indice da classe de estilo, fixo para toda a sonda")
     ap.add_argument("--device", type=str, default="cuda:0")
-    ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="so escreve o manifesto e imprime o comando")
     args = ap.parse_args()
 
     if not REPO.exists():
         sys.exit(f"FALHA: repo nao encontrado em {REPO}")
 
+    # Pesos que o README exige. Checar antes evita descobrir que faltam depois
+    # de 40 minutos de geracao.
     faltando = [d for d in ("saved_iam_data", "style_models",
                             "diffusionpen_iam_model_path")
                 if not (REPO / d).exists()]
@@ -78,59 +96,45 @@ def main():
                  + "\nBaixe de https://huggingface.co/konnik/DiffusionPen")
 
     SAIDA.mkdir(parents=True, exist_ok=True)
-    # -1 replica o comportamento do single_sampling original, que sorteava um
-    # estilo por palavra. Util no smoke test: expoe a variacao entre escritores.
-    # A sonda da Fase 2 NAO usa isso - la o estilo precisa ser fixo.
-    import random as _rnd
-    if args.style < 0:
-        _rnd.seed(0)  # sorteio aleatorio mas reproduzivel
-        estilos = [_rnd.randint(0, 338) for _ in PALAVRAS]
-    else:
-        estilos = [args.style] * len(PALAVRAS)
+    manifesto = construir_manifesto()
+    caminho_manifesto = SAIDA.parent / "manifesto_sonda.json"
+    caminho_manifesto.write_text(
+        json.dumps(manifesto, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    manifesto = [
-        {"grupo": "smoke", "palavra": p, "seed": 0, "estilo": e,
-         "arquivo": f"{p}__estilo{e:03d}.png"}
-        for p, e in zip(PALAVRAS, estilos)
-    ]
-    print("estilos sorteados:", dict(zip(PALAVRAS, estilos)))
-    caminho = SAIDA.parent / "manifesto_smoke.json"
-    caminho.write_text(json.dumps(manifesto, ensure_ascii=False, indent=2),
-                       encoding="utf-8")
+    print(f"manifesto: {caminho_manifesto}  ({len(manifesto)} itens)")
+    print(f"nao-ASCII exercitados: {' '.join(P.caracteres_nao_ascii())}")
+    print(f"estilo fixo: {args.style}   seeds: {P.SEEDS}")
 
     cmd = [
         sys.executable, "train.py",
         "--train_mode", "sampling",
         "--sampling_mode", "sonda",
-        "--sonda_manifest", str(caminho),
+        "--sonda_manifest", str(caminho_manifesto),
         "--sonda_out", str(SAIDA),
-        "--sonda_style", str(max(args.style, 0)),
+        "--sonda_style", str(args.style),
         "--save_path", "./diffusionpen_iam_model_path",
         "--style_path", "./style_models/iam_style_diffusionpen.pth",
         "--device", args.device,
     ]
 
     if args.dry_run:
-        print("comando (dry-run):")
+        print("\ncomando (dry-run):")
         print("  cd", REPO)
         print(" ", " ".join(cmd))
         return
 
+    print(f"\nexecutando em {REPO} ...\n")
     r = subprocess.run(cmd, cwd=REPO, env=_env_rocm())
     if r.returncode != 0:
         sys.exit(f"FALHA: train.py saiu com codigo {r.returncode}")
 
     gerados = sorted(SAIDA.glob("*.png"))
-    print(f"\nimagens geradas: {len(gerados)}/{len(PALAVRAS)}")
-    for g in gerados:
-        print("  ", g.name)
+    print(f"\nimagens geradas: {len(gerados)}/{len(manifesto)}")
+    if len(gerados) < len(manifesto):
+        print("AVISO: faltaram imagens - a folha de contato vai marcar 'ausente'")
 
-    if len(gerados) != len(PALAVRAS):
-        sys.exit("FALHA: nem todas as palavras foram geradas")
-
-    print("\nCRITERIO DE ACEITACAO: inspecione as 5 imagens.")
-    print("O texto tem de corresponder ao pedido e ser legivel.")
-    print("Se sair ruido -> pesos mal posicionados. NAO prosseguir para a Fase 2.")
+    print("\nproximo passo:")
+    print(f"  python comum/folha_contato.py {SAIDA}")
 
 
 if __name__ == "__main__":

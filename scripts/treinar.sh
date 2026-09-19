@@ -64,11 +64,11 @@ while true; do
   echo "=== bloco: $feitas epocas feitas, treinando mais $n ==="
 
   if [ "$feitas" -eq 0 ]; then
-    python diffusionpen/DiffusionPen/train.py "${comum[@]}" \
-      --pretrained_path ./diffusionpen/DiffusionPen/diffusionpen_iam_model_path/models \
+    python DiffusionPen/train.py "${comum[@]}" \
+      --pretrained_path ./DiffusionPen/diffusionpen_iam_model_path/models \
       --epochs "$n" 2>&1 | tee -a "$LOG"
   else
-    python diffusionpen/DiffusionPen/train.py "${comum[@]}" \
+    python DiffusionPen/train.py "${comum[@]}" \
       --load_check True --epochs "$n" 2>&1 | tee -a "$LOG"
   fi
 

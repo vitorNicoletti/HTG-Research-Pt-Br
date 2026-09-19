@@ -31,7 +31,7 @@ class BRESSAY_Dataset(Dataset):
 
         # Caminhos apontando para o setup local do BRESSAY
         self.tsv_file = os.path.join(basefolder, "splits", f"{subset}.tsv")
-        self.images_root = "/home/leo/repos/htg-tcc/bressay/data/words"
+        self.images_root = os.environ.get("BRESSAY_IMAGES", "./bressay/data/words")
 
         self.data = []
         self.writer_indices = {}

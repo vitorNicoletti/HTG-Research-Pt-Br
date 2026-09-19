@@ -70,7 +70,7 @@ acima de 40 caracteres, zero arquivos ausentes.
 
 ## O que foi arquivado e por quê
 
-Tudo em `~/repos/htg-tcc-arquivo/` (31 GB). **Movido, não apagado.**
+Tudo em `~/repos/htg-tcc-arquivo/` (37 GB). **Movido, não apagado.**
 
 | item | motivo |
 |---|---|
@@ -99,30 +99,30 @@ CKPT=<um .pt do unet> python diagnostico/teste_lote_unet.py
 
 # 3. clonar o DiffusionPen e aplicar as correções
 #    (ver README.md, seção "Reprodução")
-cp diffusionpen_mods/train.py                diffusionpen/DiffusionPen/
-cp diffusionpen_mods/style_encoder_train.py  diffusionpen/DiffusionPen/
-cp diffusionpen_mods/utils/bressay_dataset.py diffusionpen/DiffusionPen/utils/
+cp diffusionpen_mods/train.py                DiffusionPen/
+cp diffusionpen_mods/style_encoder_train.py  DiffusionPen/
+cp diffusionpen_mods/utils/bressay_dataset.py DiffusionPen/utils/
 
 # 4. baixar os pesos do DiffusionPen (huggingface.co/konnik/DiffusionPen)
 
 # 5. treinar o extrator de estilo no BRESSAY (~20-25 epocas bastam;
 #    depois disso ele overfita nos escritores vistos)
-python diffusionpen/DiffusionPen/style_encoder_train.py \
+python DiffusionPen/style_encoder_train.py \
   --dataset bressay --mode mixed --model mobilenetv2_100 \
   --epochs 25 --batch_size 64 --save_path ./style_models
 
 # 6. fine-tune, em blocos com verificacao por geracao
-./treinar_v2.sh
+./scripts/treinar.sh
 ```
 
 ### Notas de quem já rodou
 
-O `treinar_v2.sh` treina em blocos de 5 épocas e gera amostras ao fim de cada
+O `scripts/treinar.sh` treina em blocos de 5 épocas e gera amostras ao fim de cada
 um. Isso existe porque **o MSE não é sinal confiável de saúde**: já aconteceu
 de ele melhorar (0,0522 → 0,0404) enquanto o modelo perdia completamente a
 capacidade de gerar. O único teste que vale é gerar amostra e olhar.
 
-A geração usa `gerar_amostras.py --ckpt <arquivo.pt> --out <pasta>`. Semente e
+A geração usa `scripts/gerar_amostras.py --ckpt <arquivo.pt> --out <pasta>`. Semente e
 escritores são fixos, então checkpoints diferentes saem comparáveis.
 
 Avalie pelas palavras com diacrítico (`ação`, `não`, `avó`, `coração`), não
@@ -151,7 +151,7 @@ controle negativo, e é exatamente o que o trabalho quer superar.
 - **Nunca avalie um modelo pelo MSE.** Gere amostras.
 - **Não confie em grade de amostra gerada dentro do treino.** O
   `sampling_loader` do DiffusionPen tokeniza com `max_length=200` enquanto o
-  treino usa 40 — condicionamento diferente do treino. O `treinar_v2.sh`
+  treino usa 40 — condicionamento diferente do treino. O `scripts/treinar.sh`
   desliga essa amostragem e gera em processo separado.
 - **`--pretrained_path` e `--load_check` são mutuamente exclusivos.** No
   `train.py` o bloco do `pretrained_path` roda **depois** do `load_check` e

@@ -1,7 +1,7 @@
 # Correções aplicadas ao DiffusionPen
 
 O repositório do DiffusionPen é clonado à parte e fica no `.gitignore`
-(`diffusionpen/DiffusionPen/`). Estes arquivos são as versões **corrigidas** e
+(`DiffusionPen/`). Estes arquivos são as versões **corrigidas** e
 existem aqui para que as correções não se percam no re-clone e cheguem a quem
 for rodar o treino em outra máquina.
 
@@ -10,9 +10,9 @@ arquivos.
 
 | arquivo | destino no clone |
 |---|---|
-| `train.py` | `diffusionpen/DiffusionPen/train.py` |
-| `style_encoder_train.py` | `diffusionpen/DiffusionPen/style_encoder_train.py` |
-| `utils/bressay_dataset.py` | `diffusionpen/DiffusionPen/utils/bressay_dataset.py` |
+| `train.py` | `DiffusionPen/train.py` |
+| `style_encoder_train.py` | `DiffusionPen/style_encoder_train.py` |
+| `utils/bressay_dataset.py` | `DiffusionPen/utils/bressay_dataset.py` |
 
 ## O que foi corrigido, e por quê
 
