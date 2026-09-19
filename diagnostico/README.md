@@ -3,6 +3,32 @@
 **Rode isto em qualquer GPU nova antes de treinar nela.** São minutos, e evita
 semanas de resultados inexplicáveis.
 
+> ## Leia antes: o que reproduz e o que não reproduz
+>
+> **Reproduz sempre:** gradiente não-finito no *backward*.
+> `teste_gradiente_sintetico.py` dá **1/60 (2%)** nesta máquina, idêntico em
+> execuções repetidas, usando só o checkpoint público do DiffusionPen e dados
+> sintéticos. No treino real eram ~11% em todas as épocas. **É este o teste
+> para comparar máquinas** — e é este o fenômeno que inviabilizou os treinos.
+>
+> **NÃO reproduz sob demanda:** o erro do *forward* por tamanho de lote. Com
+> aquecimento de cada formato antes de medir, seis processos seguidos deram
+> ~3e-07 em todos os lotes — limpos. O erro de 9,71e-02 no lote 4 aparece
+> apenas em certas sequências de chamadas dentro do processo. O fenômeno é
+> real e foi medido mais de uma vez, mas depende do histórico de formatos
+> executados, o que é consistente com a hipótese de reuso de área temporária
+> de memória (*workspace*) e **não permite afirmar "o lote 4 sempre erra"**.
+>
+> Consequência para o texto do TCC: descreva o achado principal como
+> **gradientes não-finitos reprodutíveis no backward**, e trate a dependência
+> de lote no forward como observação secundária, com a ressalva de que ela é
+> intermitente.
+>
+> **Controle ainda pendente:** rodar `teste_gradiente_sintetico.py` com
+> `DEVICE=cpu`. Se a CPU também produzir gradiente não-finito, a causa é do
+> modelo ou da configuração, não da placa. É lento (minutos por passo), mas é
+> a medida que fecha o argumento.
+
 ## Resumo do que foi encontrado
 
 Todo o treino deste projeto até 19/09/2026 rodou numa **AMD Radeon RX 6600 XT**
