@@ -13,3 +13,12 @@ ckpt.pt: 457/457 chaves carregadas
   ep0 passo 25/200 | MSE 0.2269 | |grad| 2.0 | descartados 0 | 14.4s/passo | faltam ~42 min
   ep0 passo 50/200 | MSE 0.2143 | |grad| 1.7 | descartados 0 | 14.5s/passo | faltam ~36 min
   ep0 passo 75/200 | MSE 0.2072 | |grad| 1.1 | descartados 0 | 14.5s/passo | faltam ~30 min
+  ep0 passo 100/200 | MSE 0.2057 | |grad| 1.1 | descartados 0 | 14.5s/passo | faltam ~24 min
+  ep0 passo 125/200 | MSE 0.2002 | |grad| 1.2 | descartados 0 | 14.4s/passo | faltam ~18 min
+  ep0 passo 150/200 | MSE 0.1964 | |grad| 1.7 | descartados 0 | 14.2s/passo | faltam ~12 min
+  ep0 passo 175/200 | MSE 0.1945 | |grad| 1.2 | descartados 0 | 14.0s/passo | faltam ~6 min
+
+epoca 0: MSE 0.1914 | 0 batches descartados de 200 | |grad| mediana 1.2 max 2.2 | 47 min
+
+checkpoint salvo em ./model_cpu_lr3e7/models/
+
