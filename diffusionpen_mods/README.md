@@ -79,10 +79,14 @@ que mede se o embedding de estilo generaliza para escritores novos.
 ## Aviso sobre o hardware
 
 Todo o treino feito até aqui rodou numa AMD RX 6600 XT (ROCm), e essa placa
-**não computa este modelo de forma confiável**: com entradas idênticas, o
-forward do UNet varia entre execuções (erro relativo de 1,75e-03 a 1,08,
-dependendo do tamanho do lote), enquanto a CPU é estável (5,2e-07) e uma
-convolução isolada está correta (1,1e-06). Veja `diagnostico/`.
+**não computa este modelo corretamente com lote maior que 2**: comparando cada
+lote com o lote 1, a GPU erra 9,71e-02 no lote 4 e 3,09e-01 no lote 16,
+enquanto a CPU fica em 5,19e-07 no mesmo teste — uma diferença de 187 mil
+vezes. Lotes 1 e 2 estão corretos nos dois, e uma convolução isolada também
+(1,1e-06). Veja `diagnostico/`.
+
+Como o treino roda com `--batch_size 32`, todo forward e todo backward de todos
+os treinos feitos nesta máquina caíram na faixa defeituosa.
 
 Consequência prática: rode o teste mínimo de `diagnostico/` em qualquer placa
 nova **antes** de treinar nela.

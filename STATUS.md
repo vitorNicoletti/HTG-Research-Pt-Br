@@ -22,16 +22,22 @@ até agora é aproveitável. O próximo passo é repetir o treino numa GPU valid
 
 Medido em `diagnostico/`, com a CPU como referência:
 
-| teste | resultado | veredito |
-|---|---|---|
-| uma `Conv2d` isolada, CPU vs GPU | 1,1e-06 | correto |
-| UNet completo na CPU, lote 1 vs lote 4 | 5,2e-07 | a CPU independe do lote |
-| UNet completo na GPU, lote 1, vs CPU | 9,7e-07 | correto |
-| UNet completo na GPU, lote 4, vs CPU | 9,9e-02 | **errado** |
-| UNet completo na GPU, entradas idênticas, lotes 1 a 32 | **1,75e-03 a 1,08** | **instável** |
+A falha é **seletiva por tamanho de lote**. Comparando cada lote com o lote 1,
+na GPU e na CPU, com o mesmo checkpoint:
 
-Duas chamadas idênticas já divergem. Não é viés sistemático, é instabilidade.
-Uma convolução isolada passa, então o defeito aparece só no modelo completo.
+| lote | GPU | CPU | veredito |
+|---|---|---|---|
+| 2 | 2,91e-07 | 4,83e-07 | correto nos dois |
+| 4 | **9,71e-02** | 5,19e-07 | GPU errada, 187 mil vezes a CPU |
+| 16 | **3,09e-01** | — | GPU errada |
+
+Lotes 1 e 2 certos, lotes 4 e 16 errados. O lote 2 é o controle interno que
+descarta erro no próprio teste. Uma convolução isolada também passa (1,1e-06),
+então o defeito aparece só no modelo completo.
+
+Há ainda um transiente de primeira chamada por formato de lote, e
+irreprodutibilidade genuína no lote 16. Detalhes e a correção de uma afirmação
+anterior estão em `diagnostico/README.md`.
 
 **Isso explicou todos os sintomas que travaram o projeto:** ~11% dos batches
 com gradiente não-finito em todas as épocas; a qualidade piorando conforme
