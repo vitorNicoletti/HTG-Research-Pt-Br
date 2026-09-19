@@ -1,172 +1,257 @@
 # STATUS — onde a execução parou e como retomar
 
-**Atualizado:** 2026-09-19
-**Fase atual:** fine-tune executado; **bloqueado por hardware**
-**Bloqueio ativo:** 1 — a GPU de desenvolvimento não computa o modelo de forma confiável
-
-> O histórico das fases anteriores está no `LOG.md`. Este documento descreve
-> só o estado atual e o que fazer a seguir.
+**Atualizado:** 2026-08-19
+**Fase atual:** 0 (ambiente) — **bloqueada**
+**Bloqueios ativos:** 2, ambos dependem de ação do orientando
 
 ---
 
 ## Resumo em uma linha
 
-O pipeline completo roda de ponta a ponta — dados, extrator de estilo,
-fine-tune, geração e métrica — mas **a RX 6600 XT usada no desenvolvimento
-produz resultados numericamente instáveis**, e por isso nenhum modelo treinado
-até agora é aproveitável. O próximo passo é repetir o treino numa GPU validada.
+A GPU existe e o driver está correto, mas o PyTorch não a enxerga: em WSL não
+há `/dev/kfd`, e os wheels do pytorch.org exigem essa interface. Solução
+identificada: container `rocm/pytorch` + o pacote `rocdxg-roct` no host (um
+`sudo dpkg -i`, sem trocar de distro). Em paralelo, o DiffusionPen precisa do
+dataset IAM, que exige registro — o orientando fará o download depois.
 
 ---
 
-## O bloqueio
+## Máquina de trabalho
 
-Medido em `diagnostico/`, com a CPU como referência:
-
-A falha é **seletiva por tamanho de lote**. Comparando cada lote com o lote 1,
-na GPU e na CPU, com o mesmo checkpoint:
-
-| lote | GPU | CPU | veredito |
-|---|---|---|---|
-| 2 | 2,91e-07 | 4,83e-07 | correto nos dois |
-| 4 | **9,71e-02** | 5,19e-07 | GPU errada, 187 mil vezes a CPU |
-| 16 | **3,09e-01** | — | GPU errada |
-
-Lotes 1 e 2 certos, lotes 4 e 16 errados. O lote 2 é o controle interno que
-descarta erro no próprio teste. Uma convolução isolada também passa (1,1e-06),
-então o defeito aparece só no modelo completo.
-
-Há ainda um transiente de primeira chamada por formato de lote, e
-irreprodutibilidade genuína no lote 16. Detalhes e a correção de uma afirmação
-anterior estão em `diagnostico/README.md`.
-
-**Isso explicou todos os sintomas que travaram o projeto:** ~11% dos batches
-com gradiente não-finito em todas as épocas; a qualidade piorando conforme
-treinava enquanto o MSE melhorava; grades de amostra em ruído ou preto sem que
-os pesos tivessem um único `NaN` (verificado: 0 em 170.908.868 parâmetros).
-
-Nada disso era o código, o BRESSAY, o extrator de estilo ou a taxa de
-aprendizado — todas essas hipóteses foram levantadas e descartadas por medição.
-
----
-
-## O que está pronto e é aproveitável
-
-**Correções no DiffusionPen** — `diffusionpen_mods/`, com README explicando
-cada uma. São três arquivos que substituem os do clone. Sem eles o treino
-corrompe o otimizador na primeira época com gradiente não-finito, o treino do
-extrator de estilo quebra com `IndexError` em 50 dos 647 escritores, e o
-carregamento do dataset estoura 32 GB de RAM.
-
-**Testes de diagnóstico de GPU** — `diagnostico/`. Rode em qualquer placa nova
-antes de treinar nela.
-
-**Métrica de diacríticos** — `avaliacao_diacriticos/`, ver o `ESTADO.md` de lá.
-Passos 1, 2, 3 e 6 prontos e verificados, 14 testes sintéticos passando. O
-portão do Passo 1 passou: os gêmeos dos pares mínimos saem alinhados
-(dx=dy=0, IoU 0,932), então o E1 por diferença de imagens é válido.
-
-**Splits do BRESSAY** — `bressay_split/`. 74.882 amostras de treino, 647
-escritores; train, val e test **disjuntos por escritor** (647/154/199,
-sobreposição zero em todos os pares). Transcrições limpas: zero vazias, zero
-acima de 40 caracteres, zero arquivos ausentes.
-
-**Ambiente** — `flake.nix` com três shells: `rocm`, `cuda` e `cpu`.
-
----
-
-## O que foi arquivado e por quê
-
-Tudo em `~/repos/htg-tcc-arquivo/` (37 GB). **Movido, não apagado.**
-
-| item | motivo |
+| Item | Valor |
 |---|---|
-| todos os modelos treinados | treinados na GPU defeituosa, não confiáveis |
-| extrator de estilo do BRESSAY | idem |
-| `saved_iam_data/` (duas cópias, 11,6 GB) | caches `.pt` que o código nunca lê — o `torch.load` está comentado no `style_encoder_train.py` |
-| logs dos treinos | evidência dos diagnósticos, para documentar depois |
-| 23 pastas de amostras e comparações | resultados dos runs defeituosos |
-
-O repositório saiu de 45 GB para 7,6 GB.
+| Acesso | `ssh -p 2222 dead@100.100.155.123` (chave autorizada, funcionando) |
+| Host | `DESKTOP-KKFR30E` — WSL2 sobre Windows 11 Home build 26200 |
+| Distro WSL | Ubuntu 26.04 (resolute) |
+| CPU / RAM / disco | i5-14600K · 15 GiB · 948 G livres |
+| GPU | **AMD Radeon RX 9060 XT** (gfx1200) ✅ |
+| Driver Windows | Adrenalin 26.7.1 (`32.0.31035.1003`) ✅ acima do mínimo |
+| Diretório do projeto | `~/htg-tcc/` |
 
 ---
 
-## Como retomar, numa máquina nova
+## O que já está pronto
 
-```bash
-# 1. ambiente conforme a placa
-nix develop .#cuda      # NVIDIA  (recomendado)
-nix develop .#rocm      # AMD     (valide antes!)
-nix develop .#cpu       # sem GPU (métrica e referência numérica)
+### Na máquina remota (`~/htg-tcc/`)
 
-# 2. VALIDE A PLACA ANTES DE QUALQUER TREINO
-python diagnostico/teste_conv_isolada.py
-CKPT=<um .pt do unet> python diagnostico/teste_lote_unet.py
-# erros ~1e-6: pode treinar.  >=1e-2 ou erráticos: NÃO treine nesta placa.
+- [x] Estrutura de diretórios e scripts transferidos por `scp`
+- [x] `uv` 0.12.5 instalado em `~/.local/bin` (contorno: sem sudo, sem `ensurepip`)
+- [x] venv `venv-diffpen` com **Python 3.12.14**
+- [x] DiffusionPen clonado (`diffusionpen/DiffusionPen/`)
+- [x] VATr++ clonado (`vatr/VATr-pp/`)
+- [x] `patch_sonda_train.diff` aplicado e validado (`ast.parse` OK; branch
+      `sonda` em `train.py:750`)
+- [ ] ⚠ `torch 2.13.0+rocm7.2` instalado mas **é o wheel errado** — precisa ser
+      substituído pelo da AMD (ver bloqueio 1)
 
-# 3. clonar o DiffusionPen e aplicar as correções
-#    (ver README.md, seção "Reprodução")
-cp diffusionpen_mods/train.py                DiffusionPen/
-cp diffusionpen_mods/style_encoder_train.py  DiffusionPen/
-cp diffusionpen_mods/utils/bressay_dataset.py DiffusionPen/utils/
+### Análise estática (concluída, não depende de GPU)
 
-# 4. baixar os pesos do DiffusionPen (huggingface.co/konnik/DiffusionPen)
+- [x] Charset do DiffusionPen mapeado; CANINE confirmado empiricamente aceitando
+      `ã`/`ç` como codepoints
+- [x] Ausência de normalização de acentos confirmada
+- [x] **Filtro silencioso do VATr++ descoberto** (`generate/writer.py:70`)
+- [x] Mecanismo `special_alphabet` (grego) identificado como alavanca para PT-BR
+- [x] `xformers`/`bitsandbytes` confirmados ausentes — patch previsto no plano
+      é desnecessário
 
-# 5. treinar o extrator de estilo no BRESSAY (~20-25 epocas bastam;
-#    depois disso ele overfita nos escritores vistos)
-python DiffusionPen/style_encoder_train.py \
-  --dataset bressay --mode mixed --model mobilenetv2_100 \
-  --epochs 25 --batch_size 64 --save_path ./style_models
+### Scripts prontos e testados (sem GPU)
 
-# 6. fine-tune, em blocos com verificacao por geracao
-./scripts/treinar.sh
+| Arquivo | Estado |
+|---|---|
+| `env/check_env.py` | ✅ executado no remoto; abortou corretamente |
+| `comum/palavras.py` | ✅ testado — 60 imagens (4 grupos × 3 seeds) |
+| `comum/folha_contato.py` | ✅ testado com imagens sintéticas |
+| `diffusionpen/smoke_test.py` | ✅ dry-run OK |
+| `diffusionpen/sonda_diacriticos.py` | ✅ dry-run OK, manifesto gerado |
+| `vatr/*` | ❌ não escrito ainda (Fase 4) |
+| `*/perfil_vram.py` | ❌ não escrito ainda (Fase 3) |
+
+---
+
+## BLOQUEIO 1 — ROCm não funciona nesta distro do WSL
+
+### Diagnóstico
+
+```
+$ ./venv-diffpen/bin/python env/check_env.py
+W agent.cpp:608] sysfs nodes path '/sys/class/kfd/kfd/topology/nodes' does not exist
+torch: 2.13.0+rocm7.2      hip/rocm: 7.2.53211
+cuda disponivel: False
+FALHA: GPU nao visivel ao PyTorch          (exit 1)
 ```
 
-### Notas de quem já rodou
+Duas causas independentes:
 
-O `scripts/treinar.sh` treina em blocos de 5 épocas e gera amostras ao fim de cada
-um. Isso existe porque **o MSE não é sinal confiável de saúde**: já aconteceu
-de ele melhorar (0,0522 → 0,0404) enquanto o modelo perdia completamente a
-capacidade de gerar. O único teste que vale é gerar amostra e olhar.
+1. **WSL não tem KFD.** Sem módulo `amdgpu`; a GPU chega por `/dev/dxg`. Os
+   wheels do pytorch.org são compilados contra a interface KFD nativa. Não há
+   configuração que contorne.
+2. **Ubuntu 26.04 não tem repositório ROCm.** `resolute` → HTTP 404 em
+   `repo.radeon.com` (verificado em `rocm/apt/{latest,7.2.4,7.2.3,7.2.1}` e em
+   `amdgpu/latest/ubuntu`). Só `noble` (24.04) e `jammy` (22.04) existem.
 
-A geração usa `scripts/gerar_amostras.py --ckpt <arquivo.pt> --out <pasta>`. Semente e
-escritores são fixos, então checkpoints diferentes saem comparáveis.
+### Solução adotada: **ROCm via pip, sem Docker** (revisão 2)
 
-Avalie pelas palavras com diacrítico (`ação`, `não`, `avó`, `coração`), não
-pela legibilidade geral. O modelo do IAM puro gera "português" legível **sem o
-circunflexo** e apaga til e cedilha ("não" → "no", "ação" → "aco") — é o
-controle negativo, e é exatamente o que o trabalho quer superar.
+A imagem `rocm/pytorch` de 19,3 GB foi **descartada**. Inspeção do config da
+imagem revelou a causa do tamanho:
+
+```
+AMDGPU_FAMILY=device-all
+INDEX_URL=https://repo.amd.com/rocm/whl-multi-arch
+```
+
+`device-all` = kernels de GPU pré-compilados para **todas** as arquiteturas AMD
+(Instinct gfx90a/942/950, RDNA2, RDNA3, APUs Strix...). Uma única camada da
+imagem tem 18,82 GB. Precisamos de exatamente uma arquitetura: gfx1200.
+
+A AMD publica índices **por família** em `repo.amd.com/rocm/whl/`. O nosso é
+`gfx120X-all` (RDNA4). Tamanhos medidos individualmente:
+
+| pacote | tamanho |
+|---|---|
+| `torch-2.9.1+rocm7.13.0` (cp312) | 340 MB |
+| `rocm_sdk_libraries_gfx120x_all` | 1062 MB |
+| `rocm_sdk_core` | 414 MB |
+| `pytorch_triton_rocm` | 320 MB |
+| `torchvision-0.26.0` | 1 MB |
+| **total** | **≈ 2,2 GB** (9× menor) |
+
+**Consequência importante:** `rocm-sdk-core` e `rocm-sdk-libraries` são wheels
+Python. O ROCm vem pelo **pip**, não pelo apt — logo o repositório ausente para
+`resolute` (Ubuntu 26.04) **deixa de ser um problema**, e o Docker torna-se
+desnecessário. Sem Docker Desktop, sem integração WSL, sem segunda distro.
+
+#### Passos
+
+```bash
+# 1. Unico passo com sudo (181 KB, sem dependencias) - FEITO em 2026-08-20
+wget https://github.com/ROCm/librocdxg/releases/download/v1.2.2/rocdxg-roct_1.2.2_amd64.deb
+sudo dpkg -i rocdxg-roct_1.2.2_amd64.deb
+
+# 2. Resto em user-space
+uv venv --clear --python 3.12 venv-diffpen
+uv pip install --python ./venv-diffpen/bin/python \
+  torch torchvision pytorch-triton-rocm \
+  --index-url https://repo.amd.com/rocm/whl/gfx120X-all/
+```
+
+Verificado no host em 2026-08-20:
+
+```
+ii  rocdxg-roct  1.2.2  amd64  ROCDXG runtime libraries
+OK  /opt/rocm/lib/librocdxg.so
+OK  /opt/rocm/share/rocdxg/dids.conf
+OK  /etc/ld.so.conf.d/x86_64-libhsakmt.conf
+OK  /dev/dxg
+```
+
+#### Risco assumido
+
+Este caminho (ROCm via pip + `librocdxg` no host) **não é o documentado pela
+AMD** — a documentação oficial descreve o fluxo Docker. É dedução a partir da
+organização dos pacotes. Ponto de falha possível: o `librocdxg` localizar o
+ROCm dentro do `site-packages` em vez de `/opt/rocm`.
+
+Fallback caso falhe: Docker com a imagem menor
+`rocm/pytorch:rocm7.2.4_ubuntu24.04_py3.12_pytorch_2.10.0_ORT_1.23.2` (10,7 GB),
+com os mounts documentados em `github.com/ROCm/librocdxg`.
+
+### Critério de destravamento
+Dentro do container: `python env/check_env.py` imprimir `gfx1200` e ~16 GB de
+VRAM, com exit 0.
+
+### Alternativa descartada (registrada)
+
+Instalar `Ubuntu-24.04` como segunda distro WSL também funcionaria — está
+disponível em `wsl.exe -l -o`. Foi preterida: exige instalar distro, ROCm
+completo, sshd e reconfigurar acesso, contra um único `dpkg -i` no caminho
+Docker.
+
+---
+
+## BLOQUEIO 2 — dataset IAM (aguardando, sem pressa)
+
+O orientando informou que **fará o download depois**.
+
+### Por que é necessário
+
+`train.py:338-345`, dentro de `Diffusion.sampling()`:
+
+```python
+root_path = './iam_data/words'
+for im_idx, random_f in enumerate(five_styles):
+    file_path = os.path.join(root_path, random_f[0])
+    img_s = Image.open(file_path).convert('RGB')
+```
+
+As 5 imagens de estilo few-shot são lidas **do disco**. Os caminhos vêm de
+`utils/splits_words/iam_train_val.txt` (já no repo), mas os PNGs não.
+
+`--img_feat False` existe, porém faz `style_images = None` e
+`style_features = None`: gera sem condicionamento de estilo. Não é o modo
+few-shot que a Fase 1 especifica, e o modelo foi treinado com o condicionamento.
+**Não usar como substituto.**
+
+### O que baixar
+
+1. **IAM** — `words.tgz` (~1.2 GB), registro em
+   https://fki.tic.heia-fr.ch/databases/iam-handwriting-database
+   Extrair para `~/htg-tcc/diffusionpen/DiffusionPen/iam_data/words/`
+   (estrutura `a01/a01-000u/a01-000u-00-00.png`)
+
+2. **Pesos do DiffusionPen** — https://huggingface.co/konnik/DiffusionPen
+   (~7.4 GB dos ~10 GB totais; o resto não é usado em sampling)
+
+   | arquivo | tamanho | necessário |
+   |---|---|---|
+   | `saved_iam_data/train_word_IAM.pt` | 5.30 G | sim |
+   | `diffusionpen_iam_model_path/models/ema_ckpt.pt` | 0.68 G | sim |
+   | `diffusionpen_iam_model_path/models/ckpt.pt` | 0.68 G | sim |
+   | `style_models/iam_style_diffusionpen.pth` | 0.01 G | sim |
+   | `saved_iam_data/test_word_IAM.pt` | 1.93 G | não |
+   | `diffusionpen_iam_model_path/models/optim.pt` | 1.35 G | não |
+
+   Colocar as pastas na raiz de `diffusionpen/DiffusionPen/`.
+
+3. **Stable Diffusion v1.5** — subpastas `vae` e `scheduler` de
+   https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5
+   Apontar com `--stable_dif_path`.
 
 ---
 
 ## O que falta, em ordem
 
-1. **Validar uma GPU.** A equipe tem uma RTX 3090 (Ampere, CUDA, 24 GB —
-   caminho recomendado) e uma RX 9060 XT (RDNA4; é placa AMD de consumo, mesma
-   classe de risco da RX 6600 XT, então **precisa passar pelo `diagnostico/`**).
-2. **Re-treinar o extrator de estilo** no BRESSAY, na placa validada.
-3. **Re-treinar o fine-tune** a partir do pré-treinado do IAM.
-4. **Refazer o controle E1 do IAM puro** da métrica — o valor atual (0,141)
-   veio de imagens geradas na placa defeituosa, em lote 4. Os números de
-   recorte real (0,861) estão a salvo, porque não passam por geração.
-5. **Fechar o E2** nos recortes reais e rodar o Passo 5 da métrica.
+| # | Tarefa | Depende de |
+|---|---|---|
+| 1 | `dpkg -i rocdxg-roct` + Docker operacional | bloqueio 1 |
+| 2 | `check_env.py` passar com `gfx1200` | 1 |
+| 3 | Baixar IAM + pesos + VAE do SD1.5 | bloqueio 2 |
+| 4 | **Fase 1** — smoke test em inglês (5 palavras) | 2, 3 |
+| 5 | **Fase 2** — sonda de diacríticos (60 imagens) + folha de contato | 4 |
+| 6 | **Fase 3** — escrever e rodar `perfil_vram.py` | 4 |
+| 7 | **Fase 4** — VATr++: instalar, smoke, sonda, perfil | 2 |
+| 8 | Consolidar `ACHADOS.md` com resultados visuais | 5, 6, 7 |
+
+---
+
+## Decisões pendentes do orientando
+
+1. **Ambiente:** caminho Docker (recomendado — um `sudo dpkg -i` + container),
+   segunda distro Ubuntu 24.04, ou migrar para Kaggle/Colab? (A Fase 3 pede
+   perfil de VRAM da própria 9060 XT, o que só as opções locais entregam.)
+2. **VATr++ / Fase 4:** o filtro de `writer.py:70` descarta os diacríticos antes
+   da geração. Corrigi-lo altera o que é pedido ao modelo — não é patch de
+   compatibilidade. **Não será mexido sem autorização explícita** (regra 4).
+3. **VATr++ / versões:** o repo fixa PyTorch 1.13.1 + CUDA 11.7. Não existe
+   equivalente ROCm. Vai precisar rodar em PyTorch 2.x — reportar antes de forçar.
 
 ---
 
 ## Armadilhas já encontradas (para não repetir)
 
-- **Nunca avalie um modelo pelo MSE.** Gere amostras.
-- **Não confie em grade de amostra gerada dentro do treino.** O
-  `sampling_loader` do DiffusionPen tokeniza com `max_length=200` enquanto o
-  treino usa 40 — condicionamento diferente do treino. O `scripts/treinar.sh`
-  desliga essa amostragem e gera em processo separado.
-- **`--pretrained_path` e `--load_check` são mutuamente exclusivos.** No
-  `train.py` o bloco do `pretrained_path` roda **depois** do `load_check` e
-  sobrescreve silenciosamente os pesos retomados.
-- **`--load_check` é `type=bool` no argparse**, então `--load_check False`
-  vira `True`. Só passe a flag quando quiser mesmo retomar.
-- **O EMA precisa do `ema.step` restaurado ao retomar**, senão o `step_ema`
-  copia os pesos do modelo por cima do EMA carregado e o destrói. O
-  `estado.pt` cuida disso.
-- **Escritores de train e val são disjuntos**, então a acurácia de validação
-  do extrator de estilo é 0,0000 por construção — não é defeito. A seleção de
-  checkpoint usa o triplet loss por causa disso.
+- Timeout de SSH **não mata o processo remoto**: duas instâncias de `uv pip
+  install` ficaram travadas no lock do cache. Usar `setsid` + polling.
+- `python3 -m venv` falha na Ubuntu 26.04 (sem `ensurepip`); `python3.14-venv`
+  exigiria sudo. `uv` resolve sem privilégio.
+- Não há wheel `cp314` do PyTorch no repo da AMD — fixar **Python 3.12**.
+- `sudo` no host remoto **pede senha** — nada que exija privilégio pode ser
+  automatizado por mim.

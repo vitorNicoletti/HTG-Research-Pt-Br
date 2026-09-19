@@ -1,201 +1,233 @@
 # Diagnóstico de hardware
 
-**Rode isto em qualquer GPU nova antes de treinar nela.** São minutos, e evita
+**Rode isto em qualquer GPU nova antes de treinar nela.** Custa minutos e evita
 semanas de resultados inexplicáveis.
 
-> ## Caracterização final (2026-09-19)
->
-> **O forward está correto. O defeito está isolado no backward.**
->
-> Tensor de saída inteiro do UNet, CPU como referência, com aquecimento por
-> formato, `eval()` nos dois lados e amostras diferentes dentro do lote
-> (`teste_forward_completo.py`):
->
-> | lote | 1 | 2 | 4 | 8 | 16 | 32 |
-> |---|---|---|---|---|---|---|
-> | erro relativo | 2,0e-06 | 2,1e-06 | 2,5e-06 | 2,4e-06 | 2,2e-06 | 2,3e-06 |
->
-> Plano, sem dependência de lote. É ruído normal de fp32.
->
-> O gradiente, nas mesmas condições (`teste_gradiente_pareado.py`,
-> `teste_acumulacao_gradiente.py`):
->
-> | medida | CPU | GPU |
-> |---|---|---|
-> | \|grad\| lote 32, 5 passos | 6,8 a 10,9 | 51 a 74 (**5 a 9×**) |
-> | \|grad\| lote 4 | 6,67 | 37,9 (**5,6×**) |
-> | \|grad\| acumulando lotes 1 | 6,67 | 152,9 (**23×**) |
->
-> Como o forward está correto, as ativações que o backward consome estão
-> corretas, e o erro nasce no próprio backward.
->
-> **Acumulação de gradiente não resolve.** Era a saída prática óbvia — treinar
-> em lotes de 1 e somar — e a medição a descarta: é o pior dos caminhos, 23×
-> fora da referência contra 5,6× do lote 4. Não há configuração segura de
-> treino nesta placa.
->
-> ### Afirmações anteriores que caíram
->
-> Duas caracterizações deste documento foram refutadas por medições melhores, e
-> ficam registradas para quem for reproduzir:
->
-> 1. *"Duas chamadas idênticas com o mesmo lote divergem"* — era o transiente de
->    primeira chamada, medido sem aquecimento.
-> 2. *"A falha é seletiva por formato de lote: 1 e 2 certos, 4 e 16 errados"* —
->    medido no forward sem aquecimento por formato. Com aquecimento, todos os
->    lotes de 1 a 32 dão ~2e-06.
->
-> O que sobrevive das duas é o **transiente de primeira chamada por formato**,
-> que é real mas é um efeito separado e menor.
->
-> ## Histórico: o que reproduz e o que não reproduz
->
-> **Reproduz sempre:** gradiente não-finito no *backward*.
-> `teste_gradiente_sintetico.py` dá **1/60 (2%)** nesta máquina, idêntico em
-> execuções repetidas, usando só o checkpoint público do DiffusionPen e dados
-> sintéticos. No treino real eram ~11% em todas as épocas. **É este o teste
-> para comparar máquinas** — e é este o fenômeno que inviabilizou os treinos.
->
-> **NÃO reproduz sob demanda:** o erro do *forward* por tamanho de lote. Com
-> aquecimento de cada formato antes de medir, seis processos seguidos deram
-> ~3e-07 em todos os lotes — limpos. O erro de 9,71e-02 no lote 4 aparece
-> apenas em certas sequências de chamadas dentro do processo. O fenômeno é
-> real e foi medido mais de uma vez, mas depende do histórico de formatos
-> executados, o que é consistente com a hipótese de reuso de área temporária
-> de memória (*workspace*) e **não permite afirmar "o lote 4 sempre erra"**.
->
-> Consequência para o texto do TCC: descreva o achado principal como
-> **gradientes não-finitos reprodutíveis no backward**, e trate a dependência
-> de lote no forward como observação secundária, com a ressalva de que ela é
-> intermitente.
->
-> **Controle ainda pendente:** rodar `teste_gradiente_sintetico.py` com
-> `DEVICE=cpu`. Se a CPU também produzir gradiente não-finito, a causa é do
-> modelo ou da configuração, não da placa. É lento (minutos por passo), mas é
-> a medida que fecha o argumento.
+Máquina onde o defeito foi encontrado: **AMD Radeon RX 6600 XT** (RDNA2,
+gfx1032 rodando como gfx1030 via `HSA_OVERRIDE_GFX_VERSION=10.3.0`), ROCm,
+PyTorch 2.12 / HIP 7.2.53211. Modelo: UNet do DiffusionPen, ~170M parâmetros,
+difusão latente, latentes 4×8×32.
 
-## Resumo do que foi encontrado
+---
 
-Todo o treino deste projeto até 19/09/2026 rodou numa **AMD Radeon RX 6600 XT**
-(RDNA2, ROCm, `HSA_OVERRIDE_GFX_VERSION=10.3.0`, PyTorch 2.12 / HIP 7.2). Essa
-placa **não computa este modelo de forma confiável**.
+## Conclusão
 
-**A falha é seletiva por formato de lote.** Medido com `teste_repeticao.py`
-(5 chamadas idênticas por lote, descartando a primeira) e o controle
-`teste_repeticao_cpu.py`, ambos com o checkpoint `ema_ep11.pt`:
+**O forward está correto. O defeito está isolado no backward, e é de direção,
+não de escala.**
 
-| lote | GPU vs lote 1 | CPU vs lote 1 | veredito |
-|---|---|---|---|
-| 1 | referência | referência | — |
-| 2 | 2,91e-07 | 4,83e-07 | **correto** nos dois |
-| 4 | **9,71e-02** | 5,19e-07 | GPU **errada**, 187 mil vezes a CPU |
-| 16 | **3,09e-01** | — | GPU **errada** |
+### Forward: correto
 
-Não é "lote maior que 1 quebra": lotes 1 e 2 estão certos, lotes 4 e 16 estão
-errados. Essa seletividade é a assinatura mais informativa do defeito.
+Tensor de saída **inteiro** do UNet (não o loss, que é escalar e pode esconder
+erros que se cancelam), CPU como referência — `teste_forward_completo.py`:
 
-**O lote 2 é o controle que descarta erro no próprio teste.** O script replica
-a entrada com `.repeat(n, 1)`, inclusive o `style_extractor`, que tem formato
-`(5, 1280)` por amostra. Se essa replicação estivesse errada, o lote 2 quebraria
-tanto quanto o lote 4. Ele dá 2,91e-07 — precisão perfeita. Logo a replicação
-está correta e o que falha no lote 4 não é o harness.
+| lote | 1 | 2 | 4 | 8 | 16 | 32 |
+|---|---|---|---|---|---|---|
+| erro relativo | 2,0e-06 | 2,1e-06 | 2,5e-06 | 2,4e-06 | 2,2e-06 | 2,3e-06 |
 
-Outros dois fenômenos, menores e distintos do principal:
+Plano, sem dependência de lote. É ruído normal de fp32.
 
-- **Efeito de primeira chamada, por formato.** A primeira chamada de cada
-  tamanho de lote difere das seguintes; da segunda em diante o resultado é
-  **bit a bit idêntico** (6 de 10 pares idênticos com 5 repetições — exatamente
-  os 6 pares formados pelas repetições 2 a 5). Não é aleatoriedade geral: é um
-  transiente de primeira execução.
-- **Irreprodutibilidade real, só no lote 16.** Ali nem as chamadas aquecidas
-  concordam entre si (dispersão de 9,45e-04 a 6,12e-02, nenhum par idêntico).
+### Backward: errado
 
-Uma convolução isolada passa no teste (1,1e-06 contra a CPU, e determinismo
-perfeito), então o defeito não está no kernel de convolução sozinho — aparece
-no modelo completo.
+Mesmas entradas, mesmos pesos — `teste_gradiente_pareado.py`:
 
-> **Correção de uma versão anterior deste documento.** A primeira redação
-> afirmava "duas chamadas idênticas com o mesmo lote já divergem", com base numa
-> medida de 1,75e-03 feita sem aquecimento adequado. Isso **não se sustenta**:
-> com repetições e descarte da primeira chamada, os lotes 1, 2 e 4 são bit a bit
-> determinísticos. O fenômeno medido era real, mas foi interpretado como
-> instabilidade geral quando era o transiente de primeira chamada. A conclusão
-> principal — a dependência do tamanho do lote — não só sobrevive à correção
-> como fica mais forte, porque agora tem o lote 2 como controle interno.
+| lote 32, 5 passos | CPU | GPU |
+|---|---|---|
+| loss | 2,825638 | 2,825733 *(concorda na 4ª casa)* |
+| \|grad\| | 6,8 a 10,9 | 51 a 74 — **5 a 9×** |
 
-## O que isso explicou
+E o dado decisivo, `teste_direcao_gradiente.py`, lote 8:
 
-Esta era a causa raiz de praticamente tudo que travou o projeto:
+```
+cosseno entre o gradiente da CPU e o da GPU ........ 0,357
+fração da norma da GPU ortogonal ao correto ........ 93,6%
+```
 
-- ~11% dos batches com gradiente não-finito, em todas as épocas de todos os
-  treinos;
-- a qualidade do modelo **piorando** conforme treinava, enquanto o MSE
-  melhorava (o loss era calculado no mesmo regime corrompido);
-- grades de amostra saindo em ruído colorido ou preto, sem que os pesos
-  tivessem qualquer `NaN` (verificado: 0 em 170.908.868 parâmetros);
-- o padrão aparente de "palavras curtas falham" — era artefato de geração em
-  lote, não do modelo.
+**Não é erro de escala, é de direção.** Isso importa porque o treino usa
+`clip_grad_norm_`, que normaliza a magnitude — se fosse só escala, o clip
+corrigiria. Como é direção, 94% de cada passo de treino é ruído ortogonal à
+descida correta. É por isso que treinar piorava o modelo.
 
-Nada disso era o código, o BRESSAY, o extrator de estilo ou a taxa de
-aprendizado.
+### Acumulação de gradiente não resolve
+
+Era a saída prática óbvia: treinar em lotes de 1 e somar, acionando só formatos
+pequenos. `teste_acumulacao_gradiente.py`, com 4 amostras diferentes:
+
+| comparação | erro relativo | normas |
+|---|---|---|
+| sanidade CPU: lote 4 vs acumulado | 3,62e-06 | 6,67 / 6,67 |
+| GPU lote 4 vs CPU lote 4 | 5,60 | 37,9 / 6,67 |
+| GPU acumulado vs CPU acumulado | **22,9** | 152,9 / 6,67 |
+
+Acumular é o **pior** caminho, não o mais seguro. **Não há configuração segura
+de treino nesta placa.** Gerar imagem, por outro lado, está liberado: é só
+forward.
+
+### A CPU está limpa
+
+- `teste_gradiente_sintetico.py` com `DEVICE=cpu`: **0/10** gradientes
+  não-finitos (a GPU dá 1/60 no mesmo teste), `|grad|` mediana 6,8 contra 57,1.
+- Invariância ao lote: 4,83e-07 (lote 2), 5,19e-07 (lote 4).
+- Treino real de 625 passos: **0 batches descartados**.
+
+---
+
+## O defeito do forward era dependente do estado da máquina
+
+Registrado porque é a armadilha mais perigosa deste diagnóstico.
+
+O mesmo script, mesmo checkpoint, mesma configuração:
+
+| | antes do reinício (3,5 dias de uptime) | depois do reinício |
+|---|---|---|
+| lote 4 | 9,71e-02 | 3,20e-07 |
+| lote 16 | 3,09e-01 | 3,16e-07 |
+| pares bit-idênticos | 6/10 | 10/10 |
+| transiente de 1ª chamada | presente | ausente |
+
+O reinício eliminou o defeito do forward **e** o transiente de primeira
+chamada. O defeito do backward sobreviveu — todas as medidas da seção anterior
+são pós-reinício.
+
+O cache do MIOpen (`~/.cache/miopen`) persiste entre reinícios, então não é ele.
+
+**Consequência prática: anote o uptime da máquina junto de cada medida.** Sem
+isso, duas execuções idênticas podem discordar e ninguém saberá por quê.
+
+---
+
+## O que continua em aberto
+
+Declarado como pendência, não como fato:
+
+1. **Qual operação do backward produz o erro.** Uma convolução isolada passa no
+   teste; o defeito só aparece no modelo completo.
+2. **Se a causa é física ou de software.** Testável trocando a versão do ROCm.
+3. **Que estado de máquina, limpo por reinício, corrompia o forward.**
+4. **Por que acumular lotes de 1 erra mais (23×) que um lote 4 (5,6×)**, se
+   acumular envolve reduções menores.
+
+---
+
+## Validar uma máquina nova (roteiro para SSH)
+
+```bash
+nix develop .#cuda          # NVIDIA  |  .#rocm para AMD  |  .#cpu sem GPU
+
+# 1. o mais barato: uma convolucao isolada. Segundos, sem checkpoint.
+python diagnostico/teste_conv_isolada.py
+
+# 2. comparavel entre maquinas: gradiente nao-finito, com o checkpoint
+#    PUBLICO do DiffusionPen e dados sinteticos
+CKPT=./DiffusionPen/diffusionpen_iam_model_path/models/ema_ckpt.pt \
+    python diagnostico/teste_gradiente_sintetico.py
+#    0/60 nao-finitos = saudavel | > 0 = mesmo problema desta maquina
+
+# 3. o conclusivo: a direcao do gradiente bate com a CPU?
+CKPT=... python diagnostico/teste_direcao_gradiente.py
+#    cosseno ~1,0 = saudavel | cosseno baixo = nao treine nesta placa
+```
+
+Rode 2 ou 3 vezes cada um, em processos separados, e registre o uptime.
+
+**Como ler os números.** Os limiares estão escritos dentro dos próprios
+scripts, de propósito, para não serem ajustados depois de ver o resultado:
+
+- **~1e-6 a 1e-5** — diferença normal de fp32 entre CPU e GPU. Saudável.
+- **≥ 1e-2** — a GPU está calculando errado.
+- **cosseno < 0,9 no gradiente** — a direção está errada; não treine.
+
+---
 
 ## Os testes
 
-### `teste_conv_isolada.py`
-O menor teste possível: uma `nn.Conv2d`, entrada sintética, CPU contra GPU.
-Não precisa de checkpoint nem de dataset. **Comece por aqui.** Se falhar, a
-placa está fora de questão. Se passar, ela ainda pode falhar no modelo
-completo — foi o que aconteceu aqui.
+| arquivo | o que mede | precisa de |
+|---|---|---|
+| `teste_conv_isolada.py` | uma `nn.Conv2d`, CPU vs GPU | nada |
+| `teste_forward_completo.py` | tensor de saída inteiro, lotes 1 a 32 | checkpoint |
+| `teste_gradiente_pareado.py` | loss e \|grad\|, entradas idênticas | checkpoint |
+| `teste_direcao_gradiente.py` | **cosseno** entre gradientes CPU e GPU | checkpoint |
+| `teste_acumulacao_gradiente.py` | acumular lotes de 1 resolve? | checkpoint |
+| `teste_gradiente_sintetico.py` | gradientes não-finitos, dados sintéticos | checkpoint público |
+| `teste_repeticao.py` / `_cpu.py` | repetibilidade e efeito do lote | checkpoint |
+| `teste_lote_unet.py` / `_vs_cpu.py` | versões anteriores, superadas | checkpoint |
+| `teste_gradiente_cpu_vs_gpu.py` | gradiente com batches reais do BRESSAY | checkpoint + dataset |
+| `treinar_cpu.py` | treino de referência em hardware limpo | dataset |
+| `vigia_termico.sh` | mata o treino se a CPU passar do limite | — |
 
-### `teste_lote_unet.py`
-Uma passada do UNet com a mesma entrada replicada, varrendo o tamanho do lote
-de 1 a 32. Compara a linha 0 de cada lote contra o lote 1. Precisa de um
-checkpoint (ajuste a constante `CKPT` no topo). **É o teste que pegou o
-defeito.**
+---
 
-### `teste_lote_vs_cpu.py`
-O mesmo, mas com a CPU como referência absoluta, para decidir qual dos dois
-resultados está certo. Mais lento (a passada na CPU leva minutos).
+## Armadilhas operacionais
 
-### `teste_gradiente_cpu_vs_gpu.py`
-Compara o **gradiente** (não só o forward) entre CPU e GPU, com batches reais do
-BRESSAY, e tenta capturar um batch em que a GPU produza gradiente não-finito
-para recalculá-lo na CPU. Define `CKPT_DIR` com uma pasta `models/`.
+Valem para qualquer máquina, não só para a defeituosa. Cada uma custou horas.
 
-Foi o teste que revelou que a **primeira** chamada de cada processo diverge das
-seguintes (loss 0,14865 contra 0,15532, com as chamadas 2 e 3 idênticas até
-1e-12). Esse comportamento de primeira chamada **continua sem explicação** — só
-se sabe que não vem de convolução quebrada, porque `teste_conv_isolada.py`
-passa. Fica registrado como pendência.
+- **Nunca avalie o modelo pelo MSE.** Ele caiu de 0,0522 para 0,0404 na mesma
+  época em que a geração morreu por completo. Gere amostras.
+- **Use a deriva em relação ao pré-treinado como métrica de saúde.** Custa
+  segundos e não mente: deriva 0,046% = modelo intacto; 0,351% = destruído.
+- **Em qualquer comparação CPU vs GPU, use `eval()` nos dois lados.** O CANINE
+  fica aninhado dentro do UNet e tem dropout 0,1; em `train()` cada lado sorteia
+  máscaras diferentes e a comparação vira lixo. Esse bug invalidou duas medidas
+  desta investigação.
+- **Gere as entradas uma vez na CPU e copie para a GPU.** `torch.randn(device=)`
+  usa geradores diferentes em cada dispositivo — sem isso você compara entradas
+  diferentes achando que são as mesmas.
+- **Aqueça cada formato de tensor antes de medir.** A primeira chamada de cada
+  formato difere das seguintes.
+- **Não confie em grade de amostra gerada dentro do treino.** O
+  `sampling_loader` do DiffusionPen tokeniza com `max_length=200` enquanto o
+  treino usa 40 — condicionamento diferente do treino.
+- **`--pretrained_path` e `--load_check` são mutuamente exclusivos.** No
+  `train.py` o bloco do `pretrained_path` roda **depois** do `load_check` e
+  sobrescreve silenciosamente os pesos retomados.
+- **`--load_check` é `type=bool` no argparse**, então `--load_check False` vira
+  `True`. Só passe a flag quando quiser mesmo retomar.
+- **O EMA precisa do `ema.step` restaurado ao retomar**, senão o `step_ema`
+  copia os pesos do modelo por cima do EMA carregado e o destrói.
+- **Escritores de train e val são disjuntos**, então a acurácia de validação do
+  extrator de estilo é 0,0000 por construção. Não é defeito.
+- **Comparar geração CPU vs GPU em lote 1 engana.** Uma diferença legítima de
+  1e-6 é amplificada por 50 iterações do DDIM e produz imagens visivelmente
+  distintas, **ambas válidas**. Isso não demonstra defeito.
 
-Cuidado ao usá-lo: numa versão anterior deste teste o modelo ficava em
-`train()`, o que deixava o dropout do CANINE ativo dentro do UNet; os dois
-lados sorteavam máscaras diferentes e a comparação inteira virava lixo (quase
-produziu um falso positivo de "GPU culpada"). Por isso o `monta()` força
-`eval()`.
+---
 
-## Como interpretar
+## Um segundo problema, independente do hardware
 
-Os limiares estão declarados nos próprios scripts, de propósito, para não
-serem ajustados depois de ver o resultado:
+Medido **na CPU**, com hardware comprovadamente limpo (0 batches descartados):
+o fine-tune com `lr=2e-5` + AdamW destrói o modelo em uma época.
 
-- **~1e-6 a 1e-5** — diferença normal de fp32 (ordem de redução distinta entre
-  CPU e GPU). Placa saudável.
-- **>= 1e-2** — a GPU está calculando errado.
-- **Duas chamadas idênticas divergindo** — instabilidade; a placa não serve
-  para treinar, em nenhuma configuração.
+| | deriva do pré-treinado | geração |
+|---|---|---|
+| `lr=2e-5`, 625 passos | 0,351% | destruída (borrões) |
+| `lr=1e-6`, 200 passos | 0,046% | legível, mas borrada |
+| `lr=3e-7`, 200 passos | 0,017% | **nítida** |
 
-## Ambiente
+A razão: o AdamW move cada parâmetro ~`lr` por passo, independente do tamanho
+do gradiente. Em 625 passos com `lr=2e-5` isso dá 0,0125 de deriva por peso,
+contra uma magnitude mediana de **0,0219** — mais da metade do peso típico numa
+única época.
 
-Na RX 6600 XT era obrigatório:
+Nos três pontos medidos, nenhum produziu diacríticos: quanto mais o modelo se
+afasta do pré-treinado, pior a imagem, e o acento nunca aparece. Foram apenas
+200 passos por ponto, então a variável "mais passos com `lr` baixo" continua
+não testada.
 
-```bash
-export HSA_OVERRIDE_GFX_VERSION=10.3.0        # gfx1032 usando kernels de gfx1030
-export PYTORCH_HIP_ALLOC_CONF=expandable_segments:True
-```
+Resultados em `resultados/`.
 
-Sem o `expandable_segments`, o treino entrava de forma **determinística** num
-estado em que todo backward dava gradiente não-finito — sempre no passo 11 da
-época, travando de vez no passo 71, reproduzido três vezes com ordens de dados
-diferentes. Com ele, esse modo de falha específico desaparece, mas a
-instabilidade acima permanece.
+---
+
+## Correções de versões anteriores deste documento
+
+Registradas porque os números aparecem no histórico do git e alguém pode
+reproduzi-los:
+
+1. *"Duas chamadas idênticas com o mesmo lote divergem"* — era o transiente de
+   primeira chamada, medido sem aquecimento.
+2. *"A falha é seletiva por formato: lotes 1 e 2 certos, 4 e 16 errados"* —
+   medido antes do reinício da máquina. Depois do reinício, todos os lotes de 1
+   a 32 dão ~2e-06 no forward.
+3. *"Aquecimento por formato explica a discrepância entre execuções"* — a
+   variável era o estado da máquina, não o aquecimento.
+4. *"O forward está corrompido, logo a geração é contaminada pelo laço do
+   DDIM"* — a premissa é falsa; o forward está correto.
+5. *"Acumulação de gradiente é o caminho seguro"* — é o pior caminho.

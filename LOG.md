@@ -684,6 +684,6 @@ caches `.pt` não lidos foram **movidos** (não apagados) para
 
 ### Próximo passo
 
-Validar a RTX 3090 da equipe com `diagnostico/` e repetir o treino nela. A RX
+Validar a RTX 3060 da equipe com `diagnostico/` e repetir o treino nela. A RX
 9060 XT é RDNA4 — mesma classe de risco, precisa passar pelo mesmo teste antes
 de qualquer treino.
