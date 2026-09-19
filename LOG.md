@@ -603,3 +603,87 @@ Poupados 3,3 GB: `optim.pt` só serve para retomar treino e `test_word_IAM.pt`
 não é usado no sampling.
 
 Do SD 1.5: `vae/` (safetensors, 334 MB), `scheduler/`, `model_index.json`.
+
+---
+
+## 2026-09-19 — Fine-tune executado; bloqueio de hardware identificado
+
+### Estado: **BLOQUEADA** — a GPU de desenvolvimento não computa o modelo de forma confiável
+
+Sessão longa de execução e diagnóstico na RX 6600 XT (RDNA2, ROCm,
+`HSA_OVERRIDE_GFX_VERSION=10.3.0`, PyTorch 2.12 / HIP 7.2).
+
+### O que foi executado
+
+- Extrator de estilo treinado no BRESSAY (50 épocas; melhor checkpoint na 20 —
+  depois disso o triplet de validação piora, ou seja, overfita nos escritores
+  vistos).
+- Fine-tune do pré-treinado do IAM, várias tentativas: 40 épocas em 20.000
+  amostras; 12 épocas no split inteiro (74.882); e um segundo run em blocos de
+  5 épocas.
+
+### Sintomas observados
+
+- ~11% dos batches com gradiente não-finito, em **todas** as épocas de **todos**
+  os runs.
+- Qualidade da geração **piorando** conforme treinava, enquanto o MSE melhorava
+  (0,0522 → 0,0404 numa época, com o modelo perdendo de vez a capacidade de
+  gerar).
+- Grades de amostra saindo em ruído colorido ou preto, sem que os pesos
+  tivessem um único `NaN` — verificado: 0 em 170.908.868 parâmetros, incluindo
+  o estado do AdamW.
+- O primeiro run colapsou de vez por volta da época 28.
+
+### Causa raiz
+
+A placa produz resultados numericamente instáveis para este modelo. Medido com
+a CPU como referência (`diagnostico/`):
+
+| teste | resultado |
+|---|---|
+| uma `Conv2d` isolada, CPU vs GPU | 1,1e-06 — correto |
+| UNet na CPU, lote 1 vs lote 4 | 5,2e-07 — CPU independe do lote |
+| UNet na GPU, lote 1, vs CPU | 9,7e-07 — correto |
+| UNet na GPU, lote 4, vs CPU | 9,9e-02 — **errado** |
+| UNet na GPU, entradas idênticas, lotes 1 a 32 | **1,75e-03 a 1,08** — **instável** |
+
+Duas chamadas idênticas divergem. Uma convolução isolada passa no teste, então
+o defeito só aparece no modelo completo.
+
+### Hipóteses levantadas e descartadas por medição
+
+Registradas porque cada uma custou horas e nenhuma se sustentou:
+
+1. `label_emb` indexado fora dos limites (647 escritores contra 339 classes) —
+   **falso**: o `y` é sobrescrito pelas features de estilo em `unet.py:1287`, e
+   o `label_emb` nunca é chamado nesta configuração.
+2. Extrator de estilo do BRESSAY com features de magnitude anormal — **falso**:
+   norma L2 mediana 46,7 contra 46,0 do IAM, praticamente idênticas.
+3. Imagens degeneradas no dataset — **falso**: varredura das 74.882 imagens
+   achou 6 com aspecto extremo, nenhuma ilegível ou sem contraste.
+4. `set_timesteps` mutando o scheduler compartilhado — **falso**: `add_noise`
+   bit a bit idêntico antes e depois.
+5. Amostragem dentro do treino envenenando o processo — **falso**: sem amostrar
+   nenhuma vez, os descartes continuaram em ~11% e o processo travou igual.
+6. Convolução Winograd do MIOpen — **falso**: desligada, o piso de 11%
+   permaneceu.
+
+### Correções de código feitas no caminho (aproveitáveis)
+
+Em `diffusionpen_mods/`, com README detalhando cada uma. As principais: guard
+de gradiente não-finito antes do `optimizer.step()` (sem ele, um único
+gradiente `inf` envenena o `exp_avg_sq` do AdamW de forma permanente); retomada
+real com `estado.pt`; correção do crash determinístico no treino do extrator de
+estilo; e o carregamento lazy do dataset, que antes estourava 32 GB de RAM.
+
+### Reorganização
+
+Repositório de 45 GB para 7,6 GB. Modelos, extrator de estilo, logs, amostras e
+caches `.pt` não lidos foram **movidos** (não apagados) para
+`~/repos/htg-tcc-arquivo/`.
+
+### Próximo passo
+
+Validar a RTX 3090 da equipe com `diagnostico/` e repetir o treino nela. A RX
+9060 XT é RDNA4 — mesma classe de risco, precisa passar pelo mesmo teste antes
+de qualquer treino.

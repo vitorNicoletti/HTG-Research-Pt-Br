@@ -17,3 +17,18 @@ saidas/**/*.json
 # ambientes
 venv-*/
 __pycache__/
+
+# dataset bruto do BRESSAY (4,3 GB) -- os splits em bressay_split/splits/ sao
+# versionados, mas as imagens nao. Obtidas a parte, ver STATUS.md.
+bressay/
+
+# registro de descartes da montagem do split (23 MB, reconstruivel por split.py)
+bressay_split/descartados.tsv
+
+# saidas geradas da metrica (o trocr_tokenizer/ E versionado de proposito:
+# o repo do Hub nao tem tokenizer fast, foi reconstruido -- ver ESTADO.md)
+avaliacao_diacriticos/ger_iam_puro/
+avaliacao_diacriticos/reais_test/
+
+# editor
+.vscode/
