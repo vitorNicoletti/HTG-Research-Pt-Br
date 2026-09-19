@@ -1,0 +1,24 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+CPU | threads 12 | workers 8 | lote 32 | lr 1e-06
+BRESSAY [train]: Lendo indice do disco (Otimizado Lazy Load)...
+BRESSAY [train]: 641 escritores distintos.
+BRESSAY [train]: Carregamento concluido. 6400 amostras validas de 74882 linhas no split (limitado a 6400).
+Loading weights:   0%|          | 0/246 [00:00<?, ?it/s]Loading weights: 100%|██████████| 246/246 [00:00<00:00, 11979.55it/s]
+/nix/store/98rpw6g3y3j5vc2xiyhwdqgy7xl1qyix-python3-3.14.7-env/lib/python3.14/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+ckpt.pt: 457/457 chaves carregadas
+6400 amostras | 200 passos por epoca
+
+  ep0 passo 0/200 | MSE 0.2748 | |grad| 1.9 | descartados 0 | 16.8s/passo | faltam ~56 min
+  ep0 passo 25/200 | MSE 0.2268 | |grad| 1.9 | descartados 0 | 13.3s/passo | faltam ~39 min
+  ep0 passo 50/200 | MSE 0.2065 | |grad| 1.3 | descartados 0 | 13.3s/passo | faltam ~33 min
+  ep0 passo 75/200 | MSE 0.1895 | |grad| 1.1 | descartados 0 | 13.3s/passo | faltam ~27 min
+  ep0 passo 100/200 | MSE 0.1745 | |grad| 0.7 | descartados 0 | 13.3s/passo | faltam ~22 min
+  ep0 passo 125/200 | MSE 0.1667 | |grad| 0.8 | descartados 0 | 13.3s/passo | faltam ~16 min
+  ep0 passo 150/200 | MSE 0.1606 | |grad| 0.3 | descartados 0 | 13.3s/passo | faltam ~11 min
+  ep0 passo 175/200 | MSE 0.1560 | |grad| 0.6 | descartados 0 | 13.3s/passo | faltam ~5 min
+
+epoca 0: MSE 0.1500 | 0 batches descartados de 200 | |grad| mediana 0.7 max 2.1 | 44 min
+
+checkpoint salvo em ./model_cpu_lr1e6/models/
+

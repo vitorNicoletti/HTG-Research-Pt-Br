@@ -3,7 +3,52 @@
 **Rode isto em qualquer GPU nova antes de treinar nela.** São minutos, e evita
 semanas de resultados inexplicáveis.
 
-> ## Leia antes: o que reproduz e o que não reproduz
+> ## Caracterização final (2026-09-19)
+>
+> **O forward está correto. O defeito está isolado no backward.**
+>
+> Tensor de saída inteiro do UNet, CPU como referência, com aquecimento por
+> formato, `eval()` nos dois lados e amostras diferentes dentro do lote
+> (`teste_forward_completo.py`):
+>
+> | lote | 1 | 2 | 4 | 8 | 16 | 32 |
+> |---|---|---|---|---|---|---|
+> | erro relativo | 2,0e-06 | 2,1e-06 | 2,5e-06 | 2,4e-06 | 2,2e-06 | 2,3e-06 |
+>
+> Plano, sem dependência de lote. É ruído normal de fp32.
+>
+> O gradiente, nas mesmas condições (`teste_gradiente_pareado.py`,
+> `teste_acumulacao_gradiente.py`):
+>
+> | medida | CPU | GPU |
+> |---|---|---|
+> | \|grad\| lote 32, 5 passos | 6,8 a 10,9 | 51 a 74 (**5 a 9×**) |
+> | \|grad\| lote 4 | 6,67 | 37,9 (**5,6×**) |
+> | \|grad\| acumulando lotes 1 | 6,67 | 152,9 (**23×**) |
+>
+> Como o forward está correto, as ativações que o backward consome estão
+> corretas, e o erro nasce no próprio backward.
+>
+> **Acumulação de gradiente não resolve.** Era a saída prática óbvia — treinar
+> em lotes de 1 e somar — e a medição a descarta: é o pior dos caminhos, 23×
+> fora da referência contra 5,6× do lote 4. Não há configuração segura de
+> treino nesta placa.
+>
+> ### Afirmações anteriores que caíram
+>
+> Duas caracterizações deste documento foram refutadas por medições melhores, e
+> ficam registradas para quem for reproduzir:
+>
+> 1. *"Duas chamadas idênticas com o mesmo lote divergem"* — era o transiente de
+>    primeira chamada, medido sem aquecimento.
+> 2. *"A falha é seletiva por formato de lote: 1 e 2 certos, 4 e 16 errados"* —
+>    medido no forward sem aquecimento por formato. Com aquecimento, todos os
+>    lotes de 1 a 32 dão ~2e-06.
+>
+> O que sobrevive das duas é o **transiente de primeira chamada por formato**,
+> que é real mas é um efeito separado e menor.
+>
+> ## Histórico: o que reproduz e o que não reproduz
 >
 > **Reproduz sempre:** gradiente não-finito no *backward*.
 > `teste_gradiente_sintetico.py` dá **1/60 (2%)** nesta máquina, idêntico em

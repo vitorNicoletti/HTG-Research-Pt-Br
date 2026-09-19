@@ -41,7 +41,7 @@ from utils.bressay_dataset import BRESSAY_Dataset
 # ============================ CONFIGURACAO ============================
 # Caminhos e saida vem da linha de comando (--ckpt / --out). Aqui ficam so as
 # constantes que precisam casar com o treino.
-STYLE_PATH = os.path.join(RAIZ, "style_models", "mixed_bressay_mobilenetv2_100.pth")
+STYLE_PADRAO = os.path.join(RAIZ, "style_models", "mixed_bressay_mobilenetv2_100.pth")
 STABLE_DIF = "runwayml/stable-diffusion-v1-5"
 DATASET_FOLDER = os.path.join(RAIZ, "bressay_split")
 
@@ -67,12 +67,16 @@ def parse_cli():
     p.add_argument("--styles", type=int, default=4,
                    help="quantos escritores diferentes por palavra")
     p.add_argument("--steps", type=int, default=50, help="passos do DDIM")
+    p.add_argument("--style", type=str, default=STYLE_PADRAO,
+                   help="extrator de estilo; TEM que ser o mesmo usado no treino")
+    p.add_argument("--device", type=str, default="cuda:0",
+                   help="cpu para tirar a GPU da equacao")
     p.add_argument("--seed", type=int, default=42,
                    help="mesma semente = amostras comparaveis entre checkpoints")
     a = p.parse_args()
-    if not os.path.isfile(STYLE_PATH):
+    if not os.path.isfile(a.style):
         p.error(
-            f"extrator de estilo nao encontrado: {STYLE_PATH}\n"
+            f"extrator de estilo nao encontrado: {a.style}\n"
             f"       Ele precisa ser TREINADO antes (style_encoder_train.py) e, por\n"
             f"       causa do defeito de hardware documentado em diagnostico/, isso\n"
             f"       tem de ser feito numa GPU validada. Veja o README.")
@@ -82,10 +86,25 @@ def parse_cli():
     return a
 
 
-def build_args():
+class Passa(nn.Module):
+    """Prefixo "module." do DataParallel sem CUDA, para rodar na CPU."""
+
+    def __init__(self, module):
+        super().__init__()
+        self.module = module
+
+    def forward(self, *a, **k):
+        return self.module(*a, **k)
+
+
+def embrulha(m, na_gpu, ids):
+    return DataParallel(m, device_ids=ids) if na_gpu else Passa(m)
+
+
+def build_args(device="cuda:0", style_path=STYLE_PADRAO):
     """Namespace com os mesmos defaults do parser do train.py."""
     a = argparse.Namespace()
-    a.device = "cuda:0"
+    a.device = device
     a.img_size = (64, 256)
     a.channels = 4
     a.emb_dim = 320
@@ -102,7 +121,7 @@ def build_args():
     a.unet = "unet_latent"
     a.batch_size = 1
     a.stable_dif_path = STABLE_DIF
-    a.style_path = STYLE_PATH
+    a.style_path = style_path
     a.save_path = ""
     return a
 
@@ -112,9 +131,10 @@ def main():
     random.seed(cli.seed)
     torch.manual_seed(cli.seed)
 
-    args = build_args()
+    args = build_args(cli.device, cli.style)
     device = args.device
-    device_ids = [int("".join(filter(str.isdigit, device)))]
+    na_gpu = device != "cpu"
+    device_ids = [int("".join(filter(str.isdigit, device)))] if na_gpu else []
     os.makedirs(cli.out, exist_ok=True)
 
     transform = transforms.Compose(
@@ -128,7 +148,7 @@ def main():
     print("carregando CANINE...")
     tokenizer = CanineTokenizer.from_pretrained("google/canine-c")
     text_encoder = CanineModel.from_pretrained("google/canine-c")
-    text_encoder = nn.DataParallel(text_encoder, device_ids=device_ids).to(device)
+    text_encoder = embrulha(text_encoder, na_gpu, device_ids).to(device)
     text_encoder.eval()
 
     # ---------------- unet + ema ----------------
@@ -149,7 +169,7 @@ def main():
         args=args,
     )
     # DataParallel e obrigatorio: o checkpoint foi salvo com o prefixo "module."
-    unet = DataParallel(unet, device_ids=device_ids).to(device)
+    unet = embrulha(unet, na_gpu, device_ids).to(device)
 
     ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
     # Vale tanto para um EMA (ema_*.pt) quanto para o modelo bruto (ckpt.pt):
@@ -165,7 +185,7 @@ def main():
 
     # ---------------- vae ----------------
     vae = AutoencoderKL.from_pretrained(STABLE_DIF, subfolder="vae")
-    vae = DataParallel(vae, device_ids=device_ids).to(device)
+    vae = embrulha(vae, na_gpu, device_ids).to(device)
     vae.requires_grad_(False)
     vae.eval()
     vae_model = vae.module
@@ -174,12 +194,12 @@ def main():
     feat = ImageEncoder(
         model_name="mobilenetv2_100", num_classes=0, pretrained=True, trainable=True
     )
-    sd = torch.load(STYLE_PATH, map_location=device)
+    sd = torch.load(cli.style, map_location=device)
     md = feat.state_dict()
     sd = {k: v for k, v in sd.items() if k in md and md[k].shape == v.shape}
     md.update(sd)
     feat.load_state_dict(md)
-    feat = DataParallel(feat, device_ids=device_ids).to(device)
+    feat = embrulha(feat, na_gpu, device_ids).to(device)
     feat.requires_grad_(False)
     feat.eval()
 
