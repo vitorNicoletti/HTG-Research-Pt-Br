@@ -177,10 +177,10 @@ def tem_pauta(mask, espessura_max=ESPESSURA_MAX_PAUTA,
                for ini, fim in bandas_cheias(mask, cobertura))
 
 
-def mascara_de_tinta(tinta, remover_pauta_=True):
+def mascara_de_tinta(tinta, tirar_pauta=True):
     """Binariza e, por padrao, tira a pauta. Devolve (mascara, n_fileiras)."""
     m = binariza(tinta)
-    if not remover_pauta_:
+    if not tirar_pauta:
         return m, 0
     return remover_pauta(m)
 
@@ -251,7 +251,7 @@ def _regiao(mask, indice, n_caracteres, onde, folga=0.5):
     return linhas, slice(col[0], col[1])
 
 
-def e1_por_faixa(tinta, palavra, folga=0.5, remover_pauta_=True):
+def e1_por_faixa(tinta, palavra, folga=0.5, tirar_pauta=True):
     """Escore de presenca usando so a imagem acentuada.
 
     Devolve um dict por diacritico com:
@@ -260,7 +260,7 @@ def e1_por_faixa(tinta, palavra, folga=0.5, remover_pauta_=True):
       massa_rel  -- massa / tinta do corpo na MESMA coluna. Normaliza pelo
                     tamanho da letra, entao nao depende da escala do traco.
     """
-    mask, n_pauta = mascara_de_tinta(tinta, remover_pauta_)
+    mask, n_pauta = mascara_de_tinta(tinta, tirar_pauta)
     n = len(sem_acento(palavra))
     saida = []
     for indice, nome, onde in diacriticos(palavra):
@@ -286,7 +286,7 @@ def e1_por_faixa(tinta, palavra, folga=0.5, remover_pauta_=True):
     return saida
 
 
-def e1_por_diff(tinta_acc, tinta_asc, palavra, folga=0.5, remover_pauta_=True):
+def e1_por_diff(tinta_acc, tinta_asc, palavra, folga=0.5, tirar_pauta=True):
     """Escore de presenca comparando o par minimo.
 
     A geometria (coluna, linha de base, altura-x) e calculada na imagem
@@ -303,8 +303,8 @@ def e1_por_diff(tinta_acc, tinta_asc, palavra, folga=0.5, remover_pauta_=True):
                               de cima, abaixo para cedilha). E o sinal mais
                               especifico: nao conta o que os dois ja tinham.
     """
-    m_acc, n_pa = mascara_de_tinta(tinta_acc, remover_pauta_)
-    m_asc, n_ps = mascara_de_tinta(tinta_asc, remover_pauta_)
+    m_acc, n_pa = mascara_de_tinta(tinta_acc, tirar_pauta)
+    m_asc, n_ps = mascara_de_tinta(tinta_asc, tirar_pauta)
     n = len(sem_acento(palavra))
     saida = []
     for indice, nome, onde in diacriticos(palavra):

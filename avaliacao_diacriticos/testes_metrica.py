@@ -129,7 +129,7 @@ pautada = base.copy()
 caixa(pautada, 46, 49, 0, W)                              # pauta de 3 px na base
 r_com = M.e1_por_faixa(pautada, "dacão".replace("dac", "dac"))[0]
 r_cru = M.e1_por_faixa(pautada, "dacão".replace("dac", "dac"),
-                       remover_pauta_=False)[0]
+                       tirar_pauta=False)[0]
 checa("pauta detectada", M.tem_pauta(M.binariza(pautada)))
 checa("sem pauta nao dispara falso positivo",
       not M.tem_pauta(M.binariza(base)))
@@ -159,7 +159,7 @@ checa("cedilha sem pauta e detectada", r_sem["massa"] > 0,
 pautada2 = ped.copy()
 caixa(pautada2, 46, 49, 0, W)                             # pauta sobre a base
 r_com = M.e1_por_faixa(pautada2, "daçao")[0]
-r_cru = M.e1_por_faixa(pautada2, "daçao", remover_pauta_=False)[0]
+r_cru = M.e1_por_faixa(pautada2, "daçao", tirar_pauta=False)[0]
 checa("com remocao a cedilha continua detectada", r_com["massa"] > 0,
       f"(massa {r_com['massa']})")
 # O mecanismo: sem remover a pauta, o "corpo" estimado colapsa sobre a
