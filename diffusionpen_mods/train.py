@@ -589,7 +589,12 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                 torch.save({"epoch": epoch - 1, "ema_step": ema.step},
                            os.path.join(args.save_path, "models", "estado.pt"))
     
-        if epoch % args.sample_every == 0 or epoch == ultima_epoca:
+        # sample_every <= 0 desliga a amostragem interna por completo. Note que
+        # 'epoch % N == 0' e sempre verdadeiro na epoca 0, entao sem esta guarda
+        # a grade era gerada mesmo com N enorme.
+        amostrar = args.sample_every > 0 and (
+            epoch % args.sample_every == 0 or epoch == ultima_epoca)
+        if amostrar:
             labels = torch.arange(16).long().to(args.device)
             n=len(labels)
         
@@ -661,7 +666,7 @@ def main():
     parser.add_argument('--lr', type=float, default=0.0001)
     parser.add_argument('--max_samples', type=int, default=0, help='limite de amostras por split (0 = split inteiro), para comparar runs com menos dados')
     parser.add_argument('--start_epoch', type=int, default=0, help='epoca inicial ao retomar; o --load_check sobrescreve com o valor salvo em estado.pt quando ele existe')
-    parser.add_argument('--sample_every', type=int, default=10, help='gera a grade de amostras a cada N epocas')
+    parser.add_argument('--sample_every', type=int, default=10, help='gera a grade de amostras a cada N epocas; 0 desliga. ATENCAO: essa grade usa max_length=200 enquanto o treino usa 40, entao ela NAO e confiavel -- gere com scripts/gerar_amostras.py')
     parser.add_argument('--abort_after', type=int, default=300, help='sai com codigo 3 apos N batches seguidos sem um passo valido, para o processo poder ser relancado do checkpoint')
     parser.add_argument('--save_every_steps', type=int, default=0, help='grava checkpoint a cada N passos dentro da epoca (0 = so no fim da epoca)')
     
