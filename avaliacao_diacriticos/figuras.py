@@ -205,9 +205,9 @@ def _sem_alinhar(a, b, palavra, k):
 def falhas(med):
     piores = sorted(med, key=lambda d: -d["com"])[:4]
     fig, ax = plt.subplots(4, 3, figsize=(11.5, 6.6))
-    fig.suptitle("Como o E1 erra — os 4 maiores escores do controle negativo\n"
-                 "o IAM não desenha diacrítico, então todo escore alto aqui é "
-                 "falso positivo", fontsize=12.5, y=0.995)
+    fig.suptitle("Os 4 maiores escores do controle negativo — e nem todos são erro\n"
+                 "nas cedilhas, o modelo do IAM parece estar mesmo tentando "
+                 "desenhar o diacrítico", fontsize=12.5, y=0.995)
     for i, d in enumerate(piores):
         a, b = e1.tinta(d["acc"]), e1.tinta(d["asc"])
         cinza(ax[i, 0], d["acc"]); limpa(ax[i, 0], f'{d["marca"]}: "{d["r"]["palavra"]}"', 8.5)
@@ -216,10 +216,12 @@ def falhas(med):
         ax[i, 2].title.set_fontsize(8.5)
         caixa(ax[i, 2], b, d["r"]["palavra"], d["idx"], d["onde"] == M.ACIMA)
     fig.tight_layout(rect=[0, 0.045, 1, 0.94])
-    rodape(fig, "Não é acento: é o modelo redesenhando a palavra de outro jeito. "
-                "Quando a mudança calha de cair dentro do retângulo, vira acento.\n"
-                "É por isso que na cedilha o ruído ainda supera um acento nominal, "
-                "e só a média agregada é confiável nessa marca.", y=0.01)
+    rodape(fig, "Repare em \"presença\": o final virou \"ga\" — um c com cauda "
+                "abaixo da linha de base, que é a forma de um ç. Na gêmea \"presenca\"\n"
+                "é um \"ca\" limpo. Medido: a cedilha é a única marca em que o extra "
+                "de tinta aparece na COLUNA certa e na FAIXA certa mais do que nas\n"
+                "outras colunas da mesma imagem (+0,0245, IC95 [+0,0085, +0,0416]). "
+                "Ou seja, o IAM não é controle negativo puro para cedilha.", y=0.01)
     fig.savefig(f"{FIG}/e1_falhas.png", dpi=125)
     plt.close(fig)
     print("  figuras/e1_falhas.png")

@@ -275,6 +275,49 @@ negativo se comportando como esperado. **É esta tabela que dá sentido aos
 números do fine-tune quando ele existir**: 0,05 passa a ser "cerca de um terço
 de acento", não um número solto.
 
+## O IAM não é controle negativo puro para cedilha
+
+Olhando `figuras/e1_falhas.png`, os maiores escores do controle negativo não
+parecem todos ruído: em "presença" o final virou "ga" — um c com cauda abaixo
+da linha de base, que é a forma de um ç —, enquanto a gêmea "presenca" tem um
+"ca" limpo. Em "preço" acontece o mesmo.
+
+Testado em vez de aceito. Para cada amostra, comparei o escore na **coluna do
+acento** com o escore nas **outras colunas da mesma imagem**, com a mesma
+faixa. Se fosse jitter de traço, as duas seriam iguais. Diferença pareada,
+IC95 por bootstrap sobre 4.000 reamostragens:
+
+| marca | diferença | IC95 | efeito real? |
+|---|---|---|---|
+| **cedilha** | **+0,0245** | [+0,0085, +0,0416] | **sim** |
+| agudo | +0,0067 | [−0,0064, +0,0197] | não |
+| grave | −0,0028 | [−0,0114, +0,0056] | não |
+| circunflexo | −0,0123 | [−0,0289, +0,0040] | não |
+| til | −0,0112 | [−0,0210, −0,0018] | sim, mas **negativo** |
+
+E o extra de tinta da cedilha está na faixa certa, não no corpo da letra: na
+coluna do ç o corpo **perde** tinta (−0,0245) enquanto a faixa abaixo da linha
+de base **ganha** (+0,0338). O modelo desloca massa para baixo da linha de
+base, que é o que desenhar uma cedilha faz.
+
+**Consequência, e ela é metodológica.** Eu vinha dizendo que a métrica é pouco
+confiável na cedilha porque o ruído (p95 = 0,238) supera um acento nominal
+(0,165). A leitura correta é outra: **o controle não é negativo nessa marca**.
+O que eu estava chamando de ruído é, em parte, sinal — o IAM produzindo algo
+cedilhoide. Logo o p95 da cedilha calibrado no IAM está inflado e não serve
+como limiar.
+
+Para o agudo a hipótese **não** se sustenta: o "i maior" que aparece num caso
+isolado de "país" não sobrevive ao teste agregado com n=72.
+
+O que isso NÃO estabelece: que o ç gerado seja bem formado ou legível. O que
+está medido é que há tinta a mais, na coluna certa e na faixa certa,
+sistematicamente. Julgar a forma é trabalho da anotação humana (Passo 6).
+
+Nada disso foi corrigido — é uma limitação declarada do controle, não um bug.
+Til, grave e circunflexo continuam com controle negativo válido, e são as
+marcas em que o instrumento está pronto para medir o fine-tune.
+
 ## Alinhar os gêmeos antes de subtrair (e o portão do Passo 1 revisto)
 
 O portão do Passo 1 mediu 6 pares, deu deslocamento zero em todos, e eu
