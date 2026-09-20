@@ -5,8 +5,14 @@
 Saida em figuras/:
     e1_passo_a_passo.png   os 4 passos da metrica num par
     e1_exemplos.png        uma marca por linha
-    e1_falhas.png          os maiores escores do negativo (falsos positivos)
-    e1_alinhamento.png     por que os gemeos precisam ser alinhados
+    e1_falhas.png          os maiores escores do negativo
+
+A figura do alinhamento foi removida: ela escolhia o par em que alinhar mais
+muda o escore, e esse criterio seleciona justamente os deslocamentos grandes,
+que tendem a ser tambem os casos em que o modelo desenhou a palavra de outro
+jeito -- ou seja, mostrava um caso em que alinhar NAO limpa. A justificativa
+do alinhamento esta medida no README (p95 do ruido de 0.181 para 0.103, AUC
+de 0.936 para 0.966) e comentada em e1.deslocamento().
 """
 import json
 import os
@@ -73,16 +79,6 @@ def dif(ax, a, b, titulo=None, alinhar=True):
     img[b] = 0.80
     img[d > 0] = (0.85, 0.10, 0.10)
     img[d < 0] = (0.10, 0.30, 0.85)
-    ax.imshow(img, interpolation="nearest")
-    limpa(ax, titulo)
-
-
-def sobrepoe(ax, a, b, titulo=None):
-    """As duas palavras em cores diferentes, para ver se estao no mesmo lugar."""
-    img = np.ones((*b.shape, 3))
-    img[a] = (0.85, 0.10, 0.10)
-    img[b] = (0.10, 0.30, 0.85)
-    img[a & b] = (0.55, 0.55, 0.55)
     ax.imshow(img, interpolation="nearest")
     limpa(ax, titulo)
 
@@ -227,54 +223,9 @@ def falhas(med):
     print("  figuras/e1_falhas.png")
 
 
-def alinhamento(med):
-    """Demonstra o fantasma do desalinhamento e o efeito de corrigi-lo."""
-    d = max(med, key=lambda x: x["sem"] - x["com"])
-    a, b = e1.tinta(d["acc"]), e1.tinta(d["asc"])
-    dx, dy = e1.deslocamento(a, b)
-    pal = d["r"]["palavra"]
-
-    # painel 1: a MESMA palavra deslocada. Como as duas sao identicas, tudo que
-    # aparece e artefato do deslocamento -- e o jeito mais direto de mostrar
-    # que subtrair sem alinhar duplica cada traco.
-    H, W = b.shape
-    desl = np.zeros_like(b)
-    desl[:, 8:] = b[:, :-8]
-
-    fig, ax = plt.subplots(3, 1, figsize=(9.5, 6.4))
-    fig.suptitle("Por que os gêmeos precisam ser alinhados antes da subtração",
-                 fontsize=13, y=0.985)
-
-    dif(ax[0], desl, b, "1. a MESMA palavra, deslocada 8 px, subtraída dela mesma:\n"
-                        "   cada traço vira um par vermelho/azul — puro artefato, "
-                        "não há acento nenhum aqui", alinhar=False)
-    dif(ax[1], a, b, f'2. caso real "{pal}" / "{M.sem_acento(pal)}", sem alinhar '
-                     f'(os gêmeos saíram {abs(dx)} px fora de lugar)'
-                     f'     E1 = {d["sem"]:+.3f}  ← falso positivo', alinhar=False)
-    caixa(ax[1], b, pal, d["idx"], d["onde"] == M.ACIMA)
-    dif(ax[2], a, b, f"3. o mesmo caso, alinhado antes de subtrair "
-                     f"(dx={dx:+d} px, dy={dy:+d} px)     E1 = {d['com']:+.3f}")
-    caixa(ax[2], b, pal, d["idx"], d["onde"] == M.ACIMA)
-    for e in ax:
-        e.title.set_fontsize(9.5)
-
-    fig.tight_layout(rect=[0, 0.13, 1, 0.94])
-    rodape(fig, "Vermelho = tinta só na acentuada, azul = só na gêmea, cinza = nas "
-                "duas. No painel 1 não existe acento: todo o vermelho vem de a\n"
-                "de a palavra estar fora do lugar. É esse fantasma que caía dentro do "
-                "retângulo verde no painel 2.  Alinhar corrige só o deslocamento —\n"
-                "o vermelho que sobra no painel 3 é o modelo tendo desenhado a "
-                "palavra de outro jeito, e isso a métrica não conserta.", y=0.012)
-    fig.savefig(f"{FIG}/e1_alinhamento.png", dpi=130)
-    plt.close(fig)
-    print(f"  figuras/e1_alinhamento.png   ({pal}: {d['sem']:+.3f} -> {d['com']:+.3f}, "
-          f"dx={dx:+d} dy={dy:+d})")
-
-
 if __name__ == "__main__":
     os.makedirs(FIG, exist_ok=True)
     passo_a_passo()
     exemplos()
     med = medir_tudo()
     falhas(med)
-    alinhamento(med)

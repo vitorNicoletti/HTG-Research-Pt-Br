@@ -64,8 +64,12 @@ MEDIANAS                  0    0   0.932     0.999
 ```
 
 Deslocamento ótimo zero em todos os pares. **Os gêmeos saem alinhados**, então
-o E1 por diferença é válido. As imagens estão em `figuras/passo1_alinhamento.png` (ordem
-por par: acentuada / ascii / |diff|).
+o E1 por diferença é válido. Os números por par estão em
+`resultados/passo1_alinhamento.json`.
+
+Esta conclusão foi **revista depois**: ver a seção sobre alinhamento abaixo.
+Em 348 pares, 60% saem com deslocamento zero, mas o máximo chega a 18 px — o
+portão acertou na média e errou na cauda.
 
 As duas variantes do E1 continuam existindo porque servem a coisas diferentes:
 
