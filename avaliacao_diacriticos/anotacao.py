@@ -74,9 +74,27 @@ def preparar(a):
     print("a imagem e o id.")
 
     if a.contato:
-        from PIL import Image, ImageDraw
+        from PIL import Image, ImageDraw, ImageFont
+        # A fonte padrao do PIL nao tem os glifos acentuados, e sem eles o
+        # rotulo mostra "elucida##o" -- justamente a informacao de que quem
+        # anota precisa. Procura uma TTF com Latin-1; se nao achar, cai na
+        # fonte padrao e escreve o alvo sem acento, dizendo qual e a marca.
+        fonte, tem_acento = None, False
+        for cam in ("/run/current-system/sw/share/X11/fonts/DejaVuSans.ttf",
+                    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+                    "/usr/share/fonts/TTF/DejaVuSans.ttf"):
+            if os.path.exists(cam):
+                fonte, tem_acento = ImageFont.truetype(cam, 12), True
+                break
+        if fonte is None:
+            import glob as _g
+            achados = _g.glob("/nix/store/*/share/fonts/truetype/DejaVuSans.ttf")
+            if achados:
+                fonte, tem_acento = ImageFont.truetype(achados[0], 12), True
+        if fonte is None:
+            fonte = ImageFont.load_default()
         cols, lado, alt = 4, 256, 64
-        rot = 14
+        rot = 16
         linhas_n = (len(amostra) + cols - 1) // cols
         folha = Image.new("L", (cols * (lado + 6), linhas_n * (alt + rot + 6)), 255)
         d = ImageDraw.Draw(folha)
@@ -85,7 +103,10 @@ def preparar(a):
             x = (i % cols) * (lado + 6)
             y = (i // cols) * (alt + rot + 6)
             folha.paste(im, (x, y + rot))
-            d.text((x + 2, y + 2), f"id={i}  alvo={r['palavra']}", fill=0)
+            import metrica as _M
+            alvo = r["palavra"] if tem_acento else _M.sem_acento(r["palavra"])
+            d.text((x + 2, y + 2),
+                   f"id={i}  alvo={alvo}  ({r['marca']})", fill=0, font=fonte)
         folha.save(a.contato)
         print("folha de contato:", a.contato)
 

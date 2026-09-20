@@ -111,6 +111,59 @@ estão degenerados**, todos em `ação.png`, nas pastas `amostras_bressay_ep15`,
 std = 0,000, imagem em branco. Não é o modelo falhando em "ação": é a
 amostragem em lote.
 
+## E2 satura no piso — e satura já no manuscrito humano
+
+Este é o resultado do Passo 3/4 para o segundo eixo, e ele é negativo. O TrOCR
+`microsoft/trocr-base-handwritten` aplicado aos recortes **REAIS** do BRESSAY:
+
+| grupo | n | CER médio | IC95 | mediana |
+|---|---|---|---|---|
+| acentuadas | 148 | 0,826 | [0,760, 0,895] | 0,778 |
+| ASCII (controle) | 120 | 1,035 | [0,922, 1,160] | 1,000 |
+
+CER 1,0 quer dizer "tão errado quanto uma string vazia". **Apenas 1 de 120**
+recortes acentuados foi lido perfeitamente; 12 ficaram com CER ≤ 0,3. Exemplos
+de leitura em manuscrito humano perfeitamente legível: "psicólogos" →
+`assimilance`, "vivência" → `preceivers .`, "pública" → `1million .`.
+
+A diferença entre os dois grupos é **confundimento de comprimento**, não
+qualidade: as acentuadas têm 8,32 caracteres de média contra 5,28 das ASCII, e
+o CER normaliza pelo comprimento do alvo. Dentro de cada faixa os grupos
+empatam:
+
+| comprimento | CER acentuadas | CER ASCII |
+|---|---|---|
+| 3–4 | 1,550 (n=15) | 1,520 (n=58) |
+| 5–6 | 0,773 (n=11) | 0,727 (n=33) |
+| 7–9 | 0,747 (n=53) | 0,396 (n=20) |
+| 10+ | 0,656 (n=41) | 0,452 (n=9) |
+
+**A consequência é que o eixo não decide nada.** Em manuscrito humano real, onde
+a base está íntegra por construção, a classificação vira de ponta-cabeça
+conforme a escolha do limiar:
+
+| limiar de E2 | "acerto" | "degradação" |
+|---|---|---|
+| 0,3 absoluto | 6,8% | **89,9%** |
+| 0,5 absoluto | 21,6% | 74,3% |
+| relativo ao grupo ASCII (q75) | **83,8%** | 6,8% |
+
+Com o limiar relativo, "base íntegra" acaba significando "não é pior do que um
+baseline ilegível" — vacuamente verdadeiro. Com limiar absoluto, manuscrito
+humano legível é declarado degradado.
+
+**Leitura para o TCC:** não é que o gerador degrade a base — é que *este
+reconhecedor não lê este corpus*. O eixo E2 não está validado e não deve
+sustentar conclusão sobre integridade de base enquanto não houver um
+reconhecedor treinado em manuscrito português. Até lá, a classificação honesta
+tem duas categorias (acento presente / ausente), não quatro. Isso está
+implementado: sem `--com-e2`, o `avaliar.py` rotula `presente`/`ausente` em vez
+de forçar as quatro.
+
+O caminho para consertar o eixo é trocar o reconhecedor, não afrouxar o limiar.
+A folha de contato `anotacao_reais.png` deixa isso visível: as palavras são
+perfeitamente legíveis para uma pessoa, e o CER diz 0,83.
+
 ## A linha pautada do papel quebrava o E1 (corrigido)
 
 73% dos alvos de treino do BRESSAY e 88% dos recortes de teste têm a linha
@@ -221,6 +274,42 @@ dos casos. O IAM puro produz 1,8% da massa de um acento nominal — é o control
 negativo se comportando como esperado. **É esta tabela que dá sentido aos
 números do fine-tune quando ele existir**: 0,05 passa a ser "cerca de um terço
 de acento", não um número solto.
+
+## O limiar do eixo por diferença sai do negativo REAL, não da curva sintética
+
+A curva acima é o melhor caso possível: o acento é pintado sobre a *mesma*
+imagem, então fora do acento os gêmeos são idênticos. Em par mínimo gerado de
+verdade os dois gêmeos diferem em todo lugar por jitter de traço, e esse ruído
+entra no delta. Medido no Passo 5 (IAM puro, 696 imagens, 348 diacríticos):
+**28,4% das amostras cruzam o piso sintético de 0,02**, e 16,4% cruzam 0,0389 —
+num gerador que comprovadamente não desenha diacrítico nenhum.
+
+Portanto o limiar operacional se calibra no controle negativo real
+(`limiares_eixo_diff.json`), não na curva sintética:
+
+| marca | média | p90 | **p95** | p99 | acento nominal |
+|---|---|---|---|---|---|
+| grave | −0,0088 | 0,0276 | **0,0365** | 0,0562 | 0,1657 |
+| til | −0,0116 | 0,0319 | **0,0455** | 0,0667 | 0,1657 |
+| circunflexo | −0,0085 | 0,0350 | **0,0682** | 0,1213 | 0,1657 |
+| cedilha | 0,0311 | 0,1643 | **0,2056** | 0,3534 | 0,1657 |
+| agudo | 0,0526 | 0,1907 | **0,2636** | 0,3401 | 0,1657 |
+
+Usar o p95 como limiar quer dizer "um escore assim aparece em menos de 5% das
+amostras de um gerador que não desenha acento".
+
+**Limitação que precisa estar no TCC:** para agudo e cedilha o ruído do p95
+(0,264 e 0,206) **supera** o sinal de um acento nominal (0,166). Nessas duas
+marcas a classificação amostra a amostra não é confiável — só a média agregada
+com intervalo de confiança. Faz sentido: o agudo no "i" substitui o pingo, que
+o gêmeo ASCII também tem, e a cedilha cai numa região já cheia de tinta. Para
+til e grave, que são o alvo central do trabalho, o eixo separa por amostra com
+folga de 3 a 4 vezes.
+
+Til, grave e circunflexo dão média **negativa** no IAM puro: a versão acentuada
+tem *menos* tinta na faixa do que a gêmea ASCII. Não é o modelo desenhando um
+acento pequeno — é o modelo renderizando uma palavra diferente, sem acento
+nenhum. É o controle negativo se comportando como deveria.
 
 ## A janela de coluna é sensível à folga, mas a decisão não é
 

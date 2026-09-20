@@ -1,80 +1,105 @@
-# Estado — onde parei e como retomar
+# Estado — o que está medido e o que falta
 
-Sessão interrompida a pedido (desligar a máquina). **Nada foi perdido**: tudo
-abaixo são arquivos normais em `avaliacao_diacriticos/`, não há estado em
-memória. Nenhum processo ficou rodando.
+Atualizado ao fim da sessão que corrigiu a linha pautada. Tudo abaixo são
+arquivos normais em `avaliacao_diacriticos/`, commitados na branch
+`diagnostico-gpu-e-reorganizacao`. Nenhum processo ficou rodando.
+
+Os números detalhados e o raciocínio estão no `README.md`; aqui fica só o
+estado e o que fazer em seguida.
 
 ## Pronto e verificado
 
 | Passo | Estado |
 |---|---|
-| 1 — portão de alinhamento | **PASSOU**. dx=dy=0 nos 6 pares, IoU mediano 0.932, corr de colunas 0.999. Números em `passo1_alinhamento.json`, imagens em `passo1_contato.png` e `gate_cpu/`. |
-| 2 — E1 | Implementado nas duas variantes (`e1_por_diff`, `e1_por_faixa`). 14 testes sintéticos de resposta conhecida passam (`testes_metrica.py`), incluindo "ascendente não conta como acento" e o caso do pingo do "i". |
-| 3 — E2 | TrOCR funcionando, com CER dobrado para ASCII dos dois lados. Precisou reconstruir o `tokenizer.json` (o repo do Hub só tem vocab+merges e o transformers 5.x exige tokenizer fast); está versionado em `trocr_tokenizer/`, com round-trip conferido. |
-| 6 — kappa | Implementado e validado em dados sintéticos (1.0 / −1.0 / ~0). Falta rodar sobre dados reais, que dependem do Passo 4/5. |
+| 1 — portão de alinhamento | **PASSOU**. dx=dy=0 nos 6 pares, IoU mediano 0,932. |
+| 2 — E1 | Duas variantes, com remoção da linha pautada. **31 testes sintéticos** de resposta conhecida passam. |
+| 3 — E2 | Implementado e **medido: satura**. Ver abaixo. |
+| 4 — controles | Fechado, com um controle a mais do que o planejado. |
+| 5 — N declarado | Fechado **para o IAM puro**: 696 imagens, 0 colapsadas, 0 NaN. |
+| 6 — kappa | Ferramenta pronta e validada; planilha e folha de contato geradas. Falta a anotação humana. |
 
-## Passo 4 — controles: metade medido
+## Os três resultados que importam
 
-O eixo E1 já separa os dois extremos, **usando a mesma variante (faixa) nos
-dois lados**, que é a única comparação honesta:
+**1. A pauta estava sendo medida como acento, e corrigir derrubou o controle
+positivo de 0,861 para 0,510.** Reportado como queda, sem mexer no limiar. O
+discriminador certo é espessura (bandas de até 5 px), não cobertura: a correção
+ingênua por cobertura destruía palavras curtas. 100% das amostras de um modelo
+ajustado no BRESSAY (`am_v2/`) têm a pauta, então a correção vale para o gerado.
 
-| conjunto | n | E1 escore médio | IC95 |
-|---|---|---|---|
-| IAM puro (`ger_iam_puro/`, 29 pares × 2 estilos × 1 semente) | 58 | **0.141** | [0.090, 0.209] |
-| recortes REAIS do BRESSAY (`reais_test/`, 120 acentuados) | 148 | **0.861** | [0.713, 1.035] |
+**2. O E1 por faixa é um detector fraco em material real (AUC 0,680).** Isso só
+apareceu com um controle negativo **no mesmo domínio** (`controle_ascii.py`:
+palavra real do BRESSAY sem diacrítico, com acento fabricado). Contra o IAM
+puro o AUC parecia 0,849 — boa parte era diferença de domínio, não presença de
+acento. A barra do Passo 4 ("perto de 100% nos dois lados") **não é atingida**
+com limiar único.
 
-Pela variante de diferença (só disponível no gerado), o IAM puro dá
-**0.003** [−0.013, 0.022] — ou seja, praticamente nenhuma tinta a mais onde o
-diacrítico deveria estar. É o controle negativo se comportando como esperado.
+**3. O E2 não está validado: o TrOCR não lê este corpus.** Em recorte humano
+real, CER 0,826 nas acentuadas e 1,035 nas ASCII, com **1 leitura perfeita em
+120**. A classificação em quatro categorias vira de ponta-cabeça conforme o
+limiar (89,9% de "degradação" com corte 0,3; 83,8% de "acerto" com corte
+relativo). Enquanto não houver reconhecedor treinado em manuscrito português, a
+classificação honesta tem **duas** categorias, não quatro.
 
-**O que falta:** o E2 nos recortes reais não terminou (TrOCR em CPU, ~240
-imagens; foi interrompido). Sem ele não dá para calcular o piso de leitura nem
-fechar a calibração do limiar. Retomar com:
+## Para quando o fine-tune do BRESSAY estiver pronto
+
+O instrumento está calibrado e caracterizado. A sequência é:
 
 ```bash
+export HSA_OVERRIDE_GFX_VERSION=10.3.0
+export PYTORCH_HIP_ALLOC_CONF=expandable_segments:True
 PY=/nix/store/98rpw6g3y3j5vc2xiyhwdqgy7xl1qyix-python3-3.14.7-env/bin/python
 cd ~/repos/htg-tcc
-$PY avaliacao_diacriticos/avaliar.py --dir avaliacao_diacriticos/reais_test \
-    --csv-out avaliacao_diacriticos/res_reais.csv --com-e2 --device cpu
-$PY avaliacao_diacriticos/calibrar.py \
-    --negativo avaliacao_diacriticos/res_iam_faixa.csv \
-    --positivo avaliacao_diacriticos/res_reais.csv \
-    --json-out avaliacao_diacriticos/calibracao_e1.json
+
+# 1. invariante de amostragem do checkpoint novo (obrigatório: lote > 1
+#    corrompe nesta GPU, e imagem colapsada vira "acento omitido")
+$PY avaliacao_diacriticos/gerar_pares.py --ckpt <novo.pt> --out-dir /tmp/x \
+    --pares-tsv avaliacao_diacriticos/pares_gate.tsv \
+    --n-styles 1 --seeds 0 --batch 1 --autoteste-lote
+
+# 2. gerar com o mesmo N do controle negativo (696 imagens, ~30 min na GPU)
+$PY avaliacao_diacriticos/gerar_pares.py --ckpt <novo.pt> \
+    --out-dir avaliacao_diacriticos/ger_ft --batch 1 \
+    --pares-tsv avaliacao_diacriticos/pares_sonda30.tsv \
+    --n-styles 4 --seeds 0 1 2
+
+# 3. ler o eixo por DIFERENÇA (não o por faixa) contra limiares_eixo_diff.json
+$PY avaliacao_diacriticos/avaliar.py --dir avaliacao_diacriticos/ger_ft \
+    --csv-out avaliacao_diacriticos/res_ft.csv --eixo1 diff --limiar-e1 0.0455
 ```
 
-Aviso que já dá para dar: numa amostra de 10 recortes **reais**, o TrOCR leu
-"econômico"→"economic", "perpetuação"→"perpetuation", "não"→'" Chicago"', com
-CER entre 0.11 e 1.67. É provável que o E2 sature perto do teto já no
-manuscrito humano. Se isso se confirmar, o achado é que **E2 não discrimina
-integridade de base com este reconhecedor** — o que é uma medida válida e
-precisa ser reportada, não um defeito a esconder.
+O limiar 0,0455 é o p95 do til no controle negativo. **Use o limiar da marca**
+(`limiares_eixo_diff.json`), não um global: para agudo (p95 0,264) e cedilha
+(p95 0,206) o ruído supera um acento nominal (0,166), então nessas duas marcas
+só a média agregada com IC é confiável — classificação amostra a amostra, não.
+Para til (0,046) e grave (0,037) o eixo separa por amostra com folga de 3 a 4×.
 
-## Passo 5 — não feito, por decisão sua
+A referência de escala vem de `teste_sensibilidade_diff.py`: 0,0000 = gêmeos
+idênticos, 0,0389 = meio acento nominal, 0,1657 = acento nominal. O IAM puro,
+em 348 diacríticos, dá 0,0116 — cerca de 7% de um acento.
 
-Você pediu para não gerar amostras com os modelos do BRESSAY por ora, já que
-ainda não estão bons. O conjunto parcial que tinha começado foi apagado. O
-comando está pronto no README quando quiser; com `--batch 1` na GPU dá ~2,5 s
-por imagem, ou seja ~30 min para 29 pares × 4 estilos × 3 sementes.
+## O que falta, em ordem
 
-## Dois achados que valem independentemente do fine-tune
+1. **Anotação humana** (Passo 6). `anotacao_reais.csv` tem 38 linhas
+   estratificadas pelas quatro categorias e `anotacao_reais.png` é a folha de
+   contato. Quem anota preenche só `acento_presente` e `base_legivel` (0/1) e
+   **não deve ver as colunas `_metrica_*`**. Depois:
+   `anotacao.py kappa --csv <preenchida>`. O kappa do eixo E2 vai quantificar o
+   quanto o TrOCR discorda de um leitor humano — que é a evidência mais direta
+   do problema 3.
+2. **Trocar o reconhecedor do E2**, ou declarar o eixo como não medido. Não
+   afrouxar o limiar.
+3. **Aumentar o n de cedilha e grave** nos controles se eles forem virar
+   conclusão: hoje são n=8 e n=7 no positivo real.
 
-1. **Lote > 1 corrompe a amostragem nesta GPU** (NaN, colapso para cinza, não
-   reproduzível). Com lote 1 a GPU bate com a CPU em 1/255. Consequência
-   concreta: 12 de 332 sub-painéis das pastas `amostras_*` estão em branco
-   (std = 0.000), todos em `ação.png`, em `amostras_bressay_ep15`,
-   `amostras_bressay_ep15_sem_flag` e `amostras_v2_5ep`. Isso é artefato de
-   amostragem, não incapacidade do modelo. Detalhes e medições no README.
-   O `gerar_amostras.py` da raiz gera 4 estilos num lote só — **não mexi
-   nele**, é da outra sessão.
+## Avisos que continuam valendo
 
-2. **Til e cedilha quase não têm gêmeo ASCII real no corpus**: dos 188 pares,
-   só 5 são de cedilha e 3 de til (`sã`, `fã`, `dã`). Como são justamente as
-   marcas que o IAM apaga, `pares_sonda30.tsv` marca numa coluna quais pares
-   têm gêmeo real e quais não — o confundimento com "não-palavra" precisa ser
-   declarado no TCC.
-
-## Não commitado
-
-Não commitei nada: o checkout está na `main` e tem alterações não commitadas de
-outra sessão (`flake.nix`, `requirements.txt`). Se quiser que eu commite só a
-pasta `avaliacao_diacriticos/` numa branch separada, é só pedir.
+- **Lote > 1 corrompe a amostragem nesta GPU** (NaN, colapso para cinza, não
+  reproduzível). `--batch 1` é obrigatório e o `--autoteste-lote` verifica.
+  Na corrida de 696 imagens deu 0 colapsadas e 0 NaN.
+- **Til e cedilha quase não têm gêmeo ASCII real no corpus** (3 e 5 pares dos
+  188). Em `pares_sonda30.tsv` a coluna `gemeo_e_palavra_real` diz quais pares
+  têm o gêmeo como palavra real; para til e cedilha ele é não-palavra, e o
+  confundimento precisa ser declarado.
+- **O escore E1 depende da `folga`** (varia 45% entre folga 0 e 2), embora a
+  separação não dependa (AUC 0,79–0,88). Sempre declarar a folga usada e
+  calibrar o limiar na mesma folga.

@@ -1,0 +1,149 @@
+arquivo,palavra,ascii,par_id,escritor,semente,real,marca,onde,indice,medivel,fileiras_pauta,faixa_massa,faixa_massa_rel,faixa_densidade,tem_gemeo,diff_massa_acc,diff_massa_asc,diff_delta,diff_delta_rel,diff_acima_do_topo,e2_lido,e2_cer,e1_escore,e1_presente,categoria
+real_acc_0000.png,psicólogos,psicologos,real0000,958,-1,True,agudo,acima,4,True,4,234,0.94355,0.10174,False,,,,,,assimilance,0.8,0.94355,True,degradacao_com_diacritico
+real_acc_0001.png,elucidação,elucidacao,real0001,862,-1,True,cedilha,abaixo,7,True,3,24,0.06452,0.03209,False,,,,,,elucidacias .,0.2,0.06452,False,omissao_do_acento
+real_acc_0001.png,elucidação,elucidacao,real0001,862,-1,True,til,acima,8,True,3,33,0.0801,0.02778,False,,,,,,elucidacias .,0.2,0.0801,False,omissao_do_acento
+real_acc_0002.png,vivência,vivencia,real0002,458,-1,True,circunflexo,acima,3,True,1,97,0.24808,0.06929,False,,,,,,preceivers .,1.125,0.24808,True,degradacao_com_diacritico
+real_acc_0003.png,àquelas,aquelas,real0003,446,-1,True,grave,acima,0,True,2,169,2.22368,0.15533,False,,,,,,3 liquidants .,1.0,2.22368,True,degradacao_com_diacritico
+real_acc_0004.png,pública,publica,real0004,446,-1,True,agudo,acima,1,True,2,256,1.23671,0.23594,False,,,,,,1million .,0.8571428571428571,1.23671,True,degradacao_com_diacritico
+real_acc_0005.png,perpetuação,perpetuacao,real0005,812,-1,True,cedilha,abaixo,8,True,2,103,0.32595,0.0933,False,,,,,,perpetuation,0.2727272727272727,0.32595,True,acerto
+real_acc_0005.png,perpetuação,perpetuacao,real0005,812,-1,True,til,acima,9,True,2,50,0.15924,0.04348,False,,,,,,perpetuation,0.2727272727272727,0.15924,True,acerto
+real_acc_0006.png,econômico,economico,real0006,384,-1,True,circunflexo,acima,4,True,0,68,0.11203,0.05519,False,,,,,,economic,0.1111111111111111,0.11203,False,omissao_do_acento
+real_acc_0007.png,àqueles,aqueles,real0007,244,-1,True,grave,acima,0,True,3,96,0.34532,0.07973,False,,,,,,riapresses .,0.8571428571428571,0.34532,True,degradacao_com_diacritico
+real_acc_0008.png,não,nao,real0008,459,-1,True,til,acima,1,True,0,196,0.35125,0.09771,False,,,,,,""" Chicago",1.6666666666666667,0.35125,True,degradacao_com_diacritico
+real_acc_0009.png,psíquicos,psiquicos,real0009,233,-1,True,agudo,acima,2,True,2,107,0.39194,0.1019,False,,,,,,pricympies .,0.7777777777777778,0.39194,True,degradacao_com_diacritico
+real_acc_0010.png,aquisição,aquisicao,real0010,383,-1,True,cedilha,abaixo,6,True,4,22,0.0694,0.04365,False,,,,,,exrequisites .,0.7777777777777778,0.0694,False,degradacao_sem_diacritico
+real_acc_0010.png,aquisição,aquisicao,real0010,383,-1,True,til,acima,7,True,4,530,1.79661,0.37749,False,,,,,,exrequisites .,0.7777777777777778,1.79661,True,degradacao_com_diacritico
+real_acc_0011.png,instância,instancia,real0011,862,-1,True,circunflexo,acima,4,True,3,72,0.20225,0.05357,False,,,,,,"simatancia ,",0.3333333333333333,0.20225,True,acerto
+real_acc_0012.png,àqueles,aqueles,real0012,819,-1,True,grave,acima,0,True,2,49,0.21875,0.0349,False,,,,,,ioguels .,0.5714285714285714,0.21875,True,degradacao_com_diacritico
+real_acc_0013.png,depressão,depressao,real0013,247,-1,True,til,acima,7,True,2,303,1.52261,0.14239,False,,,,,,"deparesciao ,",0.3333333333333333,1.52261,True,acerto
+real_acc_0014.png,psíquico,psiquico,real0014,110,-1,True,agudo,acima,2,True,0,93,0.52841,0.14441,False,,,,,,"3 "" participation .",1.375,0.52841,True,degradacao_com_diacritico
+real_acc_0015.png,preço,preco,real0015,797,-1,True,cedilha,abaixo,3,True,3,172,0.31852,0.21078,False,,,,,,sprego,0.4,0.31852,True,acerto
+real_acc_0016.png,equinânime,equinanime,real0016,892,-1,True,circunflexo,acima,5,True,4,148,0.36364,0.09946,False,,,,,,sequisitionaire .,0.8,0.36364,True,degradacao_com_diacritico
+real_acc_0017.png,àquele,aquele,real0017,106,-1,True,grave,acima,0,True,3,225,1.1194,0.10227,False,,,,,,exigmile .,1.0,1.1194,True,degradacao_com_diacritico
+real_acc_0018.png,artística,artistica,real0018,813,-1,True,agudo,acima,3,True,3,237,1.43636,0.1881,False,,,,,,contistice .,0.4444444444444444,1.43636,True,acerto
+real_acc_0019.png,manutenção,manutencao,real0019,438,-1,True,cedilha,abaixo,7,True,3,57,0.16864,0.08432,False,,,,,,marquetes going into,1.1,0.16864,True,degradacao_com_diacritico
+real_acc_0019.png,manutenção,manutencao,real0019,438,-1,True,til,acima,8,True,3,150,0.4451,0.09014,False,,,,,,marquetes going into,1.1,0.4451,True,degradacao_com_diacritico
+real_acc_0020.png,ausência,ausencia,real0020,372,-1,True,circunflexo,acima,3,True,0,315,0.3198,0.19444,False,,,,,,ansienxia,0.375,0.3198,True,acerto
+real_acc_0021.png,Lumière,Lumiere,real0021,881,-1,True,grave,acima,4,True,4,116,0.23868,0.05461,False,,,,,,"flannshire ,",1.0,0.23868,True,degradacao_com_diacritico
+real_acc_0022.png,filósofo,filosofo,real0022,447,-1,True,agudo,acima,3,True,4,62,0.28704,0.07949,False,,,,,,gilship,0.625,0.28704,True,degradacao_com_diacritico
+real_acc_0023.png,avanços,avancos,real0023,383,-1,True,cedilha,abaixo,4,True,3,15,0.02547,0.02219,False,,,,,,- announces,0.7142857142857143,0.02547,False,degradacao_sem_diacritico
+real_acc_0024.png,econômico,economico,real0024,385,-1,True,circunflexo,acima,4,True,2,136,0.20827,0.07589,False,,,,,,economic,0.1111111111111111,0.20827,True,acerto
+real_acc_0025.png,àqueles,aqueles,real0025,385,-1,True,grave,acima,0,True,4,232,1.24064,0.10288,False,,,,,,inqueles .,0.2857142857142857,1.24064,True,acerto
+real_acc_0026.png,precários,precarios,real0026,813,-1,True,agudo,acima,4,True,4,44,0.16357,0.03543,False,,,,,,penecomics .,0.5555555555555556,0.16357,True,degradacao_com_diacritico
+real_acc_0027.png,associações,associacoes,real0027,205,-1,True,cedilha,abaixo,7,True,1,50,0.13089,0.06649,False,,,,,,environmental significance,1.9090909090909092,0.13089,True,degradacao_com_diacritico
+real_acc_0027.png,associações,associacoes,real0027,205,-1,True,til,acima,8,True,1,160,0.34858,0.10417,False,,,,,,environmental significance,1.9090909090909092,0.34858,True,degradacao_com_diacritico
+real_acc_0028.png,Porquês,Porques,real0028,453,-1,True,circunflexo,acima,5,True,1,183,2.10345,0.13034,False,,,,,,""" Ronguish """,0.7142857142857143,2.10345,True,degradacao_com_diacritico
+real_acc_0029.png,àqueles,aqueles,real0029,385,-1,True,grave,acima,0,True,1,312,0.72558,0.14092,False,,,,,,cannettes .,0.7142857142857143,0.72558,True,degradacao_com_diacritico
+real_acc_0030.png,cinematográficas,cinematograficas,real0030,897,-1,True,agudo,acima,10,True,4,57,0.16011,0.06597,False,,,,,,cinemataginous,0.4375,0.16011,True,acerto
+real_acc_0031.png,população,populacao,real0031,797,-1,True,cedilha,abaixo,6,True,3,158,0.40102,0.19949,False,,,,,,populaggie .,0.4444444444444444,0.40102,True,acerto
+real_acc_0031.png,população,populacao,real0031,797,-1,True,til,acima,7,True,3,273,0.64539,0.2298,False,,,,,,populaggie .,0.4444444444444444,0.64539,True,acerto
+real_acc_0032.png,prevê,preve,real0032,819,-1,True,circunflexo,acima,4,True,5,5,0.07937,0.00252,False,,,,,,"sprawl ,",0.8,0.07937,False,degradacao_sem_diacritico
+real_acc_0033.png,política,politica,real0033,399,-1,True,agudo,acima,3,True,0,265,1.09504,0.30886,False,,,,,,"2politicos ,",0.375,1.09504,True,acerto
+real_acc_0034.png,moção,mocao,real0034,444,-1,True,cedilha,abaixo,2,True,2,160,0.46647,0.16771,False,,,,,,2 . Monaco,0.6,0.46647,True,degradacao_com_diacritico
+real_acc_0034.png,moção,mocao,real0034,444,-1,True,til,acima,3,True,2,147,0.49164,0.10668,False,,,,,,2 . Monaco,0.6,0.49164,True,degradacao_com_diacritico
+real_acc_0035.png,existência,existencia,real0035,347,-1,True,circunflexo,acima,5,True,2,141,0.41471,0.1119,False,,,,,,existimla .,0.4,0.41471,True,acerto
+real_acc_0036.png,irrisórios,irrisorios,real0036,887,-1,True,agudo,acima,5,True,3,158,0.27148,0.10128,False,,,,,,invisuation,0.6,0.27148,True,degradacao_com_diacritico
+real_acc_0037.png,desorganização,desorganizacao,real0037,817,-1,True,cedilha,abaixo,11,True,2,100,0.32362,0.13228,False,,,,,,chessorptionicogenic,1.0,0.32362,True,degradacao_com_diacritico
+real_acc_0037.png,desorganização,desorganizacao,real0037,817,-1,True,til,acima,12,True,2,36,0.13333,0.03475,False,,,,,,chessorptionicogenic,1.0,0.13333,True,degradacao_com_diacritico
+real_acc_0038.png,resistência,resistencia,real0038,437,-1,True,circunflexo,acima,6,True,3,130,0.47101,0.08344,False,,,,,,resistencia .,0.0,0.47101,True,acerto
+real_acc_0039.png,princípio,principio,real0039,386,-1,True,agudo,acima,5,True,4,84,0.23662,0.05765,False,,,,,,primstripic,0.5555555555555556,0.23662,True,degradacao_com_diacritico
+real_acc_0040.png,disponibilização,disponibilizacao,real0040,812,-1,True,cedilha,abaixo,13,True,2,59,0.40136,0.06585,False,,,,,,disposhibiting,0.5,0.40136,True,acerto
+real_acc_0040.png,disponibilização,disponibilizacao,real0040,812,-1,True,til,acima,14,True,2,64,0.38554,0.07459,False,,,,,,disposhibiting,0.5,0.38554,True,acerto
+real_acc_0041.png,violência,violencia,real0041,348,-1,True,circunflexo,acima,4,True,1,99,0.30841,0.07734,False,,,,,,violoncing ;,0.3333333333333333,0.30841,True,acerto
+real_acc_0042.png,são,sao,real0042,791,-1,True,til,acima,1,True,5,124,0.23091,0.06958,False,,,,,,1 Prior,1.6666666666666667,0.23091,True,degradacao_com_diacritico
+real_acc_0043.png,Saúde,Saude,real0043,347,-1,True,agudo,acima,2,True,3,0,0.0,0.0,False,,,,,,soundly .,0.8,0.0,False,degradacao_sem_diacritico
+real_acc_0044.png,elaboração,elaboracao,real0044,247,-1,True,cedilha,abaixo,7,True,3,40,0.32258,0.05,False,,,,,,mutation,0.9,0.32258,True,degradacao_com_diacritico
+real_acc_0044.png,elaboração,elaboracao,real0044,247,-1,True,til,acima,8,True,3,302,2.45528,0.151,False,,,,,,mutation,0.9,2.45528,True,degradacao_com_diacritico
+real_acc_0045.png,contemporâneo,contemporaneo,real0045,114,-1,True,circunflexo,acima,9,True,0,181,0.46649,0.13309,False,,,,,,countermeasures .,0.6153846153846154,0.46649,True,degradacao_com_diacritico
+real_acc_0046.png,problemática,problematica,real0046,193,-1,True,agudo,acima,7,True,2,304,0.85393,0.1974,False,,,,,,prediterative .,0.5833333333333334,0.85393,True,degradacao_com_diacritico
+real_acc_0047.png,solução,solucao,real0047,459,-1,True,cedilha,abaixo,4,True,0,139,0.30152,0.14083,False,,,,,,satigation,1.0,0.30152,True,degradacao_com_diacritico
+real_acc_0047.png,solução,solucao,real0047,459,-1,True,til,acima,5,True,0,68,0.14719,0.06576,False,,,,,,satigation,1.0,0.14719,True,degradacao_com_diacritico
+real_acc_0048.png,tâncias,tancias,real0048,385,-1,True,circunflexo,acima,1,True,0,469,0.71385,0.28879,False,,,,,,thoenacious .,0.8571428571428571,0.71385,True,degradacao_com_diacritico
+real_acc_0049.png,necessária,necessaria,real0049,384,-1,True,agudo,acima,6,True,0,159,0.26544,0.09014,False,,,,,,newsylvania,0.6,0.26544,True,degradacao_com_diacritico
+real_acc_0050.png,intensificação,intensificacao,real0050,225,-1,True,cedilha,abaixo,11,True,4,80,0.35714,0.08649,False,,,,,,mistensification,0.35714285714285715,0.35714,True,acerto
+real_acc_0050.png,intensificação,intensificacao,real0050,225,-1,True,til,acima,12,True,4,199,0.869,0.19208,False,,,,,,mistensification,0.35714285714285715,0.869,True,acerto
+real_acc_0051.png,inexistência,inexistencia,real0051,383,-1,True,circunflexo,acima,7,True,3,219,0.83908,0.15083,False,,,,,,cincinnati,0.75,0.83908,True,degradacao_com_diacritico
+real_acc_0052.png,ficarão,ficarao,real0052,451,-1,True,til,acima,5,True,2,404,1.93301,0.24163,False,,,,,,""" Alicazio",0.5714285714285714,1.93301,True,degradacao_com_diacritico
+real_acc_0053.png,átricos,atricos,real0053,451,-1,True,agudo,acima,0,True,2,46,0.13731,0.03188,False,,,,,,bit-taxion .,1.0,0.13731,True,degradacao_com_diacritico
+real_acc_0054.png,ação,acao,real0054,225,-1,True,cedilha,abaixo,1,True,4,61,0.15099,0.05295,False,,,,,,-large .,1.0,0.15099,True,degradacao_com_diacritico
+real_acc_0054.png,ação,acao,real0054,225,-1,True,til,acima,2,True,4,106,0.25666,0.09601,False,,,,,,-large .,1.0,0.25666,True,degradacao_com_diacritico
+real_acc_0055.png,tendência,tendencia,real0055,797,-1,True,circunflexo,acima,4,True,2,323,0.56966,0.22276,False,,,,,,timodification .,1.1111111111111112,0.56966,True,degradacao_com_diacritico
+real_acc_0056.png,sétima,setima,real0056,887,-1,True,agudo,acima,1,True,3,119,0.14912,0.06887,False,,,,,,svetimma,0.3333333333333333,0.14912,True,acerto
+real_acc_0057.png,banalização,banalizacao,real0057,236,-1,True,cedilha,abaixo,8,True,0,0,0.0,0.0,False,,,,,,banalizations,0.36363636363636365,0.0,False,omissao_do_acento
+real_acc_0057.png,banalização,banalizacao,real0057,236,-1,True,til,acima,9,True,0,283,0.52602,0.21972,False,,,,,,banalizations,0.36363636363636365,0.52602,True,acerto
+real_acc_0058.png,momentânea,momentanea,real0058,439,-1,True,circunflexo,acima,6,True,2,92,0.30263,0.06314,False,,,,,,"representance ,",0.8,0.30263,True,degradacao_com_diacritico
+real_acc_0059.png,vão,vao,real0059,894,-1,True,til,acima,1,True,5,184,0.22521,0.08456,False,,,,,,excise .,2.0,0.22521,True,degradacao_com_diacritico
+real_acc_0060.png,contribuírem,contribuirem,real0060,437,-1,True,agudo,acima,8,True,3,86,0.27564,0.04994,False,,,,,,contribution .,0.3333333333333333,0.27564,True,acerto
+real_acc_0061.png,democratização,democratizacao,real0061,807,-1,True,cedilha,abaixo,11,True,2,127,0.65128,0.13066,False,,,,,,demonstratory system,0.8571428571428571,0.65128,True,degradacao_com_diacritico
+real_acc_0061.png,democratização,democratizacao,real0061,807,-1,True,til,acima,12,True,2,97,0.59509,0.09623,False,,,,,,demonstratory system,0.8571428571428571,0.59509,True,degradacao_com_diacritico
+real_acc_0062.png,contemporâneo,contemporaneo,real0062,892,-1,True,circunflexo,acima,9,True,3,78,0.22478,0.06964,False,,,,,,contemporianee .,0.15384615384615385,0.22478,True,acerto
+real_acc_0063.png,históricos,historicos,real0063,895,-1,True,agudo,acima,4,True,0,903,2.84858,0.36178,False,,,,,,historical .,0.2,2.84858,True,acerto
+real_acc_0064.png,doenças,doencas,real0064,446,-1,True,cedilha,abaixo,4,True,3,106,0.43089,0.15543,False,,,,,,2 drawings .,1.0,0.43089,True,degradacao_com_diacritico
+real_acc_0065.png,harmônico,harmonico,real0065,458,-1,True,circunflexo,acima,4,True,2,88,0.25656,0.07018,False,,,,,,"harneimos ,",0.5555555555555556,0.25656,True,degradacao_com_diacritico
+real_acc_0066.png,não,nao,real0066,387,-1,True,til,acima,1,True,4,344,0.40518,0.11797,False,,,,,,-made .,1.0,0.40518,True,degradacao_com_diacritico
+real_acc_0067.png,está,esta,real0067,241,-1,True,agudo,acima,3,True,0,100,0.13514,0.13228,False,,,,,,# seventeen .,1.75,0.13514,True,degradacao_com_diacritico
+real_acc_0068.png,população,populacao,real0068,233,-1,True,cedilha,abaixo,6,True,4,60,0.25105,0.05017,False,,,,,,prospellers .,0.7777777777777778,0.25105,True,degradacao_com_diacritico
+real_acc_0068.png,população,populacao,real0068,233,-1,True,til,acima,7,True,4,81,0.30566,0.08004,False,,,,,,prospellers .,0.7777777777777778,0.30566,True,degradacao_com_diacritico
+real_acc_0069.png,importância,importancia,real0069,403,-1,True,circunflexo,acima,6,True,3,238,0.4741,0.20034,False,,,,,,insuppearance,0.8181818181818182,0.4741,True,degradacao_com_diacritico
+real_acc_0070.png,Único,Unico,real0070,247,-1,True,agudo,acima,0,True,0,393,2.69178,0.14291,False,,,,,,2 2/13 Mexico .,1.4,2.69178,True,degradacao_com_diacritico
+real_acc_0071.png,construção,construcao,real0071,895,-1,True,cedilha,abaixo,7,True,4,53,0.16061,0.10454,False,,,,,,constampede .,0.6,0.16061,True,degradacao_com_diacritico
+real_acc_0071.png,construção,construcao,real0071,895,-1,True,til,acima,8,True,4,188,0.48579,0.16068,False,,,,,,constampede .,0.6,0.48579,True,degradacao_com_diacritico
+real_acc_0072.png,têm,tem,real0072,88,-1,True,circunflexo,acima,1,True,4,314,0.55872,0.22301,False,,,,,,4th term .,1.3333333333333333,0.55872,True,degradacao_com_diacritico
+real_acc_0073.png,área,area,real0073,446,-1,True,agudo,acima,0,True,3,133,0.43042,0.10215,False,,,,,,circuous .,1.75,0.43042,True,degradacao_com_diacritico
+real_acc_0074.png,promoção,promocao,real0074,453,-1,True,cedilha,abaixo,5,True,2,48,0.12245,0.04878,False,,,,,,# pneumonia .,0.75,0.12245,True,degradacao_com_diacritico
+real_acc_0074.png,promoção,promocao,real0074,453,-1,True,til,acima,6,True,2,58,0.20423,0.06151,False,,,,,,# pneumonia .,0.75,0.20423,True,degradacao_com_diacritico
+real_acc_0075.png,resistência,resistencia,real0075,880,-1,True,circunflexo,acima,6,True,4,108,0.26024,0.08096,False,,,,,,reinstincia .,0.2727272727272727,0.26024,True,acerto
+real_acc_0076.png,psíquicos,psiquicos,real0076,441,-1,True,agudo,acima,2,True,3,63,0.24609,0.05806,False,,,,,,perinquises,0.5555555555555556,0.24609,True,degradacao_com_diacritico
+real_acc_0077.png,informações,informacoes,real0077,988,-1,True,cedilha,abaixo,7,True,5,95,0.25333,0.15966,False,,,,,,engenmaguier .,0.7272727272727273,0.25333,True,degradacao_com_diacritico
+real_acc_0077.png,informações,informacoes,real0077,988,-1,True,til,acima,8,True,5,55,0.13382,0.06044,False,,,,,,engenmaguier .,0.7272727272727273,0.13382,True,degradacao_com_diacritico
+real_acc_0078.png,zofrênia,zofrenia,real0078,244,-1,True,circunflexo,acima,4,True,1,97,0.24069,0.09454,False,,,,,,exapressive .,1.0,0.24069,True,degradacao_com_diacritico
+real_acc_0079.png,pedagógico,pedagogico,real0079,897,-1,True,agudo,acima,5,True,4,93,0.19497,0.08516,False,,,,,,pedagagiosional,0.7,0.19497,True,degradacao_com_diacritico
+real_acc_0080.png,populações,populacoes,real0080,383,-1,True,cedilha,abaixo,6,True,4,27,0.06429,0.03158,False,,,,,,propaganda,0.7,0.06429,False,degradacao_sem_diacritico
+real_acc_0080.png,populações,populacoes,real0080,383,-1,True,til,acima,7,True,4,100,0.24938,0.07407,False,,,,,,propaganda,0.7,0.24938,True,degradacao_com_diacritico
+real_acc_0081.png,importância,importancia,real0081,892,-1,True,circunflexo,acima,6,True,4,268,0.65686,0.20427,False,,,,,,simpectation .,0.6363636363636364,0.65686,True,degradacao_com_diacritico
+real_acc_0082.png,não,nao,real0082,385,-1,True,til,acima,1,True,0,191,0.29116,0.12666,False,,,,,,2 main .,1.3333333333333333,0.29116,True,degradacao_com_diacritico
+real_acc_0083.png,indivíduos,individuos,real0083,384,-1,True,agudo,acima,5,True,0,33,0.07301,0.03102,False,,,,,,vindividue .,0.3,0.07301,False,omissao_do_acento
+real_acc_0084.png,doenças,doencas,real0084,451,-1,True,cedilha,abaixo,4,True,3,23,0.03577,0.0599,False,,,,,,adreemasons .,1.0,0.03577,False,degradacao_sem_diacritico
+real_acc_0085.png,desimportância,desimportancia,real0085,347,-1,True,circunflexo,acima,9,True,2,164,0.84103,0.12664,False,,,,,,design # #,0.6428571428571429,0.84103,True,degradacao_com_diacritico
+real_acc_0086.png,Ministério,Ministerio,real0086,383,-1,True,agudo,acima,6,True,3,176,0.43137,0.12222,False,,,,,,administamines,0.7,0.43137,True,degradacao_com_diacritico
+real_acc_0087.png,Ação,Acao,real0087,383,-1,True,cedilha,abaixo,1,True,4,64,0.17927,0.09467,False,,,,,,2 August,1.5,0.17927,True,degradacao_com_diacritico
+real_acc_0087.png,Ação,Acao,real0087,383,-1,True,til,acima,2,True,4,118,0.25053,0.06876,False,,,,,,2 August,1.5,0.25053,True,degradacao_com_diacritico
+real_acc_0088.png,socioeconômica,socioeconomica,real0088,384,-1,True,circunflexo,acima,9,True,2,224,0.63818,0.15932,False,,,,,,sociazimaginica,0.5714285714285714,0.63818,True,degradacao_com_diacritico
+real_acc_0089.png,lúdicas,ludicas,real0089,201,-1,True,agudo,acima,1,True,4,426,2.58182,0.19505,False,,,,,,lubricacy,0.5714285714285714,2.58182,True,degradacao_com_diacritico
+real_acc_0090.png,relação,relacao,real0090,807,-1,True,cedilha,abaixo,4,True,1,100,0.26042,0.1385,False,,,,,,employer .,1.0,0.26042,True,degradacao_com_diacritico
+real_acc_0090.png,relação,relacao,real0090,807,-1,True,til,acima,5,True,1,138,0.35294,0.12105,False,,,,,,employer .,1.0,0.35294,True,degradacao_com_diacritico
+real_acc_0091.png,têm,tem,real0091,542,-1,True,circunflexo,acima,1,True,0,317,0.41384,0.17592,False,,,,,,4 . Acting,2.0,0.41384,True,degradacao_com_diacritico
+real_acc_0092.png,são,sao,real0092,439,-1,True,til,acima,1,True,4,170,0.26114,0.07122,False,,,,,,size .,1.0,0.26114,True,degradacao_com_diacritico
+real_acc_0093.png,lamentável,lamentavel,real0093,437,-1,True,agudo,acima,6,True,3,200,0.3861,0.09615,False,,,,,,hospital,0.7,0.3861,True,degradacao_com_diacritico
+real_acc_0094.png,ções,coes,real0094,713,-1,True,cedilha,abaixo,0,True,5,46,0.27711,0.10698,False,,,,,,spiders .,1.25,0.27711,True,degradacao_com_diacritico
+real_acc_0094.png,ções,coes,real0094,713,-1,True,til,acima,1,True,5,102,0.37091,0.07244,False,,,,,,spiders .,1.25,0.37091,True,degradacao_com_diacritico
+real_acc_0095.png,ausência,ausencia,real0095,233,-1,True,circunflexo,acima,3,True,3,281,0.66746,0.15406,False,,,,,,audencia,0.125,0.66746,True,acerto
+real_acc_0096.png,depressão,depressao,real0096,451,-1,True,til,acima,7,True,2,27,0.04927,0.02222,False,,,,,,cheppressions .,0.6666666666666666,0.04927,False,degradacao_sem_diacritico
+real_acc_0097.png,psiquiátrico,psiquiatrico,real0097,454,-1,True,agudo,acima,6,True,2,294,1.68966,0.22409,False,,,,,,pariquatino .,0.4166666666666667,1.68966,True,acerto
+real_acc_0098.png,lização,lizacao,real0098,384,-1,True,cedilha,abaixo,4,False,0,0,0.0,0.0,False,,,,,,licenseers .,1.1428571428571428,0.0,False,degradacao_sem_diacritico
+real_acc_0098.png,lização,lizacao,real0098,384,-1,True,til,acima,5,True,0,331,0.42382,0.1361,False,,,,,,licenseers .,1.1428571428571428,0.42382,True,degradacao_com_diacritico
+real_acc_0099.png,êxodo,exodo,real0099,439,-1,True,circunflexo,acima,0,True,3,206,1.2638,0.08781,False,,,,,,six-six .,1.0,1.2638,True,degradacao_com_diacritico
+real_acc_0100.png,exclusão,exclusao,real0100,386,-1,True,til,acima,6,True,4,339,0.70625,0.15826,False,,,,,,exarchustino,0.75,0.70625,True,degradacao_com_diacritico
+real_acc_0101.png,Período,Periodo,real0101,437,-1,True,agudo,acima,3,True,4,37,0.13121,0.02213,False,,,,,,peniote,0.42857142857142855,0.13121,True,acerto
+real_acc_0102.png,educação,educacao,real0102,248,-1,True,cedilha,abaixo,5,True,3,34,0.13178,0.08095,False,,,,,,tatmosphere .,1.375,0.13178,True,degradacao_com_diacritico
+real_acc_0102.png,educação,educacao,real0102,248,-1,True,til,acima,6,True,3,137,0.548,0.07586,False,,,,,,tatmosphere .,1.375,0.548,True,degradacao_com_diacritico
+real_acc_0103.png,tância,tancia,real0103,458,-1,True,circunflexo,acima,1,True,2,236,0.73981,0.14899,False,,,,,,-thimica .,0.6666666666666666,0.73981,True,degradacao_com_diacritico
+real_acc_0104.png,secundário,secundario,real0104,386,-1,True,agudo,acima,6,True,4,308,0.62348,0.17949,False,,,,,,seccentricization,1.0,0.62348,True,degradacao_com_diacritico
+real_acc_0105.png,dominação,dominacao,real0105,894,-1,True,cedilha,abaixo,6,True,5,100,0.26882,0.14535,False,,,,,,demon investigate .,1.2222222222222223,0.26882,True,degradacao_com_diacritico
+real_acc_0105.png,dominação,dominacao,real0105,894,-1,True,til,acima,7,True,5,145,0.42899,0.10878,False,,,,,,demon investigate .,1.2222222222222223,0.42899,True,degradacao_com_diacritico
+real_acc_0106.png,dinâmicas,dinamicas,real0106,894,-1,True,circunflexo,acima,3,True,5,200,0.32626,0.11905,False,,,,,,classicians .,0.7777777777777778,0.32626,True,degradacao_com_diacritico
+real_acc_0107.png,Cemitério,Cemiterio,real0107,209,-1,True,agudo,acima,5,True,2,412,1.42069,0.18311,False,,,,,,""" Cinnidiesie .",0.7777777777777778,1.42069,True,degradacao_com_diacritico
+real_acc_0108.png,doença,doenca,real0108,116,-1,True,cedilha,abaixo,4,True,0,222,0.6361,0.37,False,,,,,,extremacy,1.1666666666666667,0.6361,True,degradacao_com_diacritico
+real_acc_0109.png,fância,fancia,real0109,388,-1,True,circunflexo,acima,1,True,5,343,0.5924,0.17323,False,,,,,,frincia .,0.3333333333333333,0.5924,True,acerto
+real_acc_0110.png,cidadãos,cidadaos,real0110,459,-1,True,til,acima,5,True,0,248,0.30542,0.19777,False,,,,,,cockwickwick .,1.25,0.30542,True,degradacao_com_diacritico
+real_acc_0111.png,falácia,falacia,real0111,348,-1,True,agudo,acima,3,True,2,310,0.78283,0.2013,False,,,,,,follicia .,0.42857142857142855,0.78283,True,acerto
+real_acc_0112.png,emoções,emocoes,real0112,247,-1,True,cedilha,abaixo,3,True,3,92,0.14353,0.09583,False,,,,,,expenseliness .,1.4285714285714286,0.14353,True,degradacao_com_diacritico
+real_acc_0112.png,emoções,emocoes,real0112,247,-1,True,til,acima,4,True,3,130,0.22569,0.0938,False,,,,,,expenseliness .,1.4285714285714286,0.22569,True,degradacao_com_diacritico
+real_acc_0113.png,ignorância,ignorancia,real0113,241,-1,True,circunflexo,acima,5,True,3,228,0.35514,0.12896,False,,,,,,appearance information .,1.5,0.35514,True,degradacao_com_diacritico
+real_acc_0114.png,jurídico,juridico,real0114,114,-1,True,agudo,acima,3,True,2,86,0.35537,0.07963,False,,,,,,min-in-in-in-in-in-in-in-,1.875,0.35537,True,degradacao_com_diacritico
+real_acc_0115.png,aceitação,aceitacao,real0115,372,-1,True,cedilha,abaixo,6,True,4,36,0.05471,0.06207,False,,,,,,aceitaccio,0.2222222222222222,0.05471,False,omissao_do_acento
+real_acc_0115.png,aceitação,aceitacao,real0115,372,-1,True,til,acima,7,True,4,100,0.17544,0.07184,False,,,,,,aceitaccio,0.2222222222222222,0.17544,True,acerto
+real_acc_0116.png,têm,tem,real0116,500,-1,True,circunflexo,acima,1,True,2,463,0.90607,0.19854,False,,,,,,1st century .,2.6666666666666665,0.90607,True,degradacao_com_diacritico
+real_acc_0117.png,indivíduos,individuos,real0117,383,-1,True,agudo,acima,5,True,4,47,0.21364,0.02798,False,,,,,,disciplination,1.0,0.21364,True,degradacao_com_diacritico
+real_acc_0118.png,ças,cas,real0118,444,-1,True,cedilha,abaixo,0,True,2,121,0.73333,0.10577,False,,,,,,2 years .,1.3333333333333333,0.73333,True,degradacao_com_diacritico
+real_acc_0119.png,convivência,convivencia,real0119,386,-1,True,circunflexo,acima,6,True,5,107,0.2702,0.07431,False,,,,,,exrequisites .,1.0909090909090908,0.2702,True,degradacao_com_diacritico
