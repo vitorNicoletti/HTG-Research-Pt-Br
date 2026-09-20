@@ -150,9 +150,20 @@ um bloco sólido continuam dando falso positivo ("para") ou falso negativo
 | E1 médio dos recortes reais | 0,861 | **0,510** |
 | E1 médio do IAM puro | 0,141 | 0,141 (sem pauta, não muda) |
 
-O IAM puro não tem pauta em nenhuma das 116 imagens; o gate do fine-tune já
-tinha em 50% — o modelo ajustado aprende a desenhá-la, então a correção precisa
-valer para o gerado também, e vale.
+**A correção vale para o gerado, não só para o controle.** Medindo a presença
+de pauta com o mesmo detector:
+
+| conjunto | painéis | com pauta |
+|---|---|---|
+| `ger_iam_puro/` (IAM puro) | 116 | **0%** |
+| `images/*.jpg` (amostras IAM) | 8 | **0%** |
+| `am_v2/*.png` (ajustado no BRESSAY) | 24 | **100%**, sempre 4 fileiras |
+| `gate_cpu/` (ajustado, ep11) | 12 | 50% |
+
+O modelo ajustado aprende a desenhar a pauta — e as 4 fileiras que ele desenha
+caem dentro do teto de 5 px, então `remover_pauta()` as pega. Sem a correção, a
+métrica leria a pauta aprendida como acento em praticamente toda amostra do
+fine-tune.
 
 ## O controle positivo é mais fraco do que a comparação com o IAM sugeria
 

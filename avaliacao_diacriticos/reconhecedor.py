@@ -52,7 +52,14 @@ class Reconhecedor:
         for i in range(0, len(caminhos), batch):
             imgs = [Image.open(c).convert("RGB") for c in caminhos[i:i + batch]]
             px = self.img_proc(images=imgs, return_tensors="pt").pixel_values.to(self.device)
-            ids = self.model.generate(px, max_new_tokens=self.max_novos)
+            # use_cache=True: o config publicado do TrOCR vem com
+            # use_cache=false, o que faz o decoder recomputar o prefixo inteiro
+            # a cada token. E uma otimizacao exata -- o cache guarda as chaves
+            # e valores ja calculados, nao aproxima nada --, entao a saida e a
+            # mesma e a leitura fica bem mais rapida em CPU. Ha um teste de
+            # equivalencia em testar_cache().
+            ids = self.model.generate(px, max_new_tokens=self.max_novos,
+                                      use_cache=True)
             saida += self.tok.batch_decode(ids, skip_special_tokens=True)
         return saida
 
@@ -62,3 +69,30 @@ class Reconhecedor:
         cers = [M.cer(M.dobra_ascii(a), M.dobra_ascii(l))
                 for a, l in zip(alvos, lidos)]
         return lidos, cers
+
+
+def testar_cache(caminhos, device="cpu"):
+    """Confere que use_cache=True nao muda o texto lido.
+
+    Roda o mesmo lote com e sem cache e compara as strings. Serve para nao
+    ter que confiar na promessa de que a otimizacao e exata.
+    """
+    import torch
+    from PIL import Image
+    r = Reconhecedor(device=device)
+    imgs = [Image.open(c).convert("RGB") for c in caminhos]
+    px = r.img_proc(images=imgs, return_tensors="pt").pixel_values.to(device)
+    saidas = {}
+    for usar in (True, False):
+        with torch.no_grad():
+            ids = r.model.generate(px, max_new_tokens=r.max_novos,
+                                   use_cache=usar)
+        saidas[usar] = r.tok.batch_decode(ids, skip_special_tokens=True)
+    iguais = saidas[True] == saidas[False]
+    print(f"use_cache=True vs False em {len(caminhos)} imagens: "
+          f"{'IDENTICO' if iguais else 'DIFERENTE'}")
+    if not iguais:
+        for a, b in zip(saidas[True], saidas[False]):
+            if a != b:
+                print(f"   com cache: {a!r}\n   sem cache: {b!r}")
+    return iguais
