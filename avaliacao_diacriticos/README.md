@@ -39,6 +39,10 @@ O cruzamento dos dois dá as quatro categorias:
 | `anotacao.py` | Passo 6: planilha de anotação humana e Cohen's kappa |
 | `testes_metrica.py` | testes sintéticos de resposta conhecida da geometria |
 | `checar_alinhamento.py` | Passo 1: mede se os gêmeos saem alinhados |
+| `controle_ascii.py` | controle negativo **no mesmo domínio**: palavra real sem acento, com acento fabricado |
+| `teste_linha_pautada.py` | diagnóstico do efeito da pauta na geometria |
+| `teste_folga.py` | sensibilidade da janela de coluna ao parâmetro `folga` |
+| `teste_sensibilidade_diff.py` | curva de detecção do eixo por diferença |
 
 ## Passo 1 — o portão (resultado: PASSOU)
 
@@ -252,33 +256,64 @@ diacrítico. **Isso tem que ser declarado ao reportar.**
 
 ## Como rodar
 
+Os caminhos do repositório já foram reorganizados uma vez durante o trabalho,
+então os scripts procuram o código do DiffusionPen, o extrator de estilo e o
+split numa lista de candidatos, e falham com mensagem útil em vez de
+`ImportError`. `--ckpt` aceita o caminho do `.pt` direto.
+
 ```bash
 export HSA_OVERRIDE_GFX_VERSION=10.3.0
 export PYTORCH_HIP_ALLOC_CONF=expandable_segments:True
 PY=/nix/store/98rpw6g3y3j5vc2xiyhwdqgy7xl1qyix-python3-3.14.7-env/bin/python
+IAM=DiffusionPen/diffusionpen_iam_model_path/models/ema_ckpt.pt
 
-# 0. testes do instrumento (não usam o gerador)
+# 0. testes do instrumento (não usam o gerador nem GPU)
 $PY avaliacao_diacriticos/testes_metrica.py
 
 # 1. invariante de amostragem do checkpoint que for usar
-$PY avaliacao_diacriticos/gerar_pares.py --save-path ./sanity \
-    --ckpt ema_ckpt.pt --out-dir /tmp/x \
+$PY avaliacao_diacriticos/gerar_pares.py --ckpt $IAM --out-dir /tmp/x \
     --pares-tsv avaliacao_diacriticos/pares_gate.tsv \
     --n-styles 1 --seeds 0 --batch 1 --autoteste-lote
 
-# 2. gerar a sonda (N declarado: 29 pares x 4 estilos x 3 sementes)
-$PY avaliacao_diacriticos/gerar_pares.py --save-path <modelo> \
-    --ckpt <ckpt.pt> --out-dir <saida> \
+# 2. controles do Passo 4
+$PY avaliacao_diacriticos/preparar_reais.py \
+    --out-dir avaliacao_diacriticos/reais_test
+$PY avaliacao_diacriticos/controle_ascii.py \
+    --dir avaliacao_diacriticos/reais_test \
+    --out-dir avaliacao_diacriticos/reais_ascii_negativo
+
+# 3. gerar a sonda (N declarado: 29 pares x 4 estilos x 3 sementes = 696)
+$PY avaliacao_diacriticos/gerar_pares.py --ckpt <ckpt.pt> --out-dir <saida> \
     --pares-tsv avaliacao_diacriticos/pares_sonda30.tsv \
     --n-styles 4 --seeds 0 1 2 --batch 1
 
-# 3. avaliar
-$PY avaliacao_diacriticos/avaliar.py --dir <saida> \
-    --csv-out <saida>.csv --com-e2 --device cpu \
-    --eixo1 faixa --limiar-e1 <da calibração> --limiar-e2 0.5
+# 4. avaliar. --eixo1 auto usa diferença quando há gêmeo e faixa quando não há.
+#    O limiar de E2, se omitido, sai do quantil 0.75 do grupo ASCII do próprio
+#    conjunto, que é o que o planejamento pede. --reusar-e2 evita re-rodar o
+#    TrOCR (~20 min em CPU para 240 imagens) quando só o E1 mudou.
+$PY avaliacao_diacriticos/avaliar.py --dir <saida> --csv-out <saida>.csv \
+    --com-e2 --device cpu --eixo1 auto --limiar-e1 <da calibração>
 
-# 4. planilha de anotação humana e kappa
+# 5. calibrar contra os DOIS negativos e comparar
+$PY avaliacao_diacriticos/calibrar.py \
+    --negativo avaliacao_diacriticos/res_ascii_negativo.csv \
+    --positivo avaliacao_diacriticos/res_reais_e1.csv
+
+# 6. planilha de anotação humana e kappa
 $PY avaliacao_diacriticos/anotacao.py preparar --csv <saida>.csv \
     --dir <saida> --out anotacao.csv --contato anotacao.png
 $PY avaliacao_diacriticos/anotacao.py kappa --csv anotacao_preenchida.csv
 ```
+
+## O que ainda falta para medir o fine-tune
+
+O instrumento está pronto e caracterizado; o que falta é material gerado que
+tenha diacrítico. Quando houver:
+
+1. rodar `--autoteste-lote` no checkpoint novo (a amostragem em lote corrompe
+   nesta GPU, e uma imagem colapsada seria lida como "acento omitido");
+2. gerar com `pares_sonda30.tsv`, `--n-styles 4 --seeds 0 1 2 --batch 1`;
+3. ler o eixo por diferença contra a tabela de sensibilidade acima —
+   0,0000 é nada, 0,0389 é meio acento, 0,1657 é acento nominal;
+4. só então aplicar o kappa, sorteando a amostra estratificada pelas quatro
+   categorias.

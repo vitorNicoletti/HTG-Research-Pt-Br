@@ -54,13 +54,23 @@ def main():
     ap.add_argument("--dir", required=True)
     ap.add_argument("--csv-out", required=True)
     ap.add_argument("--com-e2", action="store_true")
+    ap.add_argument("--reusar-e2", action="store_true",
+                    help="usa e2_leituras.json da pasta em vez de rodar o "
+                         "TrOCR de novo (o reconhecedor leva ~20 min em CPU "
+                         "para 240 imagens, e a leitura nao muda quando so o "
+                         "E1 muda)")
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--eixo1", default="auto", choices=["auto", "faixa", "diff"],
                     help="auto = diff quando ha gemeo, faixa quando nao ha")
     ap.add_argument("--limiar-e1", type=float, default=None,
                     help="escore E1 acima do qual o acento e considerado presente")
-    ap.add_argument("--limiar-e2", type=float, default=0.5,
-                    help="CER ASCII ate o qual a base e considerada integra")
+    ap.add_argument("--limiar-e2", type=float, default=None,
+                    help="CER ASCII ate o qual a base e considerada integra. "
+                         "Se omitido, sai do grupo ASCII do proprio conjunto "
+                         "(ver --limiar-e2-quantil)")
+    ap.add_argument("--limiar-e2-quantil", type=float, default=0.75,
+                    help="quantil do CER do grupo ASCII usado como limiar "
+                         "quando --limiar-e2 nao e dado")
     ap.add_argument("--folga-coluna", type=float, default=0.5)
     a = ap.parse_args()
 
@@ -95,6 +105,7 @@ def main():
                 "semente": d["semente"], "real": bool(d.get("real", False)),
                 "marca": f["marca"], "onde": f["onde"], "indice": f["indice"],
                 "medivel": f["medivel"],
+                "fileiras_pauta": f.get("fileiras_pauta", 0),
                 "faixa_massa": f["massa"], "faixa_massa_rel": f["massa_rel"],
                 "faixa_densidade": f["densidade"],
                 "tem_gemeo": bool(gem),
@@ -113,7 +124,20 @@ def main():
             linhas.append(linha)
 
     # ---------------- E2 ----------------
-    if a.com_e2:
+    cache_e2 = os.path.join(a.dir, "e2_leituras.json")
+    if a.reusar_e2:
+        if not os.path.exists(cache_e2):
+            sys.exit(f"--reusar-e2 pedido mas {cache_e2} nao existe; "
+                     f"rode uma vez com --com-e2")
+        guardado = json.load(open(cache_e2, encoding="utf-8"))
+        leitura = {k: (v["lido"], v["cer"]) for k, v in guardado.items()}
+        print(f"E2 reaproveitado de {cache_e2} ({len(leitura)} leituras)")
+        for linha in linhas:
+            l, c = leitura.get(linha["arquivo"], ("", None))
+            linha["e2_lido"] = l
+            linha["e2_cer"] = c
+        a.com_e2 = True
+    elif a.com_e2:
         from reconhecedor import Reconhecedor
         rec = Reconhecedor(device=a.device)
         # le TODAS as imagens (acentuadas e ASCII): o grupo ASCII e o controle
@@ -123,8 +147,7 @@ def main():
         lidos, cers = rec.cer_ascii(caminhos, [d["palavra"] for d in alvo])
         leitura = {d["arquivo"]: (l, c) for d, l, c in zip(alvo, lidos, cers)}
         json.dump({k: {"lido": v[0], "cer": v[1]} for k, v in leitura.items()},
-                  open(os.path.join(a.dir, "e2_leituras.json"), "w"),
-                  ensure_ascii=False, indent=1)
+                  open(cache_e2, "w"), ensure_ascii=False, indent=1)
         for linha in linhas:
             l, c = leitura.get(linha["arquivo"], ("", None))
             linha["e2_lido"] = l
@@ -133,6 +156,35 @@ def main():
         for linha in linhas:
             linha["e2_lido"] = ""
             linha["e2_cer"] = None
+
+    # ---------------- limiar do E2 ----------------
+    # Um limiar ABSOLUTO de CER nao serve aqui. O TrOCR e treinado em ingles e
+    # nao le bem manuscrito portugues: nos recortes REAIS do BRESSAY ele ja
+    # erra muito. Com um corte fixo em 0.5, manuscrito humano de verdade seria
+    # classificado como "base degradada", e a categoria deixaria de medir o
+    # gerador para medir o reconhecedor.
+    #
+    # Por isso o padrao e relativo, como pede o planejamento: o grupo ASCII do
+    # PROPRIO conjunto estabelece o erro de base, e "base integra" quer dizer
+    # "nao erra mais do que o proprio gerador ja erra sem diacritico nenhum".
+    # O valor absoluto continua disponivel em --limiar-e2, para comparar
+    # conjuntos entre si.
+    limiar_e2 = a.limiar_e2
+    origem_limiar = "absoluto (--limiar-e2)"
+    if limiar_e2 is None and a.com_e2:
+        asc_arqs = {d["arquivo"] for d in itens
+                    if not d["acentuada"] and not d.get("colapsada")}
+        base = [v[1] for k, v in leitura.items()
+                if k in asc_arqs and v[1] is not None]
+        if base:
+            limiar_e2 = float(np.quantile(base, a.limiar_e2_quantil))
+            origem_limiar = (f"quantil {a.limiar_e2_quantil:.2f} do grupo "
+                             f"ASCII (n={len(base)})")
+        else:
+            limiar_e2 = 0.5
+            origem_limiar = "0.5 (nao havia grupo ASCII no conjunto)"
+    if a.com_e2:
+        print(f"\nlimiar de E2 = {limiar_e2:.4f}  -- {origem_limiar}")
 
     # ---------------- classificacao ----------------
     def escore(linha):
@@ -154,7 +206,7 @@ def main():
         if linha["e2_cer"] is None:
             linha["categoria"] = "presente" if pres else "ausente"
         else:
-            base_ok = linha["e2_cer"] <= a.limiar_e2
+            base_ok = linha["e2_cer"] <= limiar_e2
             linha["categoria"] = (
                 "acerto" if (pres and base_ok) else
                 "omissao_do_acento" if (not pres and base_ok) else
@@ -171,6 +223,9 @@ def main():
     print(f"\n{len(linhas)} diacriticos avaliados em {a.dir}")
     print(f"amostras nao mediveis (sem tinta): "
           f"{sum(1 for l in linhas if not l['medivel'])}")
+    com_pauta = sum(1 for l in linhas if l.get("fileiras_pauta", 0) > 0)
+    print(f"amostras com linha pautada removida: {com_pauta} "
+          f"({100 * com_pauta / max(1, len(linhas)):.0f}%)")
     marcas = sorted({l["marca"] for l in linhas})
     print(f"\n{'marca':14s} {'n':>5s} {'E1 escore medio':>16s} {'IC95':>22s}")
     for m in marcas:
@@ -180,6 +235,22 @@ def main():
     v = [l["e1_escore"] for l in linhas]
     mu, lo, hi = ic_bootstrap(v)
     print(f"{'TODAS':14s} {len(v):5d} {mu:16.4f}   [{lo:.4f}, {hi:.4f}]")
+
+    # Quando existe gemeo, os DOIS eixos sao calculados e vale ver os dois: a
+    # variante por faixa e a unica comparavel com recorte real, e a por
+    # diferenca e a que tem piso de ruido zero (ver teste_sensibilidade_diff).
+    com_gemeo = [l for l in linhas if l["tem_gemeo"]]
+    if com_gemeo:
+        print(f"\nos dois eixos, nas {len(com_gemeo)} amostras com gemeo ASCII:")
+        for rot, col in (("por faixa (massa_rel)", "faixa_massa_rel"),
+                         ("por diferenca (delta_rel)", "diff_delta_rel")):
+            vv = [float(l[col] or 0.0) for l in com_gemeo]
+            mu, lo, hi = ic_bootstrap(vv)
+            print(f"  {rot:28s} {mu:8.4f}   [{lo:.4f}, {hi:.4f}]")
+        ref = ("referencia do eixo por diferenca (teste_sensibilidade_diff): "
+               "0.0000 = gemeos identicos, 0.0389 = meio acento nominal, "
+               "0.1657 = acento nominal")
+        print(f"  {ref}")
 
     if a.limiar_e1 is not None:
         print(f"\npresenca (E1 > {a.limiar_e1}):")
