@@ -110,17 +110,7 @@ def main():
                 "faixa_densidade": f["densidade"],
                 "tem_gemeo": bool(gem),
             }
-            if diff:
-                g = diff[k]
-                linha.update({"diff_massa_acc": g["massa_acc"],
-                              "diff_massa_asc": g["massa_asc"],
-                              "diff_delta": g["delta"],
-                              "diff_delta_rel": g["delta_rel"],
-                              "diff_acima_do_topo": g["acima_do_topo"]})
-            else:
-                linha.update({"diff_massa_acc": "", "diff_massa_asc": "",
-                              "diff_delta": "", "diff_delta_rel": "",
-                              "diff_acima_do_topo": ""})
+            linha["diff_delta_rel"] = diff[k]["delta_rel"] if diff else ""
             linhas.append(linha)
 
     # ---------------- E2 ----------------

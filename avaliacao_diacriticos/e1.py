@@ -41,24 +41,35 @@ def tinta(img):
     return m
 
 
-def alinha(a, b, mx=20, my=8):
-    """Desloca a mascara `a` para casar com `b`, por correlacao cruzada.
+def deslocamento(a, b, mx=20, my=8):
+    """(dx, dy) que faz a mascara `a` casar melhor com `b`.
 
-    O gerador nem sempre poe os dois gemeos no mesmo lugar: medido em 348
-    pares, 60% saem com deslocamento zero e o p90 e de 1 px, mas o maximo
-    chega a 18 px -- e sao justamente esses pares que viram falso positivo,
-    porque a palavra inteira entra na subtracao. Alinhar antes de subtrair
-    derruba o p95 do ruido de 0.181 para 0.103 e leva o AUC de 0.936 para
-    0.949. Para o agudo o efeito e maior (p95 de 0.268 para 0.126).
-
-    Alinhar pelo canto da caixa de tinta, que seria mais simples, PIORA
-    (AUC 0.906): o canto depende de um pixel solto.
+    Correlacao cruzada calculada por FFT. O gerador nem sempre poe os dois
+    gemeos no mesmo lugar: medido em 348 pares, 60% saem com deslocamento
+    zero e o p90 e de 1 px, mas o maximo chega a 18 px. Nesses casos a
+    palavra inteira entra na subtracao -- cada traco aparece duas vezes, uma
+    como tinta a mais e outra como tinta a menos -- e parte desse fantasma
+    cai dentro da regiao medida.
     """
     c = fftconvolve(a.astype(float), b[::-1, ::-1].astype(float), mode="same")
     H, W = a.shape
     jan = c[H // 2 - my:H // 2 + my + 1, W // 2 - mx:W // 2 + mx + 1]
     iy, ix = np.unravel_index(jan.argmax(), jan.shape)
-    dy, dx = my - iy, mx - ix
+    return mx - ix, my - iy
+
+
+def alinha(a, b):
+    """`a` deslocada para casar com `b`.
+
+    Alinhar antes de subtrair derruba o p95 do ruido de 0.181 para 0.103 e
+    leva o AUC de 0.936 para 0.966. Para o agudo o efeito e maior: p95 de
+    0.268 para 0.126, o que o tira de "so da para usar a media agregada".
+
+    Alinhar pelo canto da caixa de tinta, que seria mais simples, PIORA
+    (AUC 0.906): o canto depende de um pixel solto.
+    """
+    dx, dy = deslocamento(a, b)
+    H, W = a.shape
     out = np.zeros_like(a)
     out[max(0, dy):min(H, H + dy), max(0, dx):min(W, W + dx)] = \
         a[max(0, -dy):min(H, H - dy), max(0, -dx):min(W, W - dx)]

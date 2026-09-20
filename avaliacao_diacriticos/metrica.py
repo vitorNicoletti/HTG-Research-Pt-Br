@@ -287,61 +287,25 @@ def e1_por_faixa(tinta, palavra, folga=0.5, tirar_pauta=True):
 
 
 def e1_por_diff(tinta_acc, tinta_asc, palavra, folga=0.5, tirar_pauta=True):
-    """Escore de presenca comparando o par minimo.
+    """Escore de presenca comparando o par minimo. Delega para e1.e1().
 
-    A geometria (coluna, linha de base, altura-x) e calculada na imagem
-    ASCII, que por construcao nao tem diacritico -- se fosse calculada na
-    acentuada, o proprio acento empurraria o topo da altura-x para cima e
-    encolheria a faixa onde ele deveria ser procurado.
+    Esta funcao ja teve implementacao propria, e ela divergia da do e1.py em
+    ate 0.054 por arredondar a janela de coluna de outro jeito -- mais do que
+    o limiar do til (0.046), ou seja, o suficiente para inverter uma decisao.
+    Duas implementacoes do mesmo numero nao se justificam: aqui fica so o
+    empacotamento no formato que o avaliar.py grava no CSV.
 
-    Devolve, por diacritico:
-      massa_acc, massa_asc -- tinta de cada gemeo na regiao
-      delta                -- massa_acc - massa_asc
-      delta_rel            -- delta / tinta do corpo da ASCII na mesma coluna
-      acima_do_topo        -- tinta da acentuada, na coluna, ALEM do extremo
-                              da ASCII naquela coluna (acima dele para marcas
-                              de cima, abaixo para cedilha). E o sinal mais
-                              especifico: nao conta o que os dois ja tinham.
+    `folga` e `tirar_pauta` continuam na assinatura por compatibilidade, mas
+    o e1.py usa folga 0.5 e sempre tira a pauta, que sao os valores medidos.
     """
-    m_acc, n_pa = mascara_de_tinta(tinta_acc, tirar_pauta)
-    m_asc, n_ps = mascara_de_tinta(tinta_asc, tirar_pauta)
-    n = len(sem_acento(palavra))
-    saida = []
-    for indice, nome, onde in diacriticos(palavra):
-        r = _regiao(m_asc, indice, n, onde, folga)
-        if r is None:
-            saida.append({"indice": indice, "marca": nome, "onde": onde,
-                          "massa_acc": 0, "massa_asc": 0, "delta": 0,
-                          "delta_rel": 0.0, "acima_do_topo": 0,
-                          "fileiras_pauta": n_pa, "medivel": False})
-            continue
-        linhas, colunas = r
-        m1 = int(m_acc[linhas, colunas].sum())
-        m0 = int(m_asc[linhas, colunas].sum())
-        y_x, y_base = linha_base_e_altura_x(m_asc)
-        corpo = int(m_asc[y_x:y_base, colunas].sum())
-
-        # extremo da ASCII dentro da coluna
-        col_asc = m_asc[:, colunas]
-        col_acc = m_acc[:, colunas]
-        if col_asc.any():
-            ys = np.where(col_asc.any(axis=1))[0]
-            if onde == ACIMA:
-                alem = int(col_acc[:ys.min(), :].sum())
-            else:
-                alem = int(col_acc[ys.max() + 1:, :].sum())
-        else:
-            alem = int(col_acc.sum())
-
-        saida.append({
-            "indice": indice, "marca": nome, "onde": onde,
-            "massa_acc": m1, "massa_asc": m0, "delta": m1 - m0,
-            "delta_rel": round((m1 - m0) / corpo, 5) if corpo else 0.0,
-            "acima_do_topo": alem,
-            "fileiras_pauta": n_pa,
-            "medivel": True,
-        })
-    return saida
+    from e1 import e1 as _e1
+    valores = _e1(tinta_acc, tinta_asc, palavra)
+    m_asc, n_pauta = mascara_de_tinta(tinta_asc, tirar_pauta)
+    medivel = bool(m_asc.any())
+    return [{"indice": indice, "marca": nome, "onde": onde,
+             "delta_rel": round(v, 5),
+             "fileiras_pauta": n_pauta, "medivel": medivel}
+            for (indice, nome, onde), v in zip(diacriticos(palavra), valores)]
 
 
 # ----------------------------- E2: CER ---------------------------------

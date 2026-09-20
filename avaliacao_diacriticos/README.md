@@ -64,7 +64,7 @@ MEDIANAS                  0    0   0.932     0.999
 ```
 
 Deslocamento ótimo zero em todos os pares. **Os gêmeos saem alinhados**, então
-o E1 por diferença é válido. As imagens estão em `passo1_contato.png` (ordem
+o E1 por diferença é válido. As imagens estão em `figuras/passo1_alinhamento.png` (ordem
 por par: acentuada / ascii / |diff|).
 
 As duas variantes do E1 continuam existindo porque servem a coisas diferentes:
@@ -161,7 +161,7 @@ implementado: sem `--com-e2`, o `avaliar.py` rotula `presente`/`ausente` em vez
 de forçar as quatro.
 
 O caminho para consertar o eixo é trocar o reconhecedor, não afrouxar o limiar.
-A folha de contato `anotacao_reais.png` deixa isso visível: as palavras são
+A folha de contato `figuras/anotacao_folha.png` deixa isso visível: as palavras são
 perfeitamente legíveis para uma pessoa, e o CER diz 0,83.
 
 ## A linha pautada do papel quebrava o E1 (corrigido)
@@ -282,7 +282,7 @@ concluí que os gêmeos saem alinhados. Em 348 pares isso **não vale sempre**:
 60% saem com deslocamento zero e o p90 é de 1 px, mas o máximo chega a 18 px.
 Nesses casos a palavra inteira entra na subtração, e parte do resíduo cai
 dentro da região medida — são exatamente os falsos positivos da figura
-`figura_e1_falhas.png`.
+`figuras/e1_falhas.png`.
 
 Alinhar por correlação cruzada antes de subtrair (6 linhas, `alinha()` em
 `e1.py`) custa pouco e paga:
@@ -415,10 +415,10 @@ $PY avaliacao_diacriticos/gerar_pares.py --ckpt $IAM --out-dir /tmp/x \
 
 # 2. controles do Passo 4
 $PY avaliacao_diacriticos/preparar_reais.py \
-    --out-dir avaliacao_diacriticos/reais_test
+    --out-dir avaliacao_diacriticos/amostras/reais_test
 $PY avaliacao_diacriticos/controle_ascii.py \
-    --dir avaliacao_diacriticos/reais_test \
-    --out-dir avaliacao_diacriticos/reais_ascii_negativo
+    --dir avaliacao_diacriticos/amostras/reais_test \
+    --out-dir avaliacao_diacriticos/amostras/reais_ascii_negativo
 
 # 3. gerar a sonda (N declarado: 29 pares x 4 estilos x 3 sementes = 696)
 $PY avaliacao_diacriticos/gerar_pares.py --ckpt <ckpt.pt> --out-dir <saida> \
@@ -434,8 +434,8 @@ $PY avaliacao_diacriticos/avaliar.py --dir <saida> --csv-out <saida>.csv \
 
 # 5. calibrar contra os DOIS negativos e comparar
 $PY avaliacao_diacriticos/calibrar.py \
-    --negativo avaliacao_diacriticos/res_ascii_negativo.csv \
-    --positivo avaliacao_diacriticos/res_reais_e1.csv
+    --negativo avaliacao_diacriticos/resultados/res_ascii_negativo.csv \
+    --positivo avaliacao_diacriticos/resultados/res_reais_e1.csv
 
 # 6. planilha de anotação humana e kappa
 $PY avaliacao_diacriticos/anotacao.py preparar --csv <saida>.csv \

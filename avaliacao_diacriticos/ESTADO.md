@@ -58,13 +58,13 @@ $PY avaliacao_diacriticos/gerar_pares.py --ckpt <novo.pt> --out-dir /tmp/x \
 
 # 2. gerar com o mesmo N do controle negativo (696 imagens, ~30 min na GPU)
 $PY avaliacao_diacriticos/gerar_pares.py --ckpt <novo.pt> \
-    --out-dir avaliacao_diacriticos/ger_ft --batch 1 \
+    --out-dir avaliacao_diacriticos/amostras/ger_ft --batch 1 \
     --pares-tsv avaliacao_diacriticos/pares_sonda30.tsv \
     --n-styles 4 --seeds 0 1 2
 
 # 3. ler o eixo por DIFERENÇA (não o por faixa) contra limiares_eixo_diff.json
-$PY avaliacao_diacriticos/avaliar.py --dir avaliacao_diacriticos/ger_ft \
-    --csv-out avaliacao_diacriticos/res_ft.csv --eixo1 diff --limiar-e1 0.0455
+$PY avaliacao_diacriticos/avaliar.py --dir avaliacao_diacriticos/amostras/ger_ft \
+    --csv-out avaliacao_diacriticos/resultados/res_ft.csv --eixo1 diff --limiar-e1 0.0455
 ```
 
 O limiar 0,0455 é o p95 do til no controle negativo. **Use o limiar da marca**
@@ -80,7 +80,7 @@ em 348 diacríticos, dá 0,0116 — cerca de 7% de um acento.
 ## O que falta, em ordem
 
 1. **Anotação humana** (Passo 6). `anotacao_reais.csv` tem 38 linhas
-   estratificadas pelas quatro categorias e `anotacao_reais.png` é a folha de
+   estratificadas pelas quatro categorias e `figuras/anotacao_folha.png` é a folha de
    contato. Quem anota preenche só `acento_presente` e `base_legivel` (0/1) e
    **não deve ver as colunas `_metrica_*`**. Depois:
    `anotacao.py kappa --csv <preenchida>`. O kappa do eixo E2 vai quantificar o

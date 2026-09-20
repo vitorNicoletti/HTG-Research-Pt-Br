@@ -88,11 +88,12 @@ acc = asc.copy()
 caixa(acc, 20, 26, 20 + 2 * 30 + 6, 20 + 2 * 30 + 24)    # so a acentuada tem til
 r = M.e1_por_diff(acc, asc, "dacão".replace("dac", "dac"))
 alvo = [d for d in r if d["marca"] == "til"][0]
-checa("delta > 0 quando so a acentuada tem til", alvo["delta"] > 0, f"(delta {alvo['delta']})")
-checa("acima_do_topo > 0", alvo["acima_do_topo"] > 0, f"({alvo['acima_do_topo']})")
+checa("delta > 0 quando so a acentuada tem til", alvo["delta_rel"] > 0,
+      f"(delta_rel {alvo['delta_rel']})")
 r = M.e1_por_diff(asc, asc, "dacão".replace("dac", "dac"))
 alvo = [d for d in r if d["marca"] == "til"][0]
-checa("delta = 0 quando os gemeos sao iguais", alvo["delta"] == 0, f"(delta {alvo['delta']})")
+checa("delta = 0 quando os gemeos sao iguais", alvo["delta_rel"] == 0,
+      f"(delta_rel {alvo['delta_rel']})")
 
 print("\n6. o caso do pingo do i: agudo tem que ter MAIS massa que o pingo")
 asc = corpo(4)
@@ -101,18 +102,28 @@ acc = corpo(4)
 caixa(acc, 16, 28, 20 + 2 * 30 + 8, 20 + 2 * 30 + 22)    # agudo, maior
 r = M.e1_por_diff(acc, asc, "país")
 alvo = [d for d in r if d["marca"] == "agudo"][0]
-checa("delta > 0 (agudo maior que o pingo)", alvo["delta"] > 0,
-      f"(massa_acc {alvo['massa_acc']} vs massa_asc {alvo['massa_asc']})")
+checa("delta > 0 (agudo maior que o pingo)", alvo["delta_rel"] > 0,
+      f"(delta_rel {alvo['delta_rel']})")
 r = M.e1_por_diff(asc, asc, "país")
 alvo = [d for d in r if d["marca"] == "agudo"][0]
 checa("delta = 0 se a acentuada so tem o pingo (acento omitido)",
-      alvo["delta"] == 0, f"(delta {alvo['delta']})")
+      alvo["delta_rel"] == 0, f"(delta_rel {alvo['delta_rel']})")
 
-print("\n7. imagem em branco nao gera acento fantasma")
+print("\n7. gemeo fora de lugar nao vira acento")
+base = corpo(5)
+caixa(base, 10, 30, 24, 30)
+movida = branco()
+movida[:, 6:] = base[:, :-6]           # a MESMA palavra, 6 px para a direita
+r = M.e1_por_diff(movida, base, "dacão".replace("dac", "dac"))
+alvo = [d for d in r if d["marca"] == "til"][0]
+checa("mesma palavra deslocada 6 px -> delta 0", abs(alvo["delta_rel"]) < 0.02,
+      f"(delta_rel {alvo['delta_rel']})")
+
+print("\n8. imagem em branco nao gera acento fantasma")
 r = M.e1_por_faixa(branco(), "não")
 checa("imagem vazia -> nao medivel", not r[0]["medivel"], f"({r[0]})")
 
-print("\n8. CER e dobra ASCII")
+print("\n9. CER e dobra ASCII")
 checa("cer identico = 0", M.cer("nacao", "nacao") == 0.0)
 checa("cer 1 substituicao em 5 = 0.2", abs(M.cer("nacao", "nocao") - 0.2) < 1e-9)
 checa("dobra tira acento e caixa", M.dobra_ascii("Ação!") == "acao")
