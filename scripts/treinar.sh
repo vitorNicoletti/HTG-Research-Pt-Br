@@ -1,40 +1,52 @@
 #!/usr/bin/env bash
-# Fine-tune do zero (a partir do pre-treinado no IAM), em blocos de 5 epocas,
-# gerando amostras ao fim de cada bloco.
+# Fine-tune do DiffusionPen (a partir do pre-treinado no IAM) no BRESSAY,
+# em blocos, medindo a deriva e gerando amostras ao fim de cada bloco.
 #
-# Por que em blocos: nesta maquina o MSE NAO e sinal confiavel de saude. Ja
-# aconteceu de o MSE melhorar (0.0522 -> 0.0404) enquanto o modelo perdia
-# completamente a capacidade de gerar. O unico teste que vale e gerar amostra.
-# Cada bloco deixa um snapshot proprio, entao da para voltar atras.
+# O ALVO e a deriva, nao o numero de epocas. Medido nos treinos ja feitos:
 #
-# NAO toca em ./model_bressay_full_12ep -- o modelo bom (ema_ep11.pt) fica la.
+#     0,10% - 0,16%   preso entre IAM e BRESSAY: ilegivel
+#     2,1%  - 2,7%    BRESSAY legivel, com diacriticos  <-- o que queremos
+#     12,9%           degradado de novo
+#
+# Numa placa sadia o modelo caminha mais rapido do que caminhou na RX 6600 XT
+# (onde 64% de cada gradiente era ruido ortogonal), entao NAO fixe o numero de
+# epocas: olhe a deriva impressa ao fim de cada bloco e as amostras.
+#
+# O MSE nao serve como sinal de saude -- ja melhorou (0,0522 -> 0,0404) na
+# mesma epoca em que a geracao morreu. O unico teste que vale e gerar amostra.
 set -u
 
 export PYTORCH_HIP_ALLOC_CONF=expandable_segments:True
 
-# A RX 6600 XT e gfx1032 e o ROCm so tem kernels para gfx1030; sem isto os
-# resultados sao silenciosamente errados. Costuma vir do perfil do shell, mas
-# uma sessao tmux herda o ambiente do servidor tmux -- entao garantimos aqui.
-: "${HSA_OVERRIDE_GFX_VERSION:=10.3.0}"
-export HSA_OVERRIDE_GFX_VERSION
+# A RX 6600 XT e gfx1032 e o ROCm so tem kernels ate gfx1030; sem o override os
+# resultados sao silenciosamente errados. Em QUALQUER outra placa o override e
+# nocivo -- forcaria kernels de RDNA2 numa arquitetura diferente. Por isso e
+# condicional: so entra se a placa detectada for mesmo gfx1032.
+if [ -z "${HSA_OVERRIDE_GFX_VERSION:-}" ] && command -v rocminfo >/dev/null 2>&1; then
+  if rocminfo 2>/dev/null | grep -q gfx1032; then
+    export HSA_OVERRIDE_GFX_VERSION=10.3.0
+    echo "placa gfx1032 detectada: HSA_OVERRIDE_GFX_VERSION=10.3.0"
+  fi
+fi
 
-# Winograd fica LIGADA de proposito: o unico modelo que comprovadamente gera
-# bem (ema_ep11) foi treinado com ela, e as 3 epocas treinadas com ela
-# desligada foram as que mataram a geracao.
-
-SAVE_PATH=./model_bressay_v2
-BLOCO=5
-ALVO=50
-LOG=run_bressay_v2.log
+SAVE_PATH=${SAVE_PATH:-./model_bressay_longo}
+BLOCO=${BLOCO:-5}
+ALVO=${ALVO:-40}
+STYLE=${STYLE:-./DiffusionPen/style_models/iam_style_diffusionpen.pth}
+IAM_BASE=./DiffusionPen/diffusionpen_iam_model_path/models
+LOG=${LOG:-run_bressay_longo.log}
 
 comum=(
   --dataset bressay
   --model_name diffusionpen
   --save_path "$SAVE_PATH"
-  --style_path ./style_models/mixed_bressay_mobilenetv2_100.pth
-  --max_samples 0
-  --sample_every 999999      # amostragem dentro do treino corrompe o processo
-  --lr 2e-5
+  --style_path "$STYLE"
+  --max_samples 0            # split inteiro: o unico run bom usou 74.882
+  --sample_every 0           # a grade interna tokeniza com max_length=200
+                             # enquanto o treino usa 40 -- nao e o mesmo
+                             # condicionamento. As amostras saem do
+                             # gerar_amostras.py, em processo separado.
+  --lr 2e-5                  # valor do unico run que produziu diacriticos
   --batch_size 32
   --num_workers 12
   --save_every_steps 500
@@ -55,7 +67,7 @@ PY
 while true; do
   feitas=$(epocas_feitas)
   if [ "$feitas" -ge "$ALVO" ]; then
-    echo "=== $feitas epocas concluidas, alvo de $ALVO atingido ==="
+    echo "=== $feitas epocas concluidas, teto de $ALVO atingido ==="
     break
   fi
 
@@ -64,9 +76,11 @@ while true; do
   echo "=== bloco: $feitas epocas feitas, treinando mais $n ==="
 
   if [ "$feitas" -eq 0 ]; then
+    # --pretrained_path e --load_check sao mutuamente exclusivos: no train.py o
+    # bloco do pretrained_path roda DEPOIS e sobrescreve o que o load_check
+    # retomou. Por isso cada ramo passa so um dos dois.
     python DiffusionPen/train.py "${comum[@]}" \
-      --pretrained_path ./DiffusionPen/diffusionpen_iam_model_path/models \
-      --epochs "$n" 2>&1 | tee -a "$LOG"
+      --pretrained_path "$IAM_BASE" --epochs "$n" 2>&1 | tee -a "$LOG"
   else
     python DiffusionPen/train.py "${comum[@]}" \
       --load_check True --epochs "$n" 2>&1 | tee -a "$LOG"
@@ -82,13 +96,16 @@ while true; do
     exit "$codigo"
   fi
 
-  # Bloco fechou: snapshot com nome proprio (para poder voltar atras) e amostras.
   agora=$(epocas_feitas)
   cp "$SAVE_PATH/models/ema_ckpt.pt" "$SAVE_PATH/models/ema_bloco_${agora}ep.pt"
-  echo "=== snapshot salvo: ema_bloco_${agora}ep.pt ==="
+  echo "=== snapshot: ema_bloco_${agora}ep.pt ==="
+
+  python scripts/medir_deriva.py "$SAVE_PATH/models/ema_ckpt.pt" 2>&1 | tee -a "$LOG"
 
   echo "=== gerando amostras de ${agora} epocas ==="
-  SAVE_PATH="$SAVE_PATH" OUT_DIR="./amostras_v2_${agora}ep" CKPT=ema_ckpt.pt \
-    python gerar_amostras.py 2>&1 | tail -3 | tee -a "$LOG"
-  echo "=== veja ./amostras_v2_${agora}ep e compare com ./amostras_controle_ep11 ==="
+  python scripts/gerar_amostras.py \
+    --ckpt "$SAVE_PATH/models/ema_ckpt.pt" \
+    --out "./amostras_${agora}ep" \
+    --style "$STYLE" 2>&1 | tail -3 | tee -a "$LOG"
+  echo "=== olhe ./amostras_${agora}ep: o criterio e o diacritico aparecer ==="
 done
