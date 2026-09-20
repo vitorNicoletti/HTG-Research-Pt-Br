@@ -30,5 +30,22 @@ bressay_split/descartados.tsv
 avaliacao_diacriticos/ger_iam_puro/
 avaliacao_diacriticos/reais_test/
 
+# saidas de treino e geracao na maquina de quem executa: pastas de amostras,
+# pastas de modelo com seus snapshots, e os .log. Ficam no disco para inspecao,
+# mas nao entram no git -- sao por maquina e por execucao. Resultados curados
+# que valem como evidencia vao para diagnostico/resultados/ ou saidas/.
+am_*/
+amostras_*/
+est_*/
+model_*/
+run_*.log
+
+# reescritos a cada import do train.py (labelDictionary roda no nivel do
+# modulo e grava no diretorio atual). Alfabeto do IAM, ASCII puro -- so sao
+# usados quando --model_name e 'wordstylist'; no caminho diffusionpen o texto
+# vai pelo tokenizador do CANINE. Versionados por heranca do repo original.
+index2letter.json
+letter2index.json
+
 # editor
 .vscode/
