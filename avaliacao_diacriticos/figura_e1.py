@@ -66,7 +66,8 @@ ax[3].add_patch(Rectangle((c0, -0.5), c1 - c0, topo + 0.5, ec="tab:green",
 
 def diferenca(k, mask_acc, titulo):
     """Palavra em cinza claro ao fundo; vermelho = tinta a mais, azul = a menos."""
-    d = mask_acc.astype(int) - b.astype(int)
+    # alinhado, igual ao que a metrica faz
+    d = e1.alinha(mask_acc, b).astype(int) - b.astype(int)
     img = np.ones((*b.shape, 3))
     img[b] = 0.80                                  # a palavra, de referencia
     img[d > 0] = (0.85, 0.10, 0.10)

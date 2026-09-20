@@ -275,6 +275,44 @@ negativo se comportando como esperado. **É esta tabela que dá sentido aos
 números do fine-tune quando ele existir**: 0,05 passa a ser "cerca de um terço
 de acento", não um número solto.
 
+## Alinhar os gêmeos antes de subtrair (e o portão do Passo 1 revisto)
+
+O portão do Passo 1 mediu 6 pares, deu deslocamento zero em todos, e eu
+concluí que os gêmeos saem alinhados. Em 348 pares isso **não vale sempre**:
+60% saem com deslocamento zero e o p90 é de 1 px, mas o máximo chega a 18 px.
+Nesses casos a palavra inteira entra na subtração, e parte do resíduo cai
+dentro da região medida — são exatamente os falsos positivos da figura
+`figura_e1_falhas.png`.
+
+Alinhar por correlação cruzada antes de subtrair (6 linhas, `alinha()` em
+`e1.py`) custa pouco e paga:
+
+| | p95 do ruído | AUC |
+|---|---|---|
+| sem alinhar | 0,181 | 0,936 |
+| alinhar pelo canto da caixa de tinta | 0,204 | 0,906 |
+| **alinhar por correlação cruzada** | **0,103** | **0,966** |
+
+Alinhar pelo canto da caixa, que seria mais simples, **piora** — o canto
+depende de um pixel solto.
+
+Limiares operacionais por marca, recalculados com o alinhamento
+(`limiares_eixo_diff.json`):
+
+| marca | p95 do ruído | acento nominal | AUC | decide por amostra? |
+|---|---|---|---|---|
+| grave | 0,036 | 0,151 | 1,000 | sim |
+| til | 0,046 | 0,141 | 0,998 | sim |
+| circunflexo | 0,067 | 0,149 | 0,986 | sim |
+| agudo | 0,126 | 0,158 | 0,948 | sim |
+| **cedilha** | **0,238** | 0,165 | 0,917 | **não** |
+
+O alinhamento resgatou o agudo (p95 de 0,268 para 0,126, agora abaixo do
+sinal). A cedilha continua sendo a marca em que o ruído supera um acento
+nominal: só a média agregada com IC é confiável nela. Faz sentido — a faixa
+da cedilha é abaixo da linha de base, que é onde ficam descendentes e a linha
+pautada.
+
 ## O limiar do eixo por diferença sai do negativo REAL, não da curva sintética
 
 A curva acima é o melhor caso possível: o acento é pintado sobre a *mesma*

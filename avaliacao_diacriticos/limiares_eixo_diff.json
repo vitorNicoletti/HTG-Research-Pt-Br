@@ -1,54 +1,58 @@
 {
- "eixo": "diff_delta_rel",
- "controle_negativo": "ger_iam_n696",
- "N": "29 pares x 4 estilos x 3 sementes = 696 imagens, 348 diacriticos",
+ "eixo": "e1.py (com alinhamento por correlacao)",
+ "controle_negativo": "ger_iam_n696 (IAM puro, 696 imagens, 348 diacriticos)",
+ "positivo": "acento nominal pintado sobre a propria imagem ASCII",
+ "leitura": "use o p95 da marca como limiar. decide_por_amostra=false significa que o ruido supera um acento nominal: so a media agregada com IC e confiavel nessa marca.",
  "por_marca": {
   "agudo": {
    "n": 72,
-   "media": 0.05257222222222222,
-   "p90": 0.190715,
-   "p95": 0.2636120000000002,
-   "p99": 0.3400965000000004
-  },
-  "cedilha": {
-   "n": 72,
-   "media": 0.03108638888888889,
-   "p90": 0.164298,
-   "p95": 0.20559100000000002,
-   "p99": 0.35337860000000043
-  },
-  "circunflexo": {
-   "n": 72,
-   "media": -0.008463055555555555,
-   "p90": 0.034978,
-   "p95": 0.06819050000000003,
-   "p99": 0.1213284000000008
+   "media_ruido": 0.022240843718627758,
+   "p90": 0.08230390299355816,
+   "p95": 0.12602601156069365,
+   "p99": 0.2291675154114182,
+   "acento_nominal": 0.15815717409061694,
+   "auc": 0.9476273148148148,
+   "decide_por_amostra": true
   },
   "grave": {
    "n": 60,
-   "media": -0.008793166666666666,
-   "p90": 0.027553000000000005,
-   "p95": 0.03650549999999998,
-   "p99": 0.0562192999999999
+   "media_ruido": -0.009418503427113761,
+   "p90": 0.02538766270514998,
+   "p95": 0.03620966776670142,
+   "p99": 0.06036131053387277,
+   "acento_nominal": 0.15086421498804997,
+   "auc": 1.0,
+   "decide_por_amostra": true
+  },
+  "circunflexo": {
+   "n": 72,
+   "media_ruido": -0.013283678584488963,
+   "p90": 0.03508089289371288,
+   "p95": 0.06730205278592377,
+   "p99": 0.12306802244039351,
+   "acento_nominal": 0.1491084335833203,
+   "auc": 0.9864969135802469,
+   "decide_por_amostra": true
   },
   "til": {
    "n": 72,
-   "media": -0.01162347222222222,
-   "p90": 0.031904,
-   "p95": 0.04548250000000002,
-   "p99": 0.06665880000000005
+   "media_ruido": -0.01198157175550544,
+   "p90": 0.03310838686862733,
+   "p95": 0.04567567567567568,
+   "p99": 0.06983378256963164,
+   "acento_nominal": 0.14123237431583088,
+   "auc": 0.9982638888888888,
+   "decide_por_amostra": true
   },
-  "TODAS": {
-   "n": 348,
-   "media": 0.011636781609195401,
-   "p90": 0.07884400000000003,
-   "p95": 0.17657949999999972,
-   "p99": 0.31445899999999966
+  "cedilha": {
+   "n": 72,
+   "media_ruido": 0.03383176286807711,
+   "p90": 0.1111111111111111,
+   "p95": 0.23761480287447587,
+   "p99": 0.3553870226669392,
+   "acento_nominal": 0.16460650771051355,
+   "auc": 0.9174382716049383,
+   "decide_por_amostra": false
   }
- },
- "referencia_sintetica": {
-  "gemeos_identicos": 0.0,
-  "meio_acento_nominal": 0.0389,
-  "acento_nominal": 0.1657
  }
 }
