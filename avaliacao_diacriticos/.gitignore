@@ -1,0 +1,10 @@
+# Conjuntos de imagem sao derivados e reproduziveis pelos scripts deste
+# diretorio (preparar_reais.py, controle_ascii.py, gerar_pares.py), entao
+# ficam fora do versionamento. Os RESULTADOS (csv/json) e a evidencia do
+# portao do Passo 1 (passo1_contato.png) ficam versionados.
+reais_test/
+reais_ascii_negativo/
+ger_iam_puro/
+ger_iam_n696/
+gate_cpu/
+__pycache__/

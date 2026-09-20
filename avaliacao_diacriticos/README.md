@@ -107,6 +107,129 @@ estão degenerados**, todos em `ação.png`, nas pastas `amostras_bressay_ep15`,
 std = 0,000, imagem em branco. Não é o modelo falhando em "ação": é a
 amostragem em lote.
 
+## A linha pautada do papel quebrava o E1 (corrigido)
+
+73% dos alvos de treino do BRESSAY e 88% dos recortes de teste têm a linha
+pautada do papel atravessando a imagem. Ela não é tinta do escritor e estragava
+as duas coisas que o E1 faz:
+
+1. **a geometria.** `linha_base_e_altura_x()` chama de "corpo" as fileiras com
+   pelo menos metade da tinta da fileira mais cheia. A pauta atravessa a imagem
+   inteira, então ela *é* a fileira mais cheia: o corpo estimado caía de 25 px
+   para 12 px e a faixa ACIMA passava a engolir a letra em vez de só a zona do
+   diacrítico.
+2. **a contagem.** Para a cedilha a faixa é ABAIXO da linha de base — exatamente
+   onde a pauta costuma estar.
+
+Os dois efeitos são mensuráveis. Em teste sintético, sem remover a pauta o
+escore de um til conhecido vai de **0,082 para 1,553** (19×). Nos recortes reais,
+agudo ia a 1,070 e til a 1,035 nos que têm pauta, contra 0,265 e 0,328 nos que
+não têm.
+
+**O discriminador é espessura, não cobertura.** A primeira tentativa (zerar
+fileiras que cobrem >85% da caixa de tinta) destruía palavras curtas: em "que",
+"para" e "das" ela levava de 52% a 62% da tinta, porque num vocábulo de 3 letras
+um traço cursivo horizontal já cobre 85% da própria caixa. Medido no conjunto
+real, as bandas cheias se concentram em 2–4 px com queda brusca depois de 5 —
+o esperado para uma linha de 1–2 px ampliada 2,06× (os recortes do BRESSAY têm
+31 px de altura e são ampliados para 64). `remover_pauta()` só apaga bandas de
+até 5 px.
+
+Sobram casos difíceis: palavras onde a normalização de contraste deixou tudo
+um bloco sólido continuam dando falso positivo ("para") ou falso negativo
+("das"). Não foi tentada reconstrução do traço que cruza a pauta.
+
+**O efeito no controle positivo foi grande e está reportado como tal:**
+
+| | antes | depois |
+|---|---|---|
+| E1 médio dos recortes reais | 0,861 | **0,510** |
+| E1 médio do IAM puro | 0,141 | 0,141 (sem pauta, não muda) |
+
+O IAM puro não tem pauta em nenhuma das 116 imagens; o gate do fine-tune já
+tinha em 50% — o modelo ajustado aprende a desenhá-la, então a correção precisa
+valer para o gerado também, e vale.
+
+## O controle positivo é mais fraco do que a comparação com o IAM sugeria
+
+O negativo do Passo 4 é o DiffusionPen puro do IAM. Ele responde "o gerador que
+nunca viu português omite o acento?", mas **não** responde "o detector inventa
+acento onde não há?" — imagem gerada e recorte real diferem em traço, contraste
+e pauta (0% no IAM, 88% no real), então parte da separação pode ser só domínio.
+
+`controle_ascii.py` constrói o negativo no próprio domínio: pega palavras REAIS
+do BRESSAY que comprovadamente não têm diacrítico e finge que têm. Mesmo papel,
+mesma pauta, mesmo punho. Tudo que o E1 marcar ali é falso positivo por
+construção.
+
+| negativo usado | E1 médio do negativo | E1 médio do positivo | **AUC** |
+|---|---|---|---|
+| IAM puro (fora de domínio) | 0,141 | 0,510 | **0,849** |
+| ASCII real com acento fabricado (mesmo domínio) | 0,386 | 0,510 | **0,680** |
+
+Por marca, no mesmo domínio: cedilha 0,930 (n⁻=8), grave 0,755, til 0,723,
+circunflexo 0,731, agudo 0,686.
+
+**Conclusão honesta: o E1 por faixa, em material real, é um detector fraco
+(AUC 0,68).** A barra do Passo 4 — "omissão e presença perto de 100%" — não é
+atingida com limiar único: no melhor limiar global dá 45,0% de omissão no
+negativo de domínio e 90,5% de presença no positivo. Isso limita quanto peso o
+controle positivo de recortes reais pode sustentar, e precisa ser declarado.
+
+Vale distinguir o que isso condena e o que não condena. A variante por faixa é
+necessária só onde **não há gêmeo** — ou seja, no controle de recortes reais. A
+medida no material gerado, que é o objetivo do trabalho, usa a variante por
+diferença, caracterizada abaixo.
+
+## O eixo por diferença: piso de ruído zero e curva de detecção
+
+O eixo por diferença tem controle negativo validado (IAM puro = 0,003) mas
+ainda não tem positivo real — não existe gerador nosso que desenhe o
+diacrítico. `teste_sensibilidade_diff.py` constrói o positivo sem depender de
+gerador: pinta um acento de tamanho conhecido sobre a própria imagem ASCII que
+o modelo gerou, de modo que a única diferença entre os gêmeos seja o acento.
+
+Acento nominal = 60% da largura do caractere × 18% da altura-x.
+
+| escala do acento | delta_rel médio | detectado (>0,02) |
+|---|---|---|
+| 0,00 (gêmeos idênticos) | 0,0000 | 0,0% |
+| 0,25 | 0,0103 | 5,2% |
+| 0,50 | 0,0389 | 87,9% |
+| 0,75 | 0,0947 | 100,0% |
+| 1,00 (nominal) | 0,1657 | 100,0% |
+| 1,50 | 0,3634 | 100,0% |
+| **IAM puro, real** | **0,0029** | 25,9% |
+
+O piso de ruído é exatamente zero, e meio acento nominal já é detectado em 88%
+dos casos. O IAM puro produz 1,8% da massa de um acento nominal — é o controle
+negativo se comportando como esperado. **É esta tabela que dá sentido aos
+números do fine-tune quando ele existir**: 0,05 passa a ser "cerca de um terço
+de acento", não um número solto.
+
+## A janela de coluna é sensível à folga, mas a decisão não é
+
+`coluna_do_caractere()` divide a caixa de tinta em fatias iguais. No par mínimo
+isso se cancela entre os gêmeos; em recorte real não. Medido:
+
+| n de letras | folga=0,0 | folga=0,5 | folga=1,0 |
+|---|---|---|---|
+| 3 | 34% | 68% | 100% |
+| 7 | 15% | 29% | 43% |
+| 10 | 10% | 20% | 30% |
+
+(percentual da palavra coberto pela janela). Em palavra de 3 letras com
+folga=1,0 a janela cobre a palavra inteira e o E1 deixa de ser "tinta na coluna
+do caractere".
+
+O escore absoluto varia bastante com a folga (0,58 → 0,40 entre folga 0 e 2),
+**mas a separação quase não se move**: AUC entre 0,790 e 0,880 em toda a faixa.
+Ou seja: o escore E1 não pode ser reportado como grandeza absoluta sem declarar
+a folga, e o limiar tem que ser calibrado na mesma folga da medição — mas a
+decisão presente/ausente é estável. O padrão continua 0,5, que foi a escolha a
+priori; 0,25 dá AUC marginalmente melhor e não foi adotado para não ajustar
+parâmetro no próprio controle.
+
 ## Limitação do corpus: til e cedilha quase não têm gêmeo real
 
 Dos 10.691 tipos do BRESSAY, 2.296 têm diacrítico e 188 têm o gêmeo ASCII

@@ -37,7 +37,28 @@ from diffusers import AutoencoderKL, DDIMScheduler
 from transformers import CanineModel, CanineTokenizer
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-REPO = os.path.join(RAIZ, "DiffusionPen")
+
+
+def _primeiro_que_existe(rotulo, candidatos):
+    """Primeiro caminho existente, ou erro dizendo onde procurou.
+
+    O repositorio ja foi reorganizado uma vez no meio do trabalho
+    (diffusionpen/DiffusionPen virou DiffusionPen, sanity/ sumiu) e este
+    modulo nao pode editar scripts/ nem diffusionpen_mods/. Procurar numa
+    lista de candidatos evita que a metrica quebre de novo por mudanca de
+    layout, e falha com mensagem util em vez de ImportError solto.
+    """
+    for c in candidatos:
+        if os.path.exists(c):
+            return c
+    raise SystemExit(f"nao achei {rotulo}. Procurei em:\n  " +
+                     "\n  ".join(candidatos))
+
+
+REPO = _primeiro_que_existe("o codigo do DiffusionPen (unet.py)", [
+    os.path.join(RAIZ, "DiffusionPen"),
+    os.path.join(RAIZ, "diffusionpen", "DiffusionPen"),
+])
 sys.path.insert(0, REPO)
 
 from unet import UNetModel                      # noqa: E402
@@ -45,8 +66,13 @@ from feature_extractor import ImageEncoder      # noqa: E402
 from utils.bressay_dataset import BRESSAY_Dataset  # noqa: E402
 
 STABLE_DIF = "runwayml/stable-diffusion-v1-5"
-STYLE_PATH = os.path.join(RAIZ, "style_models", "mixed_bressay_mobilenetv2_100.pth")
-DATASET_FOLDER = os.path.join(RAIZ, "bressay_split")
+STYLE_PATH = _primeiro_que_existe("o extrator de estilo", [
+    os.path.join(RAIZ, "style_models", "mixed_bressay_mobilenetv2_100.pth"),
+    os.path.join(REPO, "style_models", "mixed_bressay_mobilenetv2_100.pth"),
+])
+DATASET_FOLDER = _primeiro_que_existe("o split do BRESSAY", [
+    os.path.join(RAIZ, "bressay_split"),
+])
 
 STYLE_CLASSES = 339
 VOCAB_SIZE = 79
@@ -127,9 +153,11 @@ def carregar_palavras(args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--save-path", required=True,
+    ap.add_argument("--save-path", default=None,
                     help="pasta do modelo (contem models/<ckpt>)")
-    ap.add_argument("--ckpt", default="ema_ckpt.pt")
+    ap.add_argument("--ckpt", default="ema_ckpt.pt",
+                    help="nome dentro de <save-path>/models/, ou o caminho "
+                         "completo do .pt (ai --save-path e dispensavel)")
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--pares-tsv", default=None,
                     help="TSV: acentuada \\t ascii")
@@ -147,7 +175,7 @@ def main():
                     help="so verifica que gerar em lote == gerar uma a uma")
     args_cli = ap.parse_args()
 
-    args = build_args(args_cli.save_path)
+    args = build_args(args_cli.save_path or "")
     args.device = args_cli.device
     device = args_cli.device
     em_cuda = device.startswith("cuda")
@@ -182,7 +210,16 @@ def main():
     )
     unet = wrap(unet)
     ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
-    ckpt = os.path.join(args_cli.save_path, "models", args_cli.ckpt)
+    # --ckpt pode ser o arquivo direto: depois da reorganizacao do repo os
+    # modelos deixaram de ficar todos em <pasta>/models/.
+    if os.path.isfile(args_cli.ckpt):
+        ckpt = args_cli.ckpt
+    elif args_cli.save_path:
+        ckpt = os.path.join(args_cli.save_path, "models", args_cli.ckpt)
+    else:
+        raise SystemExit("passe --ckpt com o caminho do .pt, ou --save-path")
+    if not os.path.isfile(ckpt):
+        raise SystemExit(f"checkpoint nao encontrado: {ckpt}")
     ema_model.load_state_dict(torch.load(ckpt, map_location=device))
     ema_model.eval()
     print("ckpt carregado:", ckpt, flush=True)

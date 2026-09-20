@@ -22,9 +22,32 @@ import random
 import sys
 import unicodedata
 
-RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(RAIZ, "DiffusionPen"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _primeiro_que_existe(rotulo, candidatos):
+    """Primeiro caminho existente, ou erro dizendo onde procurou.
+
+    O repositorio ja foi reorganizado uma vez no meio do trabalho
+    (diffusionpen/DiffusionPen virou DiffusionPen, sanity/ sumiu) e este
+    modulo nao pode editar scripts/ nem diffusionpen_mods/. Procurar numa
+    lista de candidatos evita que a metrica quebre de novo por mudanca de
+    layout, e falha com mensagem util em vez de ImportError solto.
+    """
+    for c in candidatos:
+        if os.path.exists(c):
+            return c
+    raise SystemExit(f"nao achei {rotulo}. Procurei em:\n  " +
+                     "\n  ".join(candidatos))
+
+
+REPO = _primeiro_que_existe("o codigo do DiffusionPen (unet.py)", [
+    os.path.join(RAIZ, "DiffusionPen"),
+    os.path.join(RAIZ, "diffusionpen", "DiffusionPen"),
+])
+sys.path.insert(0, REPO)
 
 import metrica as M  # noqa: E402
 from utils.bressay_dataset import BRESSAY_Dataset  # noqa: E402

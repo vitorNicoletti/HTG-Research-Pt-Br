@@ -93,6 +93,98 @@ def binariza(t):
     return m.astype(bool)
 
 
+# --------------------------- linha pautada -----------------------------
+#
+# 73% dos alvos de treino do BRESSAY (e 88% dos recortes de teste que esta
+# metrica usa como controle positivo) tem a linha pautada do papel atravessando
+# a imagem. Ela nao e tinta do escritor, e estraga as duas coisas que o E1
+# precisa:
+#
+#   1. a geometria. linha_base_e_altura_x() chama de "corpo" as fileiras com
+#      pelo menos metade da tinta da fileira mais cheia. A pauta atravessa a
+#      imagem inteira, entao ela E a fileira mais cheia: o limiar sobe, so as
+#      vizinhas dela sobrevivem e o corpo estimado cai de 25 px para 12 px.
+#      Com o corpo encolhido, a faixa ACIMA da altura-x passa a engolir a
+#      letra inteira em vez de so a zona do diacritico.
+#   2. a contagem. Para a cedilha a faixa e ABAIXO da linha de base, que e
+#      exatamente onde a pauta costuma estar -- a pauta seria contada como
+#      cedilha.
+#
+# Os dois efeitos inflam o escore na mesma direcao. Medido no controle
+# positivo, sem remover a pauta: agudo 1.070 e til 1.035, contra 0.265 e 0.328
+# nos recortes sem pauta do mesmo conjunto.
+#
+# ESPESSURA e o que separa pauta de traco de letra, nao cobertura. Uma palavra
+# curta e cursiva tem traco horizontal cobrindo 100% da propria caixa de tinta
+# -- medido em "que" e "para", 5 a 7 fileiras consecutivas a 100%. A pauta e
+# fina: no conjunto real as bandas cheias se concentram em 2-4 px, com queda
+# brusca depois de 5, que e o esperado para uma linha de 1-2 px ampliada 2.06x
+# (os recortes do BRESSAY tem 31 px de altura e sao ampliados para 64).
+
+ESPESSURA_MAX_PAUTA = 5
+COBERTURA_PAUTA = 0.90
+
+
+def bandas_cheias(mask, cobertura=COBERTURA_PAUTA):
+    """Faixas de fileiras consecutivas quase totalmente preenchidas.
+
+    A cobertura e medida sobre a caixa de tinta, nao sobre a largura da
+    imagem: load_image() centraliza recortes estreitos com pad branco, entao
+    uma pauta real nao chega as bordas da imagem.
+    """
+    cx = caixa_tinta(mask)
+    if cx is None:
+        return []
+    x0, x1, _, _ = cx
+    cheia = mask[:, x0:x1].mean(axis=1) > cobertura
+    faixas, i = [], 0
+    while i < len(cheia):
+        if cheia[i]:
+            j = i
+            while j + 1 < len(cheia) and cheia[j + 1]:
+                j += 1
+            faixas.append((i, j + 1))
+            i = j + 1
+        else:
+            i += 1
+    return faixas
+
+
+def remover_pauta(mask, espessura_max=ESPESSURA_MAX_PAUTA,
+                  cobertura=COBERTURA_PAUTA):
+    """Zera as fileiras da linha pautada. Devolve (mascara, n_fileiras).
+
+    So remove bandas FINAS. Sem o teto de espessura a funcao apaga o corpo de
+    palavras curtas: em "que", "para" e "das" a remocao ingenua levava 52% a
+    62% da tinta e deixava a palavra irreconhecivel.
+
+    Nao tenta reconstruir o traco da letra que cruza a pauta. Para o que o E1
+    faz -- estimar geometria e contar massa -- perder 1 a 4 fileiras da letra
+    e um erro pequeno e igual nos dois gemeos do par minimo.
+    """
+    m = mask.copy()
+    n = 0
+    for ini, fim in bandas_cheias(mask, cobertura):
+        if fim - ini <= espessura_max:
+            m[ini:fim, :] = False
+            n += fim - ini
+    return m, n
+
+
+def tem_pauta(mask, espessura_max=ESPESSURA_MAX_PAUTA,
+              cobertura=COBERTURA_PAUTA):
+    return any(fim - ini <= espessura_max
+               for ini, fim in bandas_cheias(mask, cobertura))
+
+
+def mascara_de_tinta(tinta, remover_pauta_=True):
+    """Binariza e, por padrao, tira a pauta. Devolve (mascara, n_fileiras)."""
+    m = binariza(tinta)
+    if not remover_pauta_:
+        return m, 0
+    return remover_pauta(m)
+
+
 def caixa_tinta(mask):
     """(x0, x1, y0, y1) da caixa que contem toda a tinta; None se vazia."""
     if not mask.any():
@@ -159,7 +251,7 @@ def _regiao(mask, indice, n_caracteres, onde, folga=0.5):
     return linhas, slice(col[0], col[1])
 
 
-def e1_por_faixa(tinta, palavra, folga=0.5):
+def e1_por_faixa(tinta, palavra, folga=0.5, remover_pauta_=True):
     """Escore de presenca usando so a imagem acentuada.
 
     Devolve um dict por diacritico com:
@@ -168,7 +260,7 @@ def e1_por_faixa(tinta, palavra, folga=0.5):
       massa_rel  -- massa / tinta do corpo na MESMA coluna. Normaliza pelo
                     tamanho da letra, entao nao depende da escala do traco.
     """
-    mask = binariza(tinta)
+    mask, n_pauta = mascara_de_tinta(tinta, remover_pauta_)
     n = len(sem_acento(palavra))
     saida = []
     for indice, nome, onde in diacriticos(palavra):
@@ -176,7 +268,7 @@ def e1_por_faixa(tinta, palavra, folga=0.5):
         if r is None:
             saida.append({"indice": indice, "marca": nome, "onde": onde,
                           "massa": 0, "densidade": 0.0, "massa_rel": 0.0,
-                          "medivel": False})
+                          "fileiras_pauta": n_pauta, "medivel": False})
             continue
         linhas, colunas = r
         massa = int(mask[linhas, colunas].sum())
@@ -188,12 +280,13 @@ def e1_por_faixa(tinta, palavra, folga=0.5):
             "massa": massa,
             "densidade": round(massa / area, 5) if area else 0.0,
             "massa_rel": round(massa / corpo, 5) if corpo else 0.0,
+            "fileiras_pauta": n_pauta,
             "medivel": True,
         })
     return saida
 
 
-def e1_por_diff(tinta_acc, tinta_asc, palavra, folga=0.5):
+def e1_por_diff(tinta_acc, tinta_asc, palavra, folga=0.5, remover_pauta_=True):
     """Escore de presenca comparando o par minimo.
 
     A geometria (coluna, linha de base, altura-x) e calculada na imagem
@@ -210,7 +303,8 @@ def e1_por_diff(tinta_acc, tinta_asc, palavra, folga=0.5):
                               de cima, abaixo para cedilha). E o sinal mais
                               especifico: nao conta o que os dois ja tinham.
     """
-    m_acc, m_asc = binariza(tinta_acc), binariza(tinta_asc)
+    m_acc, n_pa = mascara_de_tinta(tinta_acc, remover_pauta_)
+    m_asc, n_ps = mascara_de_tinta(tinta_asc, remover_pauta_)
     n = len(sem_acento(palavra))
     saida = []
     for indice, nome, onde in diacriticos(palavra):
@@ -219,7 +313,7 @@ def e1_por_diff(tinta_acc, tinta_asc, palavra, folga=0.5):
             saida.append({"indice": indice, "marca": nome, "onde": onde,
                           "massa_acc": 0, "massa_asc": 0, "delta": 0,
                           "delta_rel": 0.0, "acima_do_topo": 0,
-                          "medivel": False})
+                          "fileiras_pauta": n_pa, "medivel": False})
             continue
         linhas, colunas = r
         m1 = int(m_acc[linhas, colunas].sum())
@@ -244,6 +338,7 @@ def e1_por_diff(tinta_acc, tinta_asc, palavra, folga=0.5):
             "massa_acc": m1, "massa_asc": m0, "delta": m1 - m0,
             "delta_rel": round((m1 - m0) / corpo, 5) if corpo else 0.0,
             "acima_do_topo": alem,
+            "fileiras_pauta": n_pa,
             "medivel": True,
         })
     return saida

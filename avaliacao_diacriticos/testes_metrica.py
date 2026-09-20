@@ -119,6 +119,81 @@ checa("dobra tira acento e caixa", M.dobra_ascii("Ação!") == "acao")
 checa("CER com dobra ignora o acento",
       M.cer(M.dobra_ascii("ação"), M.dobra_ascii("acao")) == 0.0)
 
+print("\n9. linha pautada do papel")
+# palavra "dacao" com til no indice 2, MAIS a pauta atravessando a imagem
+base = corpo(5)
+caixa(base, 20, 26, 20 + 2 * 30 + 6, 20 + 2 * 30 + 24)    # til
+r_sem = M.e1_por_faixa(base, "dacão".replace("dac", "dac"))[0]
+
+pautada = base.copy()
+caixa(pautada, 46, 49, 0, W)                              # pauta de 3 px na base
+r_com = M.e1_por_faixa(pautada, "dacão".replace("dac", "dac"))[0]
+r_cru = M.e1_por_faixa(pautada, "dacão".replace("dac", "dac"),
+                       remover_pauta_=False)[0]
+checa("pauta detectada", M.tem_pauta(M.binariza(pautada)))
+checa("sem pauta nao dispara falso positivo",
+      not M.tem_pauta(M.binariza(base)))
+checa("com remocao, o escore volta ao valor sem pauta",
+      abs(r_com["massa_rel"] - r_sem["massa_rel"]) < 0.02,
+      f"(sem={r_sem['massa_rel']:.3f} com={r_com['massa_rel']:.3f})")
+checa("SEM remocao o escore se distorce",
+      abs(r_cru["massa_rel"] - r_sem["massa_rel"]) > 0.02,
+      f"(sem={r_sem['massa_rel']:.3f} cru={r_cru['massa_rel']:.3f})")
+checa("a geometria volta ao corpo desenhado com a remocao",
+      M.linha_base_e_altura_x(M.mascara_de_tinta(pautada)[0]) == (30, 46),
+      f"(obtido {M.linha_base_e_altura_x(M.mascara_de_tinta(pautada)[0])})")
+
+print("\n10. na cedilha a pauta ESCONDE o acento, nao o inventa")
+# A faixa da cedilha e abaixo da linha de base. Sem remover a pauta, ela vira
+# a fileira mais cheia e puxa a linha de base para baixo, de modo que a
+# cedilha fica DENTRO do corpo estimado e deixa de ser contada. E o oposto do
+# que acontece com as marcas de cima, que inflam. Bate com o controle real:
+# a cedilha foi a unica marca que ficou MENOR com pauta (0.214) do que sem
+# pauta (0.302), enquanto agudo e til inflaram.
+ped = corpo(5)
+caixa(ped, 47, 55, 20 + 2 * 30 + 8, 20 + 2 * 30 + 16)     # cedilha de verdade
+r_sem = M.e1_por_faixa(ped, "daçao")[0]
+checa("cedilha sem pauta e detectada", r_sem["massa"] > 0,
+      f"(massa {r_sem['massa']})")
+
+pautada2 = ped.copy()
+caixa(pautada2, 46, 49, 0, W)                             # pauta sobre a base
+r_com = M.e1_por_faixa(pautada2, "daçao")[0]
+r_cru = M.e1_por_faixa(pautada2, "daçao", remover_pauta_=False)[0]
+checa("com remocao a cedilha continua detectada", r_com["massa"] > 0,
+      f"(massa {r_com['massa']})")
+# O mecanismo: sem remover a pauta, o "corpo" estimado colapsa sobre a
+# propria pauta e a linha de base desce ate ela. O quanto isso muda a massa
+# contada depende de onde a cedilha cai em relacao a base deslocada, entao a
+# assercao aqui e sobre a GEOMETRIA, que e a causa, e nao sobre a massa, que e
+# um efeito que varia caso a caso.
+geo_cru = M.linha_base_e_altura_x(M.binariza(pautada2))
+geo_ok = M.linha_base_e_altura_x(M.mascara_de_tinta(pautada2)[0])
+checa("SEM remocao a linha de base desce ate a pauta",
+      geo_cru[1] >= 46 and (geo_cru[1] - geo_cru[0]) < 8,
+      f"(corpo cru={geo_cru}, {geo_cru[1]-geo_cru[0]} px)")
+checa("COM remocao a linha de base volta ao corpo real",
+      geo_ok == (30, 46), f"(corpo corrigido={geo_ok})")
+
+# e o caso simetrico: pauta sozinha nao pode inventar cedilha
+so_pauta = corpo(5)
+caixa(so_pauta, 46, 49, 0, W)
+checa("pauta sozinha nao vira cedilha",
+      M.e1_por_faixa(so_pauta, "daçao")[0]["massa"] == 0)
+
+print("\n11. traco de letra grosso NAO e confundido com pauta")
+# 7 fileiras cheias = corpo de palavra curta, nao pauta (medido em "que"/"para")
+grosso = branco()
+caixa(grosso, 30, 46, 100, 160)          # bloco solido: cobre 100% da bbox
+checa("bloco de 16 px nao e pauta", not M.tem_pauta(M.binariza(grosso)))
+fino = branco()
+caixa(fino, 30, 46, 100, 160)
+caixa(fino, 50, 53, 90, 170)             # pauta fina, mais larga que a letra
+checa("banda de 3 px e pauta", M.tem_pauta(M.binariza(fino)))
+m2, n = M.remover_pauta(M.binariza(fino))
+checa("remocao tira so as 3 fileiras da pauta", n == 3, f"(n={n})")
+checa("o corpo da letra sobrevive", m2[30:46, 100:160].all())
+
 print("\n" + ("TODOS OS TESTES PASSARAM" if not falhas
                else f"FALHARAM: {falhas}"))
 sys.exit(1 if falhas else 0)
