@@ -73,6 +73,17 @@ def parse_cli():
                    help="cpu para tirar a GPU da equacao")
     p.add_argument("--seed", type=int, default=42,
                    help="mesma semente = amostras comparaveis entre checkpoints")
+    p.add_argument("--estilo_de", choices=("bressay", "iam"), default="bressay",
+                   help="de onde vem as 5 imagens de referencia que o extrator "
+                        "le. 'iam' usa recortes do IAM, com o pre-processamento "
+                        "do IAM (aspecto preservado, sem normalizacao por "
+                        "percentis) -- passar imagem do IAM pelo load_image do "
+                        "BRESSAY mediria a coisa errada.")
+    p.add_argument("--em_lote", action="store_true",
+                   help="gera os N estilos num lote so. NAO use na RX 6600 XT: "
+                        "lote > 1 corrompe a amostragem nessa placa (NaN e "
+                        "colapso para cinza, nao reproduzivel). O padrao gera "
+                        "um estilo por vez, que bate com a CPU em 1/255.")
     a = p.parse_args()
     if not os.path.isfile(a.style):
         p.error(
@@ -99,6 +110,55 @@ class Passa(nn.Module):
 
 def embrulha(m, na_gpu, ids):
     return DataParallel(m, device_ids=ids) if na_gpu else Passa(m)
+
+
+def _prep_iam(im):
+    """Pre-processamento do IAM, copiado de utils/iam_dataset.py.
+
+    Preserva o aspecto sempre: altura 64 primeiro, depois encolhe ate caber em
+    256 e centraliza. Nao tem normalizacao por percentis -- ela foi calibrada
+    para o papel pautado do BRESSAY e nao se aplica aqui.
+    """
+    from PIL import Image, ImageOps
+    w, h = im.size
+    im = im.resize((max(1, int(w * 64 / h)), 64))
+    w, h = im.size
+    if w < 256:
+        return ImageOps.pad(im, size=(256, 64), color="white")
+    while w > 256:
+        w -= 20
+        im = im.resize((w, max(1, int(im.size[1] * w / im.size[0]))))
+        w, h = im.size
+    fundo = Image.new("RGB", (256, 64), (255, 255, 255))
+    fundo.paste(im, ((256 - w) // 2, (64 - h) // 2))
+    return fundo
+
+
+def estilos_iam(k, transform):
+    """k listas de NUM_STYLE_IMGS recortes do IAM, cada lista de um escritor.
+
+    No IAM uma pasta de formulario (a01/a01-000u/) e um escritor, entao os
+    recortes de estilo saem todos da mesma pasta -- e o equivalente ao
+    writer_indices do BRESSAY.
+    """
+    import glob
+    from PIL import Image
+    raiz = os.path.join(REPO, "iam_data", "words")
+    formularios = [d for d in glob.glob(os.path.join(raiz, "*", "*"))
+                   if os.path.isdir(d)]
+    if not formularios:
+        raise SystemExit(f"nenhum formulario do IAM em {raiz}")
+    saida = []
+    for _ in range(k):
+        while True:
+            d = random.choice(formularios)
+            pngs = glob.glob(os.path.join(d, "*.png"))
+            if len(pngs) >= 1:
+                break
+        escolhidos = random.choices(pngs, k=NUM_STYLE_IMGS)
+        saida.append([transform(_prep_iam(Image.open(f).convert("RGB")))
+                      for f in escolhidos])
+    return saida
 
 
 def build_args(device="cuda:0", style_path=STYLE_PADRAO):
@@ -218,53 +278,64 @@ def main():
         lat_shape = vae_model.encode(dummy).latent_dist.sample().shape[1:]
     print("shape do latente:", tuple(lat_shape))
 
-    # ---------------- geracao ----------------
-    for palavra in cli.palavras:
-        n = len(escritores)
+    # ---------------- imagens de referencia de estilo ----------------
+    # Fixadas ANTES do laco de palavras: assim todas as palavras de uma
+    # execucao veem exatamente os mesmos escritores, e duas execucoes com a
+    # mesma semente sao comparaveis palavra a palavra.
+    if cli.estilo_de == "iam":
+        ref = estilos_iam(len(escritores), transform)
+        print(f"estilo: {len(ref)} escritores do IAM "
+              f"({NUM_STYLE_IMGS} recortes cada)")
+    else:
+        ref = [[transform(ds.load_image(ds.data[i][0]))
+                for i in random.choices(ds.writer_indices[w], k=NUM_STYLE_IMGS)]
+               for w in escritores]
+        print(f"estilo: {len(ref)} escritores do BRESSAY "
+              f"({NUM_STYLE_IMGS} recortes cada)")
 
-        # 5 imagens de estilo por escritor -> [n*5, 3, 64, 256]
-        st = []
-        for w in escritores:
-            for idx in random.choices(ds.writer_indices[w], k=NUM_STYLE_IMGS):
-                p, _, _ = ds.data[idx]
-                st.append(transform(ds.load_image(p)))
+    rotulos = [ds.wid2idx[w] for w in escritores]
+
+    def gera(palavra, indices):
+        """Gera `palavra` para os estilos em `indices`, num unico lote."""
+        n = len(indices)
+        st = [t for i in indices for t in ref[i]]
         style_images = torch.stack(st).to(device)
-
         with torch.no_grad():
-            style_features = feat(style_images)  # [n*5, feat]
-
+            style_features = feat(style_images)
             text_features = tokenizer(
-                [palavra] * n,
-                padding="max_length",
-                truncation=True,
-                return_tensors="pt",
-                max_length=40,
+                [palavra] * n, padding="max_length", truncation=True,
+                return_tensors="pt", max_length=40,
             ).to(device)
-
-            labels = torch.tensor(
-                [ds.wid2idx[w] for w in escritores], device=device
-            ).long()
-
+            labels = torch.tensor([rotulos[i] for i in indices],
+                                  device=device).long()
             x = torch.randn(n, *lat_shape, device=device)
-
             for t in ddim.timesteps:
                 ts = t.repeat(n).to(device).long()
-                noise_pred = ema_model(
-                    x,
-                    timesteps=ts,
-                    context=text_features,
-                    y=labels,
-                    style_extractor=style_features,
-                )
+                noise_pred = ema_model(x, timesteps=ts, context=text_features,
+                                       y=labels, style_extractor=style_features)
                 x = ddim.step(noise_pred, t, x).prev_sample
+            return vae_model.decode(x / 0.18215).sample
 
-            x = x / 0.18215
-            img = vae_model.decode(x).sample
+    # ---------------- geracao ----------------
+    n = len(escritores)
+    for palavra in cli.palavras:
+        if cli.em_lote:
+            img = gera(palavra, list(range(n)))
+        else:
+            # Um estilo por vez. A semente e refixada por estilo para que o
+            # ruido inicial de cada painel nao dependa de quantos estilos
+            # foram pedidos -- sem isso, mudar --styles mudaria as imagens.
+            partes = []
+            for i in range(n):
+                torch.manual_seed(cli.seed + i)
+                partes.append(gera(palavra, [i]))
+            img = torch.cat(partes, dim=0)
 
         img = (img.clamp(-1, 1) + 1) / 2
         out = os.path.join(cli.out, f"{palavra}.png")
         save_image(img, out, nrow=n)
-        print("salvo:", out)
+        desvios = [f"{float(p.std()):.3f}" for p in img]
+        print(f"salvo: {out}  (std por painel: {' '.join(desvios)})")
 
     print("\npronto. veja", cli.out)
 

@@ -231,3 +231,35 @@ reproduzi-los:
 4. *"O forward está corrompido, logo a geração é contaminada pelo laço do
    DDIM"* — a premissa é falsa; o forward está correto.
 5. *"Acumulação de gradiente é o caminho seguro"* — é o pior caminho.
+
+---
+
+## A amostragem tambem falha em lote 1 (medido depois)
+
+O README registrava que a geracao estava "liberada, e so forward". **Nao esta.**
+
+Gerando 6 palavras x 4 estilos com `scripts/gerar_amostras.py --device cuda:0`,
+um estilo por vez (lote 1), no checkpoint `ema_bloco_19ep.pt`:
+
+| palavra (na ordem gerada) | std por painel |
+|---|---|
+| coração | 0,230 · 0,084 · 0,076 · 0,051 |
+| português | 0,000 · 0,000 · 0,000 · 0,000 |
+| consequente | 0,000 · 0,000 · 0,000 · 0,000 |
+| aproximadamente | 0,000 · 0,000 · 0,000 · 0,000 |
+| não | 0,000 · 0,000 · 0,000 · 0,000 |
+| ação | 0,000 · 0,000 · 0,000 · 0,000 |
+
+A degradacao e **progressiva dentro da execucao**: a primeira palavra sai, os
+paineis seguintes vao esvaziando e a partir da segunda palavra tudo vem em
+branco. E o mesmo padrao do treino nesta placa (11% -> 58% -> 100% de
+descartes).
+
+O mesmo comando com `--device cpu`, mesmo checkpoint, mesma semente, da
+0,231 / 0,205 / 0,236 / 0,215 -- saudavel. Logo nao e o codigo nem o
+checkpoint.
+
+**Consequencia: nesta maquina, gerar so na CPU.** O achado anterior do
+`avaliacao_diacriticos/README.md`, de que "lote > 1 corrompe a amostragem",
+esta correto mas e mais brando que a realidade: lote 1 tambem corrompe, so
+demora um pouco mais a aparecer.
