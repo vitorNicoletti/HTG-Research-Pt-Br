@@ -16,6 +16,15 @@
 # mesma epoca em que a geracao morreu. O unico teste que vale e gerar amostra.
 set -u
 
+RAIZ="$(cd "$(dirname "$0")/.." && pwd)"
+
+# O clone DiffusionPen/ e gitignored, entao um `git pull` NAO o atualiza. Sem
+# esta checagem a maquina roda uma versao velha do train.py em silencio.
+if ! bash "$RAIZ/scripts/aplicar_mods.sh"; then
+  echo "=== nao consegui sincronizar o clone; parando ==="
+  exit 1
+fi
+
 export PYTORCH_HIP_ALLOC_CONF=expandable_segments:True
 
 # A RX 6600 XT e gfx1032 e o ROCm so tem kernels ate gfx1030; sem o override os
