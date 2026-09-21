@@ -45,25 +45,25 @@ classificação honesta tem **duas** categorias, não quatro.
 O instrumento está calibrado e caracterizado. A sequência é:
 
 ```bash
-export HSA_OVERRIDE_GFX_VERSION=10.3.0
-export PYTORCH_HIP_ALLOC_CONF=expandable_segments:True
-PY=/nix/store/98rpw6g3y3j5vc2xiyhwdqgy7xl1qyix-python3-3.14.7-env/bin/python
 cd ~/repos/htg-tcc
+# O ambiente do projeto ja exporta HSA_OVERRIDE_GFX_VERSION e
+# PYTORCH_HIP_ALLOC_CONF, e poe o `python` certo no PATH.
+nix develop
 
 # 1. invariante de amostragem do checkpoint novo (obrigatório: lote > 1
 #    corrompe nesta GPU, e imagem colapsada vira "acento omitido")
-$PY avaliacao_diacriticos/gerar_pares.py --ckpt <novo.pt> --out-dir /tmp/x \
+python avaliacao_diacriticos/gerar_pares.py --ckpt <novo.pt> --out-dir /tmp/x \
     --pares-tsv avaliacao_diacriticos/pares_gate.tsv \
     --n-styles 1 --seeds 0 --batch 1 --autoteste-lote
 
 # 2. gerar com o mesmo N do controle negativo (696 imagens, ~30 min na GPU)
-$PY avaliacao_diacriticos/gerar_pares.py --ckpt <novo.pt> \
+python avaliacao_diacriticos/gerar_pares.py --ckpt <novo.pt> \
     --out-dir avaliacao_diacriticos/amostras/ger_ft --batch 1 \
     --pares-tsv avaliacao_diacriticos/pares_sonda30.tsv \
     --n-styles 4 --seeds 0 1 2
 
 # 3. ler o eixo por DIFERENÇA (não o por faixa) contra limiares_eixo_diff.json
-$PY avaliacao_diacriticos/avaliar.py --dir avaliacao_diacriticos/amostras/ger_ft \
+python avaliacao_diacriticos/avaliar.py --dir avaliacao_diacriticos/amostras/ger_ft \
     --csv-out avaliacao_diacriticos/resultados/res_ft.csv --eixo1 diff --limiar-e1 0.0455
 ```
 

@@ -447,28 +447,29 @@ split numa lista de candidatos, e falham com mensagem útil em vez de
 `ImportError`. `--ckpt` aceita o caminho do `.pt` direto.
 
 ```bash
-export HSA_OVERRIDE_GFX_VERSION=10.3.0
-export PYTORCH_HIP_ALLOC_CONF=expandable_segments:True
-PY=/nix/store/98rpw6g3y3j5vc2xiyhwdqgy7xl1qyix-python3-3.14.7-env/bin/python
+cd ~/repos/htg-tcc
+# O ambiente do projeto ja exporta HSA_OVERRIDE_GFX_VERSION e
+# PYTORCH_HIP_ALLOC_CONF, e poe o `python` certo no PATH.
+nix develop
 IAM=DiffusionPen/diffusionpen_iam_model_path/models/ema_ckpt.pt
 
 # 0. testes do instrumento (não usam o gerador nem GPU)
-$PY avaliacao_diacriticos/testes_metrica.py
+python avaliacao_diacriticos/testes_metrica.py
 
 # 1. invariante de amostragem do checkpoint que for usar
-$PY avaliacao_diacriticos/gerar_pares.py --ckpt $IAM --out-dir /tmp/x \
+python avaliacao_diacriticos/gerar_pares.py --ckpt $IAM --out-dir /tmp/x \
     --pares-tsv avaliacao_diacriticos/pares_gate.tsv \
     --n-styles 1 --seeds 0 --batch 1 --autoteste-lote
 
 # 2. controles do Passo 4
-$PY avaliacao_diacriticos/preparar_reais.py \
+python avaliacao_diacriticos/preparar_reais.py \
     --out-dir avaliacao_diacriticos/amostras/reais_test
-$PY avaliacao_diacriticos/controle_ascii.py \
+python avaliacao_diacriticos/controle_ascii.py \
     --dir avaliacao_diacriticos/amostras/reais_test \
     --out-dir avaliacao_diacriticos/amostras/reais_ascii_negativo
 
 # 3. gerar a sonda (N declarado: 29 pares x 4 estilos x 3 sementes = 696)
-$PY avaliacao_diacriticos/gerar_pares.py --ckpt <ckpt.pt> --out-dir <saida> \
+python avaliacao_diacriticos/gerar_pares.py --ckpt <ckpt.pt> --out-dir <saida> \
     --pares-tsv avaliacao_diacriticos/pares_sonda30.tsv \
     --n-styles 4 --seeds 0 1 2 --batch 1
 
@@ -476,18 +477,18 @@ $PY avaliacao_diacriticos/gerar_pares.py --ckpt <ckpt.pt> --out-dir <saida> \
 #    O limiar de E2, se omitido, sai do quantil 0.75 do grupo ASCII do próprio
 #    conjunto, que é o que o planejamento pede. --reusar-e2 evita re-rodar o
 #    TrOCR (~20 min em CPU para 240 imagens) quando só o E1 mudou.
-$PY avaliacao_diacriticos/avaliar.py --dir <saida> --csv-out <saida>.csv \
+python avaliacao_diacriticos/avaliar.py --dir <saida> --csv-out <saida>.csv \
     --com-e2 --device cpu --eixo1 auto --limiar-e1 <da calibração>
 
 # 5. calibrar contra os DOIS negativos e comparar
-$PY avaliacao_diacriticos/calibrar.py \
+python avaliacao_diacriticos/calibrar.py \
     --negativo avaliacao_diacriticos/resultados/res_ascii_negativo.csv \
     --positivo avaliacao_diacriticos/resultados/res_reais_e1.csv
 
 # 6. planilha de anotação humana e kappa
-$PY avaliacao_diacriticos/anotacao.py preparar --csv <saida>.csv \
+python avaliacao_diacriticos/anotacao.py preparar --csv <saida>.csv \
     --dir <saida> --out anotacao.csv --contato anotacao.png
-$PY avaliacao_diacriticos/anotacao.py kappa --csv anotacao_preenchida.csv
+python avaliacao_diacriticos/anotacao.py kappa --csv anotacao_preenchida.csv
 ```
 
 ## O que ainda falta para medir o fine-tune
