@@ -1,22 +1,15 @@
 # Pré-processamento
-
-Como uma imagem do BRESSAY vira o alvo que o DiffusionPen tenta reproduzir.
-Código em `diffusionpen_mods/utils/bressay_dataset.py`, função `load_image`.
-
 ![etapas do pipeline](figuras/pipeline_etapas.png)
 
-## As quatro etapas
+## As três etapas
 
 | # | o que faz | onde |
 |---|---|---|
 | 1 | Lê o PNG recortado do dataset | `Image.open(...).convert("RGB")` |
 | 2 | Estica o contraste por percentis | percentil 3 vira preto, percentil 40 vira branco |
 | 3 | Enquadra em 256×64 | `ImageOps.pad`, preservando o aspecto |
-| 4 | Converte em tensor | `ToTensor` + `Normalize(0.5, 0.5)`, faixa [−1, 1] |
 
-Depois disso o VAE do Stable Diffusion comprime a imagem 8× e o modelo trabalha
-num latente de 4×8×32. As 5 imagens de estilo de cada amostra passam pelo mesmo
-caminho.
+As 5 imagens de estilo de cada amostra passam pelo mesmo caminho.
 
 ### Etapa 2
 
