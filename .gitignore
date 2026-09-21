@@ -47,5 +47,9 @@ run_*.log
 index2letter.json
 letter2index.json
 
+# verificacao pontual de sanidade CPU-vs-GPU; os numeros que importam ficam
+# registrados em diagnostico/README.md, as imagens sao descartaveis
+cpu_check/
+
 # editor
 .vscode/
