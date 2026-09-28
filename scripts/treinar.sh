@@ -45,6 +45,8 @@ SPLIT=${SPLIT:-./bressay_split}
 # SD pode apontar para uma copia local (pasta com vae/ e scheduler/).
 SD=${SD:-stable-diffusion-v1-5/stable-diffusion-v1-5}
 export SD
+# Cada worker carrega o torch inteiro; com pouca RAM (ex.: 15 GB) use menos.
+NUM_WORKERS=${NUM_WORKERS:-12}
 BLOCO=${BLOCO:-5}
 ALVO=${ALVO:-40}
 STYLE=${STYLE:-./DiffusionPen/style_models/iam_style_diffusionpen.pth}
@@ -64,7 +66,7 @@ comum=(
                              # gerar_amostras.py, em processo separado.
   --lr 2e-5                  # valor do unico run que produziu diacriticos
   --batch_size 32
-  --num_workers 12
+  --num_workers "$NUM_WORKERS"
   --save_every_steps 500
   --stable_dif_path "$SD"
 )
