@@ -687,3 +687,41 @@ caches `.pt` não lidos foram **movidos** (não apagados) para
 Validar a RTX 3060 da equipe com `diagnostico/` e repetir o treino nela. A RX
 9060 XT é RDNA4 — mesma classe de risco, precisa passar pelo mesmo teste antes
 de qualquer treino.
+
+---
+
+## 2026-09-28 — RX 9060 XT validada; fine-tune no split de 25%
+
+### Diagnóstico de GPU (`diagnostico/`) — **passou**
+
+Máquina `DESKTOP-KKFR30E` (WSL2, Ubuntu 26.04), AMD RX 9060 XT (gfx1200,
+17 GB), torch `2.11.0+rocm7.13.0` do índice `gfx120X-all`. Uptime de 49 min
+no momento dos testes.
+
+| teste | resultado | referência |
+|---|---|---|
+| `teste_conv_isolada.py` | CPU vs GPU: forward 1,08e-06, gradiente 1,16e-06; GPU repetida 0,0 | ~1e-6 = ok |
+| `teste_gradiente_sintetico.py` (lote 32, 60 passos) | 0/60 não-finitos, \|grad\| mediana 7,1, máx 9,2 | 0 = ok; RX 6600 XT: 1/60, mediana 57 |
+| `teste_direcao_gradiente.py` (lote 8) | cosseno 1,002, normas 9,505 / 9,505, 0,2% ortogonal | ~1,0 = ok; RX 6600 XT: 0,357 |
+
+Rodado uma vez cada (o README pede 2 ou 3 em processos separados; pendente).
+Ao contrário da RX 6600 XT, o gradiente desta placa bate com a CPU.
+
+### Split reduzido
+
+`scripts/reduzir_split.py --fracao 0.25` → `bressay_split_25/`: 18.724 palavras
+de treino (de 74.882), os 647 escritores, 10,2% com diacrítico, piso de 5
+palavras por escritor, seed 42. Validação e teste copiados sem mudança.
+
+### Run `model_bressay_25`
+
+```
+SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKERS=8 bash scripts/treinar.sh
+```
+
+- IAM carregado por `--pretrained_path`: 457/457 chaves em `ckpt.pt` e `ema_ckpt.pt`.
+- 586 passos/época, **2,08 passos/s** depois da compilação JIT do MIOpen
+  (~4,7 min/época). Pico de RAM ~4,6 GB com 8 workers.
+- MSE 0,15 → 0,07 na primeira época, sem nenhum batch descartado.
+- Imagens do BRESSAY extraídas do `bressay.zip` (só `data/words` e `sets`):
+  416.826 PNGs, 0 ausentes nos três splits.
