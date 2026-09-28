@@ -42,7 +42,9 @@ from utils.bressay_dataset import BRESSAY_Dataset
 # Caminhos e saida vem da linha de comando (--ckpt / --out). Aqui ficam so as
 # constantes que precisam casar com o treino.
 STYLE_PADRAO = os.path.join(RAIZ, "style_models", "mixed_bressay_mobilenetv2_100.pth")
-STABLE_DIF = "runwayml/stable-diffusion-v1-5"
+# O repo runwayml/stable-diffusion-v1-5 foi removido do Hub; o espelho oficial
+# e este. Sobrescreva com a variavel SD para usar uma copia local.
+STABLE_DIF = os.environ.get("SD", "stable-diffusion-v1-5/stable-diffusion-v1-5")
 DATASET_FOLDER = os.path.join(RAIZ, "bressay_split")
 
 # Palavras de teste: as cinco primeiras exercitam os diacriticos (til, cedilha,

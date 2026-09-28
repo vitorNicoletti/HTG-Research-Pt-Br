@@ -39,6 +39,12 @@ if [ -z "${HSA_OVERRIDE_GFX_VERSION:-}" ] && command -v rocminfo >/dev/null 2>&1
 fi
 
 SAVE_PATH=${SAVE_PATH:-./model_bressay_longo}
+# Pasta do split. Uma reparticao menor sai de scripts/reduzir_split.py.
+SPLIT=${SPLIT:-./bressay_split}
+# runwayml/stable-diffusion-v1-5 foi removido do Hub; este e o espelho oficial.
+# SD pode apontar para uma copia local (pasta com vae/ e scheduler/).
+SD=${SD:-stable-diffusion-v1-5/stable-diffusion-v1-5}
+export SD
 BLOCO=${BLOCO:-5}
 ALVO=${ALVO:-40}
 STYLE=${STYLE:-./DiffusionPen/style_models/iam_style_diffusionpen.pth}
@@ -47,6 +53,7 @@ LOG=${LOG:-run_bressay_longo.log}
 
 comum=(
   --dataset bressay
+  --dataset_folder "$SPLIT"
   --model_name diffusionpen
   --save_path "$SAVE_PATH"
   --style_path "$STYLE"
@@ -59,7 +66,7 @@ comum=(
   --batch_size 32
   --num_workers 12
   --save_every_steps 500
-  --stable_dif_path runwayml/stable-diffusion-v1-5
+  --stable_dif_path "$SD"
 )
 
 epocas_feitas() {

@@ -664,6 +664,7 @@ def main():
     parser.add_argument('--sampling_mode', type=str, default='single_sampling', help='single_sampling (generate single image), paragraph (generate paragraph)')
     parser.add_argument('--pretrained_path', type=str, default=None, help='pasta models/ com pesos para fine-tune')
     parser.add_argument('--lr', type=float, default=0.0001)
+    parser.add_argument('--dataset_folder', type=str, default='./bressay_split', help='pasta do split do BRESSAY (ex.: uma reparticao menor gerada por scripts/reduzir_split.py)')
     parser.add_argument('--max_samples', type=int, default=0, help='limite de amostras por split (0 = split inteiro), para comparar runs com menos dados')
     parser.add_argument('--start_epoch', type=int, default=0, help='epoca inicial ao retomar; o --load_check sobrescreve com o valor salvo em estado.pt quando ele existe')
     parser.add_argument('--sample_every', type=int, default=10, help='gera a grade de amostras a cada N epocas; 0 desliga. ATENCAO: essa grade usa max_length=200 enquanto o treino usa 40, entao ela NAO e confiavel -- gere com scripts/gerar_amostras.py')
@@ -723,7 +724,7 @@ def main():
     elif args.dataset == 'bressay':
         print('loading BRESSAY')
         myDataset = BRESSAY_Dataset
-        dataset_folder = './bressay_split'
+        dataset_folder = args.dataset_folder
         style_classes = 339
         train_data = myDataset(dataset_folder, 'train', transforms=transform, args=args)
         test_data = myDataset(dataset_folder, 'val', transforms=transform, args=args)
