@@ -50,10 +50,9 @@ SAVE_PATH=./model_bressay BLOCO=5 ALVO=40 bash scripts/treinar.sh
 - **Hyperparameters.** lr 2e-5, batch size 32, 12 workers, `--max_samples 0` (full split), `--sample_every 0`, checkpoint every 500 steps.
 - **What trains.** Only the UNet. The style encoder (`--style_path`, which defaults to the IAM one), CANINE and the VAE are frozen. With style features present the writer ID is ignored, and `style_classes` stays at 339 only so the IAM checkpoint loads.
 - **Resuming.** `models/estado.pt` stores the epoch and `ema.step`. Without it, resuming would overwrite the EMA.
-- **When to stop.** Judge by drift and by generated samples, not by epoch count or MSE:
-  - ~0.1% drift: illegible.
-  - **2.1–2.7%: legible BRESSAY handwriting with diacritics (the target).**
-  - ~13%: degraded again.
+- **When to stop.** Judge by drift and by generated samples, not by epoch count or MSE. Drift is `‖W − W_IAM‖ / ‖W_IAM‖` over the trainable weights (CANINE excluded), printed by `medir_deriva.py`.
+  - The ranges disagree between files. `medir_deriva.py` (which prints the verdict) says: <1% too early, 1–2.5% "chegando", **2.5–4.0% target** (best old run 2.5–3.2%), ~9.5% degraded. The comment in `treinar.sh` says 2.1–2.7%. Trust `medir_deriva.py`.
+  - All ranges come from runs on the defective RX 6600 XT, so they are a rough guide only; generated samples are the real criterion.
 
   MSE improved in the same epoch that generation broke, so it is not a signal.
 - **Built-in sample grid.** Keep `--sample_every 0`. The in-training grid tokenizes with `max_length=200` while training uses 40, so its samples are not valid. Use `scripts/gerar_amostras.py` instead.

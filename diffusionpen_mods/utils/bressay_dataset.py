@@ -7,6 +7,9 @@ from utils.auxilary_functions import image_resize_PIL, centered_PIL
 import numpy as np
 
 NUM_STYLE_IMGS = 5
+# Normalizacao de contraste: o percentil P_TINTA vira preto, P_FUNDO vira
+# branco. Em nivel de modulo para o train.py registrar no config.jsonl.
+P_TINTA, P_FUNDO = 3, 40
 
 
 class BRESSAY_Dataset(Dataset):
@@ -93,8 +96,6 @@ class BRESSAY_Dataset(Dataset):
     
     def load_image(self, img_path):
         try:
-            P_TINTA, P_FUNDO = 3, 40
-
             im = Image.open(img_path).convert("RGB")
 
             # normalizacao de contraste por percentis

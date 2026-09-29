@@ -30,6 +30,16 @@ OUTPUT_MAX_LEN = 95 #+ 2  # <GO>+groundtruth+<END>
 IMG_WIDTH = 256
 IMG_HEIGHT = 64
 
+# Hiperparametros que nao sao argumentos de linha de comando. Ficam aqui, com
+# nome, para gravar_config() registrar exatamente os valores em uso -- antes
+# eram literais espalhados pelo codigo e nao ficavam registrados em lugar
+# nenhum junto do modelo. Os valores sao os originais.
+ADAMW_EPS = 1e-6
+CLIP_GRAD_NORM = 1.0
+EMA_BETA = 0.995
+EMA_INICIO = 2000        # antes disso o step_ema COPIA o modelo no EMA
+TEXTO_MAX_LEN = 40       # tokens do CANINE no treino e no sampling()
+
 c_classes = '_!"#&\'()*+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz '
 cdict = {c:i for i,c in enumerate(c_classes)}
 icdict = {i:c for i,c in enumerate(c_classes)}
@@ -84,6 +94,75 @@ def setup_logging(args):
     os.makedirs(args.save_path, exist_ok=True)
     os.makedirs(os.path.join(args.save_path, 'models'), exist_ok=True)
     os.makedirs(os.path.join(args.save_path, 'images'), exist_ok=True)
+
+def gravar_config(args, n_treino, diffusion):
+    '''Acrescenta a configuracao deste lancamento em SAVE_PATH/config.jsonl.
+
+    Uma linha por lancamento, para que retomadas com parametros diferentes
+    fiquem no historico em vez de sobrescrever o registro anterior. Junta os
+    argumentos, os hiperparametros fixos no codigo, os dados e o ambiente --
+    antes isso so podia ser reconstruido cruzando treinar.sh, este arquivo e o
+    LOG.md.
+    '''
+    import datetime
+    import platform
+    import subprocess
+    from utils import bressay_dataset as bd
+
+    def git(pasta, *cmd):
+        try:
+            r = subprocess.run(['git', '-C', pasta, *cmd],
+                               capture_output=True, text=True, timeout=10)
+            return r.stdout.strip() if r.returncode == 0 else None
+        except (OSError, subprocess.SubprocessError):
+            return None
+
+    clone = os.path.dirname(os.path.abspath(__file__))
+    raiz = os.path.dirname(clone)
+    sujo = git(raiz, 'status', '--porcelain')
+
+    reducao = None
+    caminho_reducao = os.path.join(args.dataset_folder, 'reducao.json')
+    if args.dataset == 'bressay' and os.path.isfile(caminho_reducao):
+        with open(caminho_reducao, encoding='utf-8') as f:
+            reducao = json.load(f)
+
+    registro = {
+        'data': datetime.datetime.now().isoformat(timespec='seconds'),
+        'epoca_inicial': args.start_epoch,
+        'args': vars(args),
+        'fixos': {
+            'otimizador': 'AdamW',
+            'adamw_eps': ADAMW_EPS,
+            'lr_scheduler': None,
+            'clip_grad_norm': CLIP_GRAD_NORM,
+            'ema_beta': EMA_BETA,
+            'ema_inicio': EMA_INICIO,
+            'texto_max_len': TEXTO_MAX_LEN,
+            'passos_difusao': diffusion.noise_steps,
+        },
+        'dados': {
+            'dataset': args.dataset,
+            'amostras_treino': n_treino,
+            'tamanho_imagem': [IMG_WIDTH, IMG_HEIGHT],
+            'imagens_estilo': bd.NUM_STYLE_IMGS if args.dataset == 'bressay' else None,
+            'contraste_percentis': [bd.P_TINTA, bd.P_FUNDO] if args.dataset == 'bressay' else None,
+            'reducao': reducao,
+        },
+        'ambiente': {
+            'host': platform.node(),
+            'torch': torch.__version__,
+            'gpu': torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+            'git_commit': git(raiz, 'rev-parse', 'HEAD'),
+            'git_sujo': bool(sujo) if sujo is not None else None,
+            'diffusionpen_commit': git(clone, 'rev-parse', 'HEAD'),
+        },
+    }
+    destino = os.path.join(args.save_path, 'config.jsonl')
+    with open(destino, 'a', encoding='utf-8') as f:
+        f.write(json.dumps(registro, ensure_ascii=False, default=str) + '\n')
+    print(f'configuracao registrada em {destino}')
+
 
 def save_images(images, path, args, **kwargs):
     #print('image', images.shape)
@@ -150,7 +229,7 @@ class EMA:
             return new
         return old * self.beta + (1 - self.beta) * new
 
-    def step_ema(self, ema_model, model, step_start_ema=2000):
+    def step_ema(self, ema_model, model, step_start_ema=EMA_INICIO):
         if self.step < step_start_ema:
             self.reset_parameters(ema_model, model)
             self.step += 1
@@ -261,7 +340,7 @@ class Diffusion:
             style_images = None
             text_features = x_text #[x_text]*n
             #print('text features', text_features.shape)
-            text_features = tokenizer(text_features, padding="max_length", truncation=True, return_tensors="pt", max_length=40).to(args.device)
+            text_features = tokenizer(text_features, padding="max_length", truncation=True, return_tensors="pt", max_length=TEXTO_MAX_LEN).to(args.device)
             if args.img_feat == True:
                 #pick random image according to specific style
                 with open('./writers_dict_train.json', 'r') as f:
@@ -486,7 +565,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                     batch_word_embeddings.append(word_embedding)
                 text_features = torch.stack(batch_word_embeddings)
             else:
-                text_features = tokenizer(transcr, padding="max_length", truncation=True, return_tensors="pt", max_length=40).to(args.device)
+                text_features = tokenizer(transcr, padding="max_length", truncation=True, return_tensors="pt", max_length=TEXTO_MAX_LEN).to(args.device)
             
             if style_extractor is not None:
                 reshaped_images = style_images.reshape(-1, 3, 64, 256)
@@ -540,7 +619,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                 continue
 
             loss.backward()
-            grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), CLIP_GRAD_NORM)
 
             # Um unico step com gradiente nao-finito envenena o exp_avg_sq do
             # Adam de forma permanente (NaN*beta + (1-beta)*x = NaN), e a
@@ -779,14 +858,14 @@ def main():
 
     # optimizer = optim.AdamW(unet.parameters(), lr=0.0001)
     # Usa lr do arg
-    optimizer = optim.AdamW(unet.parameters(), lr=args.lr,eps=1e-6)
+    optimizer = optim.AdamW(unet.parameters(), lr=args.lr, eps=ADAMW_EPS)
 
-    lr_scheduler = None 
+    lr_scheduler = None
 
     mse_loss = nn.MSELoss()
     diffusion = Diffusion(img_size=args.img_size, args=args)
-    
-    ema = EMA(0.995)
+
+    ema = EMA(EMA_BETA)
     ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
 
     #load from last checkpoint
@@ -853,6 +932,8 @@ def main():
     feature_extractor.eval()
     
     if args.train_mode == 'train':
+        # Depois do --load_check, para registrar a epoca de onde retoma.
+        gravar_config(args, len(train_data), diffusion)
         train(diffusion, unet, ema, ema_model, vae, optimizer, mse_loss, train_loader, test_loader, style_classes, feature_extractor, vocab_size, ddim, transform, args, tokenizer=tokenizer, text_encoder=text_encoder, lr_scheduler=lr_scheduler)
     
     elif args.train_mode == 'sampling':
@@ -863,7 +944,7 @@ def main():
         print('unet loaded')
         unet.eval()
         
-        ema = EMA(0.995)
+        ema = EMA(EMA_BETA)
         ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
         ema_model.load_state_dict(torch.load(f'{args.save_path}/models/ema_ckpt.pt'))
         ema_model.eval()
