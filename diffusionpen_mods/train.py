@@ -30,10 +30,9 @@ OUTPUT_MAX_LEN = 95 #+ 2  # <GO>+groundtruth+<END>
 IMG_WIDTH = 256
 IMG_HEIGHT = 64
 
-# Hiperparametros que nao sao argumentos de linha de comando. Ficam aqui, com
-# nome, para gravar_config() registrar exatamente os valores em uso -- antes
-# eram literais espalhados pelo codigo e nao ficavam registrados em lugar
-# nenhum junto do modelo. Os valores sao os originais.
+# Padroes dos hiperparametros que antes eram literais espalhados pelo codigo.
+# Hoje sao argumentos (--adamw_eps, --clip_grad_norm, --ema_beta, --ema_inicio,
+# --texto_max_len) com estes valores, que sao os originais.
 ADAMW_EPS = 1e-6
 CLIP_GRAD_NORM = 1.0
 EMA_BETA = 0.995
@@ -135,12 +134,7 @@ def gravar_config(args, n_treino, diffusion):
         'args': vars(args),
         'fixos': {
             'otimizador': 'AdamW',
-            'adamw_eps': ADAMW_EPS,
             'lr_scheduler': None,
-            'clip_grad_norm': CLIP_GRAD_NORM,
-            'ema_beta': EMA_BETA,
-            'ema_inicio': EMA_INICIO,
-            'texto_max_len': TEXTO_MAX_LEN,
             'passos_difusao': diffusion.noise_steps,
         },
         'dados': {
@@ -342,7 +336,9 @@ class Diffusion:
             style_images = None
             text_features = x_text #[x_text]*n
             #print('text features', text_features.shape)
-            text_features = tokenizer(text_features, padding="max_length", truncation=True, return_tensors="pt", max_length=TEXTO_MAX_LEN).to(args.device)
+            # getattr: sampling() tambem e chamado com Namespaces montados fora
+            # do parser deste arquivo, que podem nao ter o campo
+            text_features = tokenizer(text_features, padding="max_length", truncation=True, return_tensors="pt", max_length=getattr(args, 'texto_max_len', TEXTO_MAX_LEN)).to(args.device)
             if args.img_feat == True:
                 #pick random image according to specific style
                 with open('./writers_dict_train.json', 'r') as f:
@@ -567,7 +563,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                     batch_word_embeddings.append(word_embedding)
                 text_features = torch.stack(batch_word_embeddings)
             else:
-                text_features = tokenizer(transcr, padding="max_length", truncation=True, return_tensors="pt", max_length=TEXTO_MAX_LEN).to(args.device)
+                text_features = tokenizer(transcr, padding="max_length", truncation=True, return_tensors="pt", max_length=args.texto_max_len).to(args.device)
             
             if style_extractor is not None:
                 reshaped_images = style_images.reshape(-1, 3, 64, 256)
@@ -621,7 +617,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                 continue
 
             loss.backward()
-            grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), CLIP_GRAD_NORM)
+            grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip_grad_norm)
 
             # Um unico step com gradiente nao-finito envenena o exp_avg_sq do
             # Adam de forma permanente (NaN*beta + (1-beta)*x = NaN), e a
@@ -648,7 +644,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
             falhas_seguidas = 0
             optimizer.step()
 
-            ema.step_ema(ema_model, model)
+            ema.step_ema(ema_model, model, step_start_ema=args.ema_inicio)
 
             count = images.size(0)
             loss_meter.update(loss.item(), count)
@@ -751,6 +747,11 @@ def main():
     parser.add_argument('--sample_every', type=int, default=10, help='gera a grade de amostras a cada N epocas; 0 desliga. ATENCAO: essa grade usa max_length=200 enquanto o treino usa 40, entao ela NAO e confiavel -- gere com scripts/gerar_amostras.py')
     parser.add_argument('--abort_after', type=int, default=300, help='sai com codigo 3 apos N batches seguidos sem um passo valido, para o processo poder ser relancado do checkpoint')
     parser.add_argument('--save_every_steps', type=int, default=0, help='grava checkpoint a cada N passos dentro da epoca (0 = so no fim da epoca)')
+    parser.add_argument('--adamw_eps', type=float, default=ADAMW_EPS)
+    parser.add_argument('--clip_grad_norm', type=float, default=CLIP_GRAD_NORM, help='norma maxima do gradiente antes do optimizer.step()')
+    parser.add_argument('--ema_beta', type=float, default=EMA_BETA)
+    parser.add_argument('--ema_inicio', type=int, default=EMA_INICIO, help='passos em que o EMA so copia o modelo antes de comecar a media')
+    parser.add_argument('--texto_max_len', type=int, default=TEXTO_MAX_LEN, help='tokens do CANINE; a geracao (gerar_amostras.py) tem de usar o mesmo valor')
     
     args = parser.parse_args()
     
@@ -860,14 +861,14 @@ def main():
 
     # optimizer = optim.AdamW(unet.parameters(), lr=0.0001)
     # Usa lr do arg
-    optimizer = optim.AdamW(unet.parameters(), lr=args.lr, eps=ADAMW_EPS)
+    optimizer = optim.AdamW(unet.parameters(), lr=args.lr, eps=args.adamw_eps)
 
     lr_scheduler = None
 
     mse_loss = nn.MSELoss()
     diffusion = Diffusion(img_size=args.img_size, args=args)
 
-    ema = EMA(EMA_BETA)
+    ema = EMA(args.ema_beta)
     ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
 
     #load from last checkpoint
@@ -891,7 +892,7 @@ def main():
             # Checkpoint gravado antes de estado.pt existir: a epoca vem do
             # --start_epoch informado na linha de comando, e o contador do EMA
             # so precisa estar acima do limiar para nao zerar o EMA.
-            ema.step = 2000
+            ema.step = args.ema_inicio
             print(f'estado.pt ausente; usando --start_epoch {args.start_epoch}')
         print(f'Retomando na epoca {args.start_epoch} (ema.step={ema.step})')
 
@@ -946,7 +947,7 @@ def main():
         print('unet loaded')
         unet.eval()
         
-        ema = EMA(EMA_BETA)
+        ema = EMA(args.ema_beta)
         ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
         ema_model.load_state_dict(torch.load(f'{args.save_path}/models/ema_ckpt.pt'))
         ema_model.eval()

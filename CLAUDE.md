@@ -36,12 +36,21 @@ All docs, code identifiers, comments and commit messages are in **Portuguese**. 
 
 ## BRESSAY fine-tune
 
-Run from the repo root. All paths are relative (`./DiffusionPen`, `./bressay_split`, `./bressay/data/words`, which can be overridden with `BRESSAY_IMAGES`).
+Preferred entry point: an experiment file plus `scripts/treinar.py`.
 
 ```bash
-bash scripts/aplicar_mods.sh
-SAVE_PATH=./model_bressay BLOCO=5 ALVO=40 bash scripts/treinar.sh
+python scripts/treinar.py experimentos/bressay_25.json [--dry-run]
 ```
+
+- **Experiment file.** `experimentos/*.json` holds every run parameter: paths, split, lr, batch size, AdamW eps, clip, EMA, text length, workers, sample settings. Every key is required and unknown keys are an error, so the file is the complete record.
+- **Copies.** The launcher copies the file to `SAVE_PATH/experimento.json`.
+- **Resuming.** On resume it only allows changes to `descricao`, `treino.epocas_total`, `execucao.*` and `amostras.*`; anything else requires a new `save_path`.
+- **Outputs.** The log goes to `SAVE_PATH/treino.log` and samples to `SAVE_PATH/amostras/<N>ep/`.
+- **Other settings.** The contrast percentiles and the UNet architecture are deliberately not experiment parameters. `load_image` is shared with generation and the metric, and the architecture must match the IAM checkpoint. Both are still recorded in `config.jsonl`.
+
+`train.py` appends one line per launch to `SAVE_PATH/config.jsonl` (args, fixed values, data, environment, git commits).
+
+The older shell driver still works (`SAVE_PATH=... SPLIT=... BLOCO=5 ALVO=40 bash scripts/treinar.sh`). It keeps samples at the repo root instead of inside `SAVE_PATH`. Run from the repo root; all paths are relative (`./DiffusionPen`, `./bressay_split`, `./bressay/data/words`, overridable with `BRESSAY_IMAGES`).
 
 - **Blocks.** `treinar.sh` trains `BLOCO` epochs at a time, up to `ALVO` epochs. It stops early only if the Python run exits with a code other than 0 or 3.
   - The first block loads the IAM weights with `--pretrained_path`; later blocks resume with `--load_check True`. The two flags are mutually exclusive.

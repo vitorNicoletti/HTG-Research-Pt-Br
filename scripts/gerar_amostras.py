@@ -81,6 +81,9 @@ def parse_cli():
                         "do IAM (aspecto preservado, sem normalizacao por "
                         "percentis) -- passar imagem do IAM pelo load_image do "
                         "BRESSAY mediria a coisa errada.")
+    p.add_argument("--texto_max_len", type=int, default=40,
+                   help="tokens do CANINE; TEM que ser o mesmo do treino "
+                        "(--texto_max_len do train.py)")
     p.add_argument("--em_lote", action="store_true",
                    help="gera os N estilos num lote so. NAO use na RX 6600 XT: "
                         "lote > 1 corrompe a amostragem nessa placa (NaN e "
@@ -306,7 +309,7 @@ def main():
             style_features = feat(style_images)
             text_features = tokenizer(
                 [palavra] * n, padding="max_length", truncation=True,
-                return_tensors="pt", max_length=40,
+                return_tensors="pt", max_length=cli.texto_max_len,
             ).to(device)
             labels = torch.tensor([rotulos[i] for i in indices],
                                   device=device).long()
