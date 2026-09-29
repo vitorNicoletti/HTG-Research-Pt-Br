@@ -725,3 +725,21 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
 - MSE 0,15 → 0,07 na primeira época, sem nenhum batch descartado.
 - Imagens do BRESSAY extraídas do `bressay.zip` (só `data/words` e `sets`):
   416.826 PNGs, 0 ausentes nos três splits.
+
+---
+
+## 2026-09-29 — Comparação IAM vs. fine-tune e resolução do BRESSAY
+
+- O treino `model_bressay_25` parou às 22:17 de 2026-09-28, no passo 342/586
+  da época 26: o WSL foi desligado quando o processo que o mantinha vivo saiu
+  com a sessão. Última época completa: 25 (26 épocas), `estado.pt` íntegro.
+- Deriva por bloco: 0,886% (5) · 1,314% (10) · 1,641% (15) · 1,913% (20) ·
+  2,153% (25) · 2,198% (26 épocas). MSE 0,0667 → 0,0502. 0 batches descartados.
+- Amostras do modelo original do IAM e do checkpoint de 26 épocas, com
+  referência de estilo do BRESSAY e do IAM (`--seed 42 --styles 4`):
+  `saidas/diffusionpen/fine_tune_25/comparacao_iam_vs_26ep.png`. O fine-tune
+  ficou pior que o modelo de partida em todas as palavras, inclusive no
+  controle ASCII.
+- `diagnostico/resolucao_bressay.py` sobre o `bressay.zip`: palavras com altura
+  mediana de 26 px no dataset e 31 px por página no split filtrado. Corte de
+  35 px deixa 12 páginas de treino. Análise em `ACHADOS.md`, seção 7.
