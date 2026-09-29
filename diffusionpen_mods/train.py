@@ -119,7 +119,9 @@ def gravar_config(args, n_treino, diffusion):
 
     clone = os.path.dirname(os.path.abspath(__file__))
     raiz = os.path.dirname(clone)
-    sujo = git(raiz, 'status', '--porcelain')
+    # So arquivos versionados modificados; saidas soltas (logs, amostras) nao
+    # mudam o que foi treinado.
+    sujo = git(raiz, 'status', '--porcelain', '--untracked-files=no')
 
     reducao = None
     caminho_reducao = os.path.join(args.dataset_folder, 'reducao.json')
