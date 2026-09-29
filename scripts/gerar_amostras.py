@@ -81,6 +81,9 @@ def parse_cli():
                         "do IAM (aspecto preservado, sem normalizacao por "
                         "percentis) -- passar imagem do IAM pelo load_image do "
                         "BRESSAY mediria a coisa errada.")
+    p.add_argument("--preproc", choices=("v1", "v2"), default="v1",
+                   help="pre-processamento das imagens de referencia do "
+                        "BRESSAY; TEM que ser o mesmo do treino")
     p.add_argument("--texto_max_len", type=int, default=40,
                    help="tokens do CANINE; TEM que ser o mesmo do treino "
                         "(--texto_max_len do train.py)")
@@ -197,6 +200,7 @@ def main():
     torch.manual_seed(cli.seed)
 
     args = build_args(cli.device, cli.style)
+    args.preproc = cli.preproc   # lido pelo BRESSAY_Dataset.load_image()
     device = args.device
     na_gpu = device != "cpu"
     device_ids = [int("".join(filter(str.isdigit, device)))] if na_gpu else []

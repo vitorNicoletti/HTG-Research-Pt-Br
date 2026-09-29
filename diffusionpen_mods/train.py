@@ -747,6 +747,7 @@ def main():
     parser.add_argument('--sample_every', type=int, default=10, help='gera a grade de amostras a cada N epocas; 0 desliga. ATENCAO: essa grade usa max_length=200 enquanto o treino usa 40, entao ela NAO e confiavel -- gere com scripts/gerar_amostras.py')
     parser.add_argument('--abort_after', type=int, default=300, help='sai com codigo 3 apos N batches seguidos sem um passo valido, para o processo poder ser relancado do checkpoint')
     parser.add_argument('--save_every_steps', type=int, default=0, help='grava checkpoint a cada N passos dentro da epoca (0 = so no fim da epoca)')
+    parser.add_argument('--preproc', type=str, default='v1', choices=('v1', 'v2'), help='pre-processamento do BRESSAY (utils/bressay_dataset.py): v1 = original, v2 = sem pauta, recorte justo, escala do IAM')
     parser.add_argument('--adamw_eps', type=float, default=ADAMW_EPS)
     parser.add_argument('--clip_grad_norm', type=float, default=CLIP_GRAD_NORM, help='norma maxima do gradiente antes do optimizer.step()')
     parser.add_argument('--ema_beta', type=float, default=EMA_BETA)

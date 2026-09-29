@@ -4,7 +4,8 @@
   "dados": {
     "split": "./bressay_split_25",
     "imagens": "./bressay/data/words",
-    "max_samples": 0
+    "max_samples": 0,
+    "preproc": "v1"
   },
   "modelo": {
     "pesos_iniciais": "./DiffusionPen/diffusionpen_iam_model_path/models",
