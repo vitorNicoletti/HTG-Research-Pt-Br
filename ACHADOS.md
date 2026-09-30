@@ -291,3 +291,24 @@ palavras com menos de 28 px; a mediana do dataset inteiro é 26 px).
 Conclusão: com os pixels do BRESSAY (~30 px por palavra), limpar o formato não
 basta. O próximo passo coerente é ensinar os acentos sem depender desses
 pixels (seção 7, caminho 2).
+
+### Adendo: sonda da Fase 2 com escritor fixo do IAM
+
+Sonda canônica (`comum/palavras.py`, 20 palavras × seeds 0/1/2) com o escritor
+12 do IAM e as mesmas 5 referências do modo `sonda` da Fase 2
+(`gerar_amostras.py --classes_iam 12`). Figura:
+`saidas/diffusionpen/fine_tune_25_v2/sonda_estilo12_iam.png`.
+
+- **IAM original:** controle ASCII perfeito nas 3 seeds; nas acentuadas, os
+  mesmos dois modos de falha do README — omissão (`pão`→"pao", `café`→"cafe",
+  `força`→"forca", `português`→"portugues") e degradação (`nação`, `coração`,
+  `ação`, `três`, `irmã`, `põe`).
+- **Depois do fine-tune o modelo deixa de seguir o estilo do escritor.** Com
+  as mesmas referências, o v1 gera palavras minúsculas com pauta e o v2 gera
+  traço grosso e borrado; nenhum dos dois reproduz a escrita do escritor 12.
+  O controle ASCII, perfeito antes, fica ilegível ou quase.
+- Nenhum acento aparece em nenhuma palavra, nas 3 seeds, nos dois modelos.
+
+O fine-tune no BRESSAY não só deixou de ensinar os acentos: apagou parte do
+que o modelo sabia (esquecimento catastrófico), inclusive o condicionamento
+por estilo.
