@@ -178,6 +178,7 @@ def cmd_amostras(exp, ckpt, destino):
         "--style", exp["modelo"]["extrator_estilo"],
         "--texto_max_len", str(exp["treino"]["texto_max_len"]),
         "--preproc", exp["dados"]["preproc"],
+        "--dataset_folder", exp["dados"]["split"],
         "--styles", str(a["estilos"]),
         "--seed", str(a["seed"]),
         "--estilo_de", a["estilo_de"],

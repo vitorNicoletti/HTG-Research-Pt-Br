@@ -81,6 +81,9 @@ def parse_cli():
                         "do IAM (aspecto preservado, sem normalizacao por "
                         "percentis) -- passar imagem do IAM pelo load_image do "
                         "BRESSAY mediria a coisa errada.")
+    p.add_argument("--dataset_folder", default=DATASET_FOLDER,
+                   help="split de onde saem as imagens de referencia do "
+                        "BRESSAY; use o mesmo do treino")
     p.add_argument("--preproc", choices=("v1", "v2"), default="v1",
                    help="pre-processamento das imagens de referencia do "
                         "BRESSAY; TEM que ser o mesmo do treino")
@@ -277,7 +280,7 @@ def main():
     ddim.set_timesteps(cli.steps)
 
     # ---------------- dataset (so para pegar estilo) ----------------
-    ds = BRESSAY_Dataset(DATASET_FOLDER, "train", transforms=transform, args=args)
+    ds = BRESSAY_Dataset(cli.dataset_folder, "train", transforms=transform, args=args)
     escritores = random.sample(list(ds.wid2idx.keys()), min(cli.styles, len(ds.wid2idx)))
     print("escritores escolhidos:", escritores)
 
