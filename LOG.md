@@ -743,3 +743,18 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
 - `diagnostico/resolucao_bressay.py` sobre o `bressay.zip`: palavras com altura
   mediana de 26 px no dataset e 31 px por página no split filtrado. Corte de
   35 px deixa 12 páginas de treino. Análise em `ACHADOS.md`, seção 7.
+
+---
+
+## 2026-09-30 — Run `model_bressay_25_v2` (pré-processamento v2)
+
+- `python scripts/treinar.py experimentos/bressay_25_v2.json`: split
+  `bressay_split_25_v2` (17.358 palavras, tinta ≥ 14 px), pré-processamento v2,
+  demais parâmetros iguais aos do `bressay_25`. 543 passos/época, ~2,2 passos/s.
+- O PC foi desligado no passo 153 da época 38; checkpoints íntegros, retomado
+  com o mesmo comando a partir da época 38. 40 épocas, 0 batches descartados.
+- Deriva: 0,95% (5) ... 2,285% (25) · 2,514% (30) · 2,726% (35) · 2,924% (40).
+  O `medir_deriva.py` marca "FAIXA ALVO" a partir de 30 épocas.
+- Comparação com as mesmas palavras, seed 42, 4 estilos, contra o IAM original
+  e o `v1` de 26 épocas, com referência de estilo do IAM e do BRESSAY:
+  `saidas/diffusionpen/fine_tune_25_v2/`. Análise no `ACHADOS.md`, seção 8.

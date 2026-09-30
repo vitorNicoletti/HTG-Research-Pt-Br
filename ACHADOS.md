@@ -263,3 +263,31 @@ palavras com menos de 28 px; a mediana do dataset inteiro é 26 px).
 2. Ensinar os acentos sem depender dos pixels do BRESSAY: congelar parte do
    UNet, misturar IAM no treino, ou palavras acentuadas sintéticas a partir de
    recortes do IAM.
+
+---
+
+## 8. O pré-processamento v2 mudou o formato da saída, mas não ensinou diacríticos
+
+> Data: 2026-09-30. Run `model_bressay_25_v2` (ver `LOG.md`). Figuras:
+> `saidas/diffusionpen/fine_tune_25_v2/comparacao_ref_{iam,bressay}.png`.
+
+- **O que o v2 corrigiu.** Com referência do BRESSAY, o run v1 gerava palavras
+  minúsculas com a pauta embaixo; o v2 gera palavras que ocupam a imagem e sem
+  a linha contínua. O defeito de formato que o v2 atacava sumiu.
+- **O que não mudou.** Em todas as palavras, inclusive no controle `text`, os
+  modelos com fine-tune continuam piores que o IAM original. Com referência do
+  BRESSAY a saída é em blocos borrados quando as imagens de referência são de
+  baixa resolução; com referência do IAM a legibilidade é parecida com a do v1.
+- **Nenhum sinal de diacrítico aprendido.** No par mínimo, `nacao` e `nação`
+  saem quase idênticos no mesmo estilo — o til é ignorado. Marcas soltas acima
+  das letras aparecem também em palavras sem acento (`nacao`, `coracao`), então
+  não são diacríticos.
+- **Mais treino não ajuda.** 30, 35 e 40 épocas geram imagens quase iguais com a
+  mesma semente, embora a deriva tenha ido de 2,51% a 2,92%.
+- **A faixa-alvo de deriva não se sustenta.** Os três checkpoints estão na
+  "FAIXA ALVO" do `medir_deriva.py` e nenhum gera BRESSAY legível com acento.
+  A faixa foi calibrada na RX 6600 XT e não vale como critério nesta placa.
+
+Conclusão: com os pixels do BRESSAY (~30 px por palavra), limpar o formato não
+basta. O próximo passo coerente é ensinar os acentos sem depender desses
+pixels (seção 7, caminho 2).
