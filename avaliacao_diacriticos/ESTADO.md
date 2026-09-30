@@ -68,10 +68,22 @@ python avaliacao_diacriticos/avaliar.py --dir avaliacao_diacriticos/amostras/ger
 ```
 
 O limiar 0,0455 é o p95 do til no controle negativo. **Use o limiar da marca**
-(`limiares_eixo_diff.json`), não um global: para agudo (p95 0,264) e cedilha
-(p95 0,206) o ruído supera um acento nominal (0,166), então nessas duas marcas
-só a média agregada com IC é confiável — classificação amostra a amostra, não.
-Para til (0,046) e grave (0,037) o eixo separa por amostra com folga de 3 a 4×.
+(`limiares_eixo_diff.json`), não um global. Valores atuais, já com o
+alinhamento: til 0,046, grave 0,036, circunflexo 0,067, agudo 0,126 e cedilha
+0,238, contra um acento nominal de ~0,15. Só na cedilha o ruído supera o
+sinal — e ali o problema é que o IAM não é controle negativo puro (ver
+README), não que a métrica seja ruim.
+
+> **Estes limiares valem para o pré-processamento `v1` do BRESSAY, e só para
+> ele.** `preparar_reais.py` e `gerar_pares.py` chamam o mesmo `load_image` de
+> `utils/bressay_dataset.py` que o treino usa, e ele escolhe o pré-processamento
+> por `args.preproc`, cujo padrão é `v1`. O `v2` (branch `treino-split-reduzido`)
+> remove a pauta, recorta justo na tinta e escala como o IAM — ou seja, muda a
+> altura-x, a linha de base e a escala do traço, que são exatamente as três
+> coisas de que o escore do E1 depende. **No dia em que o `v2` virar padrão,
+> estes números deixam de valer e a calibração inteira precisa ser refeita do
+> zero**, inclusive os controles. Nenhum dos meus scripts declara o
+> pré-processamento hoje: eles herdam o padrão em silêncio.
 
 A referência de escala vem de `teste_sensibilidade_diff.py`: 0,0000 = gêmeos
 idênticos, 0,0389 = meio acento nominal, 0,1657 = acento nominal. O IAM puro,
