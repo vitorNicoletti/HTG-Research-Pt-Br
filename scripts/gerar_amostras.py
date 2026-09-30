@@ -81,6 +81,10 @@ def parse_cli():
                         "do IAM (aspecto preservado, sem normalizacao por "
                         "percentis) -- passar imagem do IAM pelo load_image do "
                         "BRESSAY mediria a coisa errada.")
+    p.add_argument("--classes_iam", type=int, nargs="+",
+                   help="escritores fixos do IAM pelo indice de classe (0-338), "
+                        "com as mesmas 5 referencias do modo sonda da Fase 2; "
+                        "ignora --estilo_de e --styles")
     p.add_argument("--dataset_folder", default=DATASET_FOLDER,
                    help="split de onde saem as imagens de referencia do "
                         "BRESSAY; use o mesmo do treino")
@@ -169,6 +173,35 @@ def estilos_iam(k, transform):
         escolhidos = random.choices(pngs, k=NUM_STYLE_IMGS)
         saida.append([transform(_prep_iam(Image.open(f).convert("RGB")))
                       for f in escolhidos])
+    return saida
+
+
+def estilos_iam_classes(classes, transform):
+    """Referencias de escritores FIXOS do IAM, pelo indice de classe (0-338).
+
+    Mesmo sorteio do modo 'sonda' da Fase 2 (sonda/patches_diffusionpen.diff):
+    random.seed(classe) e 5 palavras com mais de 3 letras daquele escritor em
+    utils/splits_words/iam_train_val.txt. O estilo 12 recebe as mesmas 5
+    imagens da sonda original, o que deixa o antes e o depois do fine-tune
+    comparaveis no protocolo da Fase 2.
+    """
+    import json
+    from PIL import Image
+    with open(os.path.join(REPO, "writers_dict_train.json")) as f:
+        classe_para_escritor = {v: k for k, v in json.load(f).items()}
+    with open(os.path.join(REPO, "utils", "splits_words", "iam_train_val.txt")) as f:
+        linhas = [l.strip().split(",") for l in f if l.strip()]
+    saida = []
+    for c in classes:
+        escritor = classe_para_escritor[c]
+        cand = [l for l in linhas if l[1] == escritor and len(l[2]) > 3]
+        if len(cand) >= NUM_STYLE_IMGS:
+            cinco = random.Random(c).sample(cand, NUM_STYLE_IMGS)
+        else:
+            cinco = [[l for l in linhas if l[1] == escritor][0]] * NUM_STYLE_IMGS
+        print(f"classe {c} (escritor {escritor}): {[l[2] for l in cinco]}")
+        saida.append([transform(_prep_iam(Image.open(
+            os.path.join(REPO, "iam_data", "words", l[0])).convert("RGB"))) for l in cinco])
     return saida
 
 
@@ -281,6 +314,8 @@ def main():
 
     # ---------------- dataset (so para pegar estilo) ----------------
     ds = BRESSAY_Dataset(cli.dataset_folder, "train", transforms=transform, args=args)
+    if cli.classes_iam:
+        cli.styles = len(cli.classes_iam)   # um painel por classe pedida
     escritores = random.sample(list(ds.wid2idx.keys()), min(cli.styles, len(ds.wid2idx)))
     print("escritores escolhidos:", escritores)
 
@@ -294,7 +329,10 @@ def main():
     # Fixadas ANTES do laco de palavras: assim todas as palavras de uma
     # execucao veem exatamente os mesmos escritores, e duas execucoes com a
     # mesma semente sao comparaveis palavra a palavra.
-    if cli.estilo_de == "iam":
+    if cli.classes_iam:
+        ref = estilos_iam_classes(cli.classes_iam, transform)
+        print(f"estilo: classes fixas do IAM {cli.classes_iam}")
+    elif cli.estilo_de == "iam":
         ref = estilos_iam(len(escritores), transform)
         print(f"estilo: {len(ref)} escritores do IAM "
               f"({NUM_STYLE_IMGS} recortes cada)")
