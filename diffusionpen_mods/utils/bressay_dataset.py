@@ -81,16 +81,8 @@ def _remover_pauta(g, mask):
     return g, mask, n
 
 
-def preprocessar_v2(g):
-    """Cinza 0..255 (contraste ja normalizado) -> PIL RGB 256x64.
-
-    1. amplia para 64 px de altura, a escala em que a regra da pauta foi
-       calibrada;
-    2. apaga a pauta;
-    3. recorta justo na tinta (ignorando manchas minusculas do papel);
-    4. escala como o IAM: altura 64 preservando o aspecto, cabendo em 256,
-       centralizado em fundo branco.
-    """
+def _sem_pauta_64(g):
+    """Passos 1-3 do v2: (cinza 64 px sem pauta, caixa de tinta ou None)."""
     import cv2
     h, w = g.shape
     g = cv2.resize(g, (max(1, round(w * 64.0 / h)), 64),
@@ -101,7 +93,42 @@ def preprocessar_v2(g):
 
     n, rot, stats, _ = cv2.connectedComponentsWithStats(mask.astype(np.uint8), 8)
     grandes = [k for k in range(1, n) if stats[k, cv2.CC_STAT_AREA] >= AREA_MIN_MANCHA]
-    cx = _caixa(np.isin(rot, grandes)) if grandes else None
+    return g, (_caixa(np.isin(rot, grandes)) if grandes else None)
+
+
+def contraste(caminho):
+    """Cinza float 0..255 com o contraste normalizado por percentis."""
+    g = np.asarray(Image.open(caminho).convert("L"), dtype=np.float32)
+    lo, hi = np.percentile(g, P_TINTA), np.percentile(g, P_FUNDO)
+    if hi - lo >= 8:
+        g = np.clip((g - lo) / (hi - lo), 0, 1) * 255
+    return g
+
+
+def altura_tinta_original(caminho):
+    """Altura da caixa de tinta, sem pauta, em pixels da imagem ORIGINAL.
+
+    E o quanto o v2 vai ampliar a palavra: 64 / esta altura. Usada por
+    scripts/filtrar_tinta.py para descartar recortes pequenos demais.
+    """
+    g = contraste(caminho)
+    _, cx = _sem_pauta_64(g)
+    if cx is None:
+        return 0.0
+    return (cx[3] - cx[2]) * g.shape[0] / 64.0
+
+
+def preprocessar_v2(g):
+    """Cinza 0..255 (contraste ja normalizado) -> PIL RGB 256x64.
+
+    1. amplia para 64 px de altura, a escala em que a regra da pauta foi
+       calibrada;
+    2. apaga a pauta;
+    3. recorta justo na tinta (ignorando manchas minusculas do papel);
+    4. escala como o IAM: altura 64 preservando o aspecto, cabendo em 256,
+       centralizado em fundo branco.
+    """
+    g, cx = _sem_pauta_64(g)
     if cx is not None:
         x0, x1, y0, y1 = cx
         m = MARGEM_RECORTE
@@ -203,13 +230,9 @@ class BRESSAY_Dataset(Dataset):
             # treinar sobre imagens vazias sem ninguem notar. So o arquivo
             # ilegivel vira branco aqui.
             try:
-                im = Image.open(img_path).convert("L")
+                g = contraste(img_path)
             except OSError:
                 return Image.new("RGB", (256, 64), color="white")
-            g = np.asarray(im, dtype=np.float32)
-            lo, hi = np.percentile(g, P_TINTA), np.percentile(g, P_FUNDO)
-            if hi - lo >= 8:
-                g = np.clip((g - lo) / (hi - lo), 0, 1) * 255
             return preprocessar_v2(g)
 
         try:
