@@ -753,7 +753,8 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
   demais parâmetros iguais aos do `bressay_25`. 543 passos/época, ~2,2 passos/s.
 - O PC foi desligado no passo 153 da época 38; checkpoints íntegros, retomado
   com o mesmo comando a partir da época 38. 40 épocas, 0 batches descartados.
-- Deriva: 0,95% (5) ... 2,285% (25) · 2,514% (30) · 2,726% (35) · 2,924% (40).
+- Deriva: 0,937% (5) · 1,395% (10) · 1,744% (15) · 2,031% (20) · 2,285% (25) ·
+  2,514% (30) · 2,726% (35) · 2,924% (40).
   O `medir_deriva.py` marca "FAIXA ALVO" a partir de 30 épocas.
 - Comparação com as mesmas palavras, seed 42, 4 estilos, contra o IAM original
   e o `v1` de 26 épocas, com referência de estilo do IAM e do BRESSAY:
