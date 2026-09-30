@@ -46,6 +46,7 @@ python scripts/treinar.py experimentos/bressay_25.json [--dry-run]
 - **Copies.** The launcher copies the file to `SAVE_PATH/experimento.json`.
 - **Resuming.** On resume it only allows changes to `descricao`, `treino.epocas_total`, `execucao.*` and `amostras.*`; anything else requires a new `save_path`.
 - **Outputs.** The log goes to `SAVE_PATH/treino.log` and samples to `SAVE_PATH/amostras/<N>ep/`.
+- **Preprocessing.** `dados.preproc` picks the BRESSAY image preprocessing in `utils/bressay_dataset.py`. `v1` (default, original) is contrast plus padding of the whole crop. `v2` enlarges to 64 px, removes the ruled line (same detection as the metric, but it keeps strokes crossing the line), crops tight to the ink and scales like IAM. `v2` pairs with `scripts/filtrar_tinta.py`, which drops training words whose ink is under N px tall in the original. `bressay_split_25_v2` uses 14 px, and `experimentos/bressay_25_v2.json` trains on it. Visual comparisons: `diagnostico/comparar_preproc.py`.
 - **Other settings.** The contrast percentiles and the UNet architecture are deliberately not experiment parameters. `load_image` is shared with generation and the metric, and the architecture must match the IAM checkpoint. Both are still recorded in `config.jsonl`.
 
 `train.py` appends one line per launch to `SAVE_PATH/config.jsonl` (args, fixed values, data, environment, git commits).
