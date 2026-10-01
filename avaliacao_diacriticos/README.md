@@ -279,6 +279,62 @@ negativo se comportando como esperado. **É esta tabela que dá sentido aos
 números do fine-tune quando ele existir**: 0,05 passa a ser "cerca de um terço
 de acento", não um número solto.
 
+## SSIM e PSNR não substituem o E1, e as versões globais ficam abaixo do acaso
+
+O orientador sugeriu comparar com SSIM e PSNR. As duas são métricas de
+referência completa: precisam de uma imagem correta, alinhada pixel a pixel.
+Geração não tem isso. O par mínimo é a única exceção, porque dentro dele a
+gêmea ASCII é referência para tudo que não é o acento. Medição em
+`ssim_psnr.py`, 1.276 medidas sobre `amostras/ger_iam_n696/`.
+
+Quatro grupos, todos com a mesma região medida (a faixa e a coluna que o E1
+usa) e o mesmo alinhamento:
+
+| grupo | o que é |
+|---|---|
+| POS-pintado | acento nominal pintado sobre a própria gêmea |
+| NEG-gerador | o que o IAM produziu, que não desenha acento |
+| NEG-deriva | duas saídas ASCII do mesmo par com sementes diferentes |
+| NEG-deslocado | acento pintado na coluna de um caractere sem acento |
+
+AUC do POS contra cada negativo. Maior separa melhor; abaixo de 0,5 é pior que
+o acaso.
+
+| escore | vs NEG-gerador | vs NEG-deriva | vs NEG-deslocado |
+|---|---|---|---|
+| **E1 (atual)** | **0,966** | **0,904** | **0,973** |
+| 1 − SSIM global | 0,007 | 0,000 | 0,499 |
+| 1 − SSIM local | 0,692 | 0,492 | 0,953 |
+| −PSNR global | 0,220 | 0,014 | 0,479 |
+| −PSNR local | 0,983 | 0,952 | 0,915 |
+
+**As versões globais ficam abaixo do acaso.** SSIM global dá 0,007 e PSNR
+global 0,220 contra o negativo do gerador, e 0,000 e 0,014 contra o de deriva.
+Elas ordenam os pares sem acento como mais diferentes que os pares com acento,
+porque medem a variação do gerador, que é muito maior que um diacrítico. É a
+resposta direta à sugestão: aplicadas do jeito usual, as duas não servem aqui.
+
+**PSNR local ganha do E1 em dois controles e perde no que decide.** Ele é
+melhor contra deriva (0,952 contra 0,904) e contra o gerador (0,983 contra
+0,966), mas pior em dizer **onde** está o acento: contra o deslocado dá 0,915
+contra 0,973 do E1, e por marca chega a perder 0,110 na cedilha. O critério
+fixado antes de medir era adotar só se ganhasse 0,02 global sem perder mais que
+0,02 em nenhuma marca. Ele perde, então **não é adotado**.
+
+Faz sentido que ganhe nos dois primeiros: `−PSNR` é função monótona do erro
+quadrático na região, e o acento pintado é um bloco sólido, uma mudança grande.
+E faz sentido que perca no terceiro: ele mede magnitude da diferença, sem
+nenhuma noção de que a diferença precisa pertencer àquele caractere.
+
+**Limitação técnica da sugestão, que é resultado em si.** O SSIM exige janela
+ímpar de pelo menos 7 px. Das 1.276 regiões medidas, 146 (11%) não tinham 7 px
+num dos eixos e precisaram de janela 5 ou 3. Em recorte de 26 px a região de um
+diacrítico simplesmente não tem tamanho para o SSIM operar no padrão.
+
+**Ressalva que vale para as duas e também para o E1.** O positivo é um acento
+pintado, sólido e de alto contraste. Um acento desenhado de verdade seria mais
+fraco e mais trêmulo. Todos os números desta tabela são o melhor caso.
+
 ## O IAM não é controle negativo puro para cedilha
 
 Olhando `figuras/e1_falhas.png`, os maiores escores do controle negativo não
