@@ -177,11 +177,31 @@ acento nas 120 palavras ASCII.
 
 Separando as duas medidas do artigo de Aldarmaki e Ghannam (2023):
 
-- **precisão alta.** Das 31 marcas que emitiu, 31 estavam certas.
-- **cobertura baixa.** Só 11 das 120 palavras acentuadas tiveram a base lida
-  corretamente (9,2%), e dessas 11 apenas 3 vieram com o acento também certo
-  (27%). Nos outros casos ele lê a palavra e descarta a marca: "não" vira
-  "Nao", "econômico" vira "economico", "importância" vira "importancia".
+Repetido num conjunto maior, `amostras/reais_grande/`, com 1.000 palavras
+acentuadas e 300 ASCII, montado com `--min-len 2` para o grave deixar de ter
+n=7:
+
+- **precisão alta.** 212 das 223 marcas emitidas estavam certas (95%), e o
+  falso acento nas ASCII é 0,7%.
+- **cobertura baixa.** 151 das 1.000 palavras acentuadas tiveram a base lida
+  corretamente (15,1%), e dessas apenas 43 vieram com o acento também certo
+  (28,5%, IC95 [21,2%, 39,8%]). Nos outros casos ele lê a palavra e descarta a
+  marca: "não" vira "Nao", "importância" vira "importancia".
+
+Separando por marca, entre as palavras cuja base foi lida certa:
+
+| marca | base certa | acento também certo |
+|---|---|---|
+| til | 21 | **62%** |
+| cedilha | 14 | **57%** |
+| circunflexo | 27 | 37% |
+| grave | 60 | 25% |
+| agudo | 41 | 12% |
+
+Til e cedilha, que são as marcas que o modelo do IAM não desenha e as que mais
+importam para o português, são as que o PaddleOCR lê melhor. Agudo e grave são
+os mais descartados. É coerente com a forma: til e cedilha alteram o desenho da
+letra, enquanto agudo e grave são um traço fino de poucos pixels.
 
 Pelo critério fixado antes, com CER sem dobra em 0,433, o PaddleOCR cai na
 faixa declarada como **inconclusiva** (entre 0,30 e 0,50): reportar os números
