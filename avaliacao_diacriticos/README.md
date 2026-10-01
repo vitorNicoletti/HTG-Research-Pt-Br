@@ -426,6 +426,52 @@ nominal: só a média agregada com IC é confiável nela. Faz sentido — a faix
 da cedilha é abaixo da linha de base, que é onde ficam descendentes e a linha
 pautada.
 
+## O limiar por marca depende de quantas palavras E quantos punhos se amostra
+
+O conjunto original tinha 6 palavras por marca, geradas com 4 escritores e 3
+sementes, ou seja 72 amostras vindas de 6 tipos. Ampliando para 18 palavras
+(as 6 antigas mais 12) apareceu que o veredito por marca não era estável.
+Separando as duas dimensões:
+
+| caso | til | circunflexo | agudo | cedilha |
+|---|---|---|---|---|
+| A: 6 palavras, 2 escritores, 2 sementes | 0,044 sim | 0,035 sim | 0,121 sim | 0,058 sim |
+| B: as mesmas 6, geradas de novo | 0,044 sim | 0,035 sim | 0,121 sim | 0,058 sim |
+| C: 18 palavras, 2 escritores, 2 sementes | 0,089 sim | 0,039 sim | **0,183 NÃO** | 0,136 sim |
+| D: 6 palavras, 4 escritores, 3 sementes | 0,046 sim | 0,067 sim | 0,126 sim | **0,238 NÃO** |
+
+O número é o p95 do ruído, e "sim/não" é se ele fica abaixo de um acento
+nominal, que é o critério para decidir amostra a amostra.
+
+**A e B são idênticos dígito a dígito.** São duas gerações separadas da mesma
+palavra com mesmo escritor e mesma semente, feitas com semanas de intervalo.
+Dado o histórico de corrupção numérica desta GPU, isso serve de verificação de
+reprodutibilidade.
+
+**Os dois vereditos que inverteram têm causas diferentes.** Agudo inverte de B
+para C, ou seja ao acrescentar palavras. Cedilha inverte de B para D, ao
+acrescentar escritores. Os dois conjuntos subamostram uma dimensão cada um: o
+antigo tem poucos tipos de palavra e o novo tem poucos punhos.
+
+Medindo a estabilidade por reamostragem de palavras, no conjunto de 18, a
+fração de sorteios em que o veredito dá "sim":
+
+| marca | k=6 | k=9 | k=12 | k=15 | k=18 |
+|---|---|---|---|---|---|
+| til | 66% | 96% | 100% | 100% | 100% |
+| circunflexo | 100% | 100% | 100% | 100% | 100% |
+| cedilha | 100% | 100% | 100% | 100% | 100% |
+| agudo | 55% | 45% | 40% | 27% | 0% |
+
+Til precisa de cerca de 12 palavras para o veredito estabilizar. Circunflexo e
+cedilha são estáveis desde 6. Agudo converge para "não decide" conforme se
+acrescenta palavra, o que indica que a conclusão anterior de que ele decidia
+vinha de amostra pequena.
+
+**Consequência prática.** Qualquer limiar por marca precisa declarar quantas
+palavras e quantos punhos o sustentam. Os limiares em
+`resultados/limiares_eixo_diff.json` passam a trazer esses dois números.
+
 ## O limiar do eixo por diferença sai do negativo REAL, não da curva sintética
 
 A curva acima é o melhor caso possível: o acento é pintado sobre a *mesma*
