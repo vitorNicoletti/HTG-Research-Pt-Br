@@ -472,41 +472,38 @@ vinha de amostra pequena.
 palavras e quantos punhos o sustentam. Os limiares em
 `resultados/limiares_eixo_diff.json` passam a trazer esses dois números.
 
-## O limiar do eixo por diferença sai do negativo REAL, não da curva sintética
+## Limiares por marca, no conjunto que cobre palavra e punho
 
-A curva acima é o melhor caso possível: o acento é pintado sobre a *mesma*
-imagem, então fora do acento os gêmeos são idênticos. Em par mínimo gerado de
-verdade os dois gêmeos diferem em todo lugar por jitter de traço, e esse ruído
-entra no delta. Medido no Passo 5 (IAM puro, 696 imagens, 348 diacríticos):
-**28,4% das amostras cruzam o piso sintético de 0,02**, e 16,4% cruzam 0,0389 —
-num gerador que comprovadamente não desenha diacrítico nenhum.
+Controle negativo `amostras/ger_iam_sonda77x4/`: 77 pares, 18 palavras por
+marca (5 em grave, que é o teto do corpus), 4 escritores, 2 sementes, 1.232
+imagens, sem nenhuma NaN ou colapsada. Positivo é o acento nominal pintado
+sobre a própria gêmea. O IC reamostra palavras.
 
-Portanto o limiar operacional se calibra no controle negativo real
-(`limiares_eixo_diff.json`), não na curva sintética:
+| marca | n | palavras | p95 do ruído | acento nominal | AUC | decide por amostra? | IC95 do ruído |
+|---|---|---|---|---|---|---|---|
+| grave | 40 | 5 | 0,043 | 0,151 | 1,000 | sim | [−0,0086, +0,0004] |
+| til | 144 | 18 | 0,090 | 0,148 | 0,968 | sim | [−0,0244, +0,0221] |
+| circunflexo | 144 | 18 | 0,047 | 0,132 | 0,989 | sim | [−0,0197, −0,0005] |
+| agudo | 144 | 18 | 0,177 | 0,167 | 0,937 | **não** | [−0,0020, +0,0841] |
+| cedilha | 144 | 18 | 0,206 | 0,179 | 0,931 | **não** | [+0,0104, +0,0576] |
+| TODAS | 616 | 77 | 0,131 | 0,156 | 0,952 | | [−0,0006, +0,0287] |
 
-| marca | média | p90 | **p95** | p99 | acento nominal |
-|---|---|---|---|---|---|
-| grave | −0,0088 | 0,0276 | **0,0365** | 0,0562 | 0,1657 |
-| til | −0,0116 | 0,0319 | **0,0455** | 0,0667 | 0,1657 |
-| circunflexo | −0,0085 | 0,0350 | **0,0682** | 0,1213 | 0,1657 |
-| cedilha | 0,0311 | 0,1643 | **0,2056** | 0,3534 | 0,1657 |
-| agudo | 0,0526 | 0,1907 | **0,2636** | 0,3401 | 0,1657 |
+Usar o p95 da marca como limiar quer dizer que um escore assim aparece em menos
+de 5% das amostras de um gerador que não desenha acento.
 
-Usar o p95 como limiar quer dizer "um escore assim aparece em menos de 5% das
-amostras de um gerador que não desenha acento".
+Em grave, til e circunflexo o ruído fica bem abaixo de um acento nominal e dá
+para classificar amostra a amostra. Em agudo e cedilha não, e só a média
+agregada com IC por palavra é confiável.
 
-**Limitação que precisa estar no TCC:** para agudo e cedilha o ruído do p95
-(0,264 e 0,206) **supera** o sinal de um acento nominal (0,166). Nessas duas
-marcas a classificação amostra a amostra não é confiável — só a média agregada
-com intervalo de confiança. Faz sentido: o agudo no "i" substitui o pingo, que
-o gêmeo ASCII também tem, e a cedilha cai numa região já cheia de tinta. Para
-til e grave, que são o alvo central do trabalho, o eixo separa por amostra com
-folga de 3 a 4 vezes.
+Duas leituras do IC do ruído, que não são ruído:
 
-Til, grave e circunflexo dão média **negativa** no IAM puro: a versão acentuada
-tem *menos* tinta na faixa do que a gêmea ASCII. Não é o modelo desenhando um
-acento pequeno — é o modelo renderizando uma palavra diferente, sem acento
-nenhum. É o controle negativo se comportando como deveria.
+- **Cedilha tem IC [+0,0104, +0,0576], positivo e sem cruzar zero.** Parte do
+  que está contado como ruído é o modelo do IAM desenhando algo cedilhoide,
+  conforme a seção sobre o controle não ser negativo nessa marca. É por isso
+  que o p95 dela é o maior da tabela.
+- **Circunflexo tem IC [−0,0197, −0,0005], negativo.** A versão acentuada sai
+  com menos tinta acima da altura-x do que a gêmea ASCII. O efeito é pequeno e
+  não tem explicação medida até agora.
 
 ## A janela de coluna é sensível à folga, mas a decisão não é
 

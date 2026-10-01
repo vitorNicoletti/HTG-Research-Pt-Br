@@ -1,64 +1,95 @@
 {
  "eixo": "e1.py com alinhamento",
- "controle_negativo": "ger_iam_sonda77 (IAM puro, 616 imagens, 77 pares)",
+ "controle_negativo": "ger_iam_sonda77x4 (IAM puro, 1232 imagens)",
+ "desenho": "77 pares x 4 escritores x 2 sementes; 18 palavras por marca, 5 em grave",
  "positivo": "acento nominal pintado sobre a propria imagem ASCII",
- "leitura": "use o p95 da marca como limiar. decide_por_amostra=false significa que o ruido supera um acento nominal: so a media agregada com IC por palavra e confiavel nessa marca.",
- "nota": "IC e p95 apoiados em 18 palavras distintas por marca, exceto grave, que tem 5 no corpus inteiro com len>=4.",
+ "leitura": "use o p95 da marca como limiar. decide_por_amostra=false significa que o ruido supera um acento nominal e so a media agregada vale.",
+ "aviso": "o p95 depende de quantas palavras E quantos punhos se amostra; ver a secao do README sobre estabilidade do veredito.",
  "por_marca": {
   "grave": {
-   "n": 20,
+   "n": 40,
    "palavras": 5,
-   "media_ruido": -0.0037900153787075604,
-   "p90": 0.033324103558078376,
-   "p95": 0.043226519918902556,
-   "p99": 0.0479091076647621,
-   "acento_nominal": 0.15165750910762985,
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": -0.003676190373580769,
+   "ic95_ruido": [
+    -0.008640674748468958,
+    0.00044902925988891674
+   ],
+   "p90": 0.03261791543503406,
+   "p95": 0.043226519918902535,
+   "p99": 0.06586450854979767,
+   "acento_nominal": 0.15083810224942745,
    "auc": 1.0,
    "decide_por_amostra": true
   },
   "til": {
-   "n": 72,
+   "n": 144,
    "palavras": 18,
-   "media_ruido": 0.0029348876047001183,
-   "p90": 0.061016039570458945,
-   "p95": 0.08915236398963737,
-   "p99": 0.2015984425970749,
-   "acento_nominal": 0.15174097836034717,
-   "auc": 0.9675925925925926,
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": -0.0009935714131350268,
+   "ic95_ruido": [
+    -0.024430453313586897,
+    0.022062716726319716
+   ],
+   "p90": 0.06613539834398732,
+   "p95": 0.09029994545158294,
+   "p99": 0.22653412812786572,
+   "acento_nominal": 0.14771198411730024,
+   "auc": 0.9678337191358025,
    "decide_por_amostra": true
   },
   "circunflexo": {
-   "n": 72,
+   "n": 144,
    "palavras": 18,
-   "media_ruido": -0.018297129288329037,
-   "p90": 0.03117244157937146,
-   "p95": 0.03903508771929827,
-   "p99": 0.05729663394109403,
-   "acento_nominal": 0.13511241965587498,
-   "auc": 0.9972993827160493,
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": -0.010362994397303933,
+   "ic95_ruido": [
+    -0.019742977272517136,
+    -0.00047432301649109394
+   ],
+   "p90": 0.034296953046953085,
+   "p95": 0.046615179252479,
+   "p99": 0.07677419354838695,
+   "acento_nominal": 0.1316137327044174,
+   "auc": 0.9887152777777778,
    "decide_por_amostra": true
   },
   "agudo": {
-   "n": 72,
+   "n": 144,
    "palavras": 18,
-   "media_ruido": 0.020706048055054445,
-   "p90": 0.1245018422437777,
-   "p95": 0.18344325535092093,
-   "p99": 0.3263244950440668,
-   "acento_nominal": 0.168109455139868,
-   "auc": 0.9263117283950617,
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": 0.031637125796332155,
+   "ic95_ruido": [
+    -0.001952179610722911,
+    0.08406459862917505
+   ],
+   "p90": 0.09982517482517492,
+   "p95": 0.17654433553681326,
+   "p99": 0.33574451351958634,
+   "acento_nominal": 0.16749664686815027,
+   "auc": 0.9366078317901234,
    "decide_por_amostra": false
   },
   "cedilha": {
-   "n": 72,
+   "n": 144,
    "palavras": 18,
-   "media_ruido": 0.021289208952976552,
-   "p90": 0.10807005323647942,
-   "p95": 0.1360048426150121,
-   "p99": 0.22815106382978848,
-   "acento_nominal": 0.18314857836994614,
-   "auc": 0.9766589506172839,
-   "decide_por_amostra": true
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": 0.03419431244742988,
+   "ic95_ruido": [
+    0.010428961676146374,
+    0.05762919606858417
+   ],
+   "p90": 0.13623352165725047,
+   "p95": 0.20615529365157947,
+   "p99": 0.32634031669930424,
+   "acento_nominal": 0.178827676376892,
+   "auc": 0.9310378086419753,
+   "decide_por_amostra": false
   }
  }
 }
