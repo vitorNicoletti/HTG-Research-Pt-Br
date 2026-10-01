@@ -53,3 +53,6 @@ cpu_check/
 
 # editor
 .vscode/
+
+# RIMES (Zenodo 10.5281/zenodo.10812725, CC BY-NC 4.0) -- baixado a parte
+rimes/
