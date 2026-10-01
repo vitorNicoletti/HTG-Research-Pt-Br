@@ -113,8 +113,17 @@
             python313Packages.pip
             python313Packages.virtualenv
           ];
+          # Os wheels de opencv que o paddleocr arrasta sao ligados a libGL e
+          # glib, que nao existem num shell puro do nix.
           shellHook = ''
-            export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH:${pkgsCpu.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
+            export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH:${
+              pkgsCpu.lib.makeLibraryPath [
+                pkgsCpu.stdenv.cc.cc.lib
+                pkgsCpu.libGL
+                pkgsCpu.glib
+                pkgsCpu.libglvnd
+              ]
+            }:$LD_LIBRARY_PATH"
             echo "ambiente: HTR (Python 3.13)"
             echo "  python -m venv venv-htr && venv-htr/bin/pip install paddleocr easyocr"
           '';

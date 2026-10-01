@@ -60,6 +60,31 @@ def ler_easyocr(caminhos, idiomas=("pt",)):
     return saida
 
 
+def ler_paddleocr(caminhos, modelo="latin_PP-OCRv5_mobile_rec"):
+    """PaddleOCR, so o reconhecedor. Unico candidato com alfabeto latino
+    completo: 851 simbolos, cobrindo as cinco marcas do portugues.
+
+    Usa TextRecognition e nao o pipeline PaddleOCR completo: a imagem ja e um
+    recorte de palavra, entao detectar linha antes so acrescenta um modo de
+    falha. O `lang="latin"` do pipeline nao existe nesta versao; o modelo e
+    nomeado direto.
+    """
+    import os
+    import warnings
+    warnings.filterwarnings("ignore")
+    os.environ.setdefault("PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK", "True")
+    from paddleocr import TextRecognition
+    motor = TextRecognition(model_name=modelo)
+    saida = []
+    for c in caminhos:
+        try:
+            r = list(motor.predict(c))
+            saida.append((r[0].get("rec_text", "") if r else "").strip())
+        except Exception:
+            saida.append("")
+    return saida
+
+
 def ler_trocr(caminhos, dirbase):
     """Reaproveita o cache, se existir; senao roda o modelo."""
     cache = os.path.join(dirbase, "e2_leituras.json")
@@ -74,7 +99,8 @@ def ler_trocr(caminhos, dirbase):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--backend", required=True, choices=["easyocr", "trocr"])
+    ap.add_argument("--backend", required=True,
+                    choices=["easyocr", "trocr", "paddleocr"])
     ap.add_argument("--dir", required=True)
     ap.add_argument("--csv-out", required=True)
     ap.add_argument("--limite", type=int, default=0)
@@ -86,8 +112,12 @@ def main():
         itens = itens[:a.limite]
     caminhos = [os.path.join(a.dir, d["arquivo"]) for d in itens]
 
-    lidos = (ler_easyocr(caminhos) if a.backend == "easyocr"
-             else ler_trocr(caminhos, a.dir))
+    if a.backend == "easyocr":
+        lidos = ler_easyocr(caminhos)
+    elif a.backend == "paddleocr":
+        lidos = ler_paddleocr(caminhos)
+    else:
+        lidos = ler_trocr(caminhos, a.dir)
 
     linhas = []
     for d, lido in zip(itens, lidos):
