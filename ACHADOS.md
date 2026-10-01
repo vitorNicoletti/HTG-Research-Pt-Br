@@ -312,3 +312,31 @@ Sonda canônica (`comum/palavras.py`, 20 palavras × seeds 0/1/2) com o escritor
 O fine-tune no BRESSAY não só deixou de ensinar os acentos: apagou parte do
 que o modelo sabia (esquecimento catastrófico), inclusive o condicionamento
 por estilo.
+
+---
+
+## 9. Treinar em resolução menor não ajuda: o VAE perde o acento em 32×128
+
+> Data: 2026-09-30. `diagnostico/teste_vae_resolucao.py`, figura
+> `saidas/diffusionpen/vae_resolucao.png`. Só o VAE do SD-1.5, ida e volta,
+> sem treino.
+
+O DiffusionPen gera o latente do VAE, que reduz 8× em cada eixo: 64×256 vira
+um latente 8×32; 32×128 viraria 4×16.
+
+- **Em 64×256 o VAE preserva os acentos.** Palavras do BRESSAY (as de tinta
+  mais alta) e do RIMES voltam praticamente iguais, com til, cedilha,
+  circunflexo e agudo intactos (`informação`, `tância`, `trágico`, `agréer`,
+  `précédent`).
+- **Em 32×128 o VAE já degrada.** `informação` perde letras, `agréer` perde o
+  agudo, `déménager` e `précédent` borram. O acento ocupa menos de um pixel do
+  latente.
+
+Consequências:
+
+1. Reduzir a resolução de treino e geração pioraria a representação do acento
+   antes de o UNet entrar em cena, além de descartar o que o UNet e o extrator
+   de estilo aprenderam na escala de 64×256 do IAM.
+2. Em 64×256 o VAE **não** é o gargalo: o acento cabe no latente. A falha das
+   seções 7 e 8 está no que o UNet aprende (ou esquece), e na qualidade da
+   maior parte dos dados do BRESSAY, não na capacidade de representação.
