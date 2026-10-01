@@ -138,10 +138,11 @@ Ele escreve ç, à, â, ê, ô, e **não tem til nenhum**. Como o til é a marca
 frequente do corpus, com 5.671 ocorrências, isso elimina os modelos franceses
 para metade do problema.
 
-O Paddle é o único com alfabeto completo, 851 símbolos. Ele **não roda aqui**:
-o peso vem em formato nativo `inference.pdiparams`, exige `paddlepaddle`, e não
-existe wheel de `paddlepaddle` para Python 3.14. Fica registrado como candidato
-viável em outro ambiente.
+O Paddle é o único com alfabeto completo, 851 símbolos. Os wheels de
+`paddlepaddle` vão até cp313 e o shell principal está em 3.14, então ele roda
+no shell `htr` do `flake.nix`, que fornece Python 3.13 mais `libGL` e `glib`,
+de que os wheels de opencv precisam. Usa-se `TextRecognition` direto, sem o
+pipeline de detecção, porque a imagem já é um recorte de palavra.
 
 Para a família TrOCR o portão não se aplica: o BPE byte-level representa
 qualquer Unicode, então capacidade de tokenizer não é capacidade aprendida e o
@@ -149,13 +150,14 @@ teste tem de ser empírico.
 
 ### Medida nos 240 recortes reais
 
-| | TrOCR base-handwritten | EasyOCR `pt` |
-|---|---|---|
-| CER com dobra ASCII | 0,819 | 0,692 |
-| CER sem dobra | 1,134 | 0,749 |
-| leituras exatas | 0% | 0% |
-| **produção de diacrítico** | **0,0%** | **27,5%** |
-| falso acento nas ASCII | 0,0% | 0,8% |
+| | TrOCR | EasyOCR `pt` | **PaddleOCR latin** |
+|---|---|---|---|
+| CER com dobra ASCII | 0,819 | 0,692 | **0,364** |
+| CER sem dobra | 1,134 | 0,749 | **0,433** |
+| exatas, acentuadas | 0% | 0% | 2,5% |
+| exatas, ASCII | 1,7% | 0% | **20,8%** |
+| produção de diacrítico | 0,0% | 27,5% | 20,8% |
+| falso acento nas ASCII | 0,0% | 0,8% | **0,0%** |
 
 **O TrOCR não emitiu uma única marca** em 120 palavras acentuadas, com 148
 marcas esperadas. O problema dele não é imprecisão, é não escrever diacrítico.
@@ -169,27 +171,53 @@ Mesmo assim ele reprova nos critérios fixados antes de medir: CER sem dobra
 0,749 contra o teto de 0,30, produção 27,5% contra o piso de 50%, e 0% de
 leitura exata.
 
+O PaddleOCR é melhor que os dois em tudo. A precisão por marca é perfeita:
+agudo 3/3, cedilha 6/6, circunflexo 8/8, grave 1/1, til 13/13, e nenhum falso
+acento nas 120 palavras ASCII.
+
+Separando as duas medidas do artigo de Aldarmaki e Ghannam (2023):
+
+- **precisão alta.** Das 31 marcas que emitiu, 31 estavam certas.
+- **cobertura baixa.** Só 11 das 120 palavras acentuadas tiveram a base lida
+  corretamente (9,2%), e dessas 11 apenas 3 vieram com o acento também certo
+  (27%). Nos outros casos ele lê a palavra e descarta a marca: "não" vira
+  "Nao", "econômico" vira "economico", "importância" vira "importancia".
+
+Pelo critério fixado antes, com CER sem dobra em 0,433, o PaddleOCR cai na
+faixa declarada como **inconclusiva** (entre 0,30 e 0,50): reportar os números
+e decidir com eles na mão. Ele não sustenta a estratificação por classe de
+caractere hoje, porque ela precisaria rodar sobre 11 palavras.
+
 ### A causa não é resolução
 
-| faixa de altura do recorte original | n | CER EasyOCR | produção |
+| faixa de altura | n | CER EasyOCR | CER PaddleOCR |
 |---|---|---|---|
-| ≤ 28 px | 16 | 0,707 | 25,0% |
-| 29–32 px | 34 | 0,739 | 29,4% |
-| 33–40 px | 20 | 0,712 | 35,0% |
-| ≥ 41 px | 50 | 0,784 | 24,0% |
+| ≤ 28 px | 16 / 32 | 0,707 | 0,457 |
+| 29–32 px | 34 / 80 | 0,739 | 0,446 |
+| 33–40 px | 20 / 42 | 0,712 | 0,397 |
+| ≥ 41 px | 50 / 86 | 0,784 | 0,449 |
 
-Dentro da faixa disponível, de 28 a 57 px, o CER não melhora com a altura, e a
-banda mais alta é a pior. Para o eixo E2 o gargalo é domínio e língua, não
+Dentro da faixa disponível, de 28 a 57 px, o CER não melhora com a altura em
+nenhum dos dois, e a banda mais alta não é melhor que a mais baixa. Para o eixo E2 o gargalo é domínio e língua, não
 resolução: nenhum dos dois leitores foi treinado em cursiva portuguesa. Isso
 não contradiz a análise de resolução do ACHADOS 7, que trata do que o fine-tune
 consegue aprender, e é outra pergunta.
 
 ### Conclusão
 
-Nenhum reconhecedor local de prateleira passa. O eixo E2 continua **não
-validado**, e a estratificação por classe de caractere, que precisa de leitor,
-continua bloqueada. O caminho que restaria é ajuste fino de um HTR no BRESSAY,
-que está fora do escopo acordado.
+Nenhum dos três passa o critério fixado antes de medir, mas eles falham de
+formas diferentes e isso importa.
+
+TrOCR e EasyOCR reprovam de vez. O PaddleOCR cai na faixa inconclusiva, é o
+único com alfabeto completo, tem precisão perfeita nas marcas que emite e nenhum
+falso acento. O que falta nele é cobertura: lê a base certa em 9,2% das palavras
+e, quando lê, descarta o acento em 73% dos casos.
+
+O eixo E2 continua **não validado** e a estratificação por classe de caractere
+continua bloqueada. A diferença em relação a antes é que agora existe um
+candidato que vale perseguir, e o caminho natural seria ajuste fino do
+reconhecedor do PaddleOCR no BRESSAY, que tem transcrição para 416.826
+palavras. Isso está fora do escopo acordado e é decisão do grupo.
 
 ## E2 satura no piso — e satura já no manuscrito humano
 
