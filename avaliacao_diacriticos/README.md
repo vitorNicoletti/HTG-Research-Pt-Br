@@ -115,6 +115,82 @@ estão degenerados**, todos em `ação.png`, nas pastas `amostras_bressay_ep15`,
 std = 0,000, imagem em branco. Não é o modelo falhando em "ação": é a
 amostragem em lote.
 
+## Experimento A: nenhum reconhecedor local de prateleira lê este corpus
+
+O eixo E2 depende de um leitor. O TrOCR não serve, e a pergunta era se algum
+outro modelo pronto, rodando local e de graça, serviria.
+
+### Portão de alfabeto, antes de baixar peso
+
+Um reconhecedor cujo alfabeto de saída não tem "a com til" nunca vai escrever
+"a com til". Dá para eliminar candidato lendo só o charset. Medido em
+`htr_alfabeto.py`:
+
+| modelo | til | cedilha | agudo | grave | circunflexo |
+|---|---|---|---|---|---|
+| `Teklia/pylaia-rimes` (francês) | **0/4** | 1/2 | 2/10 | 2/2 | 3/6 |
+| `Teklia/pylaia-belfort` (francês) | **0/4** | 1/2 | 2/10 | 2/2 | 3/6 |
+| `Teklia/pylaia-iam` (inglês) | 0/4 | 0/2 | 0/10 | 0/2 | 0/6 |
+| `PaddlePaddle/latin_PP-OCRv5_mobile_rec` | 4/4 | 2/2 | 10/10 | 2/2 | 6/6 |
+
+O PyLaia francês tem 100 símbolos e os não-ASCII são `¤°²ÀÉàâçèéêëîôùûœ€`.
+Ele escreve ç, à, â, ê, ô, e **não tem til nenhum**. Como o til é a marca mais
+frequente do corpus, com 5.671 ocorrências, isso elimina os modelos franceses
+para metade do problema.
+
+O Paddle é o único com alfabeto completo, 851 símbolos. Ele **não roda aqui**:
+o peso vem em formato nativo `inference.pdiparams`, exige `paddlepaddle`, e não
+existe wheel de `paddlepaddle` para Python 3.14. Fica registrado como candidato
+viável em outro ambiente.
+
+Para a família TrOCR o portão não se aplica: o BPE byte-level representa
+qualquer Unicode, então capacidade de tokenizer não é capacidade aprendida e o
+teste tem de ser empírico.
+
+### Medida nos 240 recortes reais
+
+| | TrOCR base-handwritten | EasyOCR `pt` |
+|---|---|---|
+| CER com dobra ASCII | 0,819 | 0,692 |
+| CER sem dobra | 1,134 | 0,749 |
+| leituras exatas | 0% | 0% |
+| **produção de diacrítico** | **0,0%** | **27,5%** |
+| falso acento nas ASCII | 0,0% | 0,8% |
+
+**O TrOCR não emitiu uma única marca** em 120 palavras acentuadas, com 148
+marcas esperadas. O problema dele não é imprecisão, é não escrever diacrítico.
+
+O EasyOCR emite, e quando emite costuma acertar: circunflexo 11 de 11, cedilha
+8 de 9, til 7 de 8, agudo 5 de 9, grave 1 de 4, ou 32 de 41 no total (78%).
+Isso é evidência de que a marca **está visível na imagem**; o que falta é o
+leitor conseguir ler a palavra.
+
+Mesmo assim ele reprova nos critérios fixados antes de medir: CER sem dobra
+0,749 contra o teto de 0,30, produção 27,5% contra o piso de 50%, e 0% de
+leitura exata.
+
+### A causa não é resolução
+
+| faixa de altura do recorte original | n | CER EasyOCR | produção |
+|---|---|---|---|
+| ≤ 28 px | 16 | 0,707 | 25,0% |
+| 29–32 px | 34 | 0,739 | 29,4% |
+| 33–40 px | 20 | 0,712 | 35,0% |
+| ≥ 41 px | 50 | 0,784 | 24,0% |
+
+Dentro da faixa disponível, de 28 a 57 px, o CER não melhora com a altura, e a
+banda mais alta é a pior. Para o eixo E2 o gargalo é domínio e língua, não
+resolução: nenhum dos dois leitores foi treinado em cursiva portuguesa. Isso
+não contradiz a análise de resolução do ACHADOS 7, que trata do que o fine-tune
+consegue aprender, e é outra pergunta.
+
+### Conclusão
+
+Nenhum reconhecedor local de prateleira passa. O eixo E2 continua **não
+validado**, e a estratificação por classe de caractere, que precisa de leitor,
+continua bloqueada. O caminho que restaria é ajuste fino de um HTR no BRESSAY,
+que está fora do escopo acordado.
+
 ## E2 satura no piso — e satura já no manuscrito humano
 
 Este é o resultado do Passo 3/4 para o segundo eixo, e ele é negativo. O TrOCR
