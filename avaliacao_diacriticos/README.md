@@ -291,13 +291,23 @@ acento** com o escore nas **outras colunas da mesma imagem**, com a mesma
 faixa. Se fosse jitter de traço, as duas seriam iguais. Diferença pareada,
 IC95 por bootstrap sobre 4.000 reamostragens:
 
-| marca | diferença | IC95 | efeito real? |
+O IC reamostra **palavras**, não amostras: as 72 amostras de cada marca vêm de
+6 palavras repetidas 12 vezes (4 estilos × 3 sementes), e tratá-las como
+independentes dá intervalo estreito demais.
+
+| marca | diferença | IC95 por palavra | efeito real? |
 |---|---|---|---|
-| **cedilha** | **+0,0245** | [+0,0085, +0,0416] | **sim** |
-| agudo | +0,0067 | [−0,0064, +0,0197] | não |
-| grave | −0,0028 | [−0,0114, +0,0056] | não |
-| circunflexo | −0,0123 | [−0,0289, +0,0040] | não |
-| til | −0,0112 | [−0,0210, −0,0018] | sim, mas **negativo** |
+| **cedilha** | **+0,0245** | [+0,0032, +0,0485] | **sim** |
+| agudo | +0,0067 | [−0,0012, +0,0182] | não |
+| grave | −0,0028 | [−0,0090, +0,0026] | não |
+| circunflexo | −0,0123 | [−0,0481, +0,0165] | não |
+| til | −0,0112 | [−0,0313, +0,0070] | não |
+
+Uma versão anterior desta tabela usava bootstrap por amostra e dava o til como
+efeito negativo real, com IC [−0,0210, −0,0018]. Com a reamostragem por palavra
+esse intervalo cruza zero e a conclusão cai. A da cedilha sobrevive, mas com o
+limite inferior em +0,0032 e apoiada em 6 palavras, então ampliar a lista de
+palavras é o que firmaria o resultado.
 
 E o extra de tinta da cedilha está na faixa certa, não no corpo da letra: na
 coluna do ç o corpo **perde** tinta (−0,0245) enquanto a faixa abaixo da linha

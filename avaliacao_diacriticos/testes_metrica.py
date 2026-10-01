@@ -205,6 +205,28 @@ m2, n = M.remover_pauta(M.binariza(fino))
 checa("remocao tira so as 3 fileiras da pauta", n == 3, f"(n={n})")
 checa("o corpo da letra sobrevive", m2[30:46, 100:160].all())
 
+print("\n12. IC por cluster e mais largo que IC por amostra")
+# Dado com estrutura de grupo forte: 6 palavras, 12 repeticoes identicas cada.
+# Toda a variacao esta ENTRE palavras, nenhuma dentro. Reamostrar amostra a
+# amostra finge 72 observacoes independentes; reamostrar palavra reconhece que
+# sao 6. O IC por cluster tem de ser mais largo.
+from avaliar import ic_bootstrap  # noqa: E402
+valores, grupos = [], []
+for k, base in enumerate([0.0, 0.1, 0.2, 0.3, 0.4, 0.5]):
+    valores += [base] * 12
+    grupos += [f"palavra{k}"] * 12
+_, lo_a, hi_a = ic_bootstrap(valores)
+_, lo_c, hi_c = ic_bootstrap(valores, grupos)
+checa("IC por cluster e mais largo", (hi_c - lo_c) > (hi_a - lo_a),
+      f"(amostra {hi_a - lo_a:.4f} vs cluster {hi_c - lo_c:.4f})")
+checa("as duas medias batem", abs(sum(valores) / len(valores) - 0.25) < 1e-9)
+# Sem estrutura de grupo (cada valor e seu proprio grupo) os dois coincidem
+g1 = [str(i) for i in range(len(valores))]
+_, lo_1, hi_1 = ic_bootstrap(valores, g1)
+checa("com 1 valor por grupo, cluster ~ amostra",
+      abs((hi_1 - lo_1) - (hi_a - lo_a)) < 0.03,
+      f"({hi_1 - lo_1:.4f} vs {hi_a - lo_a:.4f})")
+
 print("\n" + ("TODOS OS TESTES PASSARAM" if not falhas
                else f"FALHARAM: {falhas}"))
 sys.exit(1 if falhas else 0)

@@ -38,13 +38,33 @@ def carregar(dirbase):
     return itens
 
 
-def ic_bootstrap(valores, n=2000, alfa=0.05, seed=0):
-    """IC percentil por bootstrap. Devolve (media, low, high)."""
+def ic_bootstrap(valores, grupos=None, n=2000, alfa=0.05, seed=0):
+    """IC95 percentil por bootstrap. Devolve (media, low, high).
+
+    Com `grupos`, reamostra GRUPOS inteiros em vez de valores soltos.
+
+    Isso muda o resultado neste conjunto. As amostras de uma mesma palavra nao
+    sao independentes: sao a mesma palavra gerada com estilos e sementes
+    diferentes. No conjunto do IAM sao 72 amostras por marca vindas de 6
+    palavras, cada uma repetida 12 vezes (4 estilos x 3 sementes). Reamostrar
+    valor a valor trata isso como 72 observacoes independentes e devolve um IC
+    estreito demais. Passando a palavra como grupo, o IC passa a refletir
+    quantas palavras distintas sustentam o numero.
+    """
     v = np.asarray(valores, dtype=np.float64)
     if len(v) == 0:
         return (float("nan"),) * 3
     rng = np.random.default_rng(seed)
-    med = rng.choice(v, size=(n, len(v)), replace=True).mean(axis=1)
+    if grupos is None:
+        med = rng.choice(v, size=(n, len(v)), replace=True).mean(axis=1)
+    else:
+        blocos = {}
+        for x, g in zip(v, grupos):
+            blocos.setdefault(g, []).append(x)
+        blocos = [np.asarray(b) for b in blocos.values()]
+        k = len(blocos)
+        med = np.array([np.concatenate([blocos[j] for j in rng.integers(0, k, k)]).mean()
+                        for _ in range(n)])
     return float(v.mean()), float(np.percentile(med, 100 * alfa / 2)), \
         float(np.percentile(med, 100 * (1 - alfa / 2)))
 
@@ -217,14 +237,21 @@ def main():
     print(f"amostras com linha pautada removida: {com_pauta} "
           f"({100 * com_pauta / max(1, len(linhas)):.0f}%)")
     marcas = sorted({l["marca"] for l in linhas})
-    print(f"\n{'marca':14s} {'n':>5s} {'E1 escore medio':>16s} {'IC95':>22s}")
+    # O IC reamostra PALAVRAS, nao amostras: varias amostras da mesma palavra
+    # sao o mesmo texto com estilo e semente diferentes, e nao sao
+    # independentes. A coluna "pal" mostra quantas palavras distintas
+    # sustentam cada linha.
+    print(f"\n{'marca':14s} {'n':>5s} {'pal':>5s} {'E1 escore medio':>16s} {'IC95':>22s}")
     for m in marcas:
-        v = [l["e1_escore"] for l in linhas if l["marca"] == m]
-        mu, lo, hi = ic_bootstrap(v)
-        print(f"{m:14s} {len(v):5d} {mu:16.4f}   [{lo:.4f}, {hi:.4f}]")
+        sel = [l for l in linhas if l["marca"] == m]
+        v = [l["e1_escore"] for l in sel]
+        g = [l["palavra"] for l in sel]
+        mu, lo, hi = ic_bootstrap(v, g)
+        print(f"{m:14s} {len(v):5d} {len(set(g)):5d} {mu:16.4f}   [{lo:.4f}, {hi:.4f}]")
     v = [l["e1_escore"] for l in linhas]
-    mu, lo, hi = ic_bootstrap(v)
-    print(f"{'TODAS':14s} {len(v):5d} {mu:16.4f}   [{lo:.4f}, {hi:.4f}]")
+    g = [l["palavra"] for l in linhas]
+    mu, lo, hi = ic_bootstrap(v, g)
+    print(f"{'TODAS':14s} {len(v):5d} {len(set(g)):5d} {mu:16.4f}   [{lo:.4f}, {hi:.4f}]")
 
     # Quando existe gemeo, os DOIS eixos sao calculados e vale ver os dois: a
     # variante por faixa e a unica comparavel com recorte real, e a por
@@ -235,7 +262,7 @@ def main():
         for rot, col in (("por faixa (massa_rel)", "faixa_massa_rel"),
                          ("por diferenca (delta_rel)", "diff_delta_rel")):
             vv = [float(l[col] or 0.0) for l in com_gemeo]
-            mu, lo, hi = ic_bootstrap(vv)
+            mu, lo, hi = ic_bootstrap(vv, [l["palavra"] for l in com_gemeo])
             print(f"  {rot:28s} {mu:8.4f}   [{lo:.4f}, {hi:.4f}]")
         ref = ("referencia do eixo por diferenca (teste_sensibilidade_diff): "
                "0.0000 = gemeos identicos, 0.0389 = meio acento nominal, "
@@ -245,13 +272,13 @@ def main():
     if a.limiar_e1 is not None:
         print(f"\npresenca (E1 > {a.limiar_e1}):")
         for m in marcas:
-            v = [1.0 if l["e1_presente"] else 0.0
-                 for l in linhas if l["marca"] == m]
-            mu, lo, hi = ic_bootstrap(v)
+            sel = [l for l in linhas if l["marca"] == m]
+            v = [1.0 if l["e1_presente"] else 0.0 for l in sel]
+            mu, lo, hi = ic_bootstrap(v, [l["palavra"] for l in sel])
             print(f"  {m:14s} {len(v):5d} {100 * mu:6.1f}%   "
                   f"[{100 * lo:.1f}%, {100 * hi:.1f}%]")
         v = [1.0 if l["e1_presente"] else 0.0 for l in linhas]
-        mu, lo, hi = ic_bootstrap(v)
+        mu, lo, hi = ic_bootstrap(v, [l["palavra"] for l in linhas])
         print(f"  {'TODAS':14s} {len(v):5d} {100 * mu:6.1f}%   "
               f"[{100 * lo:.1f}%, {100 * hi:.1f}%]")
         cats = {}
