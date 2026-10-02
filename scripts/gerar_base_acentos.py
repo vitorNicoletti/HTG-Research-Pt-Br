@@ -38,7 +38,11 @@ _CFG = None
 
 def _iniciar(caminho_alinhador, cfg):
     global _ALIN, _CFG
+    # 1 thread por processo: sem isso o OpenCV e o torch abrem um pool de
+    # threads em cada worker e a maquina engasga (load 300 com 16 workers)
+    import cv2
     import torch
+    cv2.setNumThreads(1)
     torch.set_num_threads(1)
     from acentos_sinteticos import alinhamento
     _ALIN = alinhamento.Alinhador(caminho_alinhador, "cpu")

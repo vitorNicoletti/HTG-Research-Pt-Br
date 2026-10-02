@@ -46,7 +46,10 @@ flowchart TD
     M --> N["Escala mínima<br/>extensão ≥ 3,5 × espessura"]
     N --> O["Posiciona: folga vertical + desvio horizontal<br/>amplia a tela se passar da borda"]
     O --> P["Rasteriza com a caneta da palavra<br/>supersampling 4× · pontas afinadas · mistura por mínimo"]
-    P --> Q[("Saída<br/>imagem + rótulo novo + manifesto")]
+    P --> R{"visibilidade ≥ 0,6?"}
+    R -- sim --> Q[("Saída<br/>imagem + rótulo novo + manifesto")]
+    R -- "não: novo sorteio (até 3)" --> C
+    F -. "confiança < −0,2" .-> X["palavra descartada"]
 ```
 
 Toda a aleatoriedade sai de um único `random.Random(semente)` por amostra. Com a
@@ -658,8 +661,10 @@ Dentro da fatia da letra escolhida:
 
 **Caso do `í`** (`geometria.pingos_do_i`): componentes pequenos (área ≤ 0,35 ×
 altura-x²) inteiramente acima da altura-x, com centro dentro da fatia, são o pingo.
-Eles são apagados com a cor do papel, dilatados em 1 px para não deixar sombra, antes
-de o agudo ser desenhado.
+Eles são apagados por *inpainting* (`cv2.inpaint`, Telea), que preenche a área com o
+papel em volta, antes de o agudo ser desenhado. A área é dilatada em 1 px para não
+sobrar sombra da borda. Pintar com uma cor só deixava um quadrado mais claro em papel
+com textura.
 
 ## Etapa 6 — Forma do sinal (`tracos.py`)
 
@@ -724,6 +729,45 @@ Ponto de encaixe (a origem da forma):
 | `variacoes.png` | a mesma palavra e a mesma letra com 6 sementes, por tipo de sinal |
 | `comparacao_fatias.png` | com `--alinhador`: a mesma amostra com fatias iguais e com CTC + vales |
 
+## Etapa 10 — Filtros de qualidade (`gerador.gerar`)
+
+`gerar()` é a versão de `acentuar()` usada para montar a base. Ela aplica dois filtros:
+
+1. **Confiança do alinhamento.** Se `logp_medio < −0,2` (`MIN_LOGP`), a palavra inteira
+   é descartada (motivo `confianca`). Isso acontece antes de desenhar, porque um
+   alinhamento ruim indica um recorte ambíguo ou ilegível, como o `fõr`. Se o
+   alinhamento falhar, o motivo é `sem_alinhamento`; na base não há fallback para
+   fatias iguais.
+2. **Visibilidade do sinal.** Depois de desenhar, mede-se quanto do sinal virou tinta
+   **nova** (`desenho.visibilidade`). Se ficar abaixo de 0,6 (`MIN_VISIBILIDADE`), a
+   palavra é sorteada de novo (letra, forma e posição) até 3 vezes (`TENTATIVAS`).
+   Depois disso, é descartada (motivo `invisivel`).
+
+**Por que medir a visibilidade.** A tinta é misturada pelo mínimo (Etapa 8). Se o sinal
+cai em cima de um traço que já existe, como o corte do `t` ou o laço do `h`, ele some
+dentro dele. A amostra ganha o rótulo `strêwn` sem acento visível na imagem, e isso
+ensina ao modelo exatamente o erro que o trabalho estuda.
+
+**Como a visibilidade é medida:**
+- **pixels novos:** os que passaram a ficar mais escuros que o meio entre o papel e a
+  tinta, e que não eram tinta antes. A tinta antiga é dilatada em 1 px, para não contar
+  a borda suavizada das letras;
+- **área esperada:** comprimento da polilinha do sinal × espessura;
+- **visibilidade:** pixels novos ÷ área esperada. Perto de 1, o sinal inteiro apareceu;
+  perto de 0, ficou escondido.
+
+**Calibração do limiar 0,6.** As mesmas 200 amostras julgadas (seção "Avaliação visual
+de 200 amostras") foram refeitas com a mesma semente, que gera imagens idênticas, e a
+visibilidade foi cruzada com o julgamento:
+- os 4 sinais escondidos em tinta existente (`fór`, `hàs`, `strêwn`, `sidê`) têm
+  visibilidade 0,33–0,54;
+- das 182 amostras boas, só 1 fica abaixo de 0,6: `perfõrm`, com 0,42 e um til
+  minúsculo;
+- as outras boas estão todas acima de 0,68 (mediana 0,91).
+
+O valor fica em `params.visibilidade`, e o número da tentativa que passou em
+`params.tentativa`.
+
 ---
 
 ## Avaliação da localização das letras
@@ -759,18 +803,57 @@ Resultado em 2.017 palavras e 2.969 letras-alvo (`a o e u c`):
 - **Ressalva:** letras soltas são o caso fácil. Na escrita cursiva o erro é maior, e
   esse número é um limite inferior.
 
+## Avaliação visual de 200 amostras
+
+200 amostras novas (`--n 200 --seed 1`), de palavras de `iam_train_val`, em sua maioria
+cursivas. O julgamento foi feito pelo Claude, um avaliador só, sem ver a confiança, em
+folhas de 25 (`saidas/acentos_sinteticos/avaliacao_200/revisao/`). Cada amostra, com o
+motivo do julgamento, está em `avaliacao_200/julgamento.tsv`.
+
+| julgamento | n | % (199 julgáveis) |
+|---|---|---|
+| C — sinal na letra certa | 182 | 91,5% |
+| E — sinal na letra errada | 7 | 3,5% |
+| F — sinal fraco ou invisível | 10 | 5,0% |
+| ? — não julgável (rótulo do IAM errado: `person`, imagem `people`) | 1 | — |
+
+**Corte por confiança:**
+
+| corte de `logp` | fica | C | E | descartados (E / F / C) |
+|---|---|---|---|---|
+| nenhum | 199 | 91,5% | 3,5% | — |
+| **−0,2 (em uso)** | 193 (97%) | 93,3% | 2,1% | 3 / 1 / 2 |
+| −0,1 | 184 (92%) | 92,9% | 2,2% | 3 / 1 / 11 |
+| −0,05 | 158 (79%) | 94,3% | 1,3% | 5 / 3 / 33 |
+| −0,03 | 118 (59%) | 96,6% | 0% | 7 / 6 / 68 |
+
+O corte em −0,2 pega 3 dos 7 erros perdendo só 2 amostras boas. Os outros 4 erros têm
+`logp` entre −0,06 e −0,03, no meio das boas, e nenhum corte os separa sem descartar
+muitas amostras boas.
+
+**Revisão dos sinais fracos.** Ampliados, 6 dos 10 "F" (5 com `í` e o `bút`) têm o
+sinal visível: na escala do modelo, com a palavra reduzida para 64 px de altura, ele tem
+1,8 a 4,6 px de espessura. Eles pareciam fracos porque as folhas de 25 mostram palavras
+de caneta fina muito reduzidas; o erro foi da escala de visualização, não do gerador.
+Os 4 realmente invisíveis estavam escondidos em tinta existente, e o filtro de
+visibilidade (Etapa 10) os elimina.
+
+**Padrão nos erros de letra:** 3 dos 7 (`háppens`, `hélp`, `húll`) são a letra logo
+depois de um `h`, com o sinal caindo na haste dele.
+
 ## Limitações conhecidas
 
 - **Cursiva muito ligada:** em `stumblêd` o circunflexo cai sobre o `d`. O alinhador lê
   "stumblerd", e a confiança não é das mais baixas, então o filtro não o pega.
-- **Recortes quase ilegíveis:** `fõr` tem `logp` −0,29 e o alinhador lê "fo". Esses
-  casos devem ser descartados pelo filtro de confiança, não corrigidos.
-- **Sinal pouco visível** em palavras pequenas ou de traço fino (`síght`, `marriagê`).
+- **Recortes quase ilegíveis:** `fõr` tem `logp` −0,29 e o alinhador lê "fo". O filtro
+  de confiança (−0,2) descarta esses casos.
+- **Letra depois de um `h`:** o sinal pode cair na haste do `h` (3 dos 7 erros na
+  avaliação de 200). O filtro não pega esses casos.
+- **Erros residuais:** cerca de 2% dos sinais na letra vizinha, com confiança alta.
+- **Rótulos errados do próprio IAM** passam adiante (1 em 200).
 - **Cedilha** sob um `C` grande se mistura com a curva da letra.
 - O acento é **sempre um traço separado**. Escritores que ligam o acento à letra seguinte
   não são imitados.
-- **Ainda não definidos:** o corte do filtro de confiança e a taxa de acerto em cursiva,
-  com uma amostra maior.
 
 ## Como reproduzir
 
@@ -785,6 +868,9 @@ python scripts/avaliar_posicao_letras.py --alinhador modelos/alinhador_iam.pt
 
 # 3. folhas de amostras (sem --alinhador: fatias iguais)
 python scripts/amostras_acentos.py --n 30 --seed 0 --alinhador modelos/alinhador_iam.pt
+
+# 4. base completa (iam_train_val, com os filtros; ~30 min com 16 processos)
+python scripts/gerar_base_acentos.py --alinhador modelos/alinhador_iam.pt --saida iam_acentuado --workers 16
 ```
 
 Uso como biblioteca:
@@ -795,9 +881,10 @@ from acentos_sinteticos import alinhamento, gerador, iam
 
 alin = alinhamento.Alinhador("modelos/alinhador_iam.pt")      # CPU basta
 p = iam.listar("DiffusionPen")[0]
-am = gerador.acentuar(iam.carregar_cinza(p.caminho), p.texto,
-                      random.Random(123), alinhador=alin)      # None se não houver candidato
-am.imagem, am.rotulo, am.manifesto()
+am, motivo = gerador.gerar(iam.carregar_cinza(p.caminho), p.texto,
+                           random.Random(123), alin)           # com os filtros
+if am is not None:                                             # motivo == "ok"
+    am.imagem, am.rotulo, am.manifesto()
 ```
 
 ## Mapa dos arquivos
@@ -808,8 +895,9 @@ am.imagem, am.rotulo, am.manifesto()
 | `acentos_sinteticos/geometria.py` | máscara, caixa, corpo, espessura, fatias iguais, ajuste aos vales, pontos de contato, pingo do i |
 | `acentos_sinteticos/alinhamento.py` | modelo CTC, Viterbi forçado, `Alinhador`, fatias do alinhamento |
 | `acentos_sinteticos/tracos.py` | formas paramétricas dos cinco sinais |
-| `acentos_sinteticos/desenho.py` | rasterização, cor do papel, apagar, ampliar tela |
-| `acentos_sinteticos/gerador.py` | orquestra: sorteio, localização, contato, forma, posição, desenho, rótulo |
+| `acentos_sinteticos/desenho.py` | rasterização, cor do papel, apagar (inpainting), ampliar tela, visibilidade |
+| `acentos_sinteticos/gerador.py` | orquestra: sorteio, localização, contato, forma, posição, desenho, rótulo; `gerar()` com os filtros |
 | `scripts/treinar_alinhador.py` | treino do reconhecedor CTC |
 | `scripts/avaliar_posicao_letras.py` | verdade automática e comparação dos estimadores |
 | `scripts/amostras_acentos.py` | folhas de avaliação visual e manifesto |
+| `scripts/gerar_base_acentos.py` | base completa: imagens, `split.txt`, manifesto, descartes, resumo |
