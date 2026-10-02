@@ -861,3 +861,24 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
   - `thê` fundido ao arco do `h` e `háve` espremido contra o `h`, ambos na
     letra certa;
   - `satisfíes` certo: o agudo trocou um pingo em forma de traço.
+
+### Fine-tune na base de acentos sintéticos — lançado
+
+- Leitor novo `diffusionpen_mods/utils/iam_acentuado_dataset.py`
+  (`--dataset iam_acentuado`):
+  - amostras: as acentuadas mais uma fração `--iam_originais` das palavras
+    originais do `iam_train_val`;
+  - referências de estilo: sempre palavras originais do mesmo escritor;
+  - pré-processamento: o do `IAMDataset`, copiado sem mudança.
+- `scripts/treinar.py` ganhou `dados.dataset` e `dados.iam_originais`. Os
+  `experimento.json` antigos valem como `bressay`/`0`; o `--dry-run` do
+  `bressay_25_v2` não acusou diferenças.
+- Teste do leitor:
+  - 85.267 amostras (29.732 acentuadas e 55.535 originais), 339 escritores;
+  - 22 ms por amostra, com as 5 referências;
+  - imagens conferidas como o modelo as recebe.
+- `python scripts/treinar.py experimentos/iam_acentuado.json`: lr 2e-5, batch
+  32, 10 épocas em blocos de 2, a partir dos pesos do IAM.
+  - Os pesos carregaram com as 457/457 chaves.
+  - 2.665 passos por época, ~2 passos/s, ~22 min por época.
+  - MSE inicial ≈ 0,047.

@@ -867,6 +867,34 @@ Saída: `imagens/NNNNNN.png`, `split.txt` (`imagens/NNNNNN.png,escritor,rótulo`
 formato dos `utils/splits_words/*.txt`), `manifesto.jsonl`, `descartes.tsv` e
 `resumo.json`.
 
+## Uso no fine-tune
+
+O `train.py` lê a base com `--dataset iam_acentuado`
+(`diffusionpen_mods/utils/iam_acentuado_dataset.py`). O experimento é
+`experimentos/iam_acentuado.json`:
+
+```bash
+python scripts/treinar.py experimentos/iam_acentuado.json
+```
+
+- **Amostras de treino:** as 29.732 acentuadas e a fração `dados.iam_originais` das
+  55.535 palavras originais de `iam_train_val`, sem acento. Com 1,0, são 85.267
+  amostras, 35% delas acentuadas. As originais mantêm a distribuição em que o modelo
+  foi treinado, o que reduz o esquecimento. Também evitam que ele aprenda "sempre ponha
+  algum acento". E, como cada acentuada saiu de uma original, o par "mesma imagem, com
+  e sem o sinal" é o contraste mais direto possível.
+- **Referências de estilo:** 5 palavras originais, sem acento, do mesmo escritor, com
+  mais de 3 letras (o mesmo critério do `IAMDataset`). O extrator de estilo vê a
+  caligrafia; o acento só pode vir do texto.
+- **Pré-processamento:** o do `IAMDataset`, copiado sem mudança. A palavra vai para
+  altura 64 mantendo a proporção e é centralizada em 256 de largura, sem normalização
+  de contraste. É o que o modelo viu no treino original.
+- **Classe do escritor:** o índice de `writers_dict_train.json`, o mesmo do treino do
+  IAM. O escritor `000` é a classe 12, o estilo usado na sonda.
+- **Amostras de cada bloco:** pares sem e com acento (`nacao`/`nação`,
+  `coracao`/`coração`, `pao`/`pão`, `avo`/`avó`, `voce`/`você`) e o controle `the`, com
+  estilos do IAM.
+
 ## Limitações conhecidas
 
 - **Cursiva muito ligada:** em `stumblêd` o circunflexo cai sobre o `d`. O alinhador lê
@@ -927,3 +955,4 @@ if am is not None:                                             # motivo == "ok"
 | `scripts/avaliar_posicao_letras.py` | verdade automática e comparação dos estimadores |
 | `scripts/amostras_acentos.py` | folhas de avaliação visual e manifesto |
 | `scripts/gerar_base_acentos.py` | base completa: imagens, `split.txt`, manifesto, descartes, resumo |
+| `diffusionpen_mods/utils/iam_acentuado_dataset.py` | leitor da base para o `train.py` (`--dataset iam_acentuado`) |

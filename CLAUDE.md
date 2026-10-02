@@ -35,7 +35,7 @@ All docs, code identifiers, comments and commit messages are in **Portuguese**. 
 - `flake.nix` — Nix dev shells: `nix develop .#rocm` (the default), `.#cuda` and `.#cpu`.
 - `LOG.md` (dated execution diary), `ACHADOS.md` (findings), `STATUS.md`, `README.md`.
 
-## BRESSAY fine-tune
+## Fine-tune (BRESSAY and synthetic-accent IAM)
 
 Preferred entry point: an experiment file plus `scripts/treinar.py`.
 
@@ -47,6 +47,14 @@ python scripts/treinar.py experimentos/bressay_25.json [--dry-run]
 - **Copies.** The launcher copies the file to `SAVE_PATH/experimento.json`.
 - **Resuming.** On resume it only allows changes to `descricao`, `treino.epocas_total`, `execucao.*` and `amostras.*`; anything else requires a new `save_path`.
 - **Outputs.** The log goes to `SAVE_PATH/treino.log` and samples to `SAVE_PATH/amostras/<N>ep/`.
+- **Dataset.** `dados.dataset` picks the `train.py` reader.
+  - `bressay` uses `utils/bressay_dataset.py`.
+  - `iam_acentuado` uses `utils/iam_acentuado_dataset.py`, which reads the synthetic-accent base from `scripts/gerar_base_acentos.py`. Its `dados.split` is the base folder and `dados.imagens` is `DiffusionPen/iam_data/words`.
+    - It adds a fraction `dados.iam_originais` of the original unaccented `iam_train_val` words.
+    - Style references always come from original words of the same writer.
+    - Preprocessing is copied verbatim from `IAMDataset` (`dados.preproc: "iam"`, no contrast normalization).
+    - Experiment: `experimentos/iam_acentuado.json`; samples use IAM styles (`estilo_de: "iam"`).
+  - `dados.dataset` and `dados.iam_originais` were added after the BRESSAY runs. The launcher treats older saved `experimento.json` files as `bressay` / `0`, so they still resume.
 - **Preprocessing.** `dados.preproc` picks the BRESSAY image preprocessing in `utils/bressay_dataset.py`. `v1` (default, original) is contrast plus padding of the whole crop. `v2` enlarges to 64 px, removes the ruled line (same detection as the metric, but it keeps strokes crossing the line), crops tight to the ink and scales like IAM. `v2` pairs with `scripts/filtrar_tinta.py`, which drops training words whose ink is under N px tall in the original. `bressay_split_25_v2` uses 14 px, and `experimentos/bressay_25_v2.json` trains on it. Visual comparisons: `diagnostico/comparar_preproc.py`.
 - **Other settings.** The contrast percentiles and the UNet architecture are deliberately not experiment parameters. `load_image` is shared with generation and the metric, and the architecture must match the IAM checkpoint. Both are still recorded in `config.jsonl`.
 
