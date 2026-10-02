@@ -2,9 +2,9 @@
 
 Metodo:
   1. mascara de tinta por Otsu e caixa da tinta (ignorando manchas);
-  2. corpo da palavra pelo perfil horizontal: as fileiras com pelo menos
-     metade da tinta da fileira mais cheia, ampliado para a faixa que
-     concentra 70% da tinta, com piso de 3 espessuras de traco. O topo do
+  2. corpo da palavra pelo perfil horizontal: a faixa continua de fileiras
+     em torno da mais cheia com ao menos 30% da tinta dela, com piso de 3
+     espessuras de traco. O topo do
      corpo e a altura-x, o fundo e a linha de base -- ascendentes (l, t, d) e
      descendentes (g, p) ficam de fora;
   3. a largura da caixa e dividida em N fatias iguais, uma por letra;
@@ -23,8 +23,7 @@ import cv2
 import numpy as np
 
 AREA_MIN_MANCHA = 4        # px; componentes menores nao contam para a caixa
-LIMIAR_CORPO = 0.5         # fracao da fileira mais cheia que define o corpo
-MASSA_CORPO = (0.15, 0.85) # percentis da tinta por fileira que tambem definem o corpo
+LIMIAR_CORPO = 0.3         # fracao da fileira mais cheia que define o corpo
 MIN_ALTURA_X_ESPESSURAS = 3.0  # altura-x minima, em espessuras de traco
 FRACAO_CENTRAL = 0.6       # fracao central da fatia usada no ponto de contato
 TOLERANCIA_CORPO = 0.15    # quanto (em alturas-x) o contato pode sair do corpo
@@ -77,15 +76,21 @@ def analisar(g):
 
     perfil = limpa[:, x0:x1].sum(axis=1).astype(np.float32)
     perfil = np.convolve(perfil, np.ones(3) / 3, mode="same")
-    corpo = np.where(perfil >= LIMIAR_CORPO * perfil.max())[0]
-    topo_x, base = int(corpo.min()), int(corpo.max())
-    # A regra acima encolhe o corpo quando um traco horizontal forte (ligacao
-    # entre letras, barra do t) domina a fileira mais cheia: em "area" dava
-    # 8 px de altura-x para um traco de 5,7 px. A faixa que concentra a maior
-    # parte da tinta corrige isso; fica a mais larga das duas.
-    massa = np.cumsum(perfil) / max(perfil.sum(), 1e-6)
-    topo_x = min(topo_x, int(np.searchsorted(massa, MASSA_CORPO[0])))
-    base = max(base, int(np.searchsorted(massa, MASSA_CORPO[1])))
+    # Faixa CONTINUA em torno da fileira mais cheia, crescendo enquanto as
+    # fileiras tem ao menos LIMIAR_CORPO da tinta dela. Com limiar 0,5 sobre
+    # todas as fileiras o corpo encolhia quando um traco horizontal forte
+    # dominava o perfil ("area": 8 px de altura-x para traco de 5,7 px); a
+    # faixa da massa de tinta exagerava quando lacos de ascendentes
+    # concentram a tinta ("life": 61 px). A faixa continua com limiar mais
+    # baixo para nos lacos finos das hastes.
+    pico = int(np.argmax(perfil))
+    lim = LIMIAR_CORPO * perfil[pico]
+    topo_x = pico
+    while topo_x > 0 and perfil[topo_x - 1] >= lim:
+        topo_x -= 1
+    base = pico
+    while base < len(perfil) - 1 and perfil[base + 1] >= lim:
+        base += 1
 
     dist = cv2.distanceTransform(limpa.astype(np.uint8), cv2.DIST_L2, 3)
     espessura = max(1.0, 2.0 * float(np.percentile(dist[limpa], 90)))
