@@ -39,7 +39,9 @@ TOM_REL = (0.90, 1.10)          # tom do sinal / tom da tinta da palavra
 # filtros de qualidade de gerar() (calibrados em
 # saidas/acentos_sinteticos/avaliacao_200, ver LOG.md 2026-10-02)
 MIN_LOGP = -0.2                 # confianca minima do alinhamento CTC
-MIN_VISIBILIDADE = None         # fracao minima do sinal visivel como tinta nova
+# fracao minima do sinal visivel como tinta nova: abaixo de 0,6 ficaram os 4
+# sinais escondidos em tinta existente (for, has, strewn, side) e 1 bom
+MIN_VISIBILIDADE = 0.6
 TENTATIVAS = 3                  # sorteios por palavra ate o sinal ficar visivel
 
 
@@ -62,6 +64,13 @@ class Amostra:
                 "indice": self.indice, "letra": self.letra, "tipo": self.tipo,
                 "params": {k: round(v, 4) if isinstance(v, float) else v
                            for k, v in self.params.items()}}
+
+
+def elegivel(texto):
+    """Palavra que entra na base: minuscula, so letras ASCII, 3-10 letras,
+    com ao menos uma letra acentuavel."""
+    return (texto.isascii() and texto.isalpha() and texto.islower()
+            and 3 <= len(texto) <= 10 and bool(candidatos(texto)))
 
 
 def candidatos(palavra, pesos=PESOS_PADRAO):

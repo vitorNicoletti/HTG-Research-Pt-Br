@@ -70,9 +70,7 @@ def depuracao(a):
 
 def elegiveis(palavras):
     """Palavras minusculas, so letras ASCII, 3-10 letras, com candidato."""
-    return [p for p in palavras
-            if p.texto.isascii() and p.texto.isalpha() and p.texto.islower()
-            and 3 <= len(p.texto) <= 10 and gerador.candidatos(p.texto)]
+    return [p for p in palavras if gerador.elegivel(p.texto)]
 
 
 def folha_amostras(itens, caminho, f_rot):

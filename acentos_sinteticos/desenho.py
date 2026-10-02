@@ -45,12 +45,13 @@ def cor_do_papel(g):
 
 
 def apagar(g, mascara):
-    """Pinta `mascara` com a cor do papel, para tirar um pingo do i."""
-    saida = g.copy()
+    """Apaga `mascara` (o pingo do i) por inpainting: preenche com o papel em
+    volta. Pintar com uma cor so deixava um quadrado mais claro em papel com
+    textura ("with", avaliacao_200 n. 189)."""
     # dilata 1 px: a borda suavizada do pingo nao fica como sombra
-    m = cv2.dilate(mascara.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
-    saida[m] = cor_do_papel(g)
-    return saida
+    m = cv2.dilate(mascara.astype(np.uint8), np.ones((3, 3), np.uint8))
+    u8 = np.clip(g, 0, 255).astype(np.uint8)
+    return cv2.inpaint(u8, m, 3, cv2.INPAINT_TELEA).astype(np.float32)
 
 
 def ampliar_tela(g, cima, baixo, esq, dir_):

@@ -56,3 +56,8 @@ cpu_check/
 
 # RIMES (Zenodo 10.5281/zenodo.10812725, CC BY-NC 4.0) -- baixado a parte
 rimes/
+
+# base de acentos sinteticos (scripts/gerar_base_acentos.py) e pesos do
+# alinhador CTC (scripts/treinar_alinhador.py) -- reconstruiveis
+iam_acentuado*/
+modelos/
