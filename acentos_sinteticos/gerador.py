@@ -30,7 +30,10 @@ PESOS_PADRAO = {"ã": 3.0, "õ": 1.5, "ç": 2.0, "é": 1.5, "ê": 1.0, "á": 1.0
 # faixas sorteadas no posicionamento (em alturas-x da palavra)
 FOLGA_ACENTO = (0.10, 0.35)     # distancia vertical entre a letra e o acento
 DESVIO_X = (-0.10, 0.10)        # deslocamento horizontal do acento
-ESPESSURA_REL = (0.75, 1.10)    # espessura do sinal / espessura da palavra
+ESPESSURA_REL = (0.60, 1.00)    # espessura do sinal / espessura da palavra
+# extensao minima do sinal, em espessuras do proprio traco: com caneta grossa
+# um agudo curto vira uma gota que parece pingo ("make" com traco de 7 px)
+MIN_EXTENSAO_ESPESSURAS = 3.5
 TOM_REL = (0.90, 1.10)          # tom do sinal / tom da tinta da palavra
 
 
@@ -99,10 +102,17 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None):
     dx = ref * rnd.uniform(*DESVIO_X)
 
     forma, params = tracos.FORMAS[tipo](rnd, ref)
-    pts = [(c.x + dx + x, c.y + dy + y) for x, y in forma]
-
     esp = geo.espessura * rnd.uniform(*ESPESSURA_REL)
     tom = float(np.clip(geo.tom * rnd.uniform(*TOM_REL), 0, 200))
+
+    # garante o sinal comprido o bastante para a espessura; amplia sem
+    # distorcer, a partir do ponto de encaixe (a origem)
+    ext = max(max(x for x, _ in forma) - min(x for x, _ in forma),
+              max(y for _, y in forma) - min(y for _, y in forma))
+    esc = max(1.0, MIN_EXTENSAO_ESPESSURAS * esp / max(ext, 1e-6))
+    forma = [(x * esc, y * esc) for x, y in forma]
+    params["escala_minima"] = round(esc, 3)
+    pts = [(c.x + dx + x, c.y + dy + y) for x, y in forma]
 
     # abre espaco se o sinal passar da borda (o IAM corta justo no topo)
     m = esp + 2
