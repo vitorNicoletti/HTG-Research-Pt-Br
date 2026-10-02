@@ -111,6 +111,30 @@ def fatias(geo, n_letras):
     return [(x0 + k * passo, x0 + (k + 1) * passo) for k in range(n_letras)]
 
 
+def ajustar_aos_vales(geo, fats, raio=0.25):
+    """Move cada fronteira interna entre fatias para a coluna com menos tinta
+    no corpo da palavra dentro de +-raio*(largura media das fatias) -- o
+    ponto de ligacao fina entre letras cursivas, ou o vao entre letras soltas."""
+    if len(fats) < 2:
+        return list(fats)
+    perfil = geo.mask[geo.topo_x:geo.base + 1].sum(axis=0).astype(np.float32)
+    perfil = np.convolve(perfil, np.ones(3) / 3, mode="same")
+    r = raio * (fats[-1][1] - fats[0][0]) / len(fats)
+    fr = [fats[0][0]]
+    for k in range(1, len(fats)):
+        m = fats[k][0]
+        a = int(max(np.ceil(fr[-1]) + 1, np.floor(m - r)))
+        b = int(min(np.floor(fats[k][1]) - 1, np.ceil(m + r)))
+        if b > a:
+            jan = perfil[a:b + 1]
+            # empate: a coluna mais perto da fronteira original
+            cols = np.where(jan == jan.min())[0] + a
+            m = float(cols[np.argmin(np.abs(cols - m))])
+        fr.append(m)
+    fr.append(fats[-1][1])
+    return [(fr[k], fr[k + 1]) for k in range(len(fats))]
+
+
 def _colunas_centrais(fatia, largura_img):
     xa, xb = fatia
     meio, meia = (xa + xb) / 2, (xb - xa) * FRACAO_CENTRAL / 2
