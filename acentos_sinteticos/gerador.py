@@ -36,6 +36,12 @@ ESPESSURA_REL = (0.60, 1.00)    # espessura do sinal / espessura da palavra
 MIN_EXTENSAO_ESPESSURAS = 3.5
 TOM_REL = (0.90, 1.10)          # tom do sinal / tom da tinta da palavra
 
+# filtros de qualidade de gerar() (calibrados em
+# saidas/acentos_sinteticos/avaliacao_200, ver LOG.md 2026-10-02)
+MIN_LOGP = -0.2                 # confianca minima do alinhamento CTC
+MIN_VISIBILIDADE = None         # fracao minima do sinal visivel como tinta nova
+TENTATIVAS = 3                  # sorteios por palavra ate o sinal ficar visivel
+
 
 @dataclass
 class Amostra:
@@ -64,7 +70,7 @@ def candidatos(palavra, pesos=PESOS_PADRAO):
             for v in VARIANTES.get(c, ()) if pesos.get(v, 0.0) > 0]
 
 
-def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None):
+def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None, al=None):
     """Desenha um sinal numa palavra do IAM.
 
     g         -- imagem em cinza 0..255 (float ou uint8)
@@ -76,6 +82,9 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None):
                  do CTC sao ajustadas aos vales de tinta (melhor estimador em
                  scripts/avaliar_posicao_letras.py) e params["logp_alinhamento"]
                  registra a confianca do alinhamento, para filtro
+    al        -- alinhamento ja calculado (evita refazer a cada tentativa)
+    params["visibilidade"] mede quanto do sinal virou tinta nova (ver
+    desenho.visibilidade).
     Devolve Amostra, ou None se a palavra nao tiver tinta ou candidatos.
     """
     g = np.asarray(g, dtype=np.float32)
@@ -89,7 +98,8 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None):
         i, letra = escolha
     tipo = TIPO[letra]
     ref = geo.altura_x
-    al = alinhador.alinhar(g, palavra) if alinhador is not None else None
+    if al is None and alinhador is not None:
+        al = alinhador.alinhar(g, palavra)
     if al is not None:
         fats = geometria.ajustar_aos_vales(geo, alinhamento.fatias_do_alinhamento(al, geo))
         segmentacao = "ctc_vale"
@@ -133,9 +143,12 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None):
     esq = max(0, math.ceil(m - min(p[0] for p in pts)))
     dir_ = max(0, math.ceil(max(p[0] for p in pts) + m - (w - 1)))
     g = desenho.ampliar_tela(g, cima, baixo, esq, dir_)
+    tinta = np.pad(geo.mask, ((cima, baixo), (esq, dir_)), constant_values=False)
     pts = [(x + esq, y + cima) for x, y in pts]
 
+    antes = g
     g = desenho.desenhar(g, pts, esp, tom)
+    params["visibilidade"] = round(desenho.visibilidade(antes, g, tinta, pts, esp), 3)
 
     params.update({"folga_y": round(-dy, 3), "desvio_x": round(dx, 3),
                    "espessura": round(esp, 3), "tom": round(tom, 1),
@@ -153,3 +166,31 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None):
         contato=(c.x + esq, c.y + cima),
         corpo=(geo.topo_x + cima, geo.base + cima),
     )
+
+
+def gerar(g, palavra, rnd, alinhador, pesos=PESOS_PADRAO, min_logp=MIN_LOGP,
+          min_visibilidade=MIN_VISIBILIDADE, tentativas=TENTATIVAS):
+    """acentuar() com os filtros de qualidade, para montar a base.
+
+    Descarta a palavra se o alinhamento falhar ou tiver confianca abaixo de
+    min_logp (recorte ambiguo); sorteia de novo (letra, forma, posicao) ate
+    `tentativas` vezes enquanto o sinal sair com visibilidade abaixo de
+    min_visibilidade. Tudo sai do mesmo rnd, entao continua reprodutivel.
+    Devolve (Amostra ou None, motivo): "ok", "sem_alinhamento",
+    "confianca", "sem_candidato" ou "invisivel".
+    """
+    g = np.asarray(g, dtype=np.float32)
+    al = alinhador.alinhar(g, palavra)
+    if al is None:
+        return None, "sem_alinhamento"
+    if al.logp_medio < min_logp:
+        return None, "confianca"
+    for t in range(tentativas):
+        am = acentuar(g, palavra, rnd, pesos, alinhador=alinhador, al=al)
+        if am is None:
+            return None, "sem_candidato"
+        if min_visibilidade is None or am.params["visibilidade"] >= min_visibilidade:
+            am.params["tentativa"] = t + 1
+            return am, "ok"
+    return None, "invisivel"
+

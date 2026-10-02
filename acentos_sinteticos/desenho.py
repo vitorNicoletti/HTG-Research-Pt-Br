@@ -58,3 +58,26 @@ def ampliar_tela(g, cima, baixo, esq, dir_):
     if not (cima or baixo or esq or dir_):
         return g
     return np.pad(g, ((cima, baixo), (esq, dir_)), constant_values=cor_do_papel(g))
+
+
+def comprimento(pontos):
+    """Comprimento da polilinha, em px."""
+    return float(sum(math.hypot(xb - xa, yb - ya)
+                     for (xa, ya), (xb, yb) in zip(pontos, pontos[1:])))
+
+
+def visibilidade(antes, depois, tinta_antes, pontos, espessura):
+    """Fracao do sinal que virou tinta NOVA: pixels que passaram a ficar
+    escuros (abaixo do meio entre papel e tinta) fora da tinta que ja havia
+    (dilatada 1 px, para nao contar a borda suavizada das letras), dividida
+    pela area esperada do traco (comprimento x espessura). Perto de 1 = sinal
+    inteiro visivel; perto de 0 = desenhado em cima de tinta existente, ou
+    claro/fino demais para aparecer."""
+    papel = cor_do_papel(antes)
+    tom = float(np.median(antes[tinta_antes])) if tinta_antes.any() else 0.0
+    limiar = (papel + tom) / 2
+    velha = cv2.dilate(tinta_antes.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
+    nova = (depois < limiar) & (antes >= limiar) & ~velha
+    esperada = max(1.0, comprimento(pontos) * espessura)
+    return float(nova.sum()) / esperada
+
