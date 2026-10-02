@@ -8,6 +8,14 @@ foi usado.
     python scripts/treinar.py experimentos/bressay_25.json
     python scripts/treinar.py experimentos/bressay_25.json --dry-run
 
+dados.dataset escolhe o leitor do train.py:
+  bressay        -- dados.split e a pasta do split (splits/*.tsv), dados.imagens
+                    as imagens do BRESSAY, dados.preproc v1 ou v2;
+  iam_acentuado  -- dados.split e a pasta da base de scripts/gerar_base_acentos.py,
+                    dados.imagens as palavras do IAM (iam_data/words),
+                    dados.preproc "iam" (o do IAMDataset) e dados.iam_originais
+                    a fracao das palavras originais que entra junto.
+
 O que faz, na ordem:
   1. valida o JSON e sincroniza o clone (scripts/aplicar_mods.sh);
   2. grava uma copia do experimento em SAVE_PATH/experimento.json. Se ja
@@ -43,7 +51,8 @@ NUM = (int, float)
 ESQUEMA = {
     "descricao": str,
     "save_path": str,
-    "dados": {"split": str, "imagens": str, "max_samples": int, "preproc": str},
+    "dados": {"dataset": str, "split": str, "imagens": str, "max_samples": int,
+              "preproc": str, "iam_originais": NUM},
     "modelo": {"pesos_iniciais": str, "extrator_estilo": str,
                "stable_diffusion": str},
     "treino": {"epocas_por_bloco": int, "epocas_total": int, "lr": NUM,
@@ -54,6 +63,13 @@ ESQUEMA = {
     "amostras": {"palavras": list, "estilos": int, "seed": int,
                  "estilo_de": str},
 }
+
+# Valores de dados.preproc aceitos por dataset
+PREPROCS = {"bressay": ("v1", "v2"), "iam_acentuado": ("iam",)}
+
+# Chaves acrescentadas depois dos primeiros runs: um experimento.json gravado
+# antes delas equivale a estes valores (todos eram do BRESSAY).
+LEGADO = {"dados.dataset": "bressay", "dados.iam_originais": 0}
 
 # Mudancas aceitas ao retomar um save_path existente: nao alteram o que o
 # modelo ja aprendeu nem como aprende.
@@ -77,6 +93,15 @@ def validar(exp, esquema=ESQUEMA, prefixo=""):
     for chave in exp:
         if chave not in esquema:
             erros.append(f"chave desconhecida '{prefixo + chave}'")
+    if not prefixo and not erros:
+        d = exp["dados"]
+        if d["dataset"] not in PREPROCS:
+            erros.append(f"dados.dataset desconhecido: {d['dataset']!r} (use {sorted(PREPROCS)})")
+        elif d["preproc"] not in PREPROCS[d["dataset"]]:
+            erros.append(f"dados.preproc {d['preproc']!r} nao vale para {d['dataset']} "
+                         f"(use {PREPROCS[d['dataset']]})")
+        if not 0 <= d["iam_originais"] <= 1:
+            erros.append("dados.iam_originais tem de estar em [0, 1]")
     return erros
 
 
@@ -95,6 +120,8 @@ def conferir_retomada(exp, caminho):
     mudancas proibidas (vazia = pode seguir)."""
     with open(caminho, encoding="utf-8") as f:
         antigo = achatar(json.load(f))
+    for k, v in LEGADO.items():
+        antigo.setdefault(k, v)
     novo = achatar(exp)
     proibidas = []
     for k in sorted(set(antigo) | set(novo)):
@@ -119,7 +146,10 @@ def epocas_feitas(save_path):
 def ambiente(exp):
     env = os.environ.copy()
     env["PYTORCH_HIP_ALLOC_CONF"] = "expandable_segments:True"
-    env["BRESSAY_IMAGES"] = exp["dados"]["imagens"]
+    if exp["dados"]["dataset"] == "bressay":
+        env["BRESSAY_IMAGES"] = exp["dados"]["imagens"]
+    else:
+        env["IAM_IMAGES"] = os.path.abspath(exp["dados"]["imagens"])
     env["SD"] = exp["modelo"]["stable_diffusion"]
     # A RX 6600 XT (gfx1032) so roda com kernels de gfx1030; em qualquer outra
     # placa o override e nocivo. Mesmo criterio do treinar.sh.
@@ -136,14 +166,13 @@ def cmd_treino(exp, n, primeiro):
     cmd = [
         sys.executable, "DiffusionPen/train.py",
         # fixos: e o que define este pipeline, nao sao escolhas do experimento
-        "--dataset", "bressay",
+        "--dataset", d["dataset"],
         "--model_name", "diffusionpen",
         "--sample_every", "0",   # a grade interna usa max_length=200; nao vale
         # do experimento
         "--save_path", exp["save_path"],
         "--dataset_folder", d["split"],
         "--max_samples", str(d["max_samples"]),
-        "--preproc", d["preproc"],
         "--style_path", m["extrator_estilo"],
         "--stable_dif_path", m["stable_diffusion"],
         "--lr", repr(t["lr"]),
@@ -162,6 +191,10 @@ def cmd_treino(exp, n, primeiro):
     # --pretrained_path e --load_check sao mutuamente exclusivos: no train.py o
     # pretrained_path roda depois e sobrescreveria o que o load_check retomou.
     # E --load_check e type=bool: nunca passar 'False', so omitir.
+    if d["dataset"] == "bressay":
+        cmd += ["--preproc", d["preproc"]]
+    else:
+        cmd += ["--iam_originais", repr(d["iam_originais"])]
     if primeiro:
         cmd += ["--pretrained_path", m["pesos_iniciais"]]
     else:
@@ -170,15 +203,17 @@ def cmd_treino(exp, n, primeiro):
 
 
 def cmd_amostras(exp, ckpt, destino):
-    a = exp["amostras"]
+    a, d = exp["amostras"], exp["dados"]
+    # referencias de estilo do BRESSAY usam o split e o pre-processamento dele;
+    # com estilo_de "iam" o gerar_amostras.py usa o pre-processamento do IAM
+    bressay = ["--preproc", d["preproc"], "--dataset_folder", d["split"]]         if d["dataset"] == "bressay" else []
     return [
         sys.executable, "scripts/gerar_amostras.py",
         "--ckpt", ckpt,
         "--out", destino,
         "--style", exp["modelo"]["extrator_estilo"],
         "--texto_max_len", str(exp["treino"]["texto_max_len"]),
-        "--preproc", exp["dados"]["preproc"],
-        "--dataset_folder", exp["dados"]["split"],
+        *bressay,
         "--styles", str(a["estilos"]),
         "--seed", str(a["seed"]),
         "--estilo_de", a["estilo_de"],

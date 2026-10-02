@@ -20,6 +20,7 @@ from feature_extractor import ImageEncoder
 from utils.iam_dataset import IAMDataset
 from utils.GNHK_dataset import GNHK_Dataset
 from utils.bressay_dataset import BRESSAY_Dataset
+from utils.iam_acentuado_dataset import IAMAcentuadoDataset
 from utils.auxilary_functions import *
 from torchvision.utils import save_image
 from torch.nn import DataParallel
@@ -127,6 +128,12 @@ def gravar_config(args, n_treino, diffusion):
     if args.dataset == 'bressay' and os.path.isfile(caminho_reducao):
         with open(caminho_reducao, encoding='utf-8') as f:
             reducao = json.load(f)
+    # base de acentos sinteticos: o resumo.json dela (filtros, contagens, commit)
+    base_acentos = None
+    caminho_resumo = os.path.join(args.dataset_folder, 'resumo.json')
+    if args.dataset == 'iam_acentuado' and os.path.isfile(caminho_resumo):
+        with open(caminho_resumo, encoding='utf-8') as f:
+            base_acentos = json.load(f)
 
     registro = {
         'data': datetime.datetime.now().isoformat(timespec='seconds'),
@@ -144,6 +151,8 @@ def gravar_config(args, n_treino, diffusion):
             'imagens_estilo': bd.NUM_STYLE_IMGS if args.dataset == 'bressay' else None,
             'contraste_percentis': [bd.P_TINTA, bd.P_FUNDO] if args.dataset == 'bressay' else None,
             'reducao': reducao,
+            'base_acentos': base_acentos,
+            'iam_originais': args.iam_originais if args.dataset == 'iam_acentuado' else None,
         },
         'ambiente': {
             'host': platform.node(),
@@ -717,7 +726,7 @@ def main():
     parser.add_argument('--model_name', type=str, default='diffusionpen', help='diffusionpen or wordstylist (previous work)')
     parser.add_argument('--level', type=str, default='word', help='word, line')
     parser.add_argument('--img_size', type=int, default=(64, 256))  
-    parser.add_argument('--dataset', type=str, default='iam', help='iam, gnhk') 
+    parser.add_argument('--dataset', type=str, default='iam', help='iam, gnhk, bressay, iam_acentuado') 
     #UNET parameters
     parser.add_argument('--channels', type=int, default=4)
     parser.add_argument('--emb_dim', type=int, default=320)
@@ -747,6 +756,7 @@ def main():
     parser.add_argument('--sample_every', type=int, default=10, help='gera a grade de amostras a cada N epocas; 0 desliga. ATENCAO: essa grade usa max_length=200 enquanto o treino usa 40, entao ela NAO e confiavel -- gere com scripts/gerar_amostras.py')
     parser.add_argument('--abort_after', type=int, default=300, help='sai com codigo 3 apos N batches seguidos sem um passo valido, para o processo poder ser relancado do checkpoint')
     parser.add_argument('--save_every_steps', type=int, default=0, help='grava checkpoint a cada N passos dentro da epoca (0 = so no fim da epoca)')
+    parser.add_argument('--iam_originais', type=float, default=1.0, help='iam_acentuado: fracao das palavras originais do IAM (sem acento) que entram no treino junto com as acentuadas')
     parser.add_argument('--preproc', type=str, default='v1', choices=('v1', 'v2'), help='pre-processamento do BRESSAY (utils/bressay_dataset.py): v1 = original, v2 = sem pauta, recorte justo, escala do IAM')
     parser.add_argument('--adamw_eps', type=float, default=ADAMW_EPS)
     parser.add_argument('--clip_grad_norm', type=float, default=CLIP_GRAD_NORM, help='norma maxima do gradiente antes do optimizer.step()')
@@ -815,6 +825,19 @@ def main():
         rest = len(test_data) - test_size
         test_data, _ = random_split(test_data, [test_size, rest],
                                     generator=torch.Generator().manual_seed(42))
+
+    # Base de acentos sinteticos sobre o IAM (scripts/gerar_base_acentos.py)
+    # mais uma fracao das palavras originais; --dataset_folder e a pasta da base
+    elif args.dataset == 'iam_acentuado':
+        print('loading IAM acentuado')
+        style_classes = 339
+        train_data = IAMAcentuadoDataset(args.dataset_folder, transforms=transform, args=args)
+        test_size = args.batch_size
+        rest = len(train_data) - test_size
+        test_data, _ = random_split(train_data, [test_size, rest],
+                                    generator=torch.Generator().manual_seed(42))
+    else:
+        raise SystemExit(f'dataset desconhecido: {args.dataset}')
         
     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
 
