@@ -759,3 +759,38 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
 - Comparação com as mesmas palavras, seed 42, 4 estilos, contra o IAM original
   e o `v1` de 26 épocas, com referência de estilo do IAM e do BRESSAY:
   `saidas/diffusionpen/fine_tune_25_v2/`. Análise no `ACHADOS.md`, seção 8.
+
+---
+
+## 2026-10-02 — Acentos sintéticos no IAM: alinhamento CTC das letras
+
+- Pacote `acentos_sinteticos/` (gerador de acentos e cedilhas sobre palavras
+  do IAM) e folhas em `saidas/acentos_sinteticos/`
+  (`scripts/amostras_acentos.py --n 30 --seed 0`). Com fatias iguais por
+  letra, ~24/30 amostras boas; as falhas vinham de letras de larguras muito
+  diferentes.
+- Reconhecedor CTC só convolucional para localizar as letras:
+  `python scripts/treinar_alinhador.py --epocas 15 --saida modelos/alinhador_iam.pt`
+  (`iam_training.txt` 47.981 palavras, validação `iam_val.txt` 7.554, alfabeto
+  78). RX 9060 XT: ~103 s/época; a primeira execução levou 811 s por causa da
+  compilação de kernels do MIOpen. Melhor CER de validação **0,127** na época
+  14 (62% de palavras lidas certas). Os pesos ficam só em
+  `~/HTG-Research-Pt-Br/modelos/alinhador_iam.pt` (gitignored) e são
+  reconstruídos pelo comando acima.
+- `scripts/avaliar_posicao_letras.py`: verdade automática em 2.017 palavras de
+  val+test em que cada componente conexo é uma letra (2.969 letras-alvo).
+  Acerto da letra certa (todas / letras do meio) e viés mediano em larguras de
+  letra:
+  - fatias iguais: 92,6% / 89,1%, viés −0,06;
+  - iguais + vale: 94,9% / 92,5%;
+  - CTC (meio entre disparos): 97,8% / 97,1%, viés +0,03;
+  - **CTC + vale: 98,0% / 97,3%, viés −0,04**. É o que o gerador usa.
+  - Disparo CTC direto: 98,6%, mas com viés de +0,23 para a direita.
+
+  A confiança do alinhamento (`logp_medio`) separa os erros: no quartil
+  inferior o acerto é 94,1%; nos outros quartis, 98,5% ou mais. Letras soltas
+  são o caso fácil; na escrita cursiva o erro deve ser maior.
+- Nas 30 amostras, CTC + vale e fatias iguais quase sempre caem no mesmo
+  lugar. Ampliado, `bóttom` estava certo. `fõr` (logp −0,29, lido "fo") é um
+  recorte ambíguo, e `stumblêd` (lido "stumblerd") continua com o circunflexo
+  sobre o "d". Os dois de logp mais baixo são `fõr` e `bóttom`.

@@ -170,7 +170,7 @@ def main():
     folha_amostras(itens, os.path.join(a.saida, "amostras.png"), f_rot)
     if pares:
         folha_comparacao(pares, os.path.join(a.saida, "comparacao_fatias.png"), f_rot)
-        n_ctc = sum(am.params["segmentacao"] == "ctc" for _, am in pares)
+        n_ctc = sum(am.params["segmentacao"] != "igual" for _, am in pares)
         print(f"segmentacao CTC em {n_ctc}/{len(pares)} amostras (resto: fatias iguais)")
     tipos = {}
     for _, am in itens:
