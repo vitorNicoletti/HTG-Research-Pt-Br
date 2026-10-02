@@ -91,36 +91,350 @@ mesma semente produz o mesmo sinal com qualquer método de localização das let
 
 ## Etapa 3 — Geometria da tinta (`geometria.analisar`)
 
-1. **Máscara de tinta:** limiar de Otsu sobre o cinza. Componentes conexos com menos de
-   4 px de área são descartados como manchas.
-2. **Caixa:** o retângulo que envolve toda a tinta restante.
-3. **Corpo da palavra:** a faixa das letras sem as hastes.
-   - Calcula-se o perfil horizontal (tinta por fileira), suavizado com janela 3.
-   - A partir da fileira mais cheia, a faixa cresce para cima e para baixo enquanto
-     cada fileira tiver pelo menos 30% da tinta dela.
-   - O topo da faixa é a **altura-x** e o fundo é a **linha de base**. Ascendentes
-     (`l t d`) e descendentes (`g p`) ficam de fora.
-   - Por que uma faixa contínua com limiar baixo: um limiar de 0,5 aplicado a todas as
-     fileiras encolhia o corpo quando um traço horizontal forte dominava o perfil
-     (`area`). Uma faixa pela massa de tinta exagerava em palavras com laços nas hastes
-     (`life`).
-4. **Espessura do traço:** 2 × o percentil 90 da transformada de distância dentro da
-   tinta.
-5. **Piso do corpo:** se a altura-x der menos que 3 espessuras de traço, o corpo é
-   ampliado até esse mínimo, sem sair da caixa.
-6. **Tom da tinta:** o cinza mediano dos pixels de tinta.
+Esta etapa transforma a foto de uma palavra em algumas medidas simples:
+- onde está a tinta;
+- onde fica o corpo das letras;
+- qual a grossura e a cor da caneta.
 
-A altura-x é a régua de todo o resto: os tamanhos do sinal, a folga e o desvio são
-proporcionais a ela.
+O resto do pipeline usa essas medidas.
+
+| medida | como | para quê |
+|---|---|---|
+| máscara de tinta | limiar de Otsu; componentes < 4 px descartados | separar tinta de papel |
+| caixa | retângulo que envolve a tinta | início e fim da palavra |
+| altura-x e linha de base | faixa contínua do perfil horizontal com ≥ 30% do pico, piso de 3 espessuras | onde o acento encosta; régua de tamanhos |
+| espessura do traço | 2 × percentil 90 da transformada de distância | grossura do sinal desenhado |
+| tom da tinta | mediana do cinza da tinta | cor do sinal desenhado |
+
+### 3.1 Máscara de tinta por Otsu
+
+**Máscara** é uma imagem de sim ou não, do mesmo tamanho da original: cada pixel é
+marcado "tinta" ou "papel".
+
+**O limiar não pode ser fixo.** A foto vem em cinza, de 0 (preto) a 255 (branco), e é
+preciso um limiar: abaixo dele é tinta, acima é papel. Cada página do IAM tem papel e
+caneta diferentes; numa o papel é 240 e a tinta 60, noutra o papel é 200 e a tinta 120.
+
+**Como o método de Otsu escolhe o limiar:**
+- Ele olha o **histograma**: quantos pixels há de cada tom de cinza.
+- Numa palavra manuscrita o histograma tem dois "morros": um grande no claro (o papel)
+  e um menor no escuro (a tinta).
+- Otsu põe o corte no vale entre os dois. Formalmente, escolhe o limiar que deixa cada
+  grupo o mais homogêneo possível (mínima variância dentro dos grupos).
+
+```
+nº de pixels
+  │                         ▄▄
+  │                        ████   ← papel
+  │   ▄▄                  ██████
+  │  ████   ← tinta      ████████
+  └──────────────┬──────────────── cinza
+  0            limiar           255
+```
+
+Se a imagem quase não tem contraste (diferença entre o máximo e o mínimo < 25), a
+máscara fica vazia e a palavra é descartada.
+
+### 3.2 Componentes conexos e manchas
+
+**Componente conexo** é um grupo de pixels de tinta que se tocam, inclusive pela
+diagonal (vizinhança 8). Uma letra cursiva ligada forma um componente; o pingo do `i`
+forma outro, separado.
+
+Componentes com **menos de 4 px** de área são descartados. São poeira, ruído do scanner
+ou resto de outra palavra que entrou no recorte. Sem isso, um ponto de sujeira no canto
+esticaria a caixa da palavra.
+
+### 3.3 Caixa
+
+A **caixa** (*bounding box*) é o menor retângulo que contém toda a tinta restante. Ela
+define onde a palavra começa e termina na horizontal; as fatias iguais, por exemplo,
+dividem a largura dela.
+
+### 3.4 Corpo da palavra: altura-x e linha de base
+
+A escrita latina tem três zonas:
+
+```
+  ── ascendentes ───   │   │        b d f h k l t sobem aqui
+  ────────────────────── altura-x
+  ──  corpo  ───────   a c e m n o s u   todas as letras ocupam esta faixa
+  ────────────────────── linha de base
+  ── descendentes ──    g p q y       descem aqui
+```
+
+- **Linha de base:** a linha imaginária onde as letras "pousam".
+- **Altura-x:** a altura das letras sem haste, como `x`, `a` e `o`. O nome vem da
+  tipografia.
+- **Ascendentes e descendentes:** as hastes que sobem acima do corpo (`l`, `t`, `d`) e
+  as que descem abaixo da base (`g`, `p`).
+
+Isso importa porque **o acento fica logo acima da altura-x**, sobre o `a` ou o `e`, e
+não no topo do `l` vizinho. A cedilha sai da linha de base.
+
+#### O perfil horizontal
+
+O **perfil horizontal** é uma lista com a quantidade de tinta (pixels de tinta) em cada
+fileira da imagem. Exemplo com a palavra `ala`, 12 fileiras de altura:
+
+```
+fileira  tinta   desenho
+   0       2     ▌            ← topo da haste do l
+   1       2     ▌
+   2       3     ▌
+   3       3     ▌
+   4      20     ████████████ ← começa o corpo (a, l, a)
+   5      25     ██████████████
+   6      12     ███████      ← "buraco" de 1 fileira
+   7      24     █████████████
+   8      22     ████████████
+   9      18     ██████████   ← fim do corpo
+  10       1     ▏            ← resto do traço
+  11       0
+```
+
+No corpo todas as letras contribuem, então o perfil é alto. Nas zonas das hastes só
+algumas letras contribuem, e o perfil cai.
+
+#### Suavização (janela 3)
+
+A **fileira 6** tem só 12, no meio do corpo. Isso acontece, por exemplo, quando o meio
+do `a` é oco naquela altura. Não é o fim do corpo, é um acidente de 1 fileira.
+
+A suavização troca cada valor pela média dele com os dois vizinhos:
+
+```
+fileira 6:  (25 + 12 + 24) / 3 = 20,3
+```
+
+O buraco vira 20,3 e deixa de parecer o fim do corpo. Um buraco de verdade, de várias
+fileiras seguidas, continua aparecendo depois da média, porque os vizinhos também são
+baixos.
+
+#### Faixa contínua com 30% do pico
+
+Depois de suavizar, a **fileira mais cheia** (o pico) é a 5, com cerca de 23. O limite é
+**30% de 23 ≈ 7**. Partindo da fileira 5:
+
+- **subindo:** a 4 (~16) passa. A 3 (~9, já com a média da 4) passa por pouco. A 2 (~3)
+  **não passa**, e a faixa para aqui.
+- **descendo:** a 6, a 7, a 8 e a 9 passam. A 10 (~6) **não passa**, e a faixa para.
+
+O corpo vai mais ou menos da fileira 3 à 9: o **topo é a altura-x** e o **fundo é a
+linha de base**. A haste do `l` (fileiras 0 a 2) fica de fora.
+
+"**Contínua**" quer dizer que a faixa cresce passo a passo a partir do pico e **para na
+primeira fileira que falha**. Uma fileira forte lá longe não entra se houver uma fraca
+no caminho.
+
+#### Por que essa regra e não outra
+
+Duas regras anteriores falharam.
+
+**Regra 1: "todas as fileiras com pelo menos 50% do pico".** O problema é o pico. Em
+`area`, a pessoa fez um traço horizontal comprido, com o arco do `r` emendado no `e`.
+Numa única fileira isso dá uma quantidade enorme de tinta:
+
+```
+fileira  tinta
+   4      14
+   5      15
+   6      60   ← traço horizontal comprido: pico artificial
+   7      16
+   8      14
+```
+
+O pico é 60 e o limite de 50% é 30, então só a fileira 6 passa. O "corpo" sai com 1 a
+2 fileiras (na imagem real, 8 px), quando o corpo de verdade são as fileiras 4 a 8. Com
+uma altura-x minúscula, o acento é desenhado proporcional a ela e sai pequeno, colado
+na letra, quase invisível.
+
+**Regra 2: "a faixa que concentra a maior parte da tinta".** A faixa seria o conjunto de
+fileiras que, juntas, somam algo como 80% de toda a tinta. Em `life`, o `l` e o `f` têm
+**laços grossos** nas hastes, lá em cima:
+
+```
+fileira  tinta
+   0      10   ← laço do l
+   1      12   ← laço do f
+   2      11
+   3       8
+   4      15   ← corpo (i, e, base do f)
+   5      16
+   6      14
+```
+
+Os laços carregam muita tinta. Para somar 80%, a faixa precisa incluí-los, e o "corpo"
+vai do topo dos laços até a base: **61 px**, quase a palavra inteira. O acento seria
+desenhado acima dos laços, longe da letra.
+
+**A regra nova não cai nisso porque é contínua.** Subindo do pico, ela encontra a
+fileira 3 (8, abaixo de 30% de 16, já suavizada) e **para ali**. Não importa quanta
+tinta exista acima: ela não pula a fileira fraca.
+
+| regra | ponto fraco |
+|---|---|
+| 50% do pico, qualquer fileira | um pico artificial (traço comprido) encolhe o corpo |
+| faixa da maior parte da tinta | hastes com laços grossos esticam o corpo |
+| **faixa contínua, 30% do pico, suavizada** | para no primeiro ponto fraco; o piso (3.6) cobre os casos em que o pico ainda engana |
+
+A detecção em 24 palavras, incluindo `area` e `life`, está em
+`saidas/acentos_sinteticos/altura_x.png`.
+
+### 3.5 Espessura do traço: transformada de distância
+
+Queremos a grossura da caneta. Se a pessoa escreveu com traço de 6 px, o acento deve ter
+uns 6 px; senão parece feito com outra caneta. A palavra é um emaranhado de curvas, e
+não dá para pôr uma régua num único lugar: é preciso medir todos os traços de uma vez,
+automaticamente.
+
+A **transformada de distância** escreve, **em cada pixel de tinta**, a **distância até
+o papel mais próximo**. Exemplo: um traço horizontal com **6 px de altura**
+(`.` = papel):
+
+```
+máscara                    transformada de distância
+. . . . . . . .            . . . . . . . .
+█ █ █ █ █ █ █ █            1 1 1 1 1 1 1 1   ← encostado no papel
+█ █ █ █ █ █ █ █            2 2 2 2 2 2 2 2
+█ █ █ █ █ █ █ █            3 3 3 3 3 3 3 3   ← meio do traço
+█ █ █ █ █ █ █ █            3 3 3 3 3 3 3 3
+█ █ █ █ █ █ █ █            2 2 2 2 2 2 2 2
+█ █ █ █ █ █ █ █            1 1 1 1 1 1 1 1
+. . . . . . . .            . . . . . . . .
+```
+
+**Por que "2 ×".** O meio do traço está a **metade da largura** do papel: 3 até o papel
+de cima, 3 até o de baixo. Então `espessura ≈ 2 × 3 = 6 px`. Isso vale em qualquer
+direção (horizontal, vertical, diagonal, curva), porque a distância é até o papel
+**mais próximo**, seja qual for o lado.
+
+**Por que o percentil 90, e não a média nem o máximo.** Nos números do exemplo
+(1, 2, 3, 3, 2, 1), a maioria dos pixels **não** está no meio do traço.
+
+- **Média:** (1+2+3+3+2+1) / 6 = 2, o que daria espessura 4 px. **Erra para menos**,
+  porque as bordas puxam para baixo.
+- **Máximo:** erra para mais. Em cruzamentos de traços (o `t` cortado, um `x`) ou
+  borrões onde a caneta parou, a tinta forma um bloco largo e aparecem distâncias 5 ou
+  6. O máximo diria que a caneta tem 12 px.
+
+```
+cruzamento de dois traços:
+    █ █ █ █ █ █
+    █ █ █ █ █ █
+█ █ █ █ █ █ █ █ █ █
+█ █ █ █ █ █ █ █ █ █   ← bloco largo: distância até o papel maior
+█ █ █ █ █ █ █ █ █ █
+    █ █ █ █ █ █
+```
+
+- **Percentil 90:** ordenam-se as distâncias de todos os pixels de tinta e pega-se o
+  valor com **90% abaixo e 10% acima**. Ele cai no meio dos traços normais. Os poucos
+  exageros de cruzamentos e borrões ficam nos 10% de cima e são ignorados.
+
+```
+distâncias ordenadas de uma palavra inteira:
+1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 3 3 3 3 3 [3] 5 6
+ ←──── bordas ────→ ←─ meio dos traços ─→ ↑   ↑
+                               percentil 90   cruzamentos/borrões
+```
+
+Resultado: espessura = 2 × 3 = **6 px**. A medição usa a métrica L2 do OpenCV
+(`cv2.distanceTransform`, máscara 3) e tem piso de 1 px.
+
+### 3.6 Piso do corpo
+
+Uma letra tem altura-x de **várias vezes** a espessura da caneta; um `a` com corpo de
+8 px escrito com caneta de 6 px seria um borrão. Se o corpo medido der menos que
+**3 espessuras**, ele é ampliado até esse mínimo, metade para cima e metade para baixo,
+sem sair da caixa. É a rede de segurança para quando o perfil engana.
+
+### 3.7 Tom da tinta
+
+É a **mediana** do cinza dos pixels de tinta, o valor do meio quando eles são
+ordenados. A mediana não é afetada pelas bordas claras, que são meio tinta, meio papel.
+O sinal é pintado num tom sorteado entre 0,9 e 1,1 vezes esse valor (Etapa 7).
+
+### Por que tudo é medido em altura-x
+
+Com essas medidas, o resto do pipeline é proporcional à própria palavra: tamanho do
+sinal, folga entre acento e letra, deslocamento lateral. Palavra escrita grande recebe
+acento grande; palavra pequena, acento pequeno. Com valores em pixels fixos, o mesmo
+til ficaria enorme numa palavra miúda e invisível numa grande.
+
+---
 
 ## Etapa 4 — Onde está cada letra
 
-A palavra é dividida em **fatias**, uma por letra. A primeira versão usava fatias de
-largura igual. Ela falhava quando as letras tinham larguras muito diferentes: o `f` de
-`for`, por exemplo, ocupa metade da palavra. A versão atual localiza as letras com um
-reconhecedor de escrita.
+A pergunta desta etapa é: **em que pedaço da imagem está a letra que vai receber o
+acento?** A transcrição é conhecida ("for"), mas não se sabe onde o `o` está desenhado.
 
-### 4a. Reconhecedor CTC (`alinhamento.criar_modelo`)
+### 4.0 O problema das fatias iguais
+
+A primeira versão dividia a largura da palavra em partes iguais, uma por letra:
+
+```
+palavra "for", 90 px de largura → 3 fatias de 30 px
+
+ |   f    |   o    |   r    |
+ 0       30       60       90
+```
+
+Isso funciona quando as letras têm larguras parecidas. Na escrita real:
+
+```
+ |  f  f  f  f  f  f   | o  |r |
+ 0                    60   80 90
+       f ocupa 60 px     o: 20 px
+
+fatias iguais:  |  f   |  o   |  r  |
+                0      30     60    90
+                         ↑
+           a fatia do "o" (30–60) está em cima do f
+```
+
+O til sairia sobre o `f`, como aconteceu com `fõr` na primeira versão. É preciso algo que
+**olhe a imagem** e diga onde está cada letra.
+
+### 4a. O reconhecedor CTC: lê a palavra em colunas
+
+Um reconhecedor do tipo **CTC** (*Connectionist Temporal Classification*) lê a imagem
+**da esquerda para a direita**, em fatias estreitas chamadas **quadros**. No nosso, cada
+quadro tem **4 px** de largura, depois que a palavra é normalizada para 64 px de altura.
+
+Para **cada quadro**, ele dá a probabilidade de cada caractere estar ali. Há também um
+caractere especial, o **branco** (`-`). Ele quer dizer "aqui não começa letra nenhuma":
+é meio de letra, ligação ou espaço.
+
+Exemplo simplificado para "for", com 10 quadros:
+
+```
+quadro:     1    2    3    4    5    6    7    8    9    10
+           ───────── f ──────────── │ ── o ── │ ─ r ─
+P(f)       .1   .8   .3   .1   .1   .0   .0   .0   .0   .0
+P(o)       .0   .0   .0   .1   .1   .1   .7   .2   .0   .0
+P(r)       .0   .0   .0   .0   .0   .0   .0   .1   .8   .1
+P(-)       .9   .2   .7   .8   .8   .9   .3   .7   .2   .9
+```
+
+É um comportamento típico do CTC: **a letra "acende" em um ou dois quadros** (o `f` no
+2, o `o` no 7, o `r` no 9), e no resto o modelo diz "branco". O quadro em que a letra
+acende é o **disparo** dela.
+
+**Por que o branco existe.** A leitura livre junta repetições e depois tira os brancos:
+
+```
+f f - - - o o - r -   →   junta repetidos   →   f - o - r -   →   tira brancos   →   "for"
+```
+
+Para escrever `ll` (em "hello"), precisa haver um branco entre os dois `l`: `l - l`. Sem
+ele, `l l` viraria um `l` só.
+
+**Como ele aprende.** O treino mostra 47.981 palavras do IAM com a transcrição, sem
+nunca dizer onde ficam as letras. O modelo aprende sozinho a acender cada letra perto
+dela, porque é o jeito mais fácil de acertar a leitura.
+
+#### Arquitetura
 
 | item | valor |
 |---|---|
@@ -130,63 +444,206 @@ reconhecedor de escrita.
 | saída | log-probabilidades (T × 79): 78 caracteres do IAM + branco; **1 quadro = 4 px** da imagem normalizada |
 | perda | CTC (branco = 0) |
 
-O modelo é só convolucional, sem LSTM, de propósito. Com o campo receptivo limitado, o
-"disparo" de cada letra fica perto da própria letra. Uma LSTM bidirecional pode
-deslocar esses disparos.
+#### Por que só convolucional (sem LSTM)
 
-**Treino** (`scripts/treinar_alinhador.py`):
-- dados: `iam_training.txt` (47.981 palavras); validação em `iam_val.txt` (7.554);
-- otimização: AdamW com lr 1e-3, OneCycle, batch 64, clip 5, 15 épocas;
-- aumento de dados: largura esticada entre 0,8 e 1,2;
-- lotes agrupados por largura parecida, com a largura do lote arredondada para
-  múltiplos de 128 px. Cada formato novo de entrada faz o MIOpen recompilar kernels.
+**LSTM** (*Long Short-Term Memory*) é um tipo de rede feito para ler **sequências** um
+elemento por vez, guardando uma **memória** do que já viu.
 
-Resultado: ~103 s por época na RX 9060 XT. Melhor CER de validação **0,127**, na
-época 14, com 62% de palavras lidas corretamente. Os pesos ficam em
-`modelos/alinhador_iam.pt`, que é gitignored; o comando acima os reconstrói.
+Uma analogia: ler a palavra com uma lanterna que ilumina uma coluna por vez, da esquerda
+para a direita.
 
-### 4b. Alinhamento forçado (`alinhamento.viterbi_ctc`)
+- **Só convolução:** em cada coluna você enxerga o que a lanterna ilumina, mais um
+  pouco ao redor. Para decidir se ali há um `o`, você só usa o que está perto.
+- **LSTM:** enquanto anda, você anota num caderninho ("já passei por um `f`", "a pessoa
+  escreve inclinado"). Em cada coluna, decide olhando a lanterna **e** o caderninho.
 
-A transcrição é conhecida, então não se decodifica livremente. Busca-se o caminho mais
-provável do CTC que soletra **exatamente** o rótulo:
+```
+coluna:      1     2     3     4     5       6     7 ...
+              ↓     ↓     ↓     ↓     ↓       ↓     ↓
+memória:  [ ] → [f?] → [f] → [f] → [f,o?] → [f,o] → ...
+              a memória passa de uma coluna para a próxima
+```
 
-- os estados são `branco, l1, branco, l2, …, lN, branco` (2N + 1 estados);
-- de um quadro para o outro, cada estado pode ficar onde está ou avançar 1;
-- pode avançar 2, pulando o branco, só entre letras diferentes. Em `aa`, o branco do
-  meio é obrigatório;
-- o caminho termina na última letra ou no branco final;
-- se a imagem tiver menos quadros do que o rótulo exige, o alinhamento é impossível e
-  a função devolve `None`.
+O nome vem dos **portões** internos, que decidem a cada passo o que **guardar**, o que
+**esquecer** e o que **usar** da memória. Isso deixa a rede lembrar de coisas de muitos
+passos atrás. Uma **LSTM bidirecional** são duas LSTMs, uma da esquerda para a direita e
+outra da direita para a esquerda. Em cada coluna ela sabe o que veio antes **e depois**,
+ou seja, conhece a palavra inteira.
 
-O **disparo** de cada letra é o centro dos quadros em que o caminho ocupa o estado
-dela, convertido para px da imagem original.
+**Para ler, isso ajuda muito.** O contexto resolve letras ambíguas. Por isso o modelo
+clássico de reconhecimento de escrita (CRNN) é convolução + LSTM bidirecional + CTC.
 
-O alinhamento também devolve:
-- `leitura`: a leitura livre (gulosa) do modelo;
-- `logp_medio`: a log-probabilidade do caminho forçado dividida pelo número de
-  quadros. É a medida de confiança do alinhamento.
+**Para localizar, atrapalha.** Se cada coluna "sabe" a palavra inteira, o modelo pode
+acender o `o` um pouco antes ou depois de onde ele está desenhado e ainda ler certo. A
+perda CTC só cobra a **ordem** das letras, não o **lugar** em que acendem.
 
-A implementação é em numpy puro: o torchaudio não está instalado e instalá-lo mexeria
-no ambiente do treino.
+```
+só convolução:   cada coluna vê ~2–3 letras ao redor
+                 → para acender o "o", precisa estar perto do "o"
 
-### 4c. Fatias e ajuste aos vales
+com LSTM:        cada coluna vê a palavra inteira
+                 → pode acender o "o" deslocado e ainda acertar a leitura
+```
 
-1. **Fatias do alinhamento** (`alinhamento.fatias_do_alinhamento`):
-   - cada fronteira interna fica no meio entre os disparos de duas letras vizinhas;
-   - as pontas são a caixa da tinta.
+O alinhador lê pior do que um CRNN com LSTM: CER 0,127, contra cerca de 0,05–0,08 que é
+típico no IAM. Mas o disparo de cada letra fica **perto da letra**, que é o que importa
+aqui.
 
-   O disparo sozinho é enviesado: em mediana, ele cai 0,23 largura de letra à direita
-   do centro. O meio entre disparos compensa quase todo esse viés.
-2. **Ajuste aos vales** (`geometria.ajustar_aos_vales`):
-   - cada fronteira interna se move para a coluna com **menos tinta dentro do corpo**,
-     numa janela de ±0,25 × a largura média das fatias;
-   - em caso de empate, vale a coluna mais próxima da fronteira original.
+#### Treino (`scripts/treinar_alinhador.py`)
 
-   O vale de tinta é a ligação fina entre letras cursivas, ou o vão entre letras
-   soltas.
-3. **Fallback:** se não houver alinhador ou o alinhamento falhar, usam-se fatias iguais.
-   O manifesto registra qual método foi usado em `params.segmentacao`
-   (`ctc_vale` ou `igual`).
+- **Dados:** `iam_training.txt` (47.981 palavras); validação em `iam_val.txt` (7.554).
+- **Otimização:** AdamW com lr 1e-3, OneCycle, batch 64, clip 5, 15 épocas.
+- **Aumento de dados:** largura esticada entre 0,8 e 1,2.
+- **Lotes:** agrupados por largura parecida, com a largura do lote arredondada para
+  múltiplos de 128 px. Cada formato novo de entrada faz o MIOpen (ROCm) recompilar
+  kernels.
+- **Resultado:** cerca de 103 s por época na RX 9060 XT. Melhor CER de validação
+  **0,127**, na época 14, com 62% das palavras lidas certas.
+- **Pesos:** `modelos/alinhador_iam.pt` (gitignored), reconstruídos pelo comando acima.
+
+### 4b. Alinhamento forçado: "eu já sei o que está escrito" (`alinhamento.viterbi_ctc`)
+
+Lendo livremente, o modelo pode errar: em `for` ele lê "fo". Mas a resposta certa já é
+conhecida, então a pergunta muda de *"o que está escrito?"* para:
+
+> **"Sabendo que está escrito f-o-r, em que quadro está cada letra?"**
+
+Isso é o **alinhamento forçado**: considerar **todos os caminhos possíveis** que soletram
+exatamente "for" e escolher o mais provável. Um **caminho** é uma escolha de símbolo por
+quadro que, depois de juntar repetidos e tirar brancos, vira "for":
+
+```
+quadro:   1  2  3  4  5  6  7  8  9  10
+A:        -  f  -  -  -  -  o  -  r  -     ✓ soletra "for"
+B:        f  f  f  -  o  o  o  -  r  r     ✓ soletra "for"
+C:        -  f  -  o  -  -  -  -  r  -     ✓ soletra "for"
+D:        -  f  -  -  -  -  r  -  o  -     ✗ soletra "fro", não vale
+```
+
+A probabilidade de um caminho é o produto das probabilidades de cada quadro. Com a tabela
+da 4a:
+
+```
+caminho A:  .9 × .8 × .7 × .8 × .8 × .9 × .7 × .7 × .8 × .9   ≈ 0,07
+caminho C:  .9 × .8 × .7 × .1 × ...                            ≈ 0,008  ("o" no quadro 4 é improvável)
+```
+
+O caminho A vence: **f no quadro 2, o no 7, r no 9**.
+
+O **algoritmo de Viterbi** acha o vencedor sem testar os caminhos um a um, o que seria
+impossível com muitos quadros. Ele avança quadro a quadro guardando, para cada posição
+no texto, a melhor forma de ter chegado ali. As posições são "no branco antes do f",
+"no f", "no branco depois do f", "no o" etc.: 2N + 1 estados para N letras. As regras
+de movimento entre quadros:
+
+- **ficar** no mesmo estado (`f f`, `- -`);
+- **avançar** para o seguinte (`f → -`, `- → o`);
+- **pular o branco** entre duas letras **diferentes** (`f → o` direto). Entre letras
+  iguais (`l → l`) não pode, pela regra do branco acima;
+- o caminho termina na última letra ou no branco final.
+
+Se a imagem for estreita demais (menos quadros do que o rótulo exige), não há caminho, e
+a função devolve `None`.
+
+**De quadro para pixel.** O disparo de cada letra é o centro dos quadros em que o caminho
+ocupa o estado dela. Somando 0,5 e multiplicando por 4 px, a posição sai na imagem
+normalizada, e depois é convertida para a escala da imagem original.
+
+**Confiança (`logp_medio`).** É a log-probabilidade do caminho vencedor dividida pelo
+número de quadros. Numa imagem legível, as letras acendem com força e o valor fica perto
+de 0. Numa ilegível, como `fõr`, nenhum caminho é bom e o valor cai (−0,29). Por isso
+ele serve de filtro.
+
+O alinhamento também devolve `leitura`, a leitura livre (gulosa) do modelo. A
+implementação é em numpy puro, porque o torchaudio não está instalado e instalá-lo
+mexeria no ambiente do treino.
+
+### 4c. De disparos para fatias (`alinhamento.fatias_do_alinhamento`)
+
+Agora há **um ponto por letra**, mas o resto do pipeline precisa de uma **fatia** por
+letra: um intervalo da esquerda para a direita.
+
+**Usar o disparo direto como centro não funciona.** Medido (veja a Avaliação), o disparo
+cai, em mediana, **0,23 largura de letra à direita do centro**. O modelo tende a acender
+a letra quando já viu a maior parte dela:
+
+```
+        ┌── letra "o" ──┐
+        │       ●   ↑   │
+        │     centro  disparo
+```
+
+Um acento posto no disparo ficaria puxado para a direita, quase na letra seguinte.
+
+**Solução: fronteira no meio entre disparos vizinhos.** As pontas são a caixa da tinta:
+
+```
+disparos:      f●              o●         r●
+               10              55         80
+
+fronteiras:  0 ──────── 32,5 ─────── 67,5 ──── 90
+                  f           o            r
+             (início      (meio entre  (meio entre      (fim
+             da caixa)     10 e 55)     55 e 80)       da caixa)
+```
+
+Como todos os disparos estão deslocados para o mesmo lado, o meio entre dois deles cai
+perto da fronteira real entre as letras, e o deslocamento quase se cancela: o desvio
+mediano vai de +0,23 para +0,03 de letra.
+
+### 4d. Ajuste ao vale de tinta (`geometria.ajustar_aos_vales`)
+
+**Entre duas letras quase sempre há pouca tinta:** na cursiva, só a ligação fina; em
+letras soltas, papel branco. O ajuste olha o **perfil vertical** dentro do corpo da
+palavra, isto é, quanta tinta há em cada **coluna** (suavizado com janela 3):
+
+```
+tinta por coluna (só dentro do corpo):
+
+       █         █ █ █           █ █
+     █ █ █     █ █ █ █ █       █ █ █ █
+   █ █ █ █ █ ▁ █ █ █ █ █ █ ▁ ▁ █ █ █ █ █
+   ───── f ─────── o ───────── r ─────
+              ↑                 ↑
+            vale              vale
+           (pouca tinta = ligação entre letras)
+```
+
+Cada fronteira interna se move para a **coluna com menos tinta** numa janela de
+**±0,25 × a largura média das fatias** em volta dela. Em caso de empate, vale a coluna
+mais próxima da fronteira original. A janela é pequena de propósito: o ajuste refina a
+fronteira, mas não deixa ela fugir para um vale longe dali.
+
+```
+antes:   |    f     |  o   |  r  |
+                    ↑ fronteira caiu no meio do "o"
+depois:  |    f   |   o    |  r  |
+                  ↑ foi para o vale à esquerda
+```
+
+### 4e. Plano B
+
+Se não houver alinhador carregado, ou o alinhamento falhar (palavra estreita demais,
+caractere fora do alfabeto), o gerador volta às **fatias iguais**. O manifesto registra
+o método em `params.segmentacao`: `ctc_vale` ou `igual`.
+
+### Quanto cada passo ajudou
+
+Medido em 2.969 letras cuja posição é conhecida (detalhes na seção Avaliação):
+
+| método | acerta a letra | nas letras do meio |
+|---|---|---|
+| fatias iguais | 92,6% | 89,1% |
+| + CTC (fronteira no meio dos disparos) | 97,8% | 97,1% |
+| + ajuste ao vale | **98,0%** | **97,3%** |
+
+A maior parte do ganho vem do CTC, que acerta "mais ou menos onde". O vale faz o ajuste
+fino e reduz o desvio em relação ao centro da letra.
+
+**Em uma frase:** um modelo treinado para ler o IAM diz, coluna por coluna, que letra
+parece estar ali. Como o texto é conhecido, acha-se o jeito mais provável de encaixar
+"f-o-r" nessas colunas. Isso dá um ponto por letra; as fronteiras ficam no meio entre
+os pontos e são empurradas para a coluna com menos tinta.
 
 ## Etapa 5 — Ponto de contato (`geometria.contato_superior` / `contato_inferior`)
 
