@@ -6,6 +6,7 @@ Saida em figuras/:
     e1_passo_a_passo.png   os 4 passos da metrica num par
     e1_exemplos.png        uma marca por linha
     e1_falhas.png          os maiores escores do negativo
+    e1_vs_ssim_psnr.png    comparacao com as metricas sugeridas pelo orientador
 
 A figura do alinhamento foi removida: ela escolhia o par em que alinhar mais
 muda o escore, e esse criterio seleciona justamente os deslocamentos grandes,
@@ -223,9 +224,96 @@ def falhas(med):
     print("  figuras/e1_falhas.png")
 
 
+# ------------------------------------------------ 5. E1 contra SSIM e PSNR
+def comparar_metricas(csv="resultados/ssim_psnr.csv"):
+    """Le o CSV de ssim_psnr.py e desenha a comparacao."""
+    import csv as _csv
+    from calibrar import auc
+
+    caminho = os.path.join(AQUI, csv)
+    linhas = list(_csv.DictReader(open(caminho, encoding="utf-8")))
+    cols = [("e1", "E1 (atual)"), ("dissim_local", "1 - SSIM local"),
+            ("psnr_local", "-PSNR local"), ("dissim_global", "1 - SSIM global"),
+            ("psnr_global", "-PSNR global")]
+    negs = [("NEG-gerador", "contra o gerador"),
+            ("NEG-deriva", "contra a deriva"),
+            ("NEG-deslocado", "contra acento no lugar errado")]
+
+    def vals(col, grupo):
+        return [float(l[col]) for l in linhas
+                if l["grupo"] == grupo and l[col] not in ("", "nan")]
+
+    fig, ax = plt.subplots(1, 2, figsize=(14, 5.2))
+    fig.suptitle("E1 contra SSIM e PSNR, nos mesmos controles\n"
+                 "positivo = acento nominal pintado; "
+                 f"{len(linhas)} medidas do controle IAM",
+                 fontsize=13, y=0.99)
+
+    # (a) AUC por metrica e por controle
+    larg = 0.26
+    x = np.arange(len(cols))
+    cores = ["#2b6cb0", "#d69e2e", "#c53030"]
+    for i, (g, rot) in enumerate(negs):
+        alturas = [auc(vals(c, g), vals(c, "POS-pintado")) for c, _ in cols]
+        ax[0].bar(x + (i - 1) * larg, alturas, larg, label=rot, color=cores[i])
+        for xi, h in zip(x + (i - 1) * larg, alturas):
+            ax[0].text(xi, h + 0.015, f"{h:.2f}", ha="center", fontsize=7.5)
+    ax[0].axhline(0.5, color="black", ls="--", lw=1)
+    ax[0].text(len(cols) - 0.4, 0.52, "acaso", fontsize=8, style="italic")
+    ax[0].set_xticks(x)
+    ax[0].set_xticklabels([r for _, r in cols], fontsize=8.5, rotation=12)
+    ax[0].set_ylabel("AUC")
+    ax[0].set_ylim(0, 1.08)
+    ax[0].legend(fontsize=8.5, loc="lower left")
+    ax[0].set_title("(a) quanto cada escore separa acento de não-acento",
+                    fontsize=10.5, loc="left")
+    ax[0].grid(axis="y", alpha=0.25)
+
+    # (b) por que o global falha. Os dois grupos sao normalizados JUNTOS,
+    # senao cada um se estica para 0..1 e some a diferenca que interessa.
+    jit = np.random.default_rng(0)
+    for k, (col, rot) in enumerate([("e1", "E1 (atual)"),
+                                    ("dissim_local", "1 - SSIM local"),
+                                    ("dissim_global", "1 - SSIM global")]):
+        pos, neg = np.array(vals(col, "POS-pintado")), np.array(vals(col, "NEG-gerador"))
+        lo, hi = min(pos.min(), neg.min()), max(pos.max(), neg.max())
+        base = (2 - k) * 2.4
+        for j, (v, cor, nome) in enumerate([(pos, "#2b6cb0", "com acento"),
+                                            (neg, "#c53030", "sem acento")]):
+            y = base + (1 - j) + (jit.random(len(v)) - 0.5) * 0.5
+            ax[1].scatter((v - lo) / (hi - lo + 1e-9), y, s=4, alpha=0.3,
+                          color=cor, label=nome if k == 0 else None)
+            ax[1].text(1.04, base + (1 - j), nome.split()[0], fontsize=7.5,
+                       color=cor, va="center")
+        ax[1].text(-0.04, base + 0.5, rot, ha="right", va="center", fontsize=9.5)
+        ax[1].axhline(base - 0.55, color="0.85", lw=0.8)
+    ax[1].set_yticks([])
+    ax[1].set_xlim(-0.42, 1.16)
+    ax[1].set_xlabel("escore, normalizado com os DOIS grupos juntos")
+    ax[1].legend(fontsize=9, loc="lower right", framealpha=0.9)
+    ax[1].set_title("(b) onde o azul (com acento) cai em relação ao vermelho",
+                    fontsize=10.5, loc="left")
+
+    fig.tight_layout(rect=[0, 0.06, 1, 0.93])
+    rodape(fig, "No E1 o azul está claramente à direita do vermelho, que é o "
+                "esperado: com acento pontua mais. No SSIM global acontece o\n"
+                "contrário, e por isso o AUC dele fica abaixo do acaso: ele mede a "
+                "variação do gerador, que é muito maior que um diacrítico.\n"
+                "O PSNR local chega a ganhar do E1 contra o gerador e contra a "
+                "deriva, mas perde no controle do acento no lugar errado.", y=0.012)
+    fig.savefig(f"{FIG}/e1_vs_ssim_psnr.png", dpi=125)
+    plt.close(fig)
+    print("  figuras/e1_vs_ssim_psnr.png")
+
+
+def rng_jitter(n, esc=0.32):
+    return (np.random.default_rng(0).random(n) - 0.5) * esc
+
+
 if __name__ == "__main__":
     os.makedirs(FIG, exist_ok=True)
     passo_a_passo()
     exemplos()
     med = medir_tudo()
     falhas(med)
+    comparar_metricas()

@@ -26,6 +26,54 @@ O cruzamento dos dois dá as quatro categorias:
 | **acento presente** | acerto              | degradação com diacrítico    |
 | **acento ausente**  | omissão do acento   | degradação sem diacrítico    |
 
+## Onde está cada resultado
+
+### Figuras, em `figuras/`
+
+| arquivo | o que mostra |
+|---|---|
+| `e1_passo_a_passo.png` | os 4 passos do E1 num par real, do recorte ao escore |
+| `e1_exemplos.png` | uma marca por linha: entrada, gêmea, diferença real, e como seria com acento |
+| `e1_falhas.png` | os maiores escores do controle negativo, e por que alguns não são erro |
+| `e1_vs_ssim_psnr.png` | a comparação com as métricas que o orientador sugeriu |
+| `anotacao_folha.png` | a folha de contato para a anotação humana do Passo 6 |
+
+Todas são regeradas por `python avaliacao_diacriticos/figuras.py`.
+
+### Medições, em `resultados/`
+
+**Atuais, são estes que valem:**
+
+| arquivo | o que é |
+|---|---|
+| `limiares_eixo_diff.json` | **o arquivo que se usa na prática**: limiar por marca, p95 do ruído, AUC e se dá para decidir amostra a amostra |
+| `res_iam_sonda77x4.csv` | o E1 amostra a amostra no controle negativo definitivo (1.232 imagens, 18 palavras por marca, 4 escritores) |
+| `ssim_psnr.csv` | as 2.156 medidas da comparação com SSIM e PSNR, nos quatro controles |
+| `res_reais_e1.csv` | o E1 nos recortes reais, que é o controle positivo |
+| `res_ascii_negativo.csv` | o E1 no negativo do mesmo domínio (palavra real sem acento, com acento fabricado) |
+| `htr_paddleocr_grande.csv` | o melhor leitor, em 1.300 recortes reais |
+| `htr_trocr.csv`, `htr_easyocr.csv`, `htr_paddleocr.csv` | os três leitores nos mesmos 240 recortes |
+| `calibracao_e1_dominio.json` | a separação do E1 por faixa contra o negativo do mesmo domínio |
+| `pares_corpus.json` | os 187 pares mínimos com gêmeo ASCII real no corpus |
+| `passo1_alinhamento.json` | os números do portão do Passo 1 |
+
+**Superados, ficam só como histórico:** `res_iam_n696.csv`, `res_iam_sonda77.csv`,
+`res_iam_e1.csv`, `res_iam_faixa.csv`, `res_reais.csv`, `calibracao_e1.json`.
+São execuções com conjuntos menores ou com o intervalo de confiança antigo, que
+reamostrava amostras em vez de palavras. Não citar números deles.
+
+### Como ler o `limiares_eixo_diff.json`
+
+É o arquivo que responde "este escore conta como acento?". Para cada marca:
+
+- `p95` é o limiar. Um escore acima disso aparece em menos de 5% das amostras
+  de um gerador que não desenha acento.
+- `acento_nominal` é quanto vale um acento de tamanho normal, para dar escala.
+- `decide_por_amostra` é `false` quando o ruído supera o sinal, e aí só a média
+  agregada com intervalo de confiança vale naquela marca.
+- `palavras` diz quantos tipos distintos sustentam o número, que é o que
+  importa para o intervalo de confiança, não quantas imagens.
+
 ## Arquivos
 
 | arquivo | papel |
