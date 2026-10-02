@@ -24,6 +24,7 @@ sys.path.insert(0, RAIZ)
 from acentos_sinteticos import alinhamento as al, iam  # noqa: E402
 
 ESTICAR = (0.8, 1.2)     # aumento de dados: largura sorteada
+LARGURA_LOTE = 128       # px; a largura de cada lote e multiplo disto
 
 
 def _carregar(caminho):
@@ -61,7 +62,10 @@ def montar(itens, idx, indice, rnd=None):
         alvos += [indice[c] for c in texto]
         t_ent.append(im.shape[1] // al.PASSO)
         t_alvo.append(len(texto))
+    # largura do lote arredondada para poucos tamanhos fixos: cada formato novo
+    # de entrada faz o MIOpen compilar e procurar kernels de novo
     lmax = max(im.shape[1] for im in ims)
+    lmax += (-lmax) % LARGURA_LOTE
     x = np.zeros((len(ims), 1, al.ALTURA, lmax), dtype=np.float32)
     for k, im in enumerate(ims):
         x[k, 0, :, :im.shape[1]] = im / 255.0
@@ -144,7 +148,7 @@ def main():
             torch.nn.utils.clip_grad_norm_(modelo.parameters(), 5.0)
             opt.step()
             sched.step()
-            soma += float(perda)
+            soma += float(perda.detach())
             n += 1
         cer, acerto = validar(modelo, val, indice, alfabeto, a.device, a.batch)
         marca = ""
