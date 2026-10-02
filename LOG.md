@@ -827,3 +827,37 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
   - **"Sem sinal visível"** em 5 casos (`fór`, `wíth`, `sidê`, `strêwn`):
     provavelmente o sinal foi desenhado sobre tinta já existente, e a mistura
     por mínimo o escondeu.
+
+### Filtro de visibilidade e base completa
+
+- `desenho.visibilidade` mede quanto do sinal virou tinta nova (pixels novos ÷
+  comprimento × espessura). Calibrado nas mesmas 200 amostras, que a semente 1
+  reproduz idênticas:
+  - os 4 sinais escondidos em tinta existente têm 0,33–0,54;
+  - das 182 boas, só `perfõrm` fica abaixo de 0,6 (0,42); as outras estão acima
+    de 0,68.
+
+  Limiar **0,6**, com até 3 sorteios por palavra.
+- **Correção da avaliação de 200:** ampliados, 6 dos 10 sinais "fracos" (5 com
+  `í` e o `bút`) estavam visíveis, com 1,8–4,6 px de espessura na escala do
+  modelo. Pareciam fracos só porque as palavras de caneta fina apareciam muito
+  reduzidas nas folhas. Os fracos de verdade são os 4 escondidos.
+- O pingo do `i` agora é apagado por inpainting (`cv2.inpaint`). A cor única
+  deixava um quadrado claro em papel com textura.
+- `python scripts/gerar_base_acentos.py --alinhador modelos/alinhador_iam.pt --saida iam_acentuado --workers 16`
+  (seed 0, `iam_train_val`): **29.732 amostras** de 30.658 elegíveis (97,0%),
+  339 escritores, 233 MB, 125 s.
+  - Descartes: confiança 771 (2,5%) e invisível 155 (0,5%). 357 palavras
+    precisaram de mais de um sorteio.
+  - Letras: é 6.228 · ã 4.881 · ê 4.121 · í 3.261 · õ 2.666 · ó 1.642 · á 1.598 ·
+    ç 1.197 · ô 1.158 · â 1.107 · ú 1.076 · à 797.
+  - Sem `OMP_NUM_THREADS=1` e `cv2.setNumThreads(1)`, os 16 workers disputavam
+    threads (load 300, ~4 palavras/s); com eles, ~250 palavras/s.
+  - A base fica só no WSL (`~/HTG-Research-Pt-Br/iam_acentuado/`, gitignored).
+    Resumo em `saidas/acentos_sinteticos/base/resumo.json`.
+- Conferência de 25 amostras aleatórias (`base/conferencia_25.png`):
+  - cerca de 21–22 boas;
+  - `hér` com o agudo no laço do `h` (de novo, letra depois de `h`);
+  - `thê` fundido ao arco do `h` e `háve` espremido contra o `h`, ambos na
+    letra certa;
+  - `satisfíes` certo: o agudo trocou um pingo em forma de traço.

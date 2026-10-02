@@ -841,6 +841,32 @@ visibilidade (Etapa 10) os elimina.
 **Padrão nos erros de letra:** 3 dos 7 (`háppens`, `hélp`, `húll`) são a letra logo
 depois de um `h`, com o sinal caindo na haste dele.
 
+## A base gerada
+
+`scripts/gerar_base_acentos.py` com seed 0, sobre `iam_train_val`. O `iam_test` fica
+fora, para avaliação.
+
+| item | valor |
+|---|---|
+| palavras elegíveis | 30.658 |
+| amostras geradas | **29.732 (97,0%)** de 339 escritores |
+| descartadas por confiança < −0,2 | 771 (2,5%) |
+| descartadas por sinal invisível (3 sorteios) | 155 (0,5%) |
+| precisaram de 2 ou 3 sorteios | 357 |
+| tamanho | 233 MB, 125 s com 16 processos |
+
+Letras: é 6.228 · ã 4.881 · ê 4.121 · í 3.261 · õ 2.666 · ó 1.642 · á 1.598 · ç 1.197 ·
+ô 1.158 · â 1.107 · ú 1.076 · à 797. A proporção segue os pesos do sorteio e as letras
+disponíveis no inglês; o `é` lidera porque o `e` é a letra mais comum.
+
+A base fica fora do git (`iam_acentuado/`). O resumo está em
+`saidas/acentos_sinteticos/base/resumo.json`, e uma conferência de 25 amostras
+aleatórias em `base/conferencia_25.png`.
+
+Saída: `imagens/NNNNNN.png`, `split.txt` (`imagens/NNNNNN.png,escritor,rótulo`, no
+formato dos `utils/splits_words/*.txt`), `manifesto.jsonl`, `descartes.tsv` e
+`resumo.json`.
+
 ## Limitações conhecidas
 
 - **Cursiva muito ligada:** em `stumblêd` o circunflexo cai sobre o `d`. O alinhador lê
