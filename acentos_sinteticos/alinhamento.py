@@ -167,13 +167,17 @@ class Alinhador:
         return Alinhamento(centros, decodificar(y, self.alfabeto), total / len(y))
 
     def fatias(self, g, geo, texto):
-        """Fatias por letra a partir do alinhamento, no formato de
-        geometria.fatias: [(xa, xb)]. Fronteira = meio entre disparos
-        vizinhos; as pontas sao a caixa da tinta. None se nao alinhar."""
+        """Fatias por letra (ver fatias_do_alinhamento); None se nao alinhar."""
         a = self.alinhar(g, texto)
-        if a is None:
-            return None
-        x0, x1 = geo.caixa[0], geo.caixa[1]
-        c = np.clip(a.centros, x0, x1)
-        fr = [x0] + [float((c[k] + c[k + 1]) / 2) for k in range(len(c) - 1)] + [x1]
-        return [(fr[k], fr[k + 1]) for k in range(len(c))]
+        return None if a is None else fatias_do_alinhamento(a, geo)
+
+
+def fatias_do_alinhamento(a, geo):
+    """Fatias por letra no formato de geometria.fatias: [(xa, xb)].
+    Fronteira = meio entre disparos vizinhos; as pontas sao a caixa da tinta.
+    O disparo cai, em mediana, ~0,25 largura de letra a direita do centro;
+    o meio entre disparos compensa quase todo esse vies."""
+    x0, x1 = geo.caixa[0], geo.caixa[1]
+    c = np.clip(a.centros, x0, x1)
+    fr = [x0] + [float((c[k] + c[k + 1]) / 2) for k in range(len(c) - 1)] + [x1]
+    return [(fr[k], fr[k + 1]) for k in range(len(c))]

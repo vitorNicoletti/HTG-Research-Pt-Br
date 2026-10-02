@@ -10,7 +10,7 @@ Duas folhas e um manifesto em --saida:
                     bloco por tipo de sinal: mostra que nenhum sinal se repete.
   manifesto.jsonl e amostras/*.png -- cada amostra gerada, com os parametros.
   comparacao_fatias.png -- so com --alinhador: a mesma amostra (mesma
-                    semente) com fatias iguais e com fatias do alinhamento CTC.
+                    semente) com fatias iguais e com fatias do alinhamento CTC + vales.
 
     python scripts/amostras_acentos.py --n 30 --seed 0 [--alinhador modelos/alinhador_iam.pt]
 """
@@ -99,7 +99,7 @@ def folha_comparacao(pares, caminho, f_rot):
     larg = 2 * (LARGURA_VIS + 12) + 20
     folha = Image.new("RGB", (larg, 30 + len(pares) * linha_h), "white")
     d = ImageDraw.Draw(folha)
-    for k, t in enumerate(("fatias iguais", "fatias do alinhamento CTC")):
+    for k, t in enumerate(("fatias iguais", "fatias CTC + vales de tinta")):
         d.text((10 + k * (LARGURA_VIS + 12), 8), t, fill=(140, 0, 0), font=f_rot)
     y = 30
     for igual, ctc in pares:

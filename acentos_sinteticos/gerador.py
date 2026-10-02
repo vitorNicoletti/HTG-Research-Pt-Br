@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from . import desenho, geometria, tracos
+from . import alinhamento, desenho, geometria, tracos
 
 # letra-base -> letras acentuadas do portugues que se desenham sobre ela
 VARIANTES = {
@@ -72,7 +72,10 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None):
     rnd       -- random.Random; toda a variacao sai dele (reprodutivel)
     escolha   -- (indice, letra_acentuada) para forcar; None = sorteia
     alinhador -- alinhamento.Alinhador para localizar as letras; None (ou
-                 falha no alinhamento) = fatias iguais
+                 falha no alinhamento) = fatias iguais. Com ele, as fronteiras
+                 do CTC sao ajustadas aos vales de tinta (melhor estimador em
+                 scripts/avaliar_posicao_letras.py) e params["logp_alinhamento"]
+                 registra a confianca do alinhamento, para filtro
     Devolve Amostra, ou None se a palavra nao tiver tinta ou candidatos.
     """
     g = np.asarray(g, dtype=np.float32)
@@ -86,10 +89,13 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None):
         i, letra = escolha
     tipo = TIPO[letra]
     ref = geo.altura_x
-    fats = alinhador.fatias(g, geo, palavra) if alinhador is not None else None
-    segmentacao = "ctc" if fats is not None else "igual"
-    if fats is None:
+    al = alinhador.alinhar(g, palavra) if alinhador is not None else None
+    if al is not None:
+        fats = geometria.ajustar_aos_vales(geo, alinhamento.fatias_do_alinhamento(al, geo))
+        segmentacao = "ctc_vale"
+    else:
         fats = geometria.fatias(geo, len(palavra))
+        segmentacao = "igual"
     fatia = fats[i]
 
     if letra == "í":
@@ -135,6 +141,9 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None):
                    "espessura": round(esp, 3), "tom": round(tom, 1),
                    "altura_x": ref, "margens": [cima, baixo, esq, dir_],
                    "segmentacao": segmentacao})
+    if al is not None:
+        params.update({"logp_alinhamento": round(al.logp_medio, 4),
+                       "leitura_alinhador": al.leitura})
     return Amostra(
         imagem=np.clip(g, 0, 255).astype(np.uint8),
         original=palavra,

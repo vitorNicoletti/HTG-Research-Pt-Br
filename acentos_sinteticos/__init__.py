@@ -9,11 +9,15 @@ com o traco, a resolucao e o estilo do escritor preservados.
 Modulos:
     iam        -- lista de palavras e leitura das imagens do IAM
     geometria  -- mascara de tinta, corpo da palavra (altura-x e base),
-                  espessura do traco, fatias por letra e pontos de contato
+                  espessura do traco, fatias por letra, ajuste das fronteiras
+                  aos vales de tinta e pontos de contato
+    alinhamento -- reconhecedor CTC (scripts/treinar_alinhador.py) e
+                  alinhamento forcado da transcricao: onde esta cada letra
     tracos     -- formas parametricas dos sinais (til, agudo, grave,
                   circunflexo, cedilha), com variacao aleatoria
     desenho    -- rasterizacao do traco com espessura e tom da tinta
     gerador    -- escolhe a letra e o sinal, posiciona, desenha, troca o rotulo
 
-Uso: scripts/amostras_acentos.py.
+Uso: scripts/amostras_acentos.py; posicao das letras medida por
+scripts/avaliar_posicao_letras.py.
 """
