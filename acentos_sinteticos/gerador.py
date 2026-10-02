@@ -64,13 +64,15 @@ def candidatos(palavra, pesos=PESOS_PADRAO):
             for v in VARIANTES.get(c, ()) if pesos.get(v, 0.0) > 0]
 
 
-def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None):
+def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None):
     """Desenha um sinal numa palavra do IAM.
 
-    g        -- imagem em cinza 0..255 (float ou uint8)
-    palavra  -- transcricao; cada caractere conta como uma letra nas fatias
-    rnd      -- random.Random; toda a variacao sai dele (reprodutivel)
-    escolha  -- (indice, letra_acentuada) para forcar; None = sorteia
+    g         -- imagem em cinza 0..255 (float ou uint8)
+    palavra   -- transcricao; cada caractere conta como uma letra nas fatias
+    rnd       -- random.Random; toda a variacao sai dele (reprodutivel)
+    escolha   -- (indice, letra_acentuada) para forcar; None = sorteia
+    alinhador -- alinhamento.Alinhador para localizar as letras; None (ou
+                 falha no alinhamento) = fatias iguais
     Devolve Amostra, ou None se a palavra nao tiver tinta ou candidatos.
     """
     g = np.asarray(g, dtype=np.float32)
@@ -84,7 +86,10 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None):
         i, letra = escolha
     tipo = TIPO[letra]
     ref = geo.altura_x
-    fats = geometria.fatias(geo, len(palavra))
+    fats = alinhador.fatias(g, geo, palavra) if alinhador is not None else None
+    segmentacao = "ctc" if fats is not None else "igual"
+    if fats is None:
+        fats = geometria.fatias(geo, len(palavra))
     fatia = fats[i]
 
     if letra == "í":
@@ -128,7 +133,8 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None):
 
     params.update({"folga_y": round(-dy, 3), "desvio_x": round(dx, 3),
                    "espessura": round(esp, 3), "tom": round(tom, 1),
-                   "altura_x": ref, "margens": [cima, baixo, esq, dir_]})
+                   "altura_x": ref, "margens": [cima, baixo, esq, dir_],
+                   "segmentacao": segmentacao})
     return Amostra(
         imagem=np.clip(g, 0, 255).astype(np.uint8),
         original=palavra,

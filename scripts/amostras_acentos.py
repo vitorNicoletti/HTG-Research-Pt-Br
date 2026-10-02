@@ -9,8 +9,10 @@ Duas folhas e um manifesto em --saida:
   variacoes.png  -- a mesma palavra e a mesma letra com varias sementes, um
                     bloco por tipo de sinal: mostra que nenhum sinal se repete.
   manifesto.jsonl e amostras/*.png -- cada amostra gerada, com os parametros.
+  comparacao_fatias.png -- so com --alinhador: a mesma amostra (mesma
+                    semente) com fatias iguais e com fatias do alinhamento CTC.
 
-    python scripts/amostras_acentos.py --n 30 --seed 0
+    python scripts/amostras_acentos.py --n 30 --seed 0 [--alinhador modelos/alinhador_iam.pt]
 """
 
 import argparse
@@ -25,7 +27,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, RAIZ)
-from acentos_sinteticos import gerador, iam  # noqa: E402
+from acentos_sinteticos import alinhamento, gerador, iam  # noqa: E402
 
 ALTURA_VIS = 80        # altura de exibicao de cada imagem nas folhas
 LARGURA_VIS = 330      # largura maxima de exibicao
@@ -92,6 +94,23 @@ def folha_amostras(itens, caminho, f_rot):
     folha.save(caminho)
 
 
+def folha_comparacao(pares, caminho, f_rot):
+    linha_h = ALTURA_VIS + 26
+    larg = 2 * (LARGURA_VIS + 12) + 20
+    folha = Image.new("RGB", (larg, 30 + len(pares) * linha_h), "white")
+    d = ImageDraw.Draw(folha)
+    for k, t in enumerate(("fatias iguais", "fatias do alinhamento CTC")):
+        d.text((10 + k * (LARGURA_VIS + 12), 8), t, fill=(140, 0, 0), font=f_rot)
+    y = 30
+    for igual, ctc in pares:
+        d.text((10, y), f"{igual.rotulo} | {ctc.rotulo}   ({ctc.params['segmentacao']})",
+               fill="black", font=f_rot)
+        for k, am in enumerate((igual, ctc)):
+            folha.paste(para_vis(depuracao(am)), (10 + k * (LARGURA_VIS + 12), y + 20))
+        y += linha_h
+    folha.save(caminho)
+
+
 def folha_variacoes(blocos, n_sementes, caminho, f_rot):
     col_w = 200
     linha_h = ALTURA_VIS + 26
@@ -117,7 +136,11 @@ def main():
     ap.add_argument("--sementes", type=int, default=6, help="variacoes por tipo")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--saida", default=os.path.join(RAIZ, "saidas", "acentos_sinteticos"))
+    ap.add_argument("--alinhador", default=None,
+                    help="pesos de scripts/treinar_alinhador.py; sem ele, fatias iguais")
+    ap.add_argument("--device", default="cpu", help="device do alinhador")
     a = ap.parse_args()
+    alin = alinhamento.Alinhador(a.alinhador, a.device) if a.alinhador else None
 
     os.makedirs(os.path.join(a.saida, "amostras"), exist_ok=True)
     f_rot = fonte(14)
@@ -126,13 +149,16 @@ def main():
     rnd = random.Random(a.seed)
 
     # ---- folha de amostras ----
-    itens = []
+    itens, pares = [], []
     with open(os.path.join(a.saida, "manifesto.jsonl"), "w", encoding="utf-8") as man:
         for k, p in enumerate(rnd.sample(palavras, a.n * 2)):
             semente = a.seed * 1_000_003 + k
-            am = gerador.acentuar(iam.carregar_cinza(p.caminho), p.texto, random.Random(semente))
+            g = iam.carregar_cinza(p.caminho)
+            am = gerador.acentuar(g, p.texto, random.Random(semente), alinhador=alin)
             if am is None:
                 continue
+            if alin is not None:
+                pares.append((gerador.acentuar(g, p.texto, random.Random(semente)), am))
             nome = f"{len(itens):03d}_{am.rotulo}.png"
             Image.fromarray(am.imagem).save(os.path.join(a.saida, "amostras", nome))
             man.write(json.dumps({"arquivo": nome, "iam": os.path.relpath(p.caminho, a.clone),
@@ -142,6 +168,10 @@ def main():
             if len(itens) == a.n:
                 break
     folha_amostras(itens, os.path.join(a.saida, "amostras.png"), f_rot)
+    if pares:
+        folha_comparacao(pares, os.path.join(a.saida, "comparacao_fatias.png"), f_rot)
+        n_ctc = sum(am.params["segmentacao"] == "ctc" for _, am in pares)
+        print(f"segmentacao CTC em {n_ctc}/{len(pares)} amostras (resto: fatias iguais)")
     tipos = {}
     for _, am in itens:
         tipos[am.letra] = tipos.get(am.letra, 0) + 1
@@ -154,7 +184,8 @@ def main():
         for p in rnd.sample(cands, 2):
             i = p.texto.index(base)
             g = iam.carregar_cinza(p.caminho)
-            ams = [gerador.acentuar(g, p.texto, random.Random(s), escolha=(i, letra))
+            ams = [gerador.acentuar(g, p.texto, random.Random(s), escolha=(i, letra),
+                                    alinhador=alin)
                    for s in range(a.sementes)]
             ams = [x for x in ams if x is not None]
             if ams:
