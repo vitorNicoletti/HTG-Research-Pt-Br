@@ -794,3 +794,36 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
   lugar. Ampliado, `bóttom` estava certo. `fõr` (logp −0,29, lido "fo") é um
   recorte ambíguo, e `stumblêd` (lido "stumblerd") continua com o circunflexo
   sobre o "d". Os dois de logp mais baixo são `fõr` e `bóttom`.
+
+### Avaliação visual de 200 amostras (CTC + vales, seed 1)
+
+- `python scripts/amostras_acentos.py --n 200 --seed 1 --alinhador modelos/alinhador_iam.pt --saida saidas/acentos_sinteticos/avaliacao_200`.
+  Palavras de `iam_train_val`, em sua maioria cursivas.
+- Julgamento feito pelo Claude, um avaliador só, às cegas para o `logp`, em
+  folhas de 25 (`avaliacao_200/revisao/revisao_*.png`). Categorias:
+  C = sinal na letra certa, E = letra errada, F = sinal fraco ou invisível,
+  ? = não julgável. Cada amostra com o seu motivo:
+  `avaliacao_200/julgamento.tsv`.
+- Resultado: **C 182 · E 7 · F 10 · ? 1**. Sobre as 199 julgáveis:
+  91,5% certas, 3,5% na letra errada, 5,0% fracas. O `?` é um rótulo errado do
+  próprio IAM: `person`, mas a imagem mostra `people`.
+- Corte por `logp_alinhamento`:
+  | corte | fica | C | E | descartados (E/F/C) |
+  |---|---|---|---|---|
+  | nenhum | 199 | 91,5% | 3,5% | — |
+  | −0,2 | 193 (97%) | 93,3% | 2,1% | 3 / 1 / 2 |
+  | −0,1 | 184 (92%) | 92,9% | 2,2% | 3 / 1 / 11 |
+  | −0,05 | 158 (79%) | 94,3% | 1,3% | 5 / 3 / 33 |
+  | −0,03 | 118 (59%) | 96,6% | 0% | 7 / 6 / 68 |
+
+  O corte em −0,2 pega 3 dos 7 erros perdendo só 2 amostras boas. Os outros 4
+  erros têm `logp` entre −0,06 e −0,03, no meio das amostras boas. Os sinais
+  fracos não se separam pelo `logp` (mediana −0,034).
+- Padrões nas falhas:
+  - **í:** 7 das 18 amostras com problema (2 E e 5 F). O agudo do i sai fino
+    ou some.
+  - **Letra logo depois de um `h`:** 3 dos 7 erros (`háppens`, `hélp`,
+    `húll`); o sinal cai na haste do h.
+  - **"Sem sinal visível"** em 5 casos (`fór`, `wíth`, `sidê`, `strêwn`):
+    provavelmente o sinal foi desenhado sobre tinta já existente, e a mistura
+    por mínimo o escondeu.
