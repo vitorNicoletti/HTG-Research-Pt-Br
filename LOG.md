@@ -912,3 +912,6 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
     ~16 min por época;
   - nas amostras de cada bloco entram os controles `and` e `with`, que na
     base viram `ãnd` e `wíth`.
+- Interrompido a pedido no passo 1.556/2.045 da 2ª época. `estado.pt` registra 1
+  época completa (`epoch` 0, `ema_step` 3.545). Retomar com o mesmo comando
+  continua da 2ª época.
