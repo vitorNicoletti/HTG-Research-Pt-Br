@@ -79,6 +79,57 @@ def candidatos(palavra, pesos=PESOS_PADRAO):
             for v in VARIANTES.get(c, ()) if pesos.get(v, 0.0) > 0]
 
 
+def _desenhar_sinal(g, tinta, geo, fatia, tipo, rnd, ox, oy):
+    """Desenha um sinal na letra da `fatia`.
+
+    geo e fatia estao nas coordenadas da imagem ORIGINAL; (ox, oy) e quanto a
+    tela atual `g` ja foi ampliada a esquerda e em cima por sinais anteriores.
+    `tinta` e a mascara de tinta da tela atual (para medir a visibilidade).
+    A ordem dos sorteios (folga, desvio, forma, espessura, tom) e a do
+    acentuar() original: a base inglesa continua reprodutivel.
+    """
+    ref = geo.altura_x
+    if tipo == "cedilha":
+        c = geometria.contato_inferior(geo, fatia)
+        dy = -0.3 * geo.espessura          # nasce encostada na letra
+    else:
+        c = geometria.contato_superior(geo, fatia)
+        dy = -(ref * rnd.uniform(*FOLGA_ACENTO) + geo.espessura / 2)
+    dx = ref * rnd.uniform(*DESVIO_X)
+
+    forma, params = tracos.FORMAS[tipo](rnd, ref)
+    esp = geo.espessura * rnd.uniform(*ESPESSURA_REL)
+    tom = float(np.clip(geo.tom * rnd.uniform(*TOM_REL), 0, 200))
+
+    # garante o sinal comprido o bastante para a espessura; amplia sem
+    # distorcer, a partir do ponto de encaixe (a origem)
+    ext = max(max(x for x, _ in forma) - min(x for x, _ in forma),
+              max(y for _, y in forma) - min(y for _, y in forma))
+    esc = max(1.0, MIN_EXTENSAO_ESPESSURAS * esp / max(ext, 1e-6))
+    forma = [(x * esc, y * esc) for x, y in forma]
+    params["escala_minima"] = round(esc, 3)
+    pts = [(c.x + ox + dx + x, c.y + oy + dy + y) for x, y in forma]
+
+    # abre espaco se o sinal passar da borda (o IAM corta justo no topo)
+    m = esp + 2
+    h, w = g.shape
+    cima = max(0, math.ceil(m - min(p[1] for p in pts)))
+    baixo = max(0, math.ceil(max(p[1] for p in pts) + m - (h - 1)))
+    esq = max(0, math.ceil(m - min(p[0] for p in pts)))
+    dir_ = max(0, math.ceil(max(p[0] for p in pts) + m - (w - 1)))
+    g = desenho.ampliar_tela(g, cima, baixo, esq, dir_)
+    tinta = np.pad(tinta, ((cima, baixo), (esq, dir_)), constant_values=False)
+    pts = [(x + esq, y + cima) for x, y in pts]
+
+    antes = g
+    g = desenho.desenhar(g, pts, esp, tom)
+    vis = round(desenho.visibilidade(antes, g, tinta, pts, esp), 3)
+    tinta = tinta | (antes - g > 30)         # o sinal vira tinta para os proximos
+    return {"g": g, "tinta": tinta, "contato": c, "dy": dy, "dx": dx, "esp": esp,
+            "tom": tom, "params": params, "margens": (cima, baixo, esq, dir_),
+            "visibilidade": vis}
+
+
 def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None, al=None):
     """Desenha um sinal numa palavra do IAM.
 
@@ -123,41 +174,11 @@ def acentuar(g, palavra, rnd, pesos=PESOS_PADRAO, escolha=None, alinhador=None, 
             g = desenho.apagar(g, pingo)
             geo.mask &= ~pingo
 
-    if tipo == "cedilha":
-        c = geometria.contato_inferior(geo, fatia)
-        dy = -0.3 * geo.espessura          # nasce encostada na letra
-    else:
-        c = geometria.contato_superior(geo, fatia)
-        dy = -(ref * rnd.uniform(*FOLGA_ACENTO) + geo.espessura / 2)
-    dx = ref * rnd.uniform(*DESVIO_X)
-
-    forma, params = tracos.FORMAS[tipo](rnd, ref)
-    esp = geo.espessura * rnd.uniform(*ESPESSURA_REL)
-    tom = float(np.clip(geo.tom * rnd.uniform(*TOM_REL), 0, 200))
-
-    # garante o sinal comprido o bastante para a espessura; amplia sem
-    # distorcer, a partir do ponto de encaixe (a origem)
-    ext = max(max(x for x, _ in forma) - min(x for x, _ in forma),
-              max(y for _, y in forma) - min(y for _, y in forma))
-    esc = max(1.0, MIN_EXTENSAO_ESPESSURAS * esp / max(ext, 1e-6))
-    forma = [(x * esc, y * esc) for x, y in forma]
-    params["escala_minima"] = round(esc, 3)
-    pts = [(c.x + dx + x, c.y + dy + y) for x, y in forma]
-
-    # abre espaco se o sinal passar da borda (o IAM corta justo no topo)
-    m = esp + 2
-    h, w = g.shape
-    cima = max(0, math.ceil(m - min(p[1] for p in pts)))
-    baixo = max(0, math.ceil(max(p[1] for p in pts) + m - (h - 1)))
-    esq = max(0, math.ceil(m - min(p[0] for p in pts)))
-    dir_ = max(0, math.ceil(max(p[0] for p in pts) + m - (w - 1)))
-    g = desenho.ampliar_tela(g, cima, baixo, esq, dir_)
-    tinta = np.pad(geo.mask, ((cima, baixo), (esq, dir_)), constant_values=False)
-    pts = [(x + esq, y + cima) for x, y in pts]
-
-    antes = g
-    g = desenho.desenhar(g, pts, esp, tom)
-    params["visibilidade"] = round(desenho.visibilidade(antes, g, tinta, pts, esp), 3)
+    s = _desenhar_sinal(g, geo.mask, geo, fatia, tipo, rnd, 0, 0)
+    g, tinta, c, dy, dx, esp, tom, params = (s["g"], s["tinta"], s["contato"], s["dy"],
+                                             s["dx"], s["esp"], s["tom"], s["params"])
+    cima, baixo, esq, dir_ = s["margens"]
+    params["visibilidade"] = s["visibilidade"]
 
     params.update({"folga_y": round(-dy, 3), "desvio_x": round(dx, 3),
                    "espessura": round(esp, 3), "tom": round(tom, 1),
@@ -202,4 +223,64 @@ def gerar(g, palavra, rnd, alinhador, pesos=PESOS_PADRAO, min_logp=MIN_LOGP,
             am.params["tentativa"] = t + 1
             return am, "ok"
     return None, "invisivel"
+
+
+def acentuar_palavra(g, base, alvo, rnd, alinhador, min_logp=MIN_LOGP,
+                     min_visibilidade=MIN_VISIBILIDADE, tentativas=TENTATIVAS):
+    """Desenha TODOS os sinais de `alvo` sobre a imagem da palavra `base`.
+
+    base  -- transcricao sem acento da imagem (ex.: "coracao"); e o que o
+             alinhador CTC le
+    alvo  -- a palavra acentuada (ex.: "coração"), mesmo comprimento; onde
+             difere de base, alvo[i] tem de ser variante de base[i]
+    Cada sinal tem ate `tentativas` sorteios para passar na visibilidade; se
+    um deles nao passar, a amostra inteira e descartada -- rotulo com acento
+    que nao foi desenhado e justamente o erro que o trabalho estuda.
+    Devolve (imagem uint8 ou None, motivo, info).
+    """
+    if len(base) != len(alvo):
+        raise ValueError(f"base e alvo com tamanhos diferentes: {base!r} {alvo!r}")
+    posicoes = []
+    for i, (b, a) in enumerate(zip(base, alvo)):
+        if a != b:
+            if a not in VARIANTES.get(b, ()):
+                raise ValueError(f"{alvo!r}: {a!r} nao e variante de {b!r}")
+            posicoes.append(i)
+    g = np.asarray(g, dtype=np.float32)
+    geo = geometria.analisar(g)
+    if geo is None:
+        return None, "sem_tinta", {}
+    al = alinhador.alinhar(g, base)
+    if al is None:
+        return None, "sem_alinhamento", {}
+    info = {"logp_alinhamento": round(al.logp_medio, 4), "leitura_alinhador": al.leitura,
+            "altura_x": geo.altura_x, "sinais": []}
+    if al.logp_medio < min_logp:
+        return None, "confianca", info
+    fats = geometria.ajustar_aos_vales(geo, alinhamento.fatias_do_alinhamento(al, geo))
+
+    # pingos do i saem antes de qualquer desenho, nas coordenadas originais
+    for i in posicoes:
+        if alvo[i] == "í":
+            pingo = geometria.pingos_do_i(geo, fats[i])
+            if pingo.any():
+                g = desenho.apagar(g, pingo)
+                geo.mask &= ~pingo
+
+    tinta, ox, oy = geo.mask.copy(), 0, 0
+    for i in posicoes:
+        for t in range(tentativas):
+            s = _desenhar_sinal(g, tinta, geo, fats[i], TIPO[alvo[i]], rnd, ox, oy)
+            if min_visibilidade is None or s["visibilidade"] >= min_visibilidade:
+                break
+        else:
+            return None, "invisivel", info
+        g, tinta = s["g"], s["tinta"]
+        cima, _, esq, _ = s["margens"]
+        ox, oy = ox + esq, oy + cima
+        s["params"].update({"indice": i, "letra": alvo[i], "tentativa": t + 1,
+                            "visibilidade": s["visibilidade"]})
+        info["sinais"].append(s["params"])
+    info["margens_esq_cima"] = [ox, oy]
+    return np.clip(g, 0, 255).astype(np.uint8), "ok", info
 
