@@ -386,3 +386,36 @@ também a pôr marca onde não há diacrítico. Próximos passos a testar:
 - limitar a fração acentuada por palavra, para `the` continuar majoritariamente sem
   acento;
 - medir com a métrica (E1) em vez de só olhar.
+
+### Adendo: teto de 25% por palavra (`model_iam_acentuado_teto25`)
+
+Base com no máximo `max(1, round(0,25 × ocorrências))` versões acentuadas por palavra
+(9.892 acentuadas; `the` com 718 acentuadas contra 2.907 sem). Mesmo treino, 10
+épocas. Comparação com os 4 estilos (semente 42):
+`saidas/diffusionpen/fine_tune_iam_acentuado/comparacao_teto_4estilos.png`.
+
+Contagem por estilo (sinal visível / 4):
+
+| palavra | IAM | sem teto | teto 25% |
+|---|---|---|---|
+| `the` (sem acento) | 0 | 1 | 1 |
+| `and` (sem acento) | 0 | 2 | **0** |
+| `with` (sem acento) | 0 | 0 | 0 |
+| `coracao` (sem acento) | 0 | 2 | 2 |
+| `nação` | 0 | 4 | 4, mais deformados |
+| `pão` | 0 | 3 | 1 |
+| `avó`, `você` | 0 | 0 | 0 |
+
+**Leitura:**
+- O teto tirou o vazamento de `and`.
+- Não mudou o de `the` (o mesmo estilo 2 nos dois treinos) nem o de `coracao`
+  (estilos 1 e 2 nos dois).
+- O acento ficou mais fraco em `pão`, e `nação` ficou ainda menos legível.
+- O vazamento que sobra se repete **no mesmo estilo** nos dois treinos. Isso sugere
+  que ele depende do escritor de referência, e não só da frequência da palavra
+  acentuada.
+- Com 4 estilos por palavra, as diferenças de 1 em 4 não são conclusivas. É preciso
+  medir com muitas amostras por palavra antes de afirmar qualquer coisa.
+
+Deriva: 1,10% (3 ép.) · 1,32% (5) · 1,49% (7) · 1,64% (9) · 1,70% (10), menor que a do
+treino sem teto (2,02% com 10 épocas), já que há menos amostras por época.

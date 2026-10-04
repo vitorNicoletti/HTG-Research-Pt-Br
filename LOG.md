@@ -915,3 +915,12 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
 - Interrompido a pedido no passo 1.556/2.045 da 2ª época. `estado.pt` registra 1
   época completa (`epoch` 0, `ema_step` 3.545). Retomar com o mesmo comando
   continua da 2ª época.
+- Retomado em 2026-10-04 a partir de 1 época e concluído com 10 épocas. Os blocos
+  passaram a fechar nas épocas 3, 5, 7, 9 e 10. O ritmo caiu de ~2,1 para ~1,4
+  passo/s ao longo da sessão.
+- Deriva: 1,099% (3) · 1,320% (5) · 1,491% (7) · 1,635% (9) · 1,698% (10).
+- `and` e `with` gerados também para o IAM original e para o
+  `model_iam_acentuado` 10 ép. (mesma semente). Comparações em
+  `saidas/diffusionpen/fine_tune_iam_acentuado/`: `comparacao_teto.png`,
+  `comparacao_teto_4estilos.png` e `evolucao_teto25.png`. Análise no
+  ACHADOS, seção 10 (adendo).
