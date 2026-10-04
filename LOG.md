@@ -936,3 +936,57 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
   do MIOpen.
 - Tabela e análise no ACHADOS, seção 10 (adendo 2). Painéis no WSL em
   `~/HTG-Research-Pt-Br/medicao_marcas/`.
+
+## 2026-10-04 — Base portuguesa (palavras do português geradas pelo IAM e acentuadas)
+
+Ordem seguida para não vazar dados: a partição foi congelada antes de gerar
+qualquer imagem.
+
+1. **Vocabulário.** `scripts/preparar_vocabulario_pt.py`:
+   - fonte: FrequencyWords `pt_br_50k` (OpenSubtitles 2018, CC-BY-SA 4.0), com o
+     sha256 em `vocabulario_pt/resumo.json`;
+   - 48.658 palavras de 2 a 12 letras, em 41.054 grupos;
+   - **grupo** = esqueleto sem acento com o plural dobrado; o grupo inteiro vai
+     para um split só;
+   - forçados no teste: as 97 palavras de avaliação do repositório (sonda,
+     pares da métrica, amostras dos experimentos, medição de marcas) e as 1.083
+     acentuadas do teste do BRESSAY. Forçadas na validação: as 875 acentuadas
+     da validação do BRESSAY. O resto vai por hash do grupo (10% teste, 5% val);
+   - treino: 4.952 acentuadas e 35.248 sem acento; val: 532 e 2.105; teste:
+     1.536 e 4.285;
+   - commit `c0cfc38`. Não regenerar: o script também lê os
+     `experimentos/*.json`.
+2. **Várias marcas por palavra.** `gerador.acentuar_palavra` desenha todos os
+   sinais; se um sair invisível, a amostra é descartada. O desenho de um sinal
+   foi extraído para `_desenhar_sinal`, e as 40 primeiras amostras da base
+   inglesa saem idênticas pixel a pixel (regressão conferida).
+3. **Geração.**
+   - `comum/diffusionpen.py`: DiffusionPen em lote, com referências pelo
+     pré-processamento do `IAMDataset`.
+   - `scripts/gerar_base_pt.py`: só palavras do treino (conferido antes de
+     gerar e a cada gravação), só escritores do `iam_train_val`, palavras
+     amostradas uniformemente com 2 imagens por acentuada.
+   - Cada imagem é recortada na tinta e ampliada 2×. Sai se o alinhador não
+     ler o esqueleto com `logp ≥ −0,2`.
+   - Tipos de amostra: `acentuada`, `par` (a mesma imagem sem os sinais,
+     rótulo = esqueleto) e `sem_acento`.
+   - Teste com 40 + 20 palavras: 51% aproveitadas (as gerações ilegíveis do
+     IAM em palavras longas e raras saem); folha em
+     `saidas/acentos_sinteticos/base_pt_teste.png`.
+4. **Avaliação fixada antes do modelo novo.** `scripts/avaliar_pt.py`:
+   - palavras de um split (val para escolher checkpoint, teste uma vez no fim):
+     30 acentuadas, os 30 esqueletos e 20 sem acento, sem `i`/`j`; no teste
+     entram também os pares da sonda;
+   - 20 escritores do `iam_test` × sementes 42 e 43;
+   - mede a taxa de marca solta, a diferença pareada (acentuada − esqueleto) e
+     o CER de um leitor **separado** (cabeça LSTM, semente 1), não do alinhador
+     que filtrou a base;
+   - para com erro se uma palavra avaliada não for do split, se o grupo dela
+     estiver numa base de treino, ou se um escritor estiver no treino.
+5. O leitor do treino (`iam_acentuado_dataset.py`) confere os rótulos de base
+   com vocabulário contra o split de treino. `experimentos/iam_pt.json`:
+   `iam_originais` 0,3, 16 épocas em blocos de 4, amostras de bloco com
+   palavras de validação.
+- Lançado: `gerar_base_pt.py --saida iam_pt --sem_acento 12000` (21.904
+  gerações, ~2,7 por segundo). Em seguida, automaticamente,
+  `treinar_alinhador.py --cabeca lstm --seed 1 --saida modelos/leitor_iam_lstm.pt`.
