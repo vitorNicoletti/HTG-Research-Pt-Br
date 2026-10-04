@@ -882,3 +882,16 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
   - Os pesos carregaram com as 457/457 chaves.
   - 2.665 passos por época, ~2 passos/s, ~22 min por época.
   - MSE inicial ≈ 0,047.
+
+## 2026-10-04 — Fine-tune `model_iam_acentuado` (10 épocas)
+
+- Interrompido em 2026-10-02, depois de ~6 min. Relançado em 2026-10-03 com o mesmo
+  comando; como nenhuma época tinha terminado, recomeçou dos pesos do IAM.
+- 10 épocas, sem erro. ~20 min por época; ~1,35 passo/s no fim, ~2,2 no começo.
+  MSE 0,043 → 0,030.
+- Deriva: 1,009% (2) · 1,380% (4) · 1,640% (6) · 1,844% (8) · 2,016% (10).
+- Amostras de 2 a 10 épocas e do IAM original (mesma semente e estilos) em
+  `saidas/diffusionpen/fine_tune_iam_acentuado/`. Análise no ACHADOS, seção 10:
+  - o til e a cedilha aparecem em `nação`, `coração` e `pão`;
+  - o acento vaza para palavras sem acento (`the` → `thé`);
+  - `ó` e `ê` não aparecem.

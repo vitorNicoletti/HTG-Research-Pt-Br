@@ -340,3 +340,45 @@ Consequências:
 2. Em 64×256 o VAE **não** é o gargalo: o acento cabe no latente. A falha das
    seções 7 e 8 está no que o UNet aprende (ou esquece), e na qualidade da
    maior parte dos dados do BRESSAY, não na capacidade de representação.
+
+## 10. Acentos sintéticos no IAM: o modelo passa a desenhar til e cedilha, mas também onde não deve
+
+**Experimento.** `experimentos/iam_acentuado.json`:
+- dados: 29.732 palavras do IAM com acento sintético (`docs/acentos_sinteticos.md`)
+  mais as 55.535 originais, sem acento;
+- 10 épocas, lr 2e-5, a partir dos pesos do IAM.
+
+Amostras com a mesma semente (42) e os mesmos 4 estilos do IAM, comparadas com o modelo
+original:
+- `saidas/diffusionpen/fine_tune_iam_acentuado/comparacao_iam_vs_10ep.png`;
+- `saidas/diffusionpen/fine_tune_iam_acentuado/evolucao.png` (2 a 10 épocas).
+
+**O que funcionou.** O modelo original desenha `nação` igual a `nacao`, sem sinal
+nenhum. Depois do fine-tune, `nação`, `coração` e `pão` saem com traços de til e de
+cedilha nos lugares aproximados. É a primeira vez neste trabalho que um diacrítico
+aparece por causa do texto pedido. No BRESSAY isso não aconteceu (seções 7 e 8).
+
+**O que deu errado:**
+1. **Vazamento para palavras sem acento.** O controle `the` sai como `thé` já com 2
+   épocas, e `coracao` sai com sinal sobre o `ao`.
+   - Hipótese para o `the`: toda ocorrência elegível de `the` no IAM ganhou um acento
+     na base (o `e` é a única letra acentuável), então metade dos `the` que o modelo
+     viu tinha sinal. A diferença entre `e` e `é` no texto não pesou o suficiente para
+     separar os dois casos.
+2. **Legibilidade.** As palavras com `ã`/`ç` ficaram piores que as versões sem acento
+   (`nação` com letras deformadas). As sem acento continuam parecidas com as do modelo
+   original.
+3. **`ó` e `ê` não apareceram.** `avó` e `você` saem idênticos a `avo` e `voce` em
+   todas as épocas.
+
+**Deriva** (`medir_deriva.py`): 1,01% (2 ép.) · 1,38% (4) · 1,64% (6) · 1,84% (8) ·
+2,02% (10). Fica abaixo da faixa "alvo" do script, mas o vazamento já aparece com 2
+épocas, então o problema não é treinar demais.
+
+**Implicação.** O dado sintético ensina a relação "diacrítico no texto → marca na
+imagem", que o BRESSAY não conseguiu ensinar. Mas a forma como a base foi montada (todas
+as ocorrências de uma palavra frequente acentuadas, 35% de amostras acentuadas) ensinou
+também a pôr marca onde não há diacrítico. Próximos passos a testar:
+- limitar a fração acentuada por palavra, para `the` continuar majoritariamente sem
+  acento;
+- medir com a métrica (E1) em vez de só olhar.
