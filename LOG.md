@@ -924,3 +924,15 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
   `saidas/diffusionpen/fine_tune_iam_acentuado/`: `comparacao_teto.png`,
   `comparacao_teto_4estilos.png` e `evolucao_teto25.png`. Análise no
   ACHADOS, seção 10 (adendo).
+
+## 2026-10-04 — Medição de marcas soltas (80 amostras por palavra)
+
+- `gerar_amostras.py --paineis` salva cada painel separado.
+  `scripts/medir_marcas.py` conta as marcas soltas acima e abaixo do corpo.
+- 17 palavras × 40 escritores do IAM (`--classes_iam`: o 12 e mais 39 sorteados
+  com `Random(0)`) × sementes 42 e 43 × 3 modelos (IAM, `model_iam_acentuado`
+  10 ép., `model_iam_acentuado_teto25` 10 ép.), `--em_lote`. ~2,5 min por
+  modelo e semente; a primeira chamada levou 5 min por causa da compilação
+  do MIOpen.
+- Tabela e análise no ACHADOS, seção 10 (adendo 2). Painéis no WSL em
+  `~/HTG-Research-Pt-Br/medicao_marcas/`.

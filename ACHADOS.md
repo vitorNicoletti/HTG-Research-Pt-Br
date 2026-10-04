@@ -419,3 +419,55 @@ Contagem por estilo (sinal visível / 4):
 
 Deriva: 1,10% (3 ép.) · 1,32% (5) · 1,49% (7) · 1,64% (9) · 1,70% (10), menor que a do
 treino sem teto (2,02% com 10 épocas), já que há menos amostras por época.
+
+### Adendo 2: medição com 80 amostras por palavra
+
+`scripts/medir_marcas.py` conta os painéis com ao menos uma **marca solta**: um
+componente pequeno de tinta acima da altura-x ou abaixo da linha de base, que não toca
+o corpo da palavra. Configuração da medição:
+- 40 escritores fixos do IAM (o escritor 12 e mais 39 sorteados) × 2 sementes = 80
+  painéis por palavra e por modelo, 4.080 imagens no total;
+- palavras sem `i`/`j`, para o pingo não contar.
+
+Resultado em `saidas/diffusionpen/fine_tune_iam_acentuado/medicao_marcas/`
+(`resumo.md`, `paineis.tsv` e a folha de conferência do detector).
+
+| palavra | IAM | sem teto | teto 25% |
+|---|---|---|---|
+| `nação` | 2% | 85% | 64% |
+| `coração` | 6% | 86% | 81% |
+| `mãe` | 6% | 71% | 40% |
+| `café` | 8% | 62% | 41% |
+| `pão` | 0% | 56% | 35% |
+| `você` | 9% | 55% | 44% |
+| `até` | 1% | 50% | 40% |
+| `avó` | 1% | 19% | 20% |
+| `nacao` (sem acento) | 4% | 52% | 49% |
+| `have` (sem acento) | 2% | 49% | 36% |
+| `coracao` (sem acento) | 6% | 42% | 65% |
+| `voce` (sem acento) | 2% | 31% | 39% |
+| `the` (sem acento) | 2% | 30% | 19% |
+| `and` (sem acento) | 0% | 28% | 24% |
+| `that` (sem acento) | 5% | 19% | 25% |
+| `avo` (sem acento) | 1% | 16% | 19% |
+| `pao` (sem acento) | 0% | 9% | 10% |
+
+**Leitura:**
+- O IAM original fica entre 0 e 9%: é o ruído do detector.
+- Os dois modelos põem marcas nas palavras acentuadas (35–86%), mas também, e muito,
+  nas sem acento (9–65%). A diferença entre o par com e sem acento é pequena:
+  `nação` 85% contra `nacao` 52%, e `avó` 19% contra `avo` 16%. O modelo aprendeu
+  "às vezes ponha uma marca", **fracamente condicionado ao diacrítico do texto**.
+- O teto de 25% reduziu as marcas nas acentuadas e só um pouco o vazamento
+  (`the` 30→19%, `have` 49→36%). Em `coracao` e `voce` o vazamento até aumentou.
+  O teto não resolve.
+- **Ressalva do detector:** palavra deformada se parte em pedaços, e um pedaço solto
+  acima ou abaixo conta como marca. Parte do "vazamento" pode ser deformação, e não
+  acento. As duas coisas são defeitos, mas diferentes.
+
+**Implicação.** Acentuar palavras inglesas (`thé`, `ãnd`) cria pares com palavras
+reais muito frequentes e não mostra nenhuma sequência do português. O próximo passo
+proposto:
+- gerar palavras **portuguesas** sem acento com o modelo original do IAM;
+- acentuar todas as letras certas com o pipeline sintético;
+- separar palavras de treino e de teste.
