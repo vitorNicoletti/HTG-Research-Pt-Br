@@ -40,8 +40,17 @@ def normalizar(g, esticar=1.0):
     return im, w / nl
 
 
-def criar_modelo(n_classes):
-    """CNN 2D (altura 64 -> 1) + CNN 1D sobre os quadros; n_classes inclui o branco."""
+def criar_modelo(n_classes, cabeca="conv"):
+    """CNN 2D (altura 64 -> 1) + cabeca sobre os quadros; n_classes inclui o branco.
+
+    cabeca "conv" (alinhador): CNN 1D, campo receptivo local -- o disparo de
+    cada letra fica perto dela. cabeca "lstm" (leitor da avaliacao): LSTM
+    bidirecional, le melhor mas nao localiza; e um modelo SEPARADO do
+    alinhador para a legibilidade nao ser medida pelo mesmo modelo que
+    filtrou a base (avaliacao circular).
+    """
+    if cabeca not in ("conv", "lstm"):
+        raise ValueError(f"cabeca desconhecida: {cabeca}")
     import torch.nn as nn
 
     def bloco(a, b):
@@ -56,18 +65,29 @@ def criar_modelo(n_classes):
                 *bloco(128, 256), *bloco(256, 256), nn.MaxPool2d((2, 1)),  # 8
                 *bloco(256, 256), *bloco(256, 256), nn.MaxPool2d((2, 1)),  # 4
             )
-            seq = []
-            for _ in range(4):
-                seq += [nn.Conv1d(256 * 4 if not seq else 256, 256, 5, padding=2),
-                        nn.BatchNorm1d(256), nn.ReLU(inplace=True)]
-            self.seq = nn.Sequential(*seq, nn.Dropout(0.2), nn.Conv1d(256, n_classes, 1))
+            if cabeca == "conv":
+                seq = []
+                for _ in range(4):
+                    seq += [nn.Conv1d(256 * 4 if not seq else 256, 256, 5, padding=2),
+                            nn.BatchNorm1d(256), nn.ReLU(inplace=True)]
+                self.seq = nn.Sequential(*seq, nn.Dropout(0.2), nn.Conv1d(256, n_classes, 1))
+            else:
+                self.proj = nn.Linear(256 * 4, 256)
+                self.lstm = nn.LSTM(256, 128, num_layers=2, bidirectional=True,
+                                    dropout=0.2, batch_first=True)
+                self.saida = nn.Linear(256, n_classes)
 
         def forward(self, x):
             """x: (B, 1, ALTURA, L) -> log-probabilidades (T, B, C), T = L / PASSO."""
             f = self.cnn(x)
             b, c, h, t = f.shape
-            y = self.seq(f.reshape(b, c * h, t))
-            return y.permute(2, 0, 1).log_softmax(-1)
+            f = f.reshape(b, c * h, t)
+            if cabeca == "conv":
+                y = self.seq(f).permute(2, 0, 1)
+            else:
+                z, _ = self.lstm(self.proj(f.permute(0, 2, 1)))
+                y = self.saida(z).permute(1, 0, 2)
+            return y.log_softmax(-1)
 
     return Leitor()
 
@@ -137,7 +157,7 @@ class Alinhador:
         ck = torch.load(caminho, map_location=device, weights_only=False)
         self.alfabeto = ck["alfabeto"]
         self.indice = {c: k + 1 for k, c in enumerate(self.alfabeto)}
-        self.modelo = criar_modelo(len(self.alfabeto) + 1).to(device)
+        self.modelo = criar_modelo(len(self.alfabeto) + 1, ck.get("cabeca", "conv")).to(device)
         self.modelo.load_state_dict(ck["estado"])
         self.modelo.eval()
         self.device = device
@@ -150,6 +170,11 @@ class Alinhador:
         with self.torch.no_grad():
             y = self.modelo(x)[:, 0].float().cpu().numpy()
         return y, esc * PASSO
+
+    def ler(self, g):
+        """Leitura livre (gulosa) da imagem."""
+        y, _ = self.logp(g)
+        return decodificar(y, self.alfabeto)
 
     def alinhar(self, g, texto):
         """Alinhamento de `texto` sobre a imagem; None se impossivel."""

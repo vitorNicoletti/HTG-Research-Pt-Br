@@ -109,6 +109,8 @@ def main():
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--cabeca", choices=("conv", "lstm"), default="conv",
+                    help="conv = alinhador; lstm = leitor separado para avaliar legibilidade")
     a = ap.parse_args()
 
     if a.device.startswith("cuda") and not torch.cuda.is_available():
@@ -129,7 +131,7 @@ def main():
     print(f"treino {len(treino)}  val {len(val)}  alfabeto {len(alfabeto)}  "
           f"carga {time.time() - t0:.0f}s", flush=True)
 
-    modelo = al.criar_modelo(len(alfabeto) + 1).to(a.device)
+    modelo = al.criar_modelo(len(alfabeto) + 1, a.cabeca).to(a.device)
     opt = torch.optim.AdamW(modelo.parameters(), lr=a.lr, weight_decay=1e-4)
     passos = a.epocas * ((len(treino) + a.batch - 1) // a.batch)
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=a.lr, total_steps=passos, pct_start=0.1)
@@ -154,7 +156,7 @@ def main():
         marca = ""
         if melhor is None or cer < melhor:
             melhor = cer
-            torch.save({"estado": modelo.state_dict(), "alfabeto": alfabeto,
+            torch.save({"estado": modelo.state_dict(), "alfabeto": alfabeto, "cabeca": a.cabeca,
                         "altura": al.ALTURA, "passo": al.PASSO, "epoca": ep,
                         "cer_val": cer, "acerto_val": acerto, "args": vars(a)}, a.saida)
             marca = "  *salvo"
