@@ -365,6 +365,10 @@ aparece por causa do texto pedido. No BRESSAY isso não aconteceu (seções 7 e 
      na base (o `e` é a única letra acentuável), então metade dos `the` que o modelo
      viu tinha sinal. A diferença entre `e` e `é` no texto não pesou o suficiente para
      separar os dois casos.
+   - Os números confirmam: o treino viu 2.907 `the` sem acento e 2.858 com acento
+     (1.693 `thé` e 1.165 `thê`). Sozinhos, `thé` e `thê` são 9,6% da base
+     sintética. Depois deles vêm `ãnd` (663), `wíth` (353), `hís` (318) e `thãt`
+     (309).
 2. **Legibilidade.** As palavras com `ã`/`ç` ficaram piores que as versões sem acento
    (`nação` com letras deformadas). As sem acento continuam parecidas com as do modelo
    original.
