@@ -1,0 +1,38 @@
+{
+  "fonte": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/pt_br/pt_br_50k.txt",
+  "sha256_fonte": "a61d6f2ede97c5daad5fb3907b72a228f0aff12668be6d24da590d20804fa611",
+  "licenca_fonte": "CC-BY-SA 4.0",
+  "filtro": {
+    "letras": "[a-zçáéíóúâêôãõà]+",
+    "tamanho": [
+      2,
+      12
+    ]
+  },
+  "fracoes_hash": {
+    "val": 0.05,
+    "teste": 0.1
+  },
+  "palavras": 48658,
+  "grupos": 41054,
+  "por_split": {
+    "treino": {
+      "acentuadas": 4952,
+      "sem_acento": 35248
+    },
+    "val": {
+      "acentuadas": 532,
+      "sem_acento": 2105
+    },
+    "teste": {
+      "acentuadas": 1536,
+      "sem_acento": 4285
+    }
+  },
+  "forcadas": {
+    "avaliacao": 97,
+    "teste_bressay": 1083,
+    "val_bressay": 875,
+    "grupos_forcados": 1267
+  }
+}
