@@ -90,7 +90,7 @@ def main():
         f.write("modelo\tpalavra\tpainel\tmarcas_acima\tmarcas_abaixo\n" + "\n".join(linhas) + "\n")
 
     palavras = sorted({p for _, p in por}, key=lambda p: (p.isascii(), p))
-    rots = [r for r, _ in modelos]
+    rots = list(dict.fromkeys(r for r, _ in modelos))   # um modelo pode vir com varias sementes
     tab = ["| palavra | " + " | ".join(rots) + " |", "|---|" + "---|" * len(rots)]
     resumo = {}
     for p in palavras:
