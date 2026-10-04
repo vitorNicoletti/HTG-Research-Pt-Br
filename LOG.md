@@ -895,3 +895,20 @@ SPLIT=./bressay_split_25 SAVE_PATH=./model_bressay_25 BLOCO=5 ALVO=40 NUM_WORKER
   - o til e a cedilha aparecem em `nação`, `coração` e `pão`;
   - o acento vaza para palavras sem acento (`the` → `thé`);
   - `ó` e `ê` não aparecem.
+
+## 2026-10-04 — Base com teto por palavra e run `model_iam_acentuado_teto25`
+
+- `gerar_base_acentos.py --teto_por_palavra`: cada palavra recebe no máximo
+  `max(1, round(teto × ocorrências))` versões acentuadas, sorteadas com a seed.
+  O padrão 1,0 reproduz a base anterior.
+- `--teto_por_palavra 0.25 --saida iam_acentuado_teto25`:
+  - 10.232 ocorrências selecionadas de 5.223 palavras distintas;
+  - **9.892 geradas** (descartes: confiança 301, invisível 39), 45 s;
+  - `the` acentuado: 718 contra 2.907 sem acento (eram 2.858). `thé`/`thê`
+    continuam sendo as mais frequentes (436 e 282).
+- `python scripts/treinar.py experimentos/iam_acentuado_teto25.json`:
+  - 65.427 amostras, 15% acentuadas (eram 35%);
+  - mesmos hiperparâmetros do `iam_acentuado`, 2.045 passos por época,
+    ~16 min por época;
+  - nas amostras de cada bloco entram os controles `and` e `with`, que na
+    base viram `ãnd` e `wíth`.
