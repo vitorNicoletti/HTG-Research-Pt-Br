@@ -1,0 +1,52 @@
+{
+  "descricao": "Fine-tune do DiffusionPen do IAM em palavras PORTUGUESAS do treino de vocabulario_pt (geradas pelo IAM original sem acento e acentuadas pelo pipeline sintetico: base iam_pt) mais 30% das palavras originais do iam_train_val. Amostras de bloco com palavras de VALIDACAO; teste so no fim",
+  "save_path": "./model_iam_pt",
+  "dados": {
+    "dataset": "iam_acentuado",
+    "split": "./iam_pt",
+    "imagens": "./DiffusionPen/iam_data/words",
+    "max_samples": 0,
+    "preproc": "iam",
+    "iam_originais": 0.3
+  },
+  "modelo": {
+    "pesos_iniciais": "./DiffusionPen/diffusionpen_iam_model_path/models",
+    "extrator_estilo": "./DiffusionPen/style_models/iam_style_diffusionpen.pth",
+    "stable_diffusion": "stable-diffusion-v1-5/stable-diffusion-v1-5"
+  },
+  "treino": {
+    "epocas_por_bloco": 4,
+    "epocas_total": 16,
+    "lr": 2e-05,
+    "batch_size": 32,
+    "adamw_eps": 1e-06,
+    "clip_grad_norm": 1.0,
+    "ema_beta": 0.995,
+    "ema_inicio": 2000,
+    "texto_max_len": 40
+  },
+  "execucao": {
+    "device": "cuda:0",
+    "num_workers": 8,
+    "save_every_steps": 500,
+    "abort_after": 300
+  },
+  "amostras": {
+    "palavras": [
+      "fogão",
+      "fogao",
+      "câmera",
+      "camera",
+      "opção",
+      "opcao",
+      "módulo",
+      "modulo",
+      "provável",
+      "provavel",
+      "bolo"
+    ],
+    "estilos": 4,
+    "seed": 42,
+    "estilo_de": "iam"
+  }
+}

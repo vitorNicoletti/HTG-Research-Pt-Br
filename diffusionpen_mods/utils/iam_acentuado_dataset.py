@@ -22,6 +22,7 @@ import json
 import os
 import random
 import string
+import sys
 
 import torch
 from PIL import Image, ImageOps
@@ -67,6 +68,21 @@ class IAMAcentuadoDataset(Dataset):
                 p = l.rstrip("\n").split(",")
                 if len(p) >= 3:
                     sinteticas.append((os.path.join(basefolder, p[0]), p[1], ",".join(p[2:])))
+
+        # Base portuguesa: o resumo.json aponta o vocabulario particionado.
+        # Todo rotulo tem de ser do split de treino -- palavra de validacao ou
+        # teste aqui e vazamento, e o treino para em vez de seguir.
+        caminho_resumo = os.path.join(basefolder, "resumo.json")
+        if os.path.isfile(caminho_resumo):
+            with open(caminho_resumo, encoding="utf-8") as f:
+                vocab = json.load(f).get("vocabulario")
+            if vocab:
+                raiz = os.path.dirname(CLONE)
+                sys.path.insert(0, raiz)
+                from acentos_sinteticos.vocabulario import Vocabulario
+                Vocabulario(os.path.join(raiz, vocab)).conferir(
+                    [t for _, _, t in sinteticas], "treino", f"leitor da base {basefolder}")
+                print(f"IAM acentuado: {len(sinteticas)} rotulos conferidos contra {vocab} (so treino)")
 
         # originais do IAM: todas servem de referencia de estilo; a fracao
         # pedida tambem entra como amostra de treino
