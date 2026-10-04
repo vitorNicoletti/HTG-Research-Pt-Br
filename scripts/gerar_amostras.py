@@ -99,6 +99,9 @@ def parse_cli():
                         "lote > 1 corrompe a amostragem nessa placa (NaN e "
                         "colapso para cinza, nao reproduzivel). O padrao gera "
                         "um estilo por vez, que bate com a CPU em 1/255.")
+    p.add_argument("--paineis", action="store_true",
+                   help="alem da tira, salva cada painel em <out>/<palavra>/<i>.png "
+                        "(i = posicao do estilo), para medir amostra a amostra")
     a = p.parse_args()
     if not os.path.isfile(a.style):
         p.error(
@@ -384,6 +387,11 @@ def main():
         img = (img.clamp(-1, 1) + 1) / 2
         out = os.path.join(cli.out, f"{palavra}.png")
         save_image(img, out, nrow=n)
+        if cli.paineis:
+            pasta = os.path.join(cli.out, palavra)
+            os.makedirs(pasta, exist_ok=True)
+            for i, painel in enumerate(img):
+                save_image(painel, os.path.join(pasta, f"{i:03d}.png"))
         desvios = [f"{float(p.std()):.3f}" for p in img]
         print(f"salvo: {out}  (std por painel: {' '.join(desvios)})")
 
