@@ -471,3 +471,52 @@ proposto:
 - gerar palavras **portuguesas** sem acento com o modelo original do IAM;
 - acentuar todas as letras certas com o pipeline sintético;
 - separar palavras de treino e de teste.
+
+## 11. Base portuguesa: legível, mas o acento ainda é fraco
+
+**Experimento.** `experimentos/iam_pt.json`. A base `iam_pt` tem 16.892 amostras:
+- 5.188 palavras acentuadas do treino de `vocabulario_pt`, geradas pelo IAM original
+  sem acento e acentuadas pelo pipeline;
+- 5.188 pares (a mesma imagem sem acento);
+- 6.516 palavras portuguesas sem acento.
+
+Treino com essas amostras mais 30% das originais do IAM, 16 épocas.
+
+**Avaliação de validação** (`scripts/avaliar_pt.py --split val`, protocolo fixado antes
+do modelo):
+- 30 palavras acentuadas de validação, os 30 esqueletos e 20 palavras sem acento,
+  sem `i`/`j`;
+- 20 escritores do `iam_test`, nunca vistos no treino, × 2 sementes = 40 painéis por
+  palavra;
+- legibilidade (CER) medida por um leitor separado (Transformer, CER 0,084 no IAM
+  val), não pelo alinhador que filtrou a base;
+- resultados em `saidas/diffusionpen/fine_tune_iam_pt/avaliacao_val/`.
+
+| modelo | marca acentuada | marca esqueleto | marca sem acento | dif. pareada | CER acent. | CER esq. | CER sem ac. |
+|---|---|---|---|---|---|---|---|
+| IAM original | 6% | 5% | 5% | +1% | 0,25 | 0,18 | 0,22 |
+| pt 4 ép. | 38% | 27% | 26% | +11% | 0,38 | 0,30 | 0,34 |
+| pt 8 ép. | 38% | 27% | 24% | +12% | 0,37 | 0,29 | 0,32 |
+| pt 12 ép. | 41% | 28% | 24% | +14% | 0,39 | 0,30 | 0,33 |
+| pt 16 ép. | 42% | 26% | 26% | +16% | 0,39 | 0,28 | 0,34 |
+
+**Leitura:**
+- **Há condicionamento ao diacrítico, mas fraco.** Com o mesmo escritor e a mesma
+  semente, a versão acentuada tem marca 16 pontos mais vezes que a sem acento, e a
+  diferença cresce com as épocas (+11 → +16). No IAM original é +1.
+- **Vazamento.** As palavras sem acento ganham marca em ~26% dos painéis, contra 5%
+  de ruído do detector no IAM original. Como o CER também piorou, parte disso pode
+  ser fragmento de letra, e não acento (ver a ressalva do detector na seção 10).
+- **Legibilidade.** O CER subiu de 0,22 para 0,34 nas palavras sem acento, com
+  escritores de teste. Nas amostras de bloco (escritores de treino) as palavras
+  parecem limpas, então a perda é maior em estilos novos.
+- **Checkpoint escolhido pela validação:** 16 épocas (maior diferença pareada, CER
+  igual ao dos outros).
+- **O teste não foi aberto.** O resultado ainda pede outra iteração, e abrir o teste
+  agora o gastaria em ajuste.
+
+**Hipóteses para o acento fraco (a testar na validação):**
+- só ~15% das amostras de treino são acentuadas;
+- os pares mostram a mesma imagem com e sem o sinal, e no MSE do ruído a marca é
+  uma fração mínima da imagem;
+- 16 épocas ainda pode ser pouco, já que a diferença continua subindo.

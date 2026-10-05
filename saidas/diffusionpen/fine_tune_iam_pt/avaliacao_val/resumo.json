@@ -1,0 +1,203 @@
+{
+  "split": "val",
+  "palavras": [
+    "opressão",
+    "percussão",
+    "arregaçar",
+    "estarás",
+    "recomeça",
+    "rapé",
+    "pensámos",
+    "haverá",
+    "pôr",
+    "mordaça",
+    "terráquea",
+    "despedaçar",
+    "reclusão",
+    "conexões",
+    "florença",
+    "unção",
+    "caçadora",
+    "engraçadas",
+    "relâmpagos",
+    "confusões",
+    "lançados",
+    "caçadoras",
+    "bálsamo",
+    "léguas",
+    "pás",
+    "sofrerá",
+    "terço",
+    "matarás",
+    "prestação",
+    "lançaremos",
+    "opressao",
+    "percussao",
+    "arregacar",
+    "estaras",
+    "recomeca",
+    "rape",
+    "pensamos",
+    "havera",
+    "por",
+    "mordaca",
+    "terraquea",
+    "despedacar",
+    "reclusao",
+    "conexoes",
+    "florenca",
+    "uncao",
+    "cacadora",
+    "engracadas",
+    "relampagos",
+    "confusoes",
+    "lancados",
+    "cacadoras",
+    "balsamo",
+    "leguas",
+    "pas",
+    "sofrera",
+    "terco",
+    "mataras",
+    "prestacao",
+    "lancaremos",
+    "molar",
+    "navarra",
+    "torresmo",
+    "central",
+    "weller",
+    "lembrarem",
+    "golpes",
+    "fletcher",
+    "sultan",
+    "huo",
+    "contactos",
+    "apanho",
+    "rylan",
+    "travas",
+    "layout",
+    "tragada",
+    "acento",
+    "atrever",
+    "pobres",
+    "sledge"
+  ],
+  "escritores": [
+    "547",
+    "560",
+    "183",
+    "321",
+    "590",
+    "583",
+    "555",
+    "517",
+    "580",
+    "537",
+    "616",
+    "305",
+    "589",
+    "280",
+    "510",
+    "201",
+    "631",
+    "318",
+    "597",
+    "622"
+  ],
+  "sementes": [
+    42,
+    43
+  ],
+  "modelos": {
+    "iam": {
+      "acentuada": {
+        "n": 1200,
+        "marca": 0.0575,
+        "cer": 0.2496339285714286
+      },
+      "esqueleto": {
+        "n": 1200,
+        "marca": 0.04833333333333333,
+        "cer": 0.1807956349206349
+      },
+      "sem_acento": {
+        "n": 800,
+        "marca": 0.04875,
+        "cer": 0.2175173611111111
+      },
+      "diferenca_pareada": 0.009166666666666667
+    },
+    "pt_4ep": {
+      "acentuada": {
+        "n": 1200,
+        "marca": 0.38083333333333336,
+        "cer": 0.38450496031746034
+      },
+      "esqueleto": {
+        "n": 1200,
+        "marca": 0.26666666666666666,
+        "cer": 0.2966335978835979
+      },
+      "sem_acento": {
+        "n": 800,
+        "marca": 0.255,
+        "cer": 0.3414816468253969
+      },
+      "diferenca_pareada": 0.11416666666666667
+    },
+    "pt_8ep": {
+      "acentuada": {
+        "n": 1200,
+        "marca": 0.38166666666666665,
+        "cer": 0.37465608465608463
+      },
+      "esqueleto": {
+        "n": 1200,
+        "marca": 0.2658333333333333,
+        "cer": 0.29002447089947087
+      },
+      "sem_acento": {
+        "n": 800,
+        "marca": 0.235,
+        "cer": 0.32121081349206343
+      },
+      "diferenca_pareada": 0.11583333333333333
+    },
+    "pt_12ep": {
+      "acentuada": {
+        "n": 1200,
+        "marca": 0.4141666666666667,
+        "cer": 0.3934047619047619
+      },
+      "esqueleto": {
+        "n": 1200,
+        "marca": 0.2783333333333333,
+        "cer": 0.2975426587301587
+      },
+      "sem_acento": {
+        "n": 800,
+        "marca": 0.23625,
+        "cer": 0.33145089285714285
+      },
+      "diferenca_pareada": 0.13583333333333333
+    },
+    "pt_16ep": {
+      "acentuada": {
+        "n": 1200,
+        "marca": 0.42083333333333334,
+        "cer": 0.38738227513227513
+      },
+      "esqueleto": {
+        "n": 1200,
+        "marca": 0.2608333333333333,
+        "cer": 0.2834672619047619
+      },
+      "sem_acento": {
+        "n": 800,
+        "marca": 0.255,
+        "cer": 0.3401855158730159
+      },
+      "diferenca_pareada": 0.16
+    }
+  }
+}

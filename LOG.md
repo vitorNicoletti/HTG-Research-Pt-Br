@@ -990,3 +990,24 @@ qualquer imagem.
 - Lançado: `gerar_base_pt.py --saida iam_pt --sem_acento 12000` (21.904
   gerações, ~2,7 por segundo). Em seguida, automaticamente,
   `treinar_alinhador.py --cabeca lstm --seed 1 --saida modelos/leitor_iam_lstm.pt`.
+
+## 2026-10-05 — Base `iam_pt`, leitor e run `model_iam_pt`
+
+- `gerar_base_pt.py --saida iam_pt --sem_acento 12000`: 21.904 gerações em 7.681 s.
+  - Aproveitadas: 11.559 (descartes: confiança 10.052, invisível 29).
+  - Amostras: 5.188 acentuadas, 5.188 pares e 6.516 sem acento. A base fica no WSL.
+  - Folha de 24 amostras: `saidas/acentos_sinteticos/base_pt_amostras.png`.
+- Leitor da avaliação:
+  - a cabeça **LSTM** ficou presa no patamar do branco (perda ~3,5, CER ~0,95 por 7
+    épocas), enquanto a convolucional saía dele na 2ª época. Provável defeito do
+    LSTM do MIOpen na gfx1200; interrompida;
+  - `--cabeca transformer --seed 1`: CER val **0,084** (76% das palavras certas) em
+    15 épocas, `modelos/leitor_iam_transformer.pt`.
+- `python scripts/treinar.py experimentos/iam_pt.json`:
+  - 33.552 amostras (16.892 da base e 16.660 originais);
+  - os rótulos foram conferidos contra o vocabulário, todos do treino;
+  - 1.049 passos por época, ~8 min por época, 16 épocas;
+  - deriva: 0,963% (4) · 1,370% (8) · 1,683% (12) · 1,949% (16).
+- `avaliar_pt.py --split val` em IAM e pt 4/8/12/16 épocas (~25 min por modelo).
+  Tabela e análise no ACHADOS, seção 11. Checkpoint escolhido: 16 épocas. O teste
+  não foi aberto.
