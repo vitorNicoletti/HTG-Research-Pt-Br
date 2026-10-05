@@ -1,13 +1,13 @@
 {
-  "descricao": "Como iam_acentuado, com teto de 25% de ocorrencias acentuadas por palavra (iam_acentuado_teto25), para reduzir o vazamento do acento para palavras sem acento (ACHADOS 10)",
-  "save_path": "./model_iam_acentuado_teto25",
+  "descricao": "CONTROLE do peso no acento: igual ao iam_pt, so trocando a base por iam_pt_alinhado (pares na tela da acentuada). Mede quanto o alinhamento sozinho muda. Loss original (peso_acento 1). Amostras com palavras de VALIDACAO; teste so no fim",
+  "save_path": "./model_iam_pt_alinhado",
   "dados": {
     "dataset": "iam_acentuado",
-    "split": "./iam_acentuado_teto25",
+    "split": "./iam_pt_alinhado",
     "imagens": "./DiffusionPen/iam_data/words",
     "max_samples": 0,
     "preproc": "iam",
-    "iam_originais": 1.0
+    "iam_originais": 0.3
   },
   "modelo": {
     "pesos_iniciais": "./DiffusionPen/diffusionpen_iam_model_path/models",
@@ -15,8 +15,8 @@
     "stable_diffusion": "stable-diffusion-v1-5/stable-diffusion-v1-5"
   },
   "treino": {
-    "epocas_por_bloco": 2,
-    "epocas_total": 10,
+    "epocas_por_bloco": 4,
+    "epocas_total": 16,
     "lr": 2e-05,
     "batch_size": 32,
     "adamw_eps": 1e-06,
@@ -34,19 +34,17 @@
   },
   "amostras": {
     "palavras": [
-      "nacao",
-      "nação",
-      "coracao",
-      "coração",
-      "pao",
-      "pão",
-      "avo",
-      "avó",
-      "voce",
-      "você",
-      "the",
-      "and",
-      "with"
+      "fogão",
+      "fogao",
+      "câmera",
+      "camera",
+      "opção",
+      "opcao",
+      "módulo",
+      "modulo",
+      "provável",
+      "provavel",
+      "bolo"
     ],
     "estilos": 4,
     "seed": 42,

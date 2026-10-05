@@ -16,6 +16,13 @@ caligrafia, e o acento so pode vir do texto.
 O pre-processamento e o do utils/iam_dataset.py, copiado sem mudanca: altura
 64 preservando o aspecto, centralizado em 256 (ou encolhido de 20 em 20 px ate
 caber). Sem normalizacao de contraste -- e o que o modelo viu no treino do IAM.
+
+Peso no acento (args.peso_acento != 1): cada amostra ganha um 7o elemento, a
+mascara (8, 32) do acento no latente. Ela sai da diferenca entre a acentuada e
+o seu par (a mesma imagem antes dos sinais), por isso exige base com pares
+alinhados (resumo.json com pares_alinhados). A acentuada e o par recebem a
+MESMA mascara: na acentuada o peso cobra desenhar o sinal, no par cobra nao
+desenhar. Amostras sem par (sem_acento, originais do IAM) recebem zeros.
 """
 
 import json
@@ -24,6 +31,7 @@ import random
 import string
 import sys
 
+import numpy as np
 import torch
 from PIL import Image, ImageOps
 from torch.utils.data import Dataset
@@ -35,6 +43,8 @@ CLONE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SPLIT_ORIGINAIS = os.path.join(CLONE, "utils", "splits_words", "iam_train_val.txt")
 WRITERS_DICT = os.path.join(CLONE, "writers_dict_train.json")
 SEMENTE_ORIGINAIS = 0   # sorteio da fracao de originais (reprodutivel)
+LIMIAR_PIXEL = 40       # diferenca de cinza (0..255) que conta como acento (= diag_peso_acento.py)
+FORMA_LATENTE = (8, 32) # 64x256 pelo VAE do SD (fator 8)
 
 
 def preprocessar_iam(img, transcr):
@@ -50,6 +60,22 @@ def preprocessar_iam(img, transcr):
         img = image_resize_PIL(img, width=w - 20)
         (w, h) = img.size
     return centered_PIL(img, (64, 256), border_value=255.0)
+
+
+def mascara_acento(img_acentuada, img_par):
+    """Duas imagens ja pre-processadas (64x256) -> mascara bool (8, 32) do acento.
+
+    Celula do latente com algum pixel que mudou mais que LIMIAR_PIXEL, dilatada
+    em 1 celula (o VAE espalha o sinal para as vizinhas)."""
+    a = np.asarray(img_acentuada.convert("L"), dtype=np.int16)
+    b = np.asarray(img_par.convert("L"), dtype=np.int16)
+    if a.shape != b.shape:
+        raise ValueError(f"acentuada {a.shape} e par {b.shape} com formas diferentes")
+    px = np.abs(a - b) > LIMIAR_PIXEL
+    h, w = FORMA_LATENTE
+    m = px.reshape(h, px.shape[0] // h, w, px.shape[1] // w).any(axis=(1, 3))
+    p = np.pad(m, 1)
+    return np.logical_or.reduce([p[dy:dy + h, dx:dx + w] for dy in range(3) for dx in range(3)])
 
 
 class IAMAcentuadoDataset(Dataset):
@@ -73,9 +99,11 @@ class IAMAcentuadoDataset(Dataset):
         # Todo rotulo tem de ser do split de treino -- palavra de validacao ou
         # teste aqui e vazamento, e o treino para em vez de seguir.
         caminho_resumo = os.path.join(basefolder, "resumo.json")
+        resumo = {}
         if os.path.isfile(caminho_resumo):
             with open(caminho_resumo, encoding="utf-8") as f:
-                vocab = json.load(f).get("vocabulario")
+                resumo = json.load(f)
+            vocab = resumo.get("vocabulario")
             if vocab:
                 raiz = os.path.dirname(CLONE)
                 sys.path.insert(0, raiz)
@@ -83,6 +111,32 @@ class IAMAcentuadoDataset(Dataset):
                 Vocabulario(os.path.join(raiz, vocab)).conferir(
                     [t for _, _, t in sinteticas], "treino", f"leitor da base {basefolder}")
                 print(f"IAM acentuado: {len(sinteticas)} rotulos conferidos contra {vocab} (so treino)")
+
+        # peso no acento: caminho de cada acentuada/par -> (acentuada, par)
+        self.peso_acento = float(getattr(args, "peso_acento", 1.0))
+        self.pares = None
+        if self.peso_acento != 1.0:
+            if not resumo.get("pares_alinhados"):
+                raise ValueError(f"peso_acento={self.peso_acento} exige base com pares alinhados "
+                                 f"(resumo.json de {basefolder} sem pares_alinhados; ver scripts/alinhar_pares.py)")
+            with open(os.path.join(basefolder, "manifesto.jsonl"), encoding="utf-8") as f:
+                man = [json.loads(l) for l in f]
+            por_tarefa = {}
+            for x in man:
+                if x["tipo"] in ("acentuada", "par"):
+                    por_tarefa.setdefault(x["tarefa"], {})[x["tipo"]] = x
+            self.pares = {}
+            for t, d in por_tarefa.items():
+                if set(d) != {"acentuada", "par"}:
+                    raise ValueError(f"tarefa {t} sem acentuada ou sem par no manifesto")
+                par = ((os.path.join(basefolder, d["acentuada"]["arquivo"]), d["acentuada"]["rotulo"]),
+                       (os.path.join(basefolder, d["par"]["arquivo"]), d["par"]["rotulo"]))
+                self.pares[par[0][0]] = par
+                self.pares[par[1][0]] = par
+            sem_par = [c for c, _, t in sinteticas if c not in self.pares and not t.isascii()]
+            if sem_par:
+                raise ValueError(f"{len(sem_par)} amostras acentuadas sem par: {sem_par[:5]}")
+            print(f"IAM acentuado: peso {self.peso_acento} no acento, {len(por_tarefa)} pares com mascara")
 
         # originais do IAM: todas servem de referencia de estilo; a fracao
         # pedida tambem entra como amostra de treino
@@ -135,6 +189,15 @@ class IAMAcentuadoDataset(Dataset):
         img = preprocessar_iam(img, transcr)
         return self.transforms(img) if self.transforms else img
 
+    def mascara(self, caminho):
+        """Mascara float (8, 32) do acento para a amostra; zeros se ela nao tem par."""
+        if caminho not in self.pares:
+            return torch.zeros(FORMA_LATENTE)
+        (ca, ra), (cp, rp) = self.pares[caminho]
+        ia = preprocessar_iam(Image.open(ca).convert("RGB"), ra)
+        ip = preprocessar_iam(Image.open(cp).convert("RGB"), rp)
+        return torch.from_numpy(mascara_acento(ia, ip).astype(np.float32))
+
     def __getitem__(self, index):
         caminho, escritor, transcr, _ = self.data[index]
         img = self.carregar(caminho, transcr)
@@ -147,5 +210,7 @@ class IAMAcentuadoDataset(Dataset):
         cor = self.carregar(random.choice(refs), "palavra")
         # Mesmas posicoes do IAMDataset/BRESSAY_Dataset:
         # 0 imagem, 1 texto, 2 classe do escritor, 3 estilos [5,3,64,256],
-        # 4 caminho, 5 cor_im
+        # 4 caminho, 5 cor_im; com peso no acento, 6 mascara (8, 32)
+        if self.pares is not None:
+            return img, transcr, self.wid[escritor], estilos, caminho, cor, self.mascara(caminho)
         return img, transcr, self.wid[escritor], estilos, caminho, cor

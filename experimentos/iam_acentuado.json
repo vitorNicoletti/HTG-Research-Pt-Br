@@ -23,7 +23,8 @@
     "clip_grad_norm": 1.0,
     "ema_beta": 0.995,
     "ema_inicio": 2000,
-    "texto_max_len": 40
+    "texto_max_len": 40,
+    "peso_acento": 1
   },
   "execucao": {
     "device": "cuda:0",

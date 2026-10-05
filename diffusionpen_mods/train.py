@@ -153,6 +153,7 @@ def gravar_config(args, n_treino, diffusion):
             'reducao': reducao,
             'base_acentos': base_acentos,
             'iam_originais': args.iam_originais if args.dataset == 'iam_acentuado' else None,
+            'peso_acento': args.peso_acento,
         },
         'ambiente': {
             'host': platform.node(),
@@ -554,6 +555,9 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
         nan_loss = 0
         nan_grad = 0
         falhas_seguidas = 0
+        # com peso no acento: MSE sem peso (comparavel aos runs antigos) e MSE
+        # dentro/fora da mascara, acumulados na epoca
+        acum_acento = dict.fromkeys(('mse', 'n', 'dentro', 'n_dentro', 'fora', 'n_fora'), 0.0)
         pbar = tqdm(loader)
         style_feat = []
         for i, data in enumerate(pbar):
@@ -608,8 +612,28 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
             
             predicted_noise = model(x_t, timesteps=t, context=text_features, y=s_id, style_extractor=style_features)
             
-            loss = mse_loss(noise, predicted_noise)
-            
+            if args.peso_acento != 1.0:
+                # Peso no acento: o erro de ruido nas celulas do latente onde
+                # esta o acento (mascara do IAMAcentuadoDataset, data[6]) vale
+                # peso_acento; o resto vale 1. Sem normalizar pela soma dos
+                # pesos: fora da mascara a loss fica exatamente a de antes.
+                mascara = data[6].to(images.device)
+                if mascara.shape[-2:] != images.shape[-2:]:
+                    raise SystemExit(f'mascara {tuple(mascara.shape)} nao bate com o latente {tuple(images.shape)}')
+                erro2 = (noise - predicted_noise) ** 2
+                peso = 1.0 + (args.peso_acento - 1.0) * mascara[:, None]
+                loss = (peso * erro2).mean()
+                with torch.no_grad():
+                    m4 = mascara[:, None].expand_as(erro2)
+                    acum_acento['mse'] += erro2.mean().item() * images.size(0)
+                    acum_acento['n'] += images.size(0)
+                    acum_acento['dentro'] += (erro2 * m4).sum().item()
+                    acum_acento['n_dentro'] += m4.sum().item()
+                    acum_acento['fora'] += (erro2 * (1 - m4)).sum().item()
+                    acum_acento['n_fora'] += (1 - m4).sum().item()
+            else:
+                loss = mse_loss(noise, predicted_noise)
+
             optimizer.zero_grad(set_to_none=True)
 
             if not torch.isfinite(loss):
@@ -715,6 +739,12 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
         print(f"epoca {epoch}: MSE {loss_meter.avg:.4f} | {nan_epoca} batches descartados "
               f"nesta epoca (loss nao-finito: {nan_loss}, gradiente nao-finito: {nan_grad}; "
               f"total no run: {nan_total})")
+        if args.peso_acento != 1.0 and acum_acento['n']:
+            a = acum_acento
+            print(f"epoca {epoch}: peso_acento {args.peso_acento} | MSE sem peso {a['mse'] / a['n']:.4f} | "
+                  f"dentro da mascara {a['dentro'] / max(a['n_dentro'], 1):.4f} | "
+                  f"fora {a['fora'] / max(a['n_fora'], 1):.4f} | "
+                  f"mascara cobre {100 * a['n_dentro'] / (a['n_dentro'] + a['n_fora']):.2f}% do latente")
 
 
 def main():
@@ -757,6 +787,7 @@ def main():
     parser.add_argument('--abort_after', type=int, default=300, help='sai com codigo 3 apos N batches seguidos sem um passo valido, para o processo poder ser relancado do checkpoint')
     parser.add_argument('--save_every_steps', type=int, default=0, help='grava checkpoint a cada N passos dentro da epoca (0 = so no fim da epoca)')
     parser.add_argument('--iam_originais', type=float, default=1.0, help='iam_acentuado: fracao das palavras originais do IAM (sem acento) que entram no treino junto com as acentuadas')
+    parser.add_argument('--peso_acento', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas do latente onde esta o acento (mascara acentuada x par); 1.0 = loss original')
     parser.add_argument('--preproc', type=str, default='v1', choices=('v1', 'v2'), help='pre-processamento do BRESSAY (utils/bressay_dataset.py): v1 = original, v2 = sem pauta, recorte justo, escala do IAM')
     parser.add_argument('--adamw_eps', type=float, default=ADAMW_EPS)
     parser.add_argument('--clip_grad_norm', type=float, default=CLIP_GRAD_NORM, help='norma maxima do gradiente antes do optimizer.step()')
@@ -782,7 +813,12 @@ def main():
                         transforms.ToTensor(),
                         torchvision.transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)) #transforms.Normalize((0.5,), (0.5,)),  #
                         ])
-    
+
+    if args.peso_acento != 1.0 and args.dataset != 'iam_acentuado':
+        raise SystemExit(f'--peso_acento so vale para --dataset iam_acentuado (recebido {args.dataset})')
+    if args.peso_acento < 1.0:
+        raise SystemExit(f'--peso_acento tem de ser >= 1 (recebido {args.peso_acento})')
+
     if args.dataset == 'iam':
         print('loading IAM')
         iam_folder = './iam_data/words'
