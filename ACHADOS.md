@@ -521,7 +521,7 @@ do modelo):
   uma fração mínima da imagem;
 - 16 épocas ainda pode ser pouco, já que a diferença continua subindo.
 
-## 12. Diagnóstico: o modelo usa o diacrítico, mas só 0–7% do que deveria
+## 12. Diagnóstico: o sinal do acento chega ao modelo, mas a pressão do treino para usá-lo é pequena
 
 `diagnostico/diag_peso_acento.py`, sobre 96 pares da base `iam_pt` (a mesma imagem com
 e sem os sinais, o que dá a máscara exata do acento). A conta da perda reproduz a do
@@ -529,56 +529,69 @@ e sem os sinais, o que dá a máscara exata do acento). A conta da perda reprodu
 com `max_length` 40. Modelos: IAM original e `model_iam_pt` com 16 épocas. Resultado
 em `diagnostico/resultados/peso_acento/`.
 
-**1. O acento é pequeno, mas a perda o enxerga.**
+**1. Quanto um acento faltando custa na perda.**
 - O acento ocupa 0,46% dos pixels e 2,1% das posições do latente 8×32; 70% da
   diferença entre os latentes com e sem acento cai nessas posições.
-- Desenhar a palavra **sem** o acento pedido aumenta a perda da amostra em
-  `SNR(t) × média((z_acento − z_par)²)`. Comparado com a perda típica do modelo,
-  isso dá 300% (t=25), 121% (t=100), 57% (t=250), 26% (t=500) e 12–14% (t ≥ 750).
-- Ou seja, **por amostra** o erro do acento não é invisível. Ele pesa pouco
-  só no ruído alto e no **conjunto**: só ~15% das amostras do treino têm acento.
+- Desenhar sem o acento pedido acrescenta `SNR(t) × média((z_acento − z_par)²)` à
+  perda da amostra.
+- **A faixa que importa é a de ruído médio a alto.** Com pouco ruído (t ≤ 250) a
+  imagem ruidosa ainda mostra o acento, e o modelo nem precisa do texto para
+  acertá-lo. Por isso as razões grandes ali (57–300%) não dizem nada. É com ruído
+  médio a alto (t = 500 a 950) que o texto precisa fornecer o acento.
+- Nessa faixa, um acento faltando custa **12–26% da perda daquela amostra**. Como
+  só ~15% das amostras têm acento, a pressão sobre a perda do lote é de **poucos
+  por cento**. **Isso apoia a hipótese de que o acento pesa pouco no treino.**
+- O SNR×Δz² é um limite superior, não um alvo: com ruído alto, o ótimo é uma
+  previsão borrada, porque a posição e a forma exatas do sinal não são
+  determináveis.
 
-**2. O modelo usa o diacrítico, no lugar certo, mas fraco.** Na imagem acentuada com
-ruído, troquei o texto certo (`fogão`) pelo errado (`fogao`):
-- `pt_16ep`: a perda sobe só +0,5% a +3,7%. A sensibilidade da previsão à troca
-  de texto é 1,5–6,6× maior **na região do acento** do que fora dela. O modelo
-  aprendeu **onde** o diacrítico atua.
-- **Mas na intensidade, ele fica muito aquém.** Um modelo que tivesse aprendido o
-  acento teria, na região do acento, um aumento de perda da ordem da penalidade
-  ideal (1,67 em t=250). O observado é **0,05: 3%**. Nos outros passos, 0–7%.
-- No par (imagem sem acento, texto errado `fogão`) a resposta é ainda menor
-  (≤ 0,7%).
-- O IAM original tem perda **menor** com o texto errado (−2 a −4%): para ele,
-  `fogao` combina mais com a imagem que `fogão`. É o esperado de um modelo que
-  nunca viu acento.
+**2. O modelo treinado usa o diacrítico mais que o IAM, mas pouco.** Na imagem
+acentuada com ruído, troquei o texto certo (`fogão`) pelo errado (`fogao`) e medi o
+aumento da perda **na região do acento**:
 
-**3. O codificador de texto distingue com e sem acento.** Com a média sobre os tokens:
+| t | IAM original | pt 16 ép. |
+|---|---|---|
+| 250 | +1,3% | **+14,1%** |
+| 500 | +1,5% | **+10,3%** |
+| 750 | −0,2% | +4,8% |
+| 950 | 0,0% | +3,4% |
+
+- O excesso do modelo treinado sobre o IAM em ruído médio (+10–14 contra +1–1,5) é
+  a evidência de que ele aprendeu a usar o diacrítico. Na perda da imagem inteira,
+  o efeito é só +0,5% a +3,7%.
+- A concentração da sensibilidade **dentro** da região do acento (1,5–6,6×) **não**
+  é evidência de aprendizado. O IAM original também concentra (2–6× em t ≤ 250):
+  trocar uma letra mexe na atenção cruzada em volta daquela letra, e é ali que fica
+  a máscara.
+- Nenhum valor "ideal" serve de referência neste experimento. A medida de que a
+  resposta é fraca é a geração: diferença pareada de +16 pontos na validação
+  (seção 11).
+
+**3. O codificador de texto distingue com e sem acento.** Com a média sobre as 40
+posições do tokenizador (com preenchimento, o que dilui a diferença):
 - cos(`fogão`, `fogao`) = 0,935 e cos(`fogão`, outra palavra) = 0,11;
-- distância relativa ao esqueleto 0,32, contra 1,34 a outra palavra;
-- depois da `text_lin`, quase igual (0,94 e 0,31).
+- distância relativa 0,32 contra 1,34; depois da `text_lin`, praticamente igual.
 
-O sinal do diacrítico chega ao UNet com ~1/4 da diferença entre duas palavras
-distintas. **O gargalo não é o CANINE.**
+O sinal do diacrítico chega ao UNet. **O gargalo não parece ser o CANINE.**
 
-**4. Achado lateral: 64% dos pares entram desalinhados no treino.** Em 61 dos 96
-pares, o sinal passou da borda e a imagem acentuada ganhou margem. Depois do
-pré-processamento (altura 64), as duas versões ficam em **escalas diferentes**, e o
-contraste "só o acento muda" se perde em 2/3 dos pares. O diagnóstico realinhou os
-pares para medir, mas a base de treino não.
+**4. Defeito na base: 64% dos pares entram desalinhados no treino.** Em 61 dos 96
+pares o sinal passou da borda e a imagem acentuada ganhou margem. Depois do
+pré-processamento (altura 64), as duas versões ficam em escalas diferentes, e o
+contraste "só o acento muda" se perde em 2/3 dos pares. Corrige-se sem regenerar:
+basta pôr cada `_par.png` na tela da acentuada usando `margens_esq_cima`.
 
-**5. Achado lateral 2:** no `train.py` (laço de treino), `labels = None` em 10% dos
-passos não tem efeito, porque o modelo recebe `y=s_id` e o texto nunca é retirado. Não
-há treino sem condicionamento, o que impede guidance livre de classificador. Isso não
-afeta este diagnóstico.
+**5. Nota sobre o `train.py`:** `labels = None` em 10% dos passos não tem efeito,
+porque o modelo recebe `y=s_id` e o texto nunca é retirado. Fica só registrado:
+corrigir mudaria o comportamento gerativo.
 
-**Leitura da hipótese "o acento pesa pouco na perda":** confirmada em parte.
-- Por amostra, o erro pesa (12–300% da perda conforme t).
-- O que é fraco é a **resposta do modelo**: 0–7% do ideal.
-- As causas prováveis somam-se: pouco acento no conjunto (15% das amostras, cada
-  palavra 1–2 vezes), pares desalinhados (o contraste limpo existe só em 1/3) e
-  o peso uniforme da perda sobre o latente.
+**Teste causal da hipótese:** um treino com a perda pesada na região do acento.
+- máscara tirada dos pares alinhados, reduzida a 8×32 e dilatada em 1 célula,
+  porque 30% da diferença cai fora dela;
+- peso aplicado também no **par**, o que penaliza a marca desenhada sem
+  diacrítico (o vazamento);
+- peso 1 no resto; só no leitor `iam_acentuado`, com λ registrado no
+  experimento e no `config.jsonl`;
+- para separar os efeitos do alinhamento e do peso, é preciso um treino de
+  controle só com os pares alinhados.
 
-Correções a testar na validação, em ordem de custo:
-1. alinhar os pares na mesma tela;
-2. mais exemplos acentuados com repetição (frequência suavizada);
-3. pesar mais a região do acento na perda, usando a máscara dos pares.
+Esse treino muda o `train.py` e precisa de aprovação.
