@@ -109,8 +109,8 @@ def main():
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--cabeca", choices=("conv", "lstm"), default="conv",
-                    help="conv = alinhador; lstm = leitor separado para avaliar legibilidade")
+    ap.add_argument("--cabeca", choices=("conv", "lstm", "transformer"), default="conv",
+                    help="conv = alinhador; transformer = leitor separado para avaliar legibilidade")
     a = ap.parse_args()
 
     if a.device.startswith("cuda") and not torch.cuda.is_available():

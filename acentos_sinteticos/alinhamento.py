@@ -44,13 +44,19 @@ def criar_modelo(n_classes, cabeca="conv"):
     """CNN 2D (altura 64 -> 1) + cabeca sobre os quadros; n_classes inclui o branco.
 
     cabeca "conv" (alinhador): CNN 1D, campo receptivo local -- o disparo de
-    cada letra fica perto dela. cabeca "lstm" (leitor da avaliacao): LSTM
-    bidirecional, le melhor mas nao localiza; e um modelo SEPARADO do
-    alinhador para a legibilidade nao ser medida pelo mesmo modelo que
-    filtrou a base (avaliacao circular).
+    cada letra fica perto dela. cabeca "transformer" (leitor da avaliacao):
+    atencao sobre a palavra inteira, le melhor mas nao localiza; e um modelo
+    SEPARADO do alinhador para a legibilidade nao ser medida pelo mesmo
+    modelo que filtrou a base (avaliacao circular). A cabeca "lstm" ficou
+    parada no patamar do branco (perda 3,5 por 7 epocas) na RX 9060 XT,
+    enquanto a "conv" saia dele na 2a epoca -- provavel defeito do LSTM do
+    MIOpen; nao use.
     """
-    if cabeca not in ("conv", "lstm"):
+    if cabeca not in ("conv", "lstm", "transformer"):
         raise ValueError(f"cabeca desconhecida: {cabeca}")
+    import math
+
+    import torch
     import torch.nn as nn
 
     def bloco(a, b):
@@ -71,10 +77,15 @@ def criar_modelo(n_classes, cabeca="conv"):
                     seq += [nn.Conv1d(256 * 4 if not seq else 256, 256, 5, padding=2),
                             nn.BatchNorm1d(256), nn.ReLU(inplace=True)]
                 self.seq = nn.Sequential(*seq, nn.Dropout(0.2), nn.Conv1d(256, n_classes, 1))
-            else:
+            elif cabeca == "lstm":
                 self.proj = nn.Linear(256 * 4, 256)
                 self.lstm = nn.LSTM(256, 128, num_layers=2, bidirectional=True,
                                     dropout=0.2, batch_first=True)
+                self.saida = nn.Linear(256, n_classes)
+            else:
+                self.proj = nn.Linear(256 * 4, 256)
+                camada = nn.TransformerEncoderLayer(256, 4, 512, dropout=0.1, batch_first=True)
+                self.trans = nn.TransformerEncoder(camada, 3)
                 self.saida = nn.Linear(256, n_classes)
 
         def forward(self, x):
@@ -84,9 +95,18 @@ def criar_modelo(n_classes, cabeca="conv"):
             f = f.reshape(b, c * h, t)
             if cabeca == "conv":
                 y = self.seq(f).permute(2, 0, 1)
-            else:
+            elif cabeca == "lstm":
                 z, _ = self.lstm(self.proj(f.permute(0, 2, 1)))
                 y = self.saida(z).permute(1, 0, 2)
+            else:
+                z = self.proj(f.permute(0, 2, 1))
+                # posicao senoidal: sem ela a atencao nao sabe a ordem dos quadros
+                pos = torch.arange(t, device=z.device, dtype=z.dtype)[:, None]
+                div = torch.exp(torch.arange(0, 256, 2, device=z.device, dtype=z.dtype)
+                                * (-math.log(10000.0) / 256))
+                pe = torch.zeros(t, 256, device=z.device, dtype=z.dtype)
+                pe[:, 0::2], pe[:, 1::2] = torch.sin(pos * div), torch.cos(pos * div)
+                y = self.saida(self.trans(z + pe)).permute(1, 0, 2)
             return y.log_softmax(-1)
 
     return Leitor()
