@@ -635,8 +635,8 @@ Leitura:
 - **A hipótese da loss se confirma em parte.** Aumentar a pressão no acento
   aumentou o acento certo, e o controle mostra que o efeito vem do peso, não
   do realinhamento.
-- **O ganho vem com vazamento.** Cerca de metade dos +11 pp de marcas na
-  acentuada reaparece como marca no esqueleto e em palavras sem acento. O
+- **O ganho vem com vazamento.** As marcas sobem +11 pp na acentuada, mas
+  também +4 pp no esqueleto e +7 pp nas palavras sem acento. O
   modelo aprende "pôr acento em palavra portuguesa" mais do que "pôr acento
   quando o texto pede".
 - **O agudo praticamente não responde.** Nas figuras, o peso 5 desenha o
