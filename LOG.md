@@ -1035,3 +1035,31 @@ qualquer imagem.
   - figuras em `diagnostico/resultados/peso_acento/`: `pares_desalinhados.png`
     (base antiga) e `pares_alinhados_base_nova.png` (a coluna 4 é o que o
     treino recebe; a 5 reaplica a correção e não vale para a base nova).
+
+## 2026-10-05 — Peso no acento na loss: controle e peso 5
+
+- `--peso_acento λ` no `train.py` (só `iam_acentuado`; chave
+  `treino.peso_acento` nos experimentos, 1 nos antigos):
+  `loss = média((1 + (λ−1)·máscara) · (ε − ε̂)²)`, sem normalizar pelos pesos.
+  Com λ = 1 o caminho antigo roda sem mudança.
+- Máscara (`mascara_acento` em `utils/iam_acentuado_dataset.py`): pixels em que
+  a acentuada e o par diferem mais de 40 níveis, depois do pré-processamento
+  do treino; max-pool para 8×32 e dilatação de 1 célula. Exige base com
+  `pares_alinhados`. A acentuada e o par recebem a mesma máscara; sem_acento e
+  originais do IAM, zeros.
+- `diagnostico/conferir_mascara_acento.py` na `iam_pt_alinhado`:
+  - os 5.188 pares têm máscara não vazia; a do par é idêntica à da acentuada;
+  - a máscara cobre em média 7,6% do latente (mediana 7,0%, p95 13%); no lote,
+    2,3%;
+  - com λ = 5, a máscara passa de 7% para 27% da perda de uma acentuada
+    mediana e de 2,3% para 11% da perda do lote;
+  - figura: `diagnostico/resultados/peso_acento/mascaras.png`, a máscara pega
+    o sinal e só ele.
+- Teste curto na GPU (640 amostras, 1 época, λ = 5): nenhum lote descartado.
+  Com os pesos do IAM, o erro de ruído dentro da máscara é **0,319** e fora
+  **0,088** (3,6×).
+- Treinos em sequência, mesmos parâmetros do `iam_pt` com a base trocada para
+  `iam_pt_alinhado`:
+  - `experimentos/iam_pt_alinhado.json` (controle, λ = 1) → `model_iam_pt_alinhado`;
+  - `experimentos/iam_pt_peso5.json` (λ = 5) → `model_iam_pt_peso5`.
+  Logs em `~/treino_pt_alinhado.out` e `~/treino_pt_peso5.out` no WSL.
