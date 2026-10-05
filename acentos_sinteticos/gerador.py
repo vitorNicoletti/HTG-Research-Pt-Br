@@ -284,3 +284,21 @@ def acentuar_palavra(g, base, alvo, rnd, alinhador, min_logp=MIN_LOGP,
     info["margens_esq_cima"] = [ox, oy]
     return np.clip(g, 0, 255).astype(np.uint8), "ok", info
 
+
+def par_na_tela(g, forma_acentuada, margens_esq_cima):
+    """Poe a imagem SEM acento na mesma tela da acentuada.
+
+    Quando um sinal passa da borda, acentuar_palavra amplia a tela; sem este
+    passo o par e a acentuada chegam ao treino em escalas diferentes (o
+    pre-processamento leva as duas a 64 px de altura) e o contraste "so o
+    acento muda" se perde (ACHADOS.md, secao 12). Mesma cor de papel e mesma
+    funcao de margem do gerador.
+    """
+    ox, oy = margens_esq_cima
+    H, W = forma_acentuada
+    h, w = g.shape
+    baixo, dir_ = H - h - oy, W - w - ox
+    if min(ox, oy, baixo, dir_) < 0:
+        raise ValueError(f"par {g.shape} nao cabe na tela {forma_acentuada} com margens {margens_esq_cima}")
+    return desenho.ampliar_tela(np.asarray(g, dtype=np.float32), oy, baixo, ox, dir_)
+

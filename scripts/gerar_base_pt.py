@@ -11,8 +11,9 @@ Para cada palavra acentuada do treino (ex.: "coração"):
      invisivel, a amostra sai.
 Tres tipos de amostra no split.txt:
   acentuada  -- imagem com os sinais, rotulo "coração"
-  par        -- a MESMA imagem antes dos sinais, rotulo "coracao" (o
-                contraste mais direto: so o sinal muda)
+  par        -- a MESMA imagem antes dos sinais, rotulo "coracao", na mesma
+                tela da acentuada (alinhada); o contraste mais direto: so o
+                sinal muda
   sem_acento -- palavra do treino que nao tem acento ("casa"), gerada e
                 filtrada do mesmo jeito: portugues sem marca nenhuma
 
@@ -142,7 +143,9 @@ def main():
                         min_logp=a.min_logp)
                     if ac is not None:
                         extra = {"tarefa": tid, "semente_lote": semente, "alvo": alvo, **info}
-                        grava(f"imagens/{tid:06d}_par.png", g, esc, texto, "par", extra)
+                        # o par vai na MESMA tela da acentuada (alinhado): ver gerador.par_na_tela
+                        par = gerador.par_na_tela(g, ac.shape, info["margens_esq_cima"])
+                        grava(f"imagens/{tid:06d}_par.png", par, esc, texto, "par", extra)
                         grava(f"imagens/{tid:06d}.png", ac, esc, alvo, "acentuada", extra)
                 motivos[motivo] += 1
                 if motivo != "ok":
