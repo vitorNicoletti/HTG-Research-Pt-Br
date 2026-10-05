@@ -1011,3 +1011,27 @@ qualquer imagem.
 - `avaliar_pt.py --split val` em IAM e pt 4/8/12/16 épocas (~25 min por modelo).
   Tabela e análise no ACHADOS, seção 11. Checkpoint escolhido: 16 épocas. O teste
   não foi aberto.
+
+## 2026-10-05 — Diagnóstico do peso do acento e alinhamento dos pares
+
+- `diagnostico/diag_peso_acento.py` (96 pares, IAM e pt 16 ép.): análise no
+  ACHADOS, seção 12. Resumo:
+  - um acento faltando custa 12–26% da perda da amostra em ruído médio a alto,
+    mas só ~15% das amostras têm acento;
+  - com o texto errado, a perda na região do acento sobe +10–14% no pt contra
+    +1,5% no IAM;
+  - o CANINE distingue a palavra com e sem acento;
+  - 64% dos pares estavam desalinhados.
+- Correção dos pares: `gerador.par_na_tela` põe o par na tela da acentuada,
+  com a mesma função de margem e a mesma cor de papel. `gerar_base_pt.py` já
+  grava assim.
+- `scripts/alinhar_pares.py --origem iam_pt --destino iam_pt_alinhado`:
+  - 3.296 pares refeitos e 1.892 que já estavam alinhados; os 5.188 agora têm o
+    tamanho da sua acentuada;
+  - demais imagens por hardlink; `iam_pt` não foi alterada;
+  - em 500 pares, depois do pré-processamento do treino, os pixels diferentes
+    entre a acentuada e o par caíram de mediana **12,8%** (p95 30%) para
+    **0,40%** (p95 1,0%), o tamanho de um acento (0,46%);
+  - figuras em `diagnostico/resultados/peso_acento/`: `pares_desalinhados.png`
+    (base antiga) e `pares_alinhados_base_nova.png` (a coluna 4 é o que o
+    treino recebe; a 5 reaplica a correção e não vale para a base nova).
