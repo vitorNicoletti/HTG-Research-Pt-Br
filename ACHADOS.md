@@ -595,3 +595,59 @@ corrigir mudaria o comportamento gerativo.
   controle só com os pares alinhados.
 
 Esse treino muda o `train.py` e precisa de aprovação.
+
+## 13. Peso no acento: o efeito existe e é causal, mas vem com vazamento e não resolve o agudo
+
+Dois treinos iguais ao `iam_pt` (16 épocas), na base `iam_pt_alinhado`:
+- o controle, com a loss original;
+- o peso 5, com o erro de ruído 5× maior na máscara do acento, aplicado na
+  acentuada e no par (LOG, 2026-10-05).
+
+Avaliação na validação com o mesmo protocolo do `iam_pt`: 30 pares + 20 sem
+acento, 20 escritores do iam_test × 2 sementes.
+
+| modelo | marca: acentuada | marca: esqueleto | marca: sem acento | diferença pareada | CER acentuada | CER esqueleto | CER sem acento |
+|---|---|---|---|---|---|---|---|
+| IAM original | 6% | 5% | 5% | +1% | 0,25 | 0,18 | 0,22 |
+| pt (pares desalinhados) | 42% | 26% | 26% | +16% | 0,39 | 0,28 | 0,34 |
+| controle (pares alinhados) | 46% | 30% | 25% | +16% | 0,38 | 0,31 | 0,32 |
+| **peso 5** | **57%** | 34% | 32% | **+23%** | 0,39 | 0,31 | 0,32 |
+
+Bootstrap por palavra (a palavra é a unidade, 10.000 reamostragens):
+- **peso 5 − controle:** diferença pareada **+7,1 pp** (IC95 +3,2 a +11,1);
+  19 palavras melhoram e 7 pioram. Marca falsa em palavras sem acento
+  **+6,7 pp** (IC95 +2,9 a +10,6).
+- **controle − pt:** diferença pareada −0,5 pp (IC95 −4,5 a +3,3). Alinhar os
+  pares sozinho não mudou nada mensurável.
+
+Por sinal, a diferença pareada média por palavra:
+
+| sinal | controle | peso 5 |
+|---|---|---|
+| til (7 palavras) | +27 pp | +42 pp |
+| cedilha (13) | +29 pp | +34 pp |
+| agudo (10) | −1 pp | +4 pp |
+| circunflexo (2) | −1 pp | +8 pp |
+
+As palavras com til quase todas também têm cedilha (-ção).
+
+Leitura:
+- **A hipótese da loss se confirma em parte.** Aumentar a pressão no acento
+  aumentou o acento certo, e o controle mostra que o efeito vem do peso, não
+  do realinhamento.
+- **O ganho vem com vazamento.** Cerca de metade dos +11 pp de marcas na
+  acentuada reaparece como marca no esqueleto e em palavras sem acento. O
+  modelo aprende "pôr acento em palavra portuguesa" mais do que "pôr acento
+  quando o texto pede".
+- **O agudo praticamente não responde.** Nas figuras, o peso 5 desenha o
+  agudo, mas muitas vezes na letra errada ("hávera" para "haverá") e também na
+  palavra sem acento. -ção, com til e cedilha, sai certa na maioria dos
+  escritores.
+- **O CER não piorou com o peso** (0,32 nas palavras sem acento, igual ao
+  controle).
+
+Figuras (mesmo escritor e semente para todos os modelos):
+- `diagnostico/resultados/peso_acento/comparacao/`: prestação, haverá,
+  mordaça e reclusão;
+- as 30 completas ficam em `saidas/comparacao_peso/` no WSL (gerar com
+  `scripts/comparar_paineis.py`).
