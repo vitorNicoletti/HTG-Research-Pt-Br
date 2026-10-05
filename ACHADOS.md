@@ -651,3 +651,33 @@ Figuras (mesmo escritor e semente para todos os modelos):
   mordaça e reclusão;
 - as 30 completas ficam em `saidas/comparacao_peso/` no WSL (gerar com
   `scripts/comparar_paineis.py`).
+
+**Adendo: a base explica a piora da letra?** (`diagnostico/cer_base.py`,
+leitor independente, 1.500 imagens por grupo, palavras de 3 a 10 letras a–z)
+
+| o que é lido | CER médio (IC95) | leitura exata |
+|---|---|---|
+| escrita real do iam_test | 0,121 (0,112–0,132) | 62% |
+| base: sem acento, via pré-processamento do treino | 0,188 (0,180–0,197) | 30% |
+| base: par (esqueleto), via treino | 0,190 (0,181–0,198) | 26% |
+| base: acentuada, lida contra o esqueleto, via treino | 0,268 (0,260–0,277) | 11% |
+| as mesmas, lidas direto do arquivo, sem reduzir a 64 px | 0,191 / 0,191 / 0,272 | — |
+| *referência:* IAM original gerando palavras pt da validação | 0,22 (sem acento) / 0,18 (esqueleto) | — |
+| *modelos ajustados*, palavras sem acento da validação | 0,32–0,34 | — |
+
+- **A reamostragem não é a causa:** lido via treino ou direto, o CER é o mesmo.
+- **A base é tão legível quanto o gerador que a fez**, e menos que a escrita
+  real. O IAM real dá 0,12, mas são palavras em inglês, que o leitor conhece.
+- **O acento desenhado custa +0,08 de CER** na leitura (0,27 contra 0,19 do
+  mesmo par). O leitor não tem acentos no alfabeto e lê o sinal como traço a
+  mais.
+- **Os modelos ajustados (0,32–0,34) ficam piores que a própria base** (0,19
+  a 0,27). Copiar a base explicaria no máximo ~0,22. Sobra uma piora que não
+  vem da qualidade das imagens de treino. Candidatos:
+  - a base só tem escritores do treino, e a avaliação usa escritores novos
+    (perda de generalização de estilo);
+  - os 30% de originais do IAM seguram pouco a distribuição;
+  - o próprio regime do fine-tune.
+
+  O próximo teste que separa essas causas é o treino com
+  `iam_originais` = 1,0.

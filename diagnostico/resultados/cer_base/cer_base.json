@@ -1,0 +1,78 @@
+{
+  "base": "iam_pt_alinhado",
+  "leitor": "/home/dead/HTG-Research-Pt-Br/modelos/leitor_iam_transformer.pt",
+  "referencia_avaliacao_pt_val": {
+    "iam_original_gerando_pt_sem_acento": 0.22,
+    "iam_original_gerando_pt_esqueleto": 0.18
+  },
+  "iam_real": {
+    "n": 1500,
+    "cer_medio": 0.1213,
+    "cer_mediano": 0.0,
+    "exatas": 0.6233,
+    "ic95_media": [
+      0.1116,
+      0.1319
+    ]
+  },
+  "base_sem_acento": {
+    "n": 1500,
+    "cer_medio": 0.1882,
+    "cer_mediano": 0.1667,
+    "exatas": 0.304,
+    "ic95_media": [
+      0.1795,
+      0.1968
+    ]
+  },
+  "base_sem_acento_direto": {
+    "n": 1500,
+    "cer_medio": 0.1919,
+    "cer_mediano": 0.1667,
+    "exatas": 0.2947,
+    "ic95_media": [
+      0.183,
+      0.2004
+    ]
+  },
+  "base_par": {
+    "n": 1500,
+    "cer_medio": 0.1896,
+    "cer_mediano": 0.1667,
+    "exatas": 0.2627,
+    "ic95_media": [
+      0.181,
+      0.1981
+    ]
+  },
+  "base_par_direto": {
+    "n": 1500,
+    "cer_medio": 0.1912,
+    "cer_mediano": 0.1667,
+    "exatas": 0.2567,
+    "ic95_media": [
+      0.1833,
+      0.1992
+    ]
+  },
+  "base_acentuada": {
+    "n": 1500,
+    "cer_medio": 0.2684,
+    "cer_mediano": 0.25,
+    "exatas": 0.1053,
+    "ic95_media": [
+      0.2595,
+      0.2771
+    ]
+  },
+  "base_acentuada_direto": {
+    "n": 1500,
+    "cer_medio": 0.272,
+    "cer_mediano": 0.25,
+    "exatas": 0.1027,
+    "ic95_media": [
+      0.263,
+      0.2808
+    ]
+  }
+}
