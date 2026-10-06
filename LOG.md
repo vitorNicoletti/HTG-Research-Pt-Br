@@ -1063,3 +1063,26 @@ qualquer imagem.
   - `experimentos/iam_pt_alinhado.json` (controle, λ = 1) → `model_iam_pt_alinhado`;
   - `experimentos/iam_pt_peso5.json` (λ = 5) → `model_iam_pt_peso5`.
   Logs em `~/treino_pt_alinhado.out` e `~/treino_pt_peso5.out` no WSL.
+
+## 2026-10-05 — Treino com 100% de originais; peso na zona vazia (preparado)
+
+- Fine-tune que testa por que a letra borra (ACHADOS 13, adendo):
+  `experimentos/iam_pt_peso5_orig100.json`, o peso 5 com `iam_originais` 1,0
+  (72.427 amostras, ~16,5 min/época), em `model_iam_pt_peso5_orig100`.
+  Depois do treino, a mesma cadeia avalia na validação
+  (`avaliacao_orig100_val`) e gera as figuras (`saidas/comparacao_orig100`).
+- `--peso_zona` (`treino.peso_zona`, 1 nos experimentos antigos): peso nas
+  células do latente sem tinta até uma altura-x acima e abaixo do corpo da
+  palavra (`mascara_zona` em `utils/iam_acentuado_dataset.py`).
+  - Vale só na base: na acentuada e no par, calculada no par e sem as células
+    do acento; zero nos originais do IAM.
+  - Ataca o acento que o texto não pede ("hávera", acento no esqueleto).
+- `diagnostico/conferir_zona.py`: a zona nunca encosta no acento, é igual na
+  acentuada e no par, e cobre 2 px de tinta do alvo em toda a base.
+  - Cobre 16% de cada imagem da base e 3,8% do lote.
+  - Com peso 2, fica com 7% da loss do lote; o acento fica com 5%.
+  - A primeira versão, sem limite de altura, cobria 27% e pegava o fundo
+    longe da palavra.
+- `experimentos/iam_pt_peso5_zona2.json` está pronto, mas não foi lançado. Antes
+  de lançar, ajustar `iam_originais` ao resultado do orig100 e fazer um teste
+  curto na GPU.
