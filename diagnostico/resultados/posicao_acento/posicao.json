@@ -1,0 +1,234 @@
+{
+  "base:iam_pt_alinhado": {
+    "paineis_acentuados": 800,
+    "sem_alinhamento": 0,
+    "certa": 0.61,
+    "parcial": 0.1,
+    "errada": 0.0312,
+    "nenhuma": 0.2587,
+    "extra_na_acentuada": 0.0462,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 307,
+        "acerto": 0.873
+      },
+      "cedilha": {
+        "n": 270,
+        "acerto": 0.0704
+      },
+      "circunflexo": {
+        "n": 81,
+        "acerto": 0.9383
+      },
+      "til": {
+        "n": 240,
+        "acerto": 0.8958
+      }
+    }
+  },
+  "base:iam_acentuado_teto25_pares": {
+    "paineis_acentuados": 800,
+    "sem_alinhamento": 0,
+    "certa": 0.805,
+    "parcial": 0.0,
+    "errada": 0.0187,
+    "nenhuma": 0.1762,
+    "extra_na_acentuada": 0.0288,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 303,
+        "acerto": 0.8284
+      },
+      "cedilha": {
+        "n": 25,
+        "acerto": 0.04
+      },
+      "circunflexo": {
+        "n": 197,
+        "acerto": 0.797
+      },
+      "grave": {
+        "n": 31,
+        "acerto": 0.8065
+      },
+      "til": {
+        "n": 244,
+        "acerto": 0.8607
+      }
+    }
+  },
+  "iam": {
+    "paineis_acentuados": 1200,
+    "sem_alinhamento": 0,
+    "certa": 0.005,
+    "parcial": 0.0,
+    "errada": 0.0525,
+    "nenhuma": 0.9425,
+    "extra_na_acentuada": 0.0492,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 400,
+        "acerto": 0.01
+      },
+      "cedilha": {
+        "n": 520,
+        "acerto": 0.0038
+      },
+      "circunflexo": {
+        "n": 80,
+        "acerto": 0.0
+      },
+      "til": {
+        "n": 280,
+        "acerto": 0.0
+      }
+    },
+    "marca_em_esqueleto": 0.0483,
+    "marca_em_sem_acento": 0.0488
+  },
+  "pt_16ep": {
+    "paineis_acentuados": 1200,
+    "sem_alinhamento": 0,
+    "certa": 0.095,
+    "parcial": 0.0267,
+    "errada": 0.2992,
+    "nenhuma": 0.5792,
+    "extra_na_acentuada": 0.3367,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 400,
+        "acerto": 0.07
+      },
+      "cedilha": {
+        "n": 520,
+        "acerto": 0.0923
+      },
+      "circunflexo": {
+        "n": 80,
+        "acerto": 0.0375
+      },
+      "til": {
+        "n": 280,
+        "acerto": 0.2571
+      }
+    },
+    "marca_em_esqueleto": 0.2608,
+    "marca_em_sem_acento": 0.255
+  },
+  "controle_16ep": {
+    "paineis_acentuados": 1200,
+    "sem_alinhamento": 0,
+    "certa": 0.1333,
+    "parcial": 0.025,
+    "errada": 0.3017,
+    "nenhuma": 0.54,
+    "extra_na_acentuada": 0.345,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 400,
+        "acerto": 0.0925
+      },
+      "cedilha": {
+        "n": 520,
+        "acerto": 0.1462
+      },
+      "circunflexo": {
+        "n": 80,
+        "acerto": 0.0125
+      },
+      "til": {
+        "n": 280,
+        "acerto": 0.3
+      }
+    },
+    "marca_em_esqueleto": 0.305,
+    "marca_em_sem_acento": 0.2475
+  },
+  "peso5_16ep": {
+    "paineis_acentuados": 1200,
+    "sem_alinhamento": 0,
+    "certa": 0.1992,
+    "parcial": 0.0367,
+    "errada": 0.3308,
+    "nenhuma": 0.4333,
+    "extra_na_acentuada": 0.3975,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 400,
+        "acerto": 0.145
+      },
+      "cedilha": {
+        "n": 520,
+        "acerto": 0.1615
+      },
+      "circunflexo": {
+        "n": 80,
+        "acerto": 0.0375
+      },
+      "til": {
+        "n": 280,
+        "acerto": 0.525
+      }
+    },
+    "marca_em_esqueleto": 0.3408,
+    "marca_em_sem_acento": 0.315
+  },
+  "orig100_16ep": {
+    "paineis_acentuados": 1200,
+    "sem_alinhamento": 0,
+    "certa": 0.1833,
+    "parcial": 0.0383,
+    "errada": 0.395,
+    "nenhuma": 0.3833,
+    "extra_na_acentuada": 0.5008,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 400,
+        "acerto": 0.1525
+      },
+      "cedilha": {
+        "n": 520,
+        "acerto": 0.1308
+      },
+      "circunflexo": {
+        "n": 80,
+        "acerto": 0.0125
+      },
+      "til": {
+        "n": 280,
+        "acerto": 0.5286
+      }
+    },
+    "marca_em_esqueleto": 0.3675,
+    "marca_em_sem_acento": 0.295
+  },
+  "so_originais_4ep": {
+    "paineis_acentuados": 1200,
+    "sem_alinhamento": 0,
+    "certa": 0.005,
+    "parcial": 0.0008,
+    "errada": 0.0375,
+    "nenhuma": 0.9567,
+    "extra_na_acentuada": 0.0342,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 400,
+        "acerto": 0.0
+      },
+      "cedilha": {
+        "n": 520,
+        "acerto": 0.0115
+      },
+      "circunflexo": {
+        "n": 80,
+        "acerto": 0.0
+      },
+      "til": {
+        "n": 280,
+        "acerto": 0.0036
+      }
+    },
+    "marca_em_esqueleto": 0.035,
+    "marca_em_sem_acento": 0.0437
+  }
+}

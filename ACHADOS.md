@@ -753,3 +753,73 @@ não a letra. Caminhos:
 - **Acentos sintéticos sobre escrita real:** IAM ou BRESSAY no lugar das
   gerações. Na primeira tentativa, com palavras em inglês, o acento vazou para
   o "the" (seção 10).
+
+## 14. Posição do acento: o agudo aparece mais na letra errada que na certa; a cedilha não é medida
+
+`scripts/medir_posicao_acento.py` atribui cada marca a uma letra:
+- **as letras:** o alinhador CTC alinha o esqueleto no recorte da palavra
+  gerada e define a fatia de cada letra, com fronteiras ajustadas aos vales
+  de tinta;
+- **as marcas:** as do `medir_marcas`, acima ou abaixo do corpo;
+- **a atribuição:** cada marca vai para a letra cuja fatia contém o centro da
+  sua caixa.
+
+**Validação nas bases**, onde a posição é conhecida (800 acentuadas cada,
+pré-processadas como no treino):
+
+| sinal | base pt | base IAM real |
+|---|---|---|
+| agudo | 87% | 83% |
+| til | 90% | 86% |
+| circunflexo | 94% | 80% |
+| cedilha | **7%** | **4%** |
+
+- Para agudo, til e circunflexo o método funciona: ~80–94% do sinal desenhado
+  é achado na letra certa.
+- **A cedilha não é detectada.** Ela nasce encostada no c
+  (`gerador._desenhar_sinal`, dy = −0,3·espessura), e o `medir_marcas` só
+  conta componentes soltos. Isso vale também para a "marca" do `avaliar_pt.py`.
+  Os números de cedilha das seções 11–13 medem só cedilhas que saíram
+  soltas, e as diferenças pareadas das palavras com ç vêm sobretudo do til do
+  -ção. Para medir a cedilha falta outro detector: tinta abaixo da linha de
+  base na fatia do c.
+
+**Acerto por sinal nas avaliações da validação** (letra certa, lado certo;
+1.200 painéis acentuados por modelo):
+
+| modelo | agudo | til | circunflexo | marca no esqueleto | marca sem acento |
+|---|---|---|---|---|---|
+| IAM original | 1% | 0% | 0% | 5% | 5% |
+| pt | 7% | 26% | 4% | 26% | 26% |
+| controle | 9% | 30% | 1% | 30% | 25% |
+| peso 5 | 14% | 52% | 4% | 34% | 32% |
+| peso 5 + 100% IAM | 15% | 53% | 1% | 37% | 30% |
+| só originais | 0% | 0% | 0% | 4% | 4% |
+
+**Palavras com um único sinal, peso 5:**
+
+| sinal | letra certa | letra vizinha | outra letra | nenhuma marca |
+|---|---|---|---|---|
+| agudo (400) | 14% | 7% | **21%** | 57% |
+| til (200) | 50% | 16% | 2% | 32% |
+| circunflexo (80) | 4% | 1% | 10% | 85% |
+
+O peso 5 + 100% IAM fica igual (agudo 15 / 6 / 24 / 55%).
+
+Leitura:
+- **O agudo falha das duas formas.** Na maioria das vezes não aparece (57%).
+  Quando aparece, cai 2× mais em outra letra (21% + 7% na vizinha) do que na
+  certa (14%). O modelo aprendeu "a palavra leva um agudo", não "o agudo vai
+  nesta letra". É o "hávera" das figuras.
+- **O til funciona por posição fixa.** No -ão ele cai certo em metade dos
+  casos, e a "vizinha" (16%) é em boa parte o til entre o a e o o. É o sinal
+  com posição mais previsível: quase sempre no fim da palavra.
+- **O circunflexo praticamente não foi aprendido,** com só 2 palavras da
+  validação na amostra.
+- Isso explica por que o agudo quase não mexia na diferença pareada (seção
+  13). Uma marca no lugar errado conta igual a uma no lugar certo, e o
+  esqueleto também recebe marcas.
+
+Consequência: o próximo critério de sucesso deve ser o **acerto por sinal na
+letra certa**, não a diferença pareada de marcas. A cedilha precisa de um
+detector próprio.
