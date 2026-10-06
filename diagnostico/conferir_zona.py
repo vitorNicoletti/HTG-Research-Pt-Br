@@ -4,7 +4,8 @@ A zona sao as celulas do latente inteiramente fora do corpo da palavra, sem
 tinta e dentro das colunas da palavra, na imagem SEM sinal (mascara_zona em
 diffusionpen_mods/utils/iam_acentuado_dataset.py). Confere, em TODA a base:
   1. a zona nunca encosta no acento (disjunta da mascara do acento);
-  2. acentuada e par tem a mesma zona; originais do IAM, zona zerada;
+  2. acentuada e par tem a mesma zona; os originais do IAM tem zona propria
+     (medida numa amostra de --n_originais deles);
   3. a zona nao cobre tinta do alvo: na acentuada, so o sinal poderia cair
      nela, e o sinal ja esta na mascara do acento -- conta pixels de tinta do
      alvo dentro da zona;
@@ -62,6 +63,7 @@ def main():
     ap.add_argument("--peso_zona", type=float, default=2.0)
     ap.add_argument("--iam_originais", type=float, default=1.0)
     ap.add_argument("--n_figura", type=int, default=30)
+    ap.add_argument("--n_originais", type=int, default=3000)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
@@ -72,16 +74,20 @@ def main():
     ds = mods.IAMAcentuadoDataset(a.base, transforms=None, args=args)
     man = [json.loads(l) for l in open(os.path.join(a.base, "manifesto.jsonl"), encoding="utf-8")]
     tipo = {os.path.join(a.base, x["arquivo"]): x["tipo"] for x in man}
+    rnd = random.Random(a.seed)
+    originais = [d for d in ds.data if not d[3]]
+    amostra_orig = rnd.sample(originais, min(a.n_originais, len(originais)))
+    for c, *_ in amostra_orig:
+        tipo[c] = "original_iam"
 
-    cob = {"acentuada": [], "par": [], "sem_acento": []}
-    tinta_na_zona = {"acentuada": 0, "par": 0, "sem_acento": 0}
+    cob, tinta_na_zona = {}, {}
     problemas, zonas, figura = [], {}, []
-    for c, _, t, sint in ds.data:
-        if not sint:
-            continue
+    for c, _, t, sint in [d for d in ds.data if d[3]] + amostra_orig:
         tp = tipo[c]
+        cob.setdefault(tp, [])
+        tinta_na_zona.setdefault(tp, 0)
         ac = ds.mascara(c)
-        z = ds.zona(c, t, True, ac)
+        z = ds.zona(c, t, sint, ac)
         cob[tp].append(float(z.mean()))
         if (z * ac).any():
             problemas.append(f"zona encosta no acento: {c}")
@@ -96,14 +102,12 @@ def main():
     for c, ((ca, _), (cp, _)) in ds.pares.items():
         if c == ca and not torch.equal(zonas[ca], zonas[cp]):
             problemas.append(f"zona do par difere da acentuada: {ca}")
-    # originais do IAM: zona zerada
-    orig = next(d for d in ds.data if not d[3])
-    if ds.zona(orig[0], orig[2], False, torch.zeros(mods.FORMA_LATENTE)).any():
-        problemas.append("original do IAM com zona")
-
-    n_sint = sum(len(v) for v in cob.values())
-    soma = {k: sum(v) for k, v in cob.items()}
-    cob_lote = sum(soma.values()) / len(ds.data)
+    # cobertura no lote: media por tipo x quantas amostras de cada tipo
+    n_tipo = {"original_iam": len(originais)}
+    for c, _, _, sint in ds.data:
+        if sint:
+            n_tipo[tipo[c]] = n_tipo.get(tipo[c], 0) + 1
+    cob_lote = sum(np.mean(v) * n_tipo[k] for k, v in cob.items()) / len(ds.data)
     cob_ac_lote = 0.0
     for c, _, t, sint in ds.data:
         if sint and c in ds.pares:
@@ -113,7 +117,7 @@ def main():
     total = um + a.peso_acento * cob_ac_lote + a.peso_zona * cob_lote
     rel = {
         "base": a.base, "peso_acento": a.peso_acento, "peso_zona": a.peso_zona, "iam_originais": a.iam_originais,
-        "amostras": {k: len(v) for k, v in cob.items()} | {"originais_iam": ds.n_originais},
+        "amostras": n_tipo, "originais_medidos": len(amostra_orig),
         "zona_por_amostra": {k: {"media": round(float(np.mean(v)), 4), "mediana": round(float(np.median(v)), 4),
                                  "vazia": round(float(np.mean(np.array(v) == 0)), 4)} for k, v in cob.items()},
         "zona_no_lote": round(cob_lote, 4), "acento_no_lote": round(cob_ac_lote, 4),
@@ -128,9 +132,9 @@ def main():
         json.dump(rel, f, ensure_ascii=False, indent=2)
     print(json.dumps(rel, ensure_ascii=False, indent=2))
 
-    rnd = random.Random(a.seed)
+    outros = [f for f in figura if tipo[f[0]] not in ("acentuada", "par")]
     amostra = rnd.sample([f for f in figura if tipo[f[0]] == "acentuada"], a.n_figura // 3) + \
-        rnd.sample([f for f in figura if tipo[f[0]] == "sem_acento"], a.n_figura - a.n_figura // 3)
+        rnd.sample(outros, min(len(outros), a.n_figura - a.n_figura // 3))
     tela = Image.new("RGB", (2 * (256 + 8), 32 + (len(amostra) + 1) // 2 * 76), "white")
     d = ImageDraw.Draw(tela)
     d.text((4, 4), "azul = zona vazia (peso_zona); vermelho = acento (peso_acento)", fill="black")

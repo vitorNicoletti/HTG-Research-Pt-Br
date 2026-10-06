@@ -29,7 +29,8 @@ celulas vazias acima/abaixo do corpo da palavra (mascara_zona), onde tinta seria
 um acento que o texto nao pede ("havera" com acento no primeiro a). Calculada
 na imagem SEM sinal: o par para acentuada e par (as duas recebem a mesma, sem
 as celulas do acento, que ja tem o peso_acento), a propria imagem para
-sem_acento. Originais do IAM recebem zeros: a zona e sobre a base portuguesa.
+sem_acento e para os originais do IAM -- na base de acentos sobre o IAM real
+as palavras sem acento sao justamente os originais.
 """
 
 import json
@@ -247,9 +248,7 @@ class IAMAcentuadoDataset(Dataset):
 
     def zona(self, caminho, transcr, sintetica, acento):
         """Mascara float (8, 32) da zona vazia: da imagem sem sinal (o par, se a
-        amostra tem par), sem as celulas do acento; zeros nos originais do IAM."""
-        if not sintetica:
-            return torch.zeros(FORMA_LATENTE)
+        amostra tem par; senao a propria), sem as celulas do acento."""
         if caminho in self.pares:
             caminho, transcr = self.pares[caminho][1]
         z = mascara_zona(preprocessar_iam(Image.open(caminho).convert("RGB"), transcr))

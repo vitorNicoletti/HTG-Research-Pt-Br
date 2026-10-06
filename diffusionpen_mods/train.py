@@ -797,7 +797,7 @@ def main():
     parser.add_argument('--abort_after', type=int, default=300, help='sai com codigo 3 apos N batches seguidos sem um passo valido, para o processo poder ser relancado do checkpoint')
     parser.add_argument('--save_every_steps', type=int, default=0, help='grava checkpoint a cada N passos dentro da epoca (0 = so no fim da epoca)')
     parser.add_argument('--iam_originais', type=float, default=1.0, help='iam_acentuado: fracao das palavras originais do IAM (sem acento) que entram no treino junto com as acentuadas')
-    parser.add_argument('--peso_zona', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas vazias acima/abaixo do corpo da palavra na base (acento que o texto nao pede); 1.0 = loss original')
+    parser.add_argument('--peso_zona', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas vazias acima/abaixo do corpo da palavra, em toda amostra (acento que o texto nao pede); 1.0 = loss original')
     parser.add_argument('--peso_acento', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas do latente onde esta o acento (mascara acentuada x par); 1.0 = loss original')
     parser.add_argument('--preproc', type=str, default='v1', choices=('v1', 'v2'), help='pre-processamento do BRESSAY (utils/bressay_dataset.py): v1 = original, v2 = sem pauta, recorte justo, escala do IAM')
     parser.add_argument('--adamw_eps', type=float, default=ADAMW_EPS)
