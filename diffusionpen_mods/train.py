@@ -154,6 +154,7 @@ def gravar_config(args, n_treino, diffusion):
             'base_acentos': base_acentos,
             'iam_originais': args.iam_originais if args.dataset == 'iam_acentuado' else None,
             'peso_acento': args.peso_acento,
+            'peso_zona': args.peso_zona,
         },
         'ambiente': {
             'host': platform.node(),
@@ -557,7 +558,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
         falhas_seguidas = 0
         # com peso no acento: MSE sem peso (comparavel aos runs antigos) e MSE
         # dentro/fora da mascara, acumulados na epoca
-        acum_acento = dict.fromkeys(('mse', 'n', 'dentro', 'n_dentro', 'fora', 'n_fora'), 0.0)
+        acum_acento = dict.fromkeys(('mse', 'n', 'dentro', 'n_dentro', 'fora', 'n_fora', 'zona', 'n_zona'), 0.0)
         pbar = tqdm(loader)
         style_feat = []
         for i, data in enumerate(pbar):
@@ -612,16 +613,19 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
             
             predicted_noise = model(x_t, timesteps=t, context=text_features, y=s_id, style_extractor=style_features)
             
-            if args.peso_acento != 1.0:
+            if args.peso_acento != 1.0 or args.peso_zona != 1.0:
                 # Peso no acento: o erro de ruido nas celulas do latente onde
                 # esta o acento (mascara do IAMAcentuadoDataset, data[6]) vale
-                # peso_acento; o resto vale 1. Sem normalizar pela soma dos
-                # pesos: fora da mascara a loss fica exatamente a de antes.
+                # peso_acento. Peso na zona: nas celulas vazias acima/abaixo do
+                # corpo da palavra (data[7], disjunta do acento) vale peso_zona.
+                # O resto vale 1. Sem normalizar pela soma dos pesos: fora das
+                # mascaras a loss fica exatamente a de antes.
                 mascara = data[6].to(images.device)
-                if mascara.shape[-2:] != images.shape[-2:]:
-                    raise SystemExit(f'mascara {tuple(mascara.shape)} nao bate com o latente {tuple(images.shape)}')
+                zona = data[7].to(images.device) if args.peso_zona != 1.0 else torch.zeros_like(mascara)
+                if mascara.shape[-2:] != images.shape[-2:] or zona.shape != mascara.shape:
+                    raise SystemExit(f'mascaras {tuple(mascara.shape)}/{tuple(zona.shape)} nao batem com o latente {tuple(images.shape)}')
                 erro2 = (noise - predicted_noise) ** 2
-                peso = 1.0 + (args.peso_acento - 1.0) * mascara[:, None]
+                peso = 1.0 + (args.peso_acento - 1.0) * mascara[:, None] + (args.peso_zona - 1.0) * zona[:, None]
                 loss = (peso * erro2).mean()
                 with torch.no_grad():
                     m4 = mascara[:, None].expand_as(erro2)
@@ -631,6 +635,9 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                     acum_acento['n_dentro'] += m4.sum().item()
                     acum_acento['fora'] += (erro2 * (1 - m4)).sum().item()
                     acum_acento['n_fora'] += (1 - m4).sum().item()
+                    z4 = zona[:, None].expand_as(erro2)
+                    acum_acento['zona'] += (erro2 * z4).sum().item()
+                    acum_acento['n_zona'] += z4.sum().item()
             else:
                 loss = mse_loss(noise, predicted_noise)
 
@@ -739,12 +746,15 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
         print(f"epoca {epoch}: MSE {loss_meter.avg:.4f} | {nan_epoca} batches descartados "
               f"nesta epoca (loss nao-finito: {nan_loss}, gradiente nao-finito: {nan_grad}; "
               f"total no run: {nan_total})")
-        if args.peso_acento != 1.0 and acum_acento['n']:
+        if (args.peso_acento != 1.0 or args.peso_zona != 1.0) and acum_acento['n']:
             a = acum_acento
             print(f"epoca {epoch}: peso_acento {args.peso_acento} | MSE sem peso {a['mse'] / a['n']:.4f} | "
                   f"dentro da mascara {a['dentro'] / max(a['n_dentro'], 1):.4f} | "
                   f"fora {a['fora'] / max(a['n_fora'], 1):.4f} | "
                   f"mascara cobre {100 * a['n_dentro'] / (a['n_dentro'] + a['n_fora']):.2f}% do latente")
+            if args.peso_zona != 1.0:
+                print(f"epoca {epoch}: peso_zona {args.peso_zona} | zona vazia {a['zona'] / max(a['n_zona'], 1):.4f} | "
+                      f"zona cobre {100 * a['n_zona'] / (a['n_dentro'] + a['n_fora']):.2f}% do latente")
 
 
 def main():
@@ -787,6 +797,7 @@ def main():
     parser.add_argument('--abort_after', type=int, default=300, help='sai com codigo 3 apos N batches seguidos sem um passo valido, para o processo poder ser relancado do checkpoint')
     parser.add_argument('--save_every_steps', type=int, default=0, help='grava checkpoint a cada N passos dentro da epoca (0 = so no fim da epoca)')
     parser.add_argument('--iam_originais', type=float, default=1.0, help='iam_acentuado: fracao das palavras originais do IAM (sem acento) que entram no treino junto com as acentuadas')
+    parser.add_argument('--peso_zona', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas vazias acima/abaixo do corpo da palavra na base (acento que o texto nao pede); 1.0 = loss original')
     parser.add_argument('--peso_acento', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas do latente onde esta o acento (mascara acentuada x par); 1.0 = loss original')
     parser.add_argument('--preproc', type=str, default='v1', choices=('v1', 'v2'), help='pre-processamento do BRESSAY (utils/bressay_dataset.py): v1 = original, v2 = sem pauta, recorte justo, escala do IAM')
     parser.add_argument('--adamw_eps', type=float, default=ADAMW_EPS)
@@ -814,10 +825,12 @@ def main():
                         torchvision.transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)) #transforms.Normalize((0.5,), (0.5,)),  #
                         ])
 
-    if args.peso_acento != 1.0 and args.dataset != 'iam_acentuado':
-        raise SystemExit(f'--peso_acento so vale para --dataset iam_acentuado (recebido {args.dataset})')
-    if args.peso_acento < 1.0:
-        raise SystemExit(f'--peso_acento tem de ser >= 1 (recebido {args.peso_acento})')
+    for nome in ('peso_acento', 'peso_zona'):
+        v = getattr(args, nome)
+        if v != 1.0 and args.dataset != 'iam_acentuado':
+            raise SystemExit(f'--{nome} so vale para --dataset iam_acentuado (recebido {args.dataset})')
+        if v < 1.0:
+            raise SystemExit(f'--{nome} tem de ser >= 1 (recebido {v})')
 
     if args.dataset == 'iam':
         print('loading IAM')

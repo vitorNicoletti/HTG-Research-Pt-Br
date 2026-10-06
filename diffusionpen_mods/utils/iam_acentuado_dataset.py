@@ -23,6 +23,13 @@ o seu par (a mesma imagem antes dos sinais), por isso exige base com pares
 alinhados (resumo.json com pares_alinhados). A acentuada e o par recebem a
 MESMA mascara: na acentuada o peso cobra desenhar o sinal, no par cobra nao
 desenhar. Amostras sem par (sem_acento, originais do IAM) recebem zeros.
+
+Peso na zona vazia (args.peso_zona != 1): 8o elemento, a mascara (8, 32) das
+celulas vazias acima/abaixo do corpo da palavra (mascara_zona), onde tinta seria
+um acento que o texto nao pede ("havera" com acento no primeiro a). Calculada
+na imagem SEM sinal: o par para acentuada e par (as duas recebem a mesma, sem
+as celulas do acento, que ja tem o peso_acento), a propria imagem para
+sem_acento. Originais do IAM recebem zeros: a zona e sobre a base portuguesa.
 """
 
 import json
@@ -45,6 +52,12 @@ WRITERS_DICT = os.path.join(CLONE, "writers_dict_train.json")
 SEMENTE_ORIGINAIS = 0   # sorteio da fracao de originais (reprodutivel)
 LIMIAR_PIXEL = 40       # diferenca de cinza (0..255) que conta como acento (= diag_peso_acento.py)
 FORMA_LATENTE = (8, 32) # 64x256 pelo VAE do SD (fator 8)
+TOL_CORPO = 0.15        # folga do corpo na zona vazia, em alturas-x (= TOL de scripts/medir_marcas.py)
+FOLGA_TINTA = 2         # px de dilatacao da tinta: celula vizinha de traco nao e zona vazia
+
+# acentos_sinteticos (geometria, vocabulario) fica na raiz do repositorio
+if os.path.dirname(CLONE) not in sys.path:
+    sys.path.insert(0, os.path.dirname(CLONE))
 
 
 def preprocessar_iam(img, transcr):
@@ -76,6 +89,34 @@ def mascara_acento(img_acentuada, img_par):
     m = px.reshape(h, px.shape[0] // h, w, px.shape[1] // w).any(axis=(1, 3))
     p = np.pad(m, 1)
     return np.logical_or.reduce([p[dy:dy + h, dx:dx + w] for dy in range(3) for dx in range(3)])
+
+
+def mascara_zona(img_sem_sinal):
+    """Imagem SEM acento ja pre-processada (64x256) -> mascara bool (8, 32) da zona vazia.
+
+    Celulas do latente inteiramente fora do corpo da palavra (acima do topo da
+    altura-x ou abaixo da linha de base, com folga de TOL_CORPO alturas-x), sem
+    tinta (dilatada em FOLGA_TINTA px) e dentro das colunas da palavra. E onde um
+    acento que o texto nao pede apareceria; hastes e pernas de letras sao tinta
+    e ficam de fora. None da geometria (sem tinta) -> mascara vazia."""
+    import cv2
+    from acentos_sinteticos import geometria
+    g = np.asarray(img_sem_sinal.convert("L"), dtype=np.float32)
+    h, w = FORMA_LATENTE
+    geo = geometria.analisar(g)
+    if geo is None:
+        return np.zeros(FORMA_LATENTE, dtype=bool)
+    H, W = g.shape
+    folga = TOL_CORPO * geo.altura_x
+    linhas = np.arange(H)
+    fora_corpo = (linhas < geo.topo_x - folga) | (linhas > geo.base + folga)
+    tinta = cv2.dilate(geometria.mascara_tinta(g).astype(np.uint8),
+                       np.ones((2 * FOLGA_TINTA + 1,) * 2, np.uint8)).astype(bool)
+    x0, x1 = geo.caixa[0], geo.caixa[1]
+    colunas = np.zeros(W, dtype=bool)
+    colunas[max(0, x0 - W // w):min(W, x1 + W // w)] = True
+    livre = fora_corpo[:, None] & colunas[None, :] & ~tinta
+    return livre.reshape(h, H // h, w, W // w).all(axis=(1, 3))
 
 
 class IAMAcentuadoDataset(Dataset):
@@ -112,12 +153,15 @@ class IAMAcentuadoDataset(Dataset):
                     [t for _, _, t in sinteticas], "treino", f"leitor da base {basefolder}")
                 print(f"IAM acentuado: {len(sinteticas)} rotulos conferidos contra {vocab} (so treino)")
 
-        # peso no acento: caminho de cada acentuada/par -> (acentuada, par)
+        # peso no acento / na zona vazia: caminho de cada acentuada/par ->
+        # (acentuada, par). A zona tambem precisa do par: e calculada na
+        # imagem sem sinal e exclui as celulas do acento.
         self.peso_acento = float(getattr(args, "peso_acento", 1.0))
+        self.peso_zona = float(getattr(args, "peso_zona", 1.0))
         self.pares = None
-        if self.peso_acento != 1.0:
+        if self.peso_acento != 1.0 or self.peso_zona != 1.0:
             if not resumo.get("pares_alinhados"):
-                raise ValueError(f"peso_acento={self.peso_acento} exige base com pares alinhados "
+                raise ValueError(f"peso_acento={self.peso_acento}/peso_zona={self.peso_zona} exige base com pares alinhados "
                                  f"(resumo.json de {basefolder} sem pares_alinhados; ver scripts/alinhar_pares.py)")
             with open(os.path.join(basefolder, "manifesto.jsonl"), encoding="utf-8") as f:
                 man = [json.loads(l) for l in f]
@@ -136,7 +180,8 @@ class IAMAcentuadoDataset(Dataset):
             sem_par = [c for c, _, t in sinteticas if c not in self.pares and not t.isascii()]
             if sem_par:
                 raise ValueError(f"{len(sem_par)} amostras acentuadas sem par: {sem_par[:5]}")
-            print(f"IAM acentuado: peso {self.peso_acento} no acento, {len(por_tarefa)} pares com mascara")
+            print(f"IAM acentuado: peso {self.peso_acento} no acento, {self.peso_zona} na zona vazia, "
+                  f"{len(por_tarefa)} pares com mascara")
 
         # originais do IAM: todas servem de referencia de estilo; a fracao
         # pedida tambem entra como amostra de treino
@@ -198,8 +243,18 @@ class IAMAcentuadoDataset(Dataset):
         ip = preprocessar_iam(Image.open(cp).convert("RGB"), rp)
         return torch.from_numpy(mascara_acento(ia, ip).astype(np.float32))
 
+    def zona(self, caminho, transcr, sintetica, acento):
+        """Mascara float (8, 32) da zona vazia: da imagem sem sinal (o par, se a
+        amostra tem par), sem as celulas do acento; zeros nos originais do IAM."""
+        if not sintetica:
+            return torch.zeros(FORMA_LATENTE)
+        if caminho in self.pares:
+            caminho, transcr = self.pares[caminho][1]
+        z = mascara_zona(preprocessar_iam(Image.open(caminho).convert("RGB"), transcr))
+        return torch.from_numpy(z.astype(np.float32)) * (1 - acento)
+
     def __getitem__(self, index):
-        caminho, escritor, transcr, _ = self.data[index]
+        caminho, escritor, transcr, sintetica = self.data[index]
         img = self.carregar(caminho, transcr)
         refs = self.referencias[escritor]
         if len(refs) >= NUM_STYLE_IMGS:
@@ -210,7 +265,12 @@ class IAMAcentuadoDataset(Dataset):
         cor = self.carregar(random.choice(refs), "palavra")
         # Mesmas posicoes do IAMDataset/BRESSAY_Dataset:
         # 0 imagem, 1 texto, 2 classe do escritor, 3 estilos [5,3,64,256],
-        # 4 caminho, 5 cor_im; com peso no acento, 6 mascara (8, 32)
+        # 4 caminho, 5 cor_im; com peso no acento ou na zona, 6 mascara do
+        # acento (8, 32); com peso na zona, 7 mascara da zona vazia (8, 32)
+        saida = (img, transcr, self.wid[escritor], estilos, caminho, cor)
         if self.pares is not None:
-            return img, transcr, self.wid[escritor], estilos, caminho, cor, self.mascara(caminho)
-        return img, transcr, self.wid[escritor], estilos, caminho, cor
+            acento = self.mascara(caminho)
+            saida += (acento,)
+            if self.peso_zona != 1.0:
+                saida += (self.zona(caminho, transcr, sintetica, acento),)
+        return saida

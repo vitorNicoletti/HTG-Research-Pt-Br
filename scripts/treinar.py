@@ -16,7 +16,9 @@ dados.dataset escolhe o leitor do train.py:
                     dados.preproc "iam" (o do IAMDataset) e dados.iam_originais
                     a fracao das palavras originais que entra junto;
                     treino.peso_acento (>= 1) multiplica o erro de ruido na
-                    regiao do acento (exige base com pares alinhados).
+                    regiao do acento e treino.peso_zona (>= 1) nas celulas
+                    vazias acima/abaixo do corpo (as duas exigem base com
+                    pares alinhados).
 
 O que faz, na ordem:
   1. valida o JSON e sincroniza o clone (scripts/aplicar_mods.sh);
@@ -60,7 +62,7 @@ ESQUEMA = {
     "treino": {"epocas_por_bloco": int, "epocas_total": int, "lr": NUM,
                "batch_size": int, "adamw_eps": NUM, "clip_grad_norm": NUM,
                "ema_beta": NUM, "ema_inicio": int, "texto_max_len": int,
-               "peso_acento": NUM},
+               "peso_acento": NUM, "peso_zona": NUM},
     "execucao": {"device": str, "num_workers": int, "save_every_steps": int,
                  "abort_after": int},
     "amostras": {"palavras": list, "estilos": int, "seed": int,
@@ -73,7 +75,7 @@ PREPROCS = {"bressay": ("v1", "v2"), "iam_acentuado": ("iam",)}
 # Chaves acrescentadas depois dos primeiros runs: um experimento.json gravado
 # antes delas equivale a estes valores (todos eram do BRESSAY).
 LEGADO = {"dados.dataset": "bressay", "dados.iam_originais": 0,
-          "treino.peso_acento": 1}
+          "treino.peso_acento": 1, "treino.peso_zona": 1}
 
 # Mudancas aceitas ao retomar um save_path existente: nao alteram o que o
 # modelo ja aprendeu nem como aprende.
@@ -106,11 +108,12 @@ def validar(exp, esquema=ESQUEMA, prefixo=""):
                          f"(use {PREPROCS[d['dataset']]})")
         if not 0 <= d["iam_originais"] <= 1:
             erros.append("dados.iam_originais tem de estar em [0, 1]")
-        p = exp["treino"]["peso_acento"]
-        if p < 1:
-            erros.append("treino.peso_acento tem de ser >= 1 (1 = loss original)")
-        elif p != 1 and d["dataset"] != "iam_acentuado":
-            erros.append("treino.peso_acento != 1 so vale para dados.dataset iam_acentuado")
+        for nome in ("peso_acento", "peso_zona"):
+            p = exp["treino"][nome]
+            if p < 1:
+                erros.append(f"treino.{nome} tem de ser >= 1 (1 = loss original)")
+            elif p != 1 and d["dataset"] != "iam_acentuado":
+                erros.append(f"treino.{nome} != 1 so vale para dados.dataset iam_acentuado")
     return erros
 
 
@@ -204,7 +207,8 @@ def cmd_treino(exp, n, primeiro):
         cmd += ["--preproc", d["preproc"]]
     else:
         cmd += ["--iam_originais", repr(d["iam_originais"]),
-                "--peso_acento", repr(t["peso_acento"])]
+                "--peso_acento", repr(t["peso_acento"]),
+                "--peso_zona", repr(t["peso_zona"])]
     if primeiro:
         cmd += ["--pretrained_path", m["pesos_iniciais"]]
     else:
