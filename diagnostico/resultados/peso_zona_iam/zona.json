@@ -1,0 +1,44 @@
+{
+  "base": "iam_acentuado_teto25_pares",
+  "peso_acento": 5.0,
+  "peso_zona": 2.0,
+  "iam_originais": 1.0,
+  "amostras": {
+    "original_iam": 55535,
+    "par": 9892,
+    "acentuada": 9892
+  },
+  "originais_medidos": 3000,
+  "zona_por_amostra": {
+    "par": {
+      "media": 0.1058,
+      "mediana": 0.0938,
+      "vazia": 0.0265
+    },
+    "acentuada": {
+      "media": 0.1058,
+      "mediana": 0.0938,
+      "vazia": 0.0265
+    },
+    "original_iam": {
+      "media": 0.0846,
+      "mediana": 0.0664,
+      "vazia": 0.215
+    }
+  },
+  "zona_no_lote": 0.0902,
+  "acento_no_lote": 0.0197,
+  "parte_da_loss_do_lote": {
+    "zona": 0.1543,
+    "acento": 0.0842,
+    "resto": 0.7616
+  },
+  "aumento_da_loss_media": 1.1688,
+  "px_de_tinta_do_alvo_na_zona": {
+    "par": 0,
+    "acentuada": 0,
+    "original_iam": 0
+  },
+  "problemas": [],
+  "n_problemas": 0
+}

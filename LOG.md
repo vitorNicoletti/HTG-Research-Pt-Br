@@ -1086,3 +1086,28 @@ qualquer imagem.
 - `experimentos/iam_pt_peso5_zona2.json` está pronto, mas não foi lançado. Antes
   de lançar, ajustar `iam_originais` ao resultado do orig100 e fazer um teste
   curto na GPU.
+
+## 2026-10-06 — Controle só com originais; volta à base de acentos sobre o IAM real
+
+- `model_iam_so_originais` (`experimentos/iam_so_originais.json`, base vazia
+  `base_vazia/`, só as originais do IAM, 4 épocas): CER 0,21 na validação pt,
+  igual ao IAM original. A piora da letra vem das imagens geradas da base pt
+  (ACHADOS 13, adendo 3).
+- Volta à base de acentos sintéticos sobre escrita **real** do IAM, com os
+  pesos:
+  - `scripts/criar_pares_iam.py --origem iam_acentuado_teto25 --destino
+    iam_acentuado_teto25_pares`: 9.892 pares, em que o par é a palavra original
+    na tela da acentuada (`gerador.par_na_tela` com `params.margens`). Pixels
+    diferentes entre acentuada e par: mediana 0,84%, p95 2,4%.
+  - A zona vazia (`--peso_zona`) agora vale também para os originais do IAM,
+    calculada na própria imagem. Nessa base, as palavras sem acento são os
+    originais.
+  - `diagnostico/conferir_zona.py`, na base nova com 3.000 originais:
+    - zero problemas e zero px de tinta do alvo na zona;
+    - a zona cobre 11% dos pares e 8% dos originais;
+    - no lote, a zona fica com 15% da loss e o acento com 8%.
+  - Teste curto na GPU (640 amostras, peso 5 e zona 2): nenhum lote
+    descartado. Erro dentro da máscara do acento 0,234, fora 0,035; na zona
+    0,036.
+  - `experimentos/iam_acentuado_pares.json` está pronto: 75.319 amostras,
+    12 épocas em blocos de 4, ~19,5 min/época.
