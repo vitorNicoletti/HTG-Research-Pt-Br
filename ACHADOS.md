@@ -681,3 +681,35 @@ leitor independente, 1.500 imagens por grupo, palavras de 3 a 10 letras a–z)
 
   O próximo teste que separa essas causas é o treino com
   `iam_originais` = 1,0.
+
+**Adendo 2: mais escrita real não recupera a letra** (`model_iam_pt_peso5_orig100`,
+o peso 5 com `iam_originais` 1,0: 55.535 palavras reais em vez de 16.660)
+
+| modelo | marca: acentuada | marca: esqueleto | marca: sem acento | diferença pareada | CER acentuada | CER esqueleto | CER sem acento |
+|---|---|---|---|---|---|---|---|
+| peso 5 (30% IAM) | 57% | 34% | 32% | +23% | 0,39 | 0,31 | 0,32 |
+| peso 5 + 100% IAM | 62% | 37% | 30% | +25% | 0,42 | 0,33 | 0,35 |
+
+Bootstrap por palavra, 100% − 30%:
+- CER sem acento **+0,027** (IC95 +0,010 a +0,045), esqueleto +0,021
+  (+0,002 a +0,041), acentuada +0,035 (+0,022 a +0,049);
+- diferença pareada +2,3 pp (IC95 −1,6 a +6,3); marca falsa −2,0 pp
+  (−6,4 a +2,2). Nenhuma das duas é distinguível de zero.
+
+Leitura:
+- **As hipóteses 1 e 2 caem como causa principal.** Mais alvos reais deveriam
+  baixar o CER se a culpa fosse a qualidade da base ou o conflito de
+  gabaritos. O CER subiu um pouco, e o efeito é pequeno e significativo.
+- **O acento não perdeu nada** com 3× mais escrita real no treino.
+- **A piora da letra vem do fine-tune em si,** não do que há na base. Sobram:
+  - o regime (lr 2e-5, EMA recomeçado com β 0,995, AdamW novo);
+  - alguma diferença entre o nosso `train.py`/pré-processamento e o treino
+    original do DiffusionPen;
+  - a perda de generalização para escritores novos.
+
+  O teste que separa: um fine-tune **só com as palavras originais do IAM**,
+  sem base nenhuma. Ele não traz nada novo, e o CER deveria ficar em ~0,22. Se
+  subir, o problema é o regime do fine-tune.
+
+Figuras: `diagnostico/resultados/peso_acento/comparacao_orig100/` (IAM
+original, peso 5, peso 5 + 100% IAM).
