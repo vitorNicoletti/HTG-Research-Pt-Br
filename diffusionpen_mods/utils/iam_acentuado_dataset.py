@@ -54,6 +54,7 @@ LIMIAR_PIXEL = 40       # diferenca de cinza (0..255) que conta como acento (= d
 FORMA_LATENTE = (8, 32) # 64x256 pelo VAE do SD (fator 8)
 TOL_CORPO = 0.15        # folga do corpo na zona vazia, em alturas-x (= TOL de scripts/medir_marcas.py)
 FOLGA_TINTA = 2         # px de dilatacao da tinta: celula vizinha de traco nao e zona vazia
+ALCANCE_ZONA = 1.0      # altura da zona acima/abaixo do corpo, em alturas-x: onde acento e cedilha caem
 
 # acentos_sinteticos (geometria, vocabulario) fica na raiz do repositorio
 if os.path.dirname(CLONE) not in sys.path:
@@ -94,11 +95,12 @@ def mascara_acento(img_acentuada, img_par):
 def mascara_zona(img_sem_sinal):
     """Imagem SEM acento ja pre-processada (64x256) -> mascara bool (8, 32) da zona vazia.
 
-    Celulas do latente inteiramente fora do corpo da palavra (acima do topo da
-    altura-x ou abaixo da linha de base, com folga de TOL_CORPO alturas-x), sem
-    tinta (dilatada em FOLGA_TINTA px) e dentro das colunas da palavra. E onde um
-    acento que o texto nao pede apareceria; hastes e pernas de letras sao tinta
-    e ficam de fora. None da geometria (sem tinta) -> mascara vazia."""
+    Celulas do latente inteiramente nas faixas logo acima e logo abaixo do
+    corpo da palavra (de TOL_CORPO a ALCANCE_ZONA alturas-x alem do topo da
+    altura-x / da linha de base), sem tinta (dilatada em FOLGA_TINTA px) e
+    dentro das colunas da palavra. E onde um acento ou cedilha que o texto nao
+    pede apareceria; hastes e pernas de letras sao tinta e ficam de fora, e o
+    fundo longe da palavra tambem. None da geometria (sem tinta) -> vazia."""
     import cv2
     from acentos_sinteticos import geometria
     g = np.asarray(img_sem_sinal.convert("L"), dtype=np.float32)
@@ -107,9 +109,9 @@ def mascara_zona(img_sem_sinal):
     if geo is None:
         return np.zeros(FORMA_LATENTE, dtype=bool)
     H, W = g.shape
-    folga = TOL_CORPO * geo.altura_x
+    folga, alcance = TOL_CORPO * geo.altura_x, ALCANCE_ZONA * geo.altura_x
     linhas = np.arange(H)
-    fora_corpo = (linhas < geo.topo_x - folga) | (linhas > geo.base + folga)
+    fora_corpo = ((linhas < geo.topo_x - folga) & (linhas >= geo.topo_x - alcance)) |                  ((linhas > geo.base + folga) & (linhas <= geo.base + alcance))
     tinta = cv2.dilate(geometria.mascara_tinta(g).astype(np.uint8),
                        np.ones((2 * FOLGA_TINTA + 1,) * 2, np.uint8)).astype(bool)
     x0, x1 = geo.caixa[0], geo.caixa[1]
