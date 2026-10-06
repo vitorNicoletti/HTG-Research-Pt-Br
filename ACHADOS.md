@@ -713,3 +713,43 @@ Leitura:
 
 Figuras: `diagnostico/resultados/peso_acento/comparacao_orig100/` (IAM
 original, peso 5, peso 5 + 100% IAM).
+
+**Adendo 3: o regime do fine-tune está correto; quem estraga a letra são as
+imagens geradas da base** (`model_iam_so_originais`: mesmo `train.py`,
+pré-processamento e hiperparâmetros, só com as 55.535 palavras originais do
+IAM, base vazia, 4 épocas)
+
+| modelo | marca: acentuada | marca: esqueleto | marca: sem acento | diferença pareada | CER acentuada | CER esqueleto | CER sem acento |
+|---|---|---|---|---|---|---|---|
+| IAM original | 6% | 5% | 5% | +1% | 0,25 | 0,18 | 0,22 |
+| só originais, 4 épocas | 4% | 4% | 4% | +1% | 0,23 | 0,17 | 0,21 |
+| peso 5 + 100% IAM | 62% | 37% | 30% | +25% | 0,42 | 0,33 | 0,35 |
+
+Bootstrap por palavra:
+- **só originais − IAM original:** CER sem acento −0,009 (IC95 −0,023 a
+  +0,007). Esqueleto −0,013 e acentuada −0,017, os dois pequenos e a favor do
+  fine-tune. O fine-tune sozinho **não piora** a letra.
+- **peso 5 + 100% IAM − só originais:** CER sem acento **+0,137** (IC95
+  +0,107 a +0,167). A única diferença entre os dois treinos é a base
+  portuguesa, que é 23% das amostras.
+
+Leitura, corrigindo o adendo 2:
+- **O regime está descartado como causa,** e também `train.py`, o
+  pré-processamento, a taxa de aprendizado, o EMA e o otimizador.
+- **A causa é treinar nas imagens geradas, mesmo diluídas.** No adendo 2 tirei
+  da falta de melhora com mais escrita real que a qualidade da base não era a
+  causa. A inferência estava errada. A base piora a letra com 23% ou 77% das
+  amostras.
+- **Os erros se acumulam,** e o modelo ajustado fica pior que a própria base
+  (0,32–0,35 contra 0,19–0,27). Ele aprende a reproduzir a distribuição das
+  gerações do IAM, e ao gerar soma os próprios erros aos que já estavam nelas:
+  é uma cópia da cópia.
+
+Consequência para o desenho do treino: a base deveria ensinar **só o acento**,
+não a letra. Caminhos:
+- **Base pesando só no acento:** peso ~0 no resto da imagem das amostras da
+  base, e loss normal nas palavras reais do IAM. É a extensão direta do
+  `--peso_acento`.
+- **Acentos sintéticos sobre escrita real:** IAM ou BRESSAY no lugar das
+  gerações. Na primeira tentativa, com palavras em inglês, o acento vazou para
+  o "the" (seção 10).
