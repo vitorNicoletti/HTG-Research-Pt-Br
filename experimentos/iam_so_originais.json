@@ -1,0 +1,54 @@
+{
+  "descricao": "CONTROLE do regime do fine-tune (ACHADOS 13, adendo 2): mesmo train.py, pre-processamento e hiperparametros dos fine-tunes pt, mas SO com as palavras originais do iam_train_val (base vazia, iam_originais 1.0, loss original), 4 epocas. Nao traz nada novo ao modelo: se o CER em palavras pt da validacao subir de ~0,22, a piora da letra vem do regime do fine-tune",
+  "save_path": "./model_iam_so_originais",
+  "dados": {
+    "dataset": "iam_acentuado",
+    "split": "./base_vazia",
+    "imagens": "./DiffusionPen/iam_data/words",
+    "max_samples": 0,
+    "preproc": "iam",
+    "iam_originais": 1.0
+  },
+  "modelo": {
+    "pesos_iniciais": "./DiffusionPen/diffusionpen_iam_model_path/models",
+    "extrator_estilo": "./DiffusionPen/style_models/iam_style_diffusionpen.pth",
+    "stable_diffusion": "stable-diffusion-v1-5/stable-diffusion-v1-5"
+  },
+  "treino": {
+    "epocas_por_bloco": 4,
+    "epocas_total": 4,
+    "lr": 2e-05,
+    "batch_size": 32,
+    "adamw_eps": 1e-06,
+    "clip_grad_norm": 1.0,
+    "ema_beta": 0.995,
+    "ema_inicio": 2000,
+    "texto_max_len": 40,
+    "peso_acento": 1,
+    "peso_zona": 1
+  },
+  "execucao": {
+    "device": "cuda:0",
+    "num_workers": 8,
+    "save_every_steps": 500,
+    "abort_after": 300
+  },
+  "amostras": {
+    "palavras": [
+      "fogão",
+      "fogao",
+      "câmera",
+      "camera",
+      "opção",
+      "opcao",
+      "módulo",
+      "modulo",
+      "provável",
+      "provavel",
+      "bolo"
+    ],
+    "estilos": 4,
+    "seed": 42,
+    "estilo_de": "iam"
+  }
+}
