@@ -166,7 +166,7 @@ def ambiente(exp):
         env["IAM_IMAGES"] = os.path.abspath(exp["dados"]["imagens"])
     env["SD"] = exp["modelo"]["stable_diffusion"]
     # A RX 6600 XT (gfx1032) so roda com kernels de gfx1030; em qualquer outra
-    # placa o override e nocivo. Mesmo criterio do treinar.sh.
+    # placa o override e nocivo. Mesmo criterio do antigo treinar.sh.
     if "HSA_OVERRIDE_GFX_VERSION" not in env and shutil.which("rocminfo"):
         r = subprocess.run(["rocminfo"], capture_output=True, text=True)
         if "gfx1032" in r.stdout:

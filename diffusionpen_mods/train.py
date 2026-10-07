@@ -101,7 +101,7 @@ def gravar_config(args, n_treino, diffusion):
     Uma linha por lancamento, para que retomadas com parametros diferentes
     fiquem no historico em vez de sobrescrever o registro anterior. Junta os
     argumentos, os hiperparametros fixos no codigo, os dados e o ambiente --
-    antes isso so podia ser reconstruido cruzando treinar.sh, este arquivo e o
+    antes isso so podia ser reconstruido cruzando o antigo treinar.sh, este arquivo e o
     LOG.md.
     '''
     import datetime

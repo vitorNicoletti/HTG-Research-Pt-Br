@@ -12,7 +12,7 @@ Uso:
     python scripts/reduzir_split.py --fracao 0.25 --destino ./bressay_split_25
 
 Depois, no treino:
-    SPLIT=./bressay_split_25 bash scripts/treinar.sh
+    python scripts/treinar.py experimentos/bressay_25.json   (dados.split = ./bressay_split_25)
 """
 
 import argparse

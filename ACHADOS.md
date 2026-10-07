@@ -344,7 +344,7 @@ Consequências:
 ## 10. Acentos sintéticos no IAM: o modelo passa a desenhar til e cedilha, mas também onde não deve
 
 **Experimento.** `experimentos/iam_acentuado.json`:
-- dados: 29.732 palavras do IAM com acento sintético (`docs/acentos_sinteticos.md`)
+- dados: 29.732 palavras do IAM com acento sintético (`docs/06_acentos_sinteticos.md`)
   mais as 55.535 originais, sem acento;
 - 10 épocas, lr 2e-5, a partir dos pesos do IAM.
 

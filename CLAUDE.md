@@ -29,8 +29,8 @@ All docs, code identifiers, comments and commit messages are in **Portuguese**. 
   - Also calibration, a human-annotation kappa tool, and `testes_metrica.py`, a synthetic known-answer test suite.
   - `ESTADO.md` holds its status. `trocr_tokenizer/` is versioned on purpose.
 - `diagnostico/` — GPU numerical sanity tests (CPU vs GPU forward/gradient) and `treinar_cpu.py`.
-- `acentos_sinteticos/` — draws Portuguese accents and cedillas on real IAM word crops and swaps the letter in the label (`can` → `cãn`). Letters are located by CTC forced alignment (`scripts/treinar_alinhador.py`; weights in gitignored `modelos/alinhador_iam.pt`) with slot borders snapped to ink valleys, falling back to equal slots. Full pipeline, flowchart and evaluation: `docs/acentos_sinteticos.md`. Sample sheets: `scripts/amostras_acentos.py`; letter-position accuracy: `scripts/avaliar_posicao_letras.py`.
-- `docs/pre_processamento.md` — preprocessing write-up, with figures from `docs/figuras/gerar_figuras.py`.
+- `acentos_sinteticos/` — draws Portuguese accents and cedillas on real IAM word crops and swaps the letter in the label (`can` → `cãn`). Letters are located by CTC forced alignment (`scripts/treinar_alinhador.py`; weights in gitignored `modelos/alinhador_iam.pt`) with slot borders snapped to ink valleys, falling back to equal slots. Full pipeline, flowchart and evaluation: `docs/06_acentos_sinteticos.md`. Sample sheets: `scripts/amostras_acentos.py`; letter-position accuracy: `scripts/avaliar_posicao_letras.py`.
+- `docs/05b_pre_processamento_bressay.md` — preprocessing write-up, with figures from `docs/figuras/gerar_figuras.py`.
 - `env/check_env.py` — GPU/ROCm check; exits non-zero on CPU fallback.
 - `flake.nix` — Nix dev shells: `nix develop .#rocm` (the default), `.#cuda` and `.#cpu`.
 - `LOG.md` (dated execution diary), `ACHADOS.md` (findings), `STATUS.md`, `README.md`.
