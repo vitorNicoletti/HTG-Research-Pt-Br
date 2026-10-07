@@ -902,3 +902,36 @@ Conferência (`diagnostico/conferir_zona_vogais.py`, resultados em
 
 `experimentos/iam_acentuado_vogais.json` está pronto e não foi lançado: zona
 vogais com peso 5, 4 épocas.
+
+## 17. Zona vogais treinada: menos acento falso, mas a letra não volta
+
+`model_iam_acentuado_vogais` é igual ao `iam_acentuado_pares` (seção 15), 12
+épocas, trocando só a zona: **vogais com peso 5**, em vez de vazia com peso 2.
+
+| modelo | marca: acentuada | marca: esqueleto | marca: sem acento | diferença pareada | CER sem acento | CER sem acento **e sem marca** |
+|---|---|---|---|---|---|---|
+| IAM original | 6% | 5% | 5% | +1% | 0,22 | 0,19 |
+| zona vazia, peso 2 | 74% | 54% | 56% | +20% | 0,46 | 0,35 |
+| **zona vogais, peso 5** | 69% | 48% | 48% | +21% | 0,47 | 0,36 |
+
+Bootstrap por palavra, vogais − vazia:
+- marca falsa (esqueleto e sem acento) **−6,7 pp** (IC95 −9,8 a −3,6);
+- diferença pareada +1,0 pp (−2,7 a +4,8);
+- CER sem marca +0,016 (+0,001 a +0,032).
+
+Posição (`posicao_acento_vogais/`): agudo 15% na letra certa, til 28%, e 62%
+das acentuadas com marca em outra letra (no vazia: 19%, 33% e 66%).
+
+Leitura:
+- **A zona vogais reduz o acento falso,** mas pouco: de ~55% para 48%. Ainda
+  é 10× o IAM original.
+- **A letra não voltou.** O CER sem marca ficou igual ou um pouco pior
+  (0,36). A zona vazia **não** era a causa principal da piora: com quase nada
+  da zona sobre hastes, a letra continua ruim. Nas figuras, as hastes do "h"
+  até aparecem mais, mas as letras seguem deformadas ("hevera", "havere").
+- **O que os dois treinos têm em comum, e o fine-tune só com originais não
+  tem (CER 0,18):** a base de acentos sintéticos sobre o IAM real, com pares,
+  e o peso 5 no acento. O próximo teste barato é avaliar o
+  `model_iam_acentuado_teto25`, que já existe: mesma base, sem pares e sem
+  peso nenhum. Isso separa "a base sintética estraga a letra" de "o peso
+  estraga a letra".
