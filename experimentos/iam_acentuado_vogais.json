@@ -1,5 +1,5 @@
 {
-  "descricao": "Teste da zona vogais (ACHADOS 15/16): igual ao iam_acentuado_pares, mas a penalidade de acento que o texto nao pede vale so acima das vogais e abaixo do c (scripts/mascaras_vogais.py), com o MESMO peso do acento (5), em vez da zona vazia acima de toda a palavra (peso 2, que encurtava as hastes). 4 epocas: comparar hastes (CER sem marca), marcas falsas e acerto por sinal com o iam_acentuado_pares. Amostras com palavras pt de VALIDACAO; teste so no fim",
+  "descricao": "Teste da zona vogais (ACHADOS 15/16): igual ao iam_acentuado_pares, mas a penalidade de acento que o texto nao pede vale so acima das vogais e abaixo do c (scripts/mascaras_vogais.py), com o MESMO peso do acento (5), em vez da zona vazia acima de toda a palavra (peso 2, que encurtava as hastes). 12 epocas (blocos de 4): comparar hastes (CER sem marca), marcas falsas e acerto por sinal com o iam_acentuado_pares (12 epocas). Amostras com palavras pt de VALIDACAO; teste so no fim",
   "save_path": "./model_iam_acentuado_vogais",
   "dados": {
     "dataset": "iam_acentuado",
@@ -16,7 +16,7 @@
   },
   "treino": {
     "epocas_por_bloco": 4,
-    "epocas_total": 4,
+    "epocas_total": 12,
     "lr": 2e-05,
     "batch_size": 32,
     "adamw_eps": 1e-06,
