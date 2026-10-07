@@ -12,7 +12,7 @@ pega-se uma palavra REAL do BRESSAY que comprovadamente nao tem diacritico e
 finge-se que ela tem. Mesmo papel, mesma pauta, mesmo punho, mesma
 normalizacao. Tudo que o E1 marcar aqui e falso positivo, por construcao.
 
-    python avaliacao_diacriticos/controle_ascii.py \\
+    python avaliacao_diacriticos/experimentos/controle_ascii.py \\
         --dir avaliacao_diacriticos/reais_test \\
         --out-dir avaliacao_diacriticos/reais_ascii_negativo
 
@@ -26,7 +26,8 @@ import random
 import sys
 import unicodedata
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# a metrica (e1.py, metrica.py, avaliar.py) fica um nivel acima
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import metrica as M  # noqa: E402
 
 # onde cada marca pode pousar, em portugues

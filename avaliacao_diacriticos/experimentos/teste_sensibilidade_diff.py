@@ -18,7 +18,7 @@ corresponde a um acento de tamanho nominal, e qual e o menor acento que ainda
 se separa do ruido. Isso da a referencia para ler os numeros do fine-tune
 quando ele existir, em vez de ter que adivinhar se 0.05 e muito ou pouco.
 
-    python avaliacao_diacriticos/teste_sensibilidade_diff.py \\
+    python avaliacao_diacriticos/experimentos/teste_sensibilidade_diff.py \\
         --dir avaliacao_diacriticos/ger_iam_puro
 """
 import argparse
@@ -28,7 +28,8 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# a metrica (e1.py, metrica.py, avaliar.py) fica um nivel acima
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import metrica as M  # noqa: E402
 
 # fracoes da largura do caractere e da altura-x. 1.0 = "tamanho nominal":

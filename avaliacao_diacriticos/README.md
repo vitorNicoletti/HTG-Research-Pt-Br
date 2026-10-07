@@ -38,7 +38,7 @@ O cruzamento dos dois dá as quatro categorias:
 | `e1_vs_ssim_psnr.png` | a comparação com as métricas que o orientador sugeriu |
 | `anotacao_folha.png` | a folha de contato para a anotação humana do Passo 6 |
 
-Todas são regeradas por `python avaliacao_diacriticos/figuras.py`.
+Todas são regeradas por `python avaliacao_diacriticos/experimentos/figuras.py`.
 
 ### Medições, em `resultados/`
 
@@ -76,21 +76,32 @@ reamostrava amostras em vez de palavras. Não citar números deles.
 
 ## Arquivos
 
+A métrica, na raiz de `avaliacao_diacriticos/`:
+
 | arquivo | papel |
 |---|---|
-| `gerar_pares.py` | sonda: gera os pares mínimos com estilo/semente fixos |
-| `metrica.py` | núcleo: E1 (duas variantes), CER, dobra ASCII |
-| `reconhecedor.py` | E2: TrOCR + CER dobrado para ASCII |
-| `preparar_reais.py` | controle: recortes REAIS do BRESSAY no mesmo formato |
-| `avaliar.py` | aplica E1/E2 a um conjunto, classifica, IC por bootstrap |
-| `calibrar.py` | Passo 4: valida nos dois casos de resposta conhecida |
-| `anotacao.py` | Passo 6: planilha de anotação humana e Cohen's kappa |
-| `testes_metrica.py` | testes sintéticos de resposta conhecida da geometria |
-| `checar_alinhamento.py` | Passo 1: mede se os gêmeos saem alinhados |
-| `controle_ascii.py` | controle negativo **no mesmo domínio**: palavra real sem acento, com acento fabricado |
-| `teste_linha_pautada.py` | diagnóstico do efeito da pauta na geometria |
-| `teste_folga.py` | sensibilidade da janela de coluna ao parâmetro `folga` |
-| `teste_sensibilidade_diff.py` | curva de detecção do eixo por diferença |
+| `e1.py` | o eixo 1: tinta a mais na região do acento, no par mínimo alinhado |
+| `montar_pares.py` | escolhe as palavras da sonda (`pares_sonda.tsv`) |
+| `gerar_pares.py` | gera os pares mínimos a partir de um checkpoint |
+| `avaliar.py` | aplica a métrica a uma pasta de amostras e resume com IC |
+| `metrica.py` | funções de apoio (geometria, pauta, CER) e a variante sem gêmeo |
+| `testes_metrica.py` | 34 testes sintéticos de resposta conhecida |
+
+Experimentos que validaram ou compararam a métrica, em `experimentos/`:
+
+| arquivo | papel |
+|---|---|
+| `figuras.py` | gera as figuras de `figuras/` |
+| `preparar_reais.py` | monta os recortes reais do BRESSAY usados como controle |
+| `controle_ascii.py` | controle negativo no mesmo domínio (acento fabricado em palavra real) |
+| `calibrar.py` | AUC e limiar entre um controle negativo e um positivo |
+| `checar_alinhamento.py` | portão do Passo 1: os gêmeos saem alinhados? |
+| `teste_linha_pautada.py` | efeito da pauta do papel na geometria |
+| `teste_folga.py` | sensibilidade à largura da janela de coluna |
+| `teste_sensibilidade_diff.py` | curva de detecção com acento pintado |
+| `ssim_psnr.py` | comparação com SSIM e PSNR |
+| `htr_alfabeto.py`, `htr_comparar.py`, `reconhecedor.py` | eixo 2: leitores testados (TrOCR, EasyOCR, PaddleOCR) |
+| `anotacao.py` | planilha de anotação humana e Cohen's kappa |
 
 ## Passo 1 — o portão (resultado: PASSOU)
 
@@ -743,9 +754,9 @@ python avaliacao_diacriticos/gerar_pares.py --ckpt $IAM --out-dir /tmp/x \
     --n-styles 1 --seeds 0 --batch 1 --autoteste-lote
 
 # 2. controles do Passo 4
-python avaliacao_diacriticos/preparar_reais.py \
+python avaliacao_diacriticos/experimentos/preparar_reais.py \
     --out-dir avaliacao_diacriticos/amostras/reais_test
-python avaliacao_diacriticos/controle_ascii.py \
+python avaliacao_diacriticos/experimentos/controle_ascii.py \
     --dir avaliacao_diacriticos/amostras/reais_test \
     --out-dir avaliacao_diacriticos/amostras/reais_ascii_negativo
 
@@ -762,14 +773,14 @@ python avaliacao_diacriticos/avaliar.py --dir <saida> --csv-out <saida>.csv \
     --com-e2 --device cpu --eixo1 auto --limiar-e1 <da calibração>
 
 # 5. calibrar contra os DOIS negativos e comparar
-python avaliacao_diacriticos/calibrar.py \
+python avaliacao_diacriticos/experimentos/calibrar.py \
     --negativo avaliacao_diacriticos/resultados/res_ascii_negativo.csv \
     --positivo avaliacao_diacriticos/resultados/res_reais_e1.csv
 
 # 6. planilha de anotação humana e kappa
-python avaliacao_diacriticos/anotacao.py preparar --csv <saida>.csv \
+python avaliacao_diacriticos/experimentos/anotacao.py preparar --csv <saida>.csv \
     --dir <saida> --out anotacao.csv --contato anotacao.png
-python avaliacao_diacriticos/anotacao.py kappa --csv anotacao_preenchida.csv
+python avaliacao_diacriticos/experimentos/anotacao.py kappa --csv anotacao_preenchida.csv
 ```
 
 ## O que ainda falta para medir o fine-tune

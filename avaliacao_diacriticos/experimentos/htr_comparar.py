@@ -18,7 +18,7 @@ isolam desempenho de diacritico do desempenho geral do reconhecedor:
                qualquer que seja o CER.
   falso_acento fracao das palavras ASCII em que a leitura inventa marca.
 
-    python avaliacao_diacriticos/htr_comparar.py --backend easyocr \\
+    python avaliacao_diacriticos/experimentos/htr_comparar.py --backend easyocr \\
         --dir avaliacao_diacriticos/amostras/reais_test \\
         --csv-out avaliacao_diacriticos/resultados/htr_easyocr.csv
 """
@@ -32,7 +32,8 @@ import unicodedata
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# a metrica (e1.py, metrica.py, avaliar.py) fica um nivel acima
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import metrica as M  # noqa: E402
 
 

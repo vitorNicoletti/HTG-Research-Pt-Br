@@ -31,6 +31,9 @@ import sys
 
 import numpy as np
 
+# a metrica (e1.py, metrica.py, avaliar.py) fica um nivel acima
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 CATEGORIAS = ["acerto", "omissao_do_acento",
               "degradacao_com_diacritico", "degradacao_sem_diacritico"]
 

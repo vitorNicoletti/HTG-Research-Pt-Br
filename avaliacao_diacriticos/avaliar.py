@@ -148,6 +148,8 @@ def main():
             linha["e2_cer"] = c
         a.com_e2 = True
     elif a.com_e2:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                        "experimentos"))
         from reconhecedor import Reconhecedor
         rec = Reconhecedor(device=a.device)
         # le TODAS as imagens (acentuadas e ASCII): o grupo ASCII e o controle

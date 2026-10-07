@@ -15,7 +15,7 @@ Dois tipos de alfabeto:
              e se o vocabulario aprendido tem tokens com a marca, o que indica
              que o texto de treino tinha. E indicio, nao portao.
 
-    python avaliacao_diacriticos/htr_alfabeto.py
+    python avaliacao_diacriticos/experimentos/htr_alfabeto.py
 """
 import json
 import sys

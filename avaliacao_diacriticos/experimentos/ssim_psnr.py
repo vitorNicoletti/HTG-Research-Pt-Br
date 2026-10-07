@@ -25,7 +25,7 @@ Quatro controles, dois ja em disco e dois construidos aqui:
                 coluna do caractere acentuado. SSIM e PSNR globais nao tem como
                 ignorar. E o controle que decide entre global e local.
 
-    python avaliacao_diacriticos/ssim_psnr.py \\
+    python avaliacao_diacriticos/experimentos/ssim_psnr.py \\
         --dir avaliacao_diacriticos/amostras/ger_iam_n696 \\
         --csv-out avaliacao_diacriticos/resultados/ssim_psnr.csv
 """
@@ -39,7 +39,8 @@ import sys
 import numpy as np
 from skimage.metrics import structural_similarity, peak_signal_noise_ratio
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# a metrica (e1.py, metrica.py, avaliar.py) fica um nivel acima
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import metrica as M      # noqa: E402
 import e1                # noqa: E402
 from calibrar import auc  # noqa: E402

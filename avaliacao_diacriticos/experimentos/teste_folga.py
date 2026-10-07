@@ -20,7 +20,7 @@ Este teste mede duas coisas:
      virar de ponta cabeca, o E1 por faixa em material real e fragil e isso
      precisa ser declarado no TCC.
 
-    python avaliacao_diacriticos/teste_folga.py \\
+    python avaliacao_diacriticos/experimentos/teste_folga.py \\
         --real avaliacao_diacriticos/reais_test \\
         --negativo avaliacao_diacriticos/ger_iam_puro
 """
@@ -32,7 +32,8 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# a metrica (e1.py, metrica.py, avaliar.py) fica um nivel acima
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import metrica as M  # noqa: E402
 from calibrar import auc, melhor_limiar  # noqa: E402
 

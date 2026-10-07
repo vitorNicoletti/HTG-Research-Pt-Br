@@ -19,7 +19,8 @@ import numpy as np
 import torch
 from PIL import Image
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# a metrica (e1.py, metrica.py, avaliar.py) fica um nivel acima
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import metrica as M  # noqa: E402
 
 MODELO = "microsoft/trocr-base-handwritten"

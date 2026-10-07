@@ -22,9 +22,10 @@ import random
 import sys
 import unicodedata
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# a metrica (e1.py, metrica.py, avaliar.py) fica um nivel acima
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RAIZ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 def _primeiro_que_existe(rotulo, candidatos):

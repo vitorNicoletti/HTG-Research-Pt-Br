@@ -1,6 +1,6 @@
 """Gera as figuras explicativas do E1, a partir do controle IAM puro.
 
-    python avaliacao_diacriticos/figuras.py
+    python avaliacao_diacriticos/experimentos/figuras.py
 
 Saida em figuras/:
     e1_passo_a_passo.png   os 4 passos da metrica num par
@@ -24,7 +24,7 @@ import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-AQUI = os.path.dirname(os.path.abspath(__file__))
+AQUI = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # avaliacao_diacriticos/
 sys.path.insert(0, AQUI)
 import metrica as M, e1                              # noqa: E402
 from teste_sensibilidade_diff import pinta_acento    # noqa: E402

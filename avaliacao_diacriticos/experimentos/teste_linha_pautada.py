@@ -23,7 +23,7 @@ modelo ajustado no BRESSAY aprende a desenhar a pauta -- ela aparece nas
 amostras do treino de 40 epocas --, entao o mesmo artefato vai contaminar a
 medida no material gerado.
 
-    python avaliacao_diacriticos/teste_linha_pautada.py --dir avaliacao_diacriticos/reais_test
+    python avaliacao_diacriticos/experimentos/teste_linha_pautada.py --dir avaliacao_diacriticos/reais_test
 
 LEITURA
     corpo estimado parecido com e sem pauta -> a geometria aguenta
@@ -38,7 +38,8 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# a metrica (e1.py, metrica.py, avaliar.py) fica um nivel acima
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import metrica as M  # noqa: E402
 
 
