@@ -25,7 +25,8 @@
     "ema_inicio": 2000,
     "texto_max_len": 40,
     "peso_acento": 5,
-    "peso_zona": 2
+    "peso_zona": 2,
+    "zona": "vazia"
   },
   "execucao": {
     "device": "cuda:0",

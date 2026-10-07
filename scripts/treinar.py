@@ -62,7 +62,7 @@ ESQUEMA = {
     "treino": {"epocas_por_bloco": int, "epocas_total": int, "lr": NUM,
                "batch_size": int, "adamw_eps": NUM, "clip_grad_norm": NUM,
                "ema_beta": NUM, "ema_inicio": int, "texto_max_len": int,
-               "peso_acento": NUM, "peso_zona": NUM},
+               "peso_acento": NUM, "peso_zona": NUM, "zona": str},
     "execucao": {"device": str, "num_workers": int, "save_every_steps": int,
                  "abort_after": int},
     "amostras": {"palavras": list, "estilos": int, "seed": int,
@@ -75,7 +75,7 @@ PREPROCS = {"bressay": ("v1", "v2"), "iam_acentuado": ("iam",)}
 # Chaves acrescentadas depois dos primeiros runs: um experimento.json gravado
 # antes delas equivale a estes valores (todos eram do BRESSAY).
 LEGADO = {"dados.dataset": "bressay", "dados.iam_originais": 0,
-          "treino.peso_acento": 1, "treino.peso_zona": 1}
+          "treino.peso_acento": 1, "treino.peso_zona": 1, "treino.zona": "vazia"}
 
 # Mudancas aceitas ao retomar um save_path existente: nao alteram o que o
 # modelo ja aprendeu nem como aprende.
@@ -108,6 +108,8 @@ def validar(exp, esquema=ESQUEMA, prefixo=""):
                          f"(use {PREPROCS[d['dataset']]})")
         if not 0 <= d["iam_originais"] <= 1:
             erros.append("dados.iam_originais tem de estar em [0, 1]")
+        if exp["treino"]["zona"] not in ("vazia", "vogais"):
+            erros.append("treino.zona tem de ser 'vazia' ou 'vogais'")
         for nome in ("peso_acento", "peso_zona"):
             p = exp["treino"][nome]
             if p < 1:
@@ -208,7 +210,8 @@ def cmd_treino(exp, n, primeiro):
     else:
         cmd += ["--iam_originais", repr(d["iam_originais"]),
                 "--peso_acento", repr(t["peso_acento"]),
-                "--peso_zona", repr(t["peso_zona"])]
+                "--peso_zona", repr(t["peso_zona"]),
+                "--zona", t["zona"]]
     if primeiro:
         cmd += ["--pretrained_path", m["pesos_iniciais"]]
     else:

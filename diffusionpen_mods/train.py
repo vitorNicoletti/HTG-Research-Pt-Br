@@ -155,6 +155,7 @@ def gravar_config(args, n_treino, diffusion):
             'iam_originais': args.iam_originais if args.dataset == 'iam_acentuado' else None,
             'peso_acento': args.peso_acento,
             'peso_zona': args.peso_zona,
+            'zona': args.zona,
         },
         'ambiente': {
             'host': platform.node(),
@@ -798,6 +799,7 @@ def main():
     parser.add_argument('--save_every_steps', type=int, default=0, help='grava checkpoint a cada N passos dentro da epoca (0 = so no fim da epoca)')
     parser.add_argument('--iam_originais', type=float, default=1.0, help='iam_acentuado: fracao das palavras originais do IAM (sem acento) que entram no treino junto com as acentuadas')
     parser.add_argument('--peso_zona', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas vazias acima/abaixo do corpo da palavra, em toda amostra (acento que o texto nao pede); 1.0 = loss original')
+    parser.add_argument('--zona', type=str, default='vazia', choices=('vazia', 'vogais'), help='iam_acentuado: mascara do peso_zona -- vazia (faixa vazia acima/abaixo de toda a palavra) ou vogais (so acima das vogais e abaixo do c; <base>/zona_vogais.npz)')
     parser.add_argument('--peso_acento', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas do latente onde esta o acento (mascara acentuada x par); 1.0 = loss original')
     parser.add_argument('--preproc', type=str, default='v1', choices=('v1', 'v2'), help='pre-processamento do BRESSAY (utils/bressay_dataset.py): v1 = original, v2 = sem pauta, recorte justo, escala do IAM')
     parser.add_argument('--adamw_eps', type=float, default=ADAMW_EPS)

@@ -31,6 +31,13 @@ na imagem SEM sinal: o par para acentuada e par (as duas recebem a mesma, sem
 as celulas do acento, que ja tem o peso_acento), a propria imagem para
 sem_acento e para os originais do IAM -- na base de acentos sobre o IAM real
 as palavras sem acento sao justamente os originais.
+
+args.zona escolhe a mascara do peso_zona:
+  vazia  -- toda a faixa vazia acima/abaixo do corpo (ACHADOS 15: com ela as
+            hastes encurtam);
+  vogais -- so a faixa acima das vogais e abaixo do c, nas colunas da letra
+            (acentos_sinteticos/zona_vogais.py), pre-calculada por
+            scripts/mascaras_vogais.py em <base>/zona_vogais.npz.
 """
 
 import json
@@ -161,6 +168,18 @@ class IAMAcentuadoDataset(Dataset):
         # imagem sem sinal e exclui as celulas do acento.
         self.peso_acento = float(getattr(args, "peso_acento", 1.0))
         self.peso_zona = float(getattr(args, "peso_zona", 1.0))
+        self.tipo_zona = getattr(args, "zona", "vazia")
+        self.basefolder = basefolder
+        self.zonas_vogais = None
+        if self.peso_zona != 1.0 and self.tipo_zona == "vogais":
+            caminho_npz = os.path.join(basefolder, "zona_vogais.npz")
+            if not os.path.isfile(caminho_npz):
+                raise ValueError(f"--zona vogais exige {caminho_npz} (scripts/mascaras_vogais.py)")
+            z = np.load(caminho_npz)
+            self.zonas_vogais = dict(zip(z["chaves"].tolist(), z["mascaras"]))
+            print(f"IAM acentuado: zona vogais com {len(self.zonas_vogais)} mascaras de {caminho_npz}")
+        elif self.tipo_zona not in ("vazia", "vogais"):
+            raise ValueError(f"zona desconhecida: {self.tipo_zona}")
         self.pares = None
         if self.peso_acento != 1.0 or self.peso_zona != 1.0:
             if not resumo.get("pares_alinhados"):
@@ -247,8 +266,17 @@ class IAMAcentuadoDataset(Dataset):
         return torch.from_numpy(mascara_acento(ia, ip).astype(np.float32))
 
     def zona(self, caminho, transcr, sintetica, acento):
-        """Mascara float (8, 32) da zona vazia: da imagem sem sinal (o par, se a
-        amostra tem par; senao a propria), sem as celulas do acento."""
+        """Mascara float (8, 32) da zona (vazia ou vogais), sem as celulas do acento.
+        vazia: da imagem sem sinal (o par, se a amostra tem par; senao a propria).
+        vogais: pre-calculada; amostra sem mascara (alinhamento fraco) -> zeros."""
+        if self.zonas_vogais is not None:
+            raiz = self.basefolder if sintetica else self.raiz_iam
+            chave = ("base:" if sintetica else "iam:") + os.path.relpath(caminho, raiz).replace(os.sep, "/")
+            bits = self.zonas_vogais.get(chave)
+            if bits is None:
+                return torch.zeros(FORMA_LATENTE)
+            z = np.unpackbits(bits)[:FORMA_LATENTE[0] * FORMA_LATENTE[1]].reshape(FORMA_LATENTE)
+            return torch.from_numpy(z.astype(np.float32)) * (1 - acento)
         if caminho in self.pares:
             caminho, transcr = self.pares[caminho][1]
         z = mascara_zona(preprocessar_iam(Image.open(caminho).convert("RGB"), transcr))
