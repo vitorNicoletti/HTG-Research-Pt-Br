@@ -823,3 +823,47 @@ Leitura:
 Consequência: o próximo critério de sucesso deve ser o **acerto por sinal na
 letra certa**, não a diferença pareada de marcas. A cedilha precisa de um
 detector próprio.
+
+## 15. Base sobre o IAM real com peso no acento e na zona: letra pior, mais vazamento
+
+`model_iam_acentuado_pares` (`experimentos/iam_acentuado_pares.json`).
+Mudanças em relação ao peso 5 da base pt (seção 13):
+- base de acentos sobre escrita **real** do IAM (`iam_acentuado_teto25`:
+  palavras inglesas com um acento sintético em letra sorteada, teto de 25%
+  por palavra), com os pares (`criar_pares_iam.py`). Nenhuma palavra gerada
+  pelo DiffusionPen;
+- todas as originais do IAM (`iam_originais` 1,0);
+- peso 5 no acento (acentuada e par), como antes;
+- **novo:** peso 2 na zona vazia acima/abaixo do corpo, em **todas** as
+  amostras, inclusive nos 55 mil originais;
+- 12 épocas, em vez de 16.
+
+Avaliação na validação, com `--aceitar_grupos central pas` conferido à mão:
+- a base tem a palavra inglesa real "central" e variantes com acento errado;
+  "pás" não está, só "pass"/"pãss";
+- sem essas 3 palavras, os números mudam menos de 0,01.
+
+| modelo | marca: acentuada | marca: esqueleto | marca: sem acento | diferença pareada | CER esqueleto | CER sem acento |
+|---|---|---|---|---|---|---|
+| IAM original | 6% | 5% | 5% | +1% | 0,18 | 0,22 |
+| peso 5 (base pt) | 57% | 34% | 32% | +23% | 0,31 | 0,32 |
+| **IAM real + pesos** | 74% | **54%** | **56%** | +20% | **0,44** | **0,46** |
+
+- **Posição** (`posicao_acento_pares/`): agudo 19% na letra certa (14% no peso
+  5), til 33% (52%). Em 66% das acentuadas há marca em outra letra.
+- **A letra piorou de fato, não só pelas marcas.** Nos painéis sem acento
+  pedido **e sem nenhuma marca**, o CER é 0,35, contra 0,27 no peso 5 e 0,18
+  só com originais.
+- **Nas figuras, as hastes somem:** em `comparacao_pares/07_havera.png`, o "h"
+  vira "c" ou "n" ("cavera", "navera"). O prestação fica ilegível.
+
+Leitura (hipótese, porque o treino mudou várias coisas ao mesmo tempo):
+- **A zona vazia é a principal suspeita da perda das hastes.** O erro é
+  simétrico, mas o peso não é. Tinta a mais na faixa acima do corpo custa 2×,
+  e tinta a menos fora da zona custa 1×. Como a zona é calculada no alvo e a
+  posição exata da haste varia, o modelo fica mais barato encurtando hastes.
+  E foi aplicada aos 55 mil originais, ou seja, a quase todo o treino.
+- **A base em inglês ensina acento em letra sorteada** ("thé", "stôp"), sem
+  regra. Isso combina com o vazamento alto (54–56% de marcas onde não devia) e
+  com o acento na letra errada.
+- O teste que separa as duas causas é o mesmo treino com `peso_zona` 1.
