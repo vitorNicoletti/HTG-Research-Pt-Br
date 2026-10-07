@@ -51,7 +51,6 @@
         pkgs.mkShell {
           packages = [ (pkgs.python3.withPackages pythonPacotes) ];
           shellHook = ''
-            export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH:$LD_LIBRARY_PATH"
             echo "ambiente: ${nome}"
             ${hook}
           '';
@@ -113,7 +112,7 @@
           # Os wheels de opencv que o paddleocr arrasta sao ligados a libGL e
           # glib, que nao existem num shell puro do nix.
           shellHook = ''
-            export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH:${
+            export LD_LIBRARY_PATH="${
               pkgsCpu.lib.makeLibraryPath [
                 pkgsCpu.stdenv.cc.cc.lib
                 pkgsCpu.libGL
