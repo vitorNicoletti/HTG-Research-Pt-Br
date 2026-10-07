@@ -1,0 +1,16 @@
+{
+ "origem": "./bressay_split_25",
+ "altura_min_tinta_px": 14.0,
+ "medida": "utils/bressay_dataset.py::altura_tinta_original",
+ "treino_antes": 18724,
+ "treino_depois": 17358,
+ "com_acento_depois": 1893,
+ "reducao_da_origem": {
+  "origem": "bressay_split",
+  "fracao": 0.25,
+  "min_por_escritor": 5,
+  "seed": 42,
+  "treino_original": 74882,
+  "treino_reduzido": 18724
+ }
+}

@@ -1,0 +1,2059 @@
+[
+ {
+  "acc": "às",
+  "asc": "as",
+  "marcas": [
+   "grave"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 952,
+  "freq_asc": 2327,
+  "len": 2
+ },
+ {
+  "acc": "será",
+  "asc": "sera",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 50,
+  "freq_asc": 1,
+  "len": 4
+ },
+ {
+  "acc": "raíz",
+  "asc": "raiz",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 5,
+  "freq_asc": 2,
+  "len": 4
+ },
+ {
+  "acc": "há",
+  "asc": "ha",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 382,
+  "freq_asc": 2,
+  "len": 2
+ },
+ {
+  "acc": "país",
+  "asc": "pais",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 297,
+  "freq_asc": 23,
+  "len": 4
+ },
+ {
+  "acc": "importância",
+  "asc": "importancia",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 72,
+  "freq_asc": 1,
+  "len": 11
+ },
+ {
+  "acc": "está",
+  "asc": "esta",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 89,
+  "freq_asc": 20,
+  "len": 4
+ },
+ {
+  "acc": "mú-",
+  "asc": "mu-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 7,
+  "len": 3
+ },
+ {
+  "acc": "Ministério",
+  "asc": "Ministerio",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 116,
+  "freq_asc": 2,
+  "len": 10
+ },
+ {
+  "acc": "filósofo",
+  "asc": "filosofo",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 89,
+  "freq_asc": 2,
+  "len": 8
+ },
+ {
+  "acc": "já",
+  "asc": "ja",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 335,
+  "freq_asc": 9,
+  "len": 2
+ },
+ {
+  "acc": "têm",
+  "asc": "tem",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 70,
+  "freq_asc": 155,
+  "len": 3
+ },
+ {
+  "acc": "ço",
+  "asc": "co",
+  "marcas": [
+   "cedilha"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 5,
+  "freq_asc": 26,
+  "len": 2
+ },
+ {
+  "acc": "prática",
+  "asc": "pratica",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 29,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "Já",
+  "asc": "Ja",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 39,
+  "freq_asc": 1,
+  "len": 2
+ },
+ {
+  "acc": "Émile",
+  "asc": "Emile",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 9,
+  "freq_asc": 5,
+  "len": 5
+ },
+ {
+  "acc": "viés",
+  "asc": "vies",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 83,
+  "freq_asc": 1,
+  "len": 4
+ },
+ {
+  "acc": "têm-se",
+  "asc": "tem-se",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 5,
+  "len": 6
+ },
+ {
+  "acc": "psí-",
+  "asc": "psi-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 6,
+  "freq_asc": 19,
+  "len": 4
+ },
+ {
+  "acc": "lá",
+  "asc": "la",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 4,
+  "freq_asc": 27,
+  "len": 2
+ },
+ {
+  "acc": "ça",
+  "asc": "ca",
+  "marcas": [
+   "cedilha"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 15,
+  "freq_asc": 38,
+  "len": 2
+ },
+ {
+  "acc": "fé",
+  "asc": "fe",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 9,
+  "freq_asc": 1,
+  "len": 2
+ },
+ {
+  "acc": "taís",
+  "asc": "tais",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 163,
+  "len": 4
+ },
+ {
+  "acc": "só",
+  "asc": "so",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 190,
+  "freq_asc": 52,
+  "len": 2
+ },
+ {
+  "acc": "ví-",
+  "asc": "vi-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 25,
+  "len": 3
+ },
+ {
+  "acc": "fía",
+  "asc": "fia",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 2,
+  "len": 3
+ },
+ {
+  "acc": "bém",
+  "asc": "bem",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 10,
+  "freq_asc": 105,
+  "len": 3
+ },
+ {
+  "acc": "frá-",
+  "asc": "fra-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 3,
+  "len": 4
+ },
+ {
+  "acc": "indivíduos",
+  "asc": "individuos",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 116,
+  "freq_asc": 2,
+  "len": 10
+ },
+ {
+  "acc": "público",
+  "asc": "publico",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 36,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "dé-",
+  "asc": "de-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 101,
+  "len": 3
+ },
+ {
+  "acc": "Às",
+  "asc": "As",
+  "marcas": [
+   "grave"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 38,
+  "len": 2
+ },
+ {
+  "acc": "dá",
+  "asc": "da",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 38,
+  "freq_asc": 6048,
+  "len": 2
+ },
+ {
+  "acc": "sociólogo",
+  "asc": "sociologo",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 44,
+  "freq_asc": 1,
+  "len": 9
+ },
+ {
+  "acc": "indivíduo",
+  "asc": "individuo",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 42,
+  "freq_asc": 2,
+  "len": 9
+ },
+ {
+  "acc": "mé-",
+  "asc": "me-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 6,
+  "freq_asc": 30,
+  "len": 3
+ },
+ {
+  "acc": "má",
+  "asc": "ma",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 27,
+  "freq_asc": 32,
+  "len": 2
+ },
+ {
+  "acc": "mídias",
+  "asc": "midias",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 17,
+  "freq_asc": 1,
+  "len": 6
+ },
+ {
+  "acc": "trás",
+  "asc": "tras",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 4,
+  "freq_asc": 3,
+  "len": 4
+ },
+ {
+  "acc": "ças",
+  "asc": "cas",
+  "marcas": [
+   "cedilha"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 41,
+  "freq_asc": 11,
+  "len": 3
+ },
+ {
+  "acc": "públicas",
+  "asc": "publicas",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 37,
+  "freq_asc": 1,
+  "len": 8
+ },
+ {
+  "acc": "vê",
+  "asc": "ve",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 18,
+  "freq_asc": 12,
+  "len": 2
+ },
+ {
+  "acc": "ín-",
+  "asc": "in-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 79,
+  "len": 3
+ },
+ {
+  "acc": "pú-",
+  "asc": "pu-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 7,
+  "freq_asc": 1,
+  "len": 3
+ },
+ {
+  "acc": "negligência",
+  "asc": "negligencia",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 35,
+  "freq_asc": 1,
+  "len": 11
+ },
+ {
+  "acc": "porquê",
+  "asc": "porque",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 28,
+  "len": 6
+ },
+ {
+  "acc": "pôde",
+  "asc": "pode",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 187,
+  "len": 4
+ },
+ {
+  "acc": "série",
+  "asc": "serie",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 24,
+  "freq_asc": 2,
+  "len": 5
+ },
+ {
+  "acc": "nó-",
+  "asc": "no-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 12,
+  "len": 3
+ },
+ {
+  "acc": "tí-",
+  "asc": "ti-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 5,
+  "len": 3
+ },
+ {
+  "acc": "países",
+  "asc": "paises",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 10,
+  "freq_asc": 2,
+  "len": 6
+ },
+ {
+  "acc": "ân-",
+  "asc": "an-",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 5,
+  "len": 3
+ },
+ {
+  "acc": "ô-",
+  "asc": "o-",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 9,
+  "len": 2
+ },
+ {
+  "acc": "irá",
+  "asc": "ira",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 7,
+  "freq_asc": 2,
+  "len": 3
+ },
+ {
+  "acc": "influência",
+  "asc": "influencia",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 21,
+  "freq_asc": 1,
+  "len": 10
+ },
+ {
+  "acc": "âm-",
+  "asc": "am-",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 7,
+  "len": 3
+ },
+ {
+  "acc": "ás",
+  "asc": "as",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 2327,
+  "len": 2
+ },
+ {
+  "acc": "sé",
+  "asc": "se",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1662,
+  "len": 2
+ },
+ {
+  "acc": "és",
+  "asc": "es",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 2,
+  "len": 2
+ },
+ {
+  "acc": "á-",
+  "asc": "a-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 72,
+  "len": 2
+ },
+ {
+  "acc": "tério",
+  "asc": "terio",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 6,
+  "freq_asc": 1,
+  "len": 5
+ },
+ {
+  "acc": "distúrbios",
+  "asc": "disturbios",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 14,
+  "freq_asc": 1,
+  "len": 10
+ },
+ {
+  "acc": "vém",
+  "asc": "vem",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 7,
+  "len": 3
+ },
+ {
+  "acc": "ineficiência",
+  "asc": "ineficiencia",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 11,
+  "freq_asc": 1,
+  "len": 12
+ },
+ {
+  "acc": "contrá-",
+  "asc": "contra-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "nós",
+  "asc": "nos",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 4,
+  "freq_asc": 251,
+  "len": 3
+ },
+ {
+  "acc": "rá",
+  "asc": "ra",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 56,
+  "len": 2
+ },
+ {
+  "acc": "úni-",
+  "asc": "uni-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 1,
+  "len": 4
+ },
+ {
+  "acc": "período",
+  "asc": "periodo",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 10,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "vídeos",
+  "asc": "videos",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 4,
+  "freq_asc": 1,
+  "len": 6
+ },
+ {
+  "acc": "ís",
+  "asc": "is",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 7,
+  "len": 2
+ },
+ {
+  "acc": "auxílio",
+  "asc": "auxilio",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 15,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "própria",
+  "asc": "propria",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 19,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "dê",
+  "asc": "de",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 18517,
+  "len": 2
+ },
+ {
+  "acc": "há-",
+  "asc": "ha-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 4,
+  "len": 3
+ },
+ {
+  "acc": "possível",
+  "asc": "possivel",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 35,
+  "freq_asc": 2,
+  "len": 8
+ },
+ {
+  "acc": "pé",
+  "asc": "pe",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 2
+ },
+ {
+  "acc": "mí-",
+  "asc": "mi-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 4,
+  "freq_asc": 6,
+  "len": 3
+ },
+ {
+  "acc": "físi-",
+  "asc": "fisi-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 5
+ },
+ {
+  "acc": "garantía",
+  "asc": "garantia",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 13,
+  "len": 8
+ },
+ {
+  "acc": "desequilíbrios",
+  "asc": "desequilibrios",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 1,
+  "len": 14
+ },
+ {
+  "acc": "síntomas",
+  "asc": "sintomas",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 20,
+  "len": 8
+ },
+ {
+  "acc": "veí-",
+  "asc": "vei-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 3,
+  "len": 4
+ },
+ {
+  "acc": "indiví-",
+  "asc": "indivi-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "pó",
+  "asc": "po",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 11,
+  "len": 2
+ },
+ {
+  "acc": "sé-",
+  "asc": "se-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 4,
+  "freq_asc": 33,
+  "len": 3
+ },
+ {
+  "acc": "mês",
+  "asc": "mes",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 4,
+  "len": 3
+ },
+ {
+  "acc": "aú-",
+  "asc": "au-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 9,
+  "len": 3
+ },
+ {
+  "acc": "hajá",
+  "asc": "haja",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 116,
+  "len": 4
+ },
+ {
+  "acc": "àqueles",
+  "asc": "aqueles",
+  "marcas": [
+   "grave"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 7,
+  "freq_asc": 24,
+  "len": 7
+ },
+ {
+  "acc": "excluí",
+  "asc": "exclui",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 4,
+  "len": 6
+ },
+ {
+  "acc": "pró-",
+  "asc": "pro-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 87,
+  "len": 4
+ },
+ {
+  "acc": "psicológi-",
+  "asc": "psicologi-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 1,
+  "len": 10
+ },
+ {
+  "acc": "Draúzio",
+  "asc": "Drauzio",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 2,
+  "len": 7
+ },
+ {
+  "acc": "problemá-",
+  "asc": "problema-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 1,
+  "len": 9
+ },
+ {
+  "acc": "vá",
+  "asc": "va",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 11,
+  "len": 2
+ },
+ {
+  "acc": "rá-",
+  "asc": "ra-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 7,
+  "len": 3
+ },
+ {
+  "acc": "fá-",
+  "asc": "fa-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 16,
+  "len": 3
+ },
+ {
+  "acc": "propícia",
+  "asc": "propicia",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 5,
+  "len": 8
+ },
+ {
+  "acc": "tá",
+  "asc": "ta",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 56,
+  "len": 2
+ },
+ {
+  "acc": "alí",
+  "asc": "ali",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 7,
+  "len": 3
+ },
+ {
+  "acc": "pós",
+  "asc": "pos",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 6,
+  "len": 3
+ },
+ {
+  "acc": "crí-",
+  "asc": "cri-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 6,
+  "len": 4
+ },
+ {
+  "acc": "Luís",
+  "asc": "Luis",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 4
+ },
+ {
+  "acc": "çar",
+  "asc": "car",
+  "marcas": [
+   "cedilha"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 7,
+  "len": 3
+ },
+ {
+  "acc": "convívio",
+  "asc": "convivio",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 5,
+  "freq_asc": 1,
+  "len": 8
+ },
+ {
+  "acc": "ló-",
+  "asc": "lo-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 5,
+  "len": 3
+ },
+ {
+  "acc": "fí-",
+  "asc": "fi-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 11,
+  "len": 3
+ },
+ {
+  "acc": "íntegra",
+  "asc": "integra",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "históricamente",
+  "asc": "historicamente",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 7,
+  "len": 14
+ },
+ {
+  "acc": "é-",
+  "asc": "e-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 19,
+  "len": 2
+ },
+ {
+  "acc": "prá",
+  "asc": "pra",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 3,
+  "len": 3
+ },
+ {
+  "acc": "sí",
+  "asc": "si",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 46,
+  "len": 2
+ },
+ {
+  "acc": "idéia",
+  "asc": "ideia",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 24,
+  "len": 5
+ },
+ {
+  "acc": "Lévy",
+  "asc": "Levy",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 4
+ },
+ {
+  "acc": "errôneamente",
+  "asc": "erroneamente",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 3,
+  "len": 12
+ },
+ {
+  "acc": "índice",
+  "asc": "indice",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 6
+ },
+ {
+  "acc": "psicológia",
+  "asc": "psicologia",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 11,
+  "len": 10
+ },
+ {
+  "acc": "nó",
+  "asc": "no",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 2829,
+  "len": 2
+ },
+ {
+  "acc": "perí-",
+  "asc": "peri-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 5
+ },
+ {
+  "acc": "espé-",
+  "asc": "espe-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 4,
+  "len": 5
+ },
+ {
+  "acc": "sã",
+  "asc": "sa",
+  "marcas": [
+   "til"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 31,
+  "len": 2
+ },
+ {
+  "acc": "vés",
+  "asc": "ves",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 3
+ },
+ {
+  "acc": "àquela",
+  "asc": "aquela",
+  "marcas": [
+   "grave"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 6
+ },
+ {
+  "acc": "rém",
+  "asc": "rem",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 3,
+  "len": 3
+ },
+ {
+  "acc": "pô-",
+  "asc": "po-",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 48,
+  "len": 3
+ },
+ {
+  "acc": "enraízado",
+  "asc": "enraizado",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 7,
+  "len": 9
+ },
+ {
+  "acc": "negligênciar",
+  "asc": "negligenciar",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 4,
+  "len": 12
+ },
+ {
+  "acc": "psicó-",
+  "asc": "psico-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 3,
+  "len": 6
+ },
+ {
+  "acc": "pôr",
+  "asc": "por",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 2870,
+  "len": 3
+ },
+ {
+  "acc": "prá-",
+  "asc": "pra-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 4
+ },
+ {
+  "acc": "contínua",
+  "asc": "continua",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 1,
+  "len": 8
+ },
+ {
+  "acc": "patologías",
+  "asc": "patologias",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 26,
+  "len": 10
+ },
+ {
+  "acc": "famí-",
+  "asc": "fami-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 5
+ },
+ {
+  "acc": "pré-",
+  "asc": "pre-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 35,
+  "len": 4
+ },
+ {
+  "acc": "psiquiátras",
+  "asc": "psiquiatras",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 15,
+  "len": 11
+ },
+ {
+  "acc": "gás",
+  "asc": "gas",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 4,
+  "len": 3
+ },
+ {
+  "acc": "cé-",
+  "asc": "ce-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 8,
+  "len": 3
+ },
+ {
+  "acc": "psíque",
+  "asc": "psique",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 6
+ },
+ {
+  "acc": "Têm",
+  "asc": "Tem",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 2,
+  "len": 3
+ },
+ {
+  "acc": "vítima",
+  "asc": "vitima",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 4,
+  "freq_asc": 1,
+  "len": 6
+ },
+ {
+  "acc": "Indústria",
+  "asc": "Industria",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 7,
+  "freq_asc": 1,
+  "len": 9
+ },
+ {
+  "acc": "artísticas",
+  "asc": "artisticas",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 8,
+  "freq_asc": 1,
+  "len": 10
+ },
+ {
+  "acc": "àquele",
+  "asc": "aquele",
+  "marcas": [
+   "grave"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 3,
+  "len": 6
+ },
+ {
+  "acc": "gê-",
+  "asc": "ge-",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 4,
+  "len": 3
+ },
+ {
+  "acc": "empá-",
+  "asc": "empa-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 5
+ },
+ {
+  "acc": "aná-",
+  "asc": "ana-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 4
+ },
+ {
+  "acc": "séria",
+  "asc": "seria",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 8,
+  "len": 5
+ },
+ {
+  "acc": "explícita",
+  "asc": "explicita",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 2,
+  "len": 9
+ },
+ {
+  "acc": "Ministerío",
+  "asc": "Ministerio",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 2,
+  "len": 10
+ },
+ {
+  "acc": "estí-",
+  "asc": "esti-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 3,
+  "len": 5
+ },
+ {
+  "acc": "fã",
+  "asc": "fa",
+  "marcas": [
+   "til"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 2,
+  "len": 2
+ },
+ {
+  "acc": "lê",
+  "asc": "le",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 3,
+  "len": 2
+ },
+ {
+  "acc": "Débord",
+  "asc": "Debord",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 6,
+  "len": 6
+ },
+ {
+  "acc": "polí-",
+  "asc": "poli-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 1,
+  "len": 5
+ },
+ {
+  "acc": "bá-",
+  "asc": "ba-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 7,
+  "len": 3
+ },
+ {
+  "acc": "estígmas",
+  "asc": "estigmas",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 119,
+  "len": 8
+ },
+ {
+  "acc": "filósofia",
+  "asc": "filosofia",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 4,
+  "len": 9
+ },
+ {
+  "acc": "ços",
+  "asc": "cos",
+  "marcas": [
+   "cedilha"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 12,
+  "len": 3
+ },
+ {
+  "acc": "Secretárias",
+  "asc": "Secretarias",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 3,
+  "len": 11
+ },
+ {
+  "acc": "Sé-",
+  "asc": "Se-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 6,
+  "len": 3
+ },
+ {
+  "acc": "dústria",
+  "asc": "dustria",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "à-",
+  "asc": "a-",
+  "marcas": [
+   "grave"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 72,
+  "len": 2
+ },
+ {
+  "acc": "famíliar",
+  "asc": "familiar",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 8,
+  "len": 8
+ },
+ {
+  "acc": "pós-",
+  "asc": "pos-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 12,
+  "len": 4
+ },
+ {
+  "acc": "legí-",
+  "asc": "legi-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 5
+ },
+ {
+  "acc": "Lá",
+  "asc": "La",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 2
+ },
+ {
+  "acc": "àque-",
+  "asc": "aque-",
+  "marcas": [
+   "grave"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 2,
+  "len": 5
+ },
+ {
+  "acc": "téc-",
+  "asc": "tec-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 4,
+  "len": 4
+ },
+ {
+  "acc": "má-",
+  "asc": "ma-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 20,
+  "len": 3
+ },
+ {
+  "acc": "tífica",
+  "asc": "tifica",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 2,
+  "len": 6
+ },
+ {
+  "acc": "psiquiá-",
+  "asc": "psiquia-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 2,
+  "len": 8
+ },
+ {
+  "acc": "pólis",
+  "asc": "polis",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 3,
+  "freq_asc": 1,
+  "len": 5
+ },
+ {
+  "acc": "àquelas",
+  "asc": "aquelas",
+  "marcas": [
+   "grave"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 2,
+  "len": 7
+ },
+ {
+  "acc": "pré",
+  "asc": "pre",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 2,
+  "len": 3
+ },
+ {
+  "acc": "dã",
+  "asc": "da",
+  "marcas": [
+   "til"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 6048,
+  "len": 2
+ },
+ {
+  "acc": "diários",
+  "asc": "diarios",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "psiquiátra",
+  "asc": "psiquiatra",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 4,
+  "len": 10
+ },
+ {
+  "acc": "contemporâneidade",
+  "asc": "contemporaneidade",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 16,
+  "len": 17
+ },
+ {
+  "acc": "vó",
+  "asc": "vo",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 9,
+  "len": 2
+ },
+ {
+  "acc": "Sérgio",
+  "asc": "Sergio",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 6
+ },
+ {
+  "acc": "iní-",
+  "asc": "ini-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 2,
+  "len": 4
+ },
+ {
+  "acc": "Brás",
+  "asc": "Bras",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 1,
+  "len": 4
+ },
+ {
+  "acc": "possuía",
+  "asc": "possuia",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "Jô",
+  "asc": "Jo",
+  "marcas": [
+   "circunflexo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 2,
+  "freq_asc": 1,
+  "len": 2
+ },
+ {
+  "acc": "contará",
+  "asc": "contara",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 1,
+  "len": 7
+ },
+ {
+  "acc": "lí-",
+  "asc": "li-",
+  "marcas": [
+   "agudo"
+  ],
+  "n_marcas": 1,
+  "freq_acc": 1,
+  "freq_asc": 11,
+  "len": 3
+ }
+]

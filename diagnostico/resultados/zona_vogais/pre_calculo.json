@@ -1,0 +1,12 @@
+{
+  "itens": 75319,
+  "motivos": {
+    "base/confianca": 67,
+    "base/ok": 9825,
+    "iam/confianca": 6206,
+    "iam/ok": 49250,
+    "iam/sem_tinta": 79
+  },
+  "alinhador": "/home/dead/HTG-Research-Pt-Br/modelos/alinhador_iam.pt",
+  "segundos": 4328
+}

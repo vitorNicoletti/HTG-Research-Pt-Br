@@ -1,0 +1,44 @@
+{
+  "base": "iam_pt_alinhado",
+  "peso_acento": 5.0,
+  "peso_zona": 2.0,
+  "iam_originais": 1.0,
+  "amostras": {
+    "acentuada": 5188,
+    "par": 5188,
+    "sem_acento": 6516,
+    "originais_iam": 55535
+  },
+  "zona_por_amostra": {
+    "acentuada": {
+      "media": 0.161,
+      "mediana": 0.1602,
+      "vazia": 0.0231
+    },
+    "par": {
+      "media": 0.161,
+      "mediana": 0.1602,
+      "vazia": 0.0231
+    },
+    "sem_acento": {
+      "media": 0.167,
+      "mediana": 0.1719,
+      "vazia": 0.0539
+    }
+  },
+  "zona_no_lote": 0.0381,
+  "acento_no_lote": 0.0108,
+  "parte_da_loss_do_lote": {
+    "zona": 0.0705,
+    "acento": 0.0501,
+    "resto": 0.8795
+  },
+  "aumento_da_loss_media": 1.0814,
+  "px_de_tinta_do_alvo_na_zona": {
+    "acentuada": 2,
+    "par": 0,
+    "sem_acento": 0
+  },
+  "problemas": [],
+  "n_problemas": 0
+}

@@ -1,0 +1,50 @@
+{
+  "descricao": "Fine-tune do DiffusionPen (pesos do IAM) no BRESSAY com 25% do treino, extrator de estilo do IAM congelado",
+  "save_path": "./model_bressay_25",
+  "dados": {
+    "dataset": "bressay",
+    "split": "./bressay_split_25",
+    "imagens": "./bressay/data/words",
+    "max_samples": 0,
+    "preproc": "v1",
+    "iam_originais": 0
+  },
+  "modelo": {
+    "pesos_iniciais": "./DiffusionPen/diffusionpen_iam_model_path/models",
+    "extrator_estilo": "./DiffusionPen/style_models/iam_style_diffusionpen.pth",
+    "stable_diffusion": "stable-diffusion-v1-5/stable-diffusion-v1-5"
+  },
+  "treino": {
+    "epocas_por_bloco": 5,
+    "epocas_total": 40,
+    "lr": 2e-05,
+    "batch_size": 32,
+    "adamw_eps": 1e-06,
+    "clip_grad_norm": 1.0,
+    "ema_beta": 0.995,
+    "ema_inicio": 2000,
+    "texto_max_len": 40,
+    "peso_acento": 1,
+    "peso_zona": 1,
+    "zona": "vazia"
+  },
+  "execucao": {
+    "device": "cuda:0",
+    "num_workers": 8,
+    "save_every_steps": 500,
+    "abort_after": 300
+  },
+  "amostras": {
+    "palavras": [
+      "ação",
+      "coração",
+      "português",
+      "não",
+      "avó",
+      "text"
+    ],
+    "estilos": 4,
+    "seed": 42,
+    "estilo_de": "bressay"
+  }
+}

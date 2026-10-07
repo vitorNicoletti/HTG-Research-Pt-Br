@@ -1,0 +1,39 @@
+{
+  "split": "iam_train_val.txt",
+  "elegiveis": 30658,
+  "geradas": 29732,
+  "motivos": {
+    "ok": 29732,
+    "confianca": 771,
+    "invisivel": 155
+  },
+  "letras": {
+    "é": 6228,
+    "ã": 4881,
+    "ê": 4121,
+    "í": 3261,
+    "õ": 2666,
+    "ó": 1642,
+    "á": 1598,
+    "ç": 1197,
+    "ô": 1158,
+    "â": 1107,
+    "ú": 1076,
+    "à": 797
+  },
+  "tentativas": {
+    "1": 29375,
+    "2": 272,
+    "3": 85
+  },
+  "filtros": {
+    "seed": 0,
+    "saida": "iam_acentuado",
+    "min_logp": -0.2,
+    "min_visibilidade": 0.6,
+    "tentativas": 3
+  },
+  "alinhador": "modelos/alinhador_iam.pt",
+  "commit": "4bd21af88b03d6ef86379800a5c76b9022b9734a",
+  "segundos": 125
+}

@@ -1,0 +1,30 @@
+{
+  "base": "iam_pt_alinhado",
+  "peso": 5.0,
+  "iam_originais": 0.3,
+  "amostras": {
+    "acentuada": 5188,
+    "par": 5188,
+    "sem_acento": 6516,
+    "originais_iam": 16660
+  },
+  "cobertura_por_acentuada": {
+    "media": 0.07560491157478798,
+    "p5": 0.046875,
+    "mediana": 0.0703125,
+    "p95": 0.1328125,
+    "max": 0.19921875
+  },
+  "cobertura_no_lote": 0.023380918052575108,
+  "parte_da_loss_na_mascara_amostra_mediana": {
+    "peso_1": 0.0703125,
+    "peso_5": 0.27439024390243905
+  },
+  "parte_da_loss_na_mascara_lote": {
+    "peso_1": 0.023380918052575108,
+    "peso_5": 0.10690631875081448
+  },
+  "aumento_da_loss_media_no_lote": 1.0935236722103003,
+  "loss_peso_1_igual_mse": true,
+  "problemas": []
+}

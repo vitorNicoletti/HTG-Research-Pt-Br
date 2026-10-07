@@ -1,0 +1,5 @@
+# Conjuntos de imagem: derivados e reproduziveis pelos scripts deste
+# diretorio (preparar_reais.py, controle_ascii.py, gerar_pares.py).
+# figuras/ e resultados/ ficam versionados.
+amostras/
+__pycache__/
