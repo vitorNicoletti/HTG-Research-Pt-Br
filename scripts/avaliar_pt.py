@@ -18,7 +18,10 @@ esqueleto (mesmo escritor e semente), CER medio por tipo.
 
 Anti-vazamento (o script para com erro se falhar):
   - toda palavra avaliada e do --split pedido;
-  - nenhuma palavra avaliada (pelo grupo) aparece nos split.txt de --bases;
+  - nenhuma palavra avaliada (pelo grupo) aparece nos split.txt de --bases,
+    exceto os grupos de --aceitar_grupos, conferidos a mao e registrados no
+    resumo.json (ex.: "central" na base de acentos sobre o IAM real, que tem a
+    palavra inglesa real -- a mesma dos originais do IAM em todo treino);
   - os escritores de avaliacao nao estao no iam_train_val.
 
     python scripts/avaliar_pt.py --split val --modelo iam=<ckpt> --modelo pt=<ckpt> \\
@@ -82,12 +85,12 @@ def recorte_tinta(g, margem=3):
              max(0, xs.min() - margem):xs.max() + 1 + margem]
 
 
-def conferir_bases(itens, bases):
+def conferir_bases(itens, bases, aceitos=()):
     grupos = {grupo(p) for p, _, _ in itens}
     for b in bases:
         with open(os.path.join(b, "split.txt"), encoding="utf-8") as f:
             vistos = {grupo(l.rstrip("\n").split(",", 2)[2]) for l in f if l.count(",") >= 2}
-        inter = grupos & vistos
+        inter = (grupos & vistos) - set(aceitos)
         if inter:
             raise SystemExit(f"VAZAMENTO: {len(inter)} grupos avaliados estao na base {b}: {sorted(inter)[:20]}")
 
@@ -97,6 +100,8 @@ def main():
     ap.add_argument("--split", choices=("val", "teste"), required=True)
     ap.add_argument("--modelo", action="append", required=True, help="rotulo=ckpt (.pt do EMA)")
     ap.add_argument("--bases", nargs="*", default=[], help="bases de treino para conferir vazamento")
+    ap.add_argument("--aceitar_grupos", nargs="*", default=[],
+                    help="grupos presentes nas bases aceitos apos conferencia manual (ficam no resumo.json)")
     ap.add_argument("--leitor", required=True, help="leitor CTC separado (treinar_alinhador.py --cabeca lstm)")
     ap.add_argument("--style", default=os.path.join(RAIZ, "DiffusionPen/style_models/iam_style_diffusionpen.pth"))
     ap.add_argument("--saida", required=True)
@@ -109,7 +114,7 @@ def main():
     voc = Vocabulario()
     itens = escolher_palavras(voc, a.split)
     voc.conferir([p for p, _, _ in itens], a.split, f"avaliacao ({a.split})")
-    conferir_bases(itens, a.bases)
+    conferir_bases(itens, a.bases, a.aceitar_grupos)
 
     treino = EscritoresIAM("iam_train_val.txt")
     teste = EscritoresIAM("iam_test.txt")
@@ -152,6 +157,7 @@ def main():
         f.write("\n".join(linhas) + "\n")
     rots = list(dict.fromkeys(m.split("=", 1)[0] for m in a.modelo))
     resumo = {"split": a.split, "palavras": [p for p, _, _ in itens], "escritores": escritores,
+              "grupos_aceitos_nas_bases": a.aceitar_grupos,
               "sementes": list(SEMENTES), "modelos": {}}
     tab = ["| modelo | marca: acentuada | marca: esqueleto | marca: sem acento | "
            "diferenca pareada | CER acentuada | CER esqueleto | CER sem acento |",
