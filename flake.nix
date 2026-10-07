@@ -16,7 +16,10 @@
         extraConfig:
         import nixpkgs {
           inherit system;
-          config = { allowUnfree = true; } // extraConfig;
+          config = {
+            allowUnfree = true;
+          }
+          // extraConfig;
         };
 
       pythonPacotes =
@@ -51,10 +54,6 @@
             export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH:$LD_LIBRARY_PATH"
             echo "ambiente: ${nome}"
             ${hook}
-            if [ -n "$(command -v zsh)" ]; then
-              export SHELL="$(command -v zsh)"
-              exec zsh
-            fi
           '';
         };
 
@@ -105,8 +104,6 @@
         # shells acima estao em 3.14. paddleocr e easyocr nao estao no
         # nixpkgs, entao vem de pip num venv; o shell so fornece o
         # interpretador e as libs de sistema que os wheels precisam.
-        # Nao usa o mkShell acima de proposito: o 'exec zsh' do hook dele
-        # impede 'nix develop --command', que e como este shell e usado.
         htr = pkgsCpu.mkShell {
           packages = with pkgsCpu; [
             python313
@@ -126,6 +123,7 @@
             }:$LD_LIBRARY_PATH"
             echo "ambiente: HTR (Python 3.13)"
             echo "  python -m venv venv-htr && venv-htr/bin/pip install paddleocr easyocr"
+
           '';
         };
 
