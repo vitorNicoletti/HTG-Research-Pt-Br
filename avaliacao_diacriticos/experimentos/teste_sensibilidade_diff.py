@@ -19,7 +19,7 @@ se separa do ruido. Isso da a referencia para ler os numeros do fine-tune
 quando ele existir, em vez de ter que adivinhar se 0.05 e muito ou pouco.
 
     python avaliacao_diacriticos/experimentos/teste_sensibilidade_diff.py \\
-        --dir avaliacao_diacriticos/ger_iam_puro
+        --dir avaliacao_diacriticos/amostras/ger_iam_sonda77x4
 """
 import argparse
 import json

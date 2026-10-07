@@ -26,7 +26,7 @@ Quatro controles, dois ja em disco e dois construidos aqui:
                 ignorar. E o controle que decide entre global e local.
 
     python avaliacao_diacriticos/experimentos/ssim_psnr.py \\
-        --dir avaliacao_diacriticos/amostras/ger_iam_n696 \\
+        --dir avaliacao_diacriticos/amostras/ger_iam_sonda77x4 \\
         --csv-out avaliacao_diacriticos/resultados/ssim_psnr.csv
 """
 import argparse

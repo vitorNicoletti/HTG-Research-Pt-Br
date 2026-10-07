@@ -22,7 +22,7 @@ Este teste mede duas coisas:
 
     python avaliacao_diacriticos/experimentos/teste_folga.py \\
         --real avaliacao_diacriticos/reais_test \\
-        --negativo avaliacao_diacriticos/ger_iam_puro
+        --negativo avaliacao_diacriticos/amostras/ger_iam_sonda77x4
 """
 import argparse
 import collections

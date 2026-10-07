@@ -57,10 +57,11 @@ Todas são regeradas por `python avaliacao_diacriticos/experimentos/figuras.py`.
 | `pares_corpus.json` | os 187 pares mínimos com gêmeo ASCII real no corpus |
 | `passo1_alinhamento.json` | os números do portão do Passo 1 |
 
-**Superados, ficam só como histórico:** `res_iam_n696.csv`, `res_iam_sonda77.csv`,
-`res_iam_e1.csv`, `res_iam_faixa.csv`, `res_reais.csv`, `calibracao_e1.json`.
-São execuções com conjuntos menores ou com o intervalo de confiança antigo, que
-reamostrava amostras em vez de palavras. Não citar números deles.
+Os CSVs de execuções anteriores (conjuntos de 6 palavras por marca, ou com o
+intervalo de confiança que reamostrava amostras em vez de palavras) foram
+apagados, junto com os conjuntos de imagem `ger_iam_n696`, `ger_iam_sonda77` e
+`ger_iam_puro`. Algumas seções abaixo ainda citam números medidos neles; o
+conjunto de referência hoje é `amostras/ger_iam_sonda77x4/`.
 
 ### Como ler o `limiares_eixo_diff.json`
 

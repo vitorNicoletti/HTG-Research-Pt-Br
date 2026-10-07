@@ -29,7 +29,7 @@ sys.path.insert(0, AQUI)
 import metrica as M, e1                              # noqa: E402
 from teste_sensibilidade_diff import pinta_acento    # noqa: E402
 
-D = os.path.join(AQUI, "amostras", "ger_iam_n696")
+D = os.path.join(AQUI, "amostras", "ger_iam_sonda77x4")
 FIG = os.path.join(AQUI, "figuras")
 itens = [json.loads(l) for l in open(f"{D}/manifest.jsonl", encoding="utf-8")]
 gem = {(x["par_id"], x["escritor"], x["semente"]): x
@@ -90,10 +90,11 @@ def rodape(fig, texto, y=0.01):
 
 # ------------------------------------------------ 1. passo a passo
 def passo_a_passo():
+    # Exemplo fixo: "cidadaos" tem um 'd' de haste alta ao lado do til, que e
+    # o caso que o rodape da figura comenta. Sem fixar, a palavra escolhida
+    # muda quando o conjunto muda e o rodape fica falando de outra coisa.
     alvo = next((r, *par(r)) for r in itens
-                if r["acentuada"] and r.get("std", 0) > 0.20
-                and "til" in [n for _, n, _ in M.diacriticos(r["palavra"])]
-                and par(r))
+                if r["acentuada"] and r["palavra"] == "cidadãos" and par(r))
     r, acc, asc, _ = alvo
     idx, _, onde = [d for d in M.diacriticos(r["palavra"]) if d[1] == "til"][0]
     k = [d[1] for d in M.diacriticos(r["palavra"])].index("til")
@@ -124,10 +125,10 @@ def passo_a_passo():
                         f"    E1 = {e1.e1(pinta_acento(asc, r['palavra'], idx, onde, 1.0), asc, r['palavra'])[k]:+.3f}")
     caixa(ax[5], b, r["palavra"], idx, onde == M.ACIMA)
     fig.tight_layout(rect=[0, 0.055, 1, 0.945])
-    rodape(fig, "O retângulo verde é a única região que conta. Na linha 4 não sobra "
-                "tinta vermelha dentro dele: o modelo do IAM não desenhou o til.\n"
-                "Repare que o 'd' tem haste alta nas DUAS imagens, então ele some "
-                "sozinho na subtração — por isso ascendente não vira falso positivo.",
+    rodape(fig, "O retângulo verde é a única região que conta. Na linha 4 o saldo "
+                "de tinta dentro dele é negativo: o modelo do IAM não desenhou o til.\n"
+                "A haste do 'd' aparece nas duas imagens e quase se cancela na "
+                "subtração, por isso ascendente não vira falso positivo.",
            y=0.006)
     fig.savefig(f"{FIG}/e1_passo_a_passo.png", dpi=130)
     plt.close(fig)
@@ -217,7 +218,7 @@ def falhas(med):
                 "abaixo da linha de base, que é a forma de um ç. Na gêmea \"presenca\"\n"
                 "é um \"ca\" limpo. Medido: a cedilha é a única marca em que o extra "
                 "de tinta aparece na COLUNA certa e na FAIXA certa mais do que nas\n"
-                "outras colunas da mesma imagem (+0,0245, IC95 [+0,0085, +0,0416]). "
+                "outras colunas da mesma imagem (+0,026, IC95 por palavra [+0,009, +0,044]). "
                 "Ou seja, o IAM não é controle negativo puro para cedilha.", y=0.01)
     fig.savefig(f"{FIG}/e1_falhas.png", dpi=125)
     plt.close(fig)
