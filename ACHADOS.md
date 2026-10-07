@@ -1,6 +1,9 @@
-# ACHADOS — Fase de setup e sonda exploratória
+# ACHADOS — registro cronológico dos achados (seções 1 a 17)
 
-> **Status: PRELIMINAR — análise estática apenas.**
+> **Registro histórico.** A documentação organizada por assunto, com a pipeline,
+> os resultados consolidados e os problemas em aberto, está em [`docs/`](docs/README.md).
+
+> *Seções 1 a 6, de 2026-08-17:* **PRELIMINAR — análise estática apenas.**
 > A GPU alvo (RX 9060 XT / gfx1200) está em outra máquina, indisponível.
 > Nenhum modelo foi executado. Tudo abaixo vem de leitura de código e de um
 > teste de tokenização em CPU. As seções marcadas ⏳ dependem da GPU.

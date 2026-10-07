@@ -1,5 +1,23 @@
 # Acentos sintéticos sobre o IAM
 
+> Parte da série em [`docs/`](README.md). Este documento descreve **o gerador**
+> de acentos, etapa por etapa. Como as bases geradas com ele foram usadas no
+> treino, e o que deu cada experimento, está em
+> [07_experimentos_com_acentos.md](07_experimentos_com_acentos.md).
+>
+> **Peças acrescentadas depois** da primeira versão deste texto (descritas no
+> 07):
+> - `gerador.acentuar_palavra`: desenha **todos** os sinais de uma palavra
+>   portuguesa, usado na base `iam_pt`;
+> - `gerador.par_na_tela`: põe a imagem sem acento na mesma tela da acentuada;
+> - `scripts/gerar_base_pt.py`: base de palavras portuguesas geradas pelo
+>   DiffusionPen e acentuadas;
+> - `scripts/alinhar_pares.py` e `scripts/criar_pares_iam.py`: criam os pares
+>   alinhados;
+> - `acentos_sinteticos/vocabulario.py`: partição anti-vazamento do
+>   vocabulário;
+> - `acentos_sinteticos/zona_vogais.py`: máscara das vogais para a loss.
+
 Este documento descreve o pipeline que desenha acentos e cedilhas do português em
 palavras manuscritas reais do IAM, trocando também a letra correspondente no rótulo.
 Exemplo: a imagem de `can`, com um til desenhado sobre o `a`, vira uma amostra nova

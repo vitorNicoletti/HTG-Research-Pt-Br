@@ -1,5 +1,8 @@
 # LOG de execução — HTG em GPU AMD
 
+> **Registro histórico.** A documentação organizada por assunto, com a pipeline,
+> os resultados consolidados e os problemas em aberto, está em [`docs/`](docs/README.md).
+
 Diário de execução para a seção de reprodutibilidade do TCC.
 
 ---
