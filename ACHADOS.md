@@ -867,3 +867,38 @@ Leitura (hipótese, porque o treino mudou várias coisas ao mesmo tempo):
   regra. Isso combina com o vazamento alto (54–56% de marcas onde não devia) e
   com o acento na letra errada.
 - O teste que separa as duas causas é o mesmo treino com `peso_zona` 1.
+
+## 16. Zona "vogais": a penalidade fica longe das hastes (conferência, sem treino)
+
+Proposta para o vazamento da seção 15: cobrar tinta **só onde um acento
+poderia cair**, com o mesmo peso de quando ele falta (5), para tirar a
+vantagem de "apostar" no acento.
+- **onde:** a faixa acima de cada vogal e abaixo de cada c, nas colunas da
+  letra (alinhador CTC), em células sem tinta do alvo;
+- **código:** `acentos_sinteticos/zona_vogais.py`;
+- **pré-cálculo:** `scripts/mascaras_vogais.py`, 75.319 máscaras em 72 min
+  de CPU;
+- **uso no treino:** `--zona vogais`.
+
+Conferência (`diagnostico/conferir_zona_vogais.py`, resultados em
+`diagnostico/resultados/zona_vogais/`):
+- **Integridade:** zero problemas. Nenhum px de tinta do alvo na zona, zona
+  disjunta do acento, acentuada e par iguais.
+- **Hastes:** nas mesmas 3.000 originais, **0,5%** das células caem sobre
+  letra com haste ou perna. Na zona vazia da seção 15 eram **21,6%**.
+- **Sem máscara:** 11% das originais têm alinhamento fraco e ficam sem
+  máscara (`iam/confianca` 6.206 de 55.535). Ao todo, 32% das originais e 40%
+  dos pares ficam com zona vazia (palavras sem vogal livre, faixa estreita ou
+  célula encostada em tinta).
+- **Cobertura:** 2,5–3,4% do latente por amostra. Com peso 5, a zona fica com
+  13% da loss do lote e o acento com 8%.
+- **Cobertura do vazamento real:** nos painéis sem acento pedido do
+  `pares_12ep` que têm marca, **62%** das marcas caem na faixa das
+  vogais/c, e 38% em outro lugar (acima de consoantes). Só 25% desses painéis
+  puderam ser alinhados (828 com alinhamento fraco, porque as palavras saíram
+  deformadas), então a estimativa vale para os casos legíveis.
+- **Risco a acompanhar:** a faixa do i inclui a região do pingo, já que só as
+  células com tinta saem.
+
+`experimentos/iam_acentuado_vogais.json` está pronto e não foi lançado: zona
+vogais com peso 5, 4 épocas.

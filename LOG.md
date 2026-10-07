@@ -1111,3 +1111,24 @@ qualquer imagem.
     0,036.
   - `experimentos/iam_acentuado_pares.json` está pronto: 75.319 amostras,
     12 épocas em blocos de 4, ~19,5 min/época.
+
+## 2026-10-07 — Disco cheio, limpeza e zona "vogais"
+
+- O C: do Windows chegou a 0,2 GB livres, e o WSL passou a gravar arquivos
+  vazios:
+  - 10 objetos do git e depois o commit `ce0e306`;
+  - 24 arquivos versionados.
+- Limpeza:
+  - apagados os `ema_ep*.pt` de todos os `model_*` (69 arquivos, 46,9 GB;
+    ficaram os 43 `ema_bloco_*`) e o `~/.cache/uv` (28 GB);
+  - `fstrim -av` como root e `wsl --shutdown`: o C: foi para 98,9 GB livres;
+  - o `--set-sparse` do WSL está desativado pela Microsoft (risco de
+    corrupção) e não foi forçado.
+- Conserto do git no WSL:
+  - objetos vazios movidos para `~/git_objetos_vazios/` e baixados de novo
+    com `git fetch`; `fsck` limpo;
+  - arquivos truncados restaurados com `git checkout -- .`; eram só deleções.
+- Conferência de integridade: nenhum outro arquivo vazio recente (fora
+  `base_vazia/split.txt`, vazio de propósito), nenhum checkpoint truncado,
+  clone em dia.
+- Zona "vogais" pré-calculada e conferida (ACHADOS 16). Não foi treinada.
