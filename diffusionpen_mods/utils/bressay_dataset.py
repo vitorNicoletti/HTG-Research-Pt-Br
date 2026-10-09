@@ -7,6 +7,135 @@ from utils.auxilary_functions import image_resize_PIL, centered_PIL
 import numpy as np
 
 NUM_STYLE_IMGS = 5
+# Normalizacao de contraste: o percentil P_TINTA vira preto, P_FUNDO vira
+# branco. Em nivel de modulo para o train.py registrar no config.jsonl.
+P_TINTA, P_FUNDO = 3, 40
+
+# Pre-processamento. 'v1' e o original: contraste + enquadramento do recorte
+# inteiro (margens, pauta e fundo incluidos). 'v2' tira a pauta, recorta justo
+# na tinta e escala como o IAM. Escolhido por args.preproc; o padrao continua
+# 'v1' para nao mudar runs antigos nem a calibracao da metrica, que tambem usa
+# load_image(). Ver ACHADOS.md, secao 7.
+PREPROC_PADRAO = "v1"
+PREPROCS = ("v1", "v2")
+
+# Parametros do v2. Pauta: os mesmos de avaliacao_diacriticos/metrica.py,
+# calibrados na escala de 64 px de altura -- a pauta e uma faixa de ate 5
+# fileiras cobrindo >= 90% da largura da tinta; traco horizontal de letra
+# ocupa 5 a 7 fileiras.
+ESPESSURA_MAX_PAUTA = 5
+COBERTURA_PAUTA = 0.90
+MARGEM_RECORTE = 2    # px, na escala de 64, em volta da caixa de tinta
+AREA_MIN_MANCHA = 6   # px; componentes menores nao contam para a caixa
+
+
+def _binarizar(g):
+    """Cinza 0..255 -> mascara booleana de tinta (Otsu). Vazia sem contraste."""
+    import cv2
+    if float(g.max()) - float(g.min()) < 25:
+        return np.zeros(g.shape, dtype=bool)
+    _, m = cv2.threshold(g.astype(np.uint8), 0, 255,
+                         cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    return m.astype(bool)
+
+
+def _caixa(mask):
+    if not mask.any():
+        return None
+    ys, xs = np.where(mask)
+    return int(xs.min()), int(xs.max()) + 1, int(ys.min()), int(ys.max()) + 1
+
+
+def _remover_pauta(g, mask):
+    """Apaga a linha pautada de g (cinza 0..255, altura 64). Devolve (g, mask, n).
+
+    Deteccao igual a da metrica. A remocao e mais cuidadosa: a metrica zera as
+    fileiras inteiras, o que aqui cortaria toda letra que cruza a pauta -- e a
+    cedilha fica justamente nessa regiao. So se apagam as colunas em que a
+    tinta NAO continua logo acima E logo abaixo da faixa; o traco que atravessa
+    a pauta sobrevive.
+    """
+    cx = _caixa(mask)
+    if cx is None:
+        return g, mask, 0
+    x0, x1, _, _ = cx
+    cheia = mask[:, x0:x1].mean(axis=1) > COBERTURA_PAUTA
+    g, mask = g.copy(), mask.copy()
+    n, i, H = 0, 0, len(cheia)
+    while i < H:
+        if not cheia[i]:
+            i += 1
+            continue
+        j = i
+        while j + 1 < H and cheia[j + 1]:
+            j += 1
+        ini, fim = i, j + 1
+        if fim - ini <= ESPESSURA_MAX_PAUTA:
+            acima = mask[ini - 1] if ini > 0 else np.zeros(mask.shape[1], bool)
+            abaixo = mask[fim] if fim < H else np.zeros(mask.shape[1], bool)
+            apagar = ~(acima & abaixo)
+            g[ini:fim, apagar] = 255
+            mask[ini:fim, apagar] = False
+            n += fim - ini
+        i = fim
+    return g, mask, n
+
+
+def _sem_pauta_64(g):
+    """Passos 1-3 do v2: (cinza 64 px sem pauta, caixa de tinta ou None)."""
+    import cv2
+    h, w = g.shape
+    g = cv2.resize(g, (max(1, round(w * 64.0 / h)), 64),
+                   interpolation=cv2.INTER_CUBIC)
+    g = np.clip(g, 0, 255)
+    mask = _binarizar(g)
+    g, mask, _ = _remover_pauta(g, mask)
+
+    n, rot, stats, _ = cv2.connectedComponentsWithStats(mask.astype(np.uint8), 8)
+    grandes = [k for k in range(1, n) if stats[k, cv2.CC_STAT_AREA] >= AREA_MIN_MANCHA]
+    return g, (_caixa(np.isin(rot, grandes)) if grandes else None)
+
+
+def contraste(caminho):
+    """Cinza float 0..255 com o contraste normalizado por percentis."""
+    g = np.asarray(Image.open(caminho).convert("L"), dtype=np.float32)
+    lo, hi = np.percentile(g, P_TINTA), np.percentile(g, P_FUNDO)
+    if hi - lo >= 8:
+        g = np.clip((g - lo) / (hi - lo), 0, 1) * 255
+    return g
+
+
+def altura_tinta_original(caminho):
+    """Altura da caixa de tinta, sem pauta, em pixels da imagem ORIGINAL.
+
+    E o quanto o v2 vai ampliar a palavra: 64 / esta altura. Usada por
+    scripts/filtrar_tinta.py para descartar recortes pequenos demais.
+    """
+    g = contraste(caminho)
+    _, cx = _sem_pauta_64(g)
+    if cx is None:
+        return 0.0
+    return (cx[3] - cx[2]) * g.shape[0] / 64.0
+
+
+def preprocessar_v2(g):
+    """Cinza 0..255 (contraste ja normalizado) -> PIL RGB 256x64.
+
+    1. amplia para 64 px de altura, a escala em que a regra da pauta foi
+       calibrada;
+    2. apaga a pauta;
+    3. recorta justo na tinta (ignorando manchas minusculas do papel);
+    4. escala como o IAM: altura 64 preservando o aspecto, cabendo em 256,
+       centralizado em fundo branco.
+    """
+    g, cx = _sem_pauta_64(g)
+    if cx is not None:
+        x0, x1, y0, y1 = cx
+        m = MARGEM_RECORTE
+        g = g[max(0, y0 - m):min(g.shape[0], y1 + m),
+              max(0, x0 - m):min(g.shape[1], x1 + m)]
+    im = Image.fromarray(g.astype(np.uint8)).convert("RGB")
+    return ImageOps.pad(im, size=(256, 64), color="white")
 
 
 class BRESSAY_Dataset(Dataset):
@@ -92,9 +221,21 @@ class BRESSAY_Dataset(Dataset):
     
     
     def load_image(self, img_path):
-        try:
-            P_TINTA, P_FUNDO = 3, 40
+        preproc = getattr(self.args, "preproc", PREPROC_PADRAO) or PREPROC_PADRAO
+        if preproc not in PREPROCS:
+            raise ValueError(f"preproc desconhecido: {preproc!r} (use {PREPROCS})")
+        if preproc == "v2":
+            # Fora do try/except de baixo de proposito: la qualquer erro vira
+            # imagem branca em silencio, e um defeito no v2 faria o modelo
+            # treinar sobre imagens vazias sem ninguem notar. So o arquivo
+            # ilegivel vira branco aqui.
+            try:
+                g = contraste(img_path)
+            except OSError:
+                return Image.new("RGB", (256, 64), color="white")
+            return preprocessar_v2(g)
 
+        try:
             im = Image.open(img_path).convert("RGB")
 
             # normalizacao de contraste por percentis
@@ -104,7 +245,7 @@ class BRESSAY_Dataset(Dataset):
             if hi - lo >= 8:
                 g = np.clip((g - lo) / (hi - lo), 0, 1) * 255
                 im = Image.fromarray(g.astype(np.uint8)).convert("RGB")
-    
+
             # resize para altura 64
             w, h = im.size
             # im = im.resize((max(1, int(w * 64 / h)), 64), Image.BICUBIC)

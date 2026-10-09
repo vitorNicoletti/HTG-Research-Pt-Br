@@ -20,6 +20,7 @@ from feature_extractor import ImageEncoder
 from utils.iam_dataset import IAMDataset
 from utils.GNHK_dataset import GNHK_Dataset
 from utils.bressay_dataset import BRESSAY_Dataset
+from utils.iam_acentuado_dataset import IAMAcentuadoDataset
 from utils.auxilary_functions import *
 from torchvision.utils import save_image
 from torch.nn import DataParallel
@@ -29,6 +30,15 @@ torch.cuda.empty_cache()
 OUTPUT_MAX_LEN = 95 #+ 2  # <GO>+groundtruth+<END>
 IMG_WIDTH = 256
 IMG_HEIGHT = 64
+
+# Padroes dos hiperparametros que antes eram literais espalhados pelo codigo.
+# Hoje sao argumentos (--adamw_eps, --clip_grad_norm, --ema_beta, --ema_inicio,
+# --texto_max_len) com estes valores, que sao os originais.
+ADAMW_EPS = 1e-6
+CLIP_GRAD_NORM = 1.0
+EMA_BETA = 0.995
+EMA_INICIO = 2000        # antes disso o step_ema COPIA o modelo no EMA
+TEXTO_MAX_LEN = 40       # tokens do CANINE no treino e no sampling()
 
 c_classes = '_!"#&\'()*+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz '
 cdict = {c:i for i,c in enumerate(c_classes)}
@@ -84,6 +94,83 @@ def setup_logging(args):
     os.makedirs(args.save_path, exist_ok=True)
     os.makedirs(os.path.join(args.save_path, 'models'), exist_ok=True)
     os.makedirs(os.path.join(args.save_path, 'images'), exist_ok=True)
+
+def gravar_config(args, n_treino, diffusion):
+    '''Acrescenta a configuracao deste lancamento em SAVE_PATH/config.jsonl.
+
+    Uma linha por lancamento, para que retomadas com parametros diferentes
+    fiquem no historico em vez de sobrescrever o registro anterior. Junta os
+    argumentos, os hiperparametros fixos no codigo, os dados e o ambiente --
+    antes isso so podia ser reconstruido cruzando o antigo treinar.sh, este arquivo e o
+    LOG.md.
+    '''
+    import datetime
+    import platform
+    import subprocess
+    from utils import bressay_dataset as bd
+
+    def git(pasta, *cmd):
+        try:
+            r = subprocess.run(['git', '-C', pasta, *cmd],
+                               capture_output=True, text=True, timeout=10)
+            return r.stdout.strip() if r.returncode == 0 else None
+        except (OSError, subprocess.SubprocessError):
+            return None
+
+    clone = os.path.dirname(os.path.abspath(__file__))
+    raiz = os.path.dirname(clone)
+    # So arquivos versionados modificados; saidas soltas (logs, amostras) nao
+    # mudam o que foi treinado.
+    sujo = git(raiz, 'status', '--porcelain', '--untracked-files=no')
+
+    reducao = None
+    caminho_reducao = os.path.join(args.dataset_folder, 'reducao.json')
+    if args.dataset == 'bressay' and os.path.isfile(caminho_reducao):
+        with open(caminho_reducao, encoding='utf-8') as f:
+            reducao = json.load(f)
+    # base de acentos sinteticos: o resumo.json dela (filtros, contagens, commit)
+    base_acentos = None
+    caminho_resumo = os.path.join(args.dataset_folder, 'resumo.json')
+    if args.dataset == 'iam_acentuado' and os.path.isfile(caminho_resumo):
+        with open(caminho_resumo, encoding='utf-8') as f:
+            base_acentos = json.load(f)
+
+    registro = {
+        'data': datetime.datetime.now().isoformat(timespec='seconds'),
+        'epoca_inicial': args.start_epoch,
+        'args': vars(args),
+        'fixos': {
+            'otimizador': 'AdamW',
+            'lr_scheduler': None,
+            'passos_difusao': diffusion.noise_steps,
+        },
+        'dados': {
+            'dataset': args.dataset,
+            'amostras_treino': n_treino,
+            'tamanho_imagem': [IMG_WIDTH, IMG_HEIGHT],
+            'imagens_estilo': bd.NUM_STYLE_IMGS if args.dataset == 'bressay' else None,
+            'contraste_percentis': [bd.P_TINTA, bd.P_FUNDO] if args.dataset == 'bressay' else None,
+            'reducao': reducao,
+            'base_acentos': base_acentos,
+            'iam_originais': args.iam_originais if args.dataset == 'iam_acentuado' else None,
+            'peso_acento': args.peso_acento,
+            'peso_zona': args.peso_zona,
+            'zona': args.zona,
+        },
+        'ambiente': {
+            'host': platform.node(),
+            'torch': torch.__version__,
+            'gpu': torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+            'git_commit': git(raiz, 'rev-parse', 'HEAD'),
+            'git_sujo': bool(sujo) if sujo is not None else None,
+            'diffusionpen_commit': git(clone, 'rev-parse', 'HEAD'),
+        },
+    }
+    destino = os.path.join(args.save_path, 'config.jsonl')
+    with open(destino, 'a', encoding='utf-8') as f:
+        f.write(json.dumps(registro, ensure_ascii=False, default=str) + '\n')
+    print(f'configuracao registrada em {destino}')
+
 
 def save_images(images, path, args, **kwargs):
     #print('image', images.shape)
@@ -150,7 +237,7 @@ class EMA:
             return new
         return old * self.beta + (1 - self.beta) * new
 
-    def step_ema(self, ema_model, model, step_start_ema=2000):
+    def step_ema(self, ema_model, model, step_start_ema=EMA_INICIO):
         if self.step < step_start_ema:
             self.reset_parameters(ema_model, model)
             self.step += 1
@@ -261,7 +348,9 @@ class Diffusion:
             style_images = None
             text_features = x_text #[x_text]*n
             #print('text features', text_features.shape)
-            text_features = tokenizer(text_features, padding="max_length", truncation=True, return_tensors="pt", max_length=40).to(args.device)
+            # getattr: sampling() tambem e chamado com Namespaces montados fora
+            # do parser deste arquivo, que podem nao ter o campo
+            text_features = tokenizer(text_features, padding="max_length", truncation=True, return_tensors="pt", max_length=getattr(args, 'texto_max_len', TEXTO_MAX_LEN)).to(args.device)
             if args.img_feat == True:
                 #pick random image according to specific style
                 with open('./writers_dict_train.json', 'r') as f:
@@ -468,6 +557,9 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
         nan_loss = 0
         nan_grad = 0
         falhas_seguidas = 0
+        # com peso no acento: MSE sem peso (comparavel aos runs antigos) e MSE
+        # dentro/fora da mascara, acumulados na epoca
+        acum_acento = dict.fromkeys(('mse', 'n', 'dentro', 'n_dentro', 'fora', 'n_fora', 'zona', 'n_zona'), 0.0)
         pbar = tqdm(loader)
         style_feat = []
         for i, data in enumerate(pbar):
@@ -486,7 +578,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                     batch_word_embeddings.append(word_embedding)
                 text_features = torch.stack(batch_word_embeddings)
             else:
-                text_features = tokenizer(transcr, padding="max_length", truncation=True, return_tensors="pt", max_length=40).to(args.device)
+                text_features = tokenizer(transcr, padding="max_length", truncation=True, return_tensors="pt", max_length=args.texto_max_len).to(args.device)
             
             if style_extractor is not None:
                 reshaped_images = style_images.reshape(-1, 3, 64, 256)
@@ -522,8 +614,34 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
             
             predicted_noise = model(x_t, timesteps=t, context=text_features, y=s_id, style_extractor=style_features)
             
-            loss = mse_loss(noise, predicted_noise)
-            
+            if args.peso_acento != 1.0 or args.peso_zona != 1.0:
+                # Peso no acento: o erro de ruido nas celulas do latente onde
+                # esta o acento (mascara do IAMAcentuadoDataset, data[6]) vale
+                # peso_acento. Peso na zona: nas celulas vazias acima/abaixo do
+                # corpo da palavra (data[7], disjunta do acento) vale peso_zona.
+                # O resto vale 1. Sem normalizar pela soma dos pesos: fora das
+                # mascaras a loss fica exatamente a de antes.
+                mascara = data[6].to(images.device)
+                zona = data[7].to(images.device) if args.peso_zona != 1.0 else torch.zeros_like(mascara)
+                if mascara.shape[-2:] != images.shape[-2:] or zona.shape != mascara.shape:
+                    raise SystemExit(f'mascaras {tuple(mascara.shape)}/{tuple(zona.shape)} nao batem com o latente {tuple(images.shape)}')
+                erro2 = (noise - predicted_noise) ** 2
+                peso = 1.0 + (args.peso_acento - 1.0) * mascara[:, None] + (args.peso_zona - 1.0) * zona[:, None]
+                loss = (peso * erro2).mean()
+                with torch.no_grad():
+                    m4 = mascara[:, None].expand_as(erro2)
+                    acum_acento['mse'] += erro2.mean().item() * images.size(0)
+                    acum_acento['n'] += images.size(0)
+                    acum_acento['dentro'] += (erro2 * m4).sum().item()
+                    acum_acento['n_dentro'] += m4.sum().item()
+                    acum_acento['fora'] += (erro2 * (1 - m4)).sum().item()
+                    acum_acento['n_fora'] += (1 - m4).sum().item()
+                    z4 = zona[:, None].expand_as(erro2)
+                    acum_acento['zona'] += (erro2 * z4).sum().item()
+                    acum_acento['n_zona'] += z4.sum().item()
+            else:
+                loss = mse_loss(noise, predicted_noise)
+
             optimizer.zero_grad(set_to_none=True)
 
             if not torch.isfinite(loss):
@@ -540,7 +658,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                 continue
 
             loss.backward()
-            grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip_grad_norm)
 
             # Um unico step com gradiente nao-finito envenena o exp_avg_sq do
             # Adam de forma permanente (NaN*beta + (1-beta)*x = NaN), e a
@@ -567,7 +685,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
             falhas_seguidas = 0
             optimizer.step()
 
-            ema.step_ema(ema_model, model)
+            ema.step_ema(ema_model, model, step_start_ema=args.ema_inicio)
 
             count = images.size(0)
             loss_meter.update(loss.item(), count)
@@ -629,6 +747,15 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
         print(f"epoca {epoch}: MSE {loss_meter.avg:.4f} | {nan_epoca} batches descartados "
               f"nesta epoca (loss nao-finito: {nan_loss}, gradiente nao-finito: {nan_grad}; "
               f"total no run: {nan_total})")
+        if (args.peso_acento != 1.0 or args.peso_zona != 1.0) and acum_acento['n']:
+            a = acum_acento
+            print(f"epoca {epoch}: peso_acento {args.peso_acento} | MSE sem peso {a['mse'] / a['n']:.4f} | "
+                  f"dentro da mascara {a['dentro'] / max(a['n_dentro'], 1):.4f} | "
+                  f"fora {a['fora'] / max(a['n_fora'], 1):.4f} | "
+                  f"mascara cobre {100 * a['n_dentro'] / (a['n_dentro'] + a['n_fora']):.2f}% do latente")
+            if args.peso_zona != 1.0:
+                print(f"epoca {epoch}: peso_zona {args.peso_zona} | zona vazia {a['zona'] / max(a['n_zona'], 1):.4f} | "
+                      f"zona cobre {100 * a['n_zona'] / (a['n_dentro'] + a['n_fora']):.2f}% do latente")
 
 
 def main():
@@ -640,7 +767,7 @@ def main():
     parser.add_argument('--model_name', type=str, default='diffusionpen', help='diffusionpen or wordstylist (previous work)')
     parser.add_argument('--level', type=str, default='word', help='word, line')
     parser.add_argument('--img_size', type=int, default=(64, 256))  
-    parser.add_argument('--dataset', type=str, default='iam', help='iam, gnhk') 
+    parser.add_argument('--dataset', type=str, default='iam', help='iam, gnhk, bressay, iam_acentuado') 
     #UNET parameters
     parser.add_argument('--channels', type=int, default=4)
     parser.add_argument('--emb_dim', type=int, default=320)
@@ -664,11 +791,22 @@ def main():
     parser.add_argument('--sampling_mode', type=str, default='single_sampling', help='single_sampling (generate single image), paragraph (generate paragraph)')
     parser.add_argument('--pretrained_path', type=str, default=None, help='pasta models/ com pesos para fine-tune')
     parser.add_argument('--lr', type=float, default=0.0001)
+    parser.add_argument('--dataset_folder', type=str, default='./bressay_split', help='pasta do split do BRESSAY (ex.: uma reparticao menor gerada por scripts/reduzir_split.py)')
     parser.add_argument('--max_samples', type=int, default=0, help='limite de amostras por split (0 = split inteiro), para comparar runs com menos dados')
     parser.add_argument('--start_epoch', type=int, default=0, help='epoca inicial ao retomar; o --load_check sobrescreve com o valor salvo em estado.pt quando ele existe')
     parser.add_argument('--sample_every', type=int, default=10, help='gera a grade de amostras a cada N epocas; 0 desliga. ATENCAO: essa grade usa max_length=200 enquanto o treino usa 40, entao ela NAO e confiavel -- gere com scripts/gerar_amostras.py')
     parser.add_argument('--abort_after', type=int, default=300, help='sai com codigo 3 apos N batches seguidos sem um passo valido, para o processo poder ser relancado do checkpoint')
     parser.add_argument('--save_every_steps', type=int, default=0, help='grava checkpoint a cada N passos dentro da epoca (0 = so no fim da epoca)')
+    parser.add_argument('--iam_originais', type=float, default=1.0, help='iam_acentuado: fracao das palavras originais do IAM (sem acento) que entram no treino junto com as acentuadas')
+    parser.add_argument('--peso_zona', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas vazias acima/abaixo do corpo da palavra, em toda amostra (acento que o texto nao pede); 1.0 = loss original')
+    parser.add_argument('--zona', type=str, default='vazia', choices=('vazia', 'vogais'), help='iam_acentuado: mascara do peso_zona -- vazia (faixa vazia acima/abaixo de toda a palavra) ou vogais (so acima das vogais e abaixo do c; <base>/zona_vogais.npz)')
+    parser.add_argument('--peso_acento', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas do latente onde esta o acento (mascara acentuada x par); 1.0 = loss original')
+    parser.add_argument('--preproc', type=str, default='v1', choices=('v1', 'v2'), help='pre-processamento do BRESSAY (utils/bressay_dataset.py): v1 = original, v2 = sem pauta, recorte justo, escala do IAM')
+    parser.add_argument('--adamw_eps', type=float, default=ADAMW_EPS)
+    parser.add_argument('--clip_grad_norm', type=float, default=CLIP_GRAD_NORM, help='norma maxima do gradiente antes do optimizer.step()')
+    parser.add_argument('--ema_beta', type=float, default=EMA_BETA)
+    parser.add_argument('--ema_inicio', type=int, default=EMA_INICIO, help='passos em que o EMA so copia o modelo antes de comecar a media')
+    parser.add_argument('--texto_max_len', type=int, default=TEXTO_MAX_LEN, help='tokens do CANINE; a geracao (gerar_amostras.py) tem de usar o mesmo valor')
     
     args = parser.parse_args()
     
@@ -688,7 +826,14 @@ def main():
                         transforms.ToTensor(),
                         torchvision.transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)) #transforms.Normalize((0.5,), (0.5,)),  #
                         ])
-    
+
+    for nome in ('peso_acento', 'peso_zona'):
+        v = getattr(args, nome)
+        if v != 1.0 and args.dataset != 'iam_acentuado':
+            raise SystemExit(f'--{nome} so vale para --dataset iam_acentuado (recebido {args.dataset})')
+        if v < 1.0:
+            raise SystemExit(f'--{nome} tem de ser >= 1 (recebido {v})')
+
     if args.dataset == 'iam':
         print('loading IAM')
         iam_folder = './iam_data/words'
@@ -723,7 +868,7 @@ def main():
     elif args.dataset == 'bressay':
         print('loading BRESSAY')
         myDataset = BRESSAY_Dataset
-        dataset_folder = './bressay_split'
+        dataset_folder = args.dataset_folder
         style_classes = 339
         train_data = myDataset(dataset_folder, 'train', transforms=transform, args=args)
         test_data = myDataset(dataset_folder, 'val', transforms=transform, args=args)
@@ -731,6 +876,19 @@ def main():
         rest = len(test_data) - test_size
         test_data, _ = random_split(test_data, [test_size, rest],
                                     generator=torch.Generator().manual_seed(42))
+
+    # Base de acentos sinteticos sobre o IAM (scripts/gerar_base_acentos.py)
+    # mais uma fracao das palavras originais; --dataset_folder e a pasta da base
+    elif args.dataset == 'iam_acentuado':
+        print('loading IAM acentuado')
+        style_classes = 339
+        train_data = IAMAcentuadoDataset(args.dataset_folder, transforms=transform, args=args)
+        test_size = args.batch_size
+        rest = len(train_data) - test_size
+        test_data, _ = random_split(train_data, [test_size, rest],
+                                    generator=torch.Generator().manual_seed(42))
+    else:
+        raise SystemExit(f'dataset desconhecido: {args.dataset}')
         
     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
 
@@ -778,14 +936,14 @@ def main():
 
     # optimizer = optim.AdamW(unet.parameters(), lr=0.0001)
     # Usa lr do arg
-    optimizer = optim.AdamW(unet.parameters(), lr=args.lr,eps=1e-6)
+    optimizer = optim.AdamW(unet.parameters(), lr=args.lr, eps=args.adamw_eps)
 
-    lr_scheduler = None 
+    lr_scheduler = None
 
     mse_loss = nn.MSELoss()
     diffusion = Diffusion(img_size=args.img_size, args=args)
-    
-    ema = EMA(0.995)
+
+    ema = EMA(args.ema_beta)
     ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
 
     #load from last checkpoint
@@ -809,7 +967,7 @@ def main():
             # Checkpoint gravado antes de estado.pt existir: a epoca vem do
             # --start_epoch informado na linha de comando, e o contador do EMA
             # so precisa estar acima do limiar para nao zerar o EMA.
-            ema.step = 2000
+            ema.step = args.ema_inicio
             print(f'estado.pt ausente; usando --start_epoch {args.start_epoch}')
         print(f'Retomando na epoca {args.start_epoch} (ema.step={ema.step})')
 
@@ -852,6 +1010,8 @@ def main():
     feature_extractor.eval()
     
     if args.train_mode == 'train':
+        # Depois do --load_check, para registrar a epoca de onde retoma.
+        gravar_config(args, len(train_data), diffusion)
         train(diffusion, unet, ema, ema_model, vae, optimizer, mse_loss, train_loader, test_loader, style_classes, feature_extractor, vocab_size, ddim, transform, args, tokenizer=tokenizer, text_encoder=text_encoder, lr_scheduler=lr_scheduler)
     
     elif args.train_mode == 'sampling':
@@ -862,7 +1022,7 @@ def main():
         print('unet loaded')
         unet.eval()
         
-        ema = EMA(0.995)
+        ema = EMA(args.ema_beta)
         ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
         ema_model.load_state_dict(torch.load(f'{args.save_path}/models/ema_ckpt.pt'))
         ema_model.eval()

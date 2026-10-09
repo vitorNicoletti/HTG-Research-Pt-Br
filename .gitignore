@@ -19,7 +19,7 @@ venv-*/
 __pycache__/
 
 # dataset bruto do BRESSAY (4,3 GB) -- os splits em bressay_split/splits/ sao
-# versionados, mas as imagens nao. Obtidas a parte, ver STATUS.md.
+# versionados, mas as imagens nao. Obtidas a parte, ver docs/11_como_rodar.md.
 bressay/
 
 # registro de descartes da montagem do split (23 MB, reconstruivel por split.py)
@@ -48,3 +48,11 @@ cpu_check/
 
 # editor
 .vscode/
+
+# RIMES (Zenodo 10.5281/zenodo.10812725, CC BY-NC 4.0) -- baixado a parte
+rimes/
+
+# base de acentos sinteticos (scripts/gerar_base_acentos.py) e pesos do
+# alinhador CTC (scripts/treinar_alinhador.py) -- reconstruiveis
+iam_acentuado*/
+modelos/

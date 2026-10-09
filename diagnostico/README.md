@@ -148,11 +148,10 @@ scripts, de propósito, para não serem ajustados depois de ver o resultado:
 | `teste_direcao_gradiente.py` | **cosseno** entre gradientes CPU e GPU | checkpoint |
 | `teste_acumulacao_gradiente.py` | acumular lotes de 1 resolve? | checkpoint |
 | `teste_gradiente_sintetico.py` | gradientes não-finitos, dados sintéticos | checkpoint público |
-| `teste_repeticao.py` / `_cpu.py` | repetibilidade e efeito do lote | checkpoint |
-| `teste_lote_unet.py` / `_vs_cpu.py` | versões anteriores, superadas | checkpoint |
+| `teste_repeticao.py` | repetibilidade e efeito do lote | checkpoint |
+| `teste_lote_unet.py` | versão anterior, superada | checkpoint |
 | `teste_gradiente_cpu_vs_gpu.py` | gradiente com batches reais do BRESSAY | checkpoint + dataset |
 | `treinar_cpu.py` | treino de referência em hardware limpo | dataset |
-| `vigia_termico.sh` | mata o treino se a CPU passar do limite | — |
 
 ---
 

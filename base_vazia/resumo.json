@@ -1,0 +1,3 @@
+{
+  "descricao": "Base vazia para o controle do regime do fine-tune: com dados.iam_originais 1.0, o leitor iam_acentuado treina SO nas palavras originais do iam_train_val, pelo mesmo train.py e pre-processamento dos outros experimentos (ACHADOS 13, adendo 2)."
+}

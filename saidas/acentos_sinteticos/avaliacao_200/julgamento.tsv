@@ -1,0 +1,201 @@
+n	arquivo	original	rotulo	letra	tipo	julgamento	nota	logp_alinhamento	leitura_alinhador
+0	000_thé.png	the	thé	é	agudo	E	acento alto e a direita do e	-0.2924	th
+1	001_peóple.png	people	peóple	ó	agudo	C		-0.0164	people
+2	002_fãinting.png	fainting	fãinting	ã	til	C		-0.0357	fainting
+3	003_lôoked.png	looked	lôoked	ô	circunflexo	C		-0.0157	looked
+4	004_maké.png	make	maké	é	agudo	C		-0.0421	mahe
+5	005_àll.png	all	àll	à	grave	C		-0.1006	al
+6	006_fínd.png	find	fínd	í	agudo	F	agudo do i quase invisivel	-0.0366	find
+7	007_tãlked.png	talked	tãlked	ã	til	C		-0.0163	talked
+8	008_decorãted.png	decorated	decorãted	ã	til	C		-0.0184	decorated
+9	009_bráss.png	brass	bráss	á	agudo	C		-0.0181	brass
+10	010_subtlé.png	subtle	subtlé	é	agudo	C		-0.0204	subtle
+11	011_niçk.png	nick	niçk	ç	cedilha	C		-0.1025	nicd
+12	012_thê.png	the	thê	ê	circunflexo	C		-0.0136	the
+13	013_nêed.png	need	nêed	ê	circunflexo	C		-0.0256	need
+14	014_hôme.png	home	hôme	ô	circunflexo	C		-0.0138	home
+15	015_perhãps.png	perhaps	perhãps	ã	til	C		-0.0058	perhaps
+16	016_rípe.png	ripe	rípe	í	agudo	C		-0.0216	ripe
+17	017_arê.png	are	arê	ê	circunflexo	C		-0.0021	are
+18	018_perfõrm.png	perform	perfõrm	õ	til	C		-0.0345	perform
+19	019_drínk.png	drink	drínk	í	agudo	C		-0.0193	drink
+20	020_wêstern.png	western	wêstern	ê	circunflexo	C		-0.0144	western
+21	021_unfamilíar.png	unfamiliar	unfamilíar	í	agudo	C		-0.01	unfamiliar
+22	022_seé.png	see	seé	é	agudo	C		-0.0086	see
+23	023_heãlth.png	health	heãlth	ã	til	C		-0.0242	health
+24	024_premãture.png	premature	premãture	ã	til	C		-0.0869	psemature
+25	025_priçe.png	price	priçe	ç	cedilha	C		-0.0088	price
+26	026_thãt.png	that	thãt	ã	til	C		-0.0339	that
+27	027_thãt.png	that	thãt	ã	til	C		-0.0012	that
+28	028_bottlê.png	bottle	bottlê	ê	circunflexo	C		-0.0435	bottle
+29	029_ánswer.png	answer	ánswer	á	agudo	C		-0.0404	ansr
+30	030_sedaté.png	sedate	sedaté	é	agudo	C		-0.0393	sedate
+31	031_thãn.png	than	thãn	ã	til	C		-0.0175	tha
+32	032_frôm.png	from	frôm	ô	circunflexo	C		-0.1351	fronm
+33	033_fortunãte.png	fortunate	fortunãte	ã	til	C		-0.0477	forcunate
+34	034_fedéral.png	federal	fedéral	é	agudo	C		-0.0526	federsl
+35	035_fât.png	fat	fât	â	circunflexo	C		-0.0887	tat
+36	036_thé.png	the	thé	é	agudo	C		-0.0361	the
+37	037_câsh.png	cash	câsh	â	circunflexo	C		-0.0204	cash
+38	038_ànd.png	and	ànd	à	grave	C		-0.0029	and
+39	039_clõsed.png	closed	clõsed	õ	til	C		-0.0044	closed
+40	040_mistãken.png	mistaken	mistãken	ã	til	C		-0.0979	mistaker
+41	041_lêarn.png	learn	lêarn	ê	circunflexo	C		-0.1219	lear
+42	042_thê.png	the	thê	ê	circunflexo	C		-0.0027	the
+43	043_hâd.png	had	hâd	â	circunflexo	C		-0.1132	hnd
+44	044_speák.png	speak	speák	á	agudo	C		-0.0475	speak
+45	045_hãd.png	had	hãd	ã	til	C		-0.0002	had
+46	046_divérting.png	diverting	divérting	é	agudo	C		-0.0317	diverting
+47	047_plót.png	plot	plót	ó	agudo	C		-0.0636	plot
+48	048_hís.png	his	hís	í	agudo	C		-0.0688	his
+49	049_thãt.png	that	thãt	ã	til	C		-0.0273	that
+50	050_definité.png	definite	definité	é	agudo	C		-0.0231	definite
+51	051_fluençed.png	fluenced	fluençed	ç	cedilha	C		-0.1064	tluenced
+52	052_dãy.png	day	dãy	ã	til	C		-0.0183	day
+53	053_ãfter.png	after	ãfter	ã	til	C		-0.0031	after
+54	054_décides.png	decides	décides	é	agudo	C		-0.0542	decide
+55	055_neéd.png	need	neéd	é	agudo	C		-0.0511	need
+56	056_çurrent.png	current	çurrent	ç	cedilha	C		-0.0392	current
+57	057_hàs.png	has	hàs	à	grave	F	grave fundido ao laco do h	-0.2505	ho
+58	058_wíth.png	with	wíth	í	agudo	F	agudo do i confuso	-0.0347	with
+59	059_wêll.png	well	wêll	ê	circunflexo	C		-0.0635	well
+60	060_hãve.png	have	hãve	ã	til	C		-0.0334	have
+61	061_thé.png	the	thé	é	agudo	C		-0.0696	Hhe
+62	062_thê.png	the	thê	ê	circunflexo	C		-0.0004	the
+63	063_evíl.png	evil	evíl	í	agudo	E	entre o i e o l	-0.0327	evil
+64	064_wõnder.png	wonder	wõnder	õ	til	C		-0.0609	wondes
+65	065_weré.png	were	weré	é	agudo	C		-0.0263	were
+66	066_nosé.png	nose	nosé	é	agudo	C		-0.0055	nose
+67	067_whên.png	when	whên	ê	circunflexo	C		-0.0172	when
+68	068_himsélf.png	himself	himsélf	é	agudo	C		-0.0131	himself
+69	069_disçussion.png	discussion	disçussion	ç	cedilha	C		-0.0351	discussion
+70	070_fêather.png	feather	fêather	ê	circunflexo	C		-0.0275	feather
+71	071_háppens.png	happens	háppens	á	agudo	E	sobre o h	-0.0331	happens
+72	072_hím.png	him	hím	í	agudo	C		-0.0409	hin
+73	073_creãted.png	created	creãted	ã	til	C		-0.0715	oreated
+74	074_agãinst.png	against	agãinst	ã	til	C		-0.0867	against
+75	075_energétic.png	energetic	energétic	é	agudo	C		-0.0394	energetic
+76	076_hélp.png	help	hélp	é	agudo	E	sobre o h	-0.2064	trelp
+77	077_hãd.png	had	hãd	ã	til	C		-0.0109	had
+78	078_ceãsefire.png	ceasefire	ceãsefire	ã	til	C		-0.446	ceasfire
+79	079_hãd.png	had	hãd	ã	til	C		-0.0189	had
+80	080_õriginal.png	original	õriginal	õ	til	C		-0.0281	original
+81	081_slõwly.png	slowly	slõwly	õ	til	C		-0.0302	slowly
+82	082_charâcter.png	character	charâcter	â	circunflexo	C		-0.0377	character
+83	083_thesê.png	these	thesê	ê	circunflexo	C		-0.0313	these
+84	084_fróm.png	from	fróm	ó	agudo	C		-0.0122	from
+85	085_thé.png	the	thé	é	agudo	C		-0.0025	the
+86	086_àll.png	all	àll	à	grave	C		-0.0002	all
+87	087_watér.png	water	watér	é	agudo	C		-0.0174	water
+88	088_heré.png	here	heré	é	agudo	C		-0.002	here
+89	089_suçcessive.png	successive	suçcessive	ç	cedilha	C		-0.0518	snccessive
+90	090_thé.png	the	thé	é	agudo	C		-0.0115	the
+91	091_persón.png	person	persón	ó	agudo	?	rotulo do IAM errado (person, imagem mostra people)	-0.5968	peopl
+92	092_ãll.png	all	ãll	ã	til	E	til cruza as hastes, a esquerda do a	-0.06	all
+93	093_swínging.png	swinging	swínging	í	agudo	F	agudo do i quase invisivel	-0.0732	Swinging
+94	094_rígid.png	rigid	rígid	í	agudo	E	sobre o r	-0.2808	rigit
+95	095_thát.png	that	thát	á	agudo	C		-0.0134	that
+96	096_shãpe.png	shape	shãpe	ã	til	C		-0.0487	shape
+97	097_íts.png	its	íts	í	agudo	C		-0.0785	its
+98	098_ámusing.png	amusing	ámusing	á	agudo	C		-0.0342	amusing
+99	099_mediaevál.png	mediaeval	mediaevál	á	agudo	C		-0.1674	mediaeaoh
+100	100_pàying.png	paying	pàying	à	grave	C		-0.0333	paying
+101	101_fór.png	for	fór	ó	agudo	F	sem sinal visivel	-0.0151	for
+102	102_sãid.png	said	sãid	ã	til	C		-0.0119	said
+103	103_tâken.png	taken	tâken	â	circunflexo	C		-0.0304	taken
+104	104_swêet.png	sweet	swêet	ê	circunflexo	C		-0.0026	sweet
+105	105_propér.png	proper	propér	é	agudo	C		-0.0076	proper
+106	106_stàge.png	stage	stàge	à	grave	C		-0.0315	stage
+107	107_grànt.png	grant	grànt	à	grave	C		-0.0235	grant
+108	108_ând.png	and	ând	â	circunflexo	C		-0.0103	and
+109	109_sõmething.png	something	sõmething	õ	til	C		-0.0245	something
+110	110_ând.png	and	ând	â	circunflexo	C		-0.0044	and
+111	111_féet.png	feet	féet	é	agudo	C		-0.0453	feet
+112	112_systêm.png	system	systêm	ê	circunflexo	C		-0.0277	system
+113	113_bathroôm.png	bathroom	bathroôm	ô	circunflexo	C		-0.0049	bathroom
+114	114_thê.png	the	thê	ê	circunflexo	C		-0.0225	the
+115	115_shê.png	she	shê	ê	circunflexo	C		-0.0029	she
+116	116_someoné.png	someone	someoné	é	agudo	C		-0.099	someow
+117	117_opéns.png	opens	opéns	é	agudo	C		-0.0244	opens
+118	118_wíth.png	with	wíth	í	agudo	F	sem sinal visivel	-0.0335	with
+119	119_thê.png	the	thê	ê	circunflexo	C		-0.0019	the
+120	120_stérn.png	stern	stérn	é	agudo	C		-0.0203	stern
+121	121_recént.png	recent	recént	é	agudo	C		-0.0191	recent
+122	122_closêd.png	closed	closêd	ê	circunflexo	C		-0.0133	closed
+123	123_troublé.png	trouble	troublé	é	agudo	C		-0.036	trauble
+124	124_fliés.png	flies	fliés	é	agudo	C		-0.0111	flies
+125	125_wãs.png	was	wãs	ã	til	C		-0.0013	was
+126	126_generãte.png	generate	generãte	ã	til	C		-0.0093	generate
+127	127_awãy.png	away	awãy	ã	til	C		-0.0193	away
+128	128_twó.png	two	twó	ó	agudo	C		-0.0488	tw
+129	129_õne.png	one	õne	õ	til	C		-0.0148	one
+130	130_offér.png	offer	offér	é	agudo	C		-0.007	offer
+131	131_neâr.png	near	neâr	â	circunflexo	C		-0.005	near
+132	132_burdéns.png	burdens	burdéns	é	agudo	C		-0.0195	burdens
+133	133_yêt.png	yet	yêt	ê	circunflexo	C		-0.0528	yet
+134	134_thãt.png	that	thãt	ã	til	C		-0.0629	thal
+135	135_õpinion.png	opinion	õpinion	õ	til	C		-0.0579	opinion
+136	136_hís.png	his	hís	í	agudo	C		-0.013	his
+137	137_intó.png	into	intó	ó	agudo	C		-0.0213	into
+138	138_bút.png	but	bút	ú	agudo	C		-0.0045	but
+139	139_çomplete.png	complete	çomplete	ç	cedilha	C		-0.0046	complete
+140	140_heãrd.png	heard	heãrd	ã	til	C		-0.0226	heard
+141	141_addresséd.png	addressed	addresséd	é	agudo	C		-0.0278	aldmessed
+142	142_têsts.png	tests	têsts	ê	circunflexo	C		-0.0089	tests
+143	143_bevélled.png	bevelled	bevélled	é	agudo	C		-0.0054	bevelled
+144	144_cãlls.png	calls	cãlls	ã	til	C		-0.016	calls
+145	145_prõposed.png	proposed	prõposed	õ	til	C		-0.0293	proposed
+146	146_rãther.png	rather	rãther	ã	til	C		-0.0144	rather
+147	147_alsõ.png	also	alsõ	õ	til	C		-0.0264	also
+148	148_experíence.png	experience	experíence	í	agudo	C		-0.0076	experience
+149	149_niçe.png	nice	niçe	ç	cedilha	C		-0.0207	nice
+150	150_thé.png	the	thé	é	agudo	C		-0.0235	the
+151	151_thê.png	the	thê	ê	circunflexo	C		-0.0003	the
+152	152_thêy.png	they	thêy	ê	circunflexo	C		-0.0185	they
+153	153_làvish.png	lavish	làvish	à	grave	C		-0.0442	lavwist
+154	154_húll.png	hull	húll	ú	agudo	E	sobre a haste do h	-0.0602	hull
+155	155_ând.png	and	ând	â	circunflexo	C		-0.0009	and
+156	156_ãppetite.png	appetite	ãppetite	ã	til	C		-0.0264	appetite
+157	157_stôps.png	stops	stôps	ô	circunflexo	C		-0.1981	stop
+158	158_filmêd.png	filmed	filmêd	ê	circunflexo	C		-0.0133	filmed
+159	159_carriéd.png	carried	carriéd	é	agudo	C		-0.018	carried
+160	160_wêll.png	well	wêll	ê	circunflexo	C		-0.0651	wel
+161	161_sáy.png	say	sáy	á	agudo	C		-0.0059	say
+162	162_bút.png	but	bút	ú	agudo	C		-0.0056	but
+163	163_thé.png	the	thé	é	agudo	C		-0.0134	the
+164	164_muçh.png	much	muçh	ç	cedilha	C		-0.1926	umncd
+165	165_thât.png	that	thât	â	circunflexo	C		-0.0054	that
+166	166_hãve.png	have	hãve	ã	til	C		-0.0184	have
+167	167_sergeánt.png	sergeant	sergeánt	á	agudo	C		-0.0027	sergeant
+168	168_livé.png	live	livé	é	agudo	C		-0.0125	live
+169	169_thé.png	the	thé	é	agudo	C		-0.0236	the
+170	170_yôur.png	your	yôur	ô	circunflexo	C		-0.2859	yar
+171	171_émpty.png	empty	émpty	é	agudo	C		-0.0836	ermpty
+172	172_grêat.png	great	grêat	ê	circunflexo	C		-0.043	great
+173	173_sidê.png	side	sidê	ê	circunflexo	F	sem sinal visivel	-0.0771	sid
+174	174_gót.png	got	gót	ó	agudo	C		-0.0059	got
+175	175_saíd.png	said	saíd	í	agudo	C		-0.0318	said
+176	176_nãtive.png	native	nãtive	ã	til	C		-0.0187	native
+177	177_sunshiné.png	sunshine	sunshiné	é	agudo	C		-0.0214	sunshine
+178	178_bút.png	but	bút	ú	agudo	F	palavra apagada, sinal indistinto	-0.0192	but
+179	179_wôrld.png	world	wôrld	ô	circunflexo	C		-0.0125	world
+180	180_slíghtly.png	slightly	slíghtly	í	agudo	C		-0.0285	slightly
+181	181_wãs.png	was	wãs	ã	til	C		-0.019	was
+182	182_ãvailable.png	available	ãvailable	ã	til	C		-0.0278	available
+183	183_unpleâsant.png	unpleasant	unpleâsant	â	circunflexo	C		-0.0171	unpleasant
+184	184_strêwn.png	strewn	strêwn	ê	circunflexo	F	sem sinal visivel	-0.0168	strewn
+185	185_àway.png	away	àway	à	grave	C		-0.0306	away
+186	186_bút.png	but	bút	ú	agudo	C		-0.0084	but
+187	187_whilé.png	while	whilé	é	agudo	C		-0.0443	while
+188	188_thé.png	the	thé	é	agudo	C		-0.0134	the
+189	189_wíth.png	with	wíth	í	agudo	F	agudo do i quase invisivel	-0.0249	with
+190	190_articlês.png	articles	articlês	ê	circunflexo	C		-0.0198	articles
+191	191_théory.png	theory	théory	é	agudo	C		-0.0317	theory
+192	192_centrãl.png	central	centrãl	ã	til	C		-0.0309	central
+193	193_parâphrase.png	paraphrase	parâphrase	â	circunflexo	C		-0.0154	paraphrase
+194	194_advàntages.png	advantages	advàntages	à	grave	C		-0.0516	advantayes
+195	195_bróught.png	brought	bróught	ó	agudo	C		-0.0455	brought
+196	196_póts.png	pots	póts	ó	agudo	C		-0.0082	pots
+197	197_ãre.png	are	ãre	ã	til	C		-0.0158	are
+198	198_fíre.png	fire	fíre	í	agudo	C		-0.0083	fire
+199	199_gróup.png	group	gróup	ó	agudo	C		-0.0097	group

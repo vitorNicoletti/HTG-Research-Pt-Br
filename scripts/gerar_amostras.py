@@ -42,7 +42,9 @@ from utils.bressay_dataset import BRESSAY_Dataset
 # Caminhos e saida vem da linha de comando (--ckpt / --out). Aqui ficam so as
 # constantes que precisam casar com o treino.
 STYLE_PADRAO = os.path.join(RAIZ, "style_models", "mixed_bressay_mobilenetv2_100.pth")
-STABLE_DIF = "runwayml/stable-diffusion-v1-5"
+# O repo runwayml/stable-diffusion-v1-5 foi removido do Hub; o espelho oficial
+# e este. Sobrescreva com a variavel SD para usar uma copia local.
+STABLE_DIF = os.environ.get("SD", "stable-diffusion-v1-5/stable-diffusion-v1-5")
 DATASET_FOLDER = os.path.join(RAIZ, "bressay_split")
 
 # Palavras de teste: as cinco primeiras exercitam os diacriticos (til, cedilha,
@@ -79,11 +81,27 @@ def parse_cli():
                         "do IAM (aspecto preservado, sem normalizacao por "
                         "percentis) -- passar imagem do IAM pelo load_image do "
                         "BRESSAY mediria a coisa errada.")
+    p.add_argument("--classes_iam", type=int, nargs="+",
+                   help="escritores fixos do IAM pelo indice de classe (0-338), "
+                        "com as mesmas 5 referencias do modo sonda da Fase 2; "
+                        "ignora --estilo_de e --styles")
+    p.add_argument("--dataset_folder", default=DATASET_FOLDER,
+                   help="split de onde saem as imagens de referencia do "
+                        "BRESSAY; use o mesmo do treino")
+    p.add_argument("--preproc", choices=("v1", "v2"), default="v1",
+                   help="pre-processamento das imagens de referencia do "
+                        "BRESSAY; TEM que ser o mesmo do treino")
+    p.add_argument("--texto_max_len", type=int, default=40,
+                   help="tokens do CANINE; TEM que ser o mesmo do treino "
+                        "(--texto_max_len do train.py)")
     p.add_argument("--em_lote", action="store_true",
                    help="gera os N estilos num lote so. NAO use na RX 6600 XT: "
                         "lote > 1 corrompe a amostragem nessa placa (NaN e "
                         "colapso para cinza, nao reproduzivel). O padrao gera "
                         "um estilo por vez, que bate com a CPU em 1/255.")
+    p.add_argument("--paineis", action="store_true",
+                   help="alem da tira, salva cada painel em <out>/<palavra>/<i>.png "
+                        "(i = posicao do estilo), para medir amostra a amostra")
     a = p.parse_args()
     if not os.path.isfile(a.style):
         p.error(
@@ -161,6 +179,35 @@ def estilos_iam(k, transform):
     return saida
 
 
+def estilos_iam_classes(classes, transform):
+    """Referencias de escritores FIXOS do IAM, pelo indice de classe (0-338).
+
+    Mesmo sorteio do modo 'sonda' da Fase 2 (sonda/patches_diffusionpen.diff):
+    random.seed(classe) e 5 palavras com mais de 3 letras daquele escritor em
+    utils/splits_words/iam_train_val.txt. O estilo 12 recebe as mesmas 5
+    imagens da sonda original, o que deixa o antes e o depois do fine-tune
+    comparaveis no protocolo da Fase 2.
+    """
+    import json
+    from PIL import Image
+    with open(os.path.join(REPO, "writers_dict_train.json")) as f:
+        classe_para_escritor = {v: k for k, v in json.load(f).items()}
+    with open(os.path.join(REPO, "utils", "splits_words", "iam_train_val.txt")) as f:
+        linhas = [l.strip().split(",") for l in f if l.strip()]
+    saida = []
+    for c in classes:
+        escritor = classe_para_escritor[c]
+        cand = [l for l in linhas if l[1] == escritor and len(l[2]) > 3]
+        if len(cand) >= NUM_STYLE_IMGS:
+            cinco = random.Random(c).sample(cand, NUM_STYLE_IMGS)
+        else:
+            cinco = [[l for l in linhas if l[1] == escritor][0]] * NUM_STYLE_IMGS
+        print(f"classe {c} (escritor {escritor}): {[l[2] for l in cinco]}")
+        saida.append([transform(_prep_iam(Image.open(
+            os.path.join(REPO, "iam_data", "words", l[0])).convert("RGB"))) for l in cinco])
+    return saida
+
+
 def build_args(device="cuda:0", style_path=STYLE_PADRAO):
     """Namespace com os mesmos defaults do parser do train.py."""
     a = argparse.Namespace()
@@ -192,6 +239,7 @@ def main():
     torch.manual_seed(cli.seed)
 
     args = build_args(cli.device, cli.style)
+    args.preproc = cli.preproc   # lido pelo BRESSAY_Dataset.load_image()
     device = args.device
     na_gpu = device != "cpu"
     device_ids = [int("".join(filter(str.isdigit, device)))] if na_gpu else []
@@ -268,7 +316,9 @@ def main():
     ddim.set_timesteps(cli.steps)
 
     # ---------------- dataset (so para pegar estilo) ----------------
-    ds = BRESSAY_Dataset(DATASET_FOLDER, "train", transforms=transform, args=args)
+    ds = BRESSAY_Dataset(cli.dataset_folder, "train", transforms=transform, args=args)
+    if cli.classes_iam:
+        cli.styles = len(cli.classes_iam)   # um painel por classe pedida
     escritores = random.sample(list(ds.wid2idx.keys()), min(cli.styles, len(ds.wid2idx)))
     print("escritores escolhidos:", escritores)
 
@@ -282,7 +332,10 @@ def main():
     # Fixadas ANTES do laco de palavras: assim todas as palavras de uma
     # execucao veem exatamente os mesmos escritores, e duas execucoes com a
     # mesma semente sao comparaveis palavra a palavra.
-    if cli.estilo_de == "iam":
+    if cli.classes_iam:
+        ref = estilos_iam_classes(cli.classes_iam, transform)
+        print(f"estilo: classes fixas do IAM {cli.classes_iam}")
+    elif cli.estilo_de == "iam":
         ref = estilos_iam(len(escritores), transform)
         print(f"estilo: {len(ref)} escritores do IAM "
               f"({NUM_STYLE_IMGS} recortes cada)")
@@ -304,7 +357,7 @@ def main():
             style_features = feat(style_images)
             text_features = tokenizer(
                 [palavra] * n, padding="max_length", truncation=True,
-                return_tensors="pt", max_length=40,
+                return_tensors="pt", max_length=cli.texto_max_len,
             ).to(device)
             labels = torch.tensor([rotulos[i] for i in indices],
                                   device=device).long()
@@ -334,6 +387,11 @@ def main():
         img = (img.clamp(-1, 1) + 1) / 2
         out = os.path.join(cli.out, f"{palavra}.png")
         save_image(img, out, nrow=n)
+        if cli.paineis:
+            pasta = os.path.join(cli.out, palavra)
+            os.makedirs(pasta, exist_ok=True)
+            for i, painel in enumerate(img):
+                save_image(painel, os.path.join(pasta, f"{i:03d}.png"))
         desvios = [f"{float(p.std()):.3f}" for p in img]
         print(f"salvo: {out}  (std por painel: {' '.join(desvios)})")
 

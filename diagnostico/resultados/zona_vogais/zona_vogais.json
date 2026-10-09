@@ -1,0 +1,68 @@
+{
+  "base": "iam_acentuado_teto25_pares",
+  "peso_acento": 5.0,
+  "peso_zona": 5.0,
+  "motivos_do_pre_calculo": {
+    "base/confianca": 67,
+    "base/ok": 9825,
+    "iam/confianca": 6206,
+    "iam/ok": 49250,
+    "iam/sem_tinta": 79
+  },
+  "amostras": {
+    "original_iam": 55535,
+    "par": 9892,
+    "acentuada": 9892
+  },
+  "zona_por_amostra": {
+    "par": {
+      "media": 0.0251,
+      "vazia": 0.3952
+    },
+    "acentuada": {
+      "media": 0.0251,
+      "vazia": 0.3952
+    },
+    "original_iam": {
+      "media": 0.0342,
+      "vazia": 0.3233
+    }
+  },
+  "px_de_tinta_do_alvo_na_zona": {
+    "par": 0,
+    "acentuada": 0,
+    "original_iam": 0
+  },
+  "celulas_por_letra_nas_originais": {
+    "vogais": {
+      "vogal_ou_c": 25878,
+      "haste": 131,
+      "outra": 228,
+      "fora_da_palavra": 50,
+      "fracao_haste": 0.005
+    },
+    "vazia": {
+      "haste": 13415,
+      "vogal_ou_c": 26834,
+      "outra": 18218,
+      "fora_da_palavra": 3563,
+      "fracao_haste": 0.2163
+    }
+  },
+  "vazamento_do_modelo": {
+    "paineis": "avaliacao_pares_val:pares_12ep",
+    "sem_alinhamento": 828,
+    "marca_fora": 148,
+    "marca_na_faixa": 244,
+    "fracao_das_marcas_na_faixa": 0.6224
+  },
+  "zona_no_lote": 0.0318,
+  "acento_no_lote": 0.0197,
+  "parte_da_loss_do_lote": {
+    "zona": 0.1319,
+    "acento": 0.0816,
+    "resto": 0.7865
+  },
+  "n_problemas": 0,
+  "problemas": []
+}

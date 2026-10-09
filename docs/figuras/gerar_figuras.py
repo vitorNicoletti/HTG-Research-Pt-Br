@@ -1,4 +1,4 @@
-"""Refaz as figuras de docs/pre_processamento.md.
+"""Refaz as figuras de docs/05b_pre_processamento_bressay.md.
 
     python docs/figuras/gerar_figuras.py [caminho/do/recorte.png]
 

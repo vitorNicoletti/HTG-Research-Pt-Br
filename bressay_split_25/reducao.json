@@ -1,0 +1,8 @@
+{
+ "origem": "bressay_split",
+ "fracao": 0.25,
+ "min_por_escritor": 5,
+ "seed": 42,
+ "treino_original": 74882,
+ "treino_reduzido": 18724
+}

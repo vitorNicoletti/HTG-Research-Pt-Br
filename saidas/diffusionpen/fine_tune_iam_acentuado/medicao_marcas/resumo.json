@@ -1,0 +1,308 @@
+{
+  "iam/até": {
+    "n": 80,
+    "acima": 1,
+    "abaixo": 0,
+    "alguma": 1
+  },
+  "sem_teto/até": {
+    "n": 80,
+    "acima": 39,
+    "abaixo": 3,
+    "alguma": 40
+  },
+  "teto25/até": {
+    "n": 80,
+    "acima": 30,
+    "abaixo": 3,
+    "alguma": 32
+  },
+  "iam/avó": {
+    "n": 80,
+    "acima": 1,
+    "abaixo": 0,
+    "alguma": 1
+  },
+  "sem_teto/avó": {
+    "n": 80,
+    "acima": 15,
+    "abaixo": 0,
+    "alguma": 15
+  },
+  "teto25/avó": {
+    "n": 80,
+    "acima": 12,
+    "abaixo": 6,
+    "alguma": 16
+  },
+  "iam/café": {
+    "n": 80,
+    "acima": 4,
+    "abaixo": 2,
+    "alguma": 6
+  },
+  "sem_teto/café": {
+    "n": 80,
+    "acima": 46,
+    "abaixo": 9,
+    "alguma": 50
+  },
+  "teto25/café": {
+    "n": 80,
+    "acima": 29,
+    "abaixo": 6,
+    "alguma": 33
+  },
+  "iam/coração": {
+    "n": 80,
+    "acima": 4,
+    "abaixo": 1,
+    "alguma": 5
+  },
+  "sem_teto/coração": {
+    "n": 80,
+    "acima": 63,
+    "abaixo": 15,
+    "alguma": 69
+  },
+  "teto25/coração": {
+    "n": 80,
+    "acima": 62,
+    "abaixo": 17,
+    "alguma": 65
+  },
+  "iam/mãe": {
+    "n": 80,
+    "acima": 2,
+    "abaixo": 3,
+    "alguma": 5
+  },
+  "sem_teto/mãe": {
+    "n": 80,
+    "acima": 57,
+    "abaixo": 0,
+    "alguma": 57
+  },
+  "teto25/mãe": {
+    "n": 80,
+    "acima": 28,
+    "abaixo": 14,
+    "alguma": 32
+  },
+  "iam/nação": {
+    "n": 80,
+    "acima": 2,
+    "abaixo": 0,
+    "alguma": 2
+  },
+  "sem_teto/nação": {
+    "n": 80,
+    "acima": 68,
+    "abaixo": 2,
+    "alguma": 68
+  },
+  "teto25/nação": {
+    "n": 80,
+    "acima": 47,
+    "abaixo": 10,
+    "alguma": 51
+  },
+  "iam/pão": {
+    "n": 80,
+    "acima": 0,
+    "abaixo": 0,
+    "alguma": 0
+  },
+  "sem_teto/pão": {
+    "n": 80,
+    "acima": 40,
+    "abaixo": 8,
+    "alguma": 45
+  },
+  "teto25/pão": {
+    "n": 80,
+    "acima": 21,
+    "abaixo": 10,
+    "alguma": 28
+  },
+  "iam/você": {
+    "n": 80,
+    "acima": 6,
+    "abaixo": 1,
+    "alguma": 7
+  },
+  "sem_teto/você": {
+    "n": 80,
+    "acima": 42,
+    "abaixo": 4,
+    "alguma": 44
+  },
+  "teto25/você": {
+    "n": 80,
+    "acima": 27,
+    "abaixo": 13,
+    "alguma": 35
+  },
+  "iam/and": {
+    "n": 80,
+    "acima": 0,
+    "abaixo": 0,
+    "alguma": 0
+  },
+  "sem_teto/and": {
+    "n": 80,
+    "acima": 22,
+    "abaixo": 1,
+    "alguma": 22
+  },
+  "teto25/and": {
+    "n": 80,
+    "acima": 19,
+    "abaixo": 0,
+    "alguma": 19
+  },
+  "iam/avo": {
+    "n": 80,
+    "acima": 1,
+    "abaixo": 0,
+    "alguma": 1
+  },
+  "sem_teto/avo": {
+    "n": 80,
+    "acima": 12,
+    "abaixo": 1,
+    "alguma": 13
+  },
+  "teto25/avo": {
+    "n": 80,
+    "acima": 13,
+    "abaixo": 5,
+    "alguma": 15
+  },
+  "iam/coracao": {
+    "n": 80,
+    "acima": 5,
+    "abaixo": 0,
+    "alguma": 5
+  },
+  "sem_teto/coracao": {
+    "n": 80,
+    "acima": 29,
+    "abaixo": 8,
+    "alguma": 34
+  },
+  "teto25/coracao": {
+    "n": 80,
+    "acima": 46,
+    "abaixo": 17,
+    "alguma": 52
+  },
+  "iam/have": {
+    "n": 80,
+    "acima": 2,
+    "abaixo": 0,
+    "alguma": 2
+  },
+  "sem_teto/have": {
+    "n": 80,
+    "acima": 37,
+    "abaixo": 3,
+    "alguma": 39
+  },
+  "teto25/have": {
+    "n": 80,
+    "acima": 29,
+    "abaixo": 2,
+    "alguma": 29
+  },
+  "iam/nacao": {
+    "n": 80,
+    "acima": 2,
+    "abaixo": 1,
+    "alguma": 3
+  },
+  "sem_teto/nacao": {
+    "n": 80,
+    "acima": 40,
+    "abaixo": 7,
+    "alguma": 42
+  },
+  "teto25/nacao": {
+    "n": 80,
+    "acima": 35,
+    "abaixo": 15,
+    "alguma": 39
+  },
+  "iam/pao": {
+    "n": 80,
+    "acima": 0,
+    "abaixo": 0,
+    "alguma": 0
+  },
+  "sem_teto/pao": {
+    "n": 80,
+    "acima": 2,
+    "abaixo": 5,
+    "alguma": 7
+  },
+  "teto25/pao": {
+    "n": 80,
+    "acima": 4,
+    "abaixo": 4,
+    "alguma": 8
+  },
+  "iam/that": {
+    "n": 80,
+    "acima": 3,
+    "abaixo": 1,
+    "alguma": 4
+  },
+  "sem_teto/that": {
+    "n": 80,
+    "acima": 15,
+    "abaixo": 0,
+    "alguma": 15
+  },
+  "teto25/that": {
+    "n": 80,
+    "acima": 18,
+    "abaixo": 2,
+    "alguma": 20
+  },
+  "iam/the": {
+    "n": 80,
+    "acima": 2,
+    "abaixo": 0,
+    "alguma": 2
+  },
+  "sem_teto/the": {
+    "n": 80,
+    "acima": 24,
+    "abaixo": 0,
+    "alguma": 24
+  },
+  "teto25/the": {
+    "n": 80,
+    "acima": 15,
+    "abaixo": 0,
+    "alguma": 15
+  },
+  "iam/voce": {
+    "n": 80,
+    "acima": 2,
+    "abaixo": 0,
+    "alguma": 2
+  },
+  "sem_teto/voce": {
+    "n": 80,
+    "acima": 21,
+    "abaixo": 6,
+    "alguma": 25
+  },
+  "teto25/voce": {
+    "n": 80,
+    "acima": 26,
+    "abaixo": 8,
+    "alguma": 31
+  }
+}
