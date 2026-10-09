@@ -80,7 +80,15 @@ class GeradorDiffusionPen:
                          vocab_size=VOCAB_SIZE, text_encoder=enc, args=args)
         unet = ga.embrulha(unet, na_gpu, ids).to(device)
         self.ema = copy.deepcopy(unet).eval().requires_grad_(False)
-        self.ema.load_state_dict(torch.load(ckpt, map_location=device))
+        pesos = torch.load(ckpt, map_location=device)
+        # checkpoint treinado com --acento_separado: o CANINE le o esqueleto e o
+        # diacritico entra por um vetor a parte (utils/acento_separado.py)
+        from utils.acento_separado import CHAVE, Tokenizador, instalar
+        self.acento_separado = CHAVE in pesos
+        if self.acento_separado:
+            instalar(self.ema)
+            self.tokenizer = Tokenizador(self.tokenizer)
+        self.ema.load_state_dict(pesos)
         self.ema.eval()
         vae = ga.embrulha(AutoencoderKL.from_pretrained(stable_dif, subfolder="vae"), na_gpu, ids).to(device)
         vae.requires_grad_(False)

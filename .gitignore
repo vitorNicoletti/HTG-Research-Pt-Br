@@ -56,3 +56,9 @@ rimes/
 # alinhador CTC (scripts/treinar_alinhador.py) -- reconstruiveis
 iam_acentuado*/
 modelos/
+
+# bases de acentos e recortes usados nos treinos curtos da CPU (docs/13)
+iam_pt*/
+ing_*/
+# paineis individuais dos diagnosticos: as folhas montadas sao versionadas
+diagnostico/resultados/*/paineis/
