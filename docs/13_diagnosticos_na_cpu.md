@@ -101,7 +101,7 @@ Leitura das folhas em `diagnostico/resultados/ingredientes/`,
 
 ## Letra e diacrítico separados no condicionamento
 
-É a proposta que saiu disso, ainda sem resultado. O CANINE recebe sempre o
+É a proposta que saiu disso. Só há uma olhada com 1 época, descrita abaixo. O CANINE recebe sempre o
 esqueleto ("implantacao"), a entrada que o modelo do IAM conhece. O diacrítico
 entra por um vetor novo por tipo de sinal, iniciado em zero e somado só na
 posição da letra (`diffusionpen_mods/utils/acento_separado.py`, opção
@@ -111,8 +111,17 @@ Conferido antes de treinar. Com o vetor em zero, o modelo modificado pedindo
 "provável" gera a mesma imagem que o original pedindo "provavel", com
 diferença zero.
 
-O treino na CPU foi interrompido com 1 época para seguir na GPU. Para rodar a
-receita do peso 5 com a opção nova.
+O treino na CPU, com a loss original, foi interrompido com 1 época (521
+passos) para seguir na GPU. Nessa única época o sinal é ruim. A letra já sai
+deformada como no treino 4, inclusive em palavras sem acento, que recebem do
+CANINE exatamente a entrada do modelo original. As marcas aparecem em 32% das
+acentuadas, 30% dos esqueletos e 19% das sem acento, sem relação com o texto.
+Folhas em `diagnostico/resultados/acento_separado/`.
+
+Se isso se confirmar com mais treino e com o leitor, a piora da letra não vem
+de o acento mudar os vetores de texto da palavra inteira, e sim de o UNet
+aprender a desenhar marcas. Uma época é pouco, e o multiplicador 30 na lr do
+vetor novo não foi variado. Para rodar a receita do peso 5 com a opção nova.
 
 ```bash
 bash scripts/aplicar_mods.sh
