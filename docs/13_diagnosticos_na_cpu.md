@@ -235,6 +235,48 @@ avaliados.
 
 Folhas em `diagnostico/resultados/acento_separado/comparacao_professor/`.
 
+### Professor também nas acentuadas, fora da máscara
+
+Opção `--professor_fora_mascara`, ainda sem resultado. As amostras acentuadas
+também passam pelo professor, com o texto sem acento. Dentro da máscara do
+acento o alvo continua sendo o ruído sorteado, com o peso do acento. Fora dela
+o alvo é o palpite do professor. Ataca a letra das palavras acentuadas, que o
+professor por amostra não protege. Exige `--peso_acento` diferente de 1, que é
+o que carrega a máscara.
+
+Para a triagem, 6 épocas bastam, e a comparação direta é com o
+`professor_6ep` de `avaliacao_professor_val`.
+
+```bash
+python -u DiffusionPen/train.py --dataset iam_acentuado --model_name diffusionpen \
+    --sample_every 0 --save_path ./model_iam_pt_professor_fora \
+    --dataset_folder ./iam_pt_alinhado --max_samples 0 --iam_originais 0.3 \
+    --style_path ./DiffusionPen/style_models/iam_style_diffusionpen.pth \
+    --stable_dif_path stable-diffusion-v1-5/stable-diffusion-v1-5 \
+    --lr 2e-05 --batch_size 32 --adamw_eps 1e-06 --clip_grad_norm 1.0 \
+    --ema_beta 0.995 --ema_inicio 2000 --texto_max_len 40 --device cuda:0 \
+    --num_workers 8 --save_every_steps 500 --abort_after 300 \
+    --peso_acento 5 --peso_zona 1 --zona vazia --acento_separado \
+    --professor ./DiffusionPen/diffusionpen_iam_model_path/models/ema_ckpt.pt \
+    --professor_fora_mascara \
+    --epochs 6 --pretrained_path ./DiffusionPen/diffusionpen_iam_model_path/models \
+    2>&1 | tee run_professor_fora.log
+
+python scripts/avaliar_pt.py --split val \
+    --modelo fora_6ep=model_iam_pt_professor_fora/models/ema_ckpt.pt \
+    --bases iam_pt_alinhado --leitor modelos/leitor_iam_transformer.pt \
+    --saida avaliacao_fora_val
+python scripts/comparar_avaliacoes.py \
+    --modelo avaliacao_professor_val:professor_6ep --modelo avaliacao_fora_val:fora_6ep \
+    --comparar fora_6ep professor_6ep
+python scripts/medir_posicao_acento.py --avaliacao avaliacao_fora_val:fora_6ep \
+    --avaliacao avaliacao_professor_val:professor_6ep --saida diagnostico/resultados/posicao_fora
+```
+
+O que olhar é o CER das acentuadas no `resumo.md`, que com o professor por
+amostra é 0,53 com 6 épocas, sem perder a marca na acentuada (81%) nem o
+vazamento (6%).
+
 ### Como rodar
 
 Para a receita do peso 5 com o acento separado e o professor.
@@ -274,7 +316,7 @@ Todas desligadas por padrão. Sem elas o caminho é o de antes.
 | `--treinar_so texto` | treina só a atenção cruzada e a `text_lin` |
 | `--cache_congelados arquivo.pt` | guarda a saída do VAE e do extrator de estilo por imagem. Na CPU o passo cai de 11 s para 3 s |
 | `--acento_separado`, `--lr_acento_mult` | descritas acima |
-| `--professor`, `--peso_professor` | descritas acima |
+| `--professor`, `--peso_professor`, `--professor_fora_mascara` | descritas acima |
 
 Os roteiros dos treinos curtos são `diagnostico/treino_ingredientes.sh`,
 `treino_texto_vs_tudo.sh` e `treino_acento_separado.sh`. A avaliação pequena é

@@ -640,7 +640,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
         # com peso no acento: MSE sem peso (comparavel aos runs antigos) e MSE
         # dentro/fora da mascara, acumulados na epoca
         acum_acento = dict.fromkeys(('mse', 'n', 'dentro', 'n_dentro', 'fora', 'n_fora', 'zona', 'n_zona'), 0.0)
-        acum_prof = dict.fromkeys(('dist', 'n', 'total'), 0.0)
+        acum_prof = dict.fromkeys(('dist', 'n', 'total', 'n_acent'), 0.0)
         pbar = tqdm(loader)
         style_feat = []
         for i, data in enumerate(pbar):
@@ -708,19 +708,35 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
             alvo = noise
             if PROFESSOR is not None:
                 sem = torch.tensor([separar_acento(tx)[0] == tx for tx in transcr], device=images.device)
-                if sem.any():
+                # --professor_fora_mascara: as amostras acentuadas tambem passam
+                # pelo professor (com o texto sem acento), e o palpite dele vale
+                # como alvo FORA da mascara do acento. Dentro dela o alvo segue
+                # sendo o ruido sorteado: e ali que o aluno aprende o sinal.
+                usar = torch.ones_like(sem) if args.professor_fora_mascara else sem
+                if usar.any():
                     with torch.no_grad():
-                        txt_prof = tokenizer([tx for tx, k in zip(transcr, sem.tolist()) if k], padding="max_length",
-                                             truncation=True, return_tensors="pt",
+                        txt_prof = tokenizer([separar_acento(tx)[0] for tx, k in zip(transcr, usar.tolist()) if k],
+                                             padding="max_length", truncation=True, return_tensors="pt",
                                              max_length=args.texto_max_len).to(args.device)
-                        est_prof = style_features.view(images.size(0), -1, style_features.size(-1))[sem]
-                        prev_prof = PROFESSOR(x_t[sem], timesteps=t[sem], context=txt_prof, y=s_id[sem],
+                        est_prof = style_features.view(images.size(0), -1, style_features.size(-1))[usar]
+                        prev_prof = PROFESSOR(x_t[usar], timesteps=t[usar], context=txt_prof, y=s_id[usar],
                                               style_extractor=est_prof.reshape(-1, style_features.size(-1)))
-                        acum_prof['dist'] += ((predicted_noise[sem] - prev_prof) ** 2).mean().item() * int(sem.sum())
-                        acum_prof['n'] += int(sem.sum())
+                        sem_u = sem[usar]
+                        if sem_u.any():
+                            acum_prof['dist'] += ((predicted_noise[usar][sem_u] - prev_prof[sem_u]) ** 2).mean().item() * int(sem_u.sum())
+                        acum_prof['n'] += int(sem_u.sum())
                         acum_prof['total'] += images.size(0)
+                        mistura = noise[usar] + args.peso_professor * (prev_prof - noise[usar])
+                        if args.professor_fora_mascara:
+                            m = data[6].to(images.device)[usar][:, None]          # (n, 1, 8, 32), 1 = acento
+                            # acentuada sem mascara nenhuma: fica inteira com o ruido sorteado
+                            sem_masc = (~sem_u) & (m.flatten(1).sum(1) == 0)
+                            m = torch.where(sem_masc[:, None, None, None], torch.ones_like(m), m)
+                            acent = (~sem_u)[:, None, None, None]
+                            mistura = torch.where(acent, m * noise[usar] + (1 - m) * mistura, mistura)
+                            acum_prof['n_acent'] += int((~sem_u).sum())
                     alvo = noise.clone()
-                    alvo[sem] = noise[sem] + args.peso_professor * (prev_prof - noise[sem])
+                    alvo[usar] = mistura
             
             if args.peso_acento != 1.0 or args.peso_zona != 1.0:
                 # Peso no acento: o erro de ruido nas celulas do latente onde
@@ -863,7 +879,9 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
               f"total no run: {nan_total})")
         if acum_prof['n']:
             print(f"epoca {epoch}: professor em {100 * acum_prof['n'] / acum_prof['total']:.0f}% das amostras | "
-                  f"distancia aluno-professor {acum_prof['dist'] / acum_prof['n']:.5f}")
+                  f"distancia aluno-professor {acum_prof['dist'] / acum_prof['n']:.5f}"
+                  + (f" | fora da mascara em mais {100 * acum_prof['n_acent'] / acum_prof['total']:.0f}% (acentuadas)"
+                     if acum_prof['n_acent'] else ""))
         if (args.peso_acento != 1.0 or args.peso_zona != 1.0) and acum_acento['n']:
             a = acum_acento
             print(f"epoca {epoch}: peso_acento {args.peso_acento} | MSE sem peso {a['mse'] / a['n']:.4f} | "
@@ -918,6 +936,7 @@ def main():
     parser.add_argument('--peso_zona', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas vazias acima/abaixo do corpo da palavra, em toda amostra (acento que o texto nao pede); 1.0 = loss original')
     parser.add_argument('--cache_congelados', type=str, default='', help='arquivo .pt onde guardar a saida do VAE e do extrator de estilo por imagem (os dois sao congelados); vazio = sem cache, o caminho de sempre. Feito para treinar na CPU; exige o leitor iam_acentuado, que devolve o caminho de cada imagem')
     parser.add_argument('--professor', type=str, default='', help='arquivo .pt do UNet de partida (ex.: .../diffusionpen_iam_model_path/models/ema_ckpt.pt). Nas amostras cujo texto NAO tem diacritico, o alvo da loss passa a ser a previsao de ruido desse modelo congelado para a mesma entrada, em vez do ruido sorteado: segura a letra e o "sem acento, sem marca" do modelo original. Vazio = o caminho de sempre')
+    parser.add_argument('--professor_fora_mascara', action='store_true', help='com --professor: nas amostras ACENTUADAS o professor (com o texto sem acento) tambem vira o alvo, mas so fora da mascara do acento; dentro dela vale o ruido sorteado. Exige --peso_acento diferente de 1, que e o que carrega a mascara')
     parser.add_argument('--peso_professor', type=float, default=1.0, help='com --professor: 1.0 = o alvo dessas amostras e so o professor; 0.0 = so o ruido verdadeiro; valores no meio misturam os dois')
     parser.add_argument('--acento_separado', action='store_true', help='o CANINE recebe a palavra sem acentos e o diacritico entra por um vetor novo, iniciado em zero, somado na posicao da letra (utils/acento_separado.py); desligado = o caminho de sempre')
     parser.add_argument('--lr_acento_mult', type=float, default=30.0, help='com --acento_separado: a lr do vetor novo e lr * este fator (ele parte do zero e e minusculo)')
@@ -1128,6 +1147,8 @@ def main():
             mdl.load_state_dict(md)
             print(f'{nome}: {len(ok)}/{len(md)} chaves carregadas')
     
+    if args.professor_fora_mascara and (not args.professor or args.peso_acento == 1.0):
+        raise SystemExit('--professor_fora_mascara exige --professor e --peso_acento diferente de 1 (a mascara vem do peso)')
     if args.professor:
         global PROFESSOR
         PROFESSOR = copy.deepcopy(unet).eval().requires_grad_(False)
