@@ -38,6 +38,11 @@ class Passa(nn.Module):
         return self.module(*a, **k)
 
 
+# Modelo professor (--professor): copia congelada dos pesos de partida. Fica
+# fora dos argumentos de train() e do args, que e gravado no config.jsonl.
+PROFESSOR = None
+
+
 class CacheCongelados:
     """Guarda o que o VAE e o extrator de estilo devolvem para cada imagem.
 
@@ -618,6 +623,8 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
     # passa a significar "quantas epocas rodar agora", nao o total.
     ultima_epoca = args.start_epoch + args.epochs - 1
     cache = CacheCongelados(args.cache_congelados) if args.cache_congelados else None
+    if PROFESSOR is not None:
+        from utils.acento_separado import separar as separar_acento
     if args.acento_separado:
         from utils.acento_separado import tokenizar as tokenizar_com_acento
     for epoch in range(args.start_epoch, ultima_epoca + 1):
@@ -633,6 +640,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
         # com peso no acento: MSE sem peso (comparavel aos runs antigos) e MSE
         # dentro/fora da mascara, acumulados na epoca
         acum_acento = dict.fromkeys(('mse', 'n', 'dentro', 'n_dentro', 'fora', 'n_fora', 'zona', 'n_zona'), 0.0)
+        acum_prof = dict.fromkeys(('dist', 'n', 'total'), 0.0)
         pbar = tqdm(loader)
         style_feat = []
         for i, data in enumerate(pbar):
@@ -692,6 +700,27 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                 labels = None
             
             predicted_noise = model(x_t, timesteps=t, context=text_features, y=s_id, style_extractor=style_features)
+
+            # Professor: nas amostras sem diacritico no texto, o alvo e o que o
+            # modelo de partida preve para a MESMA entrada (x_t, t, texto,
+            # estilo). O aluno aprende o acento com os dados e, em todo o resto,
+            # e cobrado a continuar respondendo como o original.
+            alvo = noise
+            if PROFESSOR is not None:
+                sem = torch.tensor([separar_acento(tx)[0] == tx for tx in transcr], device=images.device)
+                if sem.any():
+                    with torch.no_grad():
+                        txt_prof = tokenizer([tx for tx, k in zip(transcr, sem.tolist()) if k], padding="max_length",
+                                             truncation=True, return_tensors="pt",
+                                             max_length=args.texto_max_len).to(args.device)
+                        est_prof = style_features.view(images.size(0), -1, style_features.size(-1))[sem]
+                        prev_prof = PROFESSOR(x_t[sem], timesteps=t[sem], context=txt_prof, y=s_id[sem],
+                                              style_extractor=est_prof.reshape(-1, style_features.size(-1)))
+                        acum_prof['dist'] += ((predicted_noise[sem] - prev_prof) ** 2).mean().item() * int(sem.sum())
+                        acum_prof['n'] += int(sem.sum())
+                        acum_prof['total'] += images.size(0)
+                    alvo = noise.clone()
+                    alvo[sem] = noise[sem] + args.peso_professor * (prev_prof - noise[sem])
             
             if args.peso_acento != 1.0 or args.peso_zona != 1.0:
                 # Peso no acento: o erro de ruido nas celulas do latente onde
@@ -704,7 +733,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                 zona = data[7].to(images.device) if args.peso_zona != 1.0 else torch.zeros_like(mascara)
                 if mascara.shape[-2:] != images.shape[-2:] or zona.shape != mascara.shape:
                     raise SystemExit(f'mascaras {tuple(mascara.shape)}/{tuple(zona.shape)} nao batem com o latente {tuple(images.shape)}')
-                erro2 = (noise - predicted_noise) ** 2
+                erro2 = (alvo - predicted_noise) ** 2
                 peso = 1.0 + (args.peso_acento - 1.0) * mascara[:, None] + (args.peso_zona - 1.0) * zona[:, None]
                 loss = (peso * erro2).mean()
                 with torch.no_grad():
@@ -719,7 +748,7 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
                     acum_acento['zona'] += (erro2 * z4).sum().item()
                     acum_acento['n_zona'] += z4.sum().item()
             else:
-                loss = mse_loss(noise, predicted_noise)
+                loss = mse_loss(alvo, predicted_noise)
 
             model.zero_grad(set_to_none=True)   # o modelo inteiro: com --treinar_so texto ha gradiente fora do otimizador
 
@@ -832,6 +861,9 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
         print(f"epoca {epoch}: MSE {loss_meter.avg:.4f} | {nan_epoca} batches descartados "
               f"nesta epoca (loss nao-finito: {nan_loss}, gradiente nao-finito: {nan_grad}; "
               f"total no run: {nan_total})")
+        if acum_prof['n']:
+            print(f"epoca {epoch}: professor em {100 * acum_prof['n'] / acum_prof['total']:.0f}% das amostras | "
+                  f"distancia aluno-professor {acum_prof['dist'] / acum_prof['n']:.5f}")
         if (args.peso_acento != 1.0 or args.peso_zona != 1.0) and acum_acento['n']:
             a = acum_acento
             print(f"epoca {epoch}: peso_acento {args.peso_acento} | MSE sem peso {a['mse'] / a['n']:.4f} | "
@@ -885,6 +917,8 @@ def main():
     parser.add_argument('--iam_originais', type=float, default=1.0, help='iam_acentuado: fracao das palavras originais do IAM (sem acento) que entram no treino junto com as acentuadas')
     parser.add_argument('--peso_zona', type=float, default=1.0, help='iam_acentuado: peso do erro de ruido nas celulas vazias acima/abaixo do corpo da palavra, em toda amostra (acento que o texto nao pede); 1.0 = loss original')
     parser.add_argument('--cache_congelados', type=str, default='', help='arquivo .pt onde guardar a saida do VAE e do extrator de estilo por imagem (os dois sao congelados); vazio = sem cache, o caminho de sempre. Feito para treinar na CPU; exige o leitor iam_acentuado, que devolve o caminho de cada imagem')
+    parser.add_argument('--professor', type=str, default='', help='arquivo .pt do UNet de partida (ex.: .../diffusionpen_iam_model_path/models/ema_ckpt.pt). Nas amostras cujo texto NAO tem diacritico, o alvo da loss passa a ser a previsao de ruido desse modelo congelado para a mesma entrada, em vez do ruido sorteado: segura a letra e o "sem acento, sem marca" do modelo original. Vazio = o caminho de sempre')
+    parser.add_argument('--peso_professor', type=float, default=1.0, help='com --professor: 1.0 = o alvo dessas amostras e so o professor; 0.0 = so o ruido verdadeiro; valores no meio misturam os dois')
     parser.add_argument('--acento_separado', action='store_true', help='o CANINE recebe a palavra sem acentos e o diacritico entra por um vetor novo, iniciado em zero, somado na posicao da letra (utils/acento_separado.py); desligado = o caminho de sempre')
     parser.add_argument('--lr_acento_mult', type=float, default=30.0, help='com --acento_separado: a lr do vetor novo e lr * este fator (ele parte do zero e e minusculo)')
     parser.add_argument('--treinar_so', type=str, default='tudo', choices=('tudo', 'texto'), help='tudo = o UNet inteiro, como sempre; texto = so a atencao cruzada (attn2) e a text_lin, o resto fica nos pesos de partida')
@@ -1094,6 +1128,19 @@ def main():
             mdl.load_state_dict(md)
             print(f'{nome}: {len(ok)}/{len(md)} chaves carregadas')
     
+    if args.professor:
+        global PROFESSOR
+        PROFESSOR = copy.deepcopy(unet).eval().requires_grad_(False)
+        sd = torch.load(args.professor, map_location=args.device)
+        md = PROFESSOR.state_dict()
+        ok = {k: v for k, v in sd.items() if k in md and md[k].shape == v.shape}
+        md.update(ok)
+        PROFESSOR.load_state_dict(md)
+        if args.acento_separado:      # o professor nunca ve acento; ao retomar, a copia traria o vetor do aluno
+            PROFESSOR.module.text_encoder.acento.weight.zero_()
+        print(f'professor: {len(ok)}/{len(md)} chaves de {args.professor}; peso {args.peso_professor:g} '
+              f'nas amostras sem diacritico')
+
     if args.latent==True:
         print('VAE is true')
         vae = AutoencoderKL.from_pretrained(args.stable_dif_path, subfolder="vae")
