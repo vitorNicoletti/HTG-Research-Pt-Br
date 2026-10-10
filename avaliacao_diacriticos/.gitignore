@@ -3,3 +3,5 @@
 # figuras/ e resultados/ ficam versionados.
 amostras/
 __pycache__/
+# refeito por experimentos/medir_base_alinhada.py
+resultados/base_alinhada_letras.csv
