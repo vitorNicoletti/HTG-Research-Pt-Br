@@ -69,4 +69,5 @@ Os detalhes de cada problema e as hipóteses abertas estão em
 | [10_problemas_em_aberto.md](10_problemas_em_aberto.md) | problemas atuais, hipóteses com evidência a favor e contra, próximos passos sugeridos |
 | [11_como_rodar.md](11_como_rodar.md) | guia prático: ambiente, dados, comandos de cada etapa, onde ficam as saídas |
 | [12_mapa_do_repositorio.md](12_mapa_do_repositorio.md) | o que é cada pasta e cada script |
-| [13_diagnosticos_na_cpu.md](13_diagnosticos_na_cpu.md) | diagnósticos de geração sem treino, treinos curtos por ingrediente e a proposta de separar letra e diacrítico |
+| [13_investigacao_do_vazamento_e_da_letra.md](13_investigacao_do_vazamento_e_da_letra.md) | testes de geração sem treino e treinos curtos por ingrediente |
+| [14_acento_separado_e_professor.md](14_acento_separado_e_professor.md) | acento separado no condicionamento e professor na loss, com os resultados na GPU e como rodar |
