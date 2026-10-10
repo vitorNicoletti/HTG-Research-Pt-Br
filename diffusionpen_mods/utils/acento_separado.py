@@ -67,7 +67,11 @@ class TextoComAcento(nn.Module):
     def __init__(self, canine):
         super().__init__()
         self.module = canine
-        self.acento = nn.Embedding(N_SINAIS, canine.config.hidden_size)
+        # padding_idx=0: a linha do "sem sinal" fica presa em zero e nao recebe
+        # gradiente. Sem isso ela vira um vetor aprendido somado em TODAS as
+        # posicoes de TODAS as palavras, e a palavra sem acento deixa de ter a
+        # entrada do modelo original -- que e a razao de ser deste modulo.
+        self.acento = nn.Embedding(N_SINAIS, canine.config.hidden_size, padding_idx=0)
         nn.init.zeros_(self.acento.weight)
 
     def forward(self, acentos=None, **entradas):
