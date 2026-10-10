@@ -227,6 +227,34 @@ checa("com 1 valor por grupo, cluster ~ amostra",
       abs((hi_1 - lo_1) - (hi_a - lo_a)) < 0.03,
       f"({hi_1 - lo_1:.4f} vs {hi_a - lo_a:.4f})")
 
+print("\n13. e1 com colunas dadas de fora, e tinta fora do corpo numa imagem so")
+import e1 as E1  # noqa: E402
+import vazamento as V  # noqa: E402
+# "acao": quatro letras de 30 px, a primeira comeca em x=20. O til fica sobre
+# a letra 2 (x de 80 a 110).
+sem = corpo(4)
+com = corpo(4)
+caixa(com, 18, 24, 86, 104)
+colunas_certas = [(20, 50), (50, 80), (80, 110), (110, 140)]
+colunas_erradas = [(20, 30), (30, 40), (40, 50), (50, 140)]
+checa("com as colunas certas o til aparece na letra 2",
+      E1.e1(com, sem, "acão", colunas_certas)[0] > 0.1)
+checa("com as colunas erradas o til some",
+      E1.e1(com, sem, "acão", colunas_erradas)[0] == 0)
+checa("sem colunas dadas, vale a fatia igual de antes",
+      E1.e1(com, sem, "acão") == E1.e1(com, sem, "acão", None))
+medidas = V.tinta_fora_do_corpo(com, colunas_certas)
+checa("tinta acima so na letra 2",
+      medidas[2][0] > 0.1 and medidas[0][0] == 0 and medidas[3][0] == 0, f"({medidas})")
+checa("palavra sem marca -> vazamento zero", V.vazamento(sem, "acao", colunas_certas) == 0)
+checa("marca sobre vogal -> vazamento maior que zero",
+      V.vazamento(com, "acao", colunas_certas) > 0.1)
+# haste de um "t" na letra 1: tinta acima, mas a letra nao vale
+haste = corpo(4)
+caixa(haste, 10, 30, 60, 66)
+checa("haste de letra alta nao conta como vazamento",
+      V.vazamento(haste, "atoa", colunas_certas) == 0)
+
 print("\n" + ("TODOS OS TESTES PASSARAM" if not falhas
                else f"FALHARAM: {falhas}"))
 sys.exit(1 if falhas else 0)
