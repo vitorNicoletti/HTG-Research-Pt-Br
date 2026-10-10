@@ -1,0 +1,54 @@
+200 imagens anotadas
+
+TEM ACENTO
+pedidas com acento (n=80, a pessoa diz sim em 43)
+  colega   kappa +0.72   diz sim em 38 das 43 que a pessoa viu e em 6 das 37 que nao viu
+  par      kappa +0.55   diz sim em 31 das 43 que a pessoa viu e em 6 das 37 que nao viu
+  e1       kappa +0.36   diz sim em 23 das 43 que a pessoa viu e em 6 das 37 que nao viu
+pedidas sem acento (n=120, a pessoa diz sim em 32)
+  colega   kappa +0.88   diz sim em 32 das 32 que a pessoa viu e em 6 das 88 que nao viu
+
+NA LETRA CERTA, so nas pedidas com acento
+todos os sinais (n=80, a pessoa diz sim em 22)
+  colega   kappa +0.29   diz sim em 10 das 22 que a pessoa viu e em 10 das 58 que nao viu
+  par      kappa +0.22   diz sim em 7 das 22 que a pessoa viu e em 7 das 58 que nao viu
+  e1       kappa +0.44   diz sim em 12 das 22 que a pessoa viu e em 7 das 58 que nao viu
+agudo (n=20, a pessoa diz sim em 3)
+  colega   kappa +0.61   diz sim em 2 das 3 que a pessoa viu e em 1 das 17 que nao viu
+  par      kappa -0.08   diz sim em 0 das 3 que a pessoa viu e em 1 das 17 que nao viu
+  e1       kappa +0.61   diz sim em 2 das 3 que a pessoa viu e em 1 das 17 que nao viu
+til (n=20, a pessoa diz sim em 7)
+  colega   kappa +0.45   diz sim em 7 das 7 que a pessoa viu e em 6 das 13 que nao viu
+  par      kappa +0.50   diz sim em 6 das 7 que a pessoa viu e em 4 das 13 que nao viu
+  e1       kappa +0.42   diz sim em 6 das 7 que a pessoa viu e em 5 das 13 que nao viu
+circunflexo (n=20, a pessoa diz sim em 1)
+  colega   kappa -0.08   diz sim em 0 das 1 que a pessoa viu e em 3 das 19 que nao viu
+  par      kappa -0.07   diz sim em 0 das 1 que a pessoa viu e em 2 das 19 que nao viu
+  e1       kappa +0.00   diz sim em 0 das 1 que a pessoa viu e em 0 das 19 que nao viu
+cedilha (n=20, a pessoa diz sim em 11)
+  colega   kappa +0.08   diz sim em 1 das 11 que a pessoa viu e em 0 das 9 que nao viu
+  par      kappa +0.08   diz sim em 1 das 11 que a pessoa viu e em 0 das 9 que nao viu
+  e1       kappa +0.24   diz sim em 4 das 11 que a pessoa viu e em 1 das 9 que nao viu
+
+LEGIVEL, contra o CER do leitor em varios limites
+todas (n=200, a pessoa diz legivel em 171)
+  CER ate 0.00  kappa +0.07   o leitor aceita 43, das quais 42 a pessoa acha legiveis; concordam em 35%
+  CER ate 0.10  kappa +0.08   o leitor aceita 44, das quais 43 a pessoa acha legiveis; concordam em 36%
+  CER ate 0.20  kappa +0.14   o leitor aceita 82, das quais 78 a pessoa acha legiveis; concordam em 52%
+  CER ate 0.34  kappa +0.24   o leitor aceita 123, das quais 115 a pessoa acha legiveis; concordam em 68%
+  CER ate 0.50  kappa +0.32   o leitor aceita 164, das quais 149 a pessoa acha legiveis; concordam em 82%
+  CER medio  0.28 nas legiveis, 0.49 nas ilegiveis
+pedidas com acento (n=80, a pessoa diz legivel em 68)
+  CER ate 0.00  kappa +0.06   o leitor aceita 12, das quais 12 a pessoa acha legiveis; concordam em 30%
+  CER ate 0.10  kappa +0.06   o leitor aceita 12, das quais 12 a pessoa acha legiveis; concordam em 30%
+  CER ate 0.20  kappa +0.13   o leitor aceita 28, das quais 27 a pessoa acha legiveis; concordam em 48%
+  CER ate 0.34  kappa +0.19   o leitor aceita 44, das quais 41 a pessoa acha legiveis; concordam em 62%
+  CER ate 0.50  kappa +0.23   o leitor aceita 60, das quais 54 a pessoa acha legiveis; concordam em 75%
+  CER medio  0.33 nas legiveis, 0.52 nas ilegiveis
+pedidas sem acento (n=120, a pessoa diz legivel em 103)
+  CER ate 0.00  kappa +0.08   o leitor aceita 31, das quais 30 a pessoa acha legiveis; concordam em 38%
+  CER ate 0.10  kappa +0.09   o leitor aceita 32, das quais 31 a pessoa acha legiveis; concordam em 39%
+  CER ate 0.20  kappa +0.14   o leitor aceita 54, das quais 51 a pessoa acha legiveis; concordam em 54%
+  CER ate 0.34  kappa +0.27   o leitor aceita 79, das quais 74 a pessoa acha legiveis; concordam em 72%
+  CER ate 0.50  kappa +0.40   o leitor aceita 104, das quais 95 a pessoa acha legiveis; concordam em 86%
+  CER medio  0.24 nas legiveis, 0.48 nas ilegiveis
