@@ -1,0 +1,31 @@
+{
+  "professor_16ep": {
+    "paineis_acentuados": 1200,
+    "sem_alinhamento": 0,
+    "certa": 0.3767,
+    "parcial": 0.0367,
+    "errada": 0.295,
+    "nenhuma": 0.2917,
+    "extra_na_acentuada": 0.46,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 400,
+        "acerto": 0.53
+      },
+      "cedilha": {
+        "n": 520,
+        "acerto": 0.175
+      },
+      "circunflexo": {
+        "n": 80,
+        "acerto": 0.2375
+      },
+      "til": {
+        "n": 280,
+        "acerto": 0.6571
+      }
+    },
+    "marca_em_esqueleto": 0.05,
+    "marca_em_sem_acento": 0.075
+  }
+}
