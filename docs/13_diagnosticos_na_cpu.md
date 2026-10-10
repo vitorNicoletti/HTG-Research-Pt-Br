@@ -159,8 +159,7 @@ vetores era treinável e chegou a norma 0,50, contra 7 a 10 dos vetores do
 CANINE e 4,4 dos vetores de sinal, um deslocamento de cerca de 6% em toda
 posição. Hoje ela fica presa em zero. Falta repetir o treino com a correção.
 
-As avaliações estão na máquina de treino, em `avaliacao_separado_val/`, e as
-folhas em `saidas/comparacao_separado/`.
+Folhas em `diagnostico/resultados/acento_separado/comparacao_separado/`.
 
 ### Na CPU, antes disso
 
@@ -178,8 +177,63 @@ mistura os dois alvos, com 1 só o professor e 0 só o ruído.
 
 Com `--acento_separado` o aluno e o professor recebem a mesma entrada de texto
 nessas amostras. Na receita do peso 5 elas são cerca de 85% do treino. Custa
-uma passada a mais pela rede, sem gradiente. Só foi testado que roda, sem
-resultado ainda.
+uma passada a mais pela rede, sem gradiente.
+
+### Resultado do professor na GPU, 16 épocas
+
+Mesma receita, com `--acento_separado` já corrigido e `--professor`. No log, o
+professor entrou em 85% das amostras e a distância entre aluno e professor
+foi de 0,0094 na primeira época para 0,0060 na última.
+
+| modelo | marca na acentuada | no esqueleto | sem acento | diferença pareada | CER sem acento pedido | o mesmo, só sem marca |
+|---|---|---|---|---|---|---|
+| IAM original | 6% | 5% | 5% | +1 | 0,195 | 0,193 |
+| peso 5 | 57% | 34% | 32% | +23 | 0,312 | 0,273 |
+| acento separado | 61% | 13% | 9% | +48 | 0,285 | 0,276 |
+| com professor, 6 épocas | 81% | 6% | 6% | +75 | | |
+| com professor, 16 épocas | 71% | 5% | 8% | +66 | 0,190 | 0,187 |
+
+Bootstrap por palavra, professor menos acento separado, com IC95.
+
+| medida | diferença | IC95 |
+|---|---|---|
+| marca na acentuada | +10 pp | +6 a +14 |
+| marca no esqueleto | −8 pp | −10 a −6 |
+| marca sem acento | −2 pp | −4 a +2 |
+| diferença pareada | +18 pp | +14 a +21 |
+| CER sem acento pedido | −0,096 | −0,109 a −0,083 |
+| CER sem acento pedido, só sem marca | −0,089 | −0,102 a −0,076 |
+
+Posição, nas 1.200 imagens acentuadas.
+
+| | acento separado | com professor |
+|---|---|---|
+| agudo na letra certa | 38% | 53% |
+| til na letra certa | 68% | 66% |
+| circunflexo na letra certa | 11% | 24% |
+| todos os sinais na letra certa | 31% | 38% |
+| marca só em letra errada | 26% | 30% |
+| nenhuma marca | 39% | 29% |
+| alguma marca em letra que não a leva | 38% | 46% |
+
+Leitura.
+
+- A letra das palavras sem acento volta ao nível do modelo original.
+- O vazamento fica no ruído do detector, que no original é 5%.
+- O acento aparece mais vezes e o agudo acerta mais a letra.
+- O que sobra está dentro das palavras acentuadas. Em 29% não sai marca, em 30%
+  ela cai em letra errada, e em 46% há marca em alguma letra que não a leva,
+  mais do que antes. O CER das acentuadas contra o esqueleto é 0,43, contra
+  0,17 do esqueleto da mesma palavra. Parte são marcas lidas como letras, mas
+  as folhas mostram deformação. O professor não atua nessas amostras.
+- Com 6 épocas o modelo marcava mais (81%) e o CER das acentuadas era 0,53.
+
+A comparação com o acento separado mistura duas mudanças, o professor e a
+correção da linha do "sem sinal". Falta o controle, acento separado corrigido
+e sem professor. A cedilha continua sem medida confiável e é 40% dos sinais
+avaliados.
+
+Folhas em `diagnostico/resultados/acento_separado/comparacao_professor/`.
 
 ### Como rodar
 
