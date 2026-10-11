@@ -113,13 +113,52 @@ amostras sem acento foi de 0,0094 na primeira época para 0,0060 na última.
 
 Está dentro das palavras acentuadas.
 
-- Em 29% não sai marca, e em 30% ela cai em letra errada.
+- Em 29% o detector não vê marca, e em 30% ela cai em letra errada. A falta
+  de marca é quase toda das palavras só com cedilha, que o detector não
+  enxerga (tabela abaixo). Nos outros sinais sai marca em 86% dos pedidos.
 - Em 46% há marca em alguma letra que não a leva, mais do que antes.
 - O CER das acentuadas contra o esqueleto é 0,43, contra 0,17 do esqueleto da
   mesma palavra. Parte são marcas lidas como letras, mas as folhas mostram
   deformação. O professor não atua nessas amostras.
 - O circunflexo segue fraco. A base tem 580 amostras com ele, contra 2.903 com
-  agudo, e só 2 com grave.
+  agudo, e só 2 com grave. A avaliação tem só duas palavras com ele, "pôr" e
+  "relâmpagos", então os números do circunflexo valem pouco.
+
+Marca detectada por sinal da palavra, no modelo com professor de 16 épocas,
+tirada do `paineis.tsv`.
+
+| sinal na palavra | palavras | imagens | com marca |
+|---|---|---|---|
+| agudo | 10 | 400 | 88% |
+| til | 5 | 200 | 86% |
+| cedilha e til | 2 | 80 | 89% |
+| circunflexo | 2 | 80 | 71% |
+| só cedilha | 11 | 440 | 45% |
+
+Das 350 imagens acentuadas sem marca, 242 são de palavras só com cedilha. Nas
+folhas dessas palavras (13 palavras, 10 escritores), vistas no olho e sem
+contagem, a cedilha aparece na maioria das imagens e quase sempre embaixo do
+c. As marcas que o detector acusa são a cedilha quando sai solta do c ou um
+acento a mais em outra letra. A deformação da letra não se concentra perto do
+ç. A falta de marca nessas palavras é portanto da medida e não do modelo.
+
+### Lastro das medidas
+
+O detector e o leitor foram comparados com a anotação humana de 200 imagens
+do modelo peso 5 (`avaliacao_diacriticos/resultados/kappa_peso5.txt`).
+
+| medida | concordância com a pessoa | lastro |
+|---|---|---|
+| há marca, palavras sem acento | kappa 0,88 | forte |
+| há marca, palavras acentuadas | kappa 0,72 | bom |
+| marca na letra certa | kappa 0,29, com 80 imagens | fraco |
+| legível, pelo CER | kappa de 0,07 a 0,40 conforme o corte | serve para comparar modelos, não como taxa de legibilidade |
+| cedilha | detectada em 1 das 11 que a pessoa viu | nenhum |
+
+A pessoa achou legíveis 171 das 200 imagens e o leitor lê sem erro 43. O CER
+médio ainda separa os grupos, 0,28 nas legíveis contra 0,49 nas outras. A
+anotação é de outro modelo, que deforma mais a letra, e cada sinal tem 20
+imagens.
 
 ### Ressalvas
 
@@ -128,7 +167,8 @@ Está dentro das palavras acentuadas.
   e o do professor depois. A comparação entre os dois mistura as duas
   mudanças. Falta o controle, acento separado corrigido e sem professor.
 - A cedilha não é medida pelo detector e é 40% dos sinais avaliados.
-- A posição ainda não foi comparada com anotação humana.
+- Os números de posição têm lastro fraco, como mostra a seção acima. A direção
+  da melhora aparece nas folhas, o valor não está validado.
 
 Registros em `diagnostico/resultados/acento_separado/`, com o resumo e o
 `paineis.tsv` de cada avaliação, a posição, o `config.jsonl` de cada treino, as
@@ -219,7 +259,7 @@ Um por vez, com 6 épocas, mudando uma coisa em relação ao treino com professo
 | 0 | controle sem professor, 16 épocas | atribuir o ganho |
 | 1 | `--professor_fora_mascara` | a letra das palavras acentuadas |
 | 2 | circunflexo repetido na base | o sinal raro |
-| 3 | peso do acento de 5 para 10 | os 29% sem marca |
+| 3 | peso do acento de 5 para 10 | perdeu o motivo, os 29% sem marca são quase todos cedilha |
 
 Entre 6 e 16 épocas a ordem entre os métodos não mudou nos dois treinos
 avaliados nos dois pontos, o que sustenta a triagem curta.

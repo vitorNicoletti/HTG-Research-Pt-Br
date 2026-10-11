@@ -1,0 +1,49 @@
+acento_separado: CANINE le o esqueleto; vetor de sinal (6, 768) iniciado em zero, lr x30
+Epoch: 0
+epoca 0: MSE 0.0683 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 0: peso_acento 5.0 | MSE sem peso 0.0556 | dentro da mascara 0.1353 | fora 0.0537 | mascara cobre 2.34% do latente
+Epoch: 1
+epoca 1: MSE 0.0609 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 1: peso_acento 5.0 | MSE sem peso 0.0505 | dentro da mascara 0.1103 | fora 0.0491 | mascara cobre 2.34% do latente
+Epoch: 2
+epoca 2: MSE 0.0587 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 2: peso_acento 5.0 | MSE sem peso 0.0490 | dentro da mascara 0.1029 | fora 0.0477 | mascara cobre 2.34% do latente
+Epoch: 3
+epoca 3: MSE 0.0573 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 3: peso_acento 5.0 | MSE sem peso 0.0481 | dentro da mascara 0.0980 | fora 0.0469 | mascara cobre 2.34% do latente
+Epoch: 4
+epoca 4: MSE 0.0569 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 4: peso_acento 5.0 | MSE sem peso 0.0478 | dentro da mascara 0.0972 | fora 0.0466 | mascara cobre 2.34% do latente
+Epoch: 5
+epoca 5: MSE 0.0550 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 5: peso_acento 5.0 | MSE sem peso 0.0466 | dentro da mascara 0.0902 | fora 0.0455 | mascara cobre 2.34% do latente
+Epoch: 6
+epoca 6: MSE 0.0546 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 6: peso_acento 5.0 | MSE sem peso 0.0463 | dentro da mascara 0.0885 | fora 0.0453 | mascara cobre 2.34% do latente
+Epoch: 7
+epoca 7: MSE 0.0540 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 7: peso_acento 5.0 | MSE sem peso 0.0459 | dentro da mascara 0.0864 | fora 0.0450 | mascara cobre 2.34% do latente
+Epoch: 8
+epoca 8: MSE 0.0532 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 8: peso_acento 5.0 | MSE sem peso 0.0454 | dentro da mascara 0.0840 | fora 0.0444 | mascara cobre 2.34% do latente
+Epoch: 9
+epoca 9: MSE 0.0525 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 9: peso_acento 5.0 | MSE sem peso 0.0449 | dentro da mascara 0.0813 | fora 0.0441 | mascara cobre 2.34% do latente
+Epoch: 10
+epoca 10: MSE 0.0515 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 10: peso_acento 5.0 | MSE sem peso 0.0441 | dentro da mascara 0.0799 | fora 0.0432 | mascara cobre 2.34% do latente
+Epoch: 11
+epoca 11: MSE 0.0523 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 11: peso_acento 5.0 | MSE sem peso 0.0449 | dentro da mascara 0.0790 | fora 0.0440 | mascara cobre 2.34% do latente
+Epoch: 12
+epoca 12: MSE 0.0509 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 12: peso_acento 5.0 | MSE sem peso 0.0437 | dentro da mascara 0.0775 | fora 0.0429 | mascara cobre 2.34% do latente
+Epoch: 13
+epoca 13: MSE 0.0506 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 13: peso_acento 5.0 | MSE sem peso 0.0435 | dentro da mascara 0.0753 | fora 0.0428 | mascara cobre 2.34% do latente
+Epoch: 14
+epoca 14: MSE 0.0508 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 14: peso_acento 5.0 | MSE sem peso 0.0437 | dentro da mascara 0.0764 | fora 0.0429 | mascara cobre 2.34% do latente
+Epoch: 15
+epoca 15: MSE 0.0493 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 15: peso_acento 5.0 | MSE sem peso 0.0425 | dentro da mascara 0.0731 | fora 0.0418 | mascara cobre 2.34% do latente
