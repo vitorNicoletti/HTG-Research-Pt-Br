@@ -708,6 +708,12 @@ def train(diffusion, model, ema, ema_model, vae, optimizer, mse_loss, loader, te
             alvo = noise
             if PROFESSOR is not None:
                 sem = torch.tensor([separar_acento(tx)[0] == tx for tx in transcr], device=images.device)
+                if args.professor_sem_pares:
+                    # o par (a acentuada sem o sinal, '<n>_par.png') fica com o
+                    # ruido sorteado, como a acentuada: as duas tem a mesma
+                    # geometria e o mesmo alvo fora do sinal, e a unica
+                    # diferenca que o texto precisa explicar e o sinal
+                    sem &= torch.tensor([not c.endswith('_par.png') for c in data[4]], device=images.device)
                 # --professor_fora_mascara: as amostras acentuadas tambem passam
                 # pelo professor (com o texto sem acento), e o palpite dele vale
                 # como alvo FORA da mascara do acento. Dentro dela o alvo segue
@@ -937,6 +943,7 @@ def main():
     parser.add_argument('--cache_congelados', type=str, default='', help='arquivo .pt onde guardar a saida do VAE e do extrator de estilo por imagem (os dois sao congelados); vazio = sem cache, o caminho de sempre. Feito para treinar na CPU; exige o leitor iam_acentuado, que devolve o caminho de cada imagem')
     parser.add_argument('--professor', type=str, default='', help='arquivo .pt do UNet de partida (ex.: .../diffusionpen_iam_model_path/models/ema_ckpt.pt). Nas amostras cujo texto NAO tem diacritico, o alvo da loss passa a ser a previsao de ruido desse modelo congelado para a mesma entrada, em vez do ruido sorteado: segura a letra e o "sem acento, sem marca" do modelo original. Vazio = o caminho de sempre')
     parser.add_argument('--professor_fora_mascara', action='store_true', help='com --professor: nas amostras ACENTUADAS o professor (com o texto sem acento) tambem vira o alvo, mas so fora da mascara do acento; dentro dela vale o ruido sorteado. Exige --peso_acento diferente de 1, que e o que carrega a mascara')
+    parser.add_argument('--professor_sem_pares', action='store_true', help='com --professor: os pares da base (a acentuada sem o sinal, arquivos _par.png) ficam fora do professor e voltam ao ruido sorteado; o professor segue nas demais amostras sem diacritico')
     parser.add_argument('--peso_professor', type=float, default=1.0, help='com --professor: 1.0 = o alvo dessas amostras e so o professor; 0.0 = so o ruido verdadeiro; valores no meio misturam os dois')
     parser.add_argument('--acento_separado', action='store_true', help='o CANINE recebe a palavra sem acentos e o diacritico entra por um vetor novo, iniciado em zero, somado na posicao da letra (utils/acento_separado.py); desligado = o caminho de sempre')
     parser.add_argument('--lr_acento_mult', type=float, default=30.0, help='com --acento_separado: a lr do vetor novo e lr * este fator (ele parte do zero e e minusculo)')
@@ -1149,6 +1156,13 @@ def main():
     
     if args.professor_fora_mascara and (not args.professor or args.peso_acento == 1.0):
         raise SystemExit('--professor_fora_mascara exige --professor e --peso_acento diferente de 1 (a mascara vem do peso)')
+    if args.professor_sem_pares:
+        if not args.professor or args.professor_fora_mascara:
+            raise SystemExit('--professor_sem_pares exige --professor e nao combina com --professor_fora_mascara')
+        with open(os.path.join(args.dataset_folder, 'manifesto.jsonl'), encoding='utf-8') as f:
+            man = [json.loads(l) for l in f]
+        if not any(x['tipo'] == 'par' for x in man) or any((x['tipo'] == 'par') != x['arquivo'].endswith('_par.png') for x in man):
+            raise SystemExit('--professor_sem_pares: os pares da base nao seguem o nome <n>_par.png')
     if args.professor:
         global PROFESSOR
         PROFESSOR = copy.deepcopy(unet).eval().requires_grad_(False)
@@ -1160,7 +1174,7 @@ def main():
         if args.acento_separado:      # o professor nunca ve acento; ao retomar, a copia traria o vetor do aluno
             PROFESSOR.module.text_encoder.acento.weight.zero_()
         print(f'professor: {len(ok)}/{len(md)} chaves de {args.professor}; peso {args.peso_professor:g} '
-              f'nas amostras sem diacritico')
+              f'nas amostras sem diacritico' + (', menos os pares' if args.professor_sem_pares else ''))
 
     if args.latent==True:
         print('VAE is true')
