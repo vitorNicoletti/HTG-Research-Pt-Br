@@ -62,3 +62,6 @@ iam_pt*/
 ing_*/
 # paineis individuais dos diagnosticos: as folhas montadas sao versionadas
 diagnostico/resultados/*/paineis/
+
+# pacote de dados para treinar fora daqui (scripts/pacote_nuvem.sh), 3 GB
+pacote_nuvem.tar
