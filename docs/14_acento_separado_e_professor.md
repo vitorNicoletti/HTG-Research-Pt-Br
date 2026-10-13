@@ -60,28 +60,36 @@ escreveu quando a base foi montada.
 
 ## Resultados
 
-Três treinos de 16 épocas. O peso 5 é o do [07](07_experimentos_com_acentos.md).
+Treinos de 16 épocas. O peso 5 é o do [07](07_experimentos_com_acentos.md). O
+controle é o acento separado sem professor, já com a correção da linha do "sem
+sinal".
 
 | modelo | marca na acentuada | no esqueleto | sem acento | diferença pareada | CER sem acento pedido | o mesmo, só sem marca |
 |---|---|---|---|---|---|---|
 | IAM original | 6% | 5% | 5% | +1 | 0,195 | 0,193 |
 | peso 5 | 57% | 34% | 32% | +23 | 0,312 | 0,273 |
-| acento separado | 61% | 13% | 9% | +48 | 0,285 | 0,276 |
+| acento separado, antes da correção | 61% | 13% | 9% | +48 | 0,285 | 0,276 |
+| acento separado, controle | 61% | 11% | 11% | +51 | 0,281 | 0,271 |
 | acento separado e professor | 71% | 5% | 8% | +66 | 0,190 | 0,187 |
 
-Com 6 épocas o acento separado dava 62%, 21%, 14% e +41, e com o professor
-81%, 6%, 6% e +75.
+Com 6 épocas o acento separado dava 62%, 21%, 14% e +41, o controle 68%, 23%,
+16% e +45, e com o professor 81%, 6%, 6% e +75.
+
+O controle empata com o treino anterior à correção em todas as medidas, com o
+zero dentro de todos os intervalos. A linha do "sem sinal" não fez diferença.
 
 Bootstrap por palavra, com IC95.
 
-| medida | separado menos peso 5 | professor menos separado |
-|---|---|---|
-| marca na acentuada | +5 pp, de −6 a +14 | +10 pp, de +6 a +14 |
-| marca no esqueleto | −21 pp, de −26 a −17 | −8 pp, de −10 a −6 |
-| marca sem acento | −23 pp, de −30 a −16 | −2 pp, de −4 a +2 |
-| diferença pareada | +26 pp, de +14 a +37 | +18 pp, de +14 a +21 |
-| CER sem acento pedido | −0,027, de −0,037 a −0,016 | −0,096, de −0,109 a −0,083 |
-| o mesmo, só sem marca | −0,002, de −0,014 a +0,010 | −0,089, de −0,102 a −0,076 |
+| medida | separado menos peso 5 | professor menos separado | professor menos controle |
+|---|---|---|---|
+| marca na acentuada | +5 pp, de −6 a +14 | +10 pp, de +6 a +14 | +9 pp, de +5 a +14 |
+| marca no esqueleto | −21 pp, de −26 a −17 | −8 pp, de −10 a −6 | −6 pp, de −9 a −3 |
+| marca sem acento | −23 pp, de −30 a −16 | −2 pp, de −4 a +2 | −3 pp, de −6 a 0 |
+| diferença pareada | +26 pp, de +14 a +37 | +18 pp, de +14 a +21 | +15 pp, de +11 a +20 |
+| CER sem acento pedido | −0,027, de −0,037 a −0,016 | −0,096, de −0,109 a −0,083 | −0,092, de −0,106 a −0,078 |
+| o mesmo, só sem marca | −0,002, de −0,014 a +0,010 | −0,089, de −0,102 a −0,076 | −0,085, de −0,098 a −0,072 |
+
+A última coluna é a comparação limpa, em que só o professor muda.
 
 Posição, nas 1.200 imagens acentuadas (`scripts/medir_posicao_acento.py`).
 
@@ -116,7 +124,12 @@ Está dentro das palavras acentuadas.
 - Em 29% o detector não vê marca, e em 30% ela cai em letra errada. A falta
   de marca é quase toda das palavras só com cedilha, que o detector não
   enxerga (tabela abaixo). Nos outros sinais sai marca em 86% dos pedidos.
-- Em 46% há marca em alguma letra que não a leva, mais do que antes.
+- Em 46% há marca em alguma letra que não a leva, mais do que antes. O
+  [15](15_acento_a_mais_e_variantes_do_professor.md) trata disso com uma
+  medida que não depende do alinhador.
+- A marca na acentuada cai de 81% para 71% entre 6 e 16 épocas. O
+  [15](15_acento_a_mais_e_variantes_do_professor.md) mostra que é o acento a
+  mais sumindo das palavras com cedilha, e que o acento pedido sobe.
 - O CER das acentuadas contra o esqueleto é 0,43, contra 0,17 do esqueleto da
   mesma palavra. Parte são marcas lidas como letras, mas as folhas mostram
   deformação. O professor não atua nessas amostras.
@@ -164,8 +177,8 @@ imagens.
 
 - Uma rodada de cada, na validação. O teste não foi aberto.
 - O treino do acento separado rodou antes da correção da linha do "sem sinal",
-  e o do professor depois. A comparação entre os dois mistura as duas
-  mudanças. Falta o controle, acento separado corrigido e sem professor.
+  e o do professor depois. O controle, rodado depois, mostra que a correção
+  não mudou as medidas, e é com ele que o ganho do professor deve ser lido.
 - A cedilha não é medida pelo detector e é 40% dos sinais avaliados.
 - Os números de posição têm lastro fraco, como mostra a seção acima. A direção
   da melhora aparece nas folhas, o valor não está validado.
@@ -177,11 +190,14 @@ modelos ficam na máquina de treino.
 
 ## Professor também nas acentuadas
 
-Opção `--professor_fora_mascara`, ainda sem resultado. As amostras acentuadas
-também passam pelo professor, com o texto sem acento. Dentro da máscara do
-acento o alvo continua sendo o ruído sorteado, com o peso do acento. Fora dela
-o alvo é o palpite do professor. Ataca a letra das palavras acentuadas. Exige
-`--peso_acento` diferente de 1, que é o que carrega a máscara.
+Opção `--professor_fora_mascara`. As amostras acentuadas também passam pelo
+professor, com o texto sem acento. Dentro da máscara do acento o alvo continua
+sendo o ruído sorteado, com o peso do acento. Fora dela o alvo é o palpite do
+professor. Exige `--peso_acento` diferente de 1, que é o que carrega a máscara.
+
+Limpa a letra das palavras acentuadas e derruba o acento pedido. Resultado e
+análise no [15](15_acento_a_mais_e_variantes_do_professor.md), junto com as
+outras variantes, o professor sem acento separado e os pares sem professor.
 
 ## Como rodar
 
@@ -210,6 +226,9 @@ Variações.
 | controle, sem professor | tirar a linha do `--professor`, outro `--save_path` |
 | professor também nas acentuadas | acrescentar `--professor_fora_mascara`, outro `--save_path` |
 | triagem curta | `--epochs 6`. O `train.py` também guarda sozinho o modelo de 6 épocas de um treino longo, em `models/ema_ep5.pt` |
+
+`scripts/treino_nuvem.sh` embute a parte fixa deste comando e recebe só o que
+muda. Ver o [15](15_acento_a_mais_e_variantes_do_professor.md).
 
 Para retomar um treino interrompido, trocar `--pretrained_path ...` por
 `--load_check True` e `--epochs` pelo que falta. Os dois juntos fazem os pesos
@@ -249,20 +268,13 @@ Todas desligadas por padrão.
 | `--professor arquivo.pt` | nas amostras sem diacrítico, o alvo é a previsão do modelo de partida |
 | `--peso_professor` | mistura entre o professor (1) e o ruído sorteado (0) |
 | `--professor_fora_mascara` | o professor também nas acentuadas, fora da máscara do acento |
+| `--professor_sem_pares` | os pares da base ficam fora do professor e voltam ao ruído sorteado |
 
 ## Próximos testes
 
-Um por vez, com 6 épocas, mudando uma coisa em relação ao treino com professor.
-
-| ordem | o que muda | ataca |
-|---|---|---|
-| 0 | controle sem professor, 16 épocas | atribuir o ganho |
-| 1 | `--professor_fora_mascara` | a letra das palavras acentuadas |
-| 2 | circunflexo repetido na base | o sinal raro |
-| 3 | peso do acento de 5 para 10 | perdeu o motivo, os 29% sem marca são quase todos cedilha |
-
-Entre 6 e 16 épocas a ordem entre os métodos não mudou nos dois treinos
-avaliados nos dois pontos, o que sustenta a triagem curta.
+A fila que estava aqui foi executada ou revista. O estado atual, os resultados
+de cada variante e o que vem a seguir estão no
+[15](15_acento_a_mais_e_variantes_do_professor.md).
 
 ## Trabalhos relacionados
 
