@@ -1,0 +1,393 @@
+palavra	variante	escritor	marca
+rapé	professor	183	1
+rapé	professor	201	1
+rapé	professor	280	1
+rapé	professor	305	0
+rapé	professor	318	1
+rapé	professor	321	1
+rapé	professor	510	1
+rapé	professor	517	0
+rapé	fora	183	0
+rapé	fora	201	0
+rapé	fora	280	0
+rapé	fora	305	0
+rapé	fora	318	0
+rapé	fora	321	0
+rapé	fora	510	0
+rapé	fora	517	0
+rapé	professor nos 5 primeiros, depois fora	183	0
+rapé	professor nos 5 primeiros, depois fora	201	0
+rapé	professor nos 5 primeiros, depois fora	280	0
+rapé	professor nos 5 primeiros, depois fora	305	0
+rapé	professor nos 5 primeiros, depois fora	318	0
+rapé	professor nos 5 primeiros, depois fora	321	0
+rapé	professor nos 5 primeiros, depois fora	510	0
+rapé	professor nos 5 primeiros, depois fora	517	0
+rapé	professor nos 10 primeiros, depois fora	183	0
+rapé	professor nos 10 primeiros, depois fora	201	0
+rapé	professor nos 10 primeiros, depois fora	280	0
+rapé	professor nos 10 primeiros, depois fora	305	0
+rapé	professor nos 10 primeiros, depois fora	318	0
+rapé	professor nos 10 primeiros, depois fora	321	0
+rapé	professor nos 10 primeiros, depois fora	510	0
+rapé	professor nos 10 primeiros, depois fora	517	0
+rapé	professor nos 20 primeiros, depois fora	183	0
+rapé	professor nos 20 primeiros, depois fora	201	0
+rapé	professor nos 20 primeiros, depois fora	280	0
+rapé	professor nos 20 primeiros, depois fora	305	0
+rapé	professor nos 20 primeiros, depois fora	318	0
+rapé	professor nos 20 primeiros, depois fora	321	0
+rapé	professor nos 20 primeiros, depois fora	510	0
+rapé	professor nos 20 primeiros, depois fora	517	0
+rapé	professor nos 30 primeiros, depois fora	183	0
+rapé	professor nos 30 primeiros, depois fora	201	0
+rapé	professor nos 30 primeiros, depois fora	280	0
+rapé	professor nos 30 primeiros, depois fora	305	0
+rapé	professor nos 30 primeiros, depois fora	318	0
+rapé	professor nos 30 primeiros, depois fora	321	1
+rapé	professor nos 30 primeiros, depois fora	510	1
+rapé	professor nos 30 primeiros, depois fora	517	0
+rapé	fora nos 20 primeiros, depois professor	183	0
+rapé	fora nos 20 primeiros, depois professor	201	0
+rapé	fora nos 20 primeiros, depois professor	280	0
+rapé	fora nos 20 primeiros, depois professor	305	0
+rapé	fora nos 20 primeiros, depois professor	318	1
+rapé	fora nos 20 primeiros, depois professor	321	1
+rapé	fora nos 20 primeiros, depois professor	510	0
+rapé	fora nos 20 primeiros, depois professor	517	0
+pás	professor	183	0
+pás	professor	201	1
+pás	professor	280	1
+pás	professor	305	0
+pás	professor	318	1
+pás	professor	321	1
+pás	professor	510	1
+pás	professor	517	1
+pás	fora	183	0
+pás	fora	201	0
+pás	fora	280	0
+pás	fora	305	0
+pás	fora	318	0
+pás	fora	321	0
+pás	fora	510	1
+pás	fora	517	0
+pás	professor nos 5 primeiros, depois fora	183	0
+pás	professor nos 5 primeiros, depois fora	201	0
+pás	professor nos 5 primeiros, depois fora	280	0
+pás	professor nos 5 primeiros, depois fora	305	0
+pás	professor nos 5 primeiros, depois fora	318	0
+pás	professor nos 5 primeiros, depois fora	321	0
+pás	professor nos 5 primeiros, depois fora	510	1
+pás	professor nos 5 primeiros, depois fora	517	0
+pás	professor nos 10 primeiros, depois fora	183	0
+pás	professor nos 10 primeiros, depois fora	201	0
+pás	professor nos 10 primeiros, depois fora	280	0
+pás	professor nos 10 primeiros, depois fora	305	0
+pás	professor nos 10 primeiros, depois fora	318	1
+pás	professor nos 10 primeiros, depois fora	321	0
+pás	professor nos 10 primeiros, depois fora	510	1
+pás	professor nos 10 primeiros, depois fora	517	0
+pás	professor nos 20 primeiros, depois fora	183	0
+pás	professor nos 20 primeiros, depois fora	201	0
+pás	professor nos 20 primeiros, depois fora	280	0
+pás	professor nos 20 primeiros, depois fora	305	0
+pás	professor nos 20 primeiros, depois fora	318	1
+pás	professor nos 20 primeiros, depois fora	321	0
+pás	professor nos 20 primeiros, depois fora	510	1
+pás	professor nos 20 primeiros, depois fora	517	1
+pás	professor nos 30 primeiros, depois fora	183	0
+pás	professor nos 30 primeiros, depois fora	201	0
+pás	professor nos 30 primeiros, depois fora	280	1
+pás	professor nos 30 primeiros, depois fora	305	0
+pás	professor nos 30 primeiros, depois fora	318	1
+pás	professor nos 30 primeiros, depois fora	321	1
+pás	professor nos 30 primeiros, depois fora	510	1
+pás	professor nos 30 primeiros, depois fora	517	1
+pás	fora nos 20 primeiros, depois professor	183	0
+pás	fora nos 20 primeiros, depois professor	201	0
+pás	fora nos 20 primeiros, depois professor	280	0
+pás	fora nos 20 primeiros, depois professor	305	0
+pás	fora nos 20 primeiros, depois professor	318	0
+pás	fora nos 20 primeiros, depois professor	321	1
+pás	fora nos 20 primeiros, depois professor	510	0
+pás	fora nos 20 primeiros, depois professor	517	0
+pôr	professor	183	0
+pôr	professor	201	0
+pôr	professor	280	0
+pôr	professor	305	0
+pôr	professor	318	1
+pôr	professor	321	1
+pôr	professor	510	1
+pôr	professor	517	1
+pôr	fora	183	0
+pôr	fora	201	0
+pôr	fora	280	0
+pôr	fora	305	0
+pôr	fora	318	0
+pôr	fora	321	0
+pôr	fora	510	0
+pôr	fora	517	0
+pôr	professor nos 5 primeiros, depois fora	183	0
+pôr	professor nos 5 primeiros, depois fora	201	0
+pôr	professor nos 5 primeiros, depois fora	280	0
+pôr	professor nos 5 primeiros, depois fora	305	0
+pôr	professor nos 5 primeiros, depois fora	318	0
+pôr	professor nos 5 primeiros, depois fora	321	0
+pôr	professor nos 5 primeiros, depois fora	510	0
+pôr	professor nos 5 primeiros, depois fora	517	0
+pôr	professor nos 10 primeiros, depois fora	183	0
+pôr	professor nos 10 primeiros, depois fora	201	0
+pôr	professor nos 10 primeiros, depois fora	280	0
+pôr	professor nos 10 primeiros, depois fora	305	0
+pôr	professor nos 10 primeiros, depois fora	318	0
+pôr	professor nos 10 primeiros, depois fora	321	0
+pôr	professor nos 10 primeiros, depois fora	510	0
+pôr	professor nos 10 primeiros, depois fora	517	0
+pôr	professor nos 20 primeiros, depois fora	183	0
+pôr	professor nos 20 primeiros, depois fora	201	0
+pôr	professor nos 20 primeiros, depois fora	280	0
+pôr	professor nos 20 primeiros, depois fora	305	0
+pôr	professor nos 20 primeiros, depois fora	318	0
+pôr	professor nos 20 primeiros, depois fora	321	1
+pôr	professor nos 20 primeiros, depois fora	510	0
+pôr	professor nos 20 primeiros, depois fora	517	1
+pôr	professor nos 30 primeiros, depois fora	183	0
+pôr	professor nos 30 primeiros, depois fora	201	0
+pôr	professor nos 30 primeiros, depois fora	280	1
+pôr	professor nos 30 primeiros, depois fora	305	0
+pôr	professor nos 30 primeiros, depois fora	318	0
+pôr	professor nos 30 primeiros, depois fora	321	0
+pôr	professor nos 30 primeiros, depois fora	510	1
+pôr	professor nos 30 primeiros, depois fora	517	1
+pôr	fora nos 20 primeiros, depois professor	183	1
+pôr	fora nos 20 primeiros, depois professor	201	0
+pôr	fora nos 20 primeiros, depois professor	280	1
+pôr	fora nos 20 primeiros, depois professor	305	0
+pôr	fora nos 20 primeiros, depois professor	318	0
+pôr	fora nos 20 primeiros, depois professor	321	1
+pôr	fora nos 20 primeiros, depois professor	510	0
+pôr	fora nos 20 primeiros, depois professor	517	0
+pensámos	professor	183	1
+pensámos	professor	201	1
+pensámos	professor	280	1
+pensámos	professor	305	1
+pensámos	professor	318	1
+pensámos	professor	321	1
+pensámos	professor	510	1
+pensámos	professor	517	1
+pensámos	fora	183	0
+pensámos	fora	201	0
+pensámos	fora	280	0
+pensámos	fora	305	0
+pensámos	fora	318	0
+pensámos	fora	321	0
+pensámos	fora	510	1
+pensámos	fora	517	0
+pensámos	professor nos 5 primeiros, depois fora	183	0
+pensámos	professor nos 5 primeiros, depois fora	201	0
+pensámos	professor nos 5 primeiros, depois fora	280	0
+pensámos	professor nos 5 primeiros, depois fora	305	0
+pensámos	professor nos 5 primeiros, depois fora	318	1
+pensámos	professor nos 5 primeiros, depois fora	321	0
+pensámos	professor nos 5 primeiros, depois fora	510	1
+pensámos	professor nos 5 primeiros, depois fora	517	0
+pensámos	professor nos 10 primeiros, depois fora	183	0
+pensámos	professor nos 10 primeiros, depois fora	201	0
+pensámos	professor nos 10 primeiros, depois fora	280	0
+pensámos	professor nos 10 primeiros, depois fora	305	0
+pensámos	professor nos 10 primeiros, depois fora	318	1
+pensámos	professor nos 10 primeiros, depois fora	321	1
+pensámos	professor nos 10 primeiros, depois fora	510	1
+pensámos	professor nos 10 primeiros, depois fora	517	0
+pensámos	professor nos 20 primeiros, depois fora	183	1
+pensámos	professor nos 20 primeiros, depois fora	201	0
+pensámos	professor nos 20 primeiros, depois fora	280	0
+pensámos	professor nos 20 primeiros, depois fora	305	0
+pensámos	professor nos 20 primeiros, depois fora	318	1
+pensámos	professor nos 20 primeiros, depois fora	321	1
+pensámos	professor nos 20 primeiros, depois fora	510	1
+pensámos	professor nos 20 primeiros, depois fora	517	1
+pensámos	professor nos 30 primeiros, depois fora	183	1
+pensámos	professor nos 30 primeiros, depois fora	201	1
+pensámos	professor nos 30 primeiros, depois fora	280	1
+pensámos	professor nos 30 primeiros, depois fora	305	1
+pensámos	professor nos 30 primeiros, depois fora	318	1
+pensámos	professor nos 30 primeiros, depois fora	321	1
+pensámos	professor nos 30 primeiros, depois fora	510	1
+pensámos	professor nos 30 primeiros, depois fora	517	1
+pensámos	fora nos 20 primeiros, depois professor	183	1
+pensámos	fora nos 20 primeiros, depois professor	201	1
+pensámos	fora nos 20 primeiros, depois professor	280	1
+pensámos	fora nos 20 primeiros, depois professor	305	1
+pensámos	fora nos 20 primeiros, depois professor	318	1
+pensámos	fora nos 20 primeiros, depois professor	321	1
+pensámos	fora nos 20 primeiros, depois professor	510	1
+pensámos	fora nos 20 primeiros, depois professor	517	1
+terço	professor	183	1
+terço	professor	201	0
+terço	professor	280	0
+terço	professor	305	1
+terço	professor	318	1
+terço	professor	321	0
+terço	professor	510	0
+terço	professor	517	1
+terço	fora	183	0
+terço	fora	201	0
+terço	fora	280	0
+terço	fora	305	0
+terço	fora	318	0
+terço	fora	321	0
+terço	fora	510	0
+terço	fora	517	0
+terço	professor nos 5 primeiros, depois fora	183	0
+terço	professor nos 5 primeiros, depois fora	201	0
+terço	professor nos 5 primeiros, depois fora	280	0
+terço	professor nos 5 primeiros, depois fora	305	0
+terço	professor nos 5 primeiros, depois fora	318	0
+terço	professor nos 5 primeiros, depois fora	321	0
+terço	professor nos 5 primeiros, depois fora	510	0
+terço	professor nos 5 primeiros, depois fora	517	0
+terço	professor nos 10 primeiros, depois fora	183	0
+terço	professor nos 10 primeiros, depois fora	201	0
+terço	professor nos 10 primeiros, depois fora	280	0
+terço	professor nos 10 primeiros, depois fora	305	0
+terço	professor nos 10 primeiros, depois fora	318	0
+terço	professor nos 10 primeiros, depois fora	321	0
+terço	professor nos 10 primeiros, depois fora	510	0
+terço	professor nos 10 primeiros, depois fora	517	0
+terço	professor nos 20 primeiros, depois fora	183	0
+terço	professor nos 20 primeiros, depois fora	201	0
+terço	professor nos 20 primeiros, depois fora	280	0
+terço	professor nos 20 primeiros, depois fora	305	0
+terço	professor nos 20 primeiros, depois fora	318	0
+terço	professor nos 20 primeiros, depois fora	321	0
+terço	professor nos 20 primeiros, depois fora	510	0
+terço	professor nos 20 primeiros, depois fora	517	1
+terço	professor nos 30 primeiros, depois fora	183	0
+terço	professor nos 30 primeiros, depois fora	201	0
+terço	professor nos 30 primeiros, depois fora	280	0
+terço	professor nos 30 primeiros, depois fora	305	0
+terço	professor nos 30 primeiros, depois fora	318	0
+terço	professor nos 30 primeiros, depois fora	321	0
+terço	professor nos 30 primeiros, depois fora	510	0
+terço	professor nos 30 primeiros, depois fora	517	1
+terço	fora nos 20 primeiros, depois professor	183	0
+terço	fora nos 20 primeiros, depois professor	201	0
+terço	fora nos 20 primeiros, depois professor	280	0
+terço	fora nos 20 primeiros, depois professor	305	0
+terço	fora nos 20 primeiros, depois professor	318	0
+terço	fora nos 20 primeiros, depois professor	321	0
+terço	fora nos 20 primeiros, depois professor	510	0
+terço	fora nos 20 primeiros, depois professor	517	1
+sofrerá	professor	183	1
+sofrerá	professor	201	1
+sofrerá	professor	280	1
+sofrerá	professor	305	1
+sofrerá	professor	318	1
+sofrerá	professor	321	1
+sofrerá	professor	510	1
+sofrerá	professor	517	1
+sofrerá	fora	183	1
+sofrerá	fora	201	1
+sofrerá	fora	280	0
+sofrerá	fora	305	1
+sofrerá	fora	318	1
+sofrerá	fora	321	1
+sofrerá	fora	510	1
+sofrerá	fora	517	0
+sofrerá	professor nos 5 primeiros, depois fora	183	1
+sofrerá	professor nos 5 primeiros, depois fora	201	1
+sofrerá	professor nos 5 primeiros, depois fora	280	0
+sofrerá	professor nos 5 primeiros, depois fora	305	1
+sofrerá	professor nos 5 primeiros, depois fora	318	1
+sofrerá	professor nos 5 primeiros, depois fora	321	1
+sofrerá	professor nos 5 primeiros, depois fora	510	1
+sofrerá	professor nos 5 primeiros, depois fora	517	0
+sofrerá	professor nos 10 primeiros, depois fora	183	1
+sofrerá	professor nos 10 primeiros, depois fora	201	1
+sofrerá	professor nos 10 primeiros, depois fora	280	0
+sofrerá	professor nos 10 primeiros, depois fora	305	1
+sofrerá	professor nos 10 primeiros, depois fora	318	1
+sofrerá	professor nos 10 primeiros, depois fora	321	1
+sofrerá	professor nos 10 primeiros, depois fora	510	1
+sofrerá	professor nos 10 primeiros, depois fora	517	0
+sofrerá	professor nos 20 primeiros, depois fora	183	1
+sofrerá	professor nos 20 primeiros, depois fora	201	1
+sofrerá	professor nos 20 primeiros, depois fora	280	1
+sofrerá	professor nos 20 primeiros, depois fora	305	1
+sofrerá	professor nos 20 primeiros, depois fora	318	1
+sofrerá	professor nos 20 primeiros, depois fora	321	1
+sofrerá	professor nos 20 primeiros, depois fora	510	1
+sofrerá	professor nos 20 primeiros, depois fora	517	0
+sofrerá	professor nos 30 primeiros, depois fora	183	1
+sofrerá	professor nos 30 primeiros, depois fora	201	1
+sofrerá	professor nos 30 primeiros, depois fora	280	1
+sofrerá	professor nos 30 primeiros, depois fora	305	1
+sofrerá	professor nos 30 primeiros, depois fora	318	1
+sofrerá	professor nos 30 primeiros, depois fora	321	1
+sofrerá	professor nos 30 primeiros, depois fora	510	1
+sofrerá	professor nos 30 primeiros, depois fora	517	1
+sofrerá	fora nos 20 primeiros, depois professor	183	1
+sofrerá	fora nos 20 primeiros, depois professor	201	1
+sofrerá	fora nos 20 primeiros, depois professor	280	1
+sofrerá	fora nos 20 primeiros, depois professor	305	1
+sofrerá	fora nos 20 primeiros, depois professor	318	1
+sofrerá	fora nos 20 primeiros, depois professor	321	1
+sofrerá	fora nos 20 primeiros, depois professor	510	1
+sofrerá	fora nos 20 primeiros, depois professor	517	1
+reclusão	professor	183	1
+reclusão	professor	201	1
+reclusão	professor	280	1
+reclusão	professor	305	1
+reclusão	professor	318	1
+reclusão	professor	321	1
+reclusão	professor	510	1
+reclusão	professor	517	1
+reclusão	fora	183	1
+reclusão	fora	201	1
+reclusão	fora	280	1
+reclusão	fora	305	1
+reclusão	fora	318	1
+reclusão	fora	321	1
+reclusão	fora	510	1
+reclusão	fora	517	1
+reclusão	professor nos 5 primeiros, depois fora	183	1
+reclusão	professor nos 5 primeiros, depois fora	201	1
+reclusão	professor nos 5 primeiros, depois fora	280	1
+reclusão	professor nos 5 primeiros, depois fora	305	1
+reclusão	professor nos 5 primeiros, depois fora	318	1
+reclusão	professor nos 5 primeiros, depois fora	321	1
+reclusão	professor nos 5 primeiros, depois fora	510	1
+reclusão	professor nos 5 primeiros, depois fora	517	1
+reclusão	professor nos 10 primeiros, depois fora	183	1
+reclusão	professor nos 10 primeiros, depois fora	201	1
+reclusão	professor nos 10 primeiros, depois fora	280	1
+reclusão	professor nos 10 primeiros, depois fora	305	1
+reclusão	professor nos 10 primeiros, depois fora	318	1
+reclusão	professor nos 10 primeiros, depois fora	321	1
+reclusão	professor nos 10 primeiros, depois fora	510	1
+reclusão	professor nos 10 primeiros, depois fora	517	1
+reclusão	professor nos 20 primeiros, depois fora	183	1
+reclusão	professor nos 20 primeiros, depois fora	201	1
+reclusão	professor nos 20 primeiros, depois fora	280	1
+reclusão	professor nos 20 primeiros, depois fora	305	1
+reclusão	professor nos 20 primeiros, depois fora	318	1
+reclusão	professor nos 20 primeiros, depois fora	321	1
+reclusão	professor nos 20 primeiros, depois fora	510	1
+reclusão	professor nos 20 primeiros, depois fora	517	1
+reclusão	professor nos 30 primeiros, depois fora	183	1
+reclusão	professor nos 30 primeiros, depois fora	201	1
+reclusão	professor nos 30 primeiros, depois fora	280	1
+reclusão	professor nos 30 primeiros, depois fora	305	1
+reclusão	professor nos 30 primeiros, depois fora	318	1
+reclusão	professor nos 30 primeiros, depois fora	321	1
+reclusão	professor nos 30 primeiros, depois fora	510	1
+reclusão	professor nos 30 primeiros, depois fora	517	1
+reclusão	fora nos 20 primeiros, depois professor	183	1
+reclusão	fora nos 20 primeiros, depois professor	201	1
+reclusão	fora nos 20 primeiros, depois professor	280	1
+reclusão	fora nos 20 primeiros, depois professor	305	1
+reclusão	fora nos 20 primeiros, depois professor	318	1
+reclusão	fora nos 20 primeiros, depois professor	321	1
+reclusão	fora nos 20 primeiros, depois professor	510	1
+reclusão	fora nos 20 primeiros, depois professor	517	1
