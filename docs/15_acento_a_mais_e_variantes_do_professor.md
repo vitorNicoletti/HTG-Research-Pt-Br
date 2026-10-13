@@ -328,6 +328,16 @@ antes ele caía sobre o segundo.
 
 É o melhor modelo até aqui em todas as medidas.
 
+![Medidas por época](../diagnostico/resultados/acento_separado/evolucao_por_epocas.png)
+
+A figura é de `diagnostico/grafico_epocas.py`, que lê os `paineis.tsv`
+guardados e também calcula as duas medidas desta página. O acento pedido ainda
+sobe em linha quase reta. O acento a mais e o CER das acentuadas estão
+achatando, longe das referências, 6% e 0,27. As duas medidas que não podem
+piorar ficam coladas no modelo original do começo ao fim. São quatro pontos de
+um treino só, e o ponto de 21 épocas mostra uma oscilação de uns 3 pontos
+entre avaliações.
+
 A diferença pareada do protocolo cai de +66 para +56 com 16 épocas e fica em
 +59 com 30. Ela soma como acerto a
 marca em cima das palavras só com cedilha, então a queda mistura o ganho com o
@@ -353,6 +363,51 @@ Ideias guardadas, na ordem em que as tentaríamos.
 
 Pendente na medição. Um detector de cedilha, e a anotação humana do modelo com
 professor em quatro classes, só o sinal certo, certo e a mais, só a mais, nada.
+
+## Estado atual e como continuar
+
+Onde estão as coisas.
+
+| o quê | onde |
+|---|---|
+| melhor modelo, zona vogais com 30 épocas | máquina com GPU, usuário `leozao`, `~/htg-diag/model_zona_vogais/models/ema_ckpt.pt` |
+| o mesmo treino com 16 épocas | na mesma pasta, `ema_16ep.pt` |
+| estado para continuar esse treino | na mesma pasta, `ckpt.pt`, `optim.pt` e `estado.pt` |
+| professor com 16 épocas | `~/htg-diag/model_iam_pt_separado_professor/models/ema_ep15.pt` |
+| imagens de cada avaliação | pastas `avaliacao_*_val` em `~/htg-diag`, fora do git |
+| tabelas, configurações, logs e figuras | `diagnostico/resultados/acento_separado/`, no git |
+
+Para continuar o melhor treino até 40 épocas, na máquina com GPU.
+
+```bash
+NOME=zona_vogais EPOCAS=40 PONTOS="40" \
+    ARGS="--acento_separado --peso_zona 5 --zona vogais" bash scripts/treino_completo.sh
+```
+
+Para um treino novo, mudando uma coisa em relação ao melhor.
+
+```bash
+NOME=meu_teste EPOCAS=16 PONTOS="6 16" \
+    ARGS="--acento_separado --peso_zona 5 --zona vogais <a mudança>" bash scripts/treino_completo.sh
+```
+
+Depois, guardar o resumo e o `paineis.tsv` da avaliação numa pasta de
+`diagnostico/resultados/acento_separado/`, acrescentar a linha em `TREINOS` no
+`diagnostico/grafico_epocas.py` e rodar. Ele imprime as medidas desta página
+para cada ponto. As figuras lado a lado saem de `scripts/comparar_paineis.py`
+e o bootstrap de `scripts/comparar_avaliacoes.py`, como no
+[14](14_acento_separado_e_professor.md).
+
+O que está em aberto, por ordem de quanto falta.
+
+- Letra das palavras acentuadas, CER 0,39 contra 0,27 nas imagens da base. O
+  treino com professor fora da máscara em ruído baixo é a tentativa em curso.
+- Acento a mais, 25% contra 6% do modelo original. Mais épocas rendem pouco
+  daqui em diante.
+- Posição do acento e cedilha, que não têm medida confiável. Dependem do
+  detector de cedilha e da anotação humana.
+- Os documentos 07, 09 e 10 e o resumo do `README.md` desta pasta ainda
+  descrevem o estado anterior ao acento separado.
 
 ## Treinar fora da máquina local
 
