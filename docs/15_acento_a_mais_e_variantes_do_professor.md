@@ -238,8 +238,8 @@ detector não mede.
   nas palavras sem haste. A única configuração em que o modelo aprendeu a
   desenhar acento nessas palavras é a palavra encolhida, que o professor não
   produz.
-- O melhor modelo continua sendo o acento separado com professor, e ele ainda
-  melhora com mais épocas.
+- O melhor modelo é o acento separado com professor e zona vogais, com 30
+  épocas. Ver a seção do viés do peso.
 
 ## O viés do peso e a zona vogais
 
@@ -298,7 +298,38 @@ marcas sem pôr a certa. O detector contava a marca errada como presença. Em
 somem. Em "sofrerá" o acento do fim fica e o acento a mais diminui, sem sumir.
 São três palavras olhadas, e a posição segue sem medida confiável.
 
-A diferença pareada do protocolo cai de +66 para +56. Ela soma como acerto a
+### Treino mais longo
+
+O mesmo treino continuado de 16 para 30 épocas, na RX 9060 XT, a partir do
+estado salvo no Colab.
+
+| professor e zona vogais | 6 épocas | 16 épocas | 21 épocas | 30 épocas | professor, 16 épocas |
+|---|---|---|---|---|---|
+| marca em cima nas só com cedilha | 61% | 30% | 33% | 25% | 45% |
+| marca nos sinais visíveis | 74% | 80% | 84% | 87% | 86% |
+| sem haste | 59% | 72% | 77% | 86% | 76% |
+| com haste | 85% | 85% | 89% | 88% | 93% |
+| circunflexo, duas palavras | 59% | 56% | 61% | 79% | 71% |
+| marca no esqueleto | 5% | 6% | 5% | 5% | 5% |
+| marca sem acento | 5% | 6% | 5% | 5% | 8% |
+| CER sem acento pedido | | 0,195 | | 0,189 | 0,190 |
+| CER das acentuadas | 0,50 | 0,41 | 0,40 | 0,39 | 0,43 |
+
+Com 30 épocas a zona vogais recupera a marca pedida que tinha custado, passa o
+professor nas palavras sem haste e fica com pouco mais da metade do acento a
+mais dele. O problema 1 e a letra das palavras sem acento não se mexem, e a
+letra das acentuadas melhora devagar. Nada piorou com o treino mais longo.
+Entre 16 e 30 épocas nenhuma diferença isolada do protocolo tem intervalo
+longe do zero, mas todas vão na mesma direção.
+
+Nas folhas, com 30 épocas "pôr" sai com o sinal sobre o "o" nas seis colunas,
+e "relâmpagos" passa a ter o sinal sobre o primeiro "a" em quatro delas, onde
+antes ele caía sobre o segundo.
+
+É o melhor modelo até aqui em todas as medidas.
+
+A diferença pareada do protocolo cai de +66 para +56 com 16 épocas e fica em
++59 com 30. Ela soma como acerto a
 marca em cima das palavras só com cedilha, então a queda mistura o ganho com o
 custo e não serve para julgar esta variante.
 
@@ -306,8 +337,8 @@ custo e não serve para julgar esta variante.
 
 | treino | o que muda em relação ao professor | situação |
 |---|---|---|
-| professor mais longo | continuar de 16 para 30 e 40 épocas | em andamento |
-| zona vogais mais longa | continuar o treino acima, já que o acento a mais cai com as épocas nos dois | a decidir |
+| zona vogais até 40 épocas | continuar o treino de 30 | a fazer, as medidas ainda melhoravam |
+| zona vogais com professor fora da máscara em ruído baixo | `--professor_fora_mascara --professor_fora_t_max 400`, para a letra das acentuadas | rodando no Colab |
 
 Ideias guardadas, na ordem em que as tentaríamos.
 
@@ -329,6 +360,8 @@ professor em quatro classes, só o sinal certo, certo e a mais, só a mais, nada
 
 - `scripts/pacote_nuvem.sh` monta `pacote_nuvem.tar`, 2,8 GB, com o que não
   está no git. Vai para uma pasta privada do Google Drive.
+- `scripts/treino_completo.sh` treina ou continua, avalia e empacota o
+  resultado, com envio por scp. É o que se usa na máquina com GPU.
 - `scripts/treino_nuvem.sh` tem os valores fixos do treino com professor e
   recebe em `ARGS` só o que muda. Copia o estado para uma pasta durável ao fim
   de cada época e retoma dali numa sessão nova. Serve também na máquina local.
@@ -355,6 +388,7 @@ resumo e o `paineis.tsv`.
 | `avaliacao_so_prof_val` | só professor e professor com acento separado, 11 épocas |
 | `avaliacao_sem_pares_val` | pares sem professor, 6 e 16 épocas, avaliados na CPU |
 | `avaliacao_zona_vogais_val` | professor e zona vogais, 6 e 16 épocas, treinado e avaliado no Colab |
+| `avaliacao_zona_vogais_30ep_val` | o mesmo treino continuado, 21 e 30 épocas |
 
 As pastas `comparacao_*` têm quatro figuras de cada comparação.
 `diagnostico/resultados/sementes/` e `diagnostico/resultados/geracao_mista/`
