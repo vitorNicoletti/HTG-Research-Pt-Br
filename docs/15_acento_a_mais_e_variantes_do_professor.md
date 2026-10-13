@@ -212,6 +212,10 @@ interruptor de "palavra acentuada" e não como um comando preso a uma letra.
 | CER sem acento pedido | 0,281 | 0,190 | 0,248 |
 | diferença pareada | +51 | +66 | +53 |
 
+Com 6 épocas o protocolo dava 72% de marca na acentuada, 16% no esqueleto, 7%
+sem acento e +55, com marca em cima nas só com cedilha em 66%. O mesmo
+movimento do professor, o acento a mais caindo com as épocas.
+
 Bootstrap por palavra, pares sem professor menos professor. Marca no esqueleto
 +4 pp, de +2 a +7. CER sem acento pedido +0,059, de +0,045 a +0,073. Diferença
 pareada −13 pp, de −18 a −7.
@@ -311,7 +315,7 @@ resumo e o `paineis.tsv`.
 | `avaliacao_controle_val` | controle, 6 e 16 épocas |
 | `avaliacao_fora_val` | professor fora da máscara, 6 e 16 épocas |
 | `avaliacao_so_prof_val` | só professor e professor com acento separado, 11 épocas |
-| `avaliacao_sem_pares_val` | pares sem professor, 16 épocas |
+| `avaliacao_sem_pares_val` | pares sem professor, 6 e 16 épocas, avaliados na CPU |
 
 As pastas `comparacao_*` têm quatro figuras de cada comparação.
 `diagnostico/resultados/sementes/` e `diagnostico/resultados/geracao_mista/`
