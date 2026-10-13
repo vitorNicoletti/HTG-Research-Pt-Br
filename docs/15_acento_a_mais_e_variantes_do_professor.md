@@ -241,7 +241,7 @@ detector não mede.
 - O melhor modelo continua sendo o acento separado com professor, e ele ainda
   melhora com mais épocas.
 
-## Hipótese ainda não testada, o viés do peso
+## O viés do peso e a zona vogais
 
 O peso 5 vale só onde o sinal está naquela amostra. Com um peso w que depende
 da amostra, a previsão que minimiza o erro numa célula deixa de ser a média do
@@ -266,12 +266,48 @@ estragada por outra causa. Não foi testada com acento separado e professor.
 A máscara para a base atual está em `iam_pt_alinhado/zona_vogais.npz`, gerada
 por `scripts/mascaras_vogais.py` (11 minutos de CPU).
 
+### Resultado
+
+Treino com professor e acento separado, mais `--peso_zona 5 --zona vogais`.
+Dezesseis épocas no Colab, numa T4, em três sessões com retomada. Os testes de
+`diagnostico/` passaram na placa, e a primeira época repetiu os números do
+treino com professor na máquina local.
+
+| 16 épocas | professor | professor e zona vogais | diferença, IC95 |
+|---|---|---|---|
+| marca em cima nas só com cedilha | 45% | 30% | |
+| marca nos sinais visíveis | 86% | 80% | |
+| sem haste | 76% | 72% | |
+| com haste | 93% | 85% | |
+| marca no esqueleto | 5% | 6% | +1 pp, de −1 a +3 |
+| marca sem acento | 8% | 6% | −1 pp, de −3 a 0 |
+| CER sem acento pedido | 0,190 | 0,195 | +0,005, de −0,002 a +0,012 |
+| CER das acentuadas | 0,43 | 0,41 | |
+
+Com 6 épocas a marca em cima nas só com cedilha era 61%, contra 82% do
+professor no mesmo ponto.
+
+É a primeira variante que reduz o acento a mais sem trazer de volta o problema
+1 nem estragar a letra. O acento a mais cai um terço, para o nível do controle
+sem professor. O custo são 6 pontos de marca nos sinais visíveis.
+
+Parte desse custo não é perda. Nas folhas de "relâmpagos" o professor põe a
+marca sobre o "a" errado na maioria das colunas, e a zona vogais tira essas
+marcas sem pôr a certa. O detector contava a marca errada como presença. Em
+"caçadora" a cedilha continua nas seis colunas e os agudos e tils sobrando
+somem. Em "sofrerá" o acento do fim fica e o acento a mais diminui, sem sumir.
+São três palavras olhadas, e a posição segue sem medida confiável.
+
+A diferença pareada do protocolo cai de +66 para +56. Ela soma como acerto a
+marca em cima das palavras só com cedilha, então a queda mistura o ganho com o
+custo e não serve para julgar esta variante.
+
 ## Próximos passos
 
 | treino | o que muda em relação ao professor | situação |
 |---|---|---|
 | professor mais longo | continuar de 16 para 30 e 40 épocas | em andamento |
-| zona vogais | `--peso_zona 5 --zona vogais` | pronto para rodar |
+| zona vogais mais longa | continuar o treino acima, já que o acento a mais cai com as épocas nos dois | a decidir |
 
 Ideias guardadas, na ordem em que as tentaríamos.
 
@@ -302,8 +338,10 @@ NOME=zona_vogais EPOCAS=16 DESTINO=./copias \
     ARGS="--acento_separado --peso_zona 5 --zona vogais" bash scripts/treino_nuvem.sh
 ```
 
-Testado na CPU, com clone limpo e só o pacote como dados. Ainda não rodou no
-Colab.
+Um treino de 16 épocas rodou no Colab gratuito, a 20 minutos por época numa
+T4, o dobro da RX 9060 XT. A cópia ocupa 2,3 GB no Drive. Cada arquivo
+sobrescrito vai para a lixeira do Drive e continua contando no espaço, então
+num treino longo é preciso esvaziá-la de tempos em tempos.
 
 ## Registros
 
@@ -316,6 +354,7 @@ resumo e o `paineis.tsv`.
 | `avaliacao_fora_val` | professor fora da máscara, 6 e 16 épocas |
 | `avaliacao_so_prof_val` | só professor e professor com acento separado, 11 épocas |
 | `avaliacao_sem_pares_val` | pares sem professor, 6 e 16 épocas, avaliados na CPU |
+| `avaliacao_zona_vogais_val` | professor e zona vogais, 6 e 16 épocas, treinado e avaliado no Colab |
 
 As pastas `comparacao_*` têm quatro figuras de cada comparação.
 `diagnostico/resultados/sementes/` e `diagnostico/resultados/geracao_mista/`
