@@ -38,10 +38,10 @@ sys.path.insert(0, os.path.join(RAIZ, "diagnostico"))
 os.chdir(RAIZ)
 from diag_casas_trocadas import esqueleto, fonte  # noqa: E402
 
-# Do protocolo de validacao (scripts/avaliar_pt.py). As quatro primeiras sao as
+# Do protocolo de validacao (scripts/avaliar_pt.py). As tres primeiras sao as
 # que mais perderam marca com o professor fora da mascara; as duas ultimas
 # quase nao mudaram e servem de comparacao.
-PALAVRAS = ["rapé", "pás", "pôr", "pensámos", "terço", "sofrerá", "reclusão"]
+PALAVRAS = ["pás", "pôr", "pensámos", "terço", "sofrerá", "reclusão"]
 ESCRITORES = ["183", "201", "280", "305", "318", "321", "510", "517"]
 # (primeiro modelo, segundo modelo, passos do primeiro)
 VARIANTES = [("A", "A", 50), ("B", "B", 50), ("A", "B", 5), ("A", "B", 10), ("A", "B", 20), ("A", "B", 30), ("B", "A", 20)]

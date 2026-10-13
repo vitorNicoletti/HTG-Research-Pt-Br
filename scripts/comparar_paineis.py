@@ -25,15 +25,26 @@ from acentos_sinteticos.vocabulario import esqueleto  # noqa: E402
 
 FONTES = ("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "arial.ttf")
 VERDE, VERMELHO = (40, 160, 60), (210, 40, 40)
+# Palavras do protocolo que nao viram figura: o esqueleto e uma palavra
+# ofensiva em ingles. Continuam nas medidas; so nao sao mostradas.
+NAO_MOSTRAR = {"rap\u00e9"}
 
 
 def fonte(tam):
-    for f in FONTES:
+    """Fonte com os acentos do portugues. A padrao do PIL nao os tem e a legenda
+    sairia com quadrados, entao sem fonte o script para."""
+    candidatas = list(FONTES)
+    try:  # o matplotlib traz a DejaVuSans consigo, em qualquer sistema
+        import matplotlib
+        candidatas.insert(0, os.path.join(matplotlib.get_data_path(), "fonts", "ttf", "DejaVuSans.ttf"))
+    except ImportError:
+        pass
+    for f in candidatas:
         try:
             return ImageFont.truetype(f, tam)
         except OSError:
             pass
-    return ImageFont.load_default()
+    raise SystemExit("nenhuma fonte com acentos encontrada (DejaVuSans); as legendas sairiam com quadrados")
 
 
 def ler_avaliacao(pasta, rotulo):
@@ -82,6 +93,8 @@ def main():
     W, H, BARRA, ROT, TOPO = 256, 64, 5, 210, 30
     f_rot, f_tit = fonte(15), fonte(18)
     for n, (ac, esq) in enumerate(pares):
+        if ac in NAO_MOSTRAR:
+            continue
         linhas = [(nome, pasta, med, palavra, palavra == ac)
                   for nome, pasta, _, _, med in modelos for palavra in (ac, esq)]
         tela = Image.new("RGB", (ROT + len(escritores) * (W + 4), TOPO + len(linhas) * (H + BARRA + 4)), "white")
@@ -100,7 +113,7 @@ def main():
                 if marca:
                     d.rectangle([x, y, x + W - 1, y + BARRA - 1], fill=VERDE if acentuada else VERMELHO)
         tela.save(os.path.join(a.saida, f"{n:02d}_{esq}.png"))
-    print(f"{len(pares)} figuras em {a.saida}")
+    print(f"{sum(ac not in NAO_MOSTRAR for ac, _ in pares)} figuras em {a.saida}")
 
 
 if __name__ == "__main__":
