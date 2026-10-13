@@ -13,6 +13,11 @@
 #           professor = modelo do IAM); pode sobrepor qualquer opcao de baixo
 # BASE      base de acentos (padrao iam_pt_alinhado)
 # DEVICE    padrao cuda:0;  WORKERS  padrao = numero de nucleos
+# GUARDAR   pontos intermediarios que tambem vao para a copia (padrao
+#           "ema_ep5.pt", o de 6 epocas). O modelo final e o ema_ckpt.pt
+#
+# A copia ocupa 1,6 GB (o necessario para retomar) mais 0,65 GB por ponto
+# guardado, e precisa de 0,7 GB de folga durante a copia.
 #
 # Grava so no fim da epoca (--save_every_steps 0): os arquivos de models/ ficam
 # parados durante a epoca seguinte e a copia nunca pega um estado pela metade.
@@ -24,6 +29,7 @@ BASE=${BASE:-iam_pt_alinhado}
 DEVICE=${DEVICE:-cuda:0}
 WORKERS=${WORKERS:-$(nproc)}
 PY=${PY:-python -u}
+GUARDAR=${GUARDAR:-ema_ep5.pt}
 IAM=./DiffusionPen/diffusionpen_iam_model_path/models
 SALVAR=./model_$NOME
 COPIA=$DESTINO/model_$NOME
@@ -32,17 +38,18 @@ LOG=$SALVAR/treino.log
 bash scripts/aplicar_mods.sh > /dev/null || { echo "aplicar_mods falhou"; exit 1; }
 mkdir -p "$SALVAR/models" "$COPIA/models"
 
-copiar() {  # models/ + registros -> pasta duravel; nome temporario e troca no fim
-  local f
-  for f in "$SALVAR"/models/*.pt; do
+copiar() {  # o que retoma o treino + pontos de GUARDAR -> pasta duravel
+  # Um arquivo por vez, com nome temporario e troca no fim, para a folga
+  # necessaria ser a de um arquivo so. O estado.pt vai por ultimo: se a sessao
+  # cair no meio, a retomada refaz uma epoca em vez de pular uma.
+  local n f
+  rm -f "$COPIA"/models/.*.tmp
+  for n in ckpt.pt ema_ckpt.pt optim.pt $GUARDAR estado.pt; do
+    f=$SALVAR/models/$n
     [ -f "$f" ] || continue
-    [ "$f" -nt "$COPIA/models/$(basename "$f")" ] || continue
-    cp "$f" "$COPIA/models/.$(basename "$f").tmp" || return 1
-  done
-  for f in "$COPIA"/models/.*.tmp; do
-    [ -f "$f" ] || continue
-    local nome; nome=$(basename "$f"); nome=${nome#.}; nome=${nome%.tmp}
-    mv "$f" "$COPIA/models/$nome" || return 1
+    [ "$f" -nt "$COPIA/models/$n" ] || continue
+    cp "$f" "$COPIA/models/.$n.tmp" && mv "$COPIA/models/.$n.tmp" "$COPIA/models/$n" \
+      || { echo "=== COPIA FALHOU em $n (espaco em $DESTINO?) ==="; rm -f "$COPIA/models/.$n.tmp"; return 1; }
   done
   cp "$LOG" "$SALVAR"/config.jsonl "$COPIA"/ 2>/dev/null
   echo "=== copia em $COPIA ($(date +%H:%M)) ==="
@@ -52,7 +59,8 @@ copiar() {  # models/ + registros -> pasta duravel; nome temporario e troca no f
 if [ ! -f "$SALVAR/models/estado.pt" ] && [ -f "$COPIA/models/estado.pt" ]; then
   echo "=== restaurando de $COPIA ==="
   rm -f "$COPIA"/models/.*.tmp
-  cp "$COPIA"/models/*.pt "$SALVAR/models/" || exit 1
+  for n in ckpt.pt ema_ckpt.pt optim.pt estado.pt; do cp "$COPIA/models/$n" "$SALVAR/models/" || exit 1; done
+  for n in $GUARDAR; do [ -f "$COPIA/models/$n" ] && cp "$COPIA/models/$n" "$SALVAR/models/"; done
   cp "$COPIA"/treino.log "$COPIA"/config.jsonl "$SALVAR"/ 2>/dev/null
 fi
 
