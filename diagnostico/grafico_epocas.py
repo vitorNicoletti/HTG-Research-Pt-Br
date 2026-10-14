@@ -29,7 +29,8 @@ TREINOS = {
     "professor": [(6, "avaliacao_professor_val", "professor_6ep"), (11, "avaliacao_so_prof_val", "professor_11ep"),
                   (16, "avaliacao_professor_val", "professor_16ep")],
     "professor e zona vogais": [(6, "avaliacao_zona_vogais_val", "zona_vogais_6ep"), (16, "avaliacao_zona_vogais_val", "zona_vogais_16ep"),
-                                (21, "avaliacao_zona_vogais_30ep_val", "zona_vogais_21ep"), (30, "avaliacao_zona_vogais_30ep_val", "zona_vogais_30ep")],
+                                (21, "avaliacao_zona_vogais_30ep_val", "zona_vogais_21ep"), (30, "avaliacao_zona_vogais_30ep_val", "zona_vogais_30ep"),
+                                (40, "avaliacao_zona_vogais_40ep_val", "zona_vogais_40ep")],
 }
 COR = {"professor": "#2a78d6", "professor e zona vogais": "#eb6834"}   # validadas (dataviz), modo claro
 TINTA, TINTA2, GRADE, FUNDO = "#0b0b0b", "#52514e", "#e4e3df", "#fcfcfb"
@@ -96,9 +97,9 @@ def main():
             ax.annotate(f"{y:.0f}%" if un else f"{y:.2f}".replace(".", ","), (x, y),
                         xytext=(0, -11 if baixo else 9), textcoords="offset points", color=TINTA,
                         fontsize=9.5, ha="center", va="top" if baixo else "bottom")
-        ax.set_xlim(4, 32)
+        ax.set_xlim(4, 42)
         ax.set_ylim(y0, y1)
-        ax.set_xticks([6, 11, 16, 21, 30])
+        ax.set_xticks([6, 11, 16, 21, 30, 40])
         ax.tick_params(length=0)
         if un:
             ax.yaxis.set_major_formatter(lambda v, _: f"{v:.0f}%")
