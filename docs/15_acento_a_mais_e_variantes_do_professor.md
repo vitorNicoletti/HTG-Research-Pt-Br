@@ -238,7 +238,7 @@ detector não mede.
   nas palavras sem haste. A única configuração em que o modelo aprendeu a
   desenhar acento nessas palavras é a palavra encolhida, que o professor não
   produz.
-- O melhor modelo é o acento separado com professor e zona vogais, com 30
+- O melhor modelo é o acento separado com professor e zona vogais, com 40
   épocas. Ver a seção do viés do peso.
 
 ## O viés do peso e a zona vogais
@@ -300,20 +300,20 @@ São três palavras olhadas, e a posição segue sem medida confiável.
 
 ### Treino mais longo
 
-O mesmo treino continuado de 16 para 30 épocas, na RX 9060 XT, a partir do
-estado salvo no Colab.
+O mesmo treino continuado de 16 para 30 e depois 40 épocas, na RX 9060 XT, a
+partir do estado salvo no Colab.
 
-| professor e zona vogais | 6 épocas | 16 épocas | 21 épocas | 30 épocas | professor, 16 épocas |
-|---|---|---|---|---|---|
-| marca em cima nas só com cedilha | 61% | 30% | 33% | 25% | 45% |
-| marca nos sinais visíveis | 74% | 80% | 84% | 87% | 86% |
-| sem haste | 59% | 72% | 77% | 86% | 76% |
-| com haste | 85% | 85% | 89% | 88% | 93% |
-| circunflexo, duas palavras | 59% | 56% | 61% | 79% | 71% |
-| marca no esqueleto | 5% | 6% | 5% | 5% | 5% |
-| marca sem acento | 5% | 6% | 5% | 5% | 8% |
-| CER sem acento pedido | | 0,195 | | 0,189 | 0,190 |
-| CER das acentuadas | 0,50 | 0,41 | 0,40 | 0,39 | 0,43 |
+| professor e zona vogais | 6 épocas | 16 épocas | 21 épocas | 30 épocas | 40 épocas | professor, 16 épocas |
+|---|---|---|---|---|---|---|
+| marca em cima nas só com cedilha | 61% | 30% | 33% | 25% | 22% | 45% |
+| marca nos sinais visíveis | 74% | 80% | 84% | 87% | 88% | 86% |
+| sem haste | 59% | 72% | 77% | 86% | 88% | 76% |
+| com haste | 85% | 85% | 89% | 88% | 87% | 93% |
+| circunflexo, duas palavras | 59% | 56% | 61% | 79% | 75% | 71% |
+| marca no esqueleto | 5% | 6% | 5% | 5% | 4% | 5% |
+| marca sem acento | 5% | 6% | 5% | 5% | 6% | 8% |
+| CER sem acento pedido | | 0,195 | | 0,189 | 0,186 | 0,190 |
+| CER das acentuadas | 0,50 | 0,41 | 0,40 | 0,39 | 0,39 | 0,43 |
 
 Com 30 épocas a zona vogais recupera a marca pedida que tinha custado, passa o
 professor nas palavras sem haste e fica com pouco mais da metade do acento a
@@ -326,29 +326,68 @@ Nas folhas, com 30 épocas "pôr" sai com o sinal sobre o "o" nas seis colunas,
 e "relâmpagos" passa a ter o sinal sobre o primeiro "a" em quatro delas, onde
 antes ele caía sobre o segundo.
 
-É o melhor modelo até aqui em todas as medidas.
+Entre 30 e 40 épocas o treino estaciona. O acento pedido e o CER das
+acentuadas não se mexem, e só o acento a mais ainda cai, de 25% para 22%.
+Nenhuma medida piora. O modelo de 40 épocas é o melhor até aqui, por pouco
+sobre o de 30.
 
 ![Medidas por época](../diagnostico/resultados/acento_separado/evolucao_por_epocas.png)
 
 A figura é de `diagnostico/grafico_epocas.py`, que lê os `paineis.tsv`
-guardados e também calcula as duas medidas desta página. O acento pedido ainda
-sobe em linha quase reta. O acento a mais e o CER das acentuadas estão
-achatando, longe das referências, 6% e 0,27. As duas medidas que não podem
-piorar ficam coladas no modelo original do começo ao fim. São quatro pontos de
-um treino só, e o ponto de 21 épocas mostra uma oscilação de uns 3 pontos
-entre avaliações.
+guardados e também calcula as duas medidas desta página. As curvas achatam a
+partir de 30 épocas, com o acento a mais e o CER das acentuadas ainda longe
+das referências, 6% e 0,27. As duas medidas que não podem piorar ficam coladas
+no modelo original do começo ao fim. São cinco pontos de um treino só, e o
+ponto de 21 épocas mostra uma oscilação de uns 3 pontos entre avaliações.
 
 A diferença pareada do protocolo cai de +66 para +56 com 16 épocas e fica em
 +59 com 30. Ela soma como acerto a
 marca em cima das palavras só com cedilha, então a queda mistura o ganho com o
 custo e não serve para julgar esta variante.
 
+## Professor fora da máscara só em ruído baixo
+
+`--professor_fora_mascara --professor_fora_t_max 400`, sobre a zona vogais. O
+professor só vale fora da máscara nas amostras acentuadas com ruído abaixo de
+t = 400, os últimos 20 dos 50 passos da geração. Acima disso a acentuada fica
+com o ruído sorteado. A aposta era limpar a letra das acentuadas sem tirar o
+lugar do sinal, já que tamanho e acento se decidem antes. Dezesseis épocas no
+Colab, numa sessão só.
+
+| 16 épocas | zona vogais | com fora da máscara em ruído baixo | fora da máscara em todo ruído, sem zona |
+|---|---|---|---|
+| CER das acentuadas | 0,41 | 0,31 | 0,28 |
+| o mesmo, só sinais visíveis e com marca | 0,44 | 0,37 | 0,34 |
+| marca nos sinais visíveis | 80% | 69% | 64% |
+| sem haste | 72% | 45% | 34% |
+| com haste | 85% | 87% | 86% |
+| marca em cima nas só com cedilha | 30% | 40% | 39% |
+| marca no esqueleto, sem acento | 6%, 6% | 5%, 5% | 6%, 6% |
+| CER sem acento pedido | 0,195 | 0,191 | 0,187 |
+
+A letra das acentuadas melhora bastante, e a melhora aparece também nas
+imagens que têm a marca. O acento das palavras sem haste volta a cair, de 72%
+para 45%, e o acento a mais sobe. Restringir ao ruído baixo atenuou o defeito
+do fora da máscara original, sem tirá-lo.
+
+Nas folhas, "pôr" sai grande, limpa e sem sinal, com a mesma forma do
+esqueleto. Em "bálsamo" a letra fica mais limpa e o acento se mantém em parte
+das colunas. Ou seja, mesmo cobrando o professor só no fim da geração, a
+palavra acentuada passa a ter a geometria do esqueleto desde o começo. A
+suposição de que o que se treina em ruído baixo não mexe no que o modelo faz
+em ruído alto não se sustentou.
+
+As três tentativas de aproximar a acentuada do esqueleto dão a mesma troca,
+em doses diferentes. Quanto mais a palavra acentuada é cobrada a se parecer
+com o que o modelo original escreveria, mais limpa a letra e menos acento nas
+palavras sem haste. A zona vogais sem o fora da máscara segue sendo o melhor
+modelo.
+
 ## Próximos passos
 
 | treino | o que muda em relação ao professor | situação |
 |---|---|---|
-| zona vogais até 40 épocas | continuar o treino de 30 | a fazer, as medidas ainda melhoravam |
-| zona vogais com professor fora da máscara em ruído baixo | `--professor_fora_mascara --professor_fora_t_max 400`, para a letra das acentuadas | rodando no Colab |
+| mais épocas da zona vogais | | feito até 40, o treino estacionou |
 
 Ideias guardadas, na ordem em que as tentaríamos.
 
@@ -370,19 +409,12 @@ Onde estão as coisas.
 
 | o quê | onde |
 |---|---|
-| melhor modelo, zona vogais com 30 épocas | máquina com GPU, usuário `leozao`, `~/htg-diag/model_zona_vogais/models/ema_ckpt.pt` |
-| o mesmo treino com 16 épocas | na mesma pasta, `ema_16ep.pt` |
+| melhor modelo, zona vogais com 40 épocas | máquina com GPU, usuário `leozao`, `~/htg-diag/model_zona_vogais/models/ema_ckpt.pt` |
+| o mesmo treino com 16 e com 30 épocas | na mesma pasta, `ema_16ep.pt` e `ema_30ep.pt` |
 | estado para continuar esse treino | na mesma pasta, `ckpt.pt`, `optim.pt` e `estado.pt` |
 | professor com 16 épocas | `~/htg-diag/model_iam_pt_separado_professor/models/ema_ep15.pt` |
 | imagens de cada avaliação | pastas `avaliacao_*_val` em `~/htg-diag`, fora do git |
 | tabelas, configurações, logs e figuras | `diagnostico/resultados/acento_separado/`, no git |
-
-Para continuar o melhor treino até 40 épocas, na máquina com GPU.
-
-```bash
-NOME=zona_vogais EPOCAS=40 PONTOS="40" \
-    ARGS="--acento_separado --peso_zona 5 --zona vogais" bash scripts/treino_completo.sh
-```
 
 Para um treino novo, mudando uma coisa em relação ao melhor.
 
@@ -400,10 +432,12 @@ e o bootstrap de `scripts/comparar_avaliacoes.py`, como no
 
 O que está em aberto, por ordem de quanto falta.
 
-- Letra das palavras acentuadas, CER 0,39 contra 0,27 nas imagens da base. O
-  treino com professor fora da máscara em ruído baixo é a tentativa em curso.
-- Acento a mais, 25% contra 6% do modelo original. Mais épocas rendem pouco
-  daqui em diante.
+- Mais épocas não resolvem o que falta. O treino estacionou em 40.
+- Letra das palavras acentuadas, CER 0,39 contra 0,27 nas imagens da base. As
+  variantes do professor fora da máscara limpam a letra e tiram o acento das
+  palavras sem haste. Falta uma ideia que não dependa de aproximar a acentuada
+  do esqueleto, ou uma base em que a palavra acentuada não precise encolher.
+- Acento a mais, 22% contra 6% do modelo original.
 - Posição do acento e cedilha, que não têm medida confiável. Dependem do
   detector de cedilha e da anotação humana.
 - Os documentos 07, 09 e 10 e o resumo do `README.md` desta pasta ainda
@@ -444,6 +478,8 @@ resumo e o `paineis.tsv`.
 | `avaliacao_sem_pares_val` | pares sem professor, 6 e 16 épocas, avaliados na CPU |
 | `avaliacao_zona_vogais_val` | professor e zona vogais, 6 e 16 épocas, treinado e avaliado no Colab |
 | `avaliacao_zona_vogais_30ep_val` | o mesmo treino continuado, 21 e 30 épocas |
+| `avaliacao_zona_vogais_40ep_val` | o mesmo treino, 40 épocas |
+| `avaliacao_zona_fora_baixo_val` | zona vogais com professor fora da máscara em ruído baixo, 6 e 16 épocas |
 
 As pastas `comparacao_*` têm quatro figuras de cada comparação.
 `diagnostico/resultados/sementes/` e `diagnostico/resultados/geracao_mista/`
