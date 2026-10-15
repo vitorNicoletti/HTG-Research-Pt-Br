@@ -1,0 +1,173 @@
+ambiente: CPU
+imagens 11704, pares 5188, sem alinhamento 0
+
+PRESENCA na letra com sinal
+  agudo        e1 atual                                20.5% [ 18.9,  22.0] n=2909
+  agudo        e1 alinhador                            83.4% [ 82.0,  84.7] n=2909
+  agudo        e1 alinhador com folga                  21.5% [ 20.0,  23.0] n=2909
+  agudo        colega na letra                         87.9% [ 86.7,  89.1] n=2909
+  agudo        colega em qualquer letra                94.5% [ 93.7,  95.3] n=2909
+  agudo        e1 atual, acima de zero                 98.6% [ 98.2,  99.0] n=2909
+  agudo        e1 alinhador, acima de zero             97.7% [ 97.2,  98.3] n=2909
+  agudo        e1 alinhador com folga, acima de zero   98.9% [ 98.5,  99.3] n=2909
+  til          e1 atual                                98.8% [ 98.1,  99.4] n=1121
+  til          e1 alinhador                            99.3% [ 98.8,  99.7] n=1121
+  til          e1 alinhador com folga                  96.3% [ 95.2,  97.5] n=1121
+  til          colega na letra                         90.9% [ 89.0,  92.6] n=1121
+  til          colega em qualquer letra                96.0% [ 94.7,  97.1] n=1121
+  til          e1 atual, acima de zero                 99.9% [ 99.7, 100.0] n=1121
+  til          e1 alinhador, acima de zero             99.6% [ 99.1,  99.9] n=1121
+  til          e1 alinhador com folga, acima de zero   99.9% [ 99.7, 100.0] n=1121
+  circunflexo  e1 atual                                99.1% [ 98.3,  99.8] n=580
+  circunflexo  e1 alinhador                            99.5% [ 98.8, 100.0] n=580
+  circunflexo  e1 alinhador com folga                  99.8% [ 99.5, 100.0] n=580
+  circunflexo  colega na letra                         91.2% [ 88.5,  93.6] n=580
+  circunflexo  colega em qualquer letra                94.1% [ 92.0,  96.2] n=580
+  circunflexo  e1 atual, acima de zero                100.0% [100.0, 100.0] n=580
+  circunflexo  e1 alinhador, acima de zero             99.7% [ 99.1, 100.0] n=580
+  circunflexo  e1 alinhador com folga, acima de zero  100.0% [100.0, 100.0] n=580
+  cedilha      e1 atual                                15.9% [ 13.6,  18.1] n=1093
+  cedilha      e1 alinhador                            26.9% [ 24.1,  29.7] n=1093
+  cedilha      e1 alinhador com folga                  17.2% [ 14.9,  19.5] n=1093
+  cedilha      colega na letra                          7.8% [  6.2,   9.5] n=1093
+  cedilha      colega em qualquer letra                 9.0% [  7.4,  10.7] n=1093
+  cedilha      e1 atual, acima de zero                 99.5% [ 99.1,  99.9] n=1093
+  cedilha      e1 alinhador, acima de zero             98.7% [ 98.0,  99.3] n=1093
+  cedilha      e1 alinhador com folga, acima de zero   99.7% [ 99.4, 100.0] n=1093
+  grave        e1 atual                               100.0% [100.0, 100.0] n=2
+  grave        e1 alinhador                           100.0% [100.0, 100.0] n=2
+  grave        e1 alinhador com folga                 100.0% [100.0, 100.0] n=2
+  grave        colega na letra                        100.0% [100.0, 100.0] n=2
+  grave        colega em qualquer letra               100.0% [100.0, 100.0] n=2
+  grave        e1 atual, acima de zero                100.0% [100.0, 100.0] n=2
+  grave        e1 alinhador, acima de zero            100.0% [100.0, 100.0] n=2
+  grave        e1 alinhador com folga, acima de zero  100.0% [100.0, 100.0] n=2
+
+PRESENCA na letra com sinal, so palavras sem i nem j
+  agudo        e1 atual                                21.3% [ 18.3,  24.4] n=807
+  agudo        e1 alinhador                            84.0% [ 81.4,  86.6] n=807
+  agudo        e1 alinhador com folga                  23.2% [ 20.1,  26.2] n=807
+  agudo        colega na letra                         89.0% [ 86.9,  91.0] n=807
+  agudo        colega em qualquer letra                92.1% [ 90.2,  93.7] n=807
+  agudo        e1 atual, acima de zero                 99.9% [ 99.6, 100.0] n=807
+  agudo        e1 alinhador, acima de zero             99.5% [ 98.9,  99.9] n=807
+  agudo        e1 alinhador com folga, acima de zero   99.8% [ 99.4, 100.0] n=807
+  til          e1 atual                                98.6% [ 97.7,  99.4] n=661
+  til          e1 alinhador                            99.1% [ 98.3,  99.7] n=661
+  til          e1 alinhador com folga                  95.6% [ 94.0,  97.1] n=661
+  til          colega na letra                         91.1% [ 88.8,  93.1] n=661
+  til          colega em qualquer letra                94.9% [ 93.1,  96.5] n=661
+  til          e1 atual, acima de zero                 99.8% [ 99.5, 100.0] n=661
+  til          e1 alinhador, acima de zero             99.5% [ 98.9, 100.0] n=661
+  til          e1 alinhador com folga, acima de zero   99.8% [ 99.5, 100.0] n=661
+  circunflexo  e1 atual                                99.5% [ 98.6, 100.0] n=216
+  circunflexo  e1 alinhador                            99.5% [ 98.6, 100.0] n=216
+  circunflexo  e1 alinhador com folga                  99.5% [ 98.6, 100.0] n=216
+  circunflexo  colega na letra                         89.8% [ 85.7,  93.8] n=216
+  circunflexo  colega em qualquer letra                90.3% [ 86.2,  94.2] n=216
+  circunflexo  e1 atual, acima de zero                100.0% [100.0, 100.0] n=216
+  circunflexo  e1 alinhador, acima de zero             99.5% [ 98.6, 100.0] n=216
+  circunflexo  e1 alinhador com folga, acima de zero  100.0% [100.0, 100.0] n=216
+  cedilha      e1 atual                                14.3% [ 11.9,  16.8] n=750
+  cedilha      e1 alinhador                            25.7% [ 22.6,  29.0] n=750
+  cedilha      e1 alinhador com folga                  14.9% [ 12.3,  17.6] n=750
+  cedilha      colega na letra                          7.6% [  5.7,   9.5] n=750
+  cedilha      colega em qualquer letra                 8.7% [  6.8,  10.7] n=750
+  cedilha      e1 atual, acima de zero                 99.5% [ 98.9,  99.9] n=750
+  cedilha      e1 alinhador, acima de zero             98.9% [ 98.2,  99.6] n=750
+  cedilha      e1 alinhador com folga, acima de zero   99.7% [ 99.3, 100.0] n=750
+
+POSICAO: letra sem sinal acusada, em palavra acentuada
+  agudo        vizinha   e1 atual                     7.8% [  7.1,   8.5] n=5179
+  agudo        vizinha   e1 alinhador                 0.8% [  0.5,   1.0] n=5179
+  agudo        vizinha   e1 alinhador com folga       5.4% [  4.8,   6.1] n=5179
+  agudo        vizinha   colega na acentuada          5.3% [  4.7,   5.9] n=5179
+  agudo        vizinha   colega no par                4.3% [  3.7,   4.9] n=5179
+  agudo        distante  e1 atual                     0.1% [  0.0,   0.1] n=13566
+  agudo        distante  e1 alinhador                 0.0% [  0.0,   0.0] n=13566
+  agudo        distante  e1 alinhador com folga       0.0% [  0.0,   0.1] n=13566
+  agudo        distante  colega na acentuada          8.3% [  7.8,   8.8] n=13566
+  agudo        distante  colega no par                8.3% [  7.8,   8.8] n=13566
+  til          vizinha   e1 atual                    63.8% [ 61.9,  65.6] n=1705
+  til          vizinha   e1 alinhador                 3.7% [  2.8,   4.6] n=1705
+  til          vizinha   e1 alinhador com folga      43.0% [ 40.5,  45.5] n=1705
+  til          vizinha   colega na acentuada          3.6% [  2.7,   4.5] n=1705
+  til          vizinha   colega no par                2.3% [  1.6,   3.1] n=1705
+  til          distante  e1 atual                     0.2% [  0.1,   0.4] n=5305
+  til          distante  e1 alinhador                 0.0% [  0.0,   0.0] n=5305
+  til          distante  e1 alinhador com folga       0.1% [  0.0,   0.2] n=5305
+  til          distante  colega na acentuada          5.1% [  4.5,   5.7] n=5305
+  til          distante  colega no par                4.9% [  4.3,   5.6] n=5305
+  circunflexo  vizinha   e1 atual                    67.7% [ 65.6,  69.8] n=1070
+  circunflexo  vizinha   e1 alinhador                 4.2% [  3.1,   5.5] n=1070
+  circunflexo  vizinha   e1 alinhador com folga      59.0% [ 55.5,  62.5] n=1070
+  circunflexo  vizinha   colega na acentuada          1.6% [  0.8,   2.4] n=1070
+  circunflexo  vizinha   colega no par                1.5% [  0.8,   2.3] n=1070
+  circunflexo  distante  e1 atual                     0.4% [  0.2,   0.7] n=2616
+  circunflexo  distante  e1 alinhador                 0.0% [  0.0,   0.0] n=2616
+  circunflexo  distante  e1 alinhador com folga       0.0% [  0.0,   0.1] n=2616
+  circunflexo  distante  colega na acentuada          8.5% [  7.5,   9.6] n=2616
+  circunflexo  distante  colega no par                8.4% [  7.3,   9.5] n=2616
+  cedilha      vizinha   e1 atual                     5.9% [  4.9,   7.1] n=1699
+  cedilha      vizinha   e1 alinhador                 0.3% [  0.1,   0.6] n=1699
+  cedilha      vizinha   e1 alinhador com folga       5.5% [  4.3,   6.7] n=1699
+  cedilha      vizinha   colega na acentuada          0.2% [  0.1,   0.5] n=1699
+  cedilha      vizinha   colega no par                0.0% [  0.0,   0.0] n=1699
+  cedilha      distante  e1 atual                     0.0% [  0.0,   0.1] n=5488
+  cedilha      distante  e1 alinhador                 0.0% [  0.0,   0.0] n=5488
+  cedilha      distante  e1 alinhador com folga       0.0% [  0.0,   0.1] n=5488
+  cedilha      distante  colega na acentuada          0.1% [  0.1,   0.3] n=5488
+  cedilha      distante  colega no par                0.2% [  0.1,   0.3] n=5488
+  grave        vizinha   e1 atual                   100.0% [100.0, 100.0] n=2
+  grave        vizinha   e1 alinhador                 0.0% [  0.0,   0.0] n=2
+  grave        vizinha   e1 alinhador com folga      50.0% [ 50.0,  50.0] n=2
+  grave        vizinha   colega na acentuada          0.0% [  0.0,   0.0] n=2
+  grave        vizinha   colega no par                0.0% [  0.0,   0.0] n=2
+  grave        distante  e1 atual                     0.0% [  0.0,   0.0] n=6
+  grave        distante  e1 alinhador                 0.0% [  0.0,   0.0] n=6
+  grave        distante  e1 alinhador com folga       0.0% [  0.0,   0.0] n=6
+  grave        distante  colega na acentuada         33.3% [ 33.3,  33.3] n=6
+  grave        distante  colega no par               33.3% [ 33.3,  33.3] n=6
+
+POSICAO: a maior medida da e1 cai na letra do sinal
+  agudo        e1 atual                    60.9%  n=2909
+  agudo        e1 alinhador                96.6%  n=2909
+  agudo        e1 alinhador com folga      82.9%  n=2909
+  til          e1 atual                    73.0%  n=1121
+  til          e1 alinhador                98.8%  n=1121
+  til          e1 alinhador com folga      91.3%  n=1121
+  circunflexo  e1 atual                    69.1%  n=580
+  circunflexo  e1 alinhador                99.1%  n=580
+  circunflexo  e1 alinhador com folga      93.6%  n=580
+  cedilha      e1 atual                    65.6%  n=1093
+  cedilha      e1 alinhador                98.0%  n=1093
+  cedilha      e1 alinhador com folga      83.7%  n=1093
+  grave        e1 atual                   100.0%  n=2
+  grave        e1 alinhador               100.0%  n=2
+  grave        e1 alinhador com folga     100.0%  n=2
+
+VAZAMENTO, todas as palavras
+  tinta por letra, AUC em todas as imagens 0.735
+  limiar da tinta 0.741; na outra metade dos escritores, 5919 negativas e 2638 positivas
+                                      colega  colega sem pingo  tinta por letra
+  falso alarme no par                  37.7%             11.8%             4.8%   n=2638
+  falso alarme na sem_acento           30.9%             10.1%             4.7%   n=3281
+  deteccao nas acentuadas              86.3%             74.8%             9.8%   n=2638
+  deteccao, so agudo                   94.5%             75.4%             7.8%   n=1470
+  deteccao, so til                     93.2%             92.9%             9.7%   n=308
+  deteccao, so circunflexo             95.2%             93.4%            11.8%   n=289
+  deteccao, so cedilha                 20.8%             15.6%            16.3%   n=307
+  deteccao, so grave                  100.0%            100.0%             0.0%   n=1
+
+VAZAMENTO, so palavras sem i nem j
+  tinta por letra, AUC em todas as imagens 0.764
+  limiar da tinta 0.766; na outra metade dos escritores, 2987 negativas e 1102 positivas
+                                      colega  colega sem pingo  tinta por letra
+  falso alarme no par                   2.5%              2.5%             6.1%   n=1102
+  falso alarme na sem_acento            4.6%              4.6%             4.7%   n=1885
+  deteccao nas acentuadas              74.5%             74.5%            10.8%   n=1102
+  deteccao, so agudo                   92.1%             92.1%             9.4%   n=416
+  deteccao, so til                     90.3%             90.3%             9.7%   n=196
+  deteccao, so circunflexo             92.0%             92.0%            11.0%   n=100
+  deteccao, so cedilha                 12.0%             12.0%            13.7%   n=249
+  deteccao, so grave                   sem dados         sem dados        sem dados   n=0

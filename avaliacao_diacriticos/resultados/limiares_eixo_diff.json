@@ -1,57 +1,94 @@
 {
- "eixo": "e1.py (com alinhamento por correlacao)",
- "controle_negativo": "ger_iam_n696 (IAM puro, 696 imagens, 348 diacriticos)",
+ "eixo": "e1.py com alinhamento",
+ "controle_negativo": "ger_iam_sonda77x4 (IAM puro, 1232 imagens)",
+ "desenho": "77 pares x 4 escritores x 2 sementes; 18 palavras por marca, 5 em grave",
  "positivo": "acento nominal pintado sobre a propria imagem ASCII",
- "leitura": "use o p95 da marca como limiar. decide_por_amostra=false significa que o ruido supera um acento nominal: so a media agregada com IC e confiavel nessa marca.",
+ "leitura": "use o p95 da marca como limiar. decide_por_amostra=false significa que o ruido supera um acento nominal e so a media agregada vale.",
+ "aviso": "o p95 depende de quantas palavras E quantos punhos se amostra; ver a secao do README sobre estabilidade do veredito.",
  "por_marca": {
-  "agudo": {
-   "n": 72,
-   "media_ruido": 0.022240843718627758,
-   "p90": 0.08230390299355816,
-   "p95": 0.12602601156069365,
-   "p99": 0.2291675154114182,
-   "acento_nominal": 0.15815717409061694,
-   "auc": 0.9476273148148148,
-   "decide_por_amostra": true
-  },
   "grave": {
-   "n": 60,
-   "media_ruido": -0.009418503427113761,
-   "p90": 0.02538766270514998,
-   "p95": 0.03620966776670142,
-   "p99": 0.06036131053387277,
-   "acento_nominal": 0.15086421498804997,
+   "n": 40,
+   "palavras": 5,
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": -0.003676190373580769,
+   "ic95_ruido": [
+    -0.008640674748468958,
+    0.00044902925988891674
+   ],
+   "p90": 0.03261791543503406,
+   "p95": 0.043226519918902535,
+   "p99": 0.06586450854979767,
+   "acento_nominal": 0.15083810224942745,
    "auc": 1.0,
    "decide_por_amostra": true
   },
-  "circunflexo": {
-   "n": 72,
-   "media_ruido": -0.013283678584488963,
-   "p90": 0.03508089289371288,
-   "p95": 0.06730205278592377,
-   "p99": 0.12306802244039351,
-   "acento_nominal": 0.1491084335833203,
-   "auc": 0.9864969135802469,
+  "til": {
+   "n": 144,
+   "palavras": 18,
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": -0.0009935714131350268,
+   "ic95_ruido": [
+    -0.024430453313586897,
+    0.022062716726319716
+   ],
+   "p90": 0.06613539834398732,
+   "p95": 0.09029994545158294,
+   "p99": 0.22653412812786572,
+   "acento_nominal": 0.14771198411730024,
+   "auc": 0.9678337191358025,
    "decide_por_amostra": true
   },
-  "til": {
-   "n": 72,
-   "media_ruido": -0.01198157175550544,
-   "p90": 0.03310838686862733,
-   "p95": 0.04567567567567568,
-   "p99": 0.06983378256963164,
-   "acento_nominal": 0.14123237431583088,
-   "auc": 0.9982638888888888,
+  "circunflexo": {
+   "n": 144,
+   "palavras": 18,
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": -0.010362994397303933,
+   "ic95_ruido": [
+    -0.019742977272517136,
+    -0.00047432301649109394
+   ],
+   "p90": 0.034296953046953085,
+   "p95": 0.046615179252479,
+   "p99": 0.07677419354838695,
+   "acento_nominal": 0.1316137327044174,
+   "auc": 0.9887152777777778,
    "decide_por_amostra": true
+  },
+  "agudo": {
+   "n": 144,
+   "palavras": 18,
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": 0.031637125796332155,
+   "ic95_ruido": [
+    -0.001952179610722911,
+    0.08406459862917505
+   ],
+   "p90": 0.09982517482517492,
+   "p95": 0.17654433553681326,
+   "p99": 0.33574451351958634,
+   "acento_nominal": 0.16749664686815027,
+   "auc": 0.9366078317901234,
+   "decide_por_amostra": false
   },
   "cedilha": {
-   "n": 72,
-   "media_ruido": 0.03383176286807711,
-   "p90": 0.1111111111111111,
-   "p95": 0.23761480287447587,
-   "p99": 0.3553870226669392,
-   "acento_nominal": 0.16460650771051355,
-   "auc": 0.9174382716049383,
+   "n": 144,
+   "palavras": 18,
+   "escritores": 4,
+   "sementes": 2,
+   "media_ruido": 0.03419431244742988,
+   "ic95_ruido": [
+    0.010428961676146374,
+    0.05762919606858417
+   ],
+   "p90": 0.13623352165725047,
+   "p95": 0.20615529365157947,
+   "p99": 0.32634031669930424,
+   "acento_nominal": 0.178827676376892,
+   "auc": 0.9310378086419753,
    "decide_por_amostra": false
   }
  }

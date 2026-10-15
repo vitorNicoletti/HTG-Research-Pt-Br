@@ -1,0 +1,51 @@
+professor: 457/458 chaves de ./DiffusionPen/diffusionpen_iam_model_path/models/ema_ckpt.pt; peso 1 nas amostras sem diacritico, menos os pares
+epoca 0: MSE 0.0507 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 0: professor em 69% das amostras | distancia aluno-professor 0.01098
+epoca 0: peso_acento 5.0 | MSE sem peso 0.0375 | dentro da mascara 0.1410 | fora 0.0351 | mascara cobre 2.34% do latente
+epoca 1: MSE 0.0443 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 1: professor em 69% das amostras | distancia aluno-professor 0.01007
+epoca 1: peso_acento 5.0 | MSE sem peso 0.0334 | dentro da mascara 0.1165 | fora 0.0314 | mascara cobre 2.34% do latente
+epoca 2: MSE 0.0414 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 2: professor em 69% das amostras | distancia aluno-professor 0.00895
+epoca 2: peso_acento 5.0 | MSE sem peso 0.0313 | dentro da mascara 0.1072 | fora 0.0295 | mascara cobre 2.34% do latente
+epoca 3: MSE 0.0403 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 3: professor em 69% das amostras | distancia aluno-professor 0.00861
+epoca 3: peso_acento 5.0 | MSE sem peso 0.0308 | dentro da mascara 0.1025 | fora 0.0290 | mascara cobre 2.34% do latente
+epoca 4: MSE 0.0395 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 4: professor em 69% das amostras | distancia aluno-professor 0.00829
+epoca 4: peso_acento 5.0 | MSE sem peso 0.0302 | dentro da mascara 0.0990 | fora 0.0285 | mascara cobre 2.34% do latente
+epoca 5: MSE 0.0391 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 5: professor em 69% das amostras | distancia aluno-professor 0.00817
+epoca 5: peso_acento 5.0 | MSE sem peso 0.0300 | dentro da mascara 0.0976 | fora 0.0284 | mascara cobre 2.34% do latente
+epoca 6: MSE 0.0384 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 6: professor em 69% das amostras | distancia aluno-professor 0.00824
+epoca 6: peso_acento 5.0 | MSE sem peso 0.0296 | dentro da mascara 0.0938 | fora 0.0281 | mascara cobre 2.34% do latente
+epoca 7: MSE 0.0370 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 7: professor em 69% das amostras | distancia aluno-professor 0.00804
+epoca 7: peso_acento 5.0 | MSE sem peso 0.0284 | dentro da mascara 0.0911 | fora 0.0269 | mascara cobre 2.34% do latente
+epoca 8: MSE 0.0365 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 8: professor em 69% das amostras | distancia aluno-professor 0.00783
+epoca 8: peso_acento 5.0 | MSE sem peso 0.0282 | dentro da mascara 0.0883 | fora 0.0268 | mascara cobre 2.34% do latente
+epoca 9: MSE 0.0353 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 9: professor em 69% das amostras | distancia aluno-professor 0.00785
+epoca 9: peso_acento 5.0 | MSE sem peso 0.0273 | dentro da mascara 0.0850 | fora 0.0260 | mascara cobre 2.34% do latente
+epoca 10: MSE 0.0351 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 10: professor em 69% das amostras | distancia aluno-professor 0.00778
+epoca 10: peso_acento 5.0 | MSE sem peso 0.0273 | dentro da mascara 0.0834 | fora 0.0260 | mascara cobre 2.34% do latente
+epoca 11: MSE 0.0343 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 11: professor em 69% das amostras | distancia aluno-professor 0.00746
+epoca 11: peso_acento 5.0 | MSE sem peso 0.0266 | dentro da mascara 0.0823 | fora 0.0253 | mascara cobre 2.34% do latente
+Retomando na epoca 12 (ema.step=13088)
+professor: 457/458 chaves de ./DiffusionPen/diffusionpen_iam_model_path/models/ema_ckpt.pt; peso 1 nas amostras sem diacritico, menos os pares
+epoca 12: MSE 0.0327 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 12: professor em 69% das amostras | distancia aluno-professor 0.00761
+epoca 12: peso_acento 5.0 | MSE sem peso 0.0256 | dentro da mascara 0.0765 | fora 0.0244 | mascara cobre 2.34% do latente
+epoca 13: MSE 0.0333 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 13: professor em 69% das amostras | distancia aluno-professor 0.00759
+epoca 13: peso_acento 5.0 | MSE sem peso 0.0260 | dentro da mascara 0.0778 | fora 0.0248 | mascara cobre 2.34% do latente
+epoca 14: MSE 0.0327 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 14: professor em 69% das amostras | distancia aluno-professor 0.00748
+epoca 14: peso_acento 5.0 | MSE sem peso 0.0256 | dentro da mascara 0.0758 | fora 0.0244 | mascara cobre 2.34% do latente
+epoca 15: MSE 0.0320 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 15: professor em 69% das amostras | distancia aluno-professor 0.00757
+epoca 15: peso_acento 5.0 | MSE sem peso 0.0251 | dentro da mascara 0.0738 | fora 0.0240 | mascara cobre 2.34% do latente

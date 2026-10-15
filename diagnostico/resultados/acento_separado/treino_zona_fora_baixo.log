@@ -1,0 +1,66 @@
+IAM acentuado: zona vogais com 72427 mascaras de ./iam_pt_alinhado/zona_vogais.npz
+professor: 457/458 chaves de ./DiffusionPen/diffusionpen_iam_model_path/models/ema_ckpt.pt; peso 1 nas amostras sem diacritico; fora da mascara nas acentuadas com t < 400
+epoca 0: MSE 0.0266 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 0: professor em 85% das amostras | distancia aluno-professor 0.00547 | fora da mascara em mais 15% (acentuadas)
+epoca 0: peso_acento 5.0 | MSE sem peso 0.0119 | dentro da mascara 0.1396 | fora 0.0089 | mascara cobre 2.34% do latente
+epoca 0: peso_zona 5.0 | zona vazia 0.0078 | zona cobre 5.07% do latente
+epoca 1: MSE 0.0245 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 1: professor em 85% das amostras | distancia aluno-professor 0.00601 | fora da mascara em mais 15% (acentuadas)
+epoca 1: peso_acento 5.0 | MSE sem peso 0.0118 | dentro da mascara 0.1185 | fora 0.0093 | mascara cobre 2.34% do latente
+epoca 1: peso_zona 5.0 | zona vazia 0.0081 | zona cobre 5.07% do latente
+epoca 2: MSE 0.0227 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 2: professor em 85% das amostras | distancia aluno-professor 0.00589 | fora da mascara em mais 15% (acentuadas)
+epoca 2: peso_acento 5.0 | MSE sem peso 0.0112 | dentro da mascara 0.1052 | fora 0.0090 | mascara cobre 2.34% do latente
+epoca 2: peso_zona 5.0 | zona vazia 0.0082 | zona cobre 5.07% do latente
+epoca 3: MSE 0.0224 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 3: professor em 85% das amostras | distancia aluno-professor 0.00590 | fora da mascara em mais 15% (acentuadas)
+epoca 3: peso_acento 5.0 | MSE sem peso 0.0112 | dentro da mascara 0.1028 | fora 0.0090 | mascara cobre 2.34% do latente
+epoca 3: peso_zona 5.0 | zona vazia 0.0079 | zona cobre 5.07% do latente
+epoca 4: MSE 0.0222 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 4: professor em 85% das amostras | distancia aluno-professor 0.00607 | fora da mascara em mais 15% (acentuadas)
+epoca 4: peso_acento 5.0 | MSE sem peso 0.0114 | dentro da mascara 0.0977 | fora 0.0093 | mascara cobre 2.34% do latente
+epoca 4: peso_zona 5.0 | zona vazia 0.0084 | zona cobre 5.07% do latente
+epoca 5: MSE 0.0215 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 5: professor em 85% das amostras | distancia aluno-professor 0.00584 | fora da mascara em mais 15% (acentuadas)
+epoca 5: peso_acento 5.0 | MSE sem peso 0.0110 | dentro da mascara 0.0952 | fora 0.0090 | mascara cobre 2.34% do latente
+epoca 5: peso_zona 5.0 | zona vazia 0.0080 | zona cobre 5.07% do latente
+epoca 6: MSE 0.0210 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 6: professor em 85% das amostras | distancia aluno-professor 0.00583 | fora da mascara em mais 15% (acentuadas)
+epoca 6: peso_acento 5.0 | MSE sem peso 0.0109 | dentro da mascara 0.0909 | fora 0.0090 | mascara cobre 2.34% do latente
+epoca 6: peso_zona 5.0 | zona vazia 0.0078 | zona cobre 5.07% do latente
+epoca 7: MSE 0.0204 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 7: professor em 85% das amostras | distancia aluno-professor 0.00578 | fora da mascara em mais 15% (acentuadas)
+epoca 7: peso_acento 5.0 | MSE sem peso 0.0107 | dentro da mascara 0.0866 | fora 0.0089 | mascara cobre 2.34% do latente
+epoca 7: peso_zona 5.0 | zona vazia 0.0077 | zona cobre 5.07% do latente
+epoca 8: MSE 0.0193 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 8: professor em 85% das amostras | distancia aluno-professor 0.00560 | fora da mascara em mais 15% (acentuadas)
+epoca 8: peso_acento 5.0 | MSE sem peso 0.0103 | dentro da mascara 0.0800 | fora 0.0087 | mascara cobre 2.34% do latente
+epoca 8: peso_zona 5.0 | zona vazia 0.0074 | zona cobre 5.07% do latente
+epoca 9: MSE 0.0192 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 9: professor em 85% das amostras | distancia aluno-professor 0.00561 | fora da mascara em mais 15% (acentuadas)
+epoca 9: peso_acento 5.0 | MSE sem peso 0.0103 | dentro da mascara 0.0798 | fora 0.0086 | mascara cobre 2.34% do latente
+epoca 9: peso_zona 5.0 | zona vazia 0.0074 | zona cobre 5.07% do latente
+epoca 10: MSE 0.0192 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 10: professor em 85% das amostras | distancia aluno-professor 0.00571 | fora da mascara em mais 15% (acentuadas)
+epoca 10: peso_acento 5.0 | MSE sem peso 0.0103 | dentro da mascara 0.0793 | fora 0.0087 | mascara cobre 2.34% do latente
+epoca 10: peso_zona 5.0 | zona vazia 0.0072 | zona cobre 5.07% do latente
+epoca 11: MSE 0.0191 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 11: professor em 85% das amostras | distancia aluno-professor 0.00566 | fora da mascara em mais 15% (acentuadas)
+epoca 11: peso_acento 5.0 | MSE sem peso 0.0102 | dentro da mascara 0.0789 | fora 0.0086 | mascara cobre 2.34% do latente
+epoca 11: peso_zona 5.0 | zona vazia 0.0075 | zona cobre 5.07% do latente
+epoca 12: MSE 0.0189 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 12: professor em 85% das amostras | distancia aluno-professor 0.00570 | fora da mascara em mais 15% (acentuadas)
+epoca 12: peso_acento 5.0 | MSE sem peso 0.0102 | dentro da mascara 0.0774 | fora 0.0086 | mascara cobre 2.34% do latente
+epoca 12: peso_zona 5.0 | zona vazia 0.0073 | zona cobre 5.07% do latente
+epoca 13: MSE 0.0185 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 13: professor em 85% das amostras | distancia aluno-professor 0.00557 | fora da mascara em mais 15% (acentuadas)
+epoca 13: peso_acento 5.0 | MSE sem peso 0.0101 | dentro da mascara 0.0746 | fora 0.0085 | mascara cobre 2.34% do latente
+epoca 13: peso_zona 5.0 | zona vazia 0.0071 | zona cobre 5.07% do latente
+epoca 14: MSE 0.0187 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 14: professor em 85% das amostras | distancia aluno-professor 0.00559 | fora da mascara em mais 15% (acentuadas)
+epoca 14: peso_acento 5.0 | MSE sem peso 0.0101 | dentro da mascara 0.0765 | fora 0.0085 | mascara cobre 2.34% do latente
+epoca 14: peso_zona 5.0 | zona vazia 0.0071 | zona cobre 5.07% do latente
+epoca 15: MSE 0.0183 | 0 batches descartados nesta epoca (loss nao-finito: 0, gradiente nao-finito: 0; total no run: 0)
+epoca 15: professor em 85% das amostras | distancia aluno-professor 0.00551 | fora da mascara em mais 15% (acentuadas)
+epoca 15: peso_acento 5.0 | MSE sem peso 0.0099 | dentro da mascara 0.0743 | fora 0.0083 | mascara cobre 2.34% do latente
+epoca 15: peso_zona 5.0 | zona vazia 0.0071 | zona cobre 5.07% do latente

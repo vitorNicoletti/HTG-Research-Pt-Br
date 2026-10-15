@@ -1,0 +1,31 @@
+{
+  "controle_16ep": {
+    "paineis_acentuados": 1200,
+    "sem_alinhamento": 0,
+    "certa": 0.33,
+    "parcial": 0.0383,
+    "errada": 0.2458,
+    "nenhuma": 0.3858,
+    "extra_na_acentuada": 0.3758,
+    "acerto_por_sinal": {
+      "agudo": {
+        "n": 400,
+        "acerto": 0.43
+      },
+      "cedilha": {
+        "n": 520,
+        "acerto": 0.1519
+      },
+      "circunflexo": {
+        "n": 80,
+        "acerto": 0.1125
+      },
+      "til": {
+        "n": 280,
+        "acerto": 0.675
+      }
+    },
+    "marca_em_esqueleto": 0.1083,
+    "marca_em_sem_acento": 0.1075
+  }
+}

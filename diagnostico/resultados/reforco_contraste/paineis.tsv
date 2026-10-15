@@ -1,0 +1,209 @@
+palavra	contraste	texto_contraste	escritor	semente	marca_acima
+tarde	normal		187	42	0
+tarde	normal		188	42	0
+tarde	normal		169	42	1
+tarde	normal		180	42	1
+tarde	normal		187	43	0
+tarde	normal		188	43	0
+tarde	normal		169	43	0
+tarde	normal		180	43	1
+tarde	1a vogal	tárde	187	42	0
+tarde	1a vogal	tárde	188	42	0
+tarde	1a vogal	tárde	169	42	0
+tarde	1a vogal	tárde	180	42	0
+tarde	1a vogal	tárde	187	43	0
+tarde	1a vogal	tárde	188	43	0
+tarde	1a vogal	tárde	169	43	0
+tarde	1a vogal	tárde	180	43	1
+tarde	todas	tárdé	187	42	0
+tarde	todas	tárdé	188	42	0
+tarde	todas	tárdé	169	42	0
+tarde	todas	tárdé	180	42	0
+tarde	todas	tárdé	187	43	0
+tarde	todas	tárdé	188	43	0
+tarde	todas	tárdé	169	43	0
+tarde	todas	tárdé	180	43	0
+tarde	misto	tãrdê	187	42	0
+tarde	misto	tãrdê	188	42	0
+tarde	misto	tãrdê	169	42	0
+tarde	misto	tãrdê	180	42	0
+tarde	misto	tãrdê	187	43	0
+tarde	misto	tãrdê	188	43	0
+tarde	misto	tãrdê	169	43	0
+tarde	misto	tãrdê	180	43	0
+bolo	normal		187	42	0
+bolo	normal		188	42	0
+bolo	normal		169	42	1
+bolo	normal		180	42	0
+bolo	normal		187	43	1
+bolo	normal		188	43	0
+bolo	normal		169	43	0
+bolo	normal		180	43	0
+bolo	1a vogal	bólo	187	42	0
+bolo	1a vogal	bólo	188	42	0
+bolo	1a vogal	bólo	169	42	1
+bolo	1a vogal	bólo	180	42	0
+bolo	1a vogal	bólo	187	43	0
+bolo	1a vogal	bólo	188	43	0
+bolo	1a vogal	bólo	169	43	0
+bolo	1a vogal	bólo	180	43	0
+bolo	todas	bóló	187	42	0
+bolo	todas	bóló	188	42	0
+bolo	todas	bóló	169	42	1
+bolo	todas	bóló	180	42	1
+bolo	todas	bóló	187	43	0
+bolo	todas	bóló	188	43	0
+bolo	todas	bóló	169	43	1
+bolo	todas	bóló	180	43	0
+bolo	misto	bóló	187	42	0
+bolo	misto	bóló	188	42	0
+bolo	misto	bóló	169	42	1
+bolo	misto	bóló	180	42	1
+bolo	misto	bóló	187	43	0
+bolo	misto	bóló	188	43	0
+bolo	misto	bóló	169	43	1
+bolo	misto	bóló	180	43	0
+campo	normal		187	42	0
+campo	normal		188	42	0
+campo	normal		169	42	0
+campo	normal		180	42	0
+campo	normal		187	43	0
+campo	normal		188	43	0
+campo	normal		169	43	0
+campo	normal		180	43	0
+campo	1a vogal	cámpo	187	42	0
+campo	1a vogal	cámpo	188	42	0
+campo	1a vogal	cámpo	169	42	0
+campo	1a vogal	cámpo	180	42	0
+campo	1a vogal	cámpo	187	43	0
+campo	1a vogal	cámpo	188	43	0
+campo	1a vogal	cámpo	169	43	0
+campo	1a vogal	cámpo	180	43	0
+campo	todas	cámpó	187	42	0
+campo	todas	cámpó	188	42	0
+campo	todas	cámpó	169	42	0
+campo	todas	cámpó	180	42	0
+campo	todas	cámpó	187	43	0
+campo	todas	cámpó	188	43	0
+campo	todas	cámpó	169	43	0
+campo	todas	cámpó	180	43	0
+campo	misto	cãmpó	187	42	0
+campo	misto	cãmpó	188	42	0
+campo	misto	cãmpó	169	42	0
+campo	misto	cãmpó	180	42	0
+campo	misto	cãmpó	187	43	0
+campo	misto	cãmpó	188	43	0
+campo	misto	cãmpó	169	43	0
+campo	misto	cãmpó	180	43	0
+mundo	normal		187	42	1
+mundo	normal		188	42	1
+mundo	normal		169	42	1
+mundo	normal		180	42	1
+mundo	normal		187	43	0
+mundo	normal		188	43	1
+mundo	normal		169	43	1
+mundo	normal		180	43	1
+mundo	1a vogal	múndo	187	42	0
+mundo	1a vogal	múndo	188	42	0
+mundo	1a vogal	múndo	169	42	1
+mundo	1a vogal	múndo	180	42	1
+mundo	1a vogal	múndo	187	43	0
+mundo	1a vogal	múndo	188	43	1
+mundo	1a vogal	múndo	169	43	1
+mundo	1a vogal	múndo	180	43	1
+mundo	todas	múndó	187	42	0
+mundo	todas	múndó	188	42	0
+mundo	todas	múndó	169	42	1
+mundo	todas	múndó	180	42	1
+mundo	todas	múndó	187	43	0
+mundo	todas	múndó	188	43	1
+mundo	todas	múndó	169	43	1
+mundo	todas	múndó	180	43	1
+mundo	misto	múndó	187	42	0
+mundo	misto	múndó	188	42	0
+mundo	misto	múndó	169	42	1
+mundo	misto	múndó	180	42	1
+mundo	misto	múndó	187	43	0
+mundo	misto	múndó	188	43	1
+mundo	misto	múndó	169	43	1
+mundo	misto	múndó	180	43	1
+provavel	normal		187	42	1
+provavel	normal		188	42	0
+provavel	normal		169	42	1
+provavel	normal		180	42	1
+provavel	normal		187	43	1
+provavel	normal		188	43	1
+provavel	normal		169	43	0
+provavel	normal		180	43	0
+provavel	1a vogal	próvavel	187	42	0
+provavel	1a vogal	próvavel	188	42	0
+provavel	1a vogal	próvavel	169	42	1
+provavel	1a vogal	próvavel	180	42	1
+provavel	1a vogal	próvavel	187	43	0
+provavel	1a vogal	próvavel	188	43	0
+provavel	1a vogal	próvavel	169	43	0
+provavel	1a vogal	próvavel	180	43	0
+provavel	todas	próvávél	187	42	0
+provavel	todas	próvávél	188	42	0
+provavel	todas	próvávél	169	42	0
+provavel	todas	próvávél	180	42	0
+provavel	todas	próvávél	187	43	0
+provavel	todas	próvávél	188	43	0
+provavel	todas	próvávél	169	43	0
+provavel	todas	próvávél	180	43	0
+provavel	misto	próvãvêl	187	42	0
+provavel	misto	próvãvêl	188	42	0
+provavel	misto	próvãvêl	169	42	0
+provavel	misto	próvãvêl	180	42	0
+provavel	misto	próvãvêl	187	43	0
+provavel	misto	próvãvêl	188	43	0
+provavel	misto	próvãvêl	169	43	0
+provavel	misto	próvãvêl	180	43	0
+provavel	verdadeiro	provável	187	42	0
+provavel	verdadeiro	provável	188	42	0
+provavel	verdadeiro	provável	169	42	0
+provavel	verdadeiro	provável	180	42	1
+provavel	verdadeiro	provável	187	43	0
+provavel	verdadeiro	provável	188	43	0
+provavel	verdadeiro	provável	169	43	0
+provavel	verdadeiro	provável	180	43	0
+modulo	normal		187	42	0
+modulo	normal		188	42	0
+modulo	normal		169	42	0
+modulo	normal		180	42	1
+modulo	normal		187	43	0
+modulo	normal		188	43	1
+modulo	normal		169	43	1
+modulo	normal		180	43	1
+modulo	1a vogal	módulo	187	42	0
+modulo	1a vogal	módulo	188	42	0
+modulo	1a vogal	módulo	169	42	0
+modulo	1a vogal	módulo	180	42	1
+modulo	1a vogal	módulo	187	43	0
+modulo	1a vogal	módulo	188	43	1
+modulo	1a vogal	módulo	169	43	1
+modulo	1a vogal	módulo	180	43	1
+modulo	todas	módúló	187	42	0
+modulo	todas	módúló	188	42	0
+modulo	todas	módúló	169	42	0
+modulo	todas	módúló	180	42	0
+modulo	todas	módúló	187	43	0
+modulo	todas	módúló	188	43	1
+modulo	todas	módúló	169	43	0
+modulo	todas	módúló	180	43	1
+modulo	misto	módúló	187	42	0
+modulo	misto	módúló	188	42	0
+modulo	misto	módúló	169	42	0
+modulo	misto	módúló	180	42	0
+modulo	misto	módúló	187	43	0
+modulo	misto	módúló	188	43	1
+modulo	misto	módúló	169	43	0
+modulo	misto	módúló	180	43	1
+modulo	verdadeiro	módulo	187	42	0
+modulo	verdadeiro	módulo	188	42	0
+modulo	verdadeiro	módulo	169	42	0
+modulo	verdadeiro	módulo	180	42	1
+modulo	verdadeiro	módulo	187	43	0
+modulo	verdadeiro	módulo	188	43	1
+modulo	verdadeiro	módulo	169	43	1
+modulo	verdadeiro	módulo	180	43	1
