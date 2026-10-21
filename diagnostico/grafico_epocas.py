@@ -3,7 +3,10 @@ por treino, a partir dos paineis.tsv guardados em
 diagnostico/resultados/acento_separado/.
 
 Medidas (ver docs/15):
-  acento a mais      marca em cima nas palavras cujo unico sinal e a cedilha
+  acento a mais      marca solta so em cima nas palavras cujo unico sinal e a
+                     cedilha, de marcas_so_cedilha.tsv (diagnostico/marcas_so_cedilha.py).
+                     A coluna marca do paineis.tsv conta tambem marca embaixo, que
+                     nessas palavras e a cedilha solta. Ponto sem o arquivo fica de fora
   acento pedido      marca nas palavras com agudo, til ou circunflexo
   ... sem haste      o mesmo, so nas palavras sem letra de haste alta
   onde nao se pede   marca no esqueleto e nas palavras sem acento
@@ -42,6 +45,19 @@ def sinais(p):
     return {c for c in unicodedata.normalize("NFD", p) if unicodedata.combining(c)}
 
 
+def acima_so_cedilha():
+    caminho = os.path.join(R, "marcas_so_cedilha.tsv")
+    saida = {}
+    if os.path.isfile(caminho):
+        with open(caminho, encoding="utf-8") as f:
+            for r in csv.DictReader(f, delimiter="\t"):
+                saida.setdefault(r["modelo"], []).append(int(r["acima"]))
+    return saida
+
+
+ACIMA = acima_so_cedilha()
+
+
 def medidas(pasta, rotulo):
     with open(os.path.join(R, pasta, "paineis.tsv"), encoding="utf-8") as f:
         rs = [r for r in csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE) if r["modelo"] == rotulo]
@@ -50,17 +66,17 @@ def medidas(pasta, rotulo):
     marca = lambda v: 100 * sum(int(r["marca"]) for r in v) / len(v)
     cer = lambda v: st.mean(float(r["cer"]) for r in v)
     ac = [r for r in rs if r["tipo"] == "acentuada"]
-    so_ced = [r for r in ac if sinais(r["palavra"]) == {CEDILHA}]
     vis = [r for r in ac if sinais(r["palavra"]) != {CEDILHA}]
     resto = [r for r in rs if r["tipo"] != "acentuada"]
-    return {"a_mais": marca(so_ced), "pedido": marca(vis),
+    a_mais = 100 * sum(ACIMA[rotulo]) / len(ACIMA[rotulo]) if rotulo in ACIMA else None
+    return {"a_mais": a_mais, "pedido": marca(vis),
             "sem_haste": marca([r for r in vis if not set(r["palavra"]) & HASTE]),
             "indevido": marca(resto), "cer_ac": cer(ac), "cer_sem": cer(resto)}
 
 
 # (chave, titulo, melhor para onde, unidade, (ymin, ymax), referencia ou None)
 PAINEIS = [
-    ("a_mais", "Acento a mais", "menor é melhor", "%", (0, 90), (6, "modelo original")),
+    ("a_mais", "Acento a mais, palavras só com cedilha", "menor é melhor", "%", (0, 70), None),
     ("pedido", "Acento pedido", "maior é melhor", "%", (50, 100), None),
     ("sem_haste", "Acento pedido, palavras sem haste", "maior é melhor", "%", (50, 100), None),
     ("indevido", "Acento onde não se pede", "menor é melhor", "%", (0, 12), (5, "modelo original")),
@@ -84,7 +100,8 @@ def main():
             ax.axhline(ref[0], color=TINTA2, linewidth=1, linestyle=(0, (4, 3)))
         fins = []
         for t, pts in dados.items():
-            xs, ys = [ep for ep, _ in pts], [m[k] for _, m in pts]
+            pts_k = [(ep, m[k]) for ep, m in pts if m[k] is not None]
+            xs, ys = [ep for ep, _ in pts_k], [v for _, v in pts_k]
             ax.plot(xs, ys, color=COR[t], linewidth=2, marker="o", markersize=7,
                     markeredgecolor=FUNDO, markeredgewidth=1.5, label=t, clip_on=False, zorder=3)
             fins.append((xs[-1], ys[-1]))
@@ -119,7 +136,7 @@ def main():
     print(SAIDA)
     for t, pts in dados.items():
         for ep, m in pts:
-            print(f"{t:26s} {ep:2d} ep  " + "  ".join(f"{k} {v:.3f}" if v < 1 else f"{k} {v:.1f}" for k, v in m.items()))
+            print(f"{t:26s} {ep:2d} ep  " + "  ".join(f"{k} -" if v is None else (f"{k} {v:.3f}" if v < 1 else f"{k} {v:.1f}") for k, v in m.items()))
 
 
 if __name__ == "__main__":

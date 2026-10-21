@@ -23,26 +23,44 @@ mesma palavra, e as palavras curtas acentuadas, que saem pequenas e tortas.
 
 Além das do protocolo, duas contas feitas sobre o `paineis.tsv`.
 
-Marca em cima nas palavras só com cedilha. O detector vê marca solta acima do
-corpo da palavra e não vê a cedilha. Numa palavra cujo único sinal é a cedilha,
-toda marca em cima é acento a mais. São 11 das 30 palavras acentuadas, 440
-imagens por modelo. Dispensa o alinhador, cuja medida de posição concorda pouco
-com a anotação humana (kappa 0,29). Tem um defeito. Quando a cedilha sai solta
-do c o detector às vezes a conta, como se viu nas folhas.
+Acento a mais nas palavras só com cedilha. Numa palavra cujo único sinal é a
+cedilha, toda marca solta acima do corpo da palavra é acento a mais. São 11 das
+30 palavras acentuadas, 440 imagens por modelo. Dispensa o alinhador, cuja
+medida de posição concorda pouco com a anotação humana (kappa 0,29).
+
+Uma correção nesta medida. Na primeira versão deste documento ela foi tirada
+da coluna `marca` do `paineis.tsv`, que conta marca solta em cima ou embaixo
+do corpo. Embaixo, numa palavra com ç, é quase sempre a própria cedilha solta
+do c. A anotação humana do modelo de 40 épocas mostrou o erro: a coluna
+acusou marca em 15 das 55 imagens de palavras só com cedilha, as pessoas viram
+acento a mais em 1, e a marca só em cima acusou 4. Os números abaixo são da
+marca só em cima, recalculados das imagens por
+`diagnostico/marcas_so_cedilha.py` e guardados em
+`diagnostico/resultados/acento_separado/marcas_so_cedilha.tsv`. Os modelos
+cujas imagens não estão mais disponíveis (peso 5, controle e o professor com 6
+épocas) ficam sem o número.
+
+| palavras só com cedilha | coluna `marca`, em cima ou embaixo | só em cima, acento a mais | só embaixo |
+|---|---|---|---|
+| professor, 16 épocas | 45% | 27% | 24% |
+| zona vogais, 16 épocas | 30% | 13% | 20% |
+| zona vogais, 40 épocas | 22% | 5% | 18% |
+
+A marca embaixo, a cedilha solta, fica perto de 20% em todos. A queda que se
+via na medida antiga era quase toda acento a mais de verdade.
 
 Marca nos sinais visíveis. A marca pedida nas outras 19 palavras, as que têm
 agudo, til ou circunflexo. A "marca na acentuada" do protocolo mistura as duas
 coisas, e nas palavras só com cedilha conta acento a mais como acerto.
 
-| modelo, 16 épocas | marca nos sinais visíveis | marca em cima nas só com cedilha |
+| modelo, 16 épocas | marca nos sinais visíveis | acento a mais nas só com cedilha |
 |---|---|---|
-| IAM original | | 6% |
-| peso 5 | | 45% |
-| acento separado, sem professor (controle) | 79% | 31% |
-| acento separado e professor | 86% | 45% |
+| acento separado, sem professor (controle) | 79% | sem as imagens |
+| acento separado e professor | 86% | 27% |
 
-O professor piorou o acento a mais, de 31% para 45%, ao mesmo tempo em que
-resolveu o problema 1 e a letra.
+Com a medida antiga o controle tinha 31% e o professor 45%, e daí se leu que o
+professor piorava o acento a mais. Sem as imagens do controle essa comparação
+não pôde ser refeita com a medida corrigida, e fica sem confirmação.
 
 ## Mais épocas ajudam
 
@@ -53,12 +71,13 @@ se inverte.
 | acento separado e professor | 6 épocas | 11 épocas | 16 épocas |
 |---|---|---|---|
 | marca nos sinais visíveis | 81% | 83% | 86% |
-| marca em cima nas só com cedilha | 82% | 60% | 45% |
+| acento a mais nas só com cedilha | | 44% | 27% |
 | acento em palavra que não pede (esqueleto) | 6% | 5% | 5% |
 
-O acento pedido sobe e o acento a mais cai. A queda de 81% para 71% era o
-acento a mais sumindo das palavras com cedilha. Nenhuma das duas medidas tinha
-parado de melhorar na época 16.
+O acento pedido sobe e o acento a mais cai. A queda de 81% para 71% era marca
+solta sumindo das palavras com cedilha, parte acento a mais e parte cedilha que
+passou a sair presa ao c. Nenhuma das duas medidas tinha parado de melhorar na
+época 16.
 
 ## O acento separado é necessário
 
@@ -72,7 +91,7 @@ ponto.
 | marca sem acento | 6% | 21% | +16 pp, de +9 a +23 |
 | diferença pareada | +69 | +44 | −25 pp, de −36 a −14 |
 | marca nos sinais visíveis | 83% | 56% | |
-| marca em cima nas só com cedilha | 60% | 78% | |
+| acento a mais nas só com cedilha | 44% | 63% | |
 | CER sem acento pedido, só sem marca | 0,186 | 0,194 | +0,013, de 0,000 a +0,027 |
 
 Com o controle do [14](14_acento_separado_e_professor.md) isso fecha a tabela
@@ -128,7 +147,7 @@ sendo o ruído sorteado. Fora dela é a previsão do professor.
 | 16 épocas | professor | fora da máscara |
 |---|---|---|
 | marca nos sinais visíveis | 86% | 64% |
-| marca em cima nas só com cedilha | 45% | 39% |
+| acento a mais nas só com cedilha | 27% | 13% |
 | marca no esqueleto, sem acento | 5%, 8% | 6%, 6% |
 | diferença pareada | +66 | +50 |
 | CER das acentuadas | 0,43 | 0,28 |
@@ -136,7 +155,7 @@ sendo o ruído sorteado. Fora dela é a previsão do professor.
 | CER sem acento pedido | 0,190 | 0,187 |
 
 A letra das acentuadas melhora bastante, e a melhora aparece também nas
-imagens sem marca. O acento pedido cai, e o acento a mais quase não muda.
+imagens sem marca. O acento pedido cai, e o acento a mais cai pela metade.
 
 A perda do acento se concentra nas palavras sem haste alta.
 
@@ -203,7 +222,7 @@ interruptor de "palavra acentuada" e não como um comando preso a uma letra.
 
 | 16 épocas | controle | professor | pares sem professor |
 |---|---|---|---|
-| marca em cima nas só com cedilha | 31% | 45% | 35% |
+| acento a mais nas só com cedilha | sem as imagens | 27% | 10% |
 | CER das acentuadas | 0,39 | 0,43 | 0,37 |
 | marca nos sinais visíveis | 79% | 86% | 79% |
 | sem haste | 61% | 76% | 59% |
@@ -213,14 +232,14 @@ interruptor de "palavra acentuada" e não como um comando preso a uma letra.
 | diferença pareada | +51 | +66 | +53 |
 
 Com 6 épocas o protocolo dava 72% de marca na acentuada, 16% no esqueleto, 7%
-sem acento e +55, com marca em cima nas só com cedilha em 66%. O mesmo
+sem acento e +55, com acento a mais nas só com cedilha em 40%. O mesmo
 movimento do professor, o acento a mais caindo com as épocas.
 
 Bootstrap por palavra, pares sem professor menos professor. Marca no esqueleto
 +4 pp, de +2 a +7. CER sem acento pedido +0,059, de +0,045 a +0,073. Diferença
 pareada −13 pp, de −18 a −7.
 
-O mecanismo se confirma. O acento a mais cai, e nas folhas a palavra curta
+O mecanismo se confirma. O acento a mais cai de 27% para 10%, e nas folhas a palavra curta
 acentuada passa a sair do mesmo tamanho do esqueleto. O custo é maior que o
 ganho. A letra das palavras sem acento piora, o problema 1 sobe e o acento
 pedido cai nas palavras sem haste. Na maioria das medidas o modelo fica perto
@@ -275,7 +294,7 @@ treino com professor na máquina local.
 
 | 16 épocas | professor | professor e zona vogais | diferença, IC95 |
 |---|---|---|---|
-| marca em cima nas só com cedilha | 45% | 30% | |
+| acento a mais nas só com cedilha | 27% | 13% | |
 | marca nos sinais visíveis | 86% | 80% | |
 | sem haste | 76% | 72% | |
 | com haste | 93% | 85% | |
@@ -284,12 +303,12 @@ treino com professor na máquina local.
 | CER sem acento pedido | 0,190 | 0,195 | +0,005, de −0,002 a +0,012 |
 | CER das acentuadas | 0,43 | 0,41 | |
 
-Com 6 épocas a marca em cima nas só com cedilha era 61%, contra 82% do
-professor no mesmo ponto.
+Com 6 épocas o acento a mais nas só com cedilha era 41%. Do professor com 6
+épocas não há mais as imagens.
 
 É a primeira variante que reduz o acento a mais sem trazer de volta o problema
-1 nem estragar a letra. O acento a mais cai um terço, para o nível do controle
-sem professor. O custo são 6 pontos de marca nos sinais visíveis.
+1 nem estragar a letra. O acento a mais cai pela metade, de 27% para 13%. O
+custo são 6 pontos de marca nos sinais visíveis.
 
 Parte desse custo não é perda. Nas folhas de "relâmpagos" o professor põe a
 marca sobre o "a" errado na maioria das colunas, e a zona vogais tira essas
@@ -305,7 +324,7 @@ partir do estado salvo no Colab.
 
 | professor e zona vogais | 6 épocas | 16 épocas | 21 épocas | 30 épocas | 40 épocas | professor, 16 épocas |
 |---|---|---|---|---|---|---|
-| marca em cima nas só com cedilha | 61% | 30% | 33% | 25% | 22% | 45% |
+| acento a mais nas só com cedilha | 41% | 13% | 13% | 7% | 5% | 27% |
 | marca nos sinais visíveis | 74% | 80% | 84% | 87% | 88% | 86% |
 | sem haste | 59% | 72% | 77% | 86% | 88% | 76% |
 | com haste | 85% | 85% | 89% | 88% | 87% | 93% |
@@ -316,8 +335,7 @@ partir do estado salvo no Colab.
 | CER das acentuadas | 0,50 | 0,41 | 0,40 | 0,39 | 0,39 | 0,43 |
 
 Com 30 épocas a zona vogais recupera a marca pedida que tinha custado, passa o
-professor nas palavras sem haste e fica com pouco mais da metade do acento a
-mais dele. O problema 1 e a letra das palavras sem acento não se mexem, e a
+professor nas palavras sem haste e fica com um quarto do acento a mais dele. O problema 1 e a letra das palavras sem acento não se mexem, e a
 letra das acentuadas melhora devagar. Nada piorou com o treino mais longo.
 Entre 16 e 30 épocas nenhuma diferença isolada do protocolo tem intervalo
 longe do zero, mas todas vão na mesma direção.
@@ -327,22 +345,23 @@ e "relâmpagos" passa a ter o sinal sobre o primeiro "a" em quatro delas, onde
 antes ele caía sobre o segundo.
 
 Entre 30 e 40 épocas o treino estaciona. O acento pedido e o CER das
-acentuadas não se mexem, e só o acento a mais ainda cai, de 25% para 22%.
+acentuadas não se mexem, e só o acento a mais ainda cai, de 7% para 5%.
 Nenhuma medida piora. O modelo de 40 épocas é o melhor até aqui, por pouco
 sobre o de 30.
 
 ![Medidas por época](../diagnostico/resultados/acento_separado/evolucao_por_epocas.png)
 
 A figura é de `diagnostico/grafico_epocas.py`, que lê os `paineis.tsv`
-guardados e também calcula as duas medidas desta página. As curvas achatam a
-partir de 30 épocas, com o acento a mais e o CER das acentuadas ainda longe
-das referências, 6% e 0,27. As duas medidas que não podem piorar ficam coladas
+guardados e o `marcas_so_cedilha.tsv`, e calcula as duas medidas desta
+página. As curvas achatam a partir de 30 épocas. O acento a mais nas palavras
+só com cedilha chega a 5%, e as pessoas viram 2% na anotação. O CER das
+acentuadas fica longe da referência, 0,27. As duas medidas que não podem piorar ficam coladas
 no modelo original do começo ao fim. São cinco pontos de um treino só, e o
 ponto de 21 épocas mostra uma oscilação de uns 3 pontos entre avaliações.
 
 A diferença pareada do protocolo cai de +66 para +56 com 16 épocas e fica em
-+59 com 30. Ela soma como acerto a
-marca em cima das palavras só com cedilha, então a queda mistura o ganho com o
++59 com 30. Ela soma como acerto qualquer marca solta das palavras só com
+cedilha, acento a mais ou cedilha solta, então a queda mistura o ganho com o
 custo e não serve para julgar esta variante.
 
 ## Professor fora da máscara só em ruído baixo
@@ -361,14 +380,14 @@ Colab, numa sessão só.
 | marca nos sinais visíveis | 80% | 69% | 64% |
 | sem haste | 72% | 45% | 34% |
 | com haste | 85% | 87% | 86% |
-| marca em cima nas só com cedilha | 30% | 40% | 39% |
+| acento a mais nas só com cedilha | 13% | 9% | 13% |
 | marca no esqueleto, sem acento | 6%, 6% | 5%, 5% | 6%, 6% |
 | CER sem acento pedido | 0,195 | 0,191 | 0,187 |
 
 A letra das acentuadas melhora bastante, e a melhora aparece também nas
 imagens que têm a marca. O acento das palavras sem haste volta a cair, de 72%
-para 45%, e o acento a mais sobe. Restringir ao ruído baixo atenuou o defeito
-do fora da máscara original, sem tirá-lo.
+para 45%. O acento a mais cai um pouco, de 13% para 9%. Restringir ao ruído
+baixo atenuou o defeito do fora da máscara original, sem tirá-lo.
 
 Nas folhas, "pôr" sai grande, limpa e sem sinal, com a mesma forma do
 esqueleto. Em "bálsamo" a letra fica mais limpa e o acento se mantém em parte
@@ -400,8 +419,30 @@ Ideias guardadas, na ordem em que as tentaríamos.
   congelado.
 - Perda na atenção cruzada que prende a posição do sinal às colunas da letra.
 
-Pendente na medição. Um detector de cedilha, e a anotação humana do modelo com
-professor em quatro classes, só o sinal certo, certo e a mais, só a mais, nada.
+## O que a anotação humana mostrou
+
+Duas pessoas anotaram 212 imagens do modelo de 40 épocas, sem saber o que foi
+pedido, e uma terceira desempatou. O registro completo está em
+`avaliacao_diacriticos/anotacao_40ep.md`. Concordância entre as duas pessoas,
+kappa 0,64 para a classe do acento nas palavras com sinal em cima e 62 de 63
+para a cedilha.
+
+| no modelo de 40 épocas, pelo gabarito humano | |
+|---|---|
+| acento pedido presente, palavras com sinal em cima | 71 de 80 (89%) |
+| acento a mais nessas palavras | 12 de 80 (15%) |
+| acento a mais nas palavras só com cedilha | 1 de 55 |
+| cedilha pedida desenhada | 62 de 63 |
+| cedilha onde não se pediu | 0 de 117 |
+| qualquer marca em palavra que não pede acento | 0 de 45 |
+| legível, pela pessoa | 142 de 180 (79%) |
+
+Contra o gabarito, a tinta abaixo do c mede a cedilha com kappa 0,91 e o
+detector de marcas acerta "há marca em cima" com kappa 0,79. O acento a mais
+por posição, pelo alinhador, continua fraco, com precisão de 38%.
+
+O problema 1 está resolvido também no olho humano. O acento a mais que sobra
+está nas palavras com acento em cima.
 
 ## Estado atual e como continuar
 
@@ -437,9 +478,10 @@ O que está em aberto, por ordem de quanto falta.
   variantes do professor fora da máscara limpam a letra e tiram o acento das
   palavras sem haste. Falta uma ideia que não dependa de aproximar a acentuada
   do esqueleto, ou uma base em que a palavra acentuada não precise encolher.
-- Acento a mais, 22% contra 6% do modelo original.
-- Posição do acento e cedilha, que não têm medida confiável. Dependem do
-  detector de cedilha e da anotação humana.
+- Acento a mais nas palavras com acento em cima, 15% pelo gabarito humano.
+  Nas palavras só com cedilha ele quase sumiu.
+- A posição do acento ainda não tem medida automática confiável. A cedilha
+  passou a ter, a tinta abaixo do c, validada pela anotação.
 - Os documentos 07, 09 e 10 e o resumo do `README.md` desta pasta ainda
   descrevem o estado anterior ao acento separado.
 
