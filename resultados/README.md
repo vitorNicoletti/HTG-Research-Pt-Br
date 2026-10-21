@@ -56,18 +56,23 @@ em si. Ver [docs/07](../docs/07_experimentos_com_acentos.md).
 O acento ocupa 2% da imagem no espaço latente. Cobrar 5 vezes mais o erro
 nessa região aumentou o acento pedido e também o indevido.
 
-| modelo, 16 épocas | marca na acentuada | marca no esqueleto | marca sem acento | diferença pareada | CER sem acento pedido |
+| modelo, 16 épocas | marca na acentuada | marca no esqueleto | marca sem acento | diferença pareada | CER sem acento |
 |---|---|---|---|---|---|
-| IAM original | 6% | 5% | 5% | +1 | 0,195 |
-| base sintética, peso 1 | 42% | 26% | 26% | +16 | |
-| base sintética, peso 5 | 57% | 34% | 32% | +23 | 0,312 |
+| IAM original | 6% | 5% | 5% | +1 | 0,22 |
+| controle, sem peso | 46% | 30% | 25% | +16 | 0,32 |
+| peso 5 | 57% | 34% | 32% | +23 | 0,32 |
+
+O controle e o peso 5 são o mesmo treino na base sintética, e diferem só no
+peso. Por isso a diferença entre eles, +7 pontos na diferença pareada (IC95 de
++3 a +11), é atribuída ao peso. O CER desta tabela é o das 20 palavras sem
+acento.
 
 O esqueleto é a mesma palavra pedida sem o acento. A diferença pareada é a
 marca na acentuada menos a marca no esqueleto, com o mesmo escritor e a mesma
 semente, e mede quanto do acento vem do texto.
 
-Na figura, "haverá" e "havera" no modelo original e nos primeiros fine-tunes.
-Barra verde é marca detectada na acentuada e vermelha no esqueleto.
+Na figura, "haverá" e "havera" no modelo original, no controle sem peso e no
+peso 5. Barra verde é marca detectada na acentuada e vermelha no esqueleto.
 
 ![Peso 5](figuras/03_peso5_havera.png)
 
