@@ -464,6 +464,8 @@ def concordancia(a):
             pares.append((humano, detector[i["imagem"]]["marca_paineis"]))
         comparar(f"{pessoa} x marca do paineis.tsv", pares)
 
+    contra_o_consenso(chave, humanos, detector, grupo_da)
+
     # imagens em que as duas pessoas discordam, para o desempate
     discordancias = []
     for item in chave:
@@ -484,6 +486,57 @@ def concordancia(a):
             escritor.writeheader()
             escritor.writerows(discordancias)
     print(f"\n{len(discordancias)} imagens com discordancia em {DESEMPATE}")
+
+
+def contra_o_consenso(chave, humanos, detector, grupo_da):
+    """Precisao, recall e kappa dos detectores nas imagens em que as duas
+    pessoas deram a mesma resposta. As palavras com i ou j ficam de fora."""
+    def consenso(pergunta):
+        return [i for i in chave if grupo_da(i) != "com i ou j"
+                and humanos[0].get(i["imagem"], {}).get(pergunta) is not None
+                and humanos[0][i["imagem"]][pergunta] == humanos[1].get(i["imagem"], {}).get(pergunta)]
+
+    def linha(nome, itens, humano, maquina):
+        h = [humano(i) for i in itens]
+        m = [maquina(i) for i in itens]
+        vp = sum(x and y for x, y in zip(h, m))
+        fp = sum(y and not x for x, y in zip(h, m))
+        fn = sum(x and not y for x, y in zip(h, m))
+        precisao = f"{vp / (vp + fp):.2f}" if vp + fp else "  -"
+        recall = f"{vp / (vp + fn):.2f}" if vp + fn else "  -"
+        print(f"  {nome:44s} n={len(itens):3d} VP={vp:3d} FP={fp:3d} FN={fn:3d}"
+              f"  precisao {precisao}  recall {recall}  kappa {cohen(h, m):+.2f}")
+
+    def certo(classe):
+        return classe in ("so o certo", "certo e a mais")
+
+    def a_mais(classe):
+        return classe in ("so a mais", "certo e a mais")
+
+    pessoa = humanos[0]
+    print("\nCONTRA O CONSENSO DAS DUAS PESSOAS, sem as palavras com i ou j")
+    cedilha = consenso("cedilha")
+    linha("cedilha, detector do colega", cedilha,
+          lambda i: pessoa[i["imagem"]]["cedilha"] == "sim", lambda i: detector[i["imagem"]]["cedilha"] == "sim")
+    linha("cedilha, cedilha abaixo do c", cedilha,
+          lambda i: pessoa[i["imagem"]]["cedilha"] == "sim",
+          lambda i: detector[i["imagem"]]["cedilha_abaixo"] == "sim")
+    classe = consenso("classe")
+    em_cima = [i for i in classe if grupo_da(i) == "com sinal em cima"]
+    linha("acento pedido presente, colega", em_cima,
+          lambda i: certo(pessoa[i["imagem"]]["classe"]), lambda i: certo(detector[i["imagem"]]["classe"]))
+    linha("acento a mais, colega", em_cima,
+          lambda i: a_mais(pessoa[i["imagem"]]["classe"]), lambda i: a_mais(detector[i["imagem"]]["classe"]))
+    linha("alguma marca em cima, colega", classe,
+          lambda i: pessoa[i["imagem"]]["classe"] != "nenhum",
+          lambda i: detector[i["imagem"]]["classe"] != "nenhum")
+    so_cedilha = [i for i in classe if grupo_da(i) == "so cedilha"]
+    linha("a mais nas so cedilha, marca do paineis.tsv", so_cedilha,
+          lambda i: pessoa[i["imagem"]]["classe"] != "nenhum",
+          lambda i: detector[i["imagem"]]["marca_paineis"] == "sim")
+    linha("a mais nas so cedilha, so marcas em cima", so_cedilha,
+          lambda i: pessoa[i["imagem"]]["classe"] != "nenhum",
+          lambda i: detector[i["imagem"]]["classe"] != "nenhum")
 
 
 # --------------------------------------------------------- palavras com i e j
