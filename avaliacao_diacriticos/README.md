@@ -375,6 +375,12 @@ deste modelo quase não são inclinadas, então a reta não tinha o que corrigir
 e só acrescentou esse erro na ponta. Os números estão em
 `resultados/cedilha_abaixo_base_local_40ep.json`.
 
+## Anotação do modelo de 40 épocas
+
+Duas pessoas anotaram 212 imagens do modelo de 40 épocas. O processo, o que é
+o kappa, a precisão e o recall, e os resultados estão em `anotacao_40ep.md`.
+O desempate ainda não foi feito.
+
 ## Eixo 2
 
 O eixo 2 precisa de um reconhecedor que leia manuscrito em português. Três
