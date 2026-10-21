@@ -68,3 +68,6 @@ pacote_nuvem.tar
 
 # arquivos de trava do LibreOffice com a planilha aberta
 .~lock.*#
+
+# coisas desta maquina tiradas da raiz (ver arquivo/LEIA.md)
+arquivo/
