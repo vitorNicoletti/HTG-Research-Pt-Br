@@ -1,0 +1,37 @@
+{
+ "negativo": {
+  "c_sem_cedilha": 280,
+  "palavras": {
+   "percussão": 40,
+   "recomeça": 40,
+   "reclusão": 40,
+   "conexões": 40,
+   "caçadora": 40,
+   "confusões": 40,
+   "caçadoras": 40
+  },
+  "acima_do_limiar_por_palavra": {
+   "percussão": 3,
+   "recomeça": 0,
+   "reclusão": 1,
+   "conexões": 1,
+   "caçadora": 2,
+   "confusões": 2,
+   "caçadoras": 5
+  },
+  "mediana": 0.0072682535250593325,
+  "p95": 0.40023809523809534
+ },
+ "limiar_antigo_iam": 0.41106382978723355,
+ "base_iam_pt_alinhado": {
+  "cedilhas": 1093,
+  "mediana": 0.2835820895522388,
+  "acima_do_limiar_novo": 0.282708142726441,
+  "acima_do_limiar_antigo": 0.2689844464775846
+ },
+ "modelo_40ep_cedilhas_pedidas": {
+  "n": 520,
+  "mediana": 0.22394156231365536,
+  "acima_do_limiar_novo": 0.27692307692307694
+ }
+}
