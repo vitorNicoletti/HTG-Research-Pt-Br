@@ -173,7 +173,13 @@ Como as medidas automáticas se saem contra esse gabarito.
 | há marca em cima | detector de marcas soltas | 0,79 |
 | há cedilha | tinta abaixo do c, criada nesta etapa | 0,91 |
 | há cedilha | detector de marcas soltas | 0,15 |
-| o acento está na letra certa | detector com alinhador | fraca, precisão de 38% no acento a mais |
+| o acento pedido está na letra certa | detector com alinhador | 0,35 |
+| há acento em letra que não o pede | detector com alinhador | 0,36 |
+
+Nas duas últimas linhas o detector erra para lados diferentes. Quando diz que
+o acento pedido está na letra certa, acerta 98% das vezes, mas perde um em
+cada quatro que as pessoas veem. Quando acusa acento a mais, acerta só 38%
+das vezes.
 
 A cedilha, 40% dos sinais avaliados, passou a ser medida. Na figura, cedilhas
 pedidas que a medida nova acerta, com a coluna do c em azul e o corte em
