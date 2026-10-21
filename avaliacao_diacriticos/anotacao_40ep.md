@@ -6,8 +6,9 @@ outubro de 2026, o acento separado com professor e zona vogais de 40 épocas
 automáticos concordam com o que uma pessoa vê, e se as duas pessoas concordam
 entre si.
 
-O desempate ainda não foi feito. Os números abaixo usam só as imagens em que
-as duas pessoas deram a mesma resposta. A seção Pendências diz o que falta.
+Onde as duas pessoas discordaram, uma terceira pessoa desempatou. O gabarito
+final tem a resposta comum onde elas concordam e a decisão do desempate onde
+discordam, e é contra ele que os detectores são comparados.
 
 ## O que foi anotado
 
@@ -69,6 +70,28 @@ cedilha 6 7 numa palavra de 5 letras) e 13 respostas de cedilha apontando uma
 letra vizinha do c, o que não muda nada porque a cedilha é comparada só como
 tem ou não tem.
 
+## Desempate
+
+As duas pessoas discordaram em pelo menos uma pergunta em 68 imagens, 51 em
+legibilidade, 18 na classe do acento e 4 na cedilha, 73 respostas no total.
+O autor do trabalho decidiu essas 68 imagens com duas folhas que mostram cada
+imagem ampliada, as letras numeradas e as respostas das duas pessoas nas
+perguntas em disputa, sem a palavra pedida. As decisões estão em
+`resultados/anotacao_40ep_desempate.csv`.
+
+| pergunta | igual ao Bruno | igual ao Vini | diferente dos dois |
+|---|---|---|---|
+| classe do acento em cima | 7 | 10 | 1 |
+| cedilha | 3 | 1 | 0 |
+| legível | 29 | 22 | 0 |
+
+A resposta diferente dos dois é img_069 (pérsico), com marca nas letras 2 e 5.
+Quem desempatou também respondeu as perguntas sem disputa dessas imagens, e
+em todas deu a mesma resposta das duas pessoas.
+
+Em img_101 (pedágio) a decisão marca cedilha na letra 5, que é o g. A palavra
+tem i e fica fora da comparação com os detectores.
+
 ## Métodos automáticos comparados
 
 O detector do colega é o `scripts/medir_marcas.py` com a letra dada pelo
@@ -126,8 +149,8 @@ olhar as contagens.
 ## Precisão e recall
 
 Precisão e recall servem quando um lado é a referência e a pergunta é sim ou
-não. Aqui a referência é o consenso das duas pessoas, e a pergunta é, por
-exemplo, se há cedilha.
+não. Aqui a referência é o gabarito final, e a pergunta é, por exemplo, se há
+cedilha.
 
 | termo | o que é |
 |---|---|
@@ -162,9 +185,21 @@ kappa descrito acima, já que quase todas as respostas são nenhum. Na
 legibilidade a concordância é leve a moderada, e esse número deve ser usado
 com cuidado.
 
-### Detectores contra o consenso
+### Detectores contra o gabarito final
 
-Imagens em que as duas pessoas deram a mesma resposta, sem as palavras com i.
+Todas as imagens, sem as palavras com i.
+
+| pergunta | detector | n | VP | FP | FN | precisão | recall | kappa |
+|---|---|---|---|---|---|---|---|---|
+| cedilha | detector do colega | 180 | 8 | 1 | 54 | 0,89 | 0,13 | 0,15 |
+| cedilha | cedilha abaixo do c | 180 | 57 | 2 | 5 | 0,97 | 0,92 | 0,91 |
+| alguma marca em cima | detector do colega | 180 | 66 | 7 | 11 | 0,90 | 0,86 | 0,79 |
+| acento pedido presente | detector do colega | 80 | 53 | 1 | 18 | 0,98 | 0,75 | 0,35 |
+| acento a mais | detector do colega | 80 | 8 | 13 | 4 | 0,38 | 0,67 | 0,36 |
+| a mais nas só cedilha | marca do paineis.tsv | 55 | 0 | 15 | 1 | 0,00 | 0,00 | -0,04 |
+| a mais nas só cedilha | só marcas em cima | 55 | 0 | 4 | 1 | 0,00 | 0,00 | -0,03 |
+
+Contra só o consenso, sem as imagens desempatadas, os números eram estes.
 
 | pergunta | detector | n | VP | FP | FN | precisão | recall | kappa |
 |---|---|---|---|---|---|---|---|---|
@@ -176,67 +211,86 @@ Imagens em que as duas pessoas deram a mesma resposta, sem as palavras com i.
 | a mais nas só cedilha | marca do paineis.tsv | 52 | 0 | 14 | 0 | 0,00 | | 0,00 |
 | a mais nas só cedilha | só marcas em cima | 52 | 0 | 3 | 0 | 0,00 | | 0,00 |
 
+As imagens desempatadas são as mais difíceis de julgar, e todos os kappas
+caem um pouco quando elas entram. A maior queda é no acento pedido presente,
+de 0,45 para 0,35, porque das 11 imagens que entraram nessa linha o detector
+perde o acento em 6.
+
 Contra cada pessoa separada, a classe do detector do colega nas 80 palavras
 com acento em cima tem kappa 0,32 com as duas.
 
+### O que o modelo desenhou
+
+Pelo gabarito final, por grupo de imagens.
+
+| grupo | imagens | sinal pedido presente | acento a mais | legível |
+|---|---|---|---|---|
+| com acento em cima | 80 | 71 | 12 | 61 |
+| só cedilha | 55 | 54 | 1 | 45 |
+| esqueletos | 30 | | 0 | 24 |
+| sem acento | 15 | | 0 | 12 |
+| com i, acentuadas | 16 | 14 | 2 | 13 |
+| com i, esqueletos | 16 | | 2 | 15 |
+
+Na linha com acento em cima, o sinal pedido presente é o acento em cima. Nas
+8 dessas imagens que também pedem cedilha, a cedilha aparece em todas. Nas
+palavras com i o pingo não conta como acento. A cedilha não aparece em
+nenhuma imagem que não a pediu, fora a img_101 descrita no desempate. A
+legibilidade tem concordância baixa entre as duas pessoas e a coluna deve ser
+lida com cuidado.
+
 ### Leitura
 
-O detector do colega sabe bem se há marca em cima, com kappa 0,84. Quando ele
-diz que o acento pedido está lá, quase sempre está, mas perde um em cada cinco
-que as pessoas veem. O ponto fraco é o acento a mais. Ele acusa acento a mais
-em 17 imagens e as pessoas veem em 8, então quase dois terços dos acentos a
-mais que ele aponta não existem.
+O detector do colega sabe bem se há marca em cima, com kappa 0,79. Quando ele
+diz que o acento pedido está lá, quase sempre está, mas perde um em cada
+quatro que as pessoas veem, 18 de 71. O ponto fraco é o acento a mais. Ele
+acusa acento a mais em 21 imagens e o gabarito tem 12, das quais ele pega 8.
+Quase dois terços dos acentos a mais que ele aponta não existem.
 
-A cedilha abaixo do c funciona nas imagens geradas, com kappa 0,92, precisão
-0,98 e recall 0,92. É o primeiro detector de cedilha que passa na anotação.
+A cedilha abaixo do c funciona nas imagens geradas, com kappa 0,91, precisão
+0,97 e recall 0,92. É o primeiro detector de cedilha que passa na anotação.
 O detector de marcas soltas do colega perde 54 das 62 cedilhas, porque a
 cedilha costuma sair presa ao c.
 
 A medida de acento a mais nas palavras só com cedilha, tirada da marca do
-`paineis.tsv`, não concorda com as pessoas. Nas 52 imagens em que elas
-concordam, elas não veem acento a mais em nenhuma, e a medida acusa 14. Das
-15 marcas dessa coluna nas 55 imagens só com cedilha, 9 são a própria cedilha
-solta contada como marca. Contando só as marcas em cima, sobram 3 falsos
-alarmes. Com zero casos positivos não há como medir o recall dessa medida
-nesta amostra.
+`paineis.tsv`, não concorda com as pessoas. Nas 55 imagens o gabarito tem
+acento a mais em uma, img_087 (lançaremos), com acento sobre o o. A medida
+acusa 15 e não pega essa. Das 15 marcas, 9 são a própria cedilha solta
+contada como marca. Contando só as marcas em cima, sobram 4 falsos alarmes, e
+img_087 continua perdida. Com um caso positivo só, o recall dessa medida não
+diz muito.
 
 Nas 32 imagens com i, o detector do colega acusa acento a mais em 18, porque
-conta o pingo. As pessoas veem acento a mais em 2 (Bruno) e 4 (Vini).
+conta o pingo. O gabarito tem acento a mais em 4.
 
 ## Pendências
 
-O desempate não foi feito. São 68 imagens com discordância em pelo menos uma
-pergunta, 51 em legibilidade, 18 na classe do acento e 4 na cedilha. Elas
-estão em `resultados/anotacao_40ep_desempate.csv`, com as respostas das duas
-pessoas lado a lado e as colunas `decisao_marcas_em_cima`, `decisao_cedilha` e
-`decisao_legivel` em branco, para preencher no mesmo formato da planilha.
-
-O script ainda não lê as decisões do desempate. Depois de preenchidas, falta
-montar o gabarito final, com a resposta comum onde as pessoas concordam e a
-decisão onde discordam, e refazer a tabela de detectores contra esse
-gabarito.
-
-Também falta medir onde o detector do colega erra a posição do acento, letra a
-letra, que era a terceira tarefa pedida.
+Falta medir onde o detector do colega erra a posição do acento, letra a
+letra, que era a terceira tarefa pedida. O gabarito guarda só a classe de
+cada imagem. As letras marcadas estão nas planilhas e no desempate.
 
 ## Arquivos
 
 | arquivo | conteúdo |
 |---|---|
-| `anotacao_dupla.py` | gera as palavras com i, monta o pacote, grava as respostas dos detectores e calcula a concordância |
+| `anotacao_dupla.py` | gera as palavras com i, monta o pacote, grava as respostas dos detectores, calcula a concordância e monta o gabarito |
 | `resultados/anotacao_40ep_chave.csv` | liga cada imagem à palavra pedida, ao tipo e ao painel original |
 | `resultados/anotacao_40ep_detector.csv` | as respostas dos detectores para as 212 imagens |
-| `resultados/anotacao_40ep_concordancia.txt` | a saída completa da concordância |
-| `resultados/anotacao_40ep_desempate.csv` | as 68 discordâncias, para o desempate |
-| `planilha_anotacao_bruno.csv`, `planilha_anotacao_vini.csv` | as planilhas preenchidas, na raiz do repositório |
+| `resultados/anotacao_40ep_concordancia.txt` | a saída completa da concordância e da comparação com o gabarito |
+| `resultados/anotacao_40ep_desempate.csv` | as 68 discordâncias, com as respostas das duas pessoas e as decisões |
+| `resultados/anotacao_40ep_gabarito.csv` | o gabarito final das 212 imagens, com as perguntas que foram desempatadas |
+| `resultados/planilha_anotacao_bruno.csv`, `resultados/planilha_anotacao_vini.csv` | as planilhas preenchidas |
+| `amostras/anotacao_40ep/desempate/folha_desempate_{1,2}.png` | as folhas usadas no desempate, fora do git |
 
-A chave e as respostas dos detectores ainda não estão no git, porque mostram a
-palavra pedida de cada imagem. Agora que as planilhas voltaram elas podem
-entrar.
-
-Para refazer a concordância, que só precisa do Python padrão e roda em
-segundos,
+Para refazer a concordância e o gabarito, que só precisam do Python padrão e
+rodam em segundos,
 
 ```
-python3 avaliacao_diacriticos/anotacao_dupla.py concordancia --planilhas planilha_anotacao_bruno.csv planilha_anotacao_vini.csv
+python3 avaliacao_diacriticos/anotacao_dupla.py concordancia \
+    --planilhas avaliacao_diacriticos/resultados/planilha_anotacao_bruno.csv \
+    avaliacao_diacriticos/resultados/planilha_anotacao_vini.csv
 ```
+
+Se `resultados/anotacao_40ep_desempate.csv` já existe, o comando lê as
+decisões dele e não o reescreve. Sem esse arquivo, ele grava a lista de
+discordâncias com as colunas de decisão em branco.
