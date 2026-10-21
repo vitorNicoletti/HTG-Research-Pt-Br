@@ -65,3 +65,6 @@ diagnostico/resultados/*/paineis/
 
 # pacote de dados para treinar fora daqui (scripts/pacote_nuvem.sh), 3 GB
 pacote_nuvem.tar
+
+# arquivos de trava do LibreOffice com a planilha aberta
+.~lock.*#
