@@ -67,9 +67,21 @@ peso. Por isso a diferença entre eles, +7 pontos na diferença pareada (IC95 de
 +3 a +11), é atribuída ao peso. O CER desta tabela é o das 20 palavras sem
 acento.
 
-O esqueleto é a mesma palavra pedida sem o acento. A diferença pareada é a
-marca na acentuada menos a marca no esqueleto, com o mesmo escritor e a mesma
-semente, e mede quanto do acento vem do texto.
+O esqueleto é a mesma palavra pedida sem o acento. A diferença pareada mede
+quanto do acento vem do texto. Cada palavra acentuada é gerada junto com o seu
+esqueleto, com o mesmo escritor e a mesma semente, então a única diferença
+entre as duas imagens é o texto pedido.
+
+| "haverá" | "havera" | conta |
+|---|---|---|
+| marca | sem marca | +1, o acento veio do texto |
+| marca | marca | 0, o modelo põe marca de qualquer jeito |
+| sem marca | sem marca | 0, não desenhou |
+| sem marca | marca | −1, o contrário do pedido |
+
+A diferença pareada é a média disso, ou seja, a marca na acentuada menos a
+marca no esqueleto. Um modelo que pusesse acento em tudo teria 100% de marca
+na acentuada e diferença pareada zero.
 
 Na figura, "haverá" e "havera" no modelo original, no controle sem peso e no
 peso 5. Barra verde é marca detectada na acentuada e vermelha no esqueleto.
@@ -152,8 +164,21 @@ sido pedido, e uma terceira desempatou. Ver
 
 ![Folha de anotação](figuras/07_folha_de_anotacao.png)
 
-As duas pessoas concordam bem sobre acento (kappa 0,64) e cedilha (62 de 63
-imagens), e pouco sobre legibilidade.
+As duas pessoas concordam bem sobre acento e cedilha, e pouco sobre
+legibilidade.
+
+| pergunta | concordam | kappa |
+|---|---|---|
+| acento em cima, palavras com acento | 69 de 80 (86%) | 0,64 |
+| acento em cima, palavras com i | 28 de 32 (88%) | 0,78 |
+| acento em cima, palavras só com cedilha | 52 de 55 (95%) | |
+| acento em cima, palavras sem acento pedido | 45 de 45 (100%) | |
+| cedilha | 176 de 177 (99%) | |
+| legível | 161 de 212 (76%) | de 0,15 a 0,44 conforme o grupo |
+
+Nas linhas sem kappa quase todas as respostas são iguais, e o kappa vai a zero
+ou não pode ser calculado mesmo com as duas pessoas concordando, pelo mesmo
+motivo explicado mais abaixo.
 
 O que elas viram no modelo de 40 épocas.
 
@@ -168,18 +193,26 @@ O que elas viram no modelo de 40 épocas.
 
 Como as medidas automáticas se saem contra esse gabarito.
 
-| pergunta | medida | kappa |
-|---|---|---|
-| há marca em cima | detector de marcas soltas | 0,79 |
-| há cedilha | tinta abaixo do c, criada nesta etapa | 0,91 |
-| há cedilha | detector de marcas soltas | 0,15 |
-| o acento pedido está na letra certa | detector com alinhador | 0,35 |
-| há acento em letra que não o pede | detector com alinhador | 0,36 |
+| pergunta | medida | concordam | kappa |
+|---|---|---|---|
+| há marca em cima | detector de marcas soltas | 162 de 180 (90%) | 0,79 |
+| há cedilha | tinta abaixo do c, criada nesta etapa | 173 de 180 (96%) | 0,91 |
+| há cedilha | detector de marcas soltas | 125 de 180 (69%) | 0,15 |
+| o acento pedido está na letra certa | detector com alinhador | 61 de 80 (76%) | 0,35 |
+| há acento em letra que não o pede | detector com alinhador | 63 de 80 (79%) | 0,36 |
 
 Nas duas últimas linhas o detector erra para lados diferentes. Quando diz que
 o acento pedido está na letra certa, acerta 98% das vezes, mas perde um em
 cada quatro que as pessoas veem. Quando acusa acento a mais, acerta só 38%
 das vezes.
+
+O kappa e a proporção de concordância às vezes contam histórias diferentes.
+O detector de marcas soltas concorda com as pessoas em 69% das imagens sobre a
+cedilha, e mesmo assim tem kappa 0,15. Das 180 imagens, 118 não têm cedilha.
+Um detector que respondesse "não" para todas acertaria 118, ou 66%, sem
+detectar nada, e esse detector faz quase isso: acha 8 das 62 cedilhas. O kappa
+desconta esse acerto que viria por acaso, e por isso é a medida principal. O
+mesmo vale para o acento a mais, com 79% de concordância e só 12 casos em 80.
 
 A cedilha, 40% dos sinais avaliados, passou a ser medida. Na figura, cedilhas
 pedidas que a medida nova acerta, com a coluna do c em azul e o corte em
