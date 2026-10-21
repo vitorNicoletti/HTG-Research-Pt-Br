@@ -3,7 +3,8 @@ Anotacao humana feita por duas pessoas, sobre imagens do avaliar_pt.py.
 
     gerar_i_j     gera na CPU palavras com i e j, que a avaliacao nao tem
     pacote        sorteia as imagens e monta a pasta que vai para quem anota
-    concordancia  le as duas planilhas preenchidas e compara
+    concordancia  le as duas planilhas preenchidas e compara; com o desempate
+                  preenchido, monta o gabarito final e compara com ele
 
 Quem anota nao roda nada. Recebe as folhas com as imagens numeradas, as
 imagens soltas, a planilha CSV e as instrucoes em texto. A folha mostra a
@@ -464,7 +465,10 @@ def concordancia(a):
             pares.append((humano, detector[i["imagem"]]["marca_paineis"]))
         comparar(f"{pessoa} x marca do paineis.tsv", pares)
 
-    contra_o_consenso(chave, humanos, detector, grupo_da)
+    consenso = {p: {imagem: r[p] for imagem, r in humanos[0].items()
+                    if r[p] is not None and r[p] == humanos[1].get(imagem, {}).get(p)}
+                for p in ("classe", "cedilha", "legivel")}
+    contra_a_referencia("CONTRA O CONSENSO DAS DUAS PESSOAS", consenso, chave, detector, grupo_da)
 
     # imagens em que as duas pessoas discordam, para o desempate
     discordancias = []
@@ -480,21 +484,83 @@ def concordancia(a):
                    for pessoa, planilha in zip(pessoas, planilhas)
                    for campo in PERGUNTAS if item["imagem"] in planilha},
                 "decisao_marcas_em_cima": "", "decisao_cedilha": "", "decisao_legivel": ""})
-    if discordancias:
+    # o desempate preenchido nao pode ser apagado por uma nova rodada
+    if os.path.exists(DESEMPATE):
+        print(f"\n{len(discordancias)} imagens com discordancia; desempate lido de {DESEMPATE}")
+        gabarito_final(chave, consenso, discordancias, detector, grupo_da)
+    elif discordancias:
         with open(DESEMPATE, "w", newline="", encoding="utf-8-sig") as f:
             escritor = csv.DictWriter(f, fieldnames=list(discordancias[0]), delimiter=";")
             escritor.writeheader()
             escritor.writerows(discordancias)
-    print(f"\n{len(discordancias)} imagens com discordancia em {DESEMPATE}")
+        print(f"\n{len(discordancias)} imagens com discordancia em {DESEMPATE}")
 
 
-def contra_o_consenso(chave, humanos, detector, grupo_da):
-    """Precisao, recall e kappa dos detectores nas imagens em que as duas
-    pessoas deram a mesma resposta. As palavras com i ou j ficam de fora."""
-    def consenso(pergunta):
+GABARITO = os.path.join(MODULO, "resultados", f"{NOME}_gabarito.csv")
+
+
+def gabarito_final(chave, consenso, discordancias, detector, grupo_da):
+    """A resposta comum onde as duas pessoas concordam e a decisao do
+    desempate onde discordam. Grava o gabarito e compara os detectores com ele."""
+    palavra = {i["imagem"]: i["palavra"] for i in chave}
+    decisoes = {}
+    for imagem, linha in ler_planilha(DESEMPATE).items():
+        try:
+            decisoes[imagem] = respostas_humanas(
+                {campo: linha[f"decisao_{campo}"] for campo in PERGUNTAS}, palavra[imagem])
+        except ValueError as erro:
+            print(f"desempate: {imagem} {erro}")
+    gabarito = {p: dict(respostas) for p, respostas in consenso.items()}
+    desempatadas = {}
+    for d in discordancias:
+        for p in d["perguntas"].split():
+            resposta = decisoes.get(d["imagem"], {}).get(p)
+            if resposta is None:
+                print(f"desempate: falta a decisao de {p} em {d['imagem']}")
+                continue
+            gabarito[p][d["imagem"]] = resposta
+            desempatadas.setdefault(d["imagem"], []).append(p)
+    # onde as duas pessoas concordam vale a resposta delas, mesmo que o
+    # desempate tenha respondido a pergunta; aqui so se conta quando difere
+    for imagem, r in decisoes.items():
+        for p, resposta in r.items():
+            if imagem in consenso[p] and resposta is not None and resposta != consenso[p][imagem]:
+                print(f"desempate: {imagem} {p} = {resposta}, as duas pessoas disseram {consenso[p][imagem]}")
+
+    with open(GABARITO, "w", newline="", encoding="utf-8") as f:
+        escritor = csv.writer(f)
+        escritor.writerow(["imagem", "palavra", "grupo", "classe", "cedilha", "legivel", "desempate"])
+        for i in chave:
+            escritor.writerow([i["imagem"], i["palavra"], grupo_da(i)]
+                              + [gabarito[p].get(i["imagem"], "") for p in ("classe", "cedilha", "legivel")]
+                              + [" ".join(desempatadas.get(i["imagem"], []))])
+    print(f"{sum(len(v) for v in desempatadas.values())} respostas desempatadas, gabarito em {GABARITO}")
+
+    print("\nGABARITO FINAL POR GRUPO")
+    for grupo in ("com sinal em cima", "so cedilha", "sem sinal pedido", "com i ou j"):
+        itens = [i["imagem"] for i in chave if grupo_da(i) == grupo]
+        classes = {}
+        for imagem in itens:
+            classe = gabarito["classe"].get(imagem)
+            classes[classe] = classes.get(classe, 0) + 1
+        com_c = [i["imagem"] for i in chave if grupo_da(i) == grupo and "ç" in i["palavra"]]
+        sem_c = [imagem for imagem in itens if imagem not in com_c]
+        print(f" {grupo} ({len(itens)} imagens)")
+        print("  classe   " + ", ".join(f"{c} {n}" for c, n in sorted(classes.items(), key=str)))
+        print(f"  cedilha  vista em {sum(gabarito['cedilha'].get(x) == 'sim' for x in com_c)} de {len(com_c)}"
+              f" pedidas com ç e em {sum(gabarito['cedilha'].get(x) == 'sim' for x in sem_c)} de {len(sem_c)} sem ç")
+        print(f"  legivel  {sum(gabarito['legivel'].get(x) == 'sim' for x in itens)} de {len(itens)}")
+
+    contra_a_referencia("CONTRA O GABARITO FINAL", gabarito, chave, detector, grupo_da)
+
+
+def contra_a_referencia(titulo, referencia, chave, detector, grupo_da):
+    """Precisao, recall e kappa dos detectores contra uma referencia humana,
+    {pergunta: {imagem: resposta}}, nas imagens que ela tem. As palavras com
+    i ou j ficam de fora, porque o detector conta o pingo como marca."""
+    def com_resposta(pergunta):
         return [i for i in chave if grupo_da(i) != "com i ou j"
-                and humanos[0].get(i["imagem"], {}).get(pergunta) is not None
-                and humanos[0][i["imagem"]][pergunta] == humanos[1].get(i["imagem"], {}).get(pergunta)]
+                and referencia[pergunta].get(i["imagem"]) is not None]
 
     def linha(nome, itens, humano, maquina):
         h = [humano(i) for i in itens]
@@ -513,30 +579,28 @@ def contra_o_consenso(chave, humanos, detector, grupo_da):
     def a_mais(classe):
         return classe in ("so a mais", "certo e a mais")
 
-    pessoa = humanos[0]
-    print("\nCONTRA O CONSENSO DAS DUAS PESSOAS, sem as palavras com i ou j")
-    cedilha = consenso("cedilha")
+    def ref(pergunta):
+        return lambda i: referencia[pergunta][i["imagem"]]
+
+    print(f"\n{titulo}, sem as palavras com i ou j")
+    cedilha = com_resposta("cedilha")
     linha("cedilha, detector do colega", cedilha,
-          lambda i: pessoa[i["imagem"]]["cedilha"] == "sim", lambda i: detector[i["imagem"]]["cedilha"] == "sim")
+          lambda i: ref("cedilha")(i) == "sim", lambda i: detector[i["imagem"]]["cedilha"] == "sim")
     linha("cedilha, cedilha abaixo do c", cedilha,
-          lambda i: pessoa[i["imagem"]]["cedilha"] == "sim",
-          lambda i: detector[i["imagem"]]["cedilha_abaixo"] == "sim")
-    classe = consenso("classe")
+          lambda i: ref("cedilha")(i) == "sim", lambda i: detector[i["imagem"]]["cedilha_abaixo"] == "sim")
+    classe = com_resposta("classe")
     em_cima = [i for i in classe if grupo_da(i) == "com sinal em cima"]
     linha("acento pedido presente, colega", em_cima,
-          lambda i: certo(pessoa[i["imagem"]]["classe"]), lambda i: certo(detector[i["imagem"]]["classe"]))
+          lambda i: certo(ref("classe")(i)), lambda i: certo(detector[i["imagem"]]["classe"]))
     linha("acento a mais, colega", em_cima,
-          lambda i: a_mais(pessoa[i["imagem"]]["classe"]), lambda i: a_mais(detector[i["imagem"]]["classe"]))
+          lambda i: a_mais(ref("classe")(i)), lambda i: a_mais(detector[i["imagem"]]["classe"]))
     linha("alguma marca em cima, colega", classe,
-          lambda i: pessoa[i["imagem"]]["classe"] != "nenhum",
-          lambda i: detector[i["imagem"]]["classe"] != "nenhum")
+          lambda i: ref("classe")(i) != "nenhum", lambda i: detector[i["imagem"]]["classe"] != "nenhum")
     so_cedilha = [i for i in classe if grupo_da(i) == "so cedilha"]
     linha("a mais nas so cedilha, marca do paineis.tsv", so_cedilha,
-          lambda i: pessoa[i["imagem"]]["classe"] != "nenhum",
-          lambda i: detector[i["imagem"]]["marca_paineis"] == "sim")
+          lambda i: ref("classe")(i) != "nenhum", lambda i: detector[i["imagem"]]["marca_paineis"] == "sim")
     linha("a mais nas so cedilha, so marcas em cima", so_cedilha,
-          lambda i: pessoa[i["imagem"]]["classe"] != "nenhum",
-          lambda i: detector[i["imagem"]]["classe"] != "nenhum")
+          lambda i: ref("classe")(i) != "nenhum", lambda i: detector[i["imagem"]]["classe"] != "nenhum")
 
 
 # --------------------------------------------------------- palavras com i e j
