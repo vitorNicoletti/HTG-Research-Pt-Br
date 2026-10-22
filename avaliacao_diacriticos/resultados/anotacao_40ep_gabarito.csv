@@ -1,0 +1,213 @@
+imagem,palavra,grupo,classe,cedilha,legivel,desempate
+img_001.png,pôr,com sinal em cima,so o certo,nao,sim,classe
+img_002.png,estaras,sem sinal pedido,nenhum,nao,nao,
+img_003.png,lançados,so cedilha,nenhum,sim,sim,classe
+img_004.png,recomeça,so cedilha,nenhum,nao,sim,cedilha
+img_005.png,terráquea,com sinal em cima,so o certo,nao,nao,classe legivel
+img_006.png,engraçadas,so cedilha,nenhum,sim,nao,legivel
+img_007.png,biólogo,com i ou j,so o certo,nao,sim,
+img_008.png,haverá,com sinal em cima,so o certo,nao,sim,
+img_009.png,pás,com sinal em cima,so o certo,nao,sim,legivel
+img_010.png,pérsico,com i ou j,so o certo,nao,sim,
+img_011.png,pôr,com sinal em cima,so o certo,nao,sim,legivel
+img_012.png,prestação,com sinal em cima,so o certo,sim,sim,
+img_013.png,terço,so cedilha,nenhum,sim,sim,
+img_014.png,caçadoras,so cedilha,nenhum,sim,sim,
+img_015.png,lancados,sem sinal pedido,nenhum,nao,nao,
+img_016.png,conexões,com sinal em cima,so o certo,nao,nao,cedilha
+img_017.png,bálsamo,com sinal em cima,so a mais,nao,sim,legivel
+img_018.png,confusões,com sinal em cima,so o certo,nao,sim,
+img_019.png,pôr,com sinal em cima,so o certo,nao,sim,
+img_020.png,varíola,com i ou j,so o certo,nao,sim,
+img_021.png,caçadoras,so cedilha,nenhum,sim,nao,legivel
+img_022.png,terço,so cedilha,nenhum,sim,sim,
+img_023.png,arregacar,sem sinal pedido,nenhum,nao,sim,legivel
+img_024.png,biologo,com i ou j,nenhum,nao,sim,
+img_025.png,engraçadas,so cedilha,nenhum,sim,sim,
+img_026.png,tipico,com i ou j,so a mais,nao,sim,legivel
+img_027.png,recomeça,so cedilha,nenhum,sim,sim,
+img_028.png,opressão,com sinal em cima,so o certo,nao,sim,
+img_029.png,caçadora,so cedilha,nenhum,sim,sim,
+img_030.png,pás,com sinal em cima,so o certo,nao,nao,
+img_031.png,despedaçar,so cedilha,nenhum,sim,sim,
+img_032.png,engraçadas,so cedilha,nenhum,sim,nao,legivel
+img_033.png,apanho,sem sinal pedido,nenhum,nao,nao,
+img_034.png,pensámos,com sinal em cima,so o certo,nao,sim,
+img_035.png,prestacao,sem sinal pedido,nenhum,nao,sim,
+img_036.png,relâmpagos,com sinal em cima,so a mais,nao,sim,
+img_037.png,típico,com i ou j,so o certo,nao,sim,
+img_038.png,pôr,com sinal em cima,certo e a mais,nao,sim,
+img_039.png,florença,so cedilha,nenhum,sim,sim,
+img_040.png,pôr,com sinal em cima,certo e a mais,nao,sim,
+img_041.png,varíola,com i ou j,so o certo,nao,sim,
+img_042.png,imóveis,com i ou j,so o certo,nao,sim,
+img_043.png,unção,com sinal em cima,so o certo,sim,sim,
+img_044.png,sofrera,sem sinal pedido,nenhum,nao,nao,
+img_045.png,reversivel,com i ou j,nenhum,nao,sim,
+img_046.png,estarás,com sinal em cima,so o certo,nao,sim,
+img_047.png,balsamo,sem sinal pedido,nenhum,nao,sim,
+img_048.png,caçadora,so cedilha,nenhum,sim,sim,
+img_049.png,travas,sem sinal pedido,nenhum,nao,nao,
+img_050.png,matarás,com sinal em cima,so o certo,nao,sim,
+img_051.png,biólogo,com i ou j,so a mais,nao,sim,
+img_052.png,tragada,sem sinal pedido,nenhum,nao,sim,legivel
+img_053.png,mataras,sem sinal pedido,nenhum,nao,nao,
+img_054.png,percussão,com sinal em cima,so o certo,nao,sim,
+img_055.png,opressao,sem sinal pedido,nenhum,nao,sim,
+img_056.png,matarás,com sinal em cima,so o certo,nao,sim,
+img_057.png,recomeça,so cedilha,nenhum,sim,sim,
+img_058.png,reversível,com i ou j,so o certo,nao,sim,
+img_059.png,percussão,com sinal em cima,so o certo,nao,nao,legivel
+img_060.png,pas,sem sinal pedido,nenhum,nao,sim,legivel
+img_061.png,recomeça,so cedilha,nenhum,sim,sim,
+img_062.png,estarás,com sinal em cima,so o certo,nao,sim,
+img_063.png,layout,sem sinal pedido,nenhum,nao,sim,
+img_064.png,típico,com i ou j,nenhum,nao,sim,
+img_065.png,pensámos,com sinal em cima,so o certo,nao,sim,classe
+img_066.png,fletcher,sem sinal pedido,nenhum,nao,sim,legivel
+img_067.png,caçadora,so cedilha,nenhum,sim,sim,
+img_068.png,lançados,so cedilha,nenhum,sim,sim,
+img_069.png,pérsico,com i ou j,certo e a mais,nao,nao,classe
+img_070.png,relâmpagos,com sinal em cima,so o certo,nao,sim,
+img_071.png,weller,sem sinal pedido,nenhum,nao,sim,
+img_072.png,despedaçar,so cedilha,nenhum,sim,sim,
+img_073.png,reclusão,com sinal em cima,so o certo,nao,sim,legivel
+img_074.png,arregaçar,so cedilha,nenhum,sim,sim,legivel
+img_075.png,relâmpagos,com sinal em cima,so o certo,nao,sim,classe
+img_076.png,pensámos,com sinal em cima,certo e a mais,nao,sim,classe
+img_077.png,pedagio,com i ou j,nenhum,nao,sim,
+img_078.png,cacadora,sem sinal pedido,nenhum,nao,sim,
+img_079.png,mordaça,so cedilha,nenhum,sim,sim,legivel
+img_080.png,uncao,sem sinal pedido,nenhum,nao,sim,
+img_081.png,evoluiram,com i ou j,nenhum,nao,sim,legivel
+img_082.png,imóveis,com i ou j,so o certo,nao,sim,
+img_083.png,haverá,com sinal em cima,so a mais,nao,nao,
+img_084.png,bálsamo,com sinal em cima,so o certo,nao,nao,
+img_085.png,despedaçar,so cedilha,nenhum,sim,nao,legivel
+img_086.png,conexoes,sem sinal pedido,nenhum,nao,nao,
+img_087.png,lançaremos,so cedilha,so a mais,sim,sim,classe legivel
+img_088.png,recomeca,sem sinal pedido,nenhum,nao,sim,
+img_089.png,prestação,com sinal em cima,so o certo,sim,sim,
+img_090.png,relâmpagos,com sinal em cima,so o certo,nao,nao,
+img_091.png,variola,com i ou j,nenhum,nao,sim,
+img_092.png,terráquea,com sinal em cima,so o certo,nao,sim,legivel
+img_093.png,lembrarem,sem sinal pedido,nenhum,nao,sim,legivel
+img_094.png,reversivel,com i ou j,so a mais,nao,sim,classe
+img_095.png,lançaremos,so cedilha,nenhum,sim,sim,
+img_096.png,arregaçar,so cedilha,nenhum,sim,nao,legivel
+img_097.png,lançados,so cedilha,nenhum,sim,sim,
+img_098.png,terço,so cedilha,nenhum,sim,nao,
+img_099.png,pôr,com sinal em cima,so o certo,nao,sim,classe
+img_100.png,sofrerá,com sinal em cima,so o certo,nao,sim,legivel
+img_101.png,pedágio,com i ou j,so o certo,sim,sim,classe cedilha
+img_102.png,acento,sem sinal pedido,nenhum,nao,sim,
+img_103.png,caçadoras,so cedilha,nenhum,sim,sim,
+img_104.png,haverá,com sinal em cima,certo e a mais,nao,sim,
+img_105.png,confusões,com sinal em cima,certo e a mais,nao,sim,classe
+img_106.png,opressão,com sinal em cima,so o certo,nao,nao,
+img_107.png,reclusão,com sinal em cima,so o certo,nao,sim,
+img_108.png,contactos,sem sinal pedido,nenhum,nao,sim,
+img_109.png,despedaçar,so cedilha,nenhum,sim,sim,
+img_110.png,léguas,com sinal em cima,certo e a mais,nao,sim,classe legivel
+img_111.png,lançaremos,so cedilha,nenhum,sim,nao,classe
+img_112.png,persico,com i ou j,nenhum,nao,nao,legivel
+img_113.png,relâmpagos,com sinal em cima,so o certo,nao,sim,legivel
+img_114.png,mordaça,so cedilha,nenhum,sim,sim,
+img_115.png,relâmpagos,com sinal em cima,so a mais,nao,sim,
+img_116.png,central,sem sinal pedido,nenhum,nao,sim,legivel
+img_117.png,unção,com sinal em cima,so o certo,sim,nao,classe
+img_118.png,florença,so cedilha,nenhum,sim,sim,
+img_119.png,mordaça,so cedilha,nenhum,sim,sim,
+img_120.png,havera,sem sinal pedido,nenhum,nao,sim,legivel
+img_121.png,unção,com sinal em cima,so o certo,sim,sim,
+img_122.png,pobres,sem sinal pedido,nenhum,nao,nao,
+img_123.png,mordaça,so cedilha,nenhum,sim,sim,legivel
+img_124.png,terráquea,com sinal em cima,so o certo,nao,sim,
+img_125.png,conexões,com sinal em cima,so o certo,nao,sim,
+img_126.png,persico,com i ou j,nenhum,nao,sim,legivel
+img_127.png,lançaremos,so cedilha,nenhum,sim,sim,
+img_128.png,sofrerá,com sinal em cima,nenhum,nao,nao,
+img_129.png,lançados,so cedilha,nenhum,sim,sim,
+img_130.png,arregaçar,so cedilha,nenhum,sim,nao,
+img_131.png,por,sem sinal pedido,nenhum,nao,sim,
+img_132.png,terço,so cedilha,nenhum,sim,nao,
+img_133.png,florença,so cedilha,nenhum,sim,sim,legivel
+img_134.png,arregaçar,so cedilha,nenhum,sim,sim,
+img_135.png,percussao,sem sinal pedido,nenhum,nao,sim,
+img_136.png,confusoes,sem sinal pedido,nenhum,nao,sim,
+img_137.png,prestação,com sinal em cima,so o certo,sim,sim,legivel
+img_138.png,caçadoras,so cedilha,nenhum,sim,sim,
+img_139.png,matarás,com sinal em cima,so o certo,nao,sim,
+img_140.png,léguas,com sinal em cima,so o certo,nao,nao,
+img_141.png,unção,com sinal em cima,so o certo,sim,nao,
+img_142.png,bálsamo,com sinal em cima,so o certo,nao,sim,legivel
+img_143.png,cacadoras,sem sinal pedido,nenhum,nao,sim,
+img_144.png,pás,com sinal em cima,so o certo,nao,sim,
+img_145.png,mordaca,sem sinal pedido,nenhum,nao,sim,
+img_146.png,conexões,com sinal em cima,so o certo,nao,sim,
+img_147.png,florenca,sem sinal pedido,nenhum,nao,sim,
+img_148.png,haverá,com sinal em cima,so o certo,nao,sim,
+img_149.png,florença,so cedilha,nenhum,sim,sim,
+img_150.png,imoveis,com i ou j,nenhum,nao,sim,
+img_151.png,relâmpagos,com sinal em cima,nenhum,nao,sim,
+img_152.png,sledge,sem sinal pedido,nenhum,nao,sim,
+img_153.png,pás,com sinal em cima,so o certo,nao,sim,
+img_154.png,biologo,com i ou j,nenhum,nao,sim,
+img_155.png,matarás,com sinal em cima,so o certo,nao,sim,
+img_156.png,lancaremos,sem sinal pedido,nenhum,nao,sim,cedilha
+img_157.png,engraçadas,so cedilha,nenhum,sim,nao,legivel
+img_158.png,caçadora,so cedilha,nenhum,sim,sim,legivel
+img_159.png,relampagos,sem sinal pedido,nenhum,nao,sim,
+img_160.png,caçadora,so cedilha,nenhum,sim,sim,
+img_161.png,imoveis,com i ou j,nenhum,nao,sim,
+img_162.png,conexões,com sinal em cima,so o certo,nao,sim,
+img_163.png,pedágio,com i ou j,so o certo,nao,nao,legivel
+img_164.png,confusões,com sinal em cima,so o certo,nao,sim,legivel
+img_165.png,reclusão,com sinal em cima,so o certo,nao,sim,
+img_166.png,pôr,com sinal em cima,so o certo,nao,sim,
+img_167.png,evoluíram,com i ou j,so o certo,nao,nao,classe
+img_168.png,terraquea,sem sinal pedido,nenhum,nao,sim,
+img_169.png,huo,sem sinal pedido,nenhum,nao,sim,
+img_170.png,caçadoras,so cedilha,nenhum,sim,sim,
+img_171.png,estarás,com sinal em cima,so o certo,nao,nao,legivel
+img_172.png,mordaça,so cedilha,nenhum,sim,sim,
+img_173.png,engraçadas,so cedilha,nenhum,sim,sim,
+img_174.png,léguas,com sinal em cima,so a mais,nao,nao,
+img_175.png,atrever,sem sinal pedido,nenhum,nao,sim,legivel
+img_176.png,bálsamo,com sinal em cima,nenhum,nao,sim,
+img_177.png,evoluíram,com i ou j,so o certo,nao,sim,legivel
+img_178.png,despedaçar,so cedilha,nenhum,sim,sim,
+img_179.png,terráquea,com sinal em cima,so o certo,nao,nao,legivel
+img_180.png,pôr,com sinal em cima,so o certo,nao,sim,
+img_181.png,arregaçar,so cedilha,nenhum,sim,sim,legivel
+img_182.png,percussão,com sinal em cima,so o certo,nao,nao,
+img_183.png,tipico,com i ou j,nenhum,nao,sim,
+img_184.png,evoluiram,com i ou j,nenhum,nao,sim,
+img_185.png,lançaremos,so cedilha,nenhum,sim,sim,legivel
+img_186.png,opressão,com sinal em cima,so o certo,nao,sim,
+img_187.png,sofrerá,com sinal em cima,so o certo,nao,sim,
+img_188.png,variola,com i ou j,nenhum,nao,sim,
+img_189.png,terco,sem sinal pedido,nenhum,nao,nao,
+img_190.png,reversível,com i ou j,so o certo,nao,sim,
+img_191.png,percussão,com sinal em cima,so o certo,nao,nao,
+img_192.png,leguas,sem sinal pedido,nenhum,nao,sim,
+img_193.png,pedagio,com i ou j,nenhum,nao,sim,
+img_194.png,sofrerá,com sinal em cima,so o certo,nao,nao,legivel
+img_195.png,opressão,com sinal em cima,so o certo,nao,sim,
+img_196.png,cacadoras,sem sinal pedido,nenhum,nao,sim,
+img_197.png,relâmpagos,com sinal em cima,nenhum,nao,nao,legivel
+img_198.png,despedacar,sem sinal pedido,nenhum,nao,sim,
+img_199.png,confusões,com sinal em cima,so o certo,nao,sim,
+img_200.png,reclusão,com sinal em cima,certo e a mais,nao,sim,classe
+img_201.png,terço,so cedilha,nenhum,sim,sim,legivel
+img_202.png,lançados,so cedilha,nenhum,sim,sim,legivel
+img_203.png,torresmo,sem sinal pedido,nenhum,nao,sim,legivel
+img_204.png,florença,so cedilha,nenhum,sim,sim,
+img_205.png,léguas,com sinal em cima,so o certo,nao,sim,
+img_206.png,engracadas,sem sinal pedido,nenhum,nao,sim,legivel
+img_207.png,pensámos,com sinal em cima,so o certo,nao,sim,classe legivel
+img_208.png,estarás,com sinal em cima,so o certo,nao,sim,
+img_209.png,pensamos,sem sinal pedido,nenhum,nao,sim,legivel
+img_210.png,recomeça,so cedilha,nenhum,sim,sim,
+img_211.png,prestação,com sinal em cima,so o certo,sim,sim,
+img_212.png,reclusao,sem sinal pedido,nenhum,nao,sim,

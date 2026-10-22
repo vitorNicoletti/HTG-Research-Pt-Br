@@ -1,0 +1,781 @@
+{
+ "medida": "altura",
+ "fundo_do_c_sem_cedilha_abaixo_da_base": {
+  "primeira_letra": {
+   "n": 160,
+   "mediana_px": 0.0,
+   "p90_px": 2.0
+  },
+  "meio": {
+   "n": 120,
+   "mediana_px": 0.0,
+   "p90_px": 2.0
+  }
+ },
+ "tol_alturas_x": 0.15,
+ "negativo": {
+  "c_sem_cedilha": 280,
+  "mediana": 0.0,
+  "p95": 0.0017857142857146916
+ },
+ "base_iam_pt_alinhado": {
+  "cedilhas": 1093,
+  "alinhadas": 1093,
+  "mediana": 0.35294117647058826,
+  "acima_do_limiar": 0.938700823421775,
+  "mesmo_c_no_par_sem_cedilha": {
+   "n": 1093,
+   "acima_do_limiar": 0.01646843549862763
+  }
+ },
+ "modelo_40ep_cedilhas_pedidas": {
+  "n": 520,
+  "mediana": 0.3514705882352941,
+  "acima_do_limiar": 0.8442307692307692
+ },
+ "folhas": {
+  "A": [
+   {
+    "painel": "A1",
+    "palavra": "engraçadas",
+    "letra": 6,
+    "medida": 0.23529411764705882,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/017_597_43.png"
+   },
+   {
+    "painel": "A2",
+    "palavra": "arregaçar",
+    "letra": 7,
+    "medida": 0.30434782608695654,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/002_321_43.png"
+   },
+   {
+    "painel": "A3",
+    "palavra": "despedaçar",
+    "letra": 8,
+    "medida": 0.35,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/011_622_43.png"
+   },
+   {
+    "painel": "A4",
+    "palavra": "lançaremos",
+    "letra": 4,
+    "medida": 0.35714285714285715,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/029_547_43.png"
+   },
+   {
+    "painel": "A5",
+    "palavra": "mordaça",
+    "letra": 6,
+    "medida": 0.36,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/009_201_42.png"
+   },
+   {
+    "painel": "A6",
+    "palavra": "caçadora",
+    "letra": 3,
+    "medida": 0.4,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/016_321_43.png"
+   },
+   {
+    "painel": "A7",
+    "palavra": "caçadora",
+    "letra": 3,
+    "medida": 0.4090909090909091,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/016_555_43.png"
+   },
+   {
+    "painel": "A8",
+    "palavra": "terço",
+    "letra": 4,
+    "medida": 0.4166666666666667,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/026_547_43.png"
+   },
+   {
+    "painel": "A9",
+    "palavra": "lançados",
+    "letra": 4,
+    "medida": 0.4444444444444444,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/020_590_42.png"
+   },
+   {
+    "painel": "A10",
+    "palavra": "caçadoras",
+    "letra": 3,
+    "medida": 0.45,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/021_201_42.png"
+   },
+   {
+    "painel": "A11",
+    "palavra": "prestação",
+    "letra": 7,
+    "medida": 0.5238095238095238,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/028_321_43.png"
+   },
+   {
+    "painel": "A12",
+    "palavra": "despedaçar",
+    "letra": 8,
+    "medida": 0.5294117647058824,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/011_547_43.png"
+   },
+   {
+    "painel": "A13",
+    "palavra": "recomeça",
+    "letra": 7,
+    "medida": 0.5454545454545454,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_183_42.png"
+   },
+   {
+    "painel": "A14",
+    "palavra": "arregaçar",
+    "letra": 7,
+    "medida": 0.5789473684210527,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/002_537_42.png"
+   },
+   {
+    "painel": "A15",
+    "palavra": "lançados",
+    "letra": 4,
+    "medida": 0.5789473684210527,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/020_201_42.png"
+   },
+   {
+    "painel": "A16",
+    "palavra": "terço",
+    "letra": 4,
+    "medida": 0.6521739130434783,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/026_305_42.png"
+   }
+  ],
+  "B": [
+   {
+    "painel": "B1",
+    "palavra": "mordaça",
+    "letra": 6,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/009_583_43.png"
+   },
+   {
+    "painel": "B2",
+    "palavra": "unção",
+    "letra": 3,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/015_560_43.png"
+   },
+   {
+    "painel": "B3",
+    "palavra": "florença",
+    "letra": 7,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/014_318_43.png"
+   },
+   {
+    "painel": "B4",
+    "palavra": "arregaçar",
+    "letra": 7,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/002_589_42.png"
+   },
+   {
+    "painel": "B5",
+    "palavra": "terço",
+    "letra": 4,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/026_631_42.png"
+   },
+   {
+    "painel": "B6",
+    "palavra": "engraçadas",
+    "letra": 6,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/017_597_42.png"
+   },
+   {
+    "painel": "B7",
+    "palavra": "terço",
+    "letra": 4,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/026_589_43.png"
+   },
+   {
+    "painel": "B8",
+    "palavra": "lançaremos",
+    "letra": 4,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/029_590_42.png"
+   },
+   {
+    "painel": "B9",
+    "palavra": "caçadoras",
+    "letra": 3,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/021_590_43.png"
+   },
+   {
+    "painel": "B10",
+    "palavra": "arregaçar",
+    "letra": 7,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/002_547_43.png"
+   },
+   {
+    "painel": "B11",
+    "palavra": "lançaremos",
+    "letra": 4,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/029_537_43.png"
+   },
+   {
+    "painel": "B12",
+    "palavra": "mordaça",
+    "letra": 6,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/009_555_42.png"
+   },
+   {
+    "painel": "B13",
+    "palavra": "unção",
+    "letra": 3,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/015_280_42.png"
+   },
+   {
+    "painel": "B14",
+    "palavra": "arregaçar",
+    "letra": 7,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/002_555_42.png"
+   },
+   {
+    "painel": "B15",
+    "palavra": "recomeça",
+    "letra": 7,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_537_42.png"
+   },
+   {
+    "painel": "B16",
+    "palavra": "engraçadas",
+    "letra": 6,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/017_537_43.png"
+   }
+  ],
+  "C": [
+   {
+    "painel": "C1",
+    "palavra": "caçadora",
+    "letra": 1,
+    "medida": 0.03571428571428571,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/016_616_42.png"
+   },
+   {
+    "painel": "C2",
+    "palavra": "caçadoras",
+    "letra": 1,
+    "medida": 0.04,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/021_537_42.png"
+   },
+   {
+    "painel": "C3",
+    "palavra": "confusões",
+    "letra": 1,
+    "medida": 0.041666666666666664,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/019_537_42.png"
+   },
+   {
+    "painel": "C4",
+    "palavra": "recomeça",
+    "letra": 3,
+    "medida": 0.043478260869565216,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_510_42.png"
+   },
+   {
+    "painel": "C5",
+    "palavra": "caçadoras",
+    "letra": 1,
+    "medida": 0.043478260869565216,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/021_589_42.png"
+   },
+   {
+    "painel": "C6",
+    "palavra": "confusões",
+    "letra": 1,
+    "medida": 0.06666666666666667,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/019_589_43.png"
+   },
+   {
+    "painel": "C7",
+    "palavra": "caçadora",
+    "letra": 1,
+    "medida": 0.08,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/016_580_43.png"
+   },
+   {
+    "painel": "C8",
+    "palavra": "recomeça",
+    "letra": 3,
+    "medida": 0.1111111111111111,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_547_42.png"
+   },
+   {
+    "painel": "C9",
+    "palavra": "percussão",
+    "letra": 4,
+    "medida": 0.13636363636363635,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/001_583_43.png"
+   },
+   {
+    "painel": "C10",
+    "palavra": "caçadora",
+    "letra": 1,
+    "medida": 0.13636363636363635,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/016_589_42.png"
+   },
+   {
+    "painel": "C11",
+    "palavra": "recomeça",
+    "letra": 3,
+    "medida": 0.3333333333333333,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_510_43.png"
+   },
+   {
+    "painel": "C12",
+    "palavra": "recomeça",
+    "letra": 3,
+    "medida": 0.3448275862068966,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_616_42.png"
+   },
+   {
+    "painel": "C13",
+    "palavra": "recomeça",
+    "letra": 3,
+    "medida": 0.42857142857142855,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_597_42.png"
+   },
+   {
+    "painel": "C14",
+    "palavra": "recomeça",
+    "letra": 3,
+    "medida": 0.43478260869565216,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_318_42.png"
+   }
+  ],
+  "D": [
+   {
+    "painel": "D1",
+    "palavra": "reclusão",
+    "letra": 3,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/012_583_42.png"
+   },
+   {
+    "painel": "D2",
+    "palavra": "caçadora",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/016_517_42.png"
+   },
+   {
+    "painel": "D3",
+    "palavra": "conexões",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/013_631_42.png"
+   },
+   {
+    "painel": "D4",
+    "palavra": "percussão",
+    "letra": 4,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/001_616_42.png"
+   },
+   {
+    "painel": "D5",
+    "palavra": "confusões",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/019_590_42.png"
+   },
+   {
+    "painel": "D6",
+    "palavra": "caçadoras",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/021_318_43.png"
+   },
+   {
+    "painel": "D7",
+    "palavra": "confusões",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/019_183_43.png"
+   },
+   {
+    "painel": "D8",
+    "palavra": "caçadoras",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/021_280_42.png"
+   },
+   {
+    "painel": "D9",
+    "palavra": "confusões",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/019_590_43.png"
+   },
+   {
+    "painel": "D10",
+    "palavra": "percussão",
+    "letra": 4,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/001_622_42.png"
+   },
+   {
+    "painel": "D11",
+    "palavra": "caçadoras",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/021_305_43.png"
+   },
+   {
+    "painel": "D12",
+    "palavra": "recomeça",
+    "letra": 3,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_201_43.png"
+   },
+   {
+    "painel": "D13",
+    "palavra": "conexões",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/013_622_42.png"
+   },
+   {
+    "painel": "D14",
+    "palavra": "percussão",
+    "letra": 4,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/001_590_42.png"
+   },
+   {
+    "painel": "D15",
+    "palavra": "recomeça",
+    "letra": 3,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_517_42.png"
+   },
+   {
+    "painel": "D16",
+    "palavra": "caçadora",
+    "letra": 1,
+    "medida": 0.0,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/016_597_42.png"
+   }
+  ],
+  "E": [
+   {
+    "painel": "E1",
+    "palavra": "mordaça",
+    "letra": 6,
+    "medida": 0.037037037037037035,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/009_597_42.png"
+   },
+   {
+    "painel": "E2",
+    "palavra": "unção",
+    "letra": 3,
+    "medida": 0.038461538461538464,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/015_590_42.png"
+   },
+   {
+    "painel": "E3",
+    "palavra": "arregaçar",
+    "letra": 7,
+    "medida": 0.04,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/002_183_42.png"
+   },
+   {
+    "painel": "E4",
+    "palavra": "lançaremos",
+    "letra": 4,
+    "medida": 0.05555555555555555,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/029_580_43.png"
+   },
+   {
+    "painel": "E5",
+    "palavra": "lançaremos",
+    "letra": 4,
+    "medida": 0.058823529411764705,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/029_305_43.png"
+   },
+   {
+    "painel": "E6",
+    "palavra": "recomeça",
+    "letra": 7,
+    "medida": 0.06451612903225806,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_616_43.png"
+   },
+   {
+    "painel": "E7",
+    "palavra": "unção",
+    "letra": 3,
+    "medida": 0.07692307692307693,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/015_318_43.png"
+   },
+   {
+    "painel": "E8",
+    "palavra": "recomeça",
+    "letra": 7,
+    "medida": 0.08333333333333333,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_183_43.png"
+   },
+   {
+    "painel": "E9",
+    "palavra": "recomeça",
+    "letra": 7,
+    "medida": 0.08333333333333333,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_510_43.png"
+   },
+   {
+    "painel": "E10",
+    "palavra": "caçadoras",
+    "letra": 3,
+    "medida": 0.08333333333333333,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/021_631_43.png"
+   },
+   {
+    "painel": "E11",
+    "palavra": "mordaça",
+    "letra": 6,
+    "medida": 0.09090909090909091,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/009_321_42.png"
+   },
+   {
+    "painel": "E12",
+    "palavra": "unção",
+    "letra": 3,
+    "medida": 0.09375,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/015_201_43.png"
+   },
+   {
+    "painel": "E13",
+    "palavra": "florença",
+    "letra": 7,
+    "medida": 0.09523809523809523,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/014_555_43.png"
+   },
+   {
+    "painel": "E14",
+    "palavra": "unção",
+    "letra": 3,
+    "medida": 0.0967741935483871,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/015_580_43.png"
+   },
+   {
+    "painel": "E15",
+    "palavra": "florença",
+    "letra": 7,
+    "medida": 0.1,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/014_201_42.png"
+   },
+   {
+    "painel": "E16",
+    "palavra": "lançaremos",
+    "letra": 4,
+    "medida": 0.1111111111111111,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/029_597_42.png"
+   },
+   {
+    "painel": "E17",
+    "palavra": "lançaremos",
+    "letra": 4,
+    "medida": 0.11764705882352941,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/029_537_42.png"
+   },
+   {
+    "painel": "E18",
+    "palavra": "mordaça",
+    "letra": 6,
+    "medida": 0.12,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/009_305_43.png"
+   },
+   {
+    "painel": "E19",
+    "palavra": "arregaçar",
+    "letra": 7,
+    "medida": 0.125,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/002_580_43.png"
+   },
+   {
+    "painel": "E20",
+    "palavra": "prestação",
+    "letra": 7,
+    "medida": 0.125,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/028_510_42.png"
+   },
+   {
+    "painel": "E21",
+    "palavra": "terço",
+    "letra": 4,
+    "medida": 0.12903225806451613,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/026_597_42.png"
+   },
+   {
+    "painel": "E22",
+    "palavra": "mordaça",
+    "letra": 6,
+    "medida": 0.13043478260869565,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/009_560_43.png"
+   },
+   {
+    "painel": "E23",
+    "palavra": "florença",
+    "letra": 7,
+    "medida": 0.13043478260869565,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/014_583_43.png"
+   },
+   {
+    "painel": "E24",
+    "palavra": "unção",
+    "letra": 3,
+    "medida": 0.13333333333333333,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/015_537_42.png"
+   },
+   {
+    "painel": "E25",
+    "palavra": "recomeça",
+    "letra": 7,
+    "medida": 0.13636363636363635,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_321_42.png"
+   },
+   {
+    "painel": "E26",
+    "palavra": "recomeça",
+    "letra": 7,
+    "medida": 0.13793103448275862,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_616_42.png"
+   },
+   {
+    "painel": "E27",
+    "palavra": "recomeça",
+    "letra": 7,
+    "medida": 0.14285714285714285,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_280_42.png"
+   },
+   {
+    "painel": "E28",
+    "palavra": "recomeça",
+    "letra": 7,
+    "medida": 0.14285714285714285,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/004_555_43.png"
+   },
+   {
+    "painel": "E29",
+    "palavra": "caçadora",
+    "letra": 3,
+    "medida": 0.14285714285714285,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/016_590_42.png"
+   },
+   {
+    "painel": "E30",
+    "palavra": "lançaremos",
+    "letra": 4,
+    "medida": 0.14285714285714285,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/029_183_42.png"
+   },
+   {
+    "painel": "E31",
+    "palavra": "arregaçar",
+    "letra": 7,
+    "medida": 0.15,
+    "imagem": "amostras/zona_vogais_40ep/avaliacao_zona_vogais_40ep_val/paineis/zona_vogais_40ep/002_590_43.png"
+   }
+  ]
+ },
+ "limiares_a_mao": [
+  {
+   "limiar": 0.05,
+   "base_cedilhas": 0.9377859103385179,
+   "base_mesmo_c_no_par": 0.010064043915827997,
+   "modelo_cedilhas_pedidas": 0.8384615384615385,
+   "modelo_c_sem_cedilha": [
+    "C6",
+    "C7",
+    "C8",
+    "C9",
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C14"
+   ]
+  },
+  {
+   "limiar": 0.1,
+   "base_cedilhas": 0.9313815187557182,
+   "base_mesmo_c_no_par": 0.0036596523330283625,
+   "modelo_cedilhas_pedidas": 0.8153846153846154,
+   "modelo_c_sem_cedilha": [
+    "C8",
+    "C9",
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C14"
+   ]
+  },
+  {
+   "limiar": 0.15,
+   "base_cedilhas": 0.9048490393412626,
+   "base_mesmo_c_no_par": 0.0009149130832570906,
+   "modelo_cedilhas_pedidas": 0.7846153846153846,
+   "modelo_c_sem_cedilha": [
+    "C11",
+    "C12",
+    "C13",
+    "C14"
+   ]
+  },
+  {
+   "limiar": 0.2,
+   "base_cedilhas": 0.8472095150960659,
+   "base_mesmo_c_no_par": 0.0,
+   "modelo_cedilhas_pedidas": 0.7461538461538462,
+   "modelo_c_sem_cedilha": [
+    "C11",
+    "C12",
+    "C13",
+    "C14"
+   ]
+  },
+  {
+   "limiar": 0.25,
+   "base_cedilhas": 0.7657822506861848,
+   "base_mesmo_c_no_par": 0.0,
+   "modelo_cedilhas_pedidas": 0.6884615384615385,
+   "modelo_c_sem_cedilha": [
+    "C11",
+    "C12",
+    "C13",
+    "C14"
+   ]
+  },
+  {
+   "limiar": 0.3,
+   "base_cedilhas": 0.656907593778591,
+   "base_mesmo_c_no_par": 0.0,
+   "modelo_cedilhas_pedidas": 0.6076923076923076,
+   "modelo_c_sem_cedilha": [
+    "C11",
+    "C12",
+    "C13",
+    "C14"
+   ]
+  }
+ ]
+}

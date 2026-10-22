@@ -216,6 +216,184 @@ python avaliacao_diacriticos/experimentos/comparar_detectores.py
 python avaliacao_diacriticos/anotacao.py kappa
 ```
 
+## Cedilha
+
+A sexta tentativa, a tinta abaixo do c numa imagem só, é a medida da
+cedilha. Ela passou na base e, nas imagens geradas pelo modelo de 40 épocas,
+concorda com a anotação humana, com kappa 0,91, precisão 0,97 e recall 0,92
+(ver `anotacao_40ep.md`).
+
+Foram oito tentativas, mais uma varredura de limiares à mão. As porcentagens
+são das 1.093 cedilhas da base `iam_pt_alinhado` que cada método percebe.
+
+| método | cedilhas percebidas |
+|---|---|
+| eixo 1 com fatias iguais, limiar do modelo do IAM | 15,9% |
+| eixo 1 com alinhador, limiar do modelo do IAM | 26,9% |
+| detector de marcas soltas | 7,8% |
+| marca nova no par | 7,6% |
+| diferença pareada com limiar do próprio modelo de 40 épocas | 28,3% |
+| tinta abaixo do c numa imagem só, limiar do modelo de 40 épocas | 95,0% |
+| altura da tinta abaixo do c numa imagem só, limiar do modelo de 40 épocas | 93,9% |
+| altura abaixo do c com linha de base local, limiar do modelo de 40 épocas | 93,6% |
+
+O detector de marcas soltas não vê a cedilha presa ao c, porque ela faz parte
+da mancha da letra. O eixo 1 vê tinta a mais embaixo do c em 99% das
+cedilhas, com medida típica de 0,28, mas o limiar fica em torno de 0,40.
+
+A última tentativa, em `experimentos/cedilha.py`, tirou o limiar dos c sem
+cedilha das imagens do modelo de 40 épocas, como o c de percussão, onde a
+acentuada e o esqueleto diferem só pelo ruído do gerador. O limiar saiu 0,40,
+quase o mesmo 0,41 do modelo do IAM. Nas cedilhas pedidas ao modelo de 40
+épocas, 27,7% passam dele.
+
+Nas oito maiores medidas desses c sem cedilha, duas são a palavra inteira
+redesenhada entre a acentuada e o esqueleto, e seis são uma cedilha de verdade
+de outra letra caindo na coluna do primeiro c. As colunas vêm do esqueleto, e
+na imagem acentuada as letras estão em outro lugar. Na base isso não acontece
+porque as duas imagens só diferem no acento. Os números estão em
+`resultados/cedilha_40ep.json`.
+
+A sexta tentativa, em `experimentos/cedilha_abaixo.py`, não usa o esqueleto.
+Como o detector do colega, ela acha o corpo das letras com
+`acentos_sinteticos/geometria.py`, e as colunas de cada letra vêm do alinhador
+lendo o esqueleto na própria imagem acentuada. A medida de cada c é a tinta
+abaixo da linha de base mais 0,15 altura-x, a mesma folga do
+`scripts/medir_marcas.py`, dividida pela tinta do corpo do c. O negativo e o
+limiar são os da tentativa anterior: o p95 dos 280 c sem cedilha das
+acentuadas do modelo de 40 épocas. O limiar saiu 0,0003, porque mais de 95%
+desses c não têm tinta nenhuma ali. Na prática a regra é haver tinta abaixo
+do c.
+
+Com esse limiar, 95,0% das 1.093 cedilhas da base passam, todas alinhadas.
+O mesmo c na imagem sem acento do par passa em 1,6%. Nas cedilhas pedidas ao
+modelo de 40 épocas, 89,4% passam. Na anotação humana do mesmo modelo, ela
+pega 57 das 62 cedilhas que as pessoas veem e acusa 2 que elas não veem.
+
+As quatro folhas `resultados/cedilha_abaixo_folha_{A,B,C,D}.png` mostram, no
+modelo de 40 épocas, 16 acertos sorteados (A), 16 cedilhas perdidas sorteadas
+(B), todos os 14 c sem cedilha que passaram do limiar (C) e 16 c sem cedilha
+que ficaram abaixo dele (D). Os painéis são numerados e listados no JSON.
+
+Nos acertos, 15 dos 16 têm cedilha visível embaixo do c. A1 não tem.
+
+Nos 14 falsos alarmes, quatro são cedilha de verdade desenhada no primeiro c
+de recomeça em vez do segundo (C7, C11, C12, C13), e a medida acertou. Oito
+são c sem cedilha: em C1, C2 e C3 só a borda de baixo do c passa do corte,
+com medida até 0,03; em C6, C8, C9, C10 e C14 a volta de baixo do c desce
+bem abaixo da base, com medida de 0,06 a 0,41, acima de muitas cedilhas
+verdadeiras. C4 e C5 são letras borradas que não dá para julgar.
+
+Nas perdidas, as cedilhas que o modelo desenhou são curtas e ficam acima do
+corte (B5, B6, B8, B9, B11, B13, B14), ou a coluna do alinhador caiu fora do
+c (B4, B7, B10, B15). Em B12 e B16 não há cedilha embaixo do c.
+
+Os 280 c do negativo vêm de sete palavras, nenhuma com g, p, j ou q ao lado
+do c. A rabeira dessas letras entrando na coluna do c não foi testada nas
+imagens geradas. Os números estão em `resultados/cedilha_abaixo_40ep.json`.
+
+A sétima tentativa, `experimentos/cedilha_abaixo.py --medida altura`, troca a
+contagem de pixels pela altura. A medida é quantas fileiras seguidas, a partir
+do corte para baixo, têm tinta na coluna do c, divididas pela altura-x. A
+ideia é que a cedilha é estreita e funda, e o c um pouco mais baixo que a
+palavra é largo e raso. Fileiras seguidas para que um pixel solto lá embaixo
+não conte. Corte, negativo e regra do limiar ficaram iguais.
+
+O limiar saiu 0,0018, de novo quase zero, porque os mesmos 95% dos c sem
+cedilha não têm tinta abaixo do corte. Com limiar zero as duas medidas
+decidem a mesma coisa, haver tinta abaixo do corte, e os 14 c sem cedilha que
+passam são os mesmos da sexta tentativa. Na base, 93,9% das cedilhas passam e
+o mesmo c no par passa em 1,6%. Nas cedilhas pedidas ao modelo de 40 épocas,
+84,4% passam, contra 89,4% da sexta.
+
+As folhas são `resultados/cedilha_abaixo_altura_folha_{A,B,C,D}.png`. A altura
+mudou a ordem dos falsos alarmes. Os c sem cedilha ficaram rasos, de 0,036 a
+0,136 altura-x (C1 a C7 e C10; o C10 é o c inteiro mais baixo de caçadora, que
+na sexta media 0,412). As cedilhas de verdade no primeiro c de recomeça
+ficaram fundas, de 0,33 a 0,44 (C11 a C14). A mediana das cedilhas da base é
+0,35. Essa separação não muda o resultado porque a regra do p95 dá limiar
+zero com qualquer medida neste negativo.
+
+As perdas a mais vêm das fileiras seguidas. Em B5 e B7 a coluna está deslocada
+e só pega a ponta curva da cedilha, que não encosta no corte; na sexta elas
+eram acerto. Em B10 e B16 a cauda cruza a linha com uma fileira vazia logo
+abaixo. Pelo mesmo motivo a cedilha solta do c, que a anotação humana conta
+como cedilha, zera a medida de altura e a da oitava tentativa. A sexta, que
+conta toda a tinta abaixo do corte, não tem esse problema e é a medida
+adotada. Os números estão em `resultados/cedilha_abaixo_altura_40ep.json`.
+
+Também testamos limiares fixos à mão, escolhidos numa grade antes de rodar e
+fora da regra do p95. Os c sem cedilha que passam são nomeados pelos painéis
+da folha C de cada medida.
+
+| medida e limiar | base | mesmo c no par | modelo, pedidas | c sem cedilha que passam |
+|---|---|---|---|---|
+| altura 0,05 | 93,8% | 1,0% | 83,8% | C6 a C14 |
+| altura 0,10 | 93,1% | 0,4% | 81,5% | C8 a C14 |
+| altura 0,15 | 90,5% | 0,1% | 78,5% | C11 a C14 |
+| altura 0,20 | 84,7% | 0,0% | 74,6% | C11 a C14 |
+| altura 0,25 | 76,6% | 0,0% | 68,8% | C11 a C14 |
+| altura 0,30 | 65,7% | 0,0% | 60,8% | C11 a C14 |
+| tinta 0,05 | 93,2% | 0,9% | 82,9% | C5 a C14 |
+| tinta 0,10 | 78,6% | 0,4% | 68,3% | C9 a C14 |
+| tinta 0,15 | 58,8% | 0,3% | 53,5% | C11 a C14 |
+| tinta 0,20 | 39,2% | 0,1% | 37,1% | C12 a C14 |
+
+Na altura, a partir de 0,15 só passam C11 a C14, as cedilhas de verdade no c
+errado de recomeça, e nenhum c normal. Na tinta, o c inteiro mais baixo de
+caçadora (C14, 0,412) passa em qualquer limiar que ainda perceba metade das
+cedilhas.
+
+O custo aparece na folha `resultados/cedilha_abaixo_altura_folha_E.png`, com as
+31 cedilhas pedidas ao modelo que o limiar 0,15 perde. Em 29 delas há cedilha
+visível embaixo do c, só que curta; E23 é apagada demais para julgar e em E28
+a coluna caiu sobre o a. As cedilhas curtas do modelo ficam na mesma faixa dos
+c normais, de 0,04 a 0,15, e nenhum limiar separa as duas coisas. Subir o
+limiar de zero para 0,15 troca 8 c normais acusados por cerca de 29 cedilhas
+verdadeiras perdidas. Qual troca serve depende do uso da medida. A anotação
+humana só foi comparada com o limiar zero da sexta tentativa, e os limiares
+fixos não foram conferidos contra ela.
+
+A oitava tentativa, `experimentos/cedilha_abaixo.py --medida base_local`, mede
+a altura a partir de uma linha de base inclinada em vez da horizontal. A
+linha é uma reta, por mínimos quadrados, pela fileira mais baixa com tinta de
+cada letra sem descendente (ficam de fora g, j, p, q, y, f, z e os próprios
+c). O corte de cada c é essa reta no meio da coluna dele mais 0,15 altura-x.
+A ideia era que um c inteiro mais baixo que as vizinhas, como o de caçadora
+que media 0,412 na sexta, deixasse de contar.
+
+Esse c de caçadora deixou de passar, mas o resultado piorou. O limiar saiu
+0,053, 93,6% das cedilhas da base passam, o mesmo c no par passa em 2,5% (era
+1,6%) e as cedilhas pedidas ao modelo passam em 82,7% (eram 84,4%). Na folha
+`resultados/cedilha_abaixo_base_local_folha_C.png` os oito c sem cedilha que
+acusam (C1 a C7 e C9) são todos a primeira letra da palavra, em confusões,
+caçadora, caçadoras e conexões. C11 a C14 são de novo a cedilha no c errado de
+recomeça, e C8 e C10 são letras borradas.
+
+O JSON de cada medida guarda quanto o fundo dos c sem cedilha desce abaixo da
+linha de base usada. Com a linha horizontal, a mediana é 0 px e o p90 é 2 px,
+tanto no c que abre a palavra quanto no c do meio. Com a reta, o c do meio
+fica em -0,4 px de mediana e 3,0 px de p90, e o c que abre a palavra fica em
+1,2 px e 4,1 px. A folga é de uns 3 px. A reta sai das letras do meio e, no
+começo da palavra, onde é extrapolada, passa acima do fundo do c. As palavras
+deste modelo quase não são inclinadas, então a reta não tinha o que corrigir
+e só acrescentou esse erro na ponta. Os números estão em
+`resultados/cedilha_abaixo_base_local_40ep.json`.
+
+## Anotação do modelo de 40 épocas
+
+Duas pessoas anotaram 212 imagens do modelo de 40 épocas. O processo, o que é
+o kappa, a precisão e o recall, o desempate e os resultados estão em
+`anotacao_40ep.md`.
+
+Um cuidado que saiu dela. A coluna `marca` do `paineis.tsv` do
+`scripts/avaliar_pt.py` vale 1 com qualquer mancha solta, em cima ou embaixo
+do corpo. Numa palavra com ç, a mancha embaixo é quase sempre a cedilha solta,
+então essa coluna não serve como medida de acento a mais. Nas palavras só com
+cedilha do modelo de 40 épocas ela acusa 15 de 55 imagens, e as pessoas viram
+acento a mais em 1. O lado do treino passou a usar só a marca em cima
+(`diagnostico/marcas_so_cedilha.py`).
+
 ## Eixo 2
 
 O eixo 2 precisa de um reconhecedor que leia manuscrito em português. Três

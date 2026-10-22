@@ -16,15 +16,24 @@ formas de avaliar especificamente os diacríticos.
 
 ## Onde estamos
 
-- **O que funciona:** com acentos sintéticos desenhados sobre palavras do IAM
-  e um **peso maior no acento na loss**, o modelo passa a desenhar diacríticos
-  a partir do texto. O modelo original não faz isso. O efeito é causal e
-  medido: +7 pontos de diferença pareada, IC95 +3 a +11.
-- **Problemas em aberto:**
-  - o modelo põe acento também onde não deve;
-  - erra a letra do agudo;
-  - a letra fica menos legível sempre que dados com acento sintético entram
-    no treino.
+Para uma visão do trabalho inteiro, fase por fase, com os números e uma figura
+de cada etapa, abra [`resultados/README.md`](resultados/README.md).
+
+O melhor modelo é o DiffusionPen com o acento separado na entrada de texto, um
+professor (cópia congelada do modelo original) e peso no acento e nas vogais,
+treinado por 40 épocas sobre uma base de acentos sintéticos. Na validação,
+pelo olho de duas pessoas e pelos detectores:
+
+| | modelo original | melhor modelo |
+|---|---|---|
+| acento pedido presente | não desenha | 89% |
+| cedilha pedida desenhada | não desenha | 62 de 63 |
+| acento em palavra que não pede | 5% | no nível do original |
+| letra das palavras sem acento (CER) | 0,195 | 0,186 |
+
+Em aberto ficam o acento a mais dentro das palavras acentuadas (15%), a letra
+das palavras acentuadas, pior que a da base de treino, e uma medida automática
+da posição do acento.
 
 ## Documentação
 
@@ -39,6 +48,10 @@ ordem de leitura de todos os documentos.
 | [docs/09_resultados_consolidados.md](docs/09_resultados_consolidados.md) | todas as tabelas |
 | [docs/10_problemas_em_aberto.md](docs/10_problemas_em_aberto.md) | onde estamos travados e o que testar |
 | [docs/11_como_rodar.md](docs/11_como_rodar.md) | guia prático |
+| [docs/13_investigacao_do_vazamento_e_da_letra.md](docs/13_investigacao_do_vazamento_e_da_letra.md) | testes pequenos que levaram às mudanças seguintes |
+| [docs/14_acento_separado_e_professor.md](docs/14_acento_separado_e_professor.md) | acento separado e professor |
+| [docs/15_acento_a_mais_e_variantes_do_professor.md](docs/15_acento_a_mais_e_variantes_do_professor.md) | zona vogais, treino longo, variantes e estado atual |
+| [avaliacao_diacriticos/anotacao_40ep.md](avaliacao_diacriticos/anotacao_40ep.md) | anotação humana do melhor modelo |
 
 Registros históricos: [`ACHADOS.md`](ACHADOS.md), com os achados na ordem em
 que apareceram, e [`LOG.md`](LOG.md), o diário de execução.

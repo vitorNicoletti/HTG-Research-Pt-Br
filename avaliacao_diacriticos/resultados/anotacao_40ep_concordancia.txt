@@ -1,0 +1,91 @@
+
+CLASSE
+ com sinal em cima (80 imagens)
+  bruno x vini                       kappa +0.64  concordam 69 de 80  (fora 0 com nao sei)
+  bruno x detector                   kappa +0.32  concordam 53 de 80  (fora 0 com nao sei)
+  vini x detector                    kappa +0.32  concordam 51 de 80  (fora 0 com nao sei)
+ so cedilha (55 imagens)
+  bruno x vini                       kappa +0.00  concordam 52 de 55  (fora 0 com nao sei)
+  bruno x detector                   kappa +0.00  concordam 51 de 55  (fora 0 com nao sei)
+  vini x detector                    kappa +0.24  concordam 50 de 55  (fora 0 com nao sei)
+ sem sinal pedido (45 imagens)
+  bruno x vini                       kappa +nan  concordam 45 de 45  (fora 0 com nao sei)
+  bruno x detector                   kappa +0.00  concordam 44 de 45  (fora 0 com nao sei)
+  vini x detector                    kappa +0.00  concordam 44 de 45  (fora 0 com nao sei)
+ com i ou j (32 imagens)
+  bruno x vini                       kappa +0.78  concordam 28 de 32  (fora 0 com nao sei)
+
+CEDILHA
+ com sinal em cima (8 imagens)
+  bruno x vini                       kappa +nan  concordam 8 de 8  (fora 0 com nao sei)
+  bruno x detector                   kappa +0.00  concordam 0 de 8  (fora 0 com nao sei)
+  bruno x cedilha abaixo             kappa +0.00  concordam 7 de 8  (fora 0 com nao sei)
+  vini x detector                    kappa +0.00  concordam 0 de 8  (fora 0 com nao sei)
+  vini x cedilha abaixo              kappa +0.00  concordam 7 de 8  (fora 0 com nao sei)
+ so cedilha (55 imagens)
+  bruno x vini                       kappa +0.00  concordam 54 de 55  (fora 0 com nao sei)
+  bruno x detector                   kappa +0.00  concordam 9 de 55  (fora 0 com nao sei)
+  bruno x cedilha abaixo             kappa +0.00  concordam 51 de 55  (fora 0 com nao sei)
+  vini x detector                    kappa -0.04  concordam 8 de 55  (fora 0 com nao sei)
+  vini x cedilha abaixo              kappa -0.03  concordam 50 de 55  (fora 0 com nao sei)
+ sem sinal pedido (45 imagens)
+  bruno x vini                       kappa +0.00  concordam 44 de 45  (fora 0 com nao sei)
+  bruno x detector                   kappa +nan  concordam 45 de 45  (fora 0 com nao sei)
+  bruno x cedilha abaixo             kappa +nan  concordam 45 de 45  (fora 0 com nao sei)
+  vini x detector                    kappa +0.00  concordam 44 de 45  (fora 0 com nao sei)
+  vini x cedilha abaixo              kappa +0.00  concordam 44 de 45  (fora 0 com nao sei)
+ com i ou j (32 imagens)
+  bruno x vini                       kappa +0.00  concordam 31 de 32  (fora 0 com nao sei)
+
+LEGIVEL
+ com sinal em cima (80 imagens)
+  bruno x vini                       kappa +0.44  concordam 62 de 80  (fora 0 com nao sei)
+ so cedilha (55 imagens)
+  bruno x vini                       kappa +0.15  concordam 39 de 55  (fora 0 com nao sei)
+ sem sinal pedido (45 imagens)
+  bruno x vini                       kappa +0.44  concordam 34 de 45  (fora 0 com nao sei)
+ com i ou j (32 imagens)
+  bruno x vini                       kappa +0.29  concordam 26 de 32  (fora 0 com nao sei)
+
+A MAIS NAS PALAVRAS SO COM CEDILHA, contra a coluna marca do paineis.tsv
+  bruno x marca do paineis.tsv       kappa +0.00  concordam 40 de 55  (fora 0 com nao sei)
+  vini x marca do paineis.tsv        kappa +0.02  concordam 39 de 55  (fora 0 com nao sei)
+
+CONTRA O CONSENSO DAS DUAS PESSOAS, sem as palavras com i ou j
+  cedilha, detector do colega                  n=177 VP=  8 FP=  0 FN= 54  precisao 1.00  recall 0.13  kappa +0.16
+  cedilha, cedilha abaixo do c                 n=177 VP= 57 FP=  1 FN=  5  precisao 0.98  recall 0.92  kappa +0.92
+  acento pedido presente, colega               n= 69 VP= 48 FP=  1 FN= 12  precisao 0.98  recall 0.80  kappa +0.45
+  acento a mais, colega                        n= 69 VP=  6 FP= 11 FN=  2  precisao 0.35  recall 0.75  kappa +0.38
+  alguma marca em cima, colega                 n=166 VP= 58 FP=  6 FN=  7  precisao 0.91  recall 0.89  kappa +0.84
+  a mais nas so cedilha, marca do paineis.tsv  n= 52 VP=  0 FP= 14 FN=  0  precisao 0.00  recall   -  kappa +0.00
+  a mais nas so cedilha, so marcas em cima     n= 52 VP=  0 FP=  3 FN=  0  precisao 0.00  recall   -  kappa +0.00
+
+68 imagens com discordancia; desempate lido de /home/leo/repos/htg-tcc/avaliacao_diacriticos/resultados/anotacao_40ep_desempate.csv
+73 respostas desempatadas, gabarito em /home/leo/repos/htg-tcc/avaliacao_diacriticos/resultados/anotacao_40ep_gabarito.csv
+
+GABARITO FINAL POR GRUPO
+ com sinal em cima (80 imagens)
+  classe   certo e a mais 7, nenhum 4, so a mais 5, so o certo 64
+  cedilha  vista em 8 de 8 pedidas com ç e em 0 de 72 sem ç
+  legivel  61 de 80
+ so cedilha (55 imagens)
+  classe   nenhum 54, so a mais 1
+  cedilha  vista em 54 de 55 pedidas com ç e em 0 de 0 sem ç
+  legivel  45 de 55
+ sem sinal pedido (45 imagens)
+  classe   nenhum 45
+  cedilha  vista em 0 de 0 pedidas com ç e em 0 de 45 sem ç
+  legivel  36 de 45
+ com i ou j (32 imagens)
+  classe   certo e a mais 1, nenhum 15, so a mais 3, so o certo 13
+  cedilha  vista em 0 de 0 pedidas com ç e em 1 de 32 sem ç
+  legivel  28 de 32
+
+CONTRA O GABARITO FINAL, sem as palavras com i ou j
+  cedilha, detector do colega                  n=180 VP=  8 FP=  1 FN= 54  precisao 0.89  recall 0.13  kappa +0.15
+  cedilha, cedilha abaixo do c                 n=180 VP= 57 FP=  2 FN=  5  precisao 0.97  recall 0.92  kappa +0.91
+  acento pedido presente, colega               n= 80 VP= 53 FP=  1 FN= 18  precisao 0.98  recall 0.75  kappa +0.35
+  acento a mais, colega                        n= 80 VP=  8 FP= 13 FN=  4  precisao 0.38  recall 0.67  kappa +0.36
+  alguma marca em cima, colega                 n=180 VP= 66 FP=  7 FN= 11  precisao 0.90  recall 0.86  kappa +0.79
+  a mais nas so cedilha, marca do paineis.tsv  n= 55 VP=  0 FP= 15 FN=  1  precisao 0.00  recall 0.00  kappa -0.04
+  a mais nas so cedilha, so marcas em cima     n= 55 VP=  0 FP=  4 FN=  1  precisao 0.00  recall 0.00  kappa -0.03
