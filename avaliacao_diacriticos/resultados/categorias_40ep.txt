@@ -1,0 +1,23 @@
+Categoria por palavra: detector (sinais.py) contra o gabarito humano, modelo de 40 epocas.
+
+PALAVRAS PEDIDAS COM ACENTO: 135 imagens, concordam 104 (77%), kappa +0.33
+  pessoas (linhas) x detector (colunas)
+                         correto         a mais   letra errada        ausente   total
+  correto                     96              6              4             11     117
+  a mais                       4              1              2              1       8
+  letra errada                 0              0              5              0       5
+  ausente                      1              1              1              2       5
+  total                      101              8             12             14
+
+PALAVRAS SEM NADA PEDIDO: 45 imagens, concordam 44 (98%), kappa +0.00
+  pessoas (linhas) x detector (colunas)
+                           limpa marca indevida   total
+  limpa                       44              1      45
+  marca indevida               0              0       0
+  total                       44              1
+
+Taxas no modelo de 40 epocas, palavras pedidas com acento:
+  correto       pessoas 87%   detector 75%
+  a mais        pessoas 6%   detector 6%
+  letra errada  pessoas 4%   detector 9%
+  ausente       pessoas 4%   detector 10%

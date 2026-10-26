@@ -1,0 +1,17 @@
+Presenca unificada contra o gabarito humano, modelo de 40 epocas.
+Cedilha reproduz a coluna cedilha_abaixo da anotacao nas 212 imagens.
+
+PARTES
+  marca em cima, todas sem i ou j                n=180  concordam 164 (91%)  VP= 68 FP= 7 FN= 9 VN= 96  precisao 0.91  recall 0.88  kappa +0.82
+  cedilha, todas                                 n=212  concordam 204 (96%)  VP= 57 FP= 2 FN= 6 VN=147  precisao 0.97  recall 0.90  kappa +0.91
+
+SINAL PEDIDO PRESENTE (todos os tipos pedidos estao la)
+  so acento em cima                              n= 72  concordam  62 (86%)  VP= 60 FP= 2 FN= 8 VN=  2  precisao 0.97  recall 0.88  kappa +0.22
+  so cedilha                                     n= 55  concordam  50 (91%)  VP= 50 FP= 1 FN= 4 VN=  0  precisao 0.98  recall 0.93  kappa -0.03
+  acento em cima e cedilha                       n=  8  concordam   7 (88%)  VP=  7 FP= 0 FN= 1 VN=  0  precisao 1.00  recall 0.88  kappa +0.00
+  todas as acentuadas                            n=135  concordam 119 (88%)  VP=117 FP= 3 FN=13 VN=  2  precisao 0.97  recall 0.90  kappa +0.15
+
+SINAL ONDE NADA FOI PEDIDO (esqueletos e palavras sem acento)
+  marca em cima ou cedilha                       n= 45  concordam  44 (98%)  VP=  0 FP= 1 FN= 0 VN= 44  precisao 0.00  recall -  kappa +0.00
+
+Imagens com i ou j ficam fora: o pingo e uma marca solta em cima.
