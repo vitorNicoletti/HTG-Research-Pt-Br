@@ -1,9 +1,119 @@
 # Métrica de diacríticos
 
-Mede se um gerador de manuscrito desenha os diacríticos do português. Tem dois
-eixos. O eixo 1 mede a presença do acento na imagem e está pronto. O eixo 2
-mede se a palavra continua legível e depende de um reconhecedor de texto que
-ainda não temos.
+Mede se um gerador de manuscrito desenha os diacríticos do português. A
+métrica final responde, para cada palavra pedida com acento, três perguntas.
+
+| pergunta | como | situação |
+|---|---|---|
+| 1. o sinal pedido está lá? | `sinais.py`: marca solta em cima para acento, tinta abaixo do c para cedilha | validada pela anotação humana |
+| 2. está na letra certa, e só nela? | `sinais.py`: a mesma marca atribuída a uma vogal pelo alinhador | validada pela anotação humana |
+| 3. é o sinal certo (agudo, til, circunflexo)? | um leitor que leia a palavra com acento, no eixo 2 | a fazer |
+
+As seções a partir de "Como o eixo 1 funciona" registram as tentativas
+anteriores, inclusive o eixo 1 original, que comparava a imagem acentuada com
+o esqueleto e não passou na anotação.
+
+## Métrica final, perguntas 1 e 2
+
+`sinais.py` junta as duas medidas que passaram na anotação humana do modelo de
+40 épocas (`anotacao_40ep.md`).
+
+- Acento em cima: manchas de tinta soltas, inteiras acima do corpo da
+  palavra, como no `scripts/medir_marcas.py` do colega.
+- Cedilha: tinta abaixo da linha de base na coluna de cada c, como na sexta
+  tentativa da seção "Cedilha".
+
+Na posição, cada marca vai para a letra cuja coluna, pelo alinhador, contém o
+centro dela. Duas regras foram acrescentadas ao detector do colega:
+
+- alta: aceita uma marca mais alta que a altura-x quando ela está inteira
+  acima do corpo. O detector original a descarta como se fosse haste.
+- vogal: se a marca cai numa consoante, ela vai para a vogal cuja coluna mais
+  se sobrepõe a ela, porque acento em português só cai em vogal.
+
+O `scripts/medir_marcas.py` não foi alterado. Ele continua sendo a régua das
+comparações de treino.
+
+Cada palavra recebe uma categoria.
+
+| categoria | quando |
+|---|---|
+| correto | todos os sinais pedidos, na letra certa, e nada a mais |
+| a mais | os sinais pedidos estão certos, mas há marca em outra letra |
+| letra errada | um acento pedido falta na letra dele, e há marca em outra |
+| ausente | falta um sinal pedido, sem marca em outro lugar |
+| limpa ou marca indevida | palavras sem nada pedido |
+
+### Validação
+
+Contra o gabarito humano das 180 imagens sem i e j do modelo de 40 épocas.
+Detalhes em `resultados/presenca_40ep.txt`, `resultados/posicao_v2_40ep.txt`
+e `resultados/categorias_40ep.txt`.
+
+Presença.
+
+| pergunta | concordam | precisão | recall | kappa |
+|---|---|---|---|---|
+| há marca em cima | 164 de 180 (91%) | 0,91 | 0,88 | 0,82 |
+| há cedilha | 204 de 212 (96%) | 0,97 | 0,90 | 0,91 |
+| todos os sinais pedidos presentes | 119 de 135 (88%) | 0,97 | 0,90 | 0,15 |
+
+O kappa da última linha é baixo porque as pessoas veem o sinal pedido em 130
+das 135 palavras, e quase não há casos negativos. Precisão e recall dizem mais.
+Quando o detector diz que o sinal está lá, acerta 97% das vezes, e ele acha
+90% dos sinais que as pessoas veem.
+
+Posição, por vogal. As palavras foram divididas em duas metades. As regras
+foram decididas olhando a metade A, e a metade B não foi usada em nenhuma
+escolha.
+
+| detector | kappa por vogal, metade A | kappa por vogal, metade B |
+|---|---|---|
+| original | 0,83 | 0,72 |
+| com as regras alta e vogal | 0,87 | 0,75 |
+
+Duas outras correções foram testadas e descartadas. Uma área mínima para a
+marca melhorou a metade A e piorou a B. A tinta acima de cada vogal, desenho
+igual ao da cedilha, achou acentos que encostam na letra, mas inventou marca
+nas palavras sem acento, porque a haste de um l ou t vizinho invade a coluna
+da vogal.
+
+Categoria por palavra, nas 135 palavras pedidas com acento.
+
+| categoria | pessoas | detector |
+|---|---|---|
+| correto | 87% | 75% |
+| a mais | 6% | 6% |
+| letra errada | 4% | 9% |
+| ausente | 4% | 10% |
+
+As duas concordam na categoria em 104 das 135 palavras (77%, kappa 0,33). O
+erro principal é o acento que encosta na letra: as pessoas o veem, o detector
+não acha mancha solta e chama a palavra de ausente (11 casos) ou de letra
+errada (4). Por isso a métrica subestima o "correto" em uns 12 pontos. Para
+comparar modelos entre si ela serve, desde que essa falha atinja os modelos de
+forma parecida. Para dizer quantas palavras um modelo acerta, o número vem com
+essa ressalva.
+
+### Como usar
+
+```bash
+python avaliacao_diacriticos/avaliar_sinais.py --saida avaliacao_diacriticos/resultados/sinais \
+    --modelo <rotulo>=<pasta das imagens>:<pasta com o paineis.tsv>
+```
+
+A entrada é uma avaliação do `scripts/avaliar_pt.py`. Sai uma linha por
+imagem em `sinais_<rotulo>.tsv` e uma linha por modelo em
+`resumo_sinais.tsv`. Leva cerca de um minuto por modelo na CPU.
+
+### Limitações
+
+- Palavras com i ou j ficam de fora, porque o pingo é uma marca solta em cima.
+- O tipo do sinal não é julgado. Um til no lugar de um agudo conta como
+  correto.
+- A cedilha conta só como presença. Na anotação, as pessoas às vezes marcaram
+  a letra vizinha do c, e o gabarito da letra dela não é confiável.
+- A validação humana é de um modelo só, o de 40 épocas.
 
 ## Como o eixo 1 funciona
 
