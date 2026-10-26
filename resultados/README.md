@@ -16,7 +16,8 @@ salvo onde dito. O split de teste nunca foi aberto.
 | 4. Peso no acento | cobrar mais o erro na região do acento? | mais acento, mais acento indevido |
 | 5. Acento separado e professor | separar letra e sinal na entrada e ancorar no modelo original? | acento indevido e letra voltam ao nível do original |
 | 6. Zona vogais e treino longo | equilibrar o custo de errar para mais e para menos? | o melhor modelo, acento pedido em 88% e acento a mais em 5% |
-| 7. Validação humana | o que medimos bate com o que uma pessoa vê? | sim para presença e cedilha, não para posição |
+| 7. Validação humana e métrica | o que medimos bate com o que uma pessoa vê? | sim para presença, cedilha e letra do acento; o tipo do sinal ainda não é medido |
+| 8. Métrica final nos treinos | quantas palavras cada modelo acerta por inteiro? | 72% no melhor modelo, contra 44% do professor |
 
 ## 1. Sonda: o modelo original não sabe desenhar acento
 
@@ -225,12 +226,57 @@ contado com qualquer marca solta, e nas palavras com ç a marca embaixo é a
 própria cedilha solta. Corrigido, o acento a mais caiu de 22% para 5% no
 modelo de 40 épocas. A correção está no [docs/15](../docs/15_acento_a_mais_e_variantes_do_professor.md).
 
+## 8. Métrica final nos treinos
+
+Com a anotação como gabarito, as medidas de presença e de posição viraram uma
+métrica só ([avaliacao_diacriticos/README.md](../avaliacao_diacriticos/README.md),
+seção "Métrica final"). Cada palavra pedida com acento recebe uma categoria.
+
+| categoria | quando |
+|---|---|
+| correto | todos os sinais pedidos, na letra certa, e nada a mais |
+| a mais | os sinais pedidos estão certos, mas há marca em outra letra |
+| letra errada | o acento pedido falta na letra dele, e há marca em outra |
+| ausente | falta um sinal pedido |
+
+Duas mudanças no detector de marcas vieram da anotação. Uma marca que cai numa
+consoante vai para a vogal mais próxima, porque acento só cai em vogal. E uma
+marca alta, inteira acima da palavra, deixa de ser descartada como haste. Por
+vogal, a letra marcada concorda com as pessoas com kappa 0,75, medido em
+palavras que não foram usadas para decidir as regras.
+
+Aplicada aos modelos de treino, nas 1.200 palavras acentuadas de cada um:
+
+| modelo | correto | a mais | letra errada | ausente | marca em palavra sem acento |
+|---|---|---|---|---|---|
+| só professor, 11 épocas | 15% | 23% | 16% | 46% | 20% |
+| professor, 16 épocas | 44% | 26% | 16% | 13% | 5% |
+| pares sem professor, 16 épocas | 47% | 18% | 15% | 20% | 10% |
+| fora da máscara, 16 épocas | 39% | 11% | 15% | 36% | 5% |
+| fora da máscara em ruído baixo, 16 épocas | 43% | 8% | 19% | 31% | 4% |
+| zona vogais, 16 épocas | 55% | 14% | 14% | 17% | 5% |
+| zona vogais, 30 épocas | 68% | 9% | 11% | 12% | 4% |
+| zona vogais, 40 épocas | 72% | 8% | 8% | 12% | 4% |
+
+A métrica conta a história do treino num número só. A zona vogais de 40 épocas
+acerta a palavra inteira em 72% dos casos, contra 44% do professor. As
+variantes com o professor fora da máscara aparecem com "ausente" alto, porque
+perdem o acento nas palavras sem haste.
+
+Uma ressalva sobre os valores absolutos. No modelo de 40 épocas, as pessoas
+viram 87% das palavras corretas, e a métrica dá 75% nas mesmas imagens. A
+diferença vem quase toda do acento que encosta na letra: a pessoa o vê, e o
+detector, que procura mancha solta, não. O "a mais" bate, 6% nas duas. Para
+comparar modelos a métrica serve; para dizer quantas palavras um modelo
+acerta, o número da métrica fica uns 12 pontos abaixo do real.
+
 ## O que falta
 
 - Acento a mais nas palavras com acento em cima, 15% pelo gabarito humano.
 - Letra das palavras acentuadas, CER 0,39 contra 0,27 nas imagens da própria
   base. As tentativas apontam para a base, onde a palavra acentuada encolhe.
-- Medida automática da posição do acento.
+- Na métrica, o tipo do sinal (til no lugar de agudo, por exemplo) e o acento
+  que encosta na letra. A ideia é um leitor que leia a palavra com acento.
 
 ## Limitações
 
