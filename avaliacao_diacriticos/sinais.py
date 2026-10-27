@@ -207,6 +207,31 @@ class Detector:
             saida.add(k + 1)
         return saida
 
+    def apagar_sinais(self, g, palavra):
+        """Copia do painel sem as manchas soltas em cima e sem a tinta abaixo do
+        corte nas colunas de cada c: as duas regioes onde ficam os sinais. Usada
+        pelo E2 (integridade.py) para o leitor ver so a letra. Nos pares da base
+        iam_pt_alinhado, com as letras iguais pixel a pixel, o custo do sinal
+        para o leitor cai de 0,092 para 0,008 nos acentos em cima e de 0,110
+        para 0,029 na cedilha (resultados/custo_do_acento.txt)."""
+        g = g.copy()
+        for x, y, w, h in marcas_acima(g):
+            g[y:y + h, x:x + w] = 255.0
+        letras = sem_acento(palavra)
+        if "c" not in letras:
+            return g
+        analise = self.fatias(g, letras)
+        if analise is None:
+            return g
+        geo, fatias, x0 = analise
+        y0 = max(0, int(np.where(geometria.mascara_tinta(g))[0].min()) - 3)   # = recorte de medir_posicao_acento
+        corte = int(round(geo.base + TOL * geo.altura_x)) + 1 + y0
+        for k, (xa, xb) in enumerate(fatias):
+            if letras[k] == "c":
+                a, b = int(round(xa)) + x0, max(int(round(xb)), int(round(xa)) + 1) + x0
+                g[corte:, a:b] = 255.0
+        return g
+
     def avaliar(self, g, palavra):
         """Presenca, letras e categoria de uma imagem."""
         r = self.analisar(g, palavra)
