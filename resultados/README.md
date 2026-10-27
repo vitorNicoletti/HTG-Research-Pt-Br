@@ -296,11 +296,36 @@ pelo gabarito humano. A tabela da métrica por classe, para todos os modelos,
 está em `avaliacao_diacriticos/resultados/sinais/por_classe.md`. Circunflexo e
 cedilha com til dependem de duas palavras cada.
 
+### A palavra estragou? Integridade e as quatro categorias
+
+O planejamento previa dois eixos: a presença do acento (E1, o que está acima) e
+a integridade da palavra (E2), se ela continua legível descontando o acento. O
+E2 é medido em pares, com o mesmo escritor e a mesma semente: o erro de leitura
+da palavra acentuada menos o do esqueleto dela. Antes de ler, os sinais das
+duas imagens são apagados, para o leitor não ler o acento como letra. Assim o
+rigor do leitor e a dificuldade da palavra se cancelam, e sobra o que o acento
+fez com a letra.
+
+| modelo | piora da letra (dCER médio) | acerto | omissão | degradação com diacrítico | degradação sem diacrítico |
+|---|---|---|---|---|---|
+| professor, 16 épocas | +0,20 | 48% | 6% | 38% | 8% |
+| fora da máscara, 16 épocas | +0,07 | 53% | 31% | 10% | 5% |
+| pares sem professor, 16 épocas | +0,05 | 66% | 15% | 14% | 5% |
+| zona vogais, 40 épocas | +0,17 | 53% | 6% | 36% | 6% |
+
+As quatro categorias são as do planejamento, com degradação definida como o
+erro de leitura subir mais de 0,2 em relação ao esqueleto. O E2 mostra a troca
+que o treino já tinha visto: as variantes que limpam a letra perdem o acento
+(omissão alta), e o melhor modelo mantém o acento com a letra pior que a do
+esqueleto em um terço das palavras. O E2 ainda não tem validação humana
+direta. Detalhes em [avaliacao_diacriticos/README.md](../avaliacao_diacriticos/README.md).
+
 ## O que falta
 
 - Acento a mais nas palavras com acento em cima, 15% pelo gabarito humano.
 - Letra das palavras acentuadas, CER 0,39 contra 0,27 nas imagens da própria
   base. As tentativas apontam para a base, onde a palavra acentuada encolhe.
+- Validar o E2 com pessoas, mostrando acentuada e esqueleto lado a lado.
 - Na métrica, o tipo do sinal (til no lugar de agudo, por exemplo) e o acento
   que encosta na letra. A ideia é um leitor que leia a palavra com acento.
 
