@@ -15,9 +15,43 @@ acerto, omissão, degradação com diacrítico e degradação sem diacrítico. O
 do sinal (um til no lugar de um agudo) não é medido e fica como trabalho
 futuro.
 
-As seções a partir de "Como o eixo 1 funciona" registram as tentativas
-anteriores, inclusive o eixo 1 original, que comparava a imagem acentuada com
-o esqueleto e não passou na anotação.
+As seções a partir de "Histórico" registram as tentativas anteriores,
+inclusive o eixo 1 original, que comparava a imagem acentuada com o esqueleto
+e não passou na anotação.
+
+## Arquivos da métrica final
+
+| arquivo | papel |
+|---|---|
+| `sinais.py` | o detector: presença do acento e da cedilha, letra de cada marca, categoria da palavra e a função que apaga os sinais para o E2 |
+| `avaliar_sinais.py` | aplica o E1 a uma avaliação do `scripts/avaliar_pt.py`, uma linha por imagem e um resumo por modelo |
+| `integridade.py` | o E2 em pares e o cruzamento com o E1 nas quatro categorias |
+| `por_classe.py` | o resultado do E1 separado por classe de sinal |
+| `anotacao_dupla.py`, `anotacao_40ep.md` | a anotação humana do modelo de 40 épocas: pacote, concordância, gabarito e o registro |
+| `experimentos/validar_presenca.py`, `validar_categorias.py`, `diagnosticar_posicao.py`, `posicao_v2.py`, `custo_do_acento.py` | as validações citadas nas seções abaixo |
+| `resultados/sinais/`, `resultados/integridade/` | os resultados dos onze modelos de treino |
+
+Os demais arquivos da pasta pertencem às tentativas do histórico.
+
+### Como usar
+
+Da raiz do repositório, no ambiente `nix develop .#cpu`. A entrada é uma
+avaliação do `scripts/avaliar_pt.py`, com o `paineis.tsv` e as imagens.
+
+```bash
+# E1: presença, letra e categoria, por imagem e por modelo
+python avaliacao_diacriticos/avaliar_sinais.py --saida avaliacao_diacriticos/resultados/sinais \
+    --modelo <rotulo>=<pasta das imagens>:<pasta com o paineis.tsv>
+# E1 por classe de sinal
+python avaliacao_diacriticos/por_classe.py
+# E2 e as quatro categorias
+python avaliacao_diacriticos/integridade.py --saida avaliacao_diacriticos/resultados/integridade \
+    --sinais avaliacao_diacriticos/resultados/sinais \
+    --modelo <rotulo>=<pasta das imagens>:<pasta com o paineis.tsv>
+```
+
+Cada um leva cerca de um minuto por modelo na CPU. Os testes sintéticos do
+eixo 1 original continuam em `testes_metrica.py`.
 
 ## Métrica final, perguntas 1 e 2 (E1)
 
@@ -100,17 +134,6 @@ errada (4). Por isso a métrica subestima o "correto" em uns 12 pontos. Para
 comparar modelos entre si ela serve, desde que essa falha atinja os modelos de
 forma parecida. Para dizer quantas palavras um modelo acerta, o número vem com
 essa ressalva.
-
-### Como usar
-
-```bash
-python avaliacao_diacriticos/avaliar_sinais.py --saida avaliacao_diacriticos/resultados/sinais \
-    --modelo <rotulo>=<pasta das imagens>:<pasta com o paineis.tsv>
-```
-
-A entrada é uma avaliação do `scripts/avaliar_pt.py`. Sai uma linha por
-imagem em `sinais_<rotulo>.tsv` e uma linha por modelo em
-`resumo_sinais.tsv`. Leva cerca de um minuto por modelo na CPU.
 
 ### Por classe de sinal
 
@@ -220,7 +243,13 @@ de 18 palavras e leva a taxa dos modelos piores a zero, com intervalos de 0 a
 50% ou mais (`resultados/correto_corrigido.txt`). E a especificidade medida
 num modelo bom não vale para modelos piores, em que o erro é mais evidente.
 
-## Como o eixo 1 funciona
+## Histórico
+
+As seções daqui para baixo registram o eixo 1 original e as tentativas que
+levaram à métrica final. Ficam como registro do caminho, e os números delas
+não são os da métrica final.
+
+## Como o eixo 1 original funciona
 
 1. Gera a mesma palavra duas vezes, com e sem acento ("ação" e "acao"), com o
    mesmo escritor e a mesma semente. A única diferença entre as duas imagens é
@@ -235,7 +264,7 @@ O escore é uma fração do tamanho da letra. Zero significa que nada foi
 desenhado. Um acento de tamanho normal vale entre 0,13 e 0,18, conforme a
 marca.
 
-## Arquivos
+## Arquivos do eixo 1 original
 
 | arquivo | papel |
 |---|---|
@@ -245,12 +274,13 @@ marca.
 | `avaliar.py` | aplica a métrica a uma pasta de amostras e resume |
 | `metrica.py` | funções de apoio e a variante para imagem sem par |
 | `testes_metrica.py` | testes com figuras sintéticas de resposta conhecida |
-| `experimentos/` | scripts de validação e comparação, e os do eixo 2 |
+| `e1_alinhador.py`, `marcas_do_par.py`, `vazamento.py`, `anotacao.py` | variantes do eixo 1, a marca nova no par, o vazamento por tinta e a primeira anotação (peso 5) |
+| `experimentos/` | scripts de validação e comparação, e os do eixo 2 original |
 | `figuras/` | figuras explicativas, geradas por `experimentos/figuras.py` |
 | `resultados/` | medições em CSV e JSON |
 | `amostras/` | conjuntos de imagem, fora do git |
 
-## Como usar
+## Como usar o eixo 1 original
 
 Todos os comandos rodam da raiz do repositório, dentro do ambiente:
 
@@ -289,7 +319,7 @@ Refazer as figuras:
 python avaliacao_diacriticos/experimentos/figuras.py
 ```
 
-## Como ler o resultado
+## Como ler o resultado do eixo 1 original
 
 O `avaliar.py` imprime, por marca, o escore médio e um intervalo de confiança
 de 95%. O intervalo é calculado reamostrando palavras, porque várias imagens
@@ -609,7 +639,7 @@ cedilha do modelo de 40 épocas ela acusa 15 de 55 imagens, e as pessoas viram
 acento a mais em 1. O lado do treino passou a usar só a marca em cima
 (`diagnostico/marcas_so_cedilha.py`).
 
-## Eixo 2
+## Eixo 2 original: leitores prontos
 
 O eixo 2 precisa de um reconhecedor que leia manuscrito em português. Três
 modelos prontos foram testados em recortes reais do BRESSAY
@@ -625,7 +655,7 @@ O PaddleOCR é o melhor. Em 1.000 palavras acentuadas ele acerta as letras em
 15% e, dessas, acerta também o acento em 28%. Não é suficiente para sustentar
 o eixo. O PaddleOCR roda no shell `nix develop .#htr`, com Python 3.13.
 
-## Limitações
+## Limitações do eixo 1 original
 
 - O controle positivo é um acento pintado. Ainda não há um gerador que
   desenhe acentos para servir de positivo real.
