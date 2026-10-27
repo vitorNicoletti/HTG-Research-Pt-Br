@@ -74,6 +74,17 @@ def main():
     sub = [(h, dt) for p, h, dt in pares if sinais_pedidos(p)]
     for c in ORDEM[:4]:
         out.append(f"  {c:13s} pessoas {sum(h == c for h, _ in sub) / len(sub):.0%}   detector {sum(dt == c for _, dt in sub) / len(sub):.0%}")
+    out.append("")
+    out.append("Por classe de sinal, palavras pedidas com acento (correto pelas pessoas / pela metrica, e concordancia):")
+    classe = lambda p: " e ".join(sorted({s for _, s in sinais_pedidos(p)}, key=lambda s: s != "cedilha"))
+    for c in ("agudo", "til", "circunflexo", "cedilha", "cedilha e til"):
+        sub = [(h, dt) for p, h, dt in pares if sinais_pedidos(p) and classe(p) == c]
+        if not sub:
+            continue
+        n = len(sub)
+        out.append(f"  {c:14s} n={n:3d}  correto pessoas {sum(h == 'correto' for h, _ in sub) / n:.0%}"
+                   f"  metrica {sum(d == 'correto' for _, d in sub) / n:.0%}"
+                   f"  mesma categoria {sum(h == d for h, d in sub)} de {n}")
     texto = "\n".join(out) + "\n"
     open(os.path.join(RES, "categorias_40ep.txt"), "w", encoding="utf-8").write(texto)
     print(texto)

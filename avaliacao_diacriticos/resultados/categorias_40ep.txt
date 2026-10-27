@@ -21,3 +21,10 @@ Taxas no modelo de 40 epocas, palavras pedidas com acento:
   a mais        pessoas 6%   detector 6%
   letra errada  pessoas 4%   detector 9%
   ausente       pessoas 4%   detector 10%
+
+Por classe de sinal, palavras pedidas com acento (correto pelas pessoas / pela metrica, e concordancia):
+  agudo          n= 36  correto pessoas 78%  metrica 64%  mesma categoria 26 de 36
+  til            n= 20  correto pessoas 90%  metrica 65%  mesma categoria 14 de 20
+  circunflexo    n= 16  correto pessoas 62%  metrica 56%  mesma categoria 10 de 16
+  cedilha        n= 55  correto pessoas 96%  metrica 89%  mesma categoria 47 de 55
+  cedilha e til  n=  8  correto pessoas 100%  metrica 88%  mesma categoria 7 de 8

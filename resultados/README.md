@@ -270,6 +270,32 @@ detector, que procura mancha solta, não. O "a mais" bate, 6% nas duas. Para
 comparar modelos a métrica serve; para dizer quantas palavras um modelo
 acerta, o número da métrica fica uns 12 pontos abaixo do real.
 
+### Por classe de sinal
+
+O planejamento do TCC pedia a métrica separada por classe de caractere.
+Separando pelo que a palavra pede, no modelo de 40 épocas, pelo gabarito
+humano das imagens anotadas:
+
+| classe | imagens anotadas | correto pelas pessoas | correto pela métrica |
+|---|---|---|---|
+| cedilha | 55 | 96% | 89% |
+| cedilha e til | 8 | 100% | 88% |
+| til | 20 | 90% | 65% |
+| agudo | 36 | 78% | 64% |
+| circunflexo | 16 | 62% | 56% |
+
+A cedilha, sinal embaixo e preso ao c, é o que o modelo acerta melhor. Entre os
+sinais em cima, o til vai melhor que o agudo, e o circunflexo é o mais fraco.
+O agudo erra mais de letra: pela métrica, 18% das palavras com agudo têm o
+acento só em outra vogal, contra 6% do til.
+
+A métrica erra de forma diferente em cada classe. Ela subestima o til em 25
+pontos, porque o til costuma encostar na letra, cobrir duas vogais ou sair
+partido, e com isso o põe no nível do agudo. A ordem entre as classes vale
+pelo gabarito humano. A tabela da métrica por classe, para todos os modelos,
+está em `avaliacao_diacriticos/resultados/sinais/por_classe.md`. Circunflexo e
+cedilha com til dependem de duas palavras cada.
+
 ## O que falta
 
 - Acento a mais nas palavras com acento em cima, 15% pelo gabarito humano.

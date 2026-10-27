@@ -106,6 +106,31 @@ A entrada é uma avaliação do `scripts/avaliar_pt.py`. Sai uma linha por
 imagem em `sinais_<rotulo>.tsv` e uma linha por modelo em
 `resumo_sinais.tsv`. Leva cerca de um minuto por modelo na CPU.
 
+### Por classe de sinal
+
+`por_classe.py` separa o resultado pelo que a palavra pede: agudo, til,
+circunflexo, cedilha, e cedilha com til. Sai em `resultados/sinais/por_classe.md`
+para cada modelo. No protocolo, circunflexo e cedilha com til têm duas palavras
+cada, e os números delas dependem muito dessas duas palavras.
+
+No modelo de 40 épocas, contra o gabarito humano (`resultados/categorias_40ep.txt`):
+
+| classe | imagens anotadas | correto pelas pessoas | correto pela métrica |
+|---|---|---|---|
+| cedilha | 55 | 96% | 89% |
+| cedilha e til | 8 | 100% | 88% |
+| til | 20 | 90% | 65% |
+| agudo | 36 | 78% | 64% |
+| circunflexo | 16 | 62% | 56% |
+
+As pessoas ordenam as classes assim: cedilha melhor, depois til, agudo e
+circunflexo. A métrica mantém a cedilha no topo e o circunflexo no fundo, mas
+subestima o til em 25 pontos e o põe junto do agudo. Nas palavras com til em
+que métrica e pessoas discordam, o til encosta na letra e não é visto, cobre
+duas vogais (o "ão") e cai na vizinha, ou sai partido em dois pedaços. Por
+isso a comparação entre classes pela métrica deve ser lida com cuidado, e a
+diferença entre til e agudo só vale pelo gabarito humano.
+
 ### Limitações
 
 - Palavras com i ou j ficam de fora, porque o pingo é uma marca solta em cima.
