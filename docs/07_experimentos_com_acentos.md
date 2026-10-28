@@ -1,5 +1,10 @@
 # 07 — Fases 4 a 9: os experimentos com acentos sintéticos
 
+> Este documento cobre as fases 4 a 9, anteriores ao acento separado. O que
+> veio depois, até o modelo final, está em [13](13_investigacao_do_vazamento_e_da_letra.md),
+> [14](14_acento_separado_e_professor.md) e [15](15_acento_a_mais_e_variantes_do_professor.md),
+> e o resumo em [09](09_resultados_consolidados.md).
+
 Este documento conta, em ordem, cada experimento feito depois do BRESSAY. Cada
 fase tem quatro partes:
 - **por quê:** o que o resultado anterior sugeria;

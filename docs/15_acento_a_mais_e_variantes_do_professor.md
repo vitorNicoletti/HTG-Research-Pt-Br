@@ -482,8 +482,8 @@ O que está em aberto, por ordem de quanto falta.
   Nas palavras só com cedilha ele quase sumiu.
 - A posição do acento ainda não tem medida automática confiável. A cedilha
   passou a ter, a tinta abaixo do c, validada pela anotação.
-- Os documentos 07, 09 e 10 e o resumo do `README.md` desta pasta ainda
-  descrevem o estado anterior ao acento separado.
+- O [09](09_resultados_consolidados.md) traz o modelo final e a métrica final.
+  O 07 e o 10 continuam descrevendo as fases anteriores, com um aviso no topo.
 
 ## Treinar fora da máquina local
 

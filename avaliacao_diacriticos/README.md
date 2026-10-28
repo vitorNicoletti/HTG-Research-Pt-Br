@@ -30,6 +30,7 @@ e não passou na anotação.
 | `anotacao_dupla.py`, `anotacao_40ep.md` | a anotação humana do modelo de 40 épocas: pacote, concordância, gabarito e o registro |
 | `experimentos/validar_presenca.py`, `validar_categorias.py`, `diagnosticar_posicao.py`, `posicao_v2.py`, `custo_do_acento.py` | as validações citadas nas seções abaixo |
 | `resultados/sinais/`, `resultados/integridade/` | os resultados dos onze modelos de treino |
+| `relatorio.py` | gera `resultados/metrica/` na raiz: a concordância com a anotação, a métrica nos treinos e três figuras |
 
 Os demais arquivos da pasta pertencem às tentativas do histórico.
 

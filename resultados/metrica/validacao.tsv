@@ -1,0 +1,213 @@
+imagem	palavra	tipo	classe	letras_gabarito	letras_metrica	cedilha_gabarito	cedilha_metrica	categoria_gabarito	categoria_metrica
+img_001.png	pôr	acentuada	circunflexo	2		0	0	correto	ausente
+img_002.png	estaras	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_003.png	lançados	acentuada	cedilha			1	1	correto	correto
+img_004.png	recomeça	acentuada	cedilha			0	1	ausente	correto
+img_005.png	terráquea	acentuada	agudo	5	5	0	0	correto	correto
+img_006.png	engraçadas	acentuada	cedilha			1	1	correto	correto
+img_007.png	biólogo	acentuada	agudo	3		0	0		
+img_008.png	haverá	acentuada	agudo	6	6	0	0	correto	correto
+img_009.png	pás	acentuada	agudo	2	2	0	0	correto	correto
+img_010.png	pérsico	acentuada	agudo	2		0	0		
+img_011.png	pôr	acentuada	circunflexo	2	2	0	0	correto	correto
+img_012.png	prestação	acentuada	cedilha e til	8	8	1	1	correto	correto
+img_013.png	terço	acentuada	cedilha			1	1	correto	correto
+img_014.png	caçadoras	acentuada	cedilha			1	1	correto	correto
+img_015.png	lancados	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_016.png	conexões	acentuada	til	6	6	0	0	correto	correto
+img_017.png	bálsamo	acentuada	agudo	5 7	5 7	0	0	letra errada	letra errada
+img_018.png	confusões	acentuada	til	7	7	0	0	correto	correto
+img_019.png	pôr	acentuada	circunflexo	2	2	0	0	correto	correto
+img_020.png	varíola	acentuada	agudo	4		0	0		
+img_021.png	caçadoras	acentuada	cedilha			1	1	correto	correto
+img_022.png	terço	acentuada	cedilha			1	1	correto	correto
+img_023.png	arregacar	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_024.png	biologo	esqueleto	sem sinal pedido			0	0		
+img_025.png	engraçadas	acentuada	cedilha			1	1	correto	correto
+img_026.png	tipico	esqueleto	sem sinal pedido	5		0	0		
+img_027.png	recomeça	acentuada	cedilha			1	1	correto	correto
+img_028.png	opressão	acentuada	til	7	7	0	0	correto	correto
+img_029.png	caçadora	acentuada	cedilha			1	1	correto	correto
+img_030.png	pás	acentuada	agudo	2	2	0	0	correto	correto
+img_031.png	despedaçar	acentuada	cedilha			1	1	correto	correto
+img_032.png	engraçadas	acentuada	cedilha			1	1	correto	correto
+img_033.png	apanho	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_034.png	pensámos	acentuada	agudo	5	5	0	0	correto	correto
+img_035.png	prestacao	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_036.png	relâmpagos	acentuada	circunflexo	7	7	0	0	letra errada	letra errada
+img_037.png	típico	acentuada	agudo	2		0	0		
+img_038.png	pôr	acentuada	circunflexo	1 2	2	0	0	a mais	correto
+img_039.png	florença	acentuada	cedilha			1	1	correto	correto
+img_040.png	pôr	acentuada	circunflexo	2 3	2	0	0	a mais	correto
+img_041.png	varíola	acentuada	agudo	4		0	0		
+img_042.png	imóveis	acentuada	agudo	3		0	0		
+img_043.png	unção	acentuada	cedilha e til	4	4	1	1	correto	correto
+img_044.png	sofrera	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_045.png	reversivel	esqueleto	sem sinal pedido			0	0		
+img_046.png	estarás	acentuada	agudo	6	2 6	0	0	correto	a mais
+img_047.png	balsamo	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_048.png	caçadora	acentuada	cedilha			1	1	correto	correto
+img_049.png	travas	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_050.png	matarás	acentuada	agudo	6	6	0	0	correto	correto
+img_051.png	biólogo	acentuada	agudo	6		0	0		
+img_052.png	tragada	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_053.png	mataras	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_054.png	percussão	acentuada	til	8	8	0	0	correto	correto
+img_055.png	opressao	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_056.png	matarás	acentuada	agudo	6	6	0	0	correto	correto
+img_057.png	recomeça	acentuada	cedilha			1	1	correto	correto
+img_058.png	reversível	acentuada	agudo	7		0	0		
+img_059.png	percussão	acentuada	til	8	8	0	0	correto	correto
+img_060.png	pas	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_061.png	recomeça	acentuada	cedilha		8	1	0	correto	ausente
+img_062.png	estarás	acentuada	agudo	6	6	0	0	correto	correto
+img_063.png	layout	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_064.png	típico	acentuada	agudo			0	0		
+img_065.png	pensámos	acentuada	agudo	5	4	0	0	correto	letra errada
+img_066.png	fletcher	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_067.png	caçadora	acentuada	cedilha			1	1	correto	correto
+img_068.png	lançados	acentuada	cedilha			1	1	correto	correto
+img_069.png	pérsico	acentuada	agudo	2 5		0	0		
+img_070.png	relâmpagos	acentuada	circunflexo	4	4	0	0	correto	correto
+img_071.png	weller	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_072.png	despedaçar	acentuada	cedilha			1	1	correto	correto
+img_073.png	reclusão	acentuada	til	7	7	0	0	correto	correto
+img_074.png	arregaçar	acentuada	cedilha			1	1	correto	correto
+img_075.png	relâmpagos	acentuada	circunflexo	4	4	0	0	correto	correto
+img_076.png	pensámos	acentuada	agudo	5 7	5	0	0	a mais	correto
+img_077.png	pedagio	esqueleto	sem sinal pedido			0	0		
+img_078.png	cacadora	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_079.png	mordaça	acentuada	cedilha			1	1	correto	correto
+img_080.png	uncao	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_081.png	evoluiram	esqueleto	sem sinal pedido			0	0		
+img_082.png	imóveis	acentuada	agudo	3		0	0		
+img_083.png	haverá	acentuada	agudo	2	2 5	0	0	letra errada	letra errada
+img_084.png	bálsamo	acentuada	agudo	2		0	0	correto	ausente
+img_085.png	despedaçar	acentuada	cedilha			1	1	correto	correto
+img_086.png	conexoes	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_087.png	lançaremos	acentuada	cedilha	9		1	1	a mais	correto
+img_088.png	recomeca	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_089.png	prestação	acentuada	cedilha e til	8	8	1	1	correto	correto
+img_090.png	relâmpagos	acentuada	circunflexo	4		0	0	correto	ausente
+img_091.png	variola	esqueleto	sem sinal pedido			0	0		
+img_092.png	terráquea	acentuada	agudo	5	5	0	0	correto	correto
+img_093.png	lembrarem	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_094.png	reversivel	esqueleto	sem sinal pedido	6		0	0		
+img_095.png	lançaremos	acentuada	cedilha			1	1	correto	correto
+img_096.png	arregaçar	acentuada	cedilha			1	0	correto	ausente
+img_097.png	lançados	acentuada	cedilha			1	1	correto	correto
+img_098.png	terço	acentuada	cedilha		1	1	1	correto	a mais
+img_099.png	pôr	acentuada	circunflexo	2		0	0	correto	ausente
+img_100.png	sofrerá	acentuada	agudo	7	7	0	0	correto	correto
+img_101.png	pedágio	acentuada	agudo	4		1	0		
+img_102.png	acento	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_103.png	caçadoras	acentuada	cedilha			1	1	correto	correto
+img_104.png	haverá	acentuada	agudo	2 6	2	0	0	a mais	letra errada
+img_105.png	confusões	acentuada	til	2 7		0	1	a mais	ausente
+img_106.png	opressão	acentuada	til	7		0	0	correto	ausente
+img_107.png	reclusão	acentuada	til	7	7	0	0	correto	correto
+img_108.png	contactos	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_109.png	despedaçar	acentuada	cedilha			1	1	correto	correto
+img_110.png	léguas	acentuada	agudo	2 5	5	0	0	a mais	letra errada
+img_111.png	lançaremos	acentuada	cedilha		1	1	0	correto	ausente
+img_112.png	persico	esqueleto	sem sinal pedido			0	0		
+img_113.png	relâmpagos	acentuada	circunflexo	4	4	0	0	correto	correto
+img_114.png	mordaça	acentuada	cedilha			1	1	correto	correto
+img_115.png	relâmpagos	acentuada	circunflexo	7	7	0	0	letra errada	letra errada
+img_116.png	central	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_117.png	unção	acentuada	cedilha e til	4	4	1	1	correto	correto
+img_118.png	florença	acentuada	cedilha			1	0	correto	ausente
+img_119.png	mordaça	acentuada	cedilha			1	1	correto	correto
+img_120.png	havera	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_121.png	unção	acentuada	cedilha e til	4	4	1	1	correto	correto
+img_122.png	pobres	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_123.png	mordaça	acentuada	cedilha			1	1	correto	correto
+img_124.png	terráquea	acentuada	agudo	5	5	0	0	correto	correto
+img_125.png	conexões	acentuada	til	6	6	0	0	correto	correto
+img_126.png	persico	esqueleto	sem sinal pedido			0	0		
+img_127.png	lançaremos	acentuada	cedilha			1	1	correto	correto
+img_128.png	sofrerá	acentuada	agudo		2	0	0	ausente	letra errada
+img_129.png	lançados	acentuada	cedilha			1	1	correto	correto
+img_130.png	arregaçar	acentuada	cedilha			1	1	correto	correto
+img_131.png	por	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_132.png	terço	acentuada	cedilha			1	1	correto	correto
+img_133.png	florença	acentuada	cedilha			1	1	correto	correto
+img_134.png	arregaçar	acentuada	cedilha			1	1	correto	correto
+img_135.png	percussao	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_136.png	confusoes	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_137.png	prestação	acentuada	cedilha e til	8	8	1	1	correto	correto
+img_138.png	caçadoras	acentuada	cedilha			1	1	correto	correto
+img_139.png	matarás	acentuada	agudo	6	6	0	0	correto	correto
+img_140.png	léguas	acentuada	agudo	2		0	0	correto	ausente
+img_141.png	unção	acentuada	cedilha e til	4	3	1	0	correto	letra errada
+img_142.png	bálsamo	acentuada	agudo	2	2	0	0	correto	correto
+img_143.png	cacadoras	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_144.png	pás	acentuada	agudo	2	2	0	0	correto	correto
+img_145.png	mordaca	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_146.png	conexões	acentuada	til	6	6	0	0	correto	correto
+img_147.png	florenca	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_148.png	haverá	acentuada	agudo	6	6	0	0	correto	correto
+img_149.png	florença	acentuada	cedilha			1	1	correto	correto
+img_150.png	imoveis	esqueleto	sem sinal pedido			0	0		
+img_151.png	relâmpagos	acentuada	circunflexo		4 7	0	0	ausente	a mais
+img_152.png	sledge	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_153.png	pás	acentuada	agudo	2	2	0	0	correto	correto
+img_154.png	biologo	esqueleto	sem sinal pedido			0	0		
+img_155.png	matarás	acentuada	agudo	6	6	0	0	correto	correto
+img_156.png	lancaremos	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_157.png	engraçadas	acentuada	cedilha			1	1	correto	correto
+img_158.png	caçadora	acentuada	cedilha			1	1	correto	correto
+img_159.png	relampagos	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_160.png	caçadora	acentuada	cedilha			1	1	correto	correto
+img_161.png	imoveis	esqueleto	sem sinal pedido			0	0		
+img_162.png	conexões	acentuada	til	6	6	0	0	correto	correto
+img_163.png	pedágio	acentuada	agudo	4		0	0		
+img_164.png	confusões	acentuada	til	7	8	0	0	correto	letra errada
+img_165.png	reclusão	acentuada	til	7	6	0	0	correto	letra errada
+img_166.png	pôr	acentuada	circunflexo	2	2	0	0	correto	correto
+img_167.png	evoluíram	acentuada	agudo	6		0	0		
+img_168.png	terraquea	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_169.png	huo	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_170.png	caçadoras	acentuada	cedilha			1	1	correto	correto
+img_171.png	estarás	acentuada	agudo	6	6	0	0	correto	correto
+img_172.png	mordaça	acentuada	cedilha			1	1	correto	correto
+img_173.png	engraçadas	acentuada	cedilha			1	1	correto	correto
+img_174.png	léguas	acentuada	agudo	4	4	0	0	letra errada	letra errada
+img_175.png	atrever	sem_acento	sem sinal pedido			0	0	limpa	limpa
+img_176.png	bálsamo	acentuada	agudo			0	0	ausente	ausente
+img_177.png	evoluíram	acentuada	agudo	6		0	0		
+img_178.png	despedaçar	acentuada	cedilha			1	1	correto	correto
+img_179.png	terráquea	acentuada	agudo	5	5	0	0	correto	correto
+img_180.png	pôr	acentuada	circunflexo	2	2	0	0	correto	correto
+img_181.png	arregaçar	acentuada	cedilha		6	1	1	correto	a mais
+img_182.png	percussão	acentuada	til	8	8	0	0	correto	correto
+img_183.png	tipico	esqueleto	sem sinal pedido			0	0		
+img_184.png	evoluiram	esqueleto	sem sinal pedido			0	0		
+img_185.png	lançaremos	acentuada	cedilha			1	1	correto	correto
+img_186.png	opressão	acentuada	til	7	1 7	0	0	correto	a mais
+img_187.png	sofrerá	acentuada	agudo	7	4 7	0	0	correto	a mais
+img_188.png	variola	esqueleto	sem sinal pedido			0	0		
+img_189.png	terco	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_190.png	reversível	acentuada	agudo	7		0	0		
+img_191.png	percussão	acentuada	til	8	7 8	0	0	correto	a mais
+img_192.png	leguas	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_193.png	pedagio	esqueleto	sem sinal pedido			0	0		
+img_194.png	sofrerá	acentuada	agudo	7	7	0	0	correto	correto
+img_195.png	opressão	acentuada	til	7	7	0	0	correto	correto
+img_196.png	cacadoras	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_197.png	relâmpagos	acentuada	circunflexo			0	0	ausente	ausente
+img_198.png	despedacar	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_199.png	confusões	acentuada	til	7	7	0	0	correto	correto
+img_200.png	reclusão	acentuada	til	5 7	5 7	0	0	a mais	a mais
+img_201.png	terço	acentuada	cedilha			1	1	correto	correto
+img_202.png	lançados	acentuada	cedilha			1	1	correto	correto
+img_203.png	torresmo	sem_acento	sem sinal pedido		1	0	0	limpa	marca indevida
+img_204.png	florença	acentuada	cedilha			1	1	correto	correto
+img_205.png	léguas	acentuada	agudo	2		0	0	correto	ausente
+img_206.png	engracadas	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_207.png	pensámos	acentuada	agudo	5	5	0	0	correto	correto
+img_208.png	estarás	acentuada	agudo	6	6	0	0	correto	correto
+img_209.png	pensamos	esqueleto	sem sinal pedido			0	0	limpa	limpa
+img_210.png	recomeça	acentuada	cedilha			1	1	correto	correto
+img_211.png	prestação	acentuada	cedilha e til	8	8	1	1	correto	correto
+img_212.png	reclusao	esqueleto	sem sinal pedido			0	0	limpa	limpa

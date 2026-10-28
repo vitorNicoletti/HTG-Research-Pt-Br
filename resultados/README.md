@@ -8,6 +8,10 @@ Todos os números de modelo são da validação, pelo protocolo de
 `scripts/avaliar_pt.py` ([docs/08](../docs/08_protocolo_de_avaliacao.md)),
 salvo onde dito. O split de teste nunca foi aberto.
 
+Um resumo da métrica para a equipe está em
+[metrica/](metrica/README.md). As figuras para o artigo estão em
+[figuras/artigo/](figuras/artigo/README.md).
+
 | fase | pergunta | resposta |
 |---|---|---|
 | 1. Sonda | o DiffusionPen original escreve acento? | não, omite ou deforma |
