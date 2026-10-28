@@ -1,0 +1,34 @@
+Atribuicao de marca a letra, contra o gabarito humano letra por letra (modelo de 40 epocas).
+Metade A: 100 imagens (22 palavras), usada para escolher a area minima.
+Metade B: 80 imagens, nao usada em nenhuma escolha.
+
+PALAVRAS COM ACENTO EM CIMA
+  variante         | metade | kappa por letra | precisao | recall | kappa da classe | letras iguais
+  base             | A      | +0.81           | 0.93     | 0.80   | +0.40           | 35 de 52
+  base             | B      | +0.69           | 0.91     | 0.68   | +0.13           | 16 de 28
+  + vogal          | A      | +0.84           | 0.93     | 0.84   | +0.44           | 37 de 52
+  + vogal          | B      | +0.69           | 0.91     | 0.68   | +0.16           | 17 de 28
+  + alta           | A      | +0.85           | 0.94     | 0.86   | +0.47           | 38 de 52
+  + alta           | B      | +0.72           | 0.92     | 0.71   | +0.18           | 18 de 28
+  + junta          | A      | +0.85           | 0.94     | 0.86   | +0.47           | 38 de 52
+  + junta          | B      | +0.72           | 0.92     | 0.71   | +0.18           | 18 de 28
+  + area >= 20     | A      | +0.88           | 1.00     | 0.84   | +0.51           | 40 de 52
+  + area >= 20     | B      | +0.69           | 0.95     | 0.65   | +0.13           | 18 de 28
+  + tinta > 0.25   | A      | +0.87           | 0.92     | 0.90   | +0.50           | 39 de 52
+  + tinta > 0.25   | B      | +0.78           | 0.87     | 0.84   | +0.24           | 19 de 28
+
+TODAS AS IMAGENS SEM I E J
+  variante         | metade | kappa por letra | precisao | recall | kappa da classe | letras iguais
+  base             | A      | +0.83           | 0.91     | 0.80   | +0.71           | 82 de 100
+  base             | B      | +0.72           | 0.88     | 0.66   | +0.59           | 63 de 80
+  + vogal          | A      | +0.86           | 0.91     | 0.84   | +0.74           | 84 de 100
+  + vogal          | B      | +0.72           | 0.88     | 0.66   | +0.61           | 64 de 80
+  + alta           | A      | +0.87           | 0.92     | 0.86   | +0.76           | 85 de 100
+  + alta           | B      | +0.75           | 0.88     | 0.69   | +0.64           | 65 de 80
+  + junta          | A      | +0.87           | 0.92     | 0.86   | +0.76           | 85 de 100
+  + junta          | B      | +0.75           | 0.88     | 0.69   | +0.64           | 65 de 80
+  + area >= 20     | A      | +0.90           | 1.00     | 0.84   | +0.79           | 88 de 100
+  + area >= 20     | B      | +0.71           | 0.91     | 0.62   | +0.64           | 66 de 80
+  + tinta > 0.25   | A      | +0.85           | 0.85     | 0.90   | +0.73           | 83 de 100
+  + tinta > 0.25   | B      | +0.73           | 0.72     | 0.81   | +0.60           | 62 de 80
+

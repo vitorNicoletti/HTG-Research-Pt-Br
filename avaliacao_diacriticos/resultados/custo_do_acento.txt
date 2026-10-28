@@ -1,0 +1,13 @@
+Custo do acento para o leitor: CER(acentuada) - CER(par) na base iam_pt_alinhado,
+mesmas letras pixel a pixel. Leitor modelos/leitor_iam_transformer.pt, recorte do avaliar_pt.py.
+
+so acento em cima: 536 pares
+  lido como esta   media +0.092 [+0.081, +0.105]  iguais 39%  piora > 0,2 16%  melhora > 0,2 1%
+  marcas apagadas  media +0.008 [+0.002, +0.014]  iguais 89%  piora > 0,2 2%  melhora > 0,2 1%
+  e abaixo dos c   media +0.008 [+0.003, +0.014]  iguais 89%  piora > 0,2 2%  melhora > 0,2 1%
+
+com cedilha: 264 pares
+  lido como esta   media +0.110 [+0.093, +0.127]  iguais 29%  piora > 0,2 21%  melhora > 0,2 3%
+  marcas apagadas  media +0.098 [+0.083, +0.115]  iguais 32%  piora > 0,2 15%  melhora > 0,2 2%
+  e abaixo dos c   media +0.029 [+0.016, +0.041]  iguais 65%  piora > 0,2 5%  melhora > 0,2 1%
+

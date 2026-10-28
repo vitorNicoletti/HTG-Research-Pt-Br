@@ -1,0 +1,56 @@
+modelo	classe	palavras	imagens	correto	a mais	letra errada	ausente	acento presente	cedilha presente
+fora_16ep	agudo	10	400	19.5	18.2	29.8	32.5	67.5	
+fora_16ep	til	5	200	40.0	10.5	13.5	36.0	64.0	
+fora_16ep	circunflexo	2	80	12.5	2.5	23.8	61.2	38.8	
+fora_16ep	cedilha	11	440	60.5	7.5	0.0	32.0		68.0
+fora_16ep	cedilha e til	2	80	37.5	2.5	11.2	48.8	63.8	62.5
+professor_11ep	agudo	10	400	14.8	38.5	30.2	16.5	83.5	
+professor_11ep	til	5	200	30.5	37.5	15.5	16.5	83.5	
+professor_11ep	circunflexo	2	80	20.0	11.2	35.0	33.8	66.2	
+professor_11ep	cedilha	11	440	48.2	38.2	0.0	13.6		86.4
+professor_11ep	cedilha e til	2	80	28.8	23.8	13.8	33.8	81.2	77.5
+professor_16ep	agudo	10	400	24.8	33.0	31.2	11.0	89.0	
+professor_16ep	til	5	200	42.0	28.5	15.5	14.0	86.0	
+professor_16ep	circunflexo	2	80	26.2	8.8	33.8	31.2	68.8	
+professor_16ep	cedilha	11	440	65.7	24.3	0.0	10.0		90.0
+professor_16ep	cedilha e til	2	80	43.8	17.5	13.8	25.0	85.0	83.8
+sem_pares_16ep	agudo	10	400	23.2	25.2	29.2	22.2	77.8	
+sem_pares_16ep	til	5	200	49.0	28.0	12.5	10.5	89.5	
+sem_pares_16ep	circunflexo	2	80	6.2	6.2	30.0	57.5	42.5	
+sem_pares_16ep	cedilha	11	440	76.8	9.5	0.0	13.6		86.4
+sem_pares_16ep	cedilha e til	2	80	43.8	12.5	13.8	30.0	80.0	78.8
+so_prof_11ep	agudo	10	400	8.2	6.8	25.0	60.0	40.0	
+so_prof_11ep	til	5	200	15.0	28.0	26.5	30.5	69.5	
+so_prof_11ep	circunflexo	2	80	2.5	0.0	17.5	80.0	20.0	
+so_prof_11ep	cedilha	11	440	23.2	42.5	0.0	34.3		65.7
+so_prof_11ep	cedilha e til	2	80	8.8	13.8	37.5	40.0	77.5	56.2
+zona_fora_baixo_16ep	agudo	10	400	24.8	9.2	35.5	30.5	69.5	
+zona_fora_baixo_16ep	til	5	200	40.0	10.5	23.5	26.0	74.0	
+zona_fora_baixo_16ep	circunflexo	2	80	6.2	2.5	33.8	57.5	42.5	
+zona_fora_baixo_16ep	cedilha	11	440	67.5	5.9	0.0	26.6		73.4
+zona_fora_baixo_16ep	cedilha e til	2	80	41.2	6.2	10.0	42.5	72.5	77.5
+zona_vogais_16ep	agudo	10	400	35.2	18.5	28.0	18.2	81.8	
+zona_vogais_16ep	til	5	200	59.0	16.0	9.0	16.0	84.0	
+zona_vogais_16ep	circunflexo	2	80	16.2	2.5	31.2	50.0	50.0	
+zona_vogais_16ep	cedilha	11	440	78.4	12.7	0.0	8.9		91.1
+zona_vogais_16ep	cedilha e til	2	80	50.0	7.5	11.2	31.2	83.8	73.8
+zona_vogais_21ep	agudo	10	400	36.8	23.2	26.8	13.2	86.8	
+zona_vogais_21ep	til	5	200	66.0	12.0	8.0	14.0	86.0	
+zona_vogais_21ep	circunflexo	2	80	21.2	3.8	33.8	41.2	58.8	
+zona_vogais_21ep	cedilha	11	440	78.0	10.7	0.0	11.4		88.6
+zona_vogais_21ep	cedilha e til	2	80	51.2	5.0	15.0	28.8	85.0	80.0
+zona_vogais_30ep	agudo	10	400	52.5	11.8	22.0	13.8	86.2	
+zona_vogais_30ep	til	5	200	71.5	12.0	8.0	8.5	91.5	
+zona_vogais_30ep	circunflexo	2	80	40.0	10.0	27.5	22.5	77.5	
+zona_vogais_30ep	cedilha	11	440	86.8	5.9	0.0	7.3		92.7
+zona_vogais_30ep	cedilha e til	2	80	56.2	10.0	11.2	22.5	91.2	82.5
+zona_vogais_40ep	agudo	10	400	59.0	11.0	17.8	12.2	87.8	
+zona_vogais_40ep	til	5	200	73.5	13.5	6.0	7.0	93.0	
+zona_vogais_40ep	circunflexo	2	80	47.5	8.8	17.5	26.2	73.8	
+zona_vogais_40ep	cedilha	11	440	86.4	4.3	0.0	9.3		90.7
+zona_vogais_40ep	cedilha e til	2	80	73.8	1.2	2.5	22.5	92.5	82.5
+zona_vogais_6ep	agudo	10	400	11.5	20.8	38.8	29.0	71.0	
+zona_vogais_6ep	til	5	200	24.0	20.5	27.0	28.5	71.5	
+zona_vogais_6ep	circunflexo	2	80	6.2	7.5	40.0	46.2	53.8	
+zona_vogais_6ep	cedilha	11	440	39.3	27.0	0.0	33.6		66.4
+zona_vogais_6ep	cedilha e til	2	80	15.0	10.0	36.2	38.8	77.5	55.0

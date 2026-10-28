@@ -9,7 +9,15 @@ documento existe para que ninguém repita esses erros.
 |---|---|---|---|
 | notebook (Arch Linux) | Intel UHD 620 | análise estática do código, testes de tokenização | sem GPU útil |
 | desktop antigo | **AMD RX 6600 XT** (RDNA2, gfx1032) | primeiros treinos no BRESSAY | **defeituosa para este modelo: todo treino feito nela é inválido** |
-| desktop atual | **AMD RX 9060 XT** (RDNA4, gfx1200, 17 GB) em **Windows 11 + WSL2 (Ubuntu 26.04)**, 15 GB de RAM | todos os resultados válidos | validada |
+| desktop atual | **AMD RX 9060 XT** (RDNA4, gfx1200, 17 GB) em **Windows 11 + WSL2 (Ubuntu 26.04)**, 15 GB de RAM | a maior parte dos treinos válidos, as avaliações e o leitor e o alinhador | validada |
+| Google Colab gratuito | NVIDIA Tesla T4 (16 GB), torch 2.11.0+cu130 | épocas 1 a 16 do modelo final (zona vogais) e o treino "fora em ruído baixo" | validada pelos testes de `diagnostico/` |
+
+O modelo final foi treinado nas duas: 16 épocas no Colab e as épocas 17 a 40
+na RX 9060 XT, retomando do estado salvo, com o mesmo código e os mesmos
+parâmetros. Detalhes em [09](09_resultados_consolidados.md), seção "Onde foi
+treinado", e o roteiro do Colab em [15](15_acento_a_mais_e_variantes_do_professor.md),
+seção "Treinar fora da máquina local". Na T4 uma época leva cerca de 20
+minutos, o dobro da RX 9060 XT.
 
 ## O defeito da RX 6600 XT (e por que validar qualquer GPU nova)
 

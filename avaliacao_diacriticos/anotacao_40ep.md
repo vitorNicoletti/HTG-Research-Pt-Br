@@ -33,7 +33,7 @@ a mesma semente. A palavra rapé ficou fora da amostra porque o esqueleto dela
 
 ## Como foi anotado
 
-Dois colegas da equipe, Bruno e Vini, anotaram as mesmas 212 imagens, cada um
+Dois colegas da equipe, Bruno e Vinícius, anotaram as mesmas 212 imagens, cada um
 sozinho. Eles receberam folhas com as imagens numeradas e embaralhadas, as
 imagens soltas, uma planilha e um texto de instruções. A folha mostra, em cima
 de cada imagem, só as letras da palavra sem acento, numeradas. Nada dizia se a
@@ -65,7 +65,7 @@ Numa palavra sem sinal em cima pedido, qualquer marca em cima conta como a
 mais.
 
 As duas planilhas voltaram completas, com 212 linhas e as letras batendo com a
-chave. Ninguém usou não sei. Houve um erro de digitação (img_013 do Vini, com
+chave. Ninguém usou não sei. Houve um erro de digitação (img_013 do Vinícius, com
 cedilha 6 7 numa palavra de 5 letras) e 13 respostas de cedilha apontando uma
 letra vizinha do c, o que não muda nada porque a cedilha é comparada só como
 tem ou não tem.
@@ -79,7 +79,7 @@ imagem ampliada, as letras numeradas e as respostas das duas pessoas nas
 perguntas em disputa, sem a palavra pedida. As decisões estão em
 `resultados/anotacao_40ep_desempate.csv`.
 
-| pergunta | igual ao Bruno | igual ao Vini | diferente dos dois |
+| pergunta | igual ao Bruno | igual ao Vinícius | diferente dos dois |
 |---|---|---|---|
 | classe do acento em cima | 7 | 10 | 1 |
 | cedilha | 3 | 1 | 0 |

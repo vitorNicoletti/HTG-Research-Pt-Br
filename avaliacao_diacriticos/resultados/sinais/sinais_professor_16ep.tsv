@@ -1,0 +1,3201 @@
+palavra	tipo	escritor	semente	sinais	pede_acima	pede_cedilha	acima	cedilha	letras	categoria
+opressão	acentuada	547	42	til	True	False	1	0	4 7	a mais
+opressão	acentuada	560	42	til	True	False	1	0	2 7	a mais
+opressão	acentuada	183	42	til	True	False	1	0	7	correto
+opressão	acentuada	321	42	til	True	False	1	0	7	correto
+opressão	acentuada	590	42	til	True	False	1	0	7	correto
+opressão	acentuada	583	42	til	True	False	1	0	8	letra errada
+opressão	acentuada	555	42	til	True	False	1	0	4	letra errada
+opressão	acentuada	517	42	til	True	False	0	0		ausente
+opressão	acentuada	580	42	til	True	False	1	0	7	correto
+opressão	acentuada	537	42	til	True	False	1	0	7	correto
+opressão	acentuada	616	42	til	True	False	1	0	7	correto
+opressão	acentuada	305	42	til	True	False	1	0	7	correto
+opressão	acentuada	589	42	til	True	False	1	0	2 8	letra errada
+opressão	acentuada	280	42	til	True	False	1	0	7	correto
+opressão	acentuada	510	42	til	True	False	0	0		ausente
+opressão	acentuada	201	42	til	True	False	0	0		ausente
+opressão	acentuada	631	42	til	True	False	1	0	7	correto
+opressão	acentuada	318	42	til	True	False	0	0		ausente
+opressão	acentuada	597	42	til	True	False	0	0		ausente
+opressão	acentuada	622	42	til	True	False	1	0	4 8	letra errada
+opressão	acentuada	547	43	til	True	False	1	0	6 7	a mais
+opressão	acentuada	560	43	til	True	False	1	0	1 8	letra errada
+opressão	acentuada	183	43	til	True	False	1	0	7	correto
+opressão	acentuada	321	43	til	True	False	0	0		ausente
+opressão	acentuada	590	43	til	True	False	1	0	7 8	a mais
+opressão	acentuada	583	43	til	True	False	1	0	7	correto
+opressão	acentuada	555	43	til	True	False	1	0	1 7	a mais
+opressão	acentuada	517	43	til	True	False	0	0		ausente
+opressão	acentuada	580	43	til	True	False	0	0		ausente
+opressão	acentuada	537	43	til	True	False	0	0		ausente
+opressão	acentuada	616	43	til	True	False	1	0	3 4 7	a mais
+opressão	acentuada	305	43	til	True	False	1	0	3 7	a mais
+opressão	acentuada	589	43	til	True	False	1	0	7	correto
+opressão	acentuada	280	43	til	True	False	0	0		ausente
+opressão	acentuada	510	43	til	True	False	1	0	7 8	a mais
+opressão	acentuada	201	43	til	True	False	1	0	6	letra errada
+opressão	acentuada	631	43	til	True	False	1	0	8	letra errada
+opressão	acentuada	318	43	til	True	False	1	0	7	correto
+opressão	acentuada	597	43	til	True	False	1	0	8	letra errada
+opressão	acentuada	622	43	til	True	False	0	0		ausente
+percussão	acentuada	547	42	til	True	False	1	0	4 8	a mais
+percussão	acentuada	560	42	til	True	False	1	0	2 8	a mais
+percussão	acentuada	183	42	til	True	False	1	0	9	letra errada
+percussão	acentuada	321	42	til	True	False	1	0	8	correto
+percussão	acentuada	590	42	til	True	False	1	0	8	correto
+percussão	acentuada	583	42	til	True	False	1	0	8	correto
+percussão	acentuada	555	42	til	True	False	1	0	8 9	a mais
+percussão	acentuada	517	42	til	True	False	1	0	9	letra errada
+percussão	acentuada	580	42	til	True	False	1	0	8	correto
+percussão	acentuada	537	42	til	True	False	1	0	8	correto
+percussão	acentuada	616	42	til	True	False	1	0	8	correto
+percussão	acentuada	305	42	til	True	False	1	0	8	correto
+percussão	acentuada	589	42	til	True	False	1	0	8	correto
+percussão	acentuada	280	42	til	True	False	1	0	7	letra errada
+percussão	acentuada	510	42	til	True	False	1	0	8	correto
+percussão	acentuada	201	42	til	True	False	1	0	9	letra errada
+percussão	acentuada	631	42	til	True	False	1	0	7	letra errada
+percussão	acentuada	318	42	til	True	False	1	0	8	correto
+percussão	acentuada	597	42	til	True	False	1	0	2 8	a mais
+percussão	acentuada	622	42	til	True	False	1	0	4 8	a mais
+percussão	acentuada	547	43	til	True	False	1	0	5 7 8	a mais
+percussão	acentuada	560	43	til	True	False	1	0	9	letra errada
+percussão	acentuada	183	43	til	True	False	1	0	8	correto
+percussão	acentuada	321	43	til	True	False	0	0		ausente
+percussão	acentuada	590	43	til	True	False	1	0	5 9	letra errada
+percussão	acentuada	583	43	til	True	False	1	1	4 5 7 8	a mais
+percussão	acentuada	555	43	til	True	False	1	0	8	correto
+percussão	acentuada	517	43	til	True	False	0	0		ausente
+percussão	acentuada	580	43	til	True	False	1	0	8	correto
+percussão	acentuada	537	43	til	True	False	1	0	7 8	a mais
+percussão	acentuada	616	43	til	True	False	1	0	8	correto
+percussão	acentuada	305	43	til	True	False	1	0	8	correto
+percussão	acentuada	589	43	til	True	False	1	0	4 8	a mais
+percussão	acentuada	280	43	til	True	False	1	1	5 8	a mais
+percussão	acentuada	510	43	til	True	False	1	0	8	correto
+percussão	acentuada	201	43	til	True	False	0	0		ausente
+percussão	acentuada	631	43	til	True	False	1	0	7 8	a mais
+percussão	acentuada	318	43	til	True	False	1	0	7 8	a mais
+percussão	acentuada	597	43	til	True	False	1	0	8	correto
+percussão	acentuada	622	43	til	True	False	0	0		ausente
+arregaçar	acentuada	547	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	560	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	183	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	321	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	590	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	583	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	555	42	cedilha	False	True	1	1	4	a mais
+arregaçar	acentuada	517	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	580	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	537	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	616	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	305	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	589	42	cedilha	False	True	0	0		ausente
+arregaçar	acentuada	280	42	cedilha	False	True	1	1	6	a mais
+arregaçar	acentuada	510	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	201	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	631	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	318	42	cedilha	False	True	0	1		correto
+arregaçar	acentuada	597	42	cedilha	False	True	0	0		ausente
+arregaçar	acentuada	622	42	cedilha	False	True	1	0	4	ausente
+arregaçar	acentuada	547	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	560	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	183	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	321	43	cedilha	False	True	0	0		ausente
+arregaçar	acentuada	590	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	583	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	555	43	cedilha	False	True	1	1	5	a mais
+arregaçar	acentuada	517	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	580	43	cedilha	False	True	0	0		ausente
+arregaçar	acentuada	537	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	616	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	305	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	589	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	280	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	510	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	201	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	631	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	318	43	cedilha	False	True	0	1		correto
+arregaçar	acentuada	597	43	cedilha	False	True	0	0		ausente
+arregaçar	acentuada	622	43	cedilha	False	True	0	0		ausente
+estarás	acentuada	547	42	agudo	True	False	1	0	6	correto
+estarás	acentuada	560	42	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	183	42	agudo	True	False	1	0	6	correto
+estarás	acentuada	321	42	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	590	42	agudo	True	False	1	0	6	correto
+estarás	acentuada	583	42	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	555	42	agudo	True	False	1	0	6	correto
+estarás	acentuada	517	42	agudo	True	False	1	0	4 6 7	a mais
+estarás	acentuada	580	42	agudo	True	False	1	0	4	letra errada
+estarás	acentuada	537	42	agudo	True	False	1	0	1 2 4 6	a mais
+estarás	acentuada	616	42	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	305	42	agudo	True	False	1	0	6	correto
+estarás	acentuada	589	42	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	280	42	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	510	42	agudo	True	False	1	0	4	letra errada
+estarás	acentuada	201	42	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	631	42	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	318	42	agudo	True	False	1	0	6	correto
+estarás	acentuada	597	42	agudo	True	False	1	0	1 6	a mais
+estarás	acentuada	622	42	agudo	True	False	1	0	4	letra errada
+estarás	acentuada	547	43	agudo	True	False	1	0	1 4 6	a mais
+estarás	acentuada	560	43	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	183	43	agudo	True	False	1	0	6	correto
+estarás	acentuada	321	43	agudo	True	False	1	0	6	correto
+estarás	acentuada	590	43	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	583	43	agudo	True	False	1	0	1 4 6	a mais
+estarás	acentuada	555	43	agudo	True	False	1	0	3 4 6	a mais
+estarás	acentuada	517	43	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	580	43	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	537	43	agudo	True	False	1	0	4 5 6	a mais
+estarás	acentuada	616	43	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	305	43	agudo	True	False	1	0	3 4 6	a mais
+estarás	acentuada	589	43	agudo	True	False	1	0	6	correto
+estarás	acentuada	280	43	agudo	True	False	1	0	6	correto
+estarás	acentuada	510	43	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	201	43	agudo	True	False	1	0	1 6	a mais
+estarás	acentuada	631	43	agudo	True	False	1	0	4 6	a mais
+estarás	acentuada	318	43	agudo	True	False	1	0	6	correto
+estarás	acentuada	597	43	agudo	True	False	1	0	6	correto
+estarás	acentuada	622	43	agudo	True	False	1	0	6	correto
+recomeça	acentuada	547	42	cedilha	False	True	0	0		ausente
+recomeça	acentuada	560	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	183	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	321	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	590	42	cedilha	False	True	1	1	8	a mais
+recomeça	acentuada	583	42	cedilha	False	True	1	1	8	a mais
+recomeça	acentuada	555	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	517	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	580	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	537	42	cedilha	False	True	0	0		ausente
+recomeça	acentuada	616	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	305	42	cedilha	False	True	1	1	8	a mais
+recomeça	acentuada	589	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	280	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	510	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	201	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	631	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	318	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	597	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	622	42	cedilha	False	True	0	1		correto
+recomeça	acentuada	547	43	cedilha	False	True	1	1	8	a mais
+recomeça	acentuada	560	43	cedilha	False	True	1	1	8	a mais
+recomeça	acentuada	183	43	cedilha	False	True	1	1	8	a mais
+recomeça	acentuada	321	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	590	43	cedilha	False	True	1	1	5	a mais
+recomeça	acentuada	583	43	cedilha	False	True	1	1	4	a mais
+recomeça	acentuada	555	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	517	43	cedilha	False	True	1	1	8	a mais
+recomeça	acentuada	580	43	cedilha	False	True	1	1	8	a mais
+recomeça	acentuada	537	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	616	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	305	43	cedilha	False	True	1	0	4	ausente
+recomeça	acentuada	589	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	280	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	510	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	201	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	631	43	cedilha	False	True	1	1	8	a mais
+recomeça	acentuada	318	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	597	43	cedilha	False	True	0	1		correto
+recomeça	acentuada	622	43	cedilha	False	True	0	1		correto
+rapé	acentuada	547	42	agudo	True	False	0	0		ausente
+rapé	acentuada	560	42	agudo	True	False	1	0	4	correto
+rapé	acentuada	183	42	agudo	True	False	1	0	2 4	a mais
+rapé	acentuada	321	42	agudo	True	False	0	0		ausente
+rapé	acentuada	590	42	agudo	True	False	1	0	2	letra errada
+rapé	acentuada	583	42	agudo	True	False	1	0	2 4	a mais
+rapé	acentuada	555	42	agudo	True	False	1	0	2	letra errada
+rapé	acentuada	517	42	agudo	True	False	0	0		ausente
+rapé	acentuada	580	42	agudo	True	False	1	0	2 4	a mais
+rapé	acentuada	537	42	agudo	True	False	1	0	4	correto
+rapé	acentuada	616	42	agudo	True	False	1	0	4	correto
+rapé	acentuada	305	42	agudo	True	False	1	0	1	letra errada
+rapé	acentuada	589	42	agudo	True	False	1	0	1 2	letra errada
+rapé	acentuada	280	42	agudo	True	False	1	0	2 4	a mais
+rapé	acentuada	510	42	agudo	True	False	0	0		ausente
+rapé	acentuada	201	42	agudo	True	False	0	0		ausente
+rapé	acentuada	631	42	agudo	True	False	1	0	2 4	a mais
+rapé	acentuada	318	42	agudo	True	False	0	0		ausente
+rapé	acentuada	597	42	agudo	True	False	1	0	2	letra errada
+rapé	acentuada	622	42	agudo	True	False	0	0		ausente
+rapé	acentuada	547	43	agudo	True	False	0	0		ausente
+rapé	acentuada	560	43	agudo	True	False	1	0	2	letra errada
+rapé	acentuada	183	43	agudo	True	False	0	0		ausente
+rapé	acentuada	321	43	agudo	True	False	1	0	2	letra errada
+rapé	acentuada	590	43	agudo	True	False	1	0	4	correto
+rapé	acentuada	583	43	agudo	True	False	1	0	2 4	a mais
+rapé	acentuada	555	43	agudo	True	False	1	0	2	letra errada
+rapé	acentuada	517	43	agudo	True	False	1	0	3 4	a mais
+rapé	acentuada	580	43	agudo	True	False	0	0		ausente
+rapé	acentuada	537	43	agudo	True	False	0	0		ausente
+rapé	acentuada	616	43	agudo	True	False	1	0	2 3	letra errada
+rapé	acentuada	305	43	agudo	True	False	1	0	2 4	a mais
+rapé	acentuada	589	43	agudo	True	False	1	0	1 2	letra errada
+rapé	acentuada	280	43	agudo	True	False	0	0		ausente
+rapé	acentuada	510	43	agudo	True	False	0	0		ausente
+rapé	acentuada	201	43	agudo	True	False	1	0	2	letra errada
+rapé	acentuada	631	43	agudo	True	False	0	0		ausente
+rapé	acentuada	318	43	agudo	True	False	1	0	3	letra errada
+rapé	acentuada	597	43	agudo	True	False	0	0		ausente
+rapé	acentuada	622	43	agudo	True	False	0	0		ausente
+pensámos	acentuada	547	42	agudo	True	False	1	0	5	correto
+pensámos	acentuada	560	42	agudo	True	False	1	0	2 5	a mais
+pensámos	acentuada	183	42	agudo	True	False	1	0	5	correto
+pensámos	acentuada	321	42	agudo	True	False	1	0	6	letra errada
+pensámos	acentuada	590	42	agudo	True	False	1	0	7	letra errada
+pensámos	acentuada	583	42	agudo	True	False	1	0	4 5	a mais
+pensámos	acentuada	555	42	agudo	True	False	1	0	7	letra errada
+pensámos	acentuada	517	42	agudo	True	False	1	0	5	correto
+pensámos	acentuada	580	42	agudo	True	False	1	0	5 7	a mais
+pensámos	acentuada	537	42	agudo	True	False	1	0	7	letra errada
+pensámos	acentuada	616	42	agudo	True	False	1	0	5 7	a mais
+pensámos	acentuada	305	42	agudo	True	False	1	0	2 5	a mais
+pensámos	acentuada	589	42	agudo	True	False	1	0	5 7	a mais
+pensámos	acentuada	280	42	agudo	True	False	1	0	5	correto
+pensámos	acentuada	510	42	agudo	True	False	0	0		ausente
+pensámos	acentuada	201	42	agudo	True	False	1	0	7	letra errada
+pensámos	acentuada	631	42	agudo	True	False	1	0	5 6	a mais
+pensámos	acentuada	318	42	agudo	True	False	1	0	5	correto
+pensámos	acentuada	597	42	agudo	True	False	1	0	5	correto
+pensámos	acentuada	622	42	agudo	True	False	1	0	4 5	a mais
+pensámos	acentuada	547	43	agudo	True	False	1	0	5	correto
+pensámos	acentuada	560	43	agudo	True	False	1	0	2 4 5	a mais
+pensámos	acentuada	183	43	agudo	True	False	1	0	5 7	a mais
+pensámos	acentuada	321	43	agudo	True	False	1	0	5	correto
+pensámos	acentuada	590	43	agudo	True	False	1	0	6	letra errada
+pensámos	acentuada	583	43	agudo	True	False	1	0	7	letra errada
+pensámos	acentuada	555	43	agudo	True	False	1	0	5	correto
+pensámos	acentuada	517	43	agudo	True	False	1	0	2 5 7	a mais
+pensámos	acentuada	580	43	agudo	True	False	1	0	5 7	a mais
+pensámos	acentuada	537	43	agudo	True	False	1	0	5	correto
+pensámos	acentuada	616	43	agudo	True	False	1	0	5	correto
+pensámos	acentuada	305	43	agudo	True	False	1	0	6 7	letra errada
+pensámos	acentuada	589	43	agudo	True	False	1	0	5	correto
+pensámos	acentuada	280	43	agudo	True	False	1	0	7	letra errada
+pensámos	acentuada	510	43	agudo	True	False	1	0	7	letra errada
+pensámos	acentuada	201	43	agudo	True	False	1	0	7	letra errada
+pensámos	acentuada	631	43	agudo	True	False	1	0	7	letra errada
+pensámos	acentuada	318	43	agudo	True	False	1	0	5	correto
+pensámos	acentuada	597	43	agudo	True	False	1	0	5 7	a mais
+pensámos	acentuada	622	43	agudo	True	False	1	0	7	letra errada
+haverá	acentuada	547	42	agudo	True	False	1	0	2	letra errada
+haverá	acentuada	560	42	agudo	True	False	1	0	6	correto
+haverá	acentuada	183	42	agudo	True	False	1	0	2	letra errada
+haverá	acentuada	321	42	agudo	True	False	1	0	6	correto
+haverá	acentuada	590	42	agudo	True	False	1	0	6	correto
+haverá	acentuada	583	42	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	555	42	agudo	True	False	1	0	6	correto
+haverá	acentuada	517	42	agudo	True	False	1	0	1 2 5	letra errada
+haverá	acentuada	580	42	agudo	True	False	1	0	2 4	letra errada
+haverá	acentuada	537	42	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	616	42	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	305	42	agudo	True	False	1	0	6	correto
+haverá	acentuada	589	42	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	280	42	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	510	42	agudo	True	False	1	0	4 6	a mais
+haverá	acentuada	201	42	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	631	42	agudo	True	False	1	0	4	letra errada
+haverá	acentuada	318	42	agudo	True	False	1	0	2 5	letra errada
+haverá	acentuada	597	42	agudo	True	False	1	0	2	letra errada
+haverá	acentuada	622	42	agudo	True	False	1	0	6	correto
+haverá	acentuada	547	43	agudo	True	False	1	0	6	correto
+haverá	acentuada	560	43	agudo	True	False	1	0	2	letra errada
+haverá	acentuada	183	43	agudo	True	False	1	0	6	correto
+haverá	acentuada	321	43	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	590	43	agudo	True	False	1	0	6	correto
+haverá	acentuada	583	43	agudo	True	False	1	0	2 3	letra errada
+haverá	acentuada	555	43	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	517	43	agudo	True	False	1	0	6	correto
+haverá	acentuada	580	43	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	537	43	agudo	True	False	1	0	4	letra errada
+haverá	acentuada	616	43	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	305	43	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	589	43	agudo	True	False	1	0	2	letra errada
+haverá	acentuada	280	43	agudo	True	False	1	0	2 4 6	a mais
+haverá	acentuada	510	43	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	201	43	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	631	43	agudo	True	False	1	0	2 6	a mais
+haverá	acentuada	318	43	agudo	True	False	1	0	6	correto
+haverá	acentuada	597	43	agudo	True	False	1	0	6	correto
+haverá	acentuada	622	43	agudo	True	False	1	0	6	correto
+pôr	acentuada	547	42	circunflexo	True	False	1	0	1	letra errada
+pôr	acentuada	560	42	circunflexo	True	False	0	0		ausente
+pôr	acentuada	183	42	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	321	42	circunflexo	True	False	0	0		ausente
+pôr	acentuada	590	42	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	583	42	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	555	42	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	517	42	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	580	42	circunflexo	True	False	0	0		ausente
+pôr	acentuada	537	42	circunflexo	True	False	0	0		ausente
+pôr	acentuada	616	42	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	305	42	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	589	42	circunflexo	True	False	1	0	1 2	a mais
+pôr	acentuada	280	42	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	510	42	circunflexo	True	False	0	0		ausente
+pôr	acentuada	201	42	circunflexo	True	False	0	0		ausente
+pôr	acentuada	631	42	circunflexo	True	False	1	0	3	letra errada
+pôr	acentuada	318	42	circunflexo	True	False	0	0		ausente
+pôr	acentuada	597	42	circunflexo	True	False	0	0		ausente
+pôr	acentuada	622	42	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	547	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	560	43	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	183	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	321	43	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	590	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	583	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	555	43	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	517	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	580	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	537	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	616	43	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	305	43	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	589	43	circunflexo	True	False	1	0	1	letra errada
+pôr	acentuada	280	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	510	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	201	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	631	43	circunflexo	True	False	0	0		ausente
+pôr	acentuada	318	43	circunflexo	True	False	1	0	3	letra errada
+pôr	acentuada	597	43	circunflexo	True	False	1	0	2	correto
+pôr	acentuada	622	43	circunflexo	True	False	0	0		ausente
+mordaça	acentuada	547	42	cedilha	False	True	1	1	4	a mais
+mordaça	acentuada	560	42	cedilha	False	True	1	1	4	a mais
+mordaça	acentuada	183	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	321	42	cedilha	False	True	1	1	7	a mais
+mordaça	acentuada	590	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	583	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	555	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	517	42	cedilha	False	True	1	1	7	a mais
+mordaça	acentuada	580	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	537	42	cedilha	False	True	1	1	6	a mais
+mordaça	acentuada	616	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	305	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	589	42	cedilha	False	True	1	1	7	a mais
+mordaça	acentuada	280	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	510	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	201	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	631	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	318	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	597	42	cedilha	False	True	0	1		correto
+mordaça	acentuada	622	42	cedilha	False	True	1	1	5	a mais
+mordaça	acentuada	547	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	560	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	183	43	cedilha	False	True	1	1	7	a mais
+mordaça	acentuada	321	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	590	43	cedilha	False	True	1	1	4	a mais
+mordaça	acentuada	583	43	cedilha	False	True	1	0	5	ausente
+mordaça	acentuada	555	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	517	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	580	43	cedilha	False	True	1	1	5	a mais
+mordaça	acentuada	537	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	616	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	305	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	589	43	cedilha	False	True	0	0		ausente
+mordaça	acentuada	280	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	510	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	201	43	cedilha	False	True	1	1	7	a mais
+mordaça	acentuada	631	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	318	43	cedilha	False	True	1	1	7	a mais
+mordaça	acentuada	597	43	cedilha	False	True	0	1		correto
+mordaça	acentuada	622	43	cedilha	False	True	0	1		correto
+terráquea	acentuada	547	42	agudo	True	False	1	0	5	correto
+terráquea	acentuada	560	42	agudo	True	False	1	0	3 5	a mais
+terráquea	acentuada	183	42	agudo	True	False	1	0	2 4	letra errada
+terráquea	acentuada	321	42	agudo	True	False	1	0	5	correto
+terráquea	acentuada	590	42	agudo	True	False	1	0	7 8	letra errada
+terráquea	acentuada	583	42	agudo	True	False	1	0	4	letra errada
+terráquea	acentuada	555	42	agudo	True	False	1	0	9	letra errada
+terráquea	acentuada	517	42	agudo	True	False	1	0	3 5 9	a mais
+terráquea	acentuada	580	42	agudo	True	False	1	0	5 9	a mais
+terráquea	acentuada	537	42	agudo	True	False	0	0		ausente
+terráquea	acentuada	616	42	agudo	True	False	1	0	6 9	letra errada
+terráquea	acentuada	305	42	agudo	True	False	0	0		ausente
+terráquea	acentuada	589	42	agudo	True	False	0	0		ausente
+terráquea	acentuada	280	42	agudo	True	False	1	0	9	letra errada
+terráquea	acentuada	510	42	agudo	True	False	1	0	4	letra errada
+terráquea	acentuada	201	42	agudo	True	False	1	0	7	letra errada
+terráquea	acentuada	631	42	agudo	True	False	1	0	5 6	a mais
+terráquea	acentuada	318	42	agudo	True	False	1	0	5 7	a mais
+terráquea	acentuada	597	42	agudo	True	False	1	0	2 5	a mais
+terráquea	acentuada	622	42	agudo	True	False	1	0	5	correto
+terráquea	acentuada	547	43	agudo	True	False	1	0	4 5	a mais
+terráquea	acentuada	560	43	agudo	True	False	1	0	2 5	a mais
+terráquea	acentuada	183	43	agudo	True	False	1	0	6 9	letra errada
+terráquea	acentuada	321	43	agudo	True	False	1	0	2 5	a mais
+terráquea	acentuada	590	43	agudo	True	False	1	0	2 6	letra errada
+terráquea	acentuada	583	43	agudo	True	False	1	0	2 5	a mais
+terráquea	acentuada	555	43	agudo	True	False	1	0	4	letra errada
+terráquea	acentuada	517	43	agudo	True	False	1	0	2 5 6	a mais
+terráquea	acentuada	580	43	agudo	True	False	1	0	5 9	a mais
+terráquea	acentuada	537	43	agudo	True	False	1	0	8	letra errada
+terráquea	acentuada	616	43	agudo	True	False	1	0	6	letra errada
+terráquea	acentuada	305	43	agudo	True	False	1	0	2 5 8	a mais
+terráquea	acentuada	589	43	agudo	True	False	1	0	5	correto
+terráquea	acentuada	280	43	agudo	True	False	1	0	5	correto
+terráquea	acentuada	510	43	agudo	True	False	1	0	4 5	a mais
+terráquea	acentuada	201	43	agudo	True	False	1	0	5	correto
+terráquea	acentuada	631	43	agudo	True	False	1	0	5	correto
+terráquea	acentuada	318	43	agudo	True	False	1	0	2 9	letra errada
+terráquea	acentuada	597	43	agudo	True	False	1	0	5	correto
+terráquea	acentuada	622	43	agudo	True	False	1	0	5	correto
+despedaçar	acentuada	547	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	560	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	183	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	321	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	590	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	583	42	cedilha	False	True	1	1	7	a mais
+despedaçar	acentuada	555	42	cedilha	False	True	1	1	9	a mais
+despedaçar	acentuada	517	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	580	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	537	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	616	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	305	42	cedilha	False	True	1	1	7	a mais
+despedaçar	acentuada	589	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	280	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	510	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	201	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	631	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	318	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	597	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	622	42	cedilha	False	True	0	1		correto
+despedaçar	acentuada	547	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	560	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	183	43	cedilha	False	True	1	1	9	a mais
+despedaçar	acentuada	321	43	cedilha	False	True	0	0		ausente
+despedaçar	acentuada	590	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	583	43	cedilha	False	True	1	1	5	a mais
+despedaçar	acentuada	555	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	517	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	580	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	537	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	616	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	305	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	589	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	280	43	cedilha	False	True	1	1	9	a mais
+despedaçar	acentuada	510	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	201	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	631	43	cedilha	False	True	0	0		ausente
+despedaçar	acentuada	318	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	597	43	cedilha	False	True	0	1		correto
+despedaçar	acentuada	622	43	cedilha	False	True	0	1		correto
+reclusão	acentuada	547	42	til	True	False	1	0	6	letra errada
+reclusão	acentuada	560	42	til	True	False	1	0	7	correto
+reclusão	acentuada	183	42	til	True	False	1	0	2 7	a mais
+reclusão	acentuada	321	42	til	True	False	1	0	7	correto
+reclusão	acentuada	590	42	til	True	False	1	0	7	correto
+reclusão	acentuada	583	42	til	True	False	1	0	5 7	a mais
+reclusão	acentuada	555	42	til	True	False	1	0	7	correto
+reclusão	acentuada	517	42	til	True	False	1	1	2 8	letra errada
+reclusão	acentuada	580	42	til	True	False	1	0	5 7	a mais
+reclusão	acentuada	537	42	til	True	False	1	0	2 7 8	a mais
+reclusão	acentuada	616	42	til	True	False	1	0	7	correto
+reclusão	acentuada	305	42	til	True	False	0	0		ausente
+reclusão	acentuada	589	42	til	True	False	1	0	7	correto
+reclusão	acentuada	280	42	til	True	False	1	0	7	correto
+reclusão	acentuada	510	42	til	True	False	0	0		ausente
+reclusão	acentuada	201	42	til	True	False	1	1	6 7	a mais
+reclusão	acentuada	631	42	til	True	False	1	0	8	letra errada
+reclusão	acentuada	318	42	til	True	False	0	0		ausente
+reclusão	acentuada	597	42	til	True	False	1	0	7	correto
+reclusão	acentuada	622	42	til	True	False	1	0	7 8	a mais
+reclusão	acentuada	547	43	til	True	False	1	0	5 7	a mais
+reclusão	acentuada	560	43	til	True	False	1	0	2 5 7	a mais
+reclusão	acentuada	183	43	til	True	False	1	0	7 8	a mais
+reclusão	acentuada	321	43	til	True	False	1	0	7	correto
+reclusão	acentuada	590	43	til	True	False	1	0	7	correto
+reclusão	acentuada	583	43	til	True	False	1	0	7	correto
+reclusão	acentuada	555	43	til	True	False	0	0		ausente
+reclusão	acentuada	517	43	til	True	False	1	0	7	correto
+reclusão	acentuada	580	43	til	True	False	1	0	7	correto
+reclusão	acentuada	537	43	til	True	False	1	0	5 6 7	a mais
+reclusão	acentuada	616	43	til	True	False	1	0	7	correto
+reclusão	acentuada	305	43	til	True	False	1	0	7	correto
+reclusão	acentuada	589	43	til	True	False	1	0	7	correto
+reclusão	acentuada	280	43	til	True	False	0	0		ausente
+reclusão	acentuada	510	43	til	True	False	1	0	7	correto
+reclusão	acentuada	201	43	til	True	False	1	0	2 3 7 8	a mais
+reclusão	acentuada	631	43	til	True	False	1	0	7	correto
+reclusão	acentuada	318	43	til	True	False	1	0	7	correto
+reclusão	acentuada	597	43	til	True	False	1	0	7	correto
+reclusão	acentuada	622	43	til	True	False	1	0	7 8	a mais
+conexões	acentuada	547	42	til	True	False	1	0	6	correto
+conexões	acentuada	560	42	til	True	False	1	0	2 4 6	a mais
+conexões	acentuada	183	42	til	True	False	1	0	2 6	a mais
+conexões	acentuada	321	42	til	True	False	1	0	5 6	a mais
+conexões	acentuada	590	42	til	True	False	1	0	4 6	a mais
+conexões	acentuada	583	42	til	True	False	0	0		ausente
+conexões	acentuada	555	42	til	True	False	0	0		ausente
+conexões	acentuada	517	42	til	True	False	1	0	2	letra errada
+conexões	acentuada	580	42	til	True	False	1	0	6	correto
+conexões	acentuada	537	42	til	True	False	0	0		ausente
+conexões	acentuada	616	42	til	True	False	1	0	6	correto
+conexões	acentuada	305	42	til	True	False	1	0	2 6	a mais
+conexões	acentuada	589	42	til	True	False	1	0	2 6	a mais
+conexões	acentuada	280	42	til	True	False	1	0	6	correto
+conexões	acentuada	510	42	til	True	False	0	0		ausente
+conexões	acentuada	201	42	til	True	False	0	0		ausente
+conexões	acentuada	631	42	til	True	False	1	0	4	letra errada
+conexões	acentuada	318	42	til	True	False	1	0	4	letra errada
+conexões	acentuada	597	42	til	True	False	0	0		ausente
+conexões	acentuada	622	42	til	True	False	1	0	4 6	a mais
+conexões	acentuada	547	43	til	True	False	1	0	4 6	a mais
+conexões	acentuada	560	43	til	True	False	1	0	4	letra errada
+conexões	acentuada	183	43	til	True	False	1	0	6 7	a mais
+conexões	acentuada	321	43	til	True	False	1	0	2 6	a mais
+conexões	acentuada	590	43	til	True	False	1	0	5	letra errada
+conexões	acentuada	583	43	til	True	False	1	0	4 6	a mais
+conexões	acentuada	555	43	til	True	False	1	0	1 6	a mais
+conexões	acentuada	517	43	til	True	False	1	0	6	correto
+conexões	acentuada	580	43	til	True	False	1	0	4 6	a mais
+conexões	acentuada	537	43	til	True	False	1	0	6	correto
+conexões	acentuada	616	43	til	True	False	1	0	2 4 6	a mais
+conexões	acentuada	305	43	til	True	False	1	0	6	correto
+conexões	acentuada	589	43	til	True	False	1	0	4	letra errada
+conexões	acentuada	280	43	til	True	False	1	0	6	correto
+conexões	acentuada	510	43	til	True	False	1	0	6	correto
+conexões	acentuada	201	43	til	True	False	1	0	6	correto
+conexões	acentuada	631	43	til	True	False	1	0	6	correto
+conexões	acentuada	318	43	til	True	False	1	0	6	correto
+conexões	acentuada	597	43	til	True	False	1	0	7	letra errada
+conexões	acentuada	622	43	til	True	False	0	0		ausente
+florença	acentuada	547	42	cedilha	False	True	1	1	3	a mais
+florença	acentuada	560	42	cedilha	False	True	0	1		correto
+florença	acentuada	183	42	cedilha	False	True	0	1		correto
+florença	acentuada	321	42	cedilha	False	True	0	1		correto
+florença	acentuada	590	42	cedilha	False	True	0	1		correto
+florença	acentuada	583	42	cedilha	False	True	0	1		correto
+florença	acentuada	555	42	cedilha	False	True	0	1		correto
+florença	acentuada	517	42	cedilha	False	True	1	1	7	a mais
+florença	acentuada	580	42	cedilha	False	True	0	1		correto
+florença	acentuada	537	42	cedilha	False	True	0	1		correto
+florença	acentuada	616	42	cedilha	False	True	0	1		correto
+florença	acentuada	305	42	cedilha	False	True	0	1		correto
+florença	acentuada	589	42	cedilha	False	True	0	1		correto
+florença	acentuada	280	42	cedilha	False	True	0	1		correto
+florença	acentuada	510	42	cedilha	False	True	0	1		correto
+florença	acentuada	201	42	cedilha	False	True	1	1	2	a mais
+florença	acentuada	631	42	cedilha	False	True	1	1	2	a mais
+florença	acentuada	318	42	cedilha	False	True	0	1		correto
+florença	acentuada	597	42	cedilha	False	True	0	1		correto
+florença	acentuada	622	42	cedilha	False	True	0	1		correto
+florença	acentuada	547	43	cedilha	False	True	1	1	7	a mais
+florença	acentuada	560	43	cedilha	False	True	0	1		correto
+florença	acentuada	183	43	cedilha	False	True	1	1	2 8	a mais
+florença	acentuada	321	43	cedilha	False	True	0	1		correto
+florença	acentuada	590	43	cedilha	False	True	0	1		correto
+florença	acentuada	583	43	cedilha	False	True	1	1	5	a mais
+florença	acentuada	555	43	cedilha	False	True	0	1		correto
+florença	acentuada	517	43	cedilha	False	True	0	1		correto
+florença	acentuada	580	43	cedilha	False	True	0	1		correto
+florença	acentuada	537	43	cedilha	False	True	0	1		correto
+florença	acentuada	616	43	cedilha	False	True	1	0	5	ausente
+florença	acentuada	305	43	cedilha	False	True	0	1		correto
+florença	acentuada	589	43	cedilha	False	True	0	1		correto
+florença	acentuada	280	43	cedilha	False	True	0	1		correto
+florença	acentuada	510	43	cedilha	False	True	1	1	1 8	a mais
+florença	acentuada	201	43	cedilha	False	True	0	1		correto
+florença	acentuada	631	43	cedilha	False	True	1	1	3	a mais
+florença	acentuada	318	43	cedilha	False	True	1	1	3	a mais
+florença	acentuada	597	43	cedilha	False	True	0	1		correto
+florença	acentuada	622	43	cedilha	False	True	1	1	8	a mais
+unção	acentuada	547	42	cedilha til	True	True	1	1	4	correto
+unção	acentuada	560	42	cedilha til	True	True	1	1	1	letra errada
+unção	acentuada	183	42	cedilha til	True	True	1	1	1 4	a mais
+unção	acentuada	321	42	cedilha til	True	True	1	1	4	correto
+unção	acentuada	590	42	cedilha til	True	True	1	1	4	correto
+unção	acentuada	583	42	cedilha til	True	True	0	0		ausente
+unção	acentuada	555	42	cedilha til	True	True	1	1	4	correto
+unção	acentuada	517	42	cedilha til	True	True	1	1	5	letra errada
+unção	acentuada	580	42	cedilha til	True	True	1	1	4 5	a mais
+unção	acentuada	537	42	cedilha til	True	True	1	0	4	ausente
+unção	acentuada	616	42	cedilha til	True	True	1	0	4	ausente
+unção	acentuada	305	42	cedilha til	True	True	0	0		ausente
+unção	acentuada	589	42	cedilha til	True	True	1	1	5	letra errada
+unção	acentuada	280	42	cedilha til	True	True	1	1	4	correto
+unção	acentuada	510	42	cedilha til	True	True	0	1		ausente
+unção	acentuada	201	42	cedilha til	True	True	1	1	4	correto
+unção	acentuada	631	42	cedilha til	True	True	1	0	5	letra errada
+unção	acentuada	318	42	cedilha til	True	True	1	0	4	ausente
+unção	acentuada	597	42	cedilha til	True	True	1	0	4	ausente
+unção	acentuada	622	42	cedilha til	True	True	1	1	3	letra errada
+unção	acentuada	547	43	cedilha til	True	True	1	1	4	correto
+unção	acentuada	560	43	cedilha til	True	True	1	1	4	correto
+unção	acentuada	183	43	cedilha til	True	True	1	1	5	letra errada
+unção	acentuada	321	43	cedilha til	True	True	1	1	4	correto
+unção	acentuada	590	43	cedilha til	True	True	1	1	4	correto
+unção	acentuada	583	43	cedilha til	True	True	1	0	3 4	ausente
+unção	acentuada	555	43	cedilha til	True	True	1	1	4	correto
+unção	acentuada	517	43	cedilha til	True	True	1	1	3 4	a mais
+unção	acentuada	580	43	cedilha til	True	True	1	1	3 4 5	a mais
+unção	acentuada	537	43	cedilha til	True	True	0	1		ausente
+unção	acentuada	616	43	cedilha til	True	True	0	1		ausente
+unção	acentuada	305	43	cedilha til	True	True	1	1	1 4	a mais
+unção	acentuada	589	43	cedilha til	True	True	1	1	4	correto
+unção	acentuada	280	43	cedilha til	True	True	0	1		ausente
+unção	acentuada	510	43	cedilha til	True	True	0	1		ausente
+unção	acentuada	201	43	cedilha til	True	True	1	0	4	ausente
+unção	acentuada	631	43	cedilha til	True	True	1	1	1	letra errada
+unção	acentuada	318	43	cedilha til	True	True	1	1	4	correto
+unção	acentuada	597	43	cedilha til	True	True	1	1	4 5	a mais
+unção	acentuada	622	43	cedilha til	True	True	0	1		ausente
+caçadora	acentuada	547	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	560	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	183	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	321	42	cedilha	False	True	1	1	6	a mais
+caçadora	acentuada	590	42	cedilha	False	True	1	1	4	a mais
+caçadora	acentuada	583	42	cedilha	False	True	1	0	8	ausente
+caçadora	acentuada	555	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	517	42	cedilha	False	True	1	1	8	a mais
+caçadora	acentuada	580	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	537	42	cedilha	False	True	1	1	4	a mais
+caçadora	acentuada	616	42	cedilha	False	True	1	1	5	a mais
+caçadora	acentuada	305	42	cedilha	False	True	1	1	8	a mais
+caçadora	acentuada	589	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	280	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	510	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	201	42	cedilha	False	True	1	1	6	a mais
+caçadora	acentuada	631	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	318	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	597	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	622	42	cedilha	False	True	0	1		correto
+caçadora	acentuada	547	43	cedilha	False	True	1	1	4	a mais
+caçadora	acentuada	560	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	183	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	321	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	590	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	583	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	555	43	cedilha	False	True	1	1	1	a mais
+caçadora	acentuada	517	43	cedilha	False	True	1	1	8	a mais
+caçadora	acentuada	580	43	cedilha	False	True	0	0		ausente
+caçadora	acentuada	537	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	616	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	305	43	cedilha	False	True	1	1	6	a mais
+caçadora	acentuada	589	43	cedilha	False	True	1	1	4	a mais
+caçadora	acentuada	280	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	510	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	201	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	631	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	318	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	597	43	cedilha	False	True	0	1		correto
+caçadora	acentuada	622	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	547	42	cedilha	False	True	1	1	5	a mais
+engraçadas	acentuada	560	42	cedilha	False	True	1	0	7	ausente
+engraçadas	acentuada	183	42	cedilha	False	True	1	1	7	a mais
+engraçadas	acentuada	321	42	cedilha	False	True	0	1		correto
+engraçadas	acentuada	590	42	cedilha	False	True	0	1		correto
+engraçadas	acentuada	583	42	cedilha	False	True	0	1		correto
+engraçadas	acentuada	555	42	cedilha	False	True	0	1		correto
+engraçadas	acentuada	517	42	cedilha	False	True	1	1	5	a mais
+engraçadas	acentuada	580	42	cedilha	False	True	0	0		ausente
+engraçadas	acentuada	537	42	cedilha	False	True	0	1		correto
+engraçadas	acentuada	616	42	cedilha	False	True	1	1	6	a mais
+engraçadas	acentuada	305	42	cedilha	False	True	0	1		correto
+engraçadas	acentuada	589	42	cedilha	False	True	0	1		correto
+engraçadas	acentuada	280	42	cedilha	False	True	0	1		correto
+engraçadas	acentuada	510	42	cedilha	False	True	1	1	7	a mais
+engraçadas	acentuada	201	42	cedilha	False	True	0	1		correto
+engraçadas	acentuada	631	42	cedilha	False	True	1	1	7	a mais
+engraçadas	acentuada	318	42	cedilha	False	True	1	0	6	ausente
+engraçadas	acentuada	597	42	cedilha	False	True	1	1	7	a mais
+engraçadas	acentuada	622	42	cedilha	False	True	0	0		ausente
+engraçadas	acentuada	547	43	cedilha	False	True	1	1	8	a mais
+engraçadas	acentuada	560	43	cedilha	False	True	1	1	8	a mais
+engraçadas	acentuada	183	43	cedilha	False	True	1	0	9	ausente
+engraçadas	acentuada	321	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	590	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	583	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	555	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	517	43	cedilha	False	True	1	1	6	a mais
+engraçadas	acentuada	580	43	cedilha	False	True	0	0		ausente
+engraçadas	acentuada	537	43	cedilha	False	True	1	0	7	ausente
+engraçadas	acentuada	616	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	305	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	589	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	280	43	cedilha	False	True	1	1	6	a mais
+engraçadas	acentuada	510	43	cedilha	False	True	1	0	8	ausente
+engraçadas	acentuada	201	43	cedilha	False	True	0	0		ausente
+engraçadas	acentuada	631	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	318	43	cedilha	False	True	0	1		correto
+engraçadas	acentuada	597	43	cedilha	False	True	1	1	5	a mais
+engraçadas	acentuada	622	43	cedilha	False	True	0	1		correto
+relâmpagos	acentuada	547	42	circunflexo	True	False	1	0	4 9	a mais
+relâmpagos	acentuada	560	42	circunflexo	True	False	1	0	7 8	letra errada
+relâmpagos	acentuada	183	42	circunflexo	True	False	1	0	4 7	a mais
+relâmpagos	acentuada	321	42	circunflexo	True	False	0	0		ausente
+relâmpagos	acentuada	590	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	583	42	circunflexo	True	False	1	0	6	letra errada
+relâmpagos	acentuada	555	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	517	42	circunflexo	True	False	1	0	4	correto
+relâmpagos	acentuada	580	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	537	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	616	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	305	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	589	42	circunflexo	True	False	1	0	4	correto
+relâmpagos	acentuada	280	42	circunflexo	True	False	1	0	8	letra errada
+relâmpagos	acentuada	510	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	201	42	circunflexo	True	False	1	0	4	correto
+relâmpagos	acentuada	631	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	318	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	597	42	circunflexo	True	False	0	0		ausente
+relâmpagos	acentuada	622	42	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	547	43	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	560	43	circunflexo	True	False	1	0	4 7	a mais
+relâmpagos	acentuada	183	43	circunflexo	True	False	1	0	4	correto
+relâmpagos	acentuada	321	43	circunflexo	True	False	1	0	2	letra errada
+relâmpagos	acentuada	590	43	circunflexo	True	False	1	0	4 6 7	a mais
+relâmpagos	acentuada	583	43	circunflexo	True	False	1	0	5 7 9	letra errada
+relâmpagos	acentuada	555	43	circunflexo	True	False	1	0	4	correto
+relâmpagos	acentuada	517	43	circunflexo	True	False	1	0	7 9	letra errada
+relâmpagos	acentuada	580	43	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	537	43	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	616	43	circunflexo	True	False	0	0		ausente
+relâmpagos	acentuada	305	43	circunflexo	True	False	1	0	4 8	a mais
+relâmpagos	acentuada	589	43	circunflexo	True	False	1	0	4	correto
+relâmpagos	acentuada	280	43	circunflexo	True	False	1	0	7 9	letra errada
+relâmpagos	acentuada	510	43	circunflexo	True	False	1	0	4 7 8	a mais
+relâmpagos	acentuada	201	43	circunflexo	True	False	1	0	7	letra errada
+relâmpagos	acentuada	631	43	circunflexo	True	False	0	0		ausente
+relâmpagos	acentuada	318	43	circunflexo	True	False	1	0	8	letra errada
+relâmpagos	acentuada	597	43	circunflexo	True	False	1	0	9	letra errada
+relâmpagos	acentuada	622	43	circunflexo	True	False	0	0		ausente
+confusões	acentuada	547	42	til	True	False	1	0	7	correto
+confusões	acentuada	560	42	til	True	False	1	0	7	correto
+confusões	acentuada	183	42	til	True	False	1	0	7	correto
+confusões	acentuada	321	42	til	True	False	1	0	7	correto
+confusões	acentuada	590	42	til	True	False	1	0	7	correto
+confusões	acentuada	583	42	til	True	False	0	0		ausente
+confusões	acentuada	555	42	til	True	False	1	0	1 2 7	a mais
+confusões	acentuada	517	42	til	True	False	1	0	2 7	a mais
+confusões	acentuada	580	42	til	True	False	1	0	5 7	a mais
+confusões	acentuada	537	42	til	True	False	1	1	7	a mais
+confusões	acentuada	616	42	til	True	False	1	0	8	letra errada
+confusões	acentuada	305	42	til	True	False	1	0	7	correto
+confusões	acentuada	589	42	til	True	False	1	0	3	letra errada
+confusões	acentuada	280	42	til	True	False	1	0	7	correto
+confusões	acentuada	510	42	til	True	False	1	0	6 7	a mais
+confusões	acentuada	201	42	til	True	False	1	0	1 7	a mais
+confusões	acentuada	631	42	til	True	False	1	0	7	correto
+confusões	acentuada	318	42	til	True	False	1	0	7	correto
+confusões	acentuada	597	42	til	True	False	1	0	2 5 7	a mais
+confusões	acentuada	622	42	til	True	False	1	0	7	correto
+confusões	acentuada	547	43	til	True	False	1	1	7	a mais
+confusões	acentuada	560	43	til	True	False	1	0	2	letra errada
+confusões	acentuada	183	43	til	True	False	1	0	5 7 8	a mais
+confusões	acentuada	321	43	til	True	False	1	0	2 7	a mais
+confusões	acentuada	590	43	til	True	False	1	0	7	correto
+confusões	acentuada	583	43	til	True	False	1	0	7	correto
+confusões	acentuada	555	43	til	True	False	1	0	7	correto
+confusões	acentuada	517	43	til	True	False	1	0	2 7	a mais
+confusões	acentuada	580	43	til	True	False	1	0	8	letra errada
+confusões	acentuada	537	43	til	True	False	1	0	7	correto
+confusões	acentuada	616	43	til	True	False	1	0	7	correto
+confusões	acentuada	305	43	til	True	False	1	0	7	correto
+confusões	acentuada	589	43	til	True	False	1	1	2	letra errada
+confusões	acentuada	280	43	til	True	False	1	0	7	correto
+confusões	acentuada	510	43	til	True	False	1	0	7	correto
+confusões	acentuada	201	43	til	True	False	1	0	7	correto
+confusões	acentuada	631	43	til	True	False	1	0	7	correto
+confusões	acentuada	318	43	til	True	False	1	0	2	letra errada
+confusões	acentuada	597	43	til	True	False	1	0	7	correto
+confusões	acentuada	622	43	til	True	False	1	0	7	correto
+lançados	acentuada	547	42	cedilha	False	True	0	1		correto
+lançados	acentuada	560	42	cedilha	False	True	0	1		correto
+lançados	acentuada	183	42	cedilha	False	True	1	0	5	ausente
+lançados	acentuada	321	42	cedilha	False	True	0	1		correto
+lançados	acentuada	590	42	cedilha	False	True	1	1	5	a mais
+lançados	acentuada	583	42	cedilha	False	True	0	1		correto
+lançados	acentuada	555	42	cedilha	False	True	0	1		correto
+lançados	acentuada	517	42	cedilha	False	True	1	1	2	a mais
+lançados	acentuada	580	42	cedilha	False	True	0	0		ausente
+lançados	acentuada	537	42	cedilha	False	True	1	1	5 7	a mais
+lançados	acentuada	616	42	cedilha	False	True	0	1		correto
+lançados	acentuada	305	42	cedilha	False	True	0	1		correto
+lançados	acentuada	589	42	cedilha	False	True	1	1	2 6	a mais
+lançados	acentuada	280	42	cedilha	False	True	0	1		correto
+lançados	acentuada	510	42	cedilha	False	True	1	1	5	a mais
+lançados	acentuada	201	42	cedilha	False	True	0	1		correto
+lançados	acentuada	631	42	cedilha	False	True	0	1		correto
+lançados	acentuada	318	42	cedilha	False	True	0	1		correto
+lançados	acentuada	597	42	cedilha	False	True	0	1		correto
+lançados	acentuada	622	42	cedilha	False	True	0	1		correto
+lançados	acentuada	547	43	cedilha	False	True	0	1		correto
+lançados	acentuada	560	43	cedilha	False	True	0	1		correto
+lançados	acentuada	183	43	cedilha	False	True	0	1		correto
+lançados	acentuada	321	43	cedilha	False	True	0	1		correto
+lançados	acentuada	590	43	cedilha	False	True	1	1	4	a mais
+lançados	acentuada	583	43	cedilha	False	True	1	1	5	a mais
+lançados	acentuada	555	43	cedilha	False	True	1	1	5	a mais
+lançados	acentuada	517	43	cedilha	False	True	0	1		correto
+lançados	acentuada	580	43	cedilha	False	True	0	1		correto
+lançados	acentuada	537	43	cedilha	False	True	0	1		correto
+lançados	acentuada	616	43	cedilha	False	True	0	1		correto
+lançados	acentuada	305	43	cedilha	False	True	0	1		correto
+lançados	acentuada	589	43	cedilha	False	True	0	1		correto
+lançados	acentuada	280	43	cedilha	False	True	0	1		correto
+lançados	acentuada	510	43	cedilha	False	True	0	1		correto
+lançados	acentuada	201	43	cedilha	False	True	0	1		correto
+lançados	acentuada	631	43	cedilha	False	True	1	1	5	a mais
+lançados	acentuada	318	43	cedilha	False	True	0	1		correto
+lançados	acentuada	597	43	cedilha	False	True	0	1		correto
+lançados	acentuada	622	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	547	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	560	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	183	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	321	42	cedilha	False	True	1	0	4	ausente
+caçadoras	acentuada	590	42	cedilha	False	True	1	1	4	a mais
+caçadoras	acentuada	583	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	555	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	517	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	580	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	537	42	cedilha	False	True	1	1	4 6	a mais
+caçadoras	acentuada	616	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	305	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	589	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	280	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	510	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	201	42	cedilha	False	True	1	1	4 6	a mais
+caçadoras	acentuada	631	42	cedilha	False	True	1	1	6	a mais
+caçadoras	acentuada	318	42	cedilha	False	True	1	1	6	a mais
+caçadoras	acentuada	597	42	cedilha	False	True	1	0	4	ausente
+caçadoras	acentuada	622	42	cedilha	False	True	0	1		correto
+caçadoras	acentuada	547	43	cedilha	False	True	1	1	4	a mais
+caçadoras	acentuada	560	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	183	43	cedilha	False	True	1	1	4 8	a mais
+caçadoras	acentuada	321	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	590	43	cedilha	False	True	1	0	4	ausente
+caçadoras	acentuada	583	43	cedilha	False	True	1	1	3 6	a mais
+caçadoras	acentuada	555	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	517	43	cedilha	False	True	1	1	8	a mais
+caçadoras	acentuada	580	43	cedilha	False	True	1	1	6	a mais
+caçadoras	acentuada	537	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	616	43	cedilha	False	True	1	1	2	a mais
+caçadoras	acentuada	305	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	589	43	cedilha	False	True	1	1	4	a mais
+caçadoras	acentuada	280	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	510	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	201	43	cedilha	False	True	1	1	8	a mais
+caçadoras	acentuada	631	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	318	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	597	43	cedilha	False	True	0	1		correto
+caçadoras	acentuada	622	43	cedilha	False	True	0	1		correto
+bálsamo	acentuada	547	42	agudo	True	False	1	0	5	letra errada
+bálsamo	acentuada	560	42	agudo	True	False	1	0	1 7	letra errada
+bálsamo	acentuada	183	42	agudo	True	False	0	0		ausente
+bálsamo	acentuada	321	42	agudo	True	False	1	0	2	correto
+bálsamo	acentuada	590	42	agudo	True	False	1	0	2	correto
+bálsamo	acentuada	583	42	agudo	True	False	1	0	2	correto
+bálsamo	acentuada	555	42	agudo	True	False	1	0	5	letra errada
+bálsamo	acentuada	517	42	agudo	True	False	1	0	2 3 4 5	a mais
+bálsamo	acentuada	580	42	agudo	True	False	1	0	4 5	letra errada
+bálsamo	acentuada	537	42	agudo	True	False	1	0	5 7	letra errada
+bálsamo	acentuada	616	42	agudo	True	False	1	0	2 5	a mais
+bálsamo	acentuada	305	42	agudo	True	False	1	0	4 6	letra errada
+bálsamo	acentuada	589	42	agudo	True	False	1	0	4 6 7	letra errada
+bálsamo	acentuada	280	42	agudo	True	False	0	0		ausente
+bálsamo	acentuada	510	42	agudo	True	False	1	0	2 5	a mais
+bálsamo	acentuada	201	42	agudo	True	False	1	0	4 7	letra errada
+bálsamo	acentuada	631	42	agudo	True	False	1	0	5	letra errada
+bálsamo	acentuada	318	42	agudo	True	False	1	0	5	letra errada
+bálsamo	acentuada	597	42	agudo	True	False	1	0	7	letra errada
+bálsamo	acentuada	622	42	agudo	True	False	0	0		ausente
+bálsamo	acentuada	547	43	agudo	True	False	1	0	7	letra errada
+bálsamo	acentuada	560	43	agudo	True	False	1	0	3 4 5	letra errada
+bálsamo	acentuada	183	43	agudo	True	False	1	0	5	letra errada
+bálsamo	acentuada	321	43	agudo	True	False	1	0	4 5	letra errada
+bálsamo	acentuada	590	43	agudo	True	False	1	0	2	correto
+bálsamo	acentuada	583	43	agudo	True	False	0	0		ausente
+bálsamo	acentuada	555	43	agudo	True	False	1	0	7	letra errada
+bálsamo	acentuada	517	43	agudo	True	False	1	0	2 4	a mais
+bálsamo	acentuada	580	43	agudo	True	False	1	0	2 5	a mais
+bálsamo	acentuada	537	43	agudo	True	False	1	0	5	letra errada
+bálsamo	acentuada	616	43	agudo	True	False	1	0	5	letra errada
+bálsamo	acentuada	305	43	agudo	True	False	1	0	5 6	letra errada
+bálsamo	acentuada	589	43	agudo	True	False	1	0	2	correto
+bálsamo	acentuada	280	43	agudo	True	False	1	0	2 4 5	a mais
+bálsamo	acentuada	510	43	agudo	True	False	1	0	3	letra errada
+bálsamo	acentuada	201	43	agudo	True	False	1	0	5 7	letra errada
+bálsamo	acentuada	631	43	agudo	True	False	1	0	5	letra errada
+bálsamo	acentuada	318	43	agudo	True	False	1	0	1 2	a mais
+bálsamo	acentuada	597	43	agudo	True	False	1	0	5	letra errada
+bálsamo	acentuada	622	43	agudo	True	False	1	0	5 7	letra errada
+léguas	acentuada	547	42	agudo	True	False	1	0	2 5	a mais
+léguas	acentuada	560	42	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	183	42	agudo	True	False	1	0	3	letra errada
+léguas	acentuada	321	42	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	590	42	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	583	42	agudo	True	False	1	0	3 5	letra errada
+léguas	acentuada	555	42	agudo	True	False	1	0	3	letra errada
+léguas	acentuada	517	42	agudo	True	False	1	0	2 4	a mais
+léguas	acentuada	580	42	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	537	42	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	616	42	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	305	42	agudo	True	False	1	0	2 5	a mais
+léguas	acentuada	589	42	agudo	True	False	1	0	2	correto
+léguas	acentuada	280	42	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	510	42	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	201	42	agudo	True	False	1	0	2 6	a mais
+léguas	acentuada	631	42	agudo	True	False	1	0	2 5 6	a mais
+léguas	acentuada	318	42	agudo	True	False	1	0	6	letra errada
+léguas	acentuada	597	42	agudo	True	False	1	0	4	letra errada
+léguas	acentuada	622	42	agudo	True	False	0	0		ausente
+léguas	acentuada	547	43	agudo	True	False	1	0	3	letra errada
+léguas	acentuada	560	43	agudo	True	False	1	0	3	letra errada
+léguas	acentuada	183	43	agudo	True	False	1	0	1 4	letra errada
+léguas	acentuada	321	43	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	590	43	agudo	True	False	1	0	4 5	letra errada
+léguas	acentuada	583	43	agudo	True	False	1	0	4 5	letra errada
+léguas	acentuada	555	43	agudo	True	False	0	0		ausente
+léguas	acentuada	517	43	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	580	43	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	537	43	agudo	True	False	0	0		ausente
+léguas	acentuada	616	43	agudo	True	False	1	0	4	letra errada
+léguas	acentuada	305	43	agudo	True	False	1	0	2 5	a mais
+léguas	acentuada	589	43	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	280	43	agudo	True	False	1	0	4 5	letra errada
+léguas	acentuada	510	43	agudo	True	False	0	0		ausente
+léguas	acentuada	201	43	agudo	True	False	1	0	5	letra errada
+léguas	acentuada	631	43	agudo	True	False	0	0		ausente
+léguas	acentuada	318	43	agudo	True	False	1	0	4 5	letra errada
+léguas	acentuada	597	43	agudo	True	False	1	0	3	letra errada
+léguas	acentuada	622	43	agudo	True	False	1	0	3	letra errada
+pás	acentuada	547	42	agudo	True	False	1	0	2	correto
+pás	acentuada	560	42	agudo	True	False	1	0	2	correto
+pás	acentuada	183	42	agudo	True	False	1	0	2	correto
+pás	acentuada	321	42	agudo	True	False	0	0		ausente
+pás	acentuada	590	42	agudo	True	False	1	0	2	correto
+pás	acentuada	583	42	agudo	True	False	1	0	2	correto
+pás	acentuada	555	42	agudo	True	False	1	0	2	correto
+pás	acentuada	517	42	agudo	True	False	1	0	2	correto
+pás	acentuada	580	42	agudo	True	False	1	0	2	correto
+pás	acentuada	537	42	agudo	True	False	0	0		ausente
+pás	acentuada	616	42	agudo	True	False	1	0	2	correto
+pás	acentuada	305	42	agudo	True	False	1	0	2	correto
+pás	acentuada	589	42	agudo	True	False	1	0	1 2	a mais
+pás	acentuada	280	42	agudo	True	False	1	0	2	correto
+pás	acentuada	510	42	agudo	True	False	0	0		ausente
+pás	acentuada	201	42	agudo	True	False	1	0	2	correto
+pás	acentuada	631	42	agudo	True	False	1	0	3	letra errada
+pás	acentuada	318	42	agudo	True	False	0	0		ausente
+pás	acentuada	597	42	agudo	True	False	1	0	2	correto
+pás	acentuada	622	42	agudo	True	False	1	0	2	correto
+pás	acentuada	547	43	agudo	True	False	1	0	2	correto
+pás	acentuada	560	43	agudo	True	False	1	0	2	correto
+pás	acentuada	183	43	agudo	True	False	0	0		ausente
+pás	acentuada	321	43	agudo	True	False	1	0	2	correto
+pás	acentuada	590	43	agudo	True	False	1	0	3	letra errada
+pás	acentuada	583	43	agudo	True	False	0	0		ausente
+pás	acentuada	555	43	agudo	True	False	1	0	1 2	a mais
+pás	acentuada	517	43	agudo	True	False	1	0	2	correto
+pás	acentuada	580	43	agudo	True	False	0	0		ausente
+pás	acentuada	537	43	agudo	True	False	0	0		ausente
+pás	acentuada	616	43	agudo	True	False	1	0	2	correto
+pás	acentuada	305	43	agudo	True	False	1	0	1 2	a mais
+pás	acentuada	589	43	agudo	True	False	1	0	2	correto
+pás	acentuada	280	43	agudo	True	False	1	0	2	correto
+pás	acentuada	510	43	agudo	True	False	0	0		ausente
+pás	acentuada	201	43	agudo	True	False	0	0		ausente
+pás	acentuada	631	43	agudo	True	False	0	0		ausente
+pás	acentuada	318	43	agudo	True	False	1	0	2 3	a mais
+pás	acentuada	597	43	agudo	True	False	1	0	2	correto
+pás	acentuada	622	43	agudo	True	False	0	0		ausente
+sofrerá	acentuada	547	42	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	560	42	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	183	42	agudo	True	False	1	0	2 7	a mais
+sofrerá	acentuada	321	42	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	590	42	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	583	42	agudo	True	False	1	0	5	letra errada
+sofrerá	acentuada	555	42	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	517	42	agudo	True	False	1	0	1 2 7	a mais
+sofrerá	acentuada	580	42	agudo	True	False	1	0	5 7	a mais
+sofrerá	acentuada	537	42	agudo	True	False	1	0	4 5	letra errada
+sofrerá	acentuada	616	42	agudo	True	False	1	0	4 7	a mais
+sofrerá	acentuada	305	42	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	589	42	agudo	True	False	0	0		ausente
+sofrerá	acentuada	280	42	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	510	42	agudo	True	False	1	0	4 5	letra errada
+sofrerá	acentuada	201	42	agudo	True	False	1	0	2 6	letra errada
+sofrerá	acentuada	631	42	agudo	True	False	1	0	2 5 7	a mais
+sofrerá	acentuada	318	42	agudo	True	False	1	0	2	letra errada
+sofrerá	acentuada	597	42	agudo	True	False	1	0	1 7	a mais
+sofrerá	acentuada	622	42	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	547	43	agudo	True	False	0	0		ausente
+sofrerá	acentuada	560	43	agudo	True	False	1	0	2 7	a mais
+sofrerá	acentuada	183	43	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	321	43	agudo	True	False	1	0	3 7	a mais
+sofrerá	acentuada	590	43	agudo	True	False	1	0	4 7	a mais
+sofrerá	acentuada	583	43	agudo	True	False	1	0	5 6	letra errada
+sofrerá	acentuada	555	43	agudo	True	False	1	0	2 7	a mais
+sofrerá	acentuada	517	43	agudo	True	False	1	0	1 7	a mais
+sofrerá	acentuada	580	43	agudo	True	False	1	0	2 7	a mais
+sofrerá	acentuada	537	43	agudo	True	False	1	0	6	letra errada
+sofrerá	acentuada	616	43	agudo	True	False	1	0	4 7	a mais
+sofrerá	acentuada	305	43	agudo	True	False	1	0	2 7	a mais
+sofrerá	acentuada	589	43	agudo	True	False	1	0	2 7	a mais
+sofrerá	acentuada	280	43	agudo	True	False	1	0	5 7	a mais
+sofrerá	acentuada	510	43	agudo	True	False	1	0	2 7	a mais
+sofrerá	acentuada	201	43	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	631	43	agudo	True	False	1	0	2	letra errada
+sofrerá	acentuada	318	43	agudo	True	False	1	0	7	correto
+sofrerá	acentuada	597	43	agudo	True	False	0	0		ausente
+sofrerá	acentuada	622	43	agudo	True	False	1	0	7	correto
+terço	acentuada	547	42	cedilha	False	True	1	1	2	a mais
+terço	acentuada	560	42	cedilha	False	True	0	1		correto
+terço	acentuada	183	42	cedilha	False	True	0	1		correto
+terço	acentuada	321	42	cedilha	False	True	0	1		correto
+terço	acentuada	590	42	cedilha	False	True	0	1		correto
+terço	acentuada	583	42	cedilha	False	True	0	1		correto
+terço	acentuada	555	42	cedilha	False	True	0	1		correto
+terço	acentuada	517	42	cedilha	False	True	1	1	1 2	a mais
+terço	acentuada	580	42	cedilha	False	True	1	1	5	a mais
+terço	acentuada	537	42	cedilha	False	True	0	1		correto
+terço	acentuada	616	42	cedilha	False	True	1	1	5	a mais
+terço	acentuada	305	42	cedilha	False	True	1	1	2	a mais
+terço	acentuada	589	42	cedilha	False	True	0	1		correto
+terço	acentuada	280	42	cedilha	False	True	0	1		correto
+terço	acentuada	510	42	cedilha	False	True	0	1		correto
+terço	acentuada	201	42	cedilha	False	True	0	1		correto
+terço	acentuada	631	42	cedilha	False	True	1	1	5	a mais
+terço	acentuada	318	42	cedilha	False	True	0	1		correto
+terço	acentuada	597	42	cedilha	False	True	0	1		correto
+terço	acentuada	622	42	cedilha	False	True	0	1		correto
+terço	acentuada	547	43	cedilha	False	True	1	1	2	a mais
+terço	acentuada	560	43	cedilha	False	True	0	1		correto
+terço	acentuada	183	43	cedilha	False	True	0	1		correto
+terço	acentuada	321	43	cedilha	False	True	1	1	2	a mais
+terço	acentuada	590	43	cedilha	False	True	0	0		ausente
+terço	acentuada	583	43	cedilha	False	True	1	1	2	a mais
+terço	acentuada	555	43	cedilha	False	True	0	1		correto
+terço	acentuada	517	43	cedilha	False	True	0	0		ausente
+terço	acentuada	580	43	cedilha	False	True	0	1		correto
+terço	acentuada	537	43	cedilha	False	True	1	1	5	a mais
+terço	acentuada	616	43	cedilha	False	True	1	1	4	a mais
+terço	acentuada	305	43	cedilha	False	True	0	1		correto
+terço	acentuada	589	43	cedilha	False	True	1	0	2	ausente
+terço	acentuada	280	43	cedilha	False	True	1	1	4	a mais
+terço	acentuada	510	43	cedilha	False	True	0	1		correto
+terço	acentuada	201	43	cedilha	False	True	0	1		correto
+terço	acentuada	631	43	cedilha	False	True	0	0		ausente
+terço	acentuada	318	43	cedilha	False	True	0	1		correto
+terço	acentuada	597	43	cedilha	False	True	0	1		correto
+terço	acentuada	622	43	cedilha	False	True	0	1		correto
+matarás	acentuada	547	42	agudo	True	False	1	0	2 4	letra errada
+matarás	acentuada	560	42	agudo	True	False	1	0	4 6	a mais
+matarás	acentuada	183	42	agudo	True	False	1	0	2 4	letra errada
+matarás	acentuada	321	42	agudo	True	False	1	0	6	correto
+matarás	acentuada	590	42	agudo	True	False	1	0	4 6	a mais
+matarás	acentuada	583	42	agudo	True	False	1	0	2 4 6	a mais
+matarás	acentuada	555	42	agudo	True	False	1	0	6	correto
+matarás	acentuada	517	42	agudo	True	False	1	0	2 4 6	a mais
+matarás	acentuada	580	42	agudo	True	False	1	0	4 6	a mais
+matarás	acentuada	537	42	agudo	True	False	1	0	2 4 6 7	a mais
+matarás	acentuada	616	42	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	305	42	agudo	True	False	1	0	6	correto
+matarás	acentuada	589	42	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	280	42	agudo	True	False	1	0	6	correto
+matarás	acentuada	510	42	agudo	True	False	1	0	2 4 6	a mais
+matarás	acentuada	201	42	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	631	42	agudo	True	False	1	0	2 4	letra errada
+matarás	acentuada	318	42	agudo	True	False	1	0	2 4	letra errada
+matarás	acentuada	597	42	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	622	42	agudo	True	False	1	0	6	correto
+matarás	acentuada	547	43	agudo	True	False	1	0	2 4	letra errada
+matarás	acentuada	560	43	agudo	True	False	1	0	2 4	letra errada
+matarás	acentuada	183	43	agudo	True	False	1	0	6	correto
+matarás	acentuada	321	43	agudo	True	False	1	0	4	letra errada
+matarás	acentuada	590	43	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	583	43	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	555	43	agudo	True	False	1	0	4	letra errada
+matarás	acentuada	517	43	agudo	True	False	1	0	6	correto
+matarás	acentuada	580	43	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	537	43	agudo	True	False	1	0	1 3 4 6	a mais
+matarás	acentuada	616	43	agudo	True	False	1	0	2 4 6	a mais
+matarás	acentuada	305	43	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	589	43	agudo	True	False	1	0	2	letra errada
+matarás	acentuada	280	43	agudo	True	False	1	0	2 4 6	a mais
+matarás	acentuada	510	43	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	201	43	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	631	43	agudo	True	False	1	0	2 4 6	a mais
+matarás	acentuada	318	43	agudo	True	False	1	0	4	letra errada
+matarás	acentuada	597	43	agudo	True	False	1	0	2 6	a mais
+matarás	acentuada	622	43	agudo	True	False	1	0	6 7	a mais
+prestação	acentuada	547	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	560	42	cedilha til	True	True	1	1	6 8	a mais
+prestação	acentuada	183	42	cedilha til	True	True	1	1	6 8	a mais
+prestação	acentuada	321	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	590	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	583	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	555	42	cedilha til	True	True	1	0	5 9	letra errada
+prestação	acentuada	517	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	580	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	537	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	616	42	cedilha til	True	True	1	0	6	letra errada
+prestação	acentuada	305	42	cedilha til	True	True	1	0	8	ausente
+prestação	acentuada	589	42	cedilha til	True	True	1	0	3 8	ausente
+prestação	acentuada	280	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	510	42	cedilha til	True	True	0	1		ausente
+prestação	acentuada	201	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	631	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	318	42	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	597	42	cedilha til	True	True	1	1	6 8	a mais
+prestação	acentuada	622	42	cedilha til	True	True	0	1		ausente
+prestação	acentuada	547	43	cedilha til	True	True	1	1	5 6 8	a mais
+prestação	acentuada	560	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	183	43	cedilha til	True	True	1	1	9	letra errada
+prestação	acentuada	321	43	cedilha til	True	True	0	1		ausente
+prestação	acentuada	590	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	583	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	555	43	cedilha til	True	True	0	1		ausente
+prestação	acentuada	517	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	580	43	cedilha til	True	True	1	1	6 8	a mais
+prestação	acentuada	537	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	616	43	cedilha til	True	True	1	1	6 8	a mais
+prestação	acentuada	305	43	cedilha til	True	True	1	1	3 6 8	a mais
+prestação	acentuada	589	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	280	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	510	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	201	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	631	43	cedilha til	True	True	1	1	8	correto
+prestação	acentuada	318	43	cedilha til	True	True	1	1	5 6 8	a mais
+prestação	acentuada	597	43	cedilha til	True	True	1	1	9	letra errada
+prestação	acentuada	622	43	cedilha til	True	True	1	1	8	correto
+lançaremos	acentuada	547	42	cedilha	False	True	0	0		ausente
+lançaremos	acentuada	560	42	cedilha	False	True	1	1	5	a mais
+lançaremos	acentuada	183	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	321	42	cedilha	False	True	1	1	5	a mais
+lançaremos	acentuada	590	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	583	42	cedilha	False	True	0	0		ausente
+lançaremos	acentuada	555	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	517	42	cedilha	False	True	1	1	2	a mais
+lançaremos	acentuada	580	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	537	42	cedilha	False	True	1	1	5	a mais
+lançaremos	acentuada	616	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	305	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	589	42	cedilha	False	True	1	1	9	a mais
+lançaremos	acentuada	280	42	cedilha	False	True	0	0		ausente
+lançaremos	acentuada	510	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	201	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	631	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	318	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	597	42	cedilha	False	True	0	1		correto
+lançaremos	acentuada	622	42	cedilha	False	True	1	1	1	a mais
+lançaremos	acentuada	547	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	560	43	cedilha	False	True	0	0		ausente
+lançaremos	acentuada	183	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	321	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	590	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	583	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	555	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	517	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	580	43	cedilha	False	True	0	0		ausente
+lançaremos	acentuada	537	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	616	43	cedilha	False	True	0	0		ausente
+lançaremos	acentuada	305	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	589	43	cedilha	False	True	0	0		ausente
+lançaremos	acentuada	280	43	cedilha	False	True	0	0		ausente
+lançaremos	acentuada	510	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	201	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	631	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	318	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	597	43	cedilha	False	True	0	1		correto
+lançaremos	acentuada	622	43	cedilha	False	True	0	0		ausente
+opressao	esqueleto	547	42		False	False	0	0		limpa
+opressao	esqueleto	560	42		False	False	0	0		limpa
+opressao	esqueleto	183	42		False	False	0	0		limpa
+opressao	esqueleto	321	42		False	False	0	0		limpa
+opressao	esqueleto	590	42		False	False	0	0		limpa
+opressao	esqueleto	583	42		False	False	0	0		limpa
+opressao	esqueleto	555	42		False	False	0	0		limpa
+opressao	esqueleto	517	42		False	False	1	0	6	marca indevida
+opressao	esqueleto	580	42		False	False	0	0		limpa
+opressao	esqueleto	537	42		False	False	0	0		limpa
+opressao	esqueleto	616	42		False	False	1	0	5	marca indevida
+opressao	esqueleto	305	42		False	False	0	0		limpa
+opressao	esqueleto	589	42		False	False	0	0		limpa
+opressao	esqueleto	280	42		False	False	0	0		limpa
+opressao	esqueleto	510	42		False	False	0	0		limpa
+opressao	esqueleto	201	42		False	False	0	0		limpa
+opressao	esqueleto	631	42		False	False	0	0		limpa
+opressao	esqueleto	318	42		False	False	0	0		limpa
+opressao	esqueleto	597	42		False	False	0	0		limpa
+opressao	esqueleto	622	42		False	False	0	0		limpa
+opressao	esqueleto	547	43		False	False	0	0		limpa
+opressao	esqueleto	560	43		False	False	0	0		limpa
+opressao	esqueleto	183	43		False	False	1	0	6	marca indevida
+opressao	esqueleto	321	43		False	False	0	0		limpa
+opressao	esqueleto	590	43		False	False	0	0		limpa
+opressao	esqueleto	583	43		False	False	0	0		limpa
+opressao	esqueleto	555	43		False	False	0	0		limpa
+opressao	esqueleto	517	43		False	False	0	0		limpa
+opressao	esqueleto	580	43		False	False	0	0		limpa
+opressao	esqueleto	537	43		False	False	0	0		limpa
+opressao	esqueleto	616	43		False	False	0	0		limpa
+opressao	esqueleto	305	43		False	False	1	0	6	marca indevida
+opressao	esqueleto	589	43		False	False	0	0		limpa
+opressao	esqueleto	280	43		False	False	0	0		limpa
+opressao	esqueleto	510	43		False	False	0	0		limpa
+opressao	esqueleto	201	43		False	False	0	0		limpa
+opressao	esqueleto	631	43		False	False	0	0		limpa
+opressao	esqueleto	318	43		False	False	0	0		limpa
+opressao	esqueleto	597	43		False	False	0	0		limpa
+opressao	esqueleto	622	43		False	False	0	0		limpa
+percussao	esqueleto	547	42		False	False	0	0		limpa
+percussao	esqueleto	560	42		False	False	0	0		limpa
+percussao	esqueleto	183	42		False	False	0	0		limpa
+percussao	esqueleto	321	42		False	False	0	0		limpa
+percussao	esqueleto	590	42		False	False	0	0		limpa
+percussao	esqueleto	583	42		False	False	0	0		limpa
+percussao	esqueleto	555	42		False	False	0	0		limpa
+percussao	esqueleto	517	42		False	False	0	0		limpa
+percussao	esqueleto	580	42		False	False	0	0		limpa
+percussao	esqueleto	537	42		False	False	0	0		limpa
+percussao	esqueleto	616	42		False	False	0	0		limpa
+percussao	esqueleto	305	42		False	False	0	0		limpa
+percussao	esqueleto	589	42		False	False	1	0	5	marca indevida
+percussao	esqueleto	280	42		False	False	0	0		limpa
+percussao	esqueleto	510	42		False	False	0	0		limpa
+percussao	esqueleto	201	42		False	False	0	0		limpa
+percussao	esqueleto	631	42		False	False	0	0		limpa
+percussao	esqueleto	318	42		False	False	0	0		limpa
+percussao	esqueleto	597	42		False	False	0	0		limpa
+percussao	esqueleto	622	42		False	False	0	0		limpa
+percussao	esqueleto	547	43		False	False	0	0		limpa
+percussao	esqueleto	560	43		False	False	0	0		limpa
+percussao	esqueleto	183	43		False	False	0	0		limpa
+percussao	esqueleto	321	43		False	False	0	0		limpa
+percussao	esqueleto	590	43		False	False	1	0	4	marca indevida
+percussao	esqueleto	583	43		False	False	0	0		limpa
+percussao	esqueleto	555	43		False	False	0	0		limpa
+percussao	esqueleto	517	43		False	False	0	0		limpa
+percussao	esqueleto	580	43		False	False	0	0		limpa
+percussao	esqueleto	537	43		False	False	0	0		limpa
+percussao	esqueleto	616	43		False	False	0	0		limpa
+percussao	esqueleto	305	43		False	False	0	0		limpa
+percussao	esqueleto	589	43		False	False	0	0		limpa
+percussao	esqueleto	280	43		False	False	0	0		limpa
+percussao	esqueleto	510	43		False	False	1	0	4	marca indevida
+percussao	esqueleto	201	43		False	False	0	0		limpa
+percussao	esqueleto	631	43		False	False	0	0		limpa
+percussao	esqueleto	318	43		False	False	0	0		limpa
+percussao	esqueleto	597	43		False	False	0	0		limpa
+percussao	esqueleto	622	43		False	False	0	0		limpa
+arregacar	esqueleto	547	42		False	False	0	0		limpa
+arregacar	esqueleto	560	42		False	False	0	0		limpa
+arregacar	esqueleto	183	42		False	False	0	0		limpa
+arregacar	esqueleto	321	42		False	False	0	0		limpa
+arregacar	esqueleto	590	42		False	False	0	0		limpa
+arregacar	esqueleto	583	42		False	False	0	0		limpa
+arregacar	esqueleto	555	42		False	False	0	0		limpa
+arregacar	esqueleto	517	42		False	False	0	0		limpa
+arregacar	esqueleto	580	42		False	False	0	0		limpa
+arregacar	esqueleto	537	42		False	False	0	0		limpa
+arregacar	esqueleto	616	42		False	False	0	0		limpa
+arregacar	esqueleto	305	42		False	False	0	0		limpa
+arregacar	esqueleto	589	42		False	False	0	0		limpa
+arregacar	esqueleto	280	42		False	False	0	0		limpa
+arregacar	esqueleto	510	42		False	False	0	0		limpa
+arregacar	esqueleto	201	42		False	False	0	0		limpa
+arregacar	esqueleto	631	42		False	False	0	0		limpa
+arregacar	esqueleto	318	42		False	False	0	0		limpa
+arregacar	esqueleto	597	42		False	False	0	0		limpa
+arregacar	esqueleto	622	42		False	False	0	0		limpa
+arregacar	esqueleto	547	43		False	False	0	0		limpa
+arregacar	esqueleto	560	43		False	False	0	0		limpa
+arregacar	esqueleto	183	43		False	False	0	0		limpa
+arregacar	esqueleto	321	43		False	False	0	0		limpa
+arregacar	esqueleto	590	43		False	False	0	0		limpa
+arregacar	esqueleto	583	43		False	False	0	0		limpa
+arregacar	esqueleto	555	43		False	False	0	0		limpa
+arregacar	esqueleto	517	43		False	False	0	0		limpa
+arregacar	esqueleto	580	43		False	False	0	0		limpa
+arregacar	esqueleto	537	43		False	False	0	0		limpa
+arregacar	esqueleto	616	43		False	False	0	0		limpa
+arregacar	esqueleto	305	43		False	False	0	0		limpa
+arregacar	esqueleto	589	43		False	False	0	0		limpa
+arregacar	esqueleto	280	43		False	False	0	0		limpa
+arregacar	esqueleto	510	43		False	False	0	0		limpa
+arregacar	esqueleto	201	43		False	False	0	0		limpa
+arregacar	esqueleto	631	43		False	False	0	0		limpa
+arregacar	esqueleto	318	43		False	False	0	0		limpa
+arregacar	esqueleto	597	43		False	False	0	0		limpa
+arregacar	esqueleto	622	43		False	False	0	1		marca indevida
+estaras	esqueleto	547	42		False	False	0	0		limpa
+estaras	esqueleto	560	42		False	False	0	0		limpa
+estaras	esqueleto	183	42		False	False	0	0		limpa
+estaras	esqueleto	321	42		False	False	0	0		limpa
+estaras	esqueleto	590	42		False	False	0	0		limpa
+estaras	esqueleto	583	42		False	False	0	0		limpa
+estaras	esqueleto	555	42		False	False	0	0		limpa
+estaras	esqueleto	517	42		False	False	0	0		limpa
+estaras	esqueleto	580	42		False	False	0	0		limpa
+estaras	esqueleto	537	42		False	False	0	0		limpa
+estaras	esqueleto	616	42		False	False	0	0		limpa
+estaras	esqueleto	305	42		False	False	0	0		limpa
+estaras	esqueleto	589	42		False	False	0	0		limpa
+estaras	esqueleto	280	42		False	False	0	0		limpa
+estaras	esqueleto	510	42		False	False	0	0		limpa
+estaras	esqueleto	201	42		False	False	0	0		limpa
+estaras	esqueleto	631	42		False	False	1	0	2	marca indevida
+estaras	esqueleto	318	42		False	False	0	0		limpa
+estaras	esqueleto	597	42		False	False	0	0		limpa
+estaras	esqueleto	622	42		False	False	0	0		limpa
+estaras	esqueleto	547	43		False	False	0	0		limpa
+estaras	esqueleto	560	43		False	False	0	0		limpa
+estaras	esqueleto	183	43		False	False	0	0		limpa
+estaras	esqueleto	321	43		False	False	0	0		limpa
+estaras	esqueleto	590	43		False	False	0	0		limpa
+estaras	esqueleto	583	43		False	False	0	0		limpa
+estaras	esqueleto	555	43		False	False	0	0		limpa
+estaras	esqueleto	517	43		False	False	0	0		limpa
+estaras	esqueleto	580	43		False	False	0	0		limpa
+estaras	esqueleto	537	43		False	False	0	0		limpa
+estaras	esqueleto	616	43		False	False	0	0		limpa
+estaras	esqueleto	305	43		False	False	0	0		limpa
+estaras	esqueleto	589	43		False	False	0	0		limpa
+estaras	esqueleto	280	43		False	False	0	0		limpa
+estaras	esqueleto	510	43		False	False	0	0		limpa
+estaras	esqueleto	201	43		False	False	1	0	7	marca indevida
+estaras	esqueleto	631	43		False	False	0	0		limpa
+estaras	esqueleto	318	43		False	False	0	0		limpa
+estaras	esqueleto	597	43		False	False	0	0		limpa
+estaras	esqueleto	622	43		False	False	0	0		limpa
+recomeca	esqueleto	547	42		False	False	0	0		limpa
+recomeca	esqueleto	560	42		False	False	0	0		limpa
+recomeca	esqueleto	183	42		False	False	0	0		limpa
+recomeca	esqueleto	321	42		False	False	0	0		limpa
+recomeca	esqueleto	590	42		False	False	0	0		limpa
+recomeca	esqueleto	583	42		False	False	0	0		limpa
+recomeca	esqueleto	555	42		False	False	0	0		limpa
+recomeca	esqueleto	517	42		False	False	0	0		limpa
+recomeca	esqueleto	580	42		False	False	0	0		limpa
+recomeca	esqueleto	537	42		False	False	0	0		limpa
+recomeca	esqueleto	616	42		False	False	0	0		limpa
+recomeca	esqueleto	305	42		False	False	0	0		limpa
+recomeca	esqueleto	589	42		False	False	0	0		limpa
+recomeca	esqueleto	280	42		False	False	0	0		limpa
+recomeca	esqueleto	510	42		False	False	0	0		limpa
+recomeca	esqueleto	201	42		False	False	0	0		limpa
+recomeca	esqueleto	631	42		False	False	0	0		limpa
+recomeca	esqueleto	318	42		False	False	0	0		limpa
+recomeca	esqueleto	597	42		False	False	0	0		limpa
+recomeca	esqueleto	622	42		False	False	0	0		limpa
+recomeca	esqueleto	547	43		False	False	0	0		limpa
+recomeca	esqueleto	560	43		False	False	0	0		limpa
+recomeca	esqueleto	183	43		False	False	0	0		limpa
+recomeca	esqueleto	321	43		False	False	0	0		limpa
+recomeca	esqueleto	590	43		False	False	0	0		limpa
+recomeca	esqueleto	583	43		False	False	0	0		limpa
+recomeca	esqueleto	555	43		False	False	0	0		limpa
+recomeca	esqueleto	517	43		False	False	0	0		limpa
+recomeca	esqueleto	580	43		False	False	0	0		limpa
+recomeca	esqueleto	537	43		False	False	0	0		limpa
+recomeca	esqueleto	616	43		False	False	0	0		limpa
+recomeca	esqueleto	305	43		False	False	0	0		limpa
+recomeca	esqueleto	589	43		False	False	0	0		limpa
+recomeca	esqueleto	280	43		False	False	0	0		limpa
+recomeca	esqueleto	510	43		False	False	0	0		limpa
+recomeca	esqueleto	201	43		False	False	0	0		limpa
+recomeca	esqueleto	631	43		False	False	0	0		limpa
+recomeca	esqueleto	318	43		False	False	0	0		limpa
+recomeca	esqueleto	597	43		False	False	0	0		limpa
+recomeca	esqueleto	622	43		False	False	0	0		limpa
+rape	esqueleto	547	42		False	False	0	0		limpa
+rape	esqueleto	560	42		False	False	0	0		limpa
+rape	esqueleto	183	42		False	False	0	0		limpa
+rape	esqueleto	321	42		False	False	0	0		limpa
+rape	esqueleto	590	42		False	False	0	0		limpa
+rape	esqueleto	583	42		False	False	0	0		limpa
+rape	esqueleto	555	42		False	False	0	0		limpa
+rape	esqueleto	517	42		False	False	0	0		limpa
+rape	esqueleto	580	42		False	False	0	0		limpa
+rape	esqueleto	537	42		False	False	0	0		limpa
+rape	esqueleto	616	42		False	False	0	0		limpa
+rape	esqueleto	305	42		False	False	0	0		limpa
+rape	esqueleto	589	42		False	False	0	0		limpa
+rape	esqueleto	280	42		False	False	0	0		limpa
+rape	esqueleto	510	42		False	False	0	0		limpa
+rape	esqueleto	201	42		False	False	0	0		limpa
+rape	esqueleto	631	42		False	False	0	0		limpa
+rape	esqueleto	318	42		False	False	0	0		limpa
+rape	esqueleto	597	42		False	False	0	0		limpa
+rape	esqueleto	622	42		False	False	0	0		limpa
+rape	esqueleto	547	43		False	False	0	0		limpa
+rape	esqueleto	560	43		False	False	0	0		limpa
+rape	esqueleto	183	43		False	False	0	0		limpa
+rape	esqueleto	321	43		False	False	0	0		limpa
+rape	esqueleto	590	43		False	False	0	0		limpa
+rape	esqueleto	583	43		False	False	0	0		limpa
+rape	esqueleto	555	43		False	False	0	0		limpa
+rape	esqueleto	517	43		False	False	0	0		limpa
+rape	esqueleto	580	43		False	False	0	0		limpa
+rape	esqueleto	537	43		False	False	0	0		limpa
+rape	esqueleto	616	43		False	False	0	0		limpa
+rape	esqueleto	305	43		False	False	0	0		limpa
+rape	esqueleto	589	43		False	False	0	0		limpa
+rape	esqueleto	280	43		False	False	0	0		limpa
+rape	esqueleto	510	43		False	False	0	0		limpa
+rape	esqueleto	201	43		False	False	0	0		limpa
+rape	esqueleto	631	43		False	False	0	0		limpa
+rape	esqueleto	318	43		False	False	0	0		limpa
+rape	esqueleto	597	43		False	False	0	0		limpa
+rape	esqueleto	622	43		False	False	0	0		limpa
+pensamos	esqueleto	547	42		False	False	0	0		limpa
+pensamos	esqueleto	560	42		False	False	0	0		limpa
+pensamos	esqueleto	183	42		False	False	0	0		limpa
+pensamos	esqueleto	321	42		False	False	0	0		limpa
+pensamos	esqueleto	590	42		False	False	0	0		limpa
+pensamos	esqueleto	583	42		False	False	0	0		limpa
+pensamos	esqueleto	555	42		False	False	0	0		limpa
+pensamos	esqueleto	517	42		False	False	0	0		limpa
+pensamos	esqueleto	580	42		False	False	0	0		limpa
+pensamos	esqueleto	537	42		False	False	0	0		limpa
+pensamos	esqueleto	616	42		False	False	0	0		limpa
+pensamos	esqueleto	305	42		False	False	0	0		limpa
+pensamos	esqueleto	589	42		False	False	0	0		limpa
+pensamos	esqueleto	280	42		False	False	0	0		limpa
+pensamos	esqueleto	510	42		False	False	0	0		limpa
+pensamos	esqueleto	201	42		False	False	0	0		limpa
+pensamos	esqueleto	631	42		False	False	0	0		limpa
+pensamos	esqueleto	318	42		False	False	0	0		limpa
+pensamos	esqueleto	597	42		False	False	0	0		limpa
+pensamos	esqueleto	622	42		False	False	0	0		limpa
+pensamos	esqueleto	547	43		False	False	0	0		limpa
+pensamos	esqueleto	560	43		False	False	0	0		limpa
+pensamos	esqueleto	183	43		False	False	0	0		limpa
+pensamos	esqueleto	321	43		False	False	0	0		limpa
+pensamos	esqueleto	590	43		False	False	0	0		limpa
+pensamos	esqueleto	583	43		False	False	0	0		limpa
+pensamos	esqueleto	555	43		False	False	1	0	5	marca indevida
+pensamos	esqueleto	517	43		False	False	0	0		limpa
+pensamos	esqueleto	580	43		False	False	0	0		limpa
+pensamos	esqueleto	537	43		False	False	0	0		limpa
+pensamos	esqueleto	616	43		False	False	0	0		limpa
+pensamos	esqueleto	305	43		False	False	1	0	5	marca indevida
+pensamos	esqueleto	589	43		False	False	0	0		limpa
+pensamos	esqueleto	280	43		False	False	0	0		limpa
+pensamos	esqueleto	510	43		False	False	0	0		limpa
+pensamos	esqueleto	201	43		False	False	0	0		limpa
+pensamos	esqueleto	631	43		False	False	0	0		limpa
+pensamos	esqueleto	318	43		False	False	0	0		limpa
+pensamos	esqueleto	597	43		False	False	0	0		limpa
+pensamos	esqueleto	622	43		False	False	0	0		limpa
+havera	esqueleto	547	42		False	False	0	0		limpa
+havera	esqueleto	560	42		False	False	0	0		limpa
+havera	esqueleto	183	42		False	False	0	0		limpa
+havera	esqueleto	321	42		False	False	0	0		limpa
+havera	esqueleto	590	42		False	False	0	0		limpa
+havera	esqueleto	583	42		False	False	0	0		limpa
+havera	esqueleto	555	42		False	False	0	0		limpa
+havera	esqueleto	517	42		False	False	0	0		limpa
+havera	esqueleto	580	42		False	False	0	0		limpa
+havera	esqueleto	537	42		False	False	0	0		limpa
+havera	esqueleto	616	42		False	False	0	0		limpa
+havera	esqueleto	305	42		False	False	1	0	1	marca indevida
+havera	esqueleto	589	42		False	False	0	0		limpa
+havera	esqueleto	280	42		False	False	0	0		limpa
+havera	esqueleto	510	42		False	False	0	0		limpa
+havera	esqueleto	201	42		False	False	0	0		limpa
+havera	esqueleto	631	42		False	False	0	0		limpa
+havera	esqueleto	318	42		False	False	0	0		limpa
+havera	esqueleto	597	42		False	False	0	0		limpa
+havera	esqueleto	622	42		False	False	0	0		limpa
+havera	esqueleto	547	43		False	False	0	0		limpa
+havera	esqueleto	560	43		False	False	0	0		limpa
+havera	esqueleto	183	43		False	False	0	0		limpa
+havera	esqueleto	321	43		False	False	0	0		limpa
+havera	esqueleto	590	43		False	False	0	0		limpa
+havera	esqueleto	583	43		False	False	0	0		limpa
+havera	esqueleto	555	43		False	False	0	0		limpa
+havera	esqueleto	517	43		False	False	0	0		limpa
+havera	esqueleto	580	43		False	False	0	0		limpa
+havera	esqueleto	537	43		False	False	0	0		limpa
+havera	esqueleto	616	43		False	False	0	0		limpa
+havera	esqueleto	305	43		False	False	0	0		limpa
+havera	esqueleto	589	43		False	False	0	0		limpa
+havera	esqueleto	280	43		False	False	0	0		limpa
+havera	esqueleto	510	43		False	False	0	0		limpa
+havera	esqueleto	201	43		False	False	0	0		limpa
+havera	esqueleto	631	43		False	False	0	0		limpa
+havera	esqueleto	318	43		False	False	0	0		limpa
+havera	esqueleto	597	43		False	False	0	0		limpa
+havera	esqueleto	622	43		False	False	0	0		limpa
+por	esqueleto	547	42		False	False	0	0		limpa
+por	esqueleto	560	42		False	False	0	0		limpa
+por	esqueleto	183	42		False	False	0	0		limpa
+por	esqueleto	321	42		False	False	0	0		limpa
+por	esqueleto	590	42		False	False	0	0		limpa
+por	esqueleto	583	42		False	False	0	0		limpa
+por	esqueleto	555	42		False	False	0	0		limpa
+por	esqueleto	517	42		False	False	0	0		limpa
+por	esqueleto	580	42		False	False	0	0		limpa
+por	esqueleto	537	42		False	False	0	0		limpa
+por	esqueleto	616	42		False	False	0	0		limpa
+por	esqueleto	305	42		False	False	0	0		limpa
+por	esqueleto	589	42		False	False	0	0		limpa
+por	esqueleto	280	42		False	False	0	0		limpa
+por	esqueleto	510	42		False	False	0	0		limpa
+por	esqueleto	201	42		False	False	0	0		limpa
+por	esqueleto	631	42		False	False	0	0		limpa
+por	esqueleto	318	42		False	False	0	0		limpa
+por	esqueleto	597	42		False	False	0	0		limpa
+por	esqueleto	622	42		False	False	0	0		limpa
+por	esqueleto	547	43		False	False	0	0		limpa
+por	esqueleto	560	43		False	False	0	0		limpa
+por	esqueleto	183	43		False	False	0	0		limpa
+por	esqueleto	321	43		False	False	0	0		limpa
+por	esqueleto	590	43		False	False	0	0		limpa
+por	esqueleto	583	43		False	False	0	0		limpa
+por	esqueleto	555	43		False	False	0	0		limpa
+por	esqueleto	517	43		False	False	0	0		limpa
+por	esqueleto	580	43		False	False	0	0		limpa
+por	esqueleto	537	43		False	False	0	0		limpa
+por	esqueleto	616	43		False	False	0	0		limpa
+por	esqueleto	305	43		False	False	0	0		limpa
+por	esqueleto	589	43		False	False	0	0		limpa
+por	esqueleto	280	43		False	False	0	0		limpa
+por	esqueleto	510	43		False	False	0	0		limpa
+por	esqueleto	201	43		False	False	0	0		limpa
+por	esqueleto	631	43		False	False	0	0		limpa
+por	esqueleto	318	43		False	False	0	0		limpa
+por	esqueleto	597	43		False	False	0	0		limpa
+por	esqueleto	622	43		False	False	0	0		limpa
+mordaca	esqueleto	547	42		False	False	0	0		limpa
+mordaca	esqueleto	560	42		False	False	0	0		limpa
+mordaca	esqueleto	183	42		False	False	0	0		limpa
+mordaca	esqueleto	321	42		False	False	0	0		limpa
+mordaca	esqueleto	590	42		False	False	0	0		limpa
+mordaca	esqueleto	583	42		False	False	0	0		limpa
+mordaca	esqueleto	555	42		False	False	0	0		limpa
+mordaca	esqueleto	517	42		False	False	0	0		limpa
+mordaca	esqueleto	580	42		False	False	0	0		limpa
+mordaca	esqueleto	537	42		False	False	0	0		limpa
+mordaca	esqueleto	616	42		False	False	0	0		limpa
+mordaca	esqueleto	305	42		False	False	0	0		limpa
+mordaca	esqueleto	589	42		False	False	1	0	4	marca indevida
+mordaca	esqueleto	280	42		False	False	0	0		limpa
+mordaca	esqueleto	510	42		False	False	0	0		limpa
+mordaca	esqueleto	201	42		False	False	1	0	5	marca indevida
+mordaca	esqueleto	631	42		False	False	0	0		limpa
+mordaca	esqueleto	318	42		False	False	0	0		limpa
+mordaca	esqueleto	597	42		False	False	0	0		limpa
+mordaca	esqueleto	622	42		False	False	0	0		limpa
+mordaca	esqueleto	547	43		False	False	0	0		limpa
+mordaca	esqueleto	560	43		False	False	0	0		limpa
+mordaca	esqueleto	183	43		False	False	0	0		limpa
+mordaca	esqueleto	321	43		False	False	0	0		limpa
+mordaca	esqueleto	590	43		False	False	0	0		limpa
+mordaca	esqueleto	583	43		False	False	0	0		limpa
+mordaca	esqueleto	555	43		False	False	0	0		limpa
+mordaca	esqueleto	517	43		False	False	0	0		limpa
+mordaca	esqueleto	580	43		False	False	0	0		limpa
+mordaca	esqueleto	537	43		False	False	0	0		limpa
+mordaca	esqueleto	616	43		False	False	0	0		limpa
+mordaca	esqueleto	305	43		False	False	0	0		limpa
+mordaca	esqueleto	589	43		False	False	0	0		limpa
+mordaca	esqueleto	280	43		False	False	0	0		limpa
+mordaca	esqueleto	510	43		False	False	0	0		limpa
+mordaca	esqueleto	201	43		False	False	0	0		limpa
+mordaca	esqueleto	631	43		False	False	0	0		limpa
+mordaca	esqueleto	318	43		False	False	0	0		limpa
+mordaca	esqueleto	597	43		False	False	0	0		limpa
+mordaca	esqueleto	622	43		False	False	0	0		limpa
+terraquea	esqueleto	547	42		False	False	0	0		limpa
+terraquea	esqueleto	560	42		False	False	0	0		limpa
+terraquea	esqueleto	183	42		False	False	0	0		limpa
+terraquea	esqueleto	321	42		False	False	0	0		limpa
+terraquea	esqueleto	590	42		False	False	0	0		limpa
+terraquea	esqueleto	583	42		False	False	0	0		limpa
+terraquea	esqueleto	555	42		False	False	0	0		limpa
+terraquea	esqueleto	517	42		False	False	1	0	2	marca indevida
+terraquea	esqueleto	580	42		False	False	0	0		limpa
+terraquea	esqueleto	537	42		False	False	0	0		limpa
+terraquea	esqueleto	616	42		False	False	0	0		limpa
+terraquea	esqueleto	305	42		False	False	0	0		limpa
+terraquea	esqueleto	589	42		False	False	0	0		limpa
+terraquea	esqueleto	280	42		False	False	0	0		limpa
+terraquea	esqueleto	510	42		False	False	1	0	6	marca indevida
+terraquea	esqueleto	201	42		False	False	0	0		limpa
+terraquea	esqueleto	631	42		False	False	0	0		limpa
+terraquea	esqueleto	318	42		False	False	1	0	3	marca indevida
+terraquea	esqueleto	597	42		False	False	0	0		limpa
+terraquea	esqueleto	622	42		False	False	0	0		limpa
+terraquea	esqueleto	547	43		False	False	0	0		limpa
+terraquea	esqueleto	560	43		False	False	0	0		limpa
+terraquea	esqueleto	183	43		False	False	0	0		limpa
+terraquea	esqueleto	321	43		False	False	0	0		limpa
+terraquea	esqueleto	590	43		False	False	0	0		limpa
+terraquea	esqueleto	583	43		False	False	0	0		limpa
+terraquea	esqueleto	555	43		False	False	0	0		limpa
+terraquea	esqueleto	517	43		False	False	0	0		limpa
+terraquea	esqueleto	580	43		False	False	0	0		limpa
+terraquea	esqueleto	537	43		False	False	0	0		limpa
+terraquea	esqueleto	616	43		False	False	0	0		limpa
+terraquea	esqueleto	305	43		False	False	0	0		limpa
+terraquea	esqueleto	589	43		False	False	0	0		limpa
+terraquea	esqueleto	280	43		False	False	0	0		limpa
+terraquea	esqueleto	510	43		False	False	0	0		limpa
+terraquea	esqueleto	201	43		False	False	0	0		limpa
+terraquea	esqueleto	631	43		False	False	0	0		limpa
+terraquea	esqueleto	318	43		False	False	0	0		limpa
+terraquea	esqueleto	597	43		False	False	0	0		limpa
+terraquea	esqueleto	622	43		False	False	0	0		limpa
+despedacar	esqueleto	547	42		False	False	0	0		limpa
+despedacar	esqueleto	560	42		False	False	0	0		limpa
+despedacar	esqueleto	183	42		False	False	0	0		limpa
+despedacar	esqueleto	321	42		False	False	0	0		limpa
+despedacar	esqueleto	590	42		False	False	0	0		limpa
+despedacar	esqueleto	583	42		False	False	0	0		limpa
+despedacar	esqueleto	555	42		False	False	0	0		limpa
+despedacar	esqueleto	517	42		False	False	0	0		limpa
+despedacar	esqueleto	580	42		False	False	0	0		limpa
+despedacar	esqueleto	537	42		False	False	0	0		limpa
+despedacar	esqueleto	616	42		False	False	0	0		limpa
+despedacar	esqueleto	305	42		False	False	0	0		limpa
+despedacar	esqueleto	589	42		False	False	0	0		limpa
+despedacar	esqueleto	280	42		False	False	1	0	7	marca indevida
+despedacar	esqueleto	510	42		False	False	0	0		limpa
+despedacar	esqueleto	201	42		False	False	0	0		limpa
+despedacar	esqueleto	631	42		False	False	0	0		limpa
+despedacar	esqueleto	318	42		False	False	0	0		limpa
+despedacar	esqueleto	597	42		False	False	0	0		limpa
+despedacar	esqueleto	622	42		False	False	0	0		limpa
+despedacar	esqueleto	547	43		False	False	0	0		limpa
+despedacar	esqueleto	560	43		False	False	0	0		limpa
+despedacar	esqueleto	183	43		False	False	0	0		limpa
+despedacar	esqueleto	321	43		False	False	0	0		limpa
+despedacar	esqueleto	590	43		False	False	0	0		limpa
+despedacar	esqueleto	583	43		False	False	0	0		limpa
+despedacar	esqueleto	555	43		False	False	0	0		limpa
+despedacar	esqueleto	517	43		False	False	0	0		limpa
+despedacar	esqueleto	580	43		False	False	0	0		limpa
+despedacar	esqueleto	537	43		False	False	0	0		limpa
+despedacar	esqueleto	616	43		False	False	0	0		limpa
+despedacar	esqueleto	305	43		False	False	0	0		limpa
+despedacar	esqueleto	589	43		False	False	0	0		limpa
+despedacar	esqueleto	280	43		False	False	0	0		limpa
+despedacar	esqueleto	510	43		False	False	0	0		limpa
+despedacar	esqueleto	201	43		False	False	0	0		limpa
+despedacar	esqueleto	631	43		False	False	0	0		limpa
+despedacar	esqueleto	318	43		False	False	0	0		limpa
+despedacar	esqueleto	597	43		False	False	0	0		limpa
+despedacar	esqueleto	622	43		False	False	0	0		limpa
+reclusao	esqueleto	547	42		False	False	0	0		limpa
+reclusao	esqueleto	560	42		False	False	0	0		limpa
+reclusao	esqueleto	183	42		False	False	0	0		limpa
+reclusao	esqueleto	321	42		False	False	0	0		limpa
+reclusao	esqueleto	590	42		False	False	0	0		limpa
+reclusao	esqueleto	583	42		False	False	0	0		limpa
+reclusao	esqueleto	555	42		False	False	0	0		limpa
+reclusao	esqueleto	517	42		False	False	0	0		limpa
+reclusao	esqueleto	580	42		False	False	0	0		limpa
+reclusao	esqueleto	537	42		False	False	0	0		limpa
+reclusao	esqueleto	616	42		False	False	0	0		limpa
+reclusao	esqueleto	305	42		False	False	0	0		limpa
+reclusao	esqueleto	589	42		False	False	0	0		limpa
+reclusao	esqueleto	280	42		False	False	0	0		limpa
+reclusao	esqueleto	510	42		False	False	0	0		limpa
+reclusao	esqueleto	201	42		False	False	0	0		limpa
+reclusao	esqueleto	631	42		False	False	0	0		limpa
+reclusao	esqueleto	318	42		False	False	0	0		limpa
+reclusao	esqueleto	597	42		False	False	0	0		limpa
+reclusao	esqueleto	622	42		False	False	0	0		limpa
+reclusao	esqueleto	547	43		False	False	0	0		limpa
+reclusao	esqueleto	560	43		False	False	0	0		limpa
+reclusao	esqueleto	183	43		False	False	0	0		limpa
+reclusao	esqueleto	321	43		False	False	0	0		limpa
+reclusao	esqueleto	590	43		False	False	0	0		limpa
+reclusao	esqueleto	583	43		False	False	0	0		limpa
+reclusao	esqueleto	555	43		False	False	0	0		limpa
+reclusao	esqueleto	517	43		False	False	0	0		limpa
+reclusao	esqueleto	580	43		False	False	0	0		limpa
+reclusao	esqueleto	537	43		False	False	1	0	4	marca indevida
+reclusao	esqueleto	616	43		False	False	0	0		limpa
+reclusao	esqueleto	305	43		False	False	0	0		limpa
+reclusao	esqueleto	589	43		False	False	0	0		limpa
+reclusao	esqueleto	280	43		False	False	0	0		limpa
+reclusao	esqueleto	510	43		False	False	0	0		limpa
+reclusao	esqueleto	201	43		False	False	0	0		limpa
+reclusao	esqueleto	631	43		False	False	0	0		limpa
+reclusao	esqueleto	318	43		False	False	0	0		limpa
+reclusao	esqueleto	597	43		False	False	0	0		limpa
+reclusao	esqueleto	622	43		False	False	0	0		limpa
+conexoes	esqueleto	547	42		False	False	0	0		limpa
+conexoes	esqueleto	560	42		False	False	0	0		limpa
+conexoes	esqueleto	183	42		False	False	0	0		limpa
+conexoes	esqueleto	321	42		False	False	0	0		limpa
+conexoes	esqueleto	590	42		False	False	0	0		limpa
+conexoes	esqueleto	583	42		False	False	0	0		limpa
+conexoes	esqueleto	555	42		False	False	0	0		limpa
+conexoes	esqueleto	517	42		False	False	0	0		limpa
+conexoes	esqueleto	580	42		False	False	0	0		limpa
+conexoes	esqueleto	537	42		False	False	0	0		limpa
+conexoes	esqueleto	616	42		False	False	0	0		limpa
+conexoes	esqueleto	305	42		False	False	0	0		limpa
+conexoes	esqueleto	589	42		False	False	0	0		limpa
+conexoes	esqueleto	280	42		False	False	0	0		limpa
+conexoes	esqueleto	510	42		False	False	0	0		limpa
+conexoes	esqueleto	201	42		False	False	0	0		limpa
+conexoes	esqueleto	631	42		False	False	0	0		limpa
+conexoes	esqueleto	318	42		False	False	0	0		limpa
+conexoes	esqueleto	597	42		False	False	0	0		limpa
+conexoes	esqueleto	622	42		False	False	0	0		limpa
+conexoes	esqueleto	547	43		False	False	0	0		limpa
+conexoes	esqueleto	560	43		False	False	0	0		limpa
+conexoes	esqueleto	183	43		False	False	0	0		limpa
+conexoes	esqueleto	321	43		False	False	0	0		limpa
+conexoes	esqueleto	590	43		False	False	0	0		limpa
+conexoes	esqueleto	583	43		False	False	0	0		limpa
+conexoes	esqueleto	555	43		False	False	0	0		limpa
+conexoes	esqueleto	517	43		False	False	0	0		limpa
+conexoes	esqueleto	580	43		False	False	0	0		limpa
+conexoes	esqueleto	537	43		False	False	0	0		limpa
+conexoes	esqueleto	616	43		False	False	1	0	5	marca indevida
+conexoes	esqueleto	305	43		False	False	0	0		limpa
+conexoes	esqueleto	589	43		False	False	0	0		limpa
+conexoes	esqueleto	280	43		False	False	0	0		limpa
+conexoes	esqueleto	510	43		False	False	0	0		limpa
+conexoes	esqueleto	201	43		False	False	0	0		limpa
+conexoes	esqueleto	631	43		False	False	0	0		limpa
+conexoes	esqueleto	318	43		False	False	0	0		limpa
+conexoes	esqueleto	597	43		False	False	0	0		limpa
+conexoes	esqueleto	622	43		False	False	0	0		limpa
+florenca	esqueleto	547	42		False	False	0	0		limpa
+florenca	esqueleto	560	42		False	False	0	1		marca indevida
+florenca	esqueleto	183	42		False	False	0	1		marca indevida
+florenca	esqueleto	321	42		False	False	0	0		limpa
+florenca	esqueleto	590	42		False	False	0	0		limpa
+florenca	esqueleto	583	42		False	False	0	0		limpa
+florenca	esqueleto	555	42		False	False	0	0		limpa
+florenca	esqueleto	517	42		False	False	0	0		limpa
+florenca	esqueleto	580	42		False	False	0	0		limpa
+florenca	esqueleto	537	42		False	False	0	0		limpa
+florenca	esqueleto	616	42		False	False	0	0		limpa
+florenca	esqueleto	305	42		False	False	0	1		marca indevida
+florenca	esqueleto	589	42		False	False	0	0		limpa
+florenca	esqueleto	280	42		False	False	0	0		limpa
+florenca	esqueleto	510	42		False	False	0	0		limpa
+florenca	esqueleto	201	42		False	False	1	0	2	marca indevida
+florenca	esqueleto	631	42		False	False	0	0		limpa
+florenca	esqueleto	318	42		False	False	0	0		limpa
+florenca	esqueleto	597	42		False	False	0	0		limpa
+florenca	esqueleto	622	42		False	False	0	0		limpa
+florenca	esqueleto	547	43		False	False	0	0		limpa
+florenca	esqueleto	560	43		False	False	0	0		limpa
+florenca	esqueleto	183	43		False	False	0	0		limpa
+florenca	esqueleto	321	43		False	False	0	0		limpa
+florenca	esqueleto	590	43		False	False	1	0	3	marca indevida
+florenca	esqueleto	583	43		False	False	0	0		limpa
+florenca	esqueleto	555	43		False	False	0	0		limpa
+florenca	esqueleto	517	43		False	False	0	0		limpa
+florenca	esqueleto	580	43		False	False	0	0		limpa
+florenca	esqueleto	537	43		False	False	0	0		limpa
+florenca	esqueleto	616	43		False	False	0	0		limpa
+florenca	esqueleto	305	43		False	False	0	0		limpa
+florenca	esqueleto	589	43		False	False	0	0		limpa
+florenca	esqueleto	280	43		False	False	0	0		limpa
+florenca	esqueleto	510	43		False	False	1	0	2	marca indevida
+florenca	esqueleto	201	43		False	False	0	0		limpa
+florenca	esqueleto	631	43		False	False	0	0		limpa
+florenca	esqueleto	318	43		False	False	0	0		limpa
+florenca	esqueleto	597	43		False	False	0	0		limpa
+florenca	esqueleto	622	43		False	False	0	0		limpa
+uncao	esqueleto	547	42		False	False	0	0		limpa
+uncao	esqueleto	560	42		False	False	0	0		limpa
+uncao	esqueleto	183	42		False	False	0	0		limpa
+uncao	esqueleto	321	42		False	False	0	0		limpa
+uncao	esqueleto	590	42		False	False	0	0		limpa
+uncao	esqueleto	583	42		False	False	0	0		limpa
+uncao	esqueleto	555	42		False	False	0	0		limpa
+uncao	esqueleto	517	42		False	False	0	0		limpa
+uncao	esqueleto	580	42		False	False	0	0		limpa
+uncao	esqueleto	537	42		False	False	0	0		limpa
+uncao	esqueleto	616	42		False	False	0	0		limpa
+uncao	esqueleto	305	42		False	False	0	0		limpa
+uncao	esqueleto	589	42		False	False	0	0		limpa
+uncao	esqueleto	280	42		False	False	0	0		limpa
+uncao	esqueleto	510	42		False	False	0	0		limpa
+uncao	esqueleto	201	42		False	False	0	0		limpa
+uncao	esqueleto	631	42		False	False	0	1		marca indevida
+uncao	esqueleto	318	42		False	False	0	0		limpa
+uncao	esqueleto	597	42		False	False	0	0		limpa
+uncao	esqueleto	622	42		False	False	0	0		limpa
+uncao	esqueleto	547	43		False	False	0	0		limpa
+uncao	esqueleto	560	43		False	False	0	0		limpa
+uncao	esqueleto	183	43		False	False	0	0		limpa
+uncao	esqueleto	321	43		False	False	0	0		limpa
+uncao	esqueleto	590	43		False	False	0	0		limpa
+uncao	esqueleto	583	43		False	False	0	0		limpa
+uncao	esqueleto	555	43		False	False	0	0		limpa
+uncao	esqueleto	517	43		False	False	0	0		limpa
+uncao	esqueleto	580	43		False	False	0	0		limpa
+uncao	esqueleto	537	43		False	False	0	0		limpa
+uncao	esqueleto	616	43		False	False	0	0		limpa
+uncao	esqueleto	305	43		False	False	0	0		limpa
+uncao	esqueleto	589	43		False	False	0	0		limpa
+uncao	esqueleto	280	43		False	False	0	0		limpa
+uncao	esqueleto	510	43		False	False	0	0		limpa
+uncao	esqueleto	201	43		False	False	0	0		limpa
+uncao	esqueleto	631	43		False	False	0	0		limpa
+uncao	esqueleto	318	43		False	False	0	0		limpa
+uncao	esqueleto	597	43		False	False	0	0		limpa
+uncao	esqueleto	622	43		False	False	0	0		limpa
+cacadora	esqueleto	547	42		False	False	0	0		limpa
+cacadora	esqueleto	560	42		False	False	0	0		limpa
+cacadora	esqueleto	183	42		False	False	0	0		limpa
+cacadora	esqueleto	321	42		False	False	0	0		limpa
+cacadora	esqueleto	590	42		False	False	0	0		limpa
+cacadora	esqueleto	583	42		False	False	0	1		marca indevida
+cacadora	esqueleto	555	42		False	False	0	0		limpa
+cacadora	esqueleto	517	42		False	False	0	0		limpa
+cacadora	esqueleto	580	42		False	False	0	0		limpa
+cacadora	esqueleto	537	42		False	False	0	0		limpa
+cacadora	esqueleto	616	42		False	False	0	0		limpa
+cacadora	esqueleto	305	42		False	False	0	0		limpa
+cacadora	esqueleto	589	42		False	False	0	0		limpa
+cacadora	esqueleto	280	42		False	False	0	0		limpa
+cacadora	esqueleto	510	42		False	False	0	0		limpa
+cacadora	esqueleto	201	42		False	False	0	0		limpa
+cacadora	esqueleto	631	42		False	False	0	0		limpa
+cacadora	esqueleto	318	42		False	False	0	0		limpa
+cacadora	esqueleto	597	42		False	False	0	0		limpa
+cacadora	esqueleto	622	42		False	False	0	0		limpa
+cacadora	esqueleto	547	43		False	False	0	0		limpa
+cacadora	esqueleto	560	43		False	False	0	1		marca indevida
+cacadora	esqueleto	183	43		False	False	0	0		limpa
+cacadora	esqueleto	321	43		False	False	0	0		limpa
+cacadora	esqueleto	590	43		False	False	0	0		limpa
+cacadora	esqueleto	583	43		False	False	0	0		limpa
+cacadora	esqueleto	555	43		False	False	0	0		limpa
+cacadora	esqueleto	517	43		False	False	0	0		limpa
+cacadora	esqueleto	580	43		False	False	0	0		limpa
+cacadora	esqueleto	537	43		False	False	0	0		limpa
+cacadora	esqueleto	616	43		False	False	0	0		limpa
+cacadora	esqueleto	305	43		False	False	0	0		limpa
+cacadora	esqueleto	589	43		False	False	0	0		limpa
+cacadora	esqueleto	280	43		False	False	0	0		limpa
+cacadora	esqueleto	510	43		False	False	0	0		limpa
+cacadora	esqueleto	201	43		False	False	0	0		limpa
+cacadora	esqueleto	631	43		False	False	0	0		limpa
+cacadora	esqueleto	318	43		False	False	0	0		limpa
+cacadora	esqueleto	597	43		False	False	0	0		limpa
+cacadora	esqueleto	622	43		False	False	0	0		limpa
+engracadas	esqueleto	547	42		False	False	0	0		limpa
+engracadas	esqueleto	560	42		False	False	0	0		limpa
+engracadas	esqueleto	183	42		False	False	0	0		limpa
+engracadas	esqueleto	321	42		False	False	0	0		limpa
+engracadas	esqueleto	590	42		False	False	0	0		limpa
+engracadas	esqueleto	583	42		False	False	0	0		limpa
+engracadas	esqueleto	555	42		False	False	0	0		limpa
+engracadas	esqueleto	517	42		False	False	0	0		limpa
+engracadas	esqueleto	580	42		False	False	0	0		limpa
+engracadas	esqueleto	537	42		False	False	0	0		limpa
+engracadas	esqueleto	616	42		False	False	0	0		limpa
+engracadas	esqueleto	305	42		False	False	0	0		limpa
+engracadas	esqueleto	589	42		False	False	0	0		limpa
+engracadas	esqueleto	280	42		False	False	0	0		limpa
+engracadas	esqueleto	510	42		False	False	0	0		limpa
+engracadas	esqueleto	201	42		False	False	0	0		limpa
+engracadas	esqueleto	631	42		False	False	0	0		limpa
+engracadas	esqueleto	318	42		False	False	0	0		limpa
+engracadas	esqueleto	597	42		False	False	0	0		limpa
+engracadas	esqueleto	622	42		False	False	0	0		limpa
+engracadas	esqueleto	547	43		False	False	0	0		limpa
+engracadas	esqueleto	560	43		False	False	0	0		limpa
+engracadas	esqueleto	183	43		False	False	1	0	8	marca indevida
+engracadas	esqueleto	321	43		False	False	0	0		limpa
+engracadas	esqueleto	590	43		False	False	0	0		limpa
+engracadas	esqueleto	583	43		False	False	0	0		limpa
+engracadas	esqueleto	555	43		False	False	0	0		limpa
+engracadas	esqueleto	517	43		False	False	0	0		limpa
+engracadas	esqueleto	580	43		False	False	0	0		limpa
+engracadas	esqueleto	537	43		False	False	0	0		limpa
+engracadas	esqueleto	616	43		False	False	0	0		limpa
+engracadas	esqueleto	305	43		False	False	0	0		limpa
+engracadas	esqueleto	589	43		False	False	0	0		limpa
+engracadas	esqueleto	280	43		False	False	0	0		limpa
+engracadas	esqueleto	510	43		False	False	0	0		limpa
+engracadas	esqueleto	201	43		False	False	0	0		limpa
+engracadas	esqueleto	631	43		False	False	0	0		limpa
+engracadas	esqueleto	318	43		False	False	0	0		limpa
+engracadas	esqueleto	597	43		False	False	0	0		limpa
+engracadas	esqueleto	622	43		False	False	0	0		limpa
+relampagos	esqueleto	547	42		False	False	0	0		limpa
+relampagos	esqueleto	560	42		False	False	0	0		limpa
+relampagos	esqueleto	183	42		False	False	0	0		limpa
+relampagos	esqueleto	321	42		False	False	0	0		limpa
+relampagos	esqueleto	590	42		False	False	0	0		limpa
+relampagos	esqueleto	583	42		False	False	0	0		limpa
+relampagos	esqueleto	555	42		False	False	0	0		limpa
+relampagos	esqueleto	517	42		False	False	0	0		limpa
+relampagos	esqueleto	580	42		False	False	0	0		limpa
+relampagos	esqueleto	537	42		False	False	0	0		limpa
+relampagos	esqueleto	616	42		False	False	0	0		limpa
+relampagos	esqueleto	305	42		False	False	0	0		limpa
+relampagos	esqueleto	589	42		False	False	0	0		limpa
+relampagos	esqueleto	280	42		False	False	0	0		limpa
+relampagos	esqueleto	510	42		False	False	0	0		limpa
+relampagos	esqueleto	201	42		False	False	0	0		limpa
+relampagos	esqueleto	631	42		False	False	0	0		limpa
+relampagos	esqueleto	318	42		False	False	0	0		limpa
+relampagos	esqueleto	597	42		False	False	0	0		limpa
+relampagos	esqueleto	622	42		False	False	0	0		limpa
+relampagos	esqueleto	547	43		False	False	0	0		limpa
+relampagos	esqueleto	560	43		False	False	0	0		limpa
+relampagos	esqueleto	183	43		False	False	0	0		limpa
+relampagos	esqueleto	321	43		False	False	0	0		limpa
+relampagos	esqueleto	590	43		False	False	0	0		limpa
+relampagos	esqueleto	583	43		False	False	0	0		limpa
+relampagos	esqueleto	555	43		False	False	0	0		limpa
+relampagos	esqueleto	517	43		False	False	0	0		limpa
+relampagos	esqueleto	580	43		False	False	0	0		limpa
+relampagos	esqueleto	537	43		False	False	0	0		limpa
+relampagos	esqueleto	616	43		False	False	0	0		limpa
+relampagos	esqueleto	305	43		False	False	0	0		limpa
+relampagos	esqueleto	589	43		False	False	0	0		limpa
+relampagos	esqueleto	280	43		False	False	0	0		limpa
+relampagos	esqueleto	510	43		False	False	0	0		limpa
+relampagos	esqueleto	201	43		False	False	0	0		limpa
+relampagos	esqueleto	631	43		False	False	0	0		limpa
+relampagos	esqueleto	318	43		False	False	0	0		limpa
+relampagos	esqueleto	597	43		False	False	0	0		limpa
+relampagos	esqueleto	622	43		False	False	0	0		limpa
+confusoes	esqueleto	547	42		False	False	0	0		limpa
+confusoes	esqueleto	560	42		False	False	0	1		marca indevida
+confusoes	esqueleto	183	42		False	False	0	0		limpa
+confusoes	esqueleto	321	42		False	False	0	0		limpa
+confusoes	esqueleto	590	42		False	False	0	0		limpa
+confusoes	esqueleto	583	42		False	False	0	0		limpa
+confusoes	esqueleto	555	42		False	False	0	1		marca indevida
+confusoes	esqueleto	517	42		False	False	0	0		limpa
+confusoes	esqueleto	580	42		False	False	0	0		limpa
+confusoes	esqueleto	537	42		False	False	1	0	1	marca indevida
+confusoes	esqueleto	616	42		False	False	0	0		limpa
+confusoes	esqueleto	305	42		False	False	0	0		limpa
+confusoes	esqueleto	589	42		False	False	0	1		marca indevida
+confusoes	esqueleto	280	42		False	False	0	0		limpa
+confusoes	esqueleto	510	42		False	False	0	0		limpa
+confusoes	esqueleto	201	42		False	False	0	0		limpa
+confusoes	esqueleto	631	42		False	False	0	0		limpa
+confusoes	esqueleto	318	42		False	False	0	0		limpa
+confusoes	esqueleto	597	42		False	False	0	0		limpa
+confusoes	esqueleto	622	42		False	False	0	0		limpa
+confusoes	esqueleto	547	43		False	False	0	0		limpa
+confusoes	esqueleto	560	43		False	False	0	0		limpa
+confusoes	esqueleto	183	43		False	False	0	0		limpa
+confusoes	esqueleto	321	43		False	False	0	0		limpa
+confusoes	esqueleto	590	43		False	False	0	0		limpa
+confusoes	esqueleto	583	43		False	False	0	0		limpa
+confusoes	esqueleto	555	43		False	False	0	0		limpa
+confusoes	esqueleto	517	43		False	False	1	0	2	marca indevida
+confusoes	esqueleto	580	43		False	False	0	1		marca indevida
+confusoes	esqueleto	537	43		False	False	0	1		marca indevida
+confusoes	esqueleto	616	43		False	False	0	0		limpa
+confusoes	esqueleto	305	43		False	False	0	0		limpa
+confusoes	esqueleto	589	43		False	False	0	0		limpa
+confusoes	esqueleto	280	43		False	False	0	0		limpa
+confusoes	esqueleto	510	43		False	False	0	0		limpa
+confusoes	esqueleto	201	43		False	False	0	0		limpa
+confusoes	esqueleto	631	43		False	False	0	0		limpa
+confusoes	esqueleto	318	43		False	False	0	0		limpa
+confusoes	esqueleto	597	43		False	False	0	0		limpa
+confusoes	esqueleto	622	43		False	False	0	0		limpa
+lancados	esqueleto	547	42		False	False	0	0		limpa
+lancados	esqueleto	560	42		False	False	0	0		limpa
+lancados	esqueleto	183	42		False	False	0	0		limpa
+lancados	esqueleto	321	42		False	False	0	0		limpa
+lancados	esqueleto	590	42		False	False	0	0		limpa
+lancados	esqueleto	583	42		False	False	0	0		limpa
+lancados	esqueleto	555	42		False	False	0	0		limpa
+lancados	esqueleto	517	42		False	False	0	0		limpa
+lancados	esqueleto	580	42		False	False	0	0		limpa
+lancados	esqueleto	537	42		False	False	0	0		limpa
+lancados	esqueleto	616	42		False	False	0	0		limpa
+lancados	esqueleto	305	42		False	False	0	0		limpa
+lancados	esqueleto	589	42		False	False	0	0		limpa
+lancados	esqueleto	280	42		False	False	0	0		limpa
+lancados	esqueleto	510	42		False	False	0	0		limpa
+lancados	esqueleto	201	42		False	False	0	0		limpa
+lancados	esqueleto	631	42		False	False	0	0		limpa
+lancados	esqueleto	318	42		False	False	0	0		limpa
+lancados	esqueleto	597	42		False	False	0	0		limpa
+lancados	esqueleto	622	42		False	False	0	0		limpa
+lancados	esqueleto	547	43		False	False	0	0		limpa
+lancados	esqueleto	560	43		False	False	0	0		limpa
+lancados	esqueleto	183	43		False	False	0	0		limpa
+lancados	esqueleto	321	43		False	False	0	0		limpa
+lancados	esqueleto	590	43		False	False	0	0		limpa
+lancados	esqueleto	583	43		False	False	0	1		marca indevida
+lancados	esqueleto	555	43		False	False	0	0		limpa
+lancados	esqueleto	517	43		False	False	0	0		limpa
+lancados	esqueleto	580	43		False	False	0	0		limpa
+lancados	esqueleto	537	43		False	False	0	0		limpa
+lancados	esqueleto	616	43		False	False	0	0		limpa
+lancados	esqueleto	305	43		False	False	0	0		limpa
+lancados	esqueleto	589	43		False	False	0	0		limpa
+lancados	esqueleto	280	43		False	False	0	0		limpa
+lancados	esqueleto	510	43		False	False	0	0		limpa
+lancados	esqueleto	201	43		False	False	0	0		limpa
+lancados	esqueleto	631	43		False	False	0	0		limpa
+lancados	esqueleto	318	43		False	False	0	0		limpa
+lancados	esqueleto	597	43		False	False	0	0		limpa
+lancados	esqueleto	622	43		False	False	0	0		limpa
+cacadoras	esqueleto	547	42		False	False	0	0		limpa
+cacadoras	esqueleto	560	42		False	False	0	0		limpa
+cacadoras	esqueleto	183	42		False	False	0	0		limpa
+cacadoras	esqueleto	321	42		False	False	0	0		limpa
+cacadoras	esqueleto	590	42		False	False	0	0		limpa
+cacadoras	esqueleto	583	42		False	False	0	0		limpa
+cacadoras	esqueleto	555	42		False	False	0	0		limpa
+cacadoras	esqueleto	517	42		False	False	0	0		limpa
+cacadoras	esqueleto	580	42		False	False	0	0		limpa
+cacadoras	esqueleto	537	42		False	False	0	0		limpa
+cacadoras	esqueleto	616	42		False	False	0	0		limpa
+cacadoras	esqueleto	305	42		False	False	0	0		limpa
+cacadoras	esqueleto	589	42		False	False	0	0		limpa
+cacadoras	esqueleto	280	42		False	False	0	0		limpa
+cacadoras	esqueleto	510	42		False	False	0	0		limpa
+cacadoras	esqueleto	201	42		False	False	0	0		limpa
+cacadoras	esqueleto	631	42		False	False	0	0		limpa
+cacadoras	esqueleto	318	42		False	False	0	0		limpa
+cacadoras	esqueleto	597	42		False	False	0	0		limpa
+cacadoras	esqueleto	622	42		False	False	0	0		limpa
+cacadoras	esqueleto	547	43		False	False	0	0		limpa
+cacadoras	esqueleto	560	43		False	False	0	0		limpa
+cacadoras	esqueleto	183	43		False	False	0	0		limpa
+cacadoras	esqueleto	321	43		False	False	0	0		limpa
+cacadoras	esqueleto	590	43		False	False	0	0		limpa
+cacadoras	esqueleto	583	43		False	False	0	0		limpa
+cacadoras	esqueleto	555	43		False	False	0	0		limpa
+cacadoras	esqueleto	517	43		False	False	0	0		limpa
+cacadoras	esqueleto	580	43		False	False	0	0		limpa
+cacadoras	esqueleto	537	43		False	False	0	0		limpa
+cacadoras	esqueleto	616	43		False	False	0	0		limpa
+cacadoras	esqueleto	305	43		False	False	0	0		limpa
+cacadoras	esqueleto	589	43		False	False	0	0		limpa
+cacadoras	esqueleto	280	43		False	False	0	0		limpa
+cacadoras	esqueleto	510	43		False	False	0	0		limpa
+cacadoras	esqueleto	201	43		False	False	0	0		limpa
+cacadoras	esqueleto	631	43		False	False	0	0		limpa
+cacadoras	esqueleto	318	43		False	False	0	0		limpa
+cacadoras	esqueleto	597	43		False	False	0	0		limpa
+cacadoras	esqueleto	622	43		False	False	0	0		limpa
+balsamo	esqueleto	547	42		False	False	0	0		limpa
+balsamo	esqueleto	560	42		False	False	0	0		limpa
+balsamo	esqueleto	183	42		False	False	0	0		limpa
+balsamo	esqueleto	321	42		False	False	0	0		limpa
+balsamo	esqueleto	590	42		False	False	0	0		limpa
+balsamo	esqueleto	583	42		False	False	0	0		limpa
+balsamo	esqueleto	555	42		False	False	0	0		limpa
+balsamo	esqueleto	517	42		False	False	0	0		limpa
+balsamo	esqueleto	580	42		False	False	1	0	5	marca indevida
+balsamo	esqueleto	537	42		False	False	0	0		limpa
+balsamo	esqueleto	616	42		False	False	0	0		limpa
+balsamo	esqueleto	305	42		False	False	0	0		limpa
+balsamo	esqueleto	589	42		False	False	0	0		limpa
+balsamo	esqueleto	280	42		False	False	0	0		limpa
+balsamo	esqueleto	510	42		False	False	0	0		limpa
+balsamo	esqueleto	201	42		False	False	0	0		limpa
+balsamo	esqueleto	631	42		False	False	0	0		limpa
+balsamo	esqueleto	318	42		False	False	0	0		limpa
+balsamo	esqueleto	597	42		False	False	0	0		limpa
+balsamo	esqueleto	622	42		False	False	0	0		limpa
+balsamo	esqueleto	547	43		False	False	0	0		limpa
+balsamo	esqueleto	560	43		False	False	0	0		limpa
+balsamo	esqueleto	183	43		False	False	0	0		limpa
+balsamo	esqueleto	321	43		False	False	0	0		limpa
+balsamo	esqueleto	590	43		False	False	0	0		limpa
+balsamo	esqueleto	583	43		False	False	0	0		limpa
+balsamo	esqueleto	555	43		False	False	0	0		limpa
+balsamo	esqueleto	517	43		False	False	0	0		limpa
+balsamo	esqueleto	580	43		False	False	0	0		limpa
+balsamo	esqueleto	537	43		False	False	1	0	4	marca indevida
+balsamo	esqueleto	616	43		False	False	0	0		limpa
+balsamo	esqueleto	305	43		False	False	0	0		limpa
+balsamo	esqueleto	589	43		False	False	0	0		limpa
+balsamo	esqueleto	280	43		False	False	0	0		limpa
+balsamo	esqueleto	510	43		False	False	0	0		limpa
+balsamo	esqueleto	201	43		False	False	0	0		limpa
+balsamo	esqueleto	631	43		False	False	0	0		limpa
+balsamo	esqueleto	318	43		False	False	0	0		limpa
+balsamo	esqueleto	597	43		False	False	0	0		limpa
+balsamo	esqueleto	622	43		False	False	0	0		limpa
+leguas	esqueleto	547	42		False	False	0	0		limpa
+leguas	esqueleto	560	42		False	False	0	0		limpa
+leguas	esqueleto	183	42		False	False	0	0		limpa
+leguas	esqueleto	321	42		False	False	0	0		limpa
+leguas	esqueleto	590	42		False	False	0	0		limpa
+leguas	esqueleto	583	42		False	False	0	0		limpa
+leguas	esqueleto	555	42		False	False	0	0		limpa
+leguas	esqueleto	517	42		False	False	0	0		limpa
+leguas	esqueleto	580	42		False	False	0	0		limpa
+leguas	esqueleto	537	42		False	False	0	0		limpa
+leguas	esqueleto	616	42		False	False	0	0		limpa
+leguas	esqueleto	305	42		False	False	0	0		limpa
+leguas	esqueleto	589	42		False	False	0	0		limpa
+leguas	esqueleto	280	42		False	False	0	0		limpa
+leguas	esqueleto	510	42		False	False	0	0		limpa
+leguas	esqueleto	201	42		False	False	0	0		limpa
+leguas	esqueleto	631	42		False	False	0	0		limpa
+leguas	esqueleto	318	42		False	False	1	0	2	marca indevida
+leguas	esqueleto	597	42		False	False	0	0		limpa
+leguas	esqueleto	622	42		False	False	0	0		limpa
+leguas	esqueleto	547	43		False	False	0	0		limpa
+leguas	esqueleto	560	43		False	False	0	0		limpa
+leguas	esqueleto	183	43		False	False	0	0		limpa
+leguas	esqueleto	321	43		False	False	0	0		limpa
+leguas	esqueleto	590	43		False	False	0	0		limpa
+leguas	esqueleto	583	43		False	False	0	0		limpa
+leguas	esqueleto	555	43		False	False	0	0		limpa
+leguas	esqueleto	517	43		False	False	0	0		limpa
+leguas	esqueleto	580	43		False	False	0	0		limpa
+leguas	esqueleto	537	43		False	False	0	0		limpa
+leguas	esqueleto	616	43		False	False	0	0		limpa
+leguas	esqueleto	305	43		False	False	0	0		limpa
+leguas	esqueleto	589	43		False	False	0	0		limpa
+leguas	esqueleto	280	43		False	False	0	0		limpa
+leguas	esqueleto	510	43		False	False	0	0		limpa
+leguas	esqueleto	201	43		False	False	0	0		limpa
+leguas	esqueleto	631	43		False	False	0	0		limpa
+leguas	esqueleto	318	43		False	False	0	0		limpa
+leguas	esqueleto	597	43		False	False	0	0		limpa
+leguas	esqueleto	622	43		False	False	0	0		limpa
+pas	esqueleto	547	42		False	False	0	0		limpa
+pas	esqueleto	560	42		False	False	0	0		limpa
+pas	esqueleto	183	42		False	False	0	0		limpa
+pas	esqueleto	321	42		False	False	0	0		limpa
+pas	esqueleto	590	42		False	False	0	0		limpa
+pas	esqueleto	583	42		False	False	0	0		limpa
+pas	esqueleto	555	42		False	False	0	0		limpa
+pas	esqueleto	517	42		False	False	0	0		limpa
+pas	esqueleto	580	42		False	False	0	0		limpa
+pas	esqueleto	537	42		False	False	0	0		limpa
+pas	esqueleto	616	42		False	False	0	0		limpa
+pas	esqueleto	305	42		False	False	0	0		limpa
+pas	esqueleto	589	42		False	False	0	0		limpa
+pas	esqueleto	280	42		False	False	0	0		limpa
+pas	esqueleto	510	42		False	False	0	0		limpa
+pas	esqueleto	201	42		False	False	0	0		limpa
+pas	esqueleto	631	42		False	False	0	0		limpa
+pas	esqueleto	318	42		False	False	0	0		limpa
+pas	esqueleto	597	42		False	False	0	0		limpa
+pas	esqueleto	622	42		False	False	0	0		limpa
+pas	esqueleto	547	43		False	False	0	0		limpa
+pas	esqueleto	560	43		False	False	0	0		limpa
+pas	esqueleto	183	43		False	False	0	0		limpa
+pas	esqueleto	321	43		False	False	0	0		limpa
+pas	esqueleto	590	43		False	False	0	0		limpa
+pas	esqueleto	583	43		False	False	0	0		limpa
+pas	esqueleto	555	43		False	False	0	0		limpa
+pas	esqueleto	517	43		False	False	0	0		limpa
+pas	esqueleto	580	43		False	False	0	0		limpa
+pas	esqueleto	537	43		False	False	0	0		limpa
+pas	esqueleto	616	43		False	False	0	0		limpa
+pas	esqueleto	305	43		False	False	0	0		limpa
+pas	esqueleto	589	43		False	False	0	0		limpa
+pas	esqueleto	280	43		False	False	0	0		limpa
+pas	esqueleto	510	43		False	False	0	0		limpa
+pas	esqueleto	201	43		False	False	0	0		limpa
+pas	esqueleto	631	43		False	False	0	0		limpa
+pas	esqueleto	318	43		False	False	0	0		limpa
+pas	esqueleto	597	43		False	False	0	0		limpa
+pas	esqueleto	622	43		False	False	0	0		limpa
+sofrera	esqueleto	547	42		False	False	0	0		limpa
+sofrera	esqueleto	560	42		False	False	0	0		limpa
+sofrera	esqueleto	183	42		False	False	0	0		limpa
+sofrera	esqueleto	321	42		False	False	0	0		limpa
+sofrera	esqueleto	590	42		False	False	0	0		limpa
+sofrera	esqueleto	583	42		False	False	0	0		limpa
+sofrera	esqueleto	555	42		False	False	0	0		limpa
+sofrera	esqueleto	517	42		False	False	0	0		limpa
+sofrera	esqueleto	580	42		False	False	0	0		limpa
+sofrera	esqueleto	537	42		False	False	0	0		limpa
+sofrera	esqueleto	616	42		False	False	0	0		limpa
+sofrera	esqueleto	305	42		False	False	0	0		limpa
+sofrera	esqueleto	589	42		False	False	0	0		limpa
+sofrera	esqueleto	280	42		False	False	0	0		limpa
+sofrera	esqueleto	510	42		False	False	1	0	3	marca indevida
+sofrera	esqueleto	201	42		False	False	0	0		limpa
+sofrera	esqueleto	631	42		False	False	1	0	1	marca indevida
+sofrera	esqueleto	318	42		False	False	0	0		limpa
+sofrera	esqueleto	597	42		False	False	1	0	1	marca indevida
+sofrera	esqueleto	622	42		False	False	0	0		limpa
+sofrera	esqueleto	547	43		False	False	0	0		limpa
+sofrera	esqueleto	560	43		False	False	0	0		limpa
+sofrera	esqueleto	183	43		False	False	1	0	4	marca indevida
+sofrera	esqueleto	321	43		False	False	0	0		limpa
+sofrera	esqueleto	590	43		False	False	1	0	4	marca indevida
+sofrera	esqueleto	583	43		False	False	0	0		limpa
+sofrera	esqueleto	555	43		False	False	0	0		limpa
+sofrera	esqueleto	517	43		False	False	1	0	1	marca indevida
+sofrera	esqueleto	580	43		False	False	0	0		limpa
+sofrera	esqueleto	537	43		False	False	0	0		limpa
+sofrera	esqueleto	616	43		False	False	0	0		limpa
+sofrera	esqueleto	305	43		False	False	0	0		limpa
+sofrera	esqueleto	589	43		False	False	0	0		limpa
+sofrera	esqueleto	280	43		False	False	0	0		limpa
+sofrera	esqueleto	510	43		False	False	0	0		limpa
+sofrera	esqueleto	201	43		False	False	0	0		limpa
+sofrera	esqueleto	631	43		False	False	0	0		limpa
+sofrera	esqueleto	318	43		False	False	0	0		limpa
+sofrera	esqueleto	597	43		False	False	0	0		limpa
+sofrera	esqueleto	622	43		False	False	0	0		limpa
+terco	esqueleto	547	42		False	False	0	0		limpa
+terco	esqueleto	560	42		False	False	0	0		limpa
+terco	esqueleto	183	42		False	False	0	0		limpa
+terco	esqueleto	321	42		False	False	0	0		limpa
+terco	esqueleto	590	42		False	False	0	0		limpa
+terco	esqueleto	583	42		False	False	0	0		limpa
+terco	esqueleto	555	42		False	False	1	0	2	marca indevida
+terco	esqueleto	517	42		False	False	0	1		marca indevida
+terco	esqueleto	580	42		False	False	0	0		limpa
+terco	esqueleto	537	42		False	False	0	0		limpa
+terco	esqueleto	616	42		False	False	0	0		limpa
+terco	esqueleto	305	42		False	False	0	0		limpa
+terco	esqueleto	589	42		False	False	0	0		limpa
+terco	esqueleto	280	42		False	False	0	0		limpa
+terco	esqueleto	510	42		False	False	0	0		limpa
+terco	esqueleto	201	42		False	False	0	0		limpa
+terco	esqueleto	631	42		False	False	0	0		limpa
+terco	esqueleto	318	42		False	False	0	0		limpa
+terco	esqueleto	597	42		False	False	0	0		limpa
+terco	esqueleto	622	42		False	False	0	0		limpa
+terco	esqueleto	547	43		False	False	0	0		limpa
+terco	esqueleto	560	43		False	False	0	0		limpa
+terco	esqueleto	183	43		False	False	0	1		marca indevida
+terco	esqueleto	321	43		False	False	0	0		limpa
+terco	esqueleto	590	43		False	False	0	0		limpa
+terco	esqueleto	583	43		False	False	0	0		limpa
+terco	esqueleto	555	43		False	False	0	0		limpa
+terco	esqueleto	517	43		False	False	0	0		limpa
+terco	esqueleto	580	43		False	False	0	0		limpa
+terco	esqueleto	537	43		False	False	0	1		marca indevida
+terco	esqueleto	616	43		False	False	0	0		limpa
+terco	esqueleto	305	43		False	False	0	0		limpa
+terco	esqueleto	589	43		False	False	0	0		limpa
+terco	esqueleto	280	43		False	False	0	0		limpa
+terco	esqueleto	510	43		False	False	0	0		limpa
+terco	esqueleto	201	43		False	False	0	0		limpa
+terco	esqueleto	631	43		False	False	0	0		limpa
+terco	esqueleto	318	43		False	False	0	0		limpa
+terco	esqueleto	597	43		False	False	0	0		limpa
+terco	esqueleto	622	43		False	False	0	0		limpa
+mataras	esqueleto	547	42		False	False	0	0		limpa
+mataras	esqueleto	560	42		False	False	0	0		limpa
+mataras	esqueleto	183	42		False	False	1	0	4	marca indevida
+mataras	esqueleto	321	42		False	False	0	0		limpa
+mataras	esqueleto	590	42		False	False	0	0		limpa
+mataras	esqueleto	583	42		False	False	0	0		limpa
+mataras	esqueleto	555	42		False	False	0	0		limpa
+mataras	esqueleto	517	42		False	False	0	0		limpa
+mataras	esqueleto	580	42		False	False	0	0		limpa
+mataras	esqueleto	537	42		False	False	0	0		limpa
+mataras	esqueleto	616	42		False	False	0	0		limpa
+mataras	esqueleto	305	42		False	False	0	0		limpa
+mataras	esqueleto	589	42		False	False	0	0		limpa
+mataras	esqueleto	280	42		False	False	0	0		limpa
+mataras	esqueleto	510	42		False	False	0	0		limpa
+mataras	esqueleto	201	42		False	False	0	0		limpa
+mataras	esqueleto	631	42		False	False	0	0		limpa
+mataras	esqueleto	318	42		False	False	0	0		limpa
+mataras	esqueleto	597	42		False	False	0	0		limpa
+mataras	esqueleto	622	42		False	False	0	0		limpa
+mataras	esqueleto	547	43		False	False	0	0		limpa
+mataras	esqueleto	560	43		False	False	0	0		limpa
+mataras	esqueleto	183	43		False	False	0	0		limpa
+mataras	esqueleto	321	43		False	False	0	0		limpa
+mataras	esqueleto	590	43		False	False	0	0		limpa
+mataras	esqueleto	583	43		False	False	0	0		limpa
+mataras	esqueleto	555	43		False	False	0	0		limpa
+mataras	esqueleto	517	43		False	False	0	0		limpa
+mataras	esqueleto	580	43		False	False	0	0		limpa
+mataras	esqueleto	537	43		False	False	0	0		limpa
+mataras	esqueleto	616	43		False	False	0	0		limpa
+mataras	esqueleto	305	43		False	False	0	0		limpa
+mataras	esqueleto	589	43		False	False	0	0		limpa
+mataras	esqueleto	280	43		False	False	0	0		limpa
+mataras	esqueleto	510	43		False	False	0	0		limpa
+mataras	esqueleto	201	43		False	False	0	0		limpa
+mataras	esqueleto	631	43		False	False	0	0		limpa
+mataras	esqueleto	318	43		False	False	0	0		limpa
+mataras	esqueleto	597	43		False	False	0	0		limpa
+mataras	esqueleto	622	43		False	False	0	0		limpa
+prestacao	esqueleto	547	42		False	False	0	0		limpa
+prestacao	esqueleto	560	42		False	False	0	0		limpa
+prestacao	esqueleto	183	42		False	False	1	0	6	marca indevida
+prestacao	esqueleto	321	42		False	False	0	0		limpa
+prestacao	esqueleto	590	42		False	False	0	0		limpa
+prestacao	esqueleto	583	42		False	False	0	0		limpa
+prestacao	esqueleto	555	42		False	False	0	0		limpa
+prestacao	esqueleto	517	42		False	False	0	0		limpa
+prestacao	esqueleto	580	42		False	False	0	0		limpa
+prestacao	esqueleto	537	42		False	False	0	0		limpa
+prestacao	esqueleto	616	42		False	False	0	0		limpa
+prestacao	esqueleto	305	42		False	False	0	0		limpa
+prestacao	esqueleto	589	42		False	False	0	0		limpa
+prestacao	esqueleto	280	42		False	False	0	0		limpa
+prestacao	esqueleto	510	42		False	False	0	0		limpa
+prestacao	esqueleto	201	42		False	False	0	0		limpa
+prestacao	esqueleto	631	42		False	False	0	0		limpa
+prestacao	esqueleto	318	42		False	False	0	0		limpa
+prestacao	esqueleto	597	42		False	False	0	0		limpa
+prestacao	esqueleto	622	42		False	False	0	0		limpa
+prestacao	esqueleto	547	43		False	False	0	0		limpa
+prestacao	esqueleto	560	43		False	False	0	0		limpa
+prestacao	esqueleto	183	43		False	False	0	0		limpa
+prestacao	esqueleto	321	43		False	False	0	0		limpa
+prestacao	esqueleto	590	43		False	False	0	0		limpa
+prestacao	esqueleto	583	43		False	False	0	0		limpa
+prestacao	esqueleto	555	43		False	False	0	0		limpa
+prestacao	esqueleto	517	43		False	False	0	0		limpa
+prestacao	esqueleto	580	43		False	False	0	0		limpa
+prestacao	esqueleto	537	43		False	False	0	0		limpa
+prestacao	esqueleto	616	43		False	False	0	0		limpa
+prestacao	esqueleto	305	43		False	False	0	0		limpa
+prestacao	esqueleto	589	43		False	False	0	0		limpa
+prestacao	esqueleto	280	43		False	False	0	0		limpa
+prestacao	esqueleto	510	43		False	False	0	0		limpa
+prestacao	esqueleto	201	43		False	False	0	0		limpa
+prestacao	esqueleto	631	43		False	False	0	0		limpa
+prestacao	esqueleto	318	43		False	False	0	0		limpa
+prestacao	esqueleto	597	43		False	False	0	0		limpa
+prestacao	esqueleto	622	43		False	False	0	0		limpa
+lancaremos	esqueleto	547	42		False	False	0	0		limpa
+lancaremos	esqueleto	560	42		False	False	0	0		limpa
+lancaremos	esqueleto	183	42		False	False	0	0		limpa
+lancaremos	esqueleto	321	42		False	False	0	0		limpa
+lancaremos	esqueleto	590	42		False	False	0	0		limpa
+lancaremos	esqueleto	583	42		False	False	0	0		limpa
+lancaremos	esqueleto	555	42		False	False	0	0		limpa
+lancaremos	esqueleto	517	42		False	False	0	0		limpa
+lancaremos	esqueleto	580	42		False	False	0	0		limpa
+lancaremos	esqueleto	537	42		False	False	0	0		limpa
+lancaremos	esqueleto	616	42		False	False	0	0		limpa
+lancaremos	esqueleto	305	42		False	False	0	0		limpa
+lancaremos	esqueleto	589	42		False	False	0	0		limpa
+lancaremos	esqueleto	280	42		False	False	0	0		limpa
+lancaremos	esqueleto	510	42		False	False	0	0		limpa
+lancaremos	esqueleto	201	42		False	False	0	0		limpa
+lancaremos	esqueleto	631	42		False	False	0	0		limpa
+lancaremos	esqueleto	318	42		False	False	0	0		limpa
+lancaremos	esqueleto	597	42		False	False	0	0		limpa
+lancaremos	esqueleto	622	42		False	False	0	0		limpa
+lancaremos	esqueleto	547	43		False	False	0	0		limpa
+lancaremos	esqueleto	560	43		False	False	0	0		limpa
+lancaremos	esqueleto	183	43		False	False	0	0		limpa
+lancaremos	esqueleto	321	43		False	False	0	0		limpa
+lancaremos	esqueleto	590	43		False	False	0	0		limpa
+lancaremos	esqueleto	583	43		False	False	0	0		limpa
+lancaremos	esqueleto	555	43		False	False	0	0		limpa
+lancaremos	esqueleto	517	43		False	False	0	0		limpa
+lancaremos	esqueleto	580	43		False	False	0	0		limpa
+lancaremos	esqueleto	537	43		False	False	0	0		limpa
+lancaremos	esqueleto	616	43		False	False	0	0		limpa
+lancaremos	esqueleto	305	43		False	False	0	0		limpa
+lancaremos	esqueleto	589	43		False	False	0	0		limpa
+lancaremos	esqueleto	280	43		False	False	0	0		limpa
+lancaremos	esqueleto	510	43		False	False	0	0		limpa
+lancaremos	esqueleto	201	43		False	False	0	0		limpa
+lancaremos	esqueleto	631	43		False	False	0	0		limpa
+lancaremos	esqueleto	318	43		False	False	0	0		limpa
+lancaremos	esqueleto	597	43		False	False	0	0		limpa
+lancaremos	esqueleto	622	43		False	False	0	0		limpa
+molar	sem_acento	547	42		False	False	0	0		limpa
+molar	sem_acento	560	42		False	False	0	0		limpa
+molar	sem_acento	183	42		False	False	0	0		limpa
+molar	sem_acento	321	42		False	False	0	0		limpa
+molar	sem_acento	590	42		False	False	0	0		limpa
+molar	sem_acento	583	42		False	False	0	0		limpa
+molar	sem_acento	555	42		False	False	0	0		limpa
+molar	sem_acento	517	42		False	False	0	0		limpa
+molar	sem_acento	580	42		False	False	0	0		limpa
+molar	sem_acento	537	42		False	False	0	0		limpa
+molar	sem_acento	616	42		False	False	0	0		limpa
+molar	sem_acento	305	42		False	False	0	0		limpa
+molar	sem_acento	589	42		False	False	0	0		limpa
+molar	sem_acento	280	42		False	False	0	0		limpa
+molar	sem_acento	510	42		False	False	0	0		limpa
+molar	sem_acento	201	42		False	False	0	0		limpa
+molar	sem_acento	631	42		False	False	0	0		limpa
+molar	sem_acento	318	42		False	False	0	0		limpa
+molar	sem_acento	597	42		False	False	0	0		limpa
+molar	sem_acento	622	42		False	False	0	0		limpa
+molar	sem_acento	547	43		False	False	0	0		limpa
+molar	sem_acento	560	43		False	False	0	0		limpa
+molar	sem_acento	183	43		False	False	0	0		limpa
+molar	sem_acento	321	43		False	False	0	0		limpa
+molar	sem_acento	590	43		False	False	0	0		limpa
+molar	sem_acento	583	43		False	False	0	0		limpa
+molar	sem_acento	555	43		False	False	0	0		limpa
+molar	sem_acento	517	43		False	False	0	0		limpa
+molar	sem_acento	580	43		False	False	0	0		limpa
+molar	sem_acento	537	43		False	False	0	0		limpa
+molar	sem_acento	616	43		False	False	0	0		limpa
+molar	sem_acento	305	43		False	False	0	0		limpa
+molar	sem_acento	589	43		False	False	0	0		limpa
+molar	sem_acento	280	43		False	False	0	0		limpa
+molar	sem_acento	510	43		False	False	0	0		limpa
+molar	sem_acento	201	43		False	False	0	0		limpa
+molar	sem_acento	631	43		False	False	0	0		limpa
+molar	sem_acento	318	43		False	False	0	0		limpa
+molar	sem_acento	597	43		False	False	0	0		limpa
+molar	sem_acento	622	43		False	False	0	0		limpa
+navarra	sem_acento	547	42		False	False	0	0		limpa
+navarra	sem_acento	560	42		False	False	0	0		limpa
+navarra	sem_acento	183	42		False	False	0	0		limpa
+navarra	sem_acento	321	42		False	False	0	0		limpa
+navarra	sem_acento	590	42		False	False	0	0		limpa
+navarra	sem_acento	583	42		False	False	0	0		limpa
+navarra	sem_acento	555	42		False	False	0	0		limpa
+navarra	sem_acento	517	42		False	False	0	0		limpa
+navarra	sem_acento	580	42		False	False	0	0		limpa
+navarra	sem_acento	537	42		False	False	0	0		limpa
+navarra	sem_acento	616	42		False	False	0	0		limpa
+navarra	sem_acento	305	42		False	False	0	0		limpa
+navarra	sem_acento	589	42		False	False	0	0		limpa
+navarra	sem_acento	280	42		False	False	0	0		limpa
+navarra	sem_acento	510	42		False	False	0	0		limpa
+navarra	sem_acento	201	42		False	False	0	0		limpa
+navarra	sem_acento	631	42		False	False	0	0		limpa
+navarra	sem_acento	318	42		False	False	0	0		limpa
+navarra	sem_acento	597	42		False	False	0	0		limpa
+navarra	sem_acento	622	42		False	False	0	0		limpa
+navarra	sem_acento	547	43		False	False	0	0		limpa
+navarra	sem_acento	560	43		False	False	0	0		limpa
+navarra	sem_acento	183	43		False	False	0	0		limpa
+navarra	sem_acento	321	43		False	False	0	0		limpa
+navarra	sem_acento	590	43		False	False	0	0		limpa
+navarra	sem_acento	583	43		False	False	0	0		limpa
+navarra	sem_acento	555	43		False	False	0	0		limpa
+navarra	sem_acento	517	43		False	False	0	0		limpa
+navarra	sem_acento	580	43		False	False	0	0		limpa
+navarra	sem_acento	537	43		False	False	0	0		limpa
+navarra	sem_acento	616	43		False	False	0	0		limpa
+navarra	sem_acento	305	43		False	False	0	0		limpa
+navarra	sem_acento	589	43		False	False	0	0		limpa
+navarra	sem_acento	280	43		False	False	0	0		limpa
+navarra	sem_acento	510	43		False	False	0	0		limpa
+navarra	sem_acento	201	43		False	False	0	0		limpa
+navarra	sem_acento	631	43		False	False	0	0		limpa
+navarra	sem_acento	318	43		False	False	0	0		limpa
+navarra	sem_acento	597	43		False	False	0	0		limpa
+navarra	sem_acento	622	43		False	False	0	0		limpa
+torresmo	sem_acento	547	42		False	False	0	0		limpa
+torresmo	sem_acento	560	42		False	False	0	0		limpa
+torresmo	sem_acento	183	42		False	False	0	0		limpa
+torresmo	sem_acento	321	42		False	False	0	0		limpa
+torresmo	sem_acento	590	42		False	False	0	0		limpa
+torresmo	sem_acento	583	42		False	False	0	0		limpa
+torresmo	sem_acento	555	42		False	False	0	0		limpa
+torresmo	sem_acento	517	42		False	False	0	0		limpa
+torresmo	sem_acento	580	42		False	False	0	0		limpa
+torresmo	sem_acento	537	42		False	False	0	0		limpa
+torresmo	sem_acento	616	42		False	False	1	0	6	marca indevida
+torresmo	sem_acento	305	42		False	False	0	0		limpa
+torresmo	sem_acento	589	42		False	False	0	0		limpa
+torresmo	sem_acento	280	42		False	False	0	0		limpa
+torresmo	sem_acento	510	42		False	False	0	0		limpa
+torresmo	sem_acento	201	42		False	False	0	0		limpa
+torresmo	sem_acento	631	42		False	False	0	0		limpa
+torresmo	sem_acento	318	42		False	False	0	0		limpa
+torresmo	sem_acento	597	42		False	False	0	0		limpa
+torresmo	sem_acento	622	42		False	False	0	0		limpa
+torresmo	sem_acento	547	43		False	False	0	0		limpa
+torresmo	sem_acento	560	43		False	False	0	0		limpa
+torresmo	sem_acento	183	43		False	False	0	0		limpa
+torresmo	sem_acento	321	43		False	False	0	0		limpa
+torresmo	sem_acento	590	43		False	False	0	0		limpa
+torresmo	sem_acento	583	43		False	False	0	0		limpa
+torresmo	sem_acento	555	43		False	False	0	0		limpa
+torresmo	sem_acento	517	43		False	False	0	0		limpa
+torresmo	sem_acento	580	43		False	False	0	0		limpa
+torresmo	sem_acento	537	43		False	False	0	0		limpa
+torresmo	sem_acento	616	43		False	False	0	0		limpa
+torresmo	sem_acento	305	43		False	False	0	0		limpa
+torresmo	sem_acento	589	43		False	False	0	0		limpa
+torresmo	sem_acento	280	43		False	False	0	0		limpa
+torresmo	sem_acento	510	43		False	False	0	0		limpa
+torresmo	sem_acento	201	43		False	False	0	0		limpa
+torresmo	sem_acento	631	43		False	False	0	0		limpa
+torresmo	sem_acento	318	43		False	False	0	0		limpa
+torresmo	sem_acento	597	43		False	False	0	0		limpa
+torresmo	sem_acento	622	43		False	False	0	0		limpa
+central	sem_acento	547	42		False	False	0	0		limpa
+central	sem_acento	560	42		False	False	0	0		limpa
+central	sem_acento	183	42		False	False	0	0		limpa
+central	sem_acento	321	42		False	False	0	0		limpa
+central	sem_acento	590	42		False	False	0	0		limpa
+central	sem_acento	583	42		False	False	0	0		limpa
+central	sem_acento	555	42		False	False	0	0		limpa
+central	sem_acento	517	42		False	False	0	0		limpa
+central	sem_acento	580	42		False	False	0	0		limpa
+central	sem_acento	537	42		False	False	0	0		limpa
+central	sem_acento	616	42		False	False	0	0		limpa
+central	sem_acento	305	42		False	False	0	0		limpa
+central	sem_acento	589	42		False	False	0	0		limpa
+central	sem_acento	280	42		False	False	1	0	7	marca indevida
+central	sem_acento	510	42		False	False	0	0		limpa
+central	sem_acento	201	42		False	False	0	0		limpa
+central	sem_acento	631	42		False	False	0	0		limpa
+central	sem_acento	318	42		False	False	0	0		limpa
+central	sem_acento	597	42		False	False	0	0		limpa
+central	sem_acento	622	42		False	False	0	0		limpa
+central	sem_acento	547	43		False	False	0	0		limpa
+central	sem_acento	560	43		False	False	0	0		limpa
+central	sem_acento	183	43		False	False	0	0		limpa
+central	sem_acento	321	43		False	False	0	0		limpa
+central	sem_acento	590	43		False	False	0	0		limpa
+central	sem_acento	583	43		False	False	0	0		limpa
+central	sem_acento	555	43		False	False	0	0		limpa
+central	sem_acento	517	43		False	False	0	0		limpa
+central	sem_acento	580	43		False	False	0	0		limpa
+central	sem_acento	537	43		False	False	0	0		limpa
+central	sem_acento	616	43		False	False	0	0		limpa
+central	sem_acento	305	43		False	False	0	0		limpa
+central	sem_acento	589	43		False	False	0	0		limpa
+central	sem_acento	280	43		False	False	0	0		limpa
+central	sem_acento	510	43		False	False	0	1		marca indevida
+central	sem_acento	201	43		False	False	1	0	2	marca indevida
+central	sem_acento	631	43		False	False	0	0		limpa
+central	sem_acento	318	43		False	False	0	0		limpa
+central	sem_acento	597	43		False	False	0	0		limpa
+central	sem_acento	622	43		False	False	0	0		limpa
+weller	sem_acento	547	42		False	False	0	0		limpa
+weller	sem_acento	560	42		False	False	0	0		limpa
+weller	sem_acento	183	42		False	False	0	0		limpa
+weller	sem_acento	321	42		False	False	0	0		limpa
+weller	sem_acento	590	42		False	False	0	0		limpa
+weller	sem_acento	583	42		False	False	0	0		limpa
+weller	sem_acento	555	42		False	False	0	0		limpa
+weller	sem_acento	517	42		False	False	0	0		limpa
+weller	sem_acento	580	42		False	False	0	0		limpa
+weller	sem_acento	537	42		False	False	0	0		limpa
+weller	sem_acento	616	42		False	False	0	0		limpa
+weller	sem_acento	305	42		False	False	0	0		limpa
+weller	sem_acento	589	42		False	False	0	0		limpa
+weller	sem_acento	280	42		False	False	0	0		limpa
+weller	sem_acento	510	42		False	False	0	0		limpa
+weller	sem_acento	201	42		False	False	0	0		limpa
+weller	sem_acento	631	42		False	False	0	0		limpa
+weller	sem_acento	318	42		False	False	0	0		limpa
+weller	sem_acento	597	42		False	False	0	0		limpa
+weller	sem_acento	622	42		False	False	0	0		limpa
+weller	sem_acento	547	43		False	False	0	0		limpa
+weller	sem_acento	560	43		False	False	0	0		limpa
+weller	sem_acento	183	43		False	False	1	0	5	marca indevida
+weller	sem_acento	321	43		False	False	0	0		limpa
+weller	sem_acento	590	43		False	False	0	0		limpa
+weller	sem_acento	583	43		False	False	0	0		limpa
+weller	sem_acento	555	43		False	False	0	0		limpa
+weller	sem_acento	517	43		False	False	0	0		limpa
+weller	sem_acento	580	43		False	False	0	0		limpa
+weller	sem_acento	537	43		False	False	0	0		limpa
+weller	sem_acento	616	43		False	False	0	0		limpa
+weller	sem_acento	305	43		False	False	0	0		limpa
+weller	sem_acento	589	43		False	False	0	0		limpa
+weller	sem_acento	280	43		False	False	0	0		limpa
+weller	sem_acento	510	43		False	False	0	0		limpa
+weller	sem_acento	201	43		False	False	1	0	1	marca indevida
+weller	sem_acento	631	43		False	False	0	0		limpa
+weller	sem_acento	318	43		False	False	0	0		limpa
+weller	sem_acento	597	43		False	False	0	0		limpa
+weller	sem_acento	622	43		False	False	0	0		limpa
+lembrarem	sem_acento	547	42		False	False	0	0		limpa
+lembrarem	sem_acento	560	42		False	False	0	0		limpa
+lembrarem	sem_acento	183	42		False	False	0	0		limpa
+lembrarem	sem_acento	321	42		False	False	0	0		limpa
+lembrarem	sem_acento	590	42		False	False	0	0		limpa
+lembrarem	sem_acento	583	42		False	False	0	0		limpa
+lembrarem	sem_acento	555	42		False	False	0	0		limpa
+lembrarem	sem_acento	517	42		False	False	0	0		limpa
+lembrarem	sem_acento	580	42		False	False	0	0		limpa
+lembrarem	sem_acento	537	42		False	False	0	0		limpa
+lembrarem	sem_acento	616	42		False	False	0	0		limpa
+lembrarem	sem_acento	305	42		False	False	0	0		limpa
+lembrarem	sem_acento	589	42		False	False	0	0		limpa
+lembrarem	sem_acento	280	42		False	False	0	0		limpa
+lembrarem	sem_acento	510	42		False	False	0	0		limpa
+lembrarem	sem_acento	201	42		False	False	1	0	7	marca indevida
+lembrarem	sem_acento	631	42		False	False	0	0		limpa
+lembrarem	sem_acento	318	42		False	False	0	0		limpa
+lembrarem	sem_acento	597	42		False	False	0	0		limpa
+lembrarem	sem_acento	622	42		False	False	0	0		limpa
+lembrarem	sem_acento	547	43		False	False	0	0		limpa
+lembrarem	sem_acento	560	43		False	False	0	0		limpa
+lembrarem	sem_acento	183	43		False	False	0	0		limpa
+lembrarem	sem_acento	321	43		False	False	1	0	7	marca indevida
+lembrarem	sem_acento	590	43		False	False	0	0		limpa
+lembrarem	sem_acento	583	43		False	False	0	0		limpa
+lembrarem	sem_acento	555	43		False	False	0	0		limpa
+lembrarem	sem_acento	517	43		False	False	0	0		limpa
+lembrarem	sem_acento	580	43		False	False	0	0		limpa
+lembrarem	sem_acento	537	43		False	False	0	0		limpa
+lembrarem	sem_acento	616	43		False	False	0	0		limpa
+lembrarem	sem_acento	305	43		False	False	0	0		limpa
+lembrarem	sem_acento	589	43		False	False	0	0		limpa
+lembrarem	sem_acento	280	43		False	False	0	0		limpa
+lembrarem	sem_acento	510	43		False	False	0	0		limpa
+lembrarem	sem_acento	201	43		False	False	0	0		limpa
+lembrarem	sem_acento	631	43		False	False	0	0		limpa
+lembrarem	sem_acento	318	43		False	False	0	0		limpa
+lembrarem	sem_acento	597	43		False	False	0	0		limpa
+lembrarem	sem_acento	622	43		False	False	0	0		limpa
+golpes	sem_acento	547	42		False	False	0	0		limpa
+golpes	sem_acento	560	42		False	False	0	0		limpa
+golpes	sem_acento	183	42		False	False	0	0		limpa
+golpes	sem_acento	321	42		False	False	0	0		limpa
+golpes	sem_acento	590	42		False	False	0	0		limpa
+golpes	sem_acento	583	42		False	False	0	0		limpa
+golpes	sem_acento	555	42		False	False	0	0		limpa
+golpes	sem_acento	517	42		False	False	0	0		limpa
+golpes	sem_acento	580	42		False	False	0	0		limpa
+golpes	sem_acento	537	42		False	False	0	0		limpa
+golpes	sem_acento	616	42		False	False	0	0		limpa
+golpes	sem_acento	305	42		False	False	0	0		limpa
+golpes	sem_acento	589	42		False	False	0	0		limpa
+golpes	sem_acento	280	42		False	False	0	0		limpa
+golpes	sem_acento	510	42		False	False	0	0		limpa
+golpes	sem_acento	201	42		False	False	0	0		limpa
+golpes	sem_acento	631	42		False	False	0	0		limpa
+golpes	sem_acento	318	42		False	False	0	0		limpa
+golpes	sem_acento	597	42		False	False	0	0		limpa
+golpes	sem_acento	622	42		False	False	0	0		limpa
+golpes	sem_acento	547	43		False	False	0	0		limpa
+golpes	sem_acento	560	43		False	False	0	0		limpa
+golpes	sem_acento	183	43		False	False	0	0		limpa
+golpes	sem_acento	321	43		False	False	0	0		limpa
+golpes	sem_acento	590	43		False	False	0	0		limpa
+golpes	sem_acento	583	43		False	False	0	0		limpa
+golpes	sem_acento	555	43		False	False	0	0		limpa
+golpes	sem_acento	517	43		False	False	0	0		limpa
+golpes	sem_acento	580	43		False	False	0	0		limpa
+golpes	sem_acento	537	43		False	False	0	0		limpa
+golpes	sem_acento	616	43		False	False	0	0		limpa
+golpes	sem_acento	305	43		False	False	1	0	3	marca indevida
+golpes	sem_acento	589	43		False	False	0	0		limpa
+golpes	sem_acento	280	43		False	False	0	0		limpa
+golpes	sem_acento	510	43		False	False	0	0		limpa
+golpes	sem_acento	201	43		False	False	0	0		limpa
+golpes	sem_acento	631	43		False	False	0	0		limpa
+golpes	sem_acento	318	43		False	False	0	0		limpa
+golpes	sem_acento	597	43		False	False	0	0		limpa
+golpes	sem_acento	622	43		False	False	0	0		limpa
+fletcher	sem_acento	547	42		False	False	0	0		limpa
+fletcher	sem_acento	560	42		False	False	0	0		limpa
+fletcher	sem_acento	183	42		False	False	0	0		limpa
+fletcher	sem_acento	321	42		False	False	0	0		limpa
+fletcher	sem_acento	590	42		False	False	0	0		limpa
+fletcher	sem_acento	583	42		False	False	0	0		limpa
+fletcher	sem_acento	555	42		False	False	0	0		limpa
+fletcher	sem_acento	517	42		False	False	0	0		limpa
+fletcher	sem_acento	580	42		False	False	0	0		limpa
+fletcher	sem_acento	537	42		False	False	0	0		limpa
+fletcher	sem_acento	616	42		False	False	0	0		limpa
+fletcher	sem_acento	305	42		False	False	1	0	1	marca indevida
+fletcher	sem_acento	589	42		False	False	0	0		limpa
+fletcher	sem_acento	280	42		False	False	0	0		limpa
+fletcher	sem_acento	510	42		False	False	0	0		limpa
+fletcher	sem_acento	201	42		False	False	0	0		limpa
+fletcher	sem_acento	631	42		False	False	0	0		limpa
+fletcher	sem_acento	318	42		False	False	1	0	2	marca indevida
+fletcher	sem_acento	597	42		False	False	0	0		limpa
+fletcher	sem_acento	622	42		False	False	0	0		limpa
+fletcher	sem_acento	547	43		False	False	0	0		limpa
+fletcher	sem_acento	560	43		False	False	0	0		limpa
+fletcher	sem_acento	183	43		False	False	0	0		limpa
+fletcher	sem_acento	321	43		False	False	0	0		limpa
+fletcher	sem_acento	590	43		False	False	0	0		limpa
+fletcher	sem_acento	583	43		False	False	0	0		limpa
+fletcher	sem_acento	555	43		False	False	0	0		limpa
+fletcher	sem_acento	517	43		False	False	0	0		limpa
+fletcher	sem_acento	580	43		False	False	0	0		limpa
+fletcher	sem_acento	537	43		False	False	0	0		limpa
+fletcher	sem_acento	616	43		False	False	0	0		limpa
+fletcher	sem_acento	305	43		False	False	0	0		limpa
+fletcher	sem_acento	589	43		False	False	0	0		limpa
+fletcher	sem_acento	280	43		False	False	0	0		limpa
+fletcher	sem_acento	510	43		False	False	0	0		limpa
+fletcher	sem_acento	201	43		False	False	1	0	6	marca indevida
+fletcher	sem_acento	631	43		False	False	0	0		limpa
+fletcher	sem_acento	318	43		False	False	1	0	3	marca indevida
+fletcher	sem_acento	597	43		False	False	0	0		limpa
+fletcher	sem_acento	622	43		False	False	0	0		limpa
+sultan	sem_acento	547	42		False	False	0	0		limpa
+sultan	sem_acento	560	42		False	False	0	0		limpa
+sultan	sem_acento	183	42		False	False	0	0		limpa
+sultan	sem_acento	321	42		False	False	1	0	4	marca indevida
+sultan	sem_acento	590	42		False	False	0	0		limpa
+sultan	sem_acento	583	42		False	False	0	0		limpa
+sultan	sem_acento	555	42		False	False	0	0		limpa
+sultan	sem_acento	517	42		False	False	0	0		limpa
+sultan	sem_acento	580	42		False	False	0	0		limpa
+sultan	sem_acento	537	42		False	False	0	0		limpa
+sultan	sem_acento	616	42		False	False	0	0		limpa
+sultan	sem_acento	305	42		False	False	0	0		limpa
+sultan	sem_acento	589	42		False	False	0	0		limpa
+sultan	sem_acento	280	42		False	False	0	0		limpa
+sultan	sem_acento	510	42		False	False	0	0		limpa
+sultan	sem_acento	201	42		False	False	0	0		limpa
+sultan	sem_acento	631	42		False	False	0	0		limpa
+sultan	sem_acento	318	42		False	False	0	0		limpa
+sultan	sem_acento	597	42		False	False	0	0		limpa
+sultan	sem_acento	622	42		False	False	0	0		limpa
+sultan	sem_acento	547	43		False	False	0	0		limpa
+sultan	sem_acento	560	43		False	False	0	0		limpa
+sultan	sem_acento	183	43		False	False	0	0		limpa
+sultan	sem_acento	321	43		False	False	1	0	4	marca indevida
+sultan	sem_acento	590	43		False	False	0	0		limpa
+sultan	sem_acento	583	43		False	False	0	0		limpa
+sultan	sem_acento	555	43		False	False	0	0		limpa
+sultan	sem_acento	517	43		False	False	1	0	1	marca indevida
+sultan	sem_acento	580	43		False	False	0	0		limpa
+sultan	sem_acento	537	43		False	False	1	0	1	marca indevida
+sultan	sem_acento	616	43		False	False	0	0		limpa
+sultan	sem_acento	305	43		False	False	0	0		limpa
+sultan	sem_acento	589	43		False	False	0	0		limpa
+sultan	sem_acento	280	43		False	False	0	0		limpa
+sultan	sem_acento	510	43		False	False	0	0		limpa
+sultan	sem_acento	201	43		False	False	0	0		limpa
+sultan	sem_acento	631	43		False	False	0	0		limpa
+sultan	sem_acento	318	43		False	False	0	0		limpa
+sultan	sem_acento	597	43		False	False	0	0		limpa
+sultan	sem_acento	622	43		False	False	0	0		limpa
+huo	sem_acento	547	42		False	False	0	0		limpa
+huo	sem_acento	560	42		False	False	0	0		limpa
+huo	sem_acento	183	42		False	False	0	0		limpa
+huo	sem_acento	321	42		False	False	0	0		limpa
+huo	sem_acento	590	42		False	False	0	0		limpa
+huo	sem_acento	583	42		False	False	0	0		limpa
+huo	sem_acento	555	42		False	False	0	0		limpa
+huo	sem_acento	517	42		False	False	0	0		limpa
+huo	sem_acento	580	42		False	False	0	0		limpa
+huo	sem_acento	537	42		False	False	0	0		limpa
+huo	sem_acento	616	42		False	False	0	0		limpa
+huo	sem_acento	305	42		False	False	0	0		limpa
+huo	sem_acento	589	42		False	False	0	0		limpa
+huo	sem_acento	280	42		False	False	0	0		limpa
+huo	sem_acento	510	42		False	False	0	0		limpa
+huo	sem_acento	201	42		False	False	0	0		limpa
+huo	sem_acento	631	42		False	False	0	0		limpa
+huo	sem_acento	318	42		False	False	0	0		limpa
+huo	sem_acento	597	42		False	False	0	0		limpa
+huo	sem_acento	622	42		False	False	0	0		limpa
+huo	sem_acento	547	43		False	False	0	0		limpa
+huo	sem_acento	560	43		False	False	0	0		limpa
+huo	sem_acento	183	43		False	False	0	0		limpa
+huo	sem_acento	321	43		False	False	0	0		limpa
+huo	sem_acento	590	43		False	False	0	0		limpa
+huo	sem_acento	583	43		False	False	0	0		limpa
+huo	sem_acento	555	43		False	False	1	0	3	marca indevida
+huo	sem_acento	517	43		False	False	0	0		limpa
+huo	sem_acento	580	43		False	False	0	0		limpa
+huo	sem_acento	537	43		False	False	0	0		limpa
+huo	sem_acento	616	43		False	False	0	0		limpa
+huo	sem_acento	305	43		False	False	0	0		limpa
+huo	sem_acento	589	43		False	False	0	0		limpa
+huo	sem_acento	280	43		False	False	0	0		limpa
+huo	sem_acento	510	43		False	False	0	0		limpa
+huo	sem_acento	201	43		False	False	0	0		limpa
+huo	sem_acento	631	43		False	False	0	0		limpa
+huo	sem_acento	318	43		False	False	0	0		limpa
+huo	sem_acento	597	43		False	False	0	0		limpa
+huo	sem_acento	622	43		False	False	0	0		limpa
+contactos	sem_acento	547	42		False	False	0	0		limpa
+contactos	sem_acento	560	42		False	False	0	0		limpa
+contactos	sem_acento	183	42		False	False	0	0		limpa
+contactos	sem_acento	321	42		False	False	0	0		limpa
+contactos	sem_acento	590	42		False	False	0	0		limpa
+contactos	sem_acento	583	42		False	False	0	1		marca indevida
+contactos	sem_acento	555	42		False	False	0	0		limpa
+contactos	sem_acento	517	42		False	False	0	0		limpa
+contactos	sem_acento	580	42		False	False	0	0		limpa
+contactos	sem_acento	537	42		False	False	0	0		limpa
+contactos	sem_acento	616	42		False	False	0	0		limpa
+contactos	sem_acento	305	42		False	False	0	0		limpa
+contactos	sem_acento	589	42		False	False	0	0		limpa
+contactos	sem_acento	280	42		False	False	0	0		limpa
+contactos	sem_acento	510	42		False	False	0	0		limpa
+contactos	sem_acento	201	42		False	False	0	0		limpa
+contactos	sem_acento	631	42		False	False	0	0		limpa
+contactos	sem_acento	318	42		False	False	0	0		limpa
+contactos	sem_acento	597	42		False	False	0	0		limpa
+contactos	sem_acento	622	42		False	False	0	0		limpa
+contactos	sem_acento	547	43		False	False	0	0		limpa
+contactos	sem_acento	560	43		False	False	0	1		marca indevida
+contactos	sem_acento	183	43		False	False	0	0		limpa
+contactos	sem_acento	321	43		False	False	0	0		limpa
+contactos	sem_acento	590	43		False	False	0	0		limpa
+contactos	sem_acento	583	43		False	False	0	0		limpa
+contactos	sem_acento	555	43		False	False	0	0		limpa
+contactos	sem_acento	517	43		False	False	0	0		limpa
+contactos	sem_acento	580	43		False	False	0	0		limpa
+contactos	sem_acento	537	43		False	False	0	0		limpa
+contactos	sem_acento	616	43		False	False	0	0		limpa
+contactos	sem_acento	305	43		False	False	0	0		limpa
+contactos	sem_acento	589	43		False	False	0	0		limpa
+contactos	sem_acento	280	43		False	False	0	0		limpa
+contactos	sem_acento	510	43		False	False	0	0		limpa
+contactos	sem_acento	201	43		False	False	0	0		limpa
+contactos	sem_acento	631	43		False	False	0	0		limpa
+contactos	sem_acento	318	43		False	False	0	0		limpa
+contactos	sem_acento	597	43		False	False	0	0		limpa
+contactos	sem_acento	622	43		False	False	0	0		limpa
+apanho	sem_acento	547	42		False	False	0	0		limpa
+apanho	sem_acento	560	42		False	False	0	0		limpa
+apanho	sem_acento	183	42		False	False	0	0		limpa
+apanho	sem_acento	321	42		False	False	0	0		limpa
+apanho	sem_acento	590	42		False	False	0	0		limpa
+apanho	sem_acento	583	42		False	False	0	0		limpa
+apanho	sem_acento	555	42		False	False	0	0		limpa
+apanho	sem_acento	517	42		False	False	0	0		limpa
+apanho	sem_acento	580	42		False	False	0	0		limpa
+apanho	sem_acento	537	42		False	False	0	0		limpa
+apanho	sem_acento	616	42		False	False	0	0		limpa
+apanho	sem_acento	305	42		False	False	0	0		limpa
+apanho	sem_acento	589	42		False	False	0	0		limpa
+apanho	sem_acento	280	42		False	False	0	0		limpa
+apanho	sem_acento	510	42		False	False	0	0		limpa
+apanho	sem_acento	201	42		False	False	0	0		limpa
+apanho	sem_acento	631	42		False	False	0	0		limpa
+apanho	sem_acento	318	42		False	False	0	0		limpa
+apanho	sem_acento	597	42		False	False	0	0		limpa
+apanho	sem_acento	622	42		False	False	0	0		limpa
+apanho	sem_acento	547	43		False	False	0	0		limpa
+apanho	sem_acento	560	43		False	False	0	0		limpa
+apanho	sem_acento	183	43		False	False	0	0		limpa
+apanho	sem_acento	321	43		False	False	0	0		limpa
+apanho	sem_acento	590	43		False	False	0	0		limpa
+apanho	sem_acento	583	43		False	False	0	0		limpa
+apanho	sem_acento	555	43		False	False	0	0		limpa
+apanho	sem_acento	517	43		False	False	0	0		limpa
+apanho	sem_acento	580	43		False	False	0	0		limpa
+apanho	sem_acento	537	43		False	False	0	0		limpa
+apanho	sem_acento	616	43		False	False	0	0		limpa
+apanho	sem_acento	305	43		False	False	0	0		limpa
+apanho	sem_acento	589	43		False	False	0	0		limpa
+apanho	sem_acento	280	43		False	False	0	0		limpa
+apanho	sem_acento	510	43		False	False	0	0		limpa
+apanho	sem_acento	201	43		False	False	0	0		limpa
+apanho	sem_acento	631	43		False	False	0	0		limpa
+apanho	sem_acento	318	43		False	False	0	0		limpa
+apanho	sem_acento	597	43		False	False	0	0		limpa
+apanho	sem_acento	622	43		False	False	0	0		limpa
+rylan	sem_acento	547	42		False	False	0	0		limpa
+rylan	sem_acento	560	42		False	False	0	0		limpa
+rylan	sem_acento	183	42		False	False	0	0		limpa
+rylan	sem_acento	321	42		False	False	0	0		limpa
+rylan	sem_acento	590	42		False	False	0	0		limpa
+rylan	sem_acento	583	42		False	False	0	0		limpa
+rylan	sem_acento	555	42		False	False	0	0		limpa
+rylan	sem_acento	517	42		False	False	0	0		limpa
+rylan	sem_acento	580	42		False	False	0	0		limpa
+rylan	sem_acento	537	42		False	False	0	0		limpa
+rylan	sem_acento	616	42		False	False	0	0		limpa
+rylan	sem_acento	305	42		False	False	0	0		limpa
+rylan	sem_acento	589	42		False	False	0	0		limpa
+rylan	sem_acento	280	42		False	False	0	0		limpa
+rylan	sem_acento	510	42		False	False	0	0		limpa
+rylan	sem_acento	201	42		False	False	0	0		limpa
+rylan	sem_acento	631	42		False	False	0	0		limpa
+rylan	sem_acento	318	42		False	False	0	0		limpa
+rylan	sem_acento	597	42		False	False	0	0		limpa
+rylan	sem_acento	622	42		False	False	0	0		limpa
+rylan	sem_acento	547	43		False	False	0	0		limpa
+rylan	sem_acento	560	43		False	False	0	0		limpa
+rylan	sem_acento	183	43		False	False	0	0		limpa
+rylan	sem_acento	321	43		False	False	1	0	4	marca indevida
+rylan	sem_acento	590	43		False	False	0	0		limpa
+rylan	sem_acento	583	43		False	False	0	0		limpa
+rylan	sem_acento	555	43		False	False	0	0		limpa
+rylan	sem_acento	517	43		False	False	0	0		limpa
+rylan	sem_acento	580	43		False	False	0	0		limpa
+rylan	sem_acento	537	43		False	False	0	0		limpa
+rylan	sem_acento	616	43		False	False	0	0		limpa
+rylan	sem_acento	305	43		False	False	0	0		limpa
+rylan	sem_acento	589	43		False	False	0	0		limpa
+rylan	sem_acento	280	43		False	False	0	0		limpa
+rylan	sem_acento	510	43		False	False	1	0	2	marca indevida
+rylan	sem_acento	201	43		False	False	0	0		limpa
+rylan	sem_acento	631	43		False	False	0	0		limpa
+rylan	sem_acento	318	43		False	False	0	0		limpa
+rylan	sem_acento	597	43		False	False	0	0		limpa
+rylan	sem_acento	622	43		False	False	0	0		limpa
+travas	sem_acento	547	42		False	False	0	0		limpa
+travas	sem_acento	560	42		False	False	0	0		limpa
+travas	sem_acento	183	42		False	False	1	0	5	marca indevida
+travas	sem_acento	321	42		False	False	0	0		limpa
+travas	sem_acento	590	42		False	False	0	0		limpa
+travas	sem_acento	583	42		False	False	1	0	2	marca indevida
+travas	sem_acento	555	42		False	False	0	0		limpa
+travas	sem_acento	517	42		False	False	0	0		limpa
+travas	sem_acento	580	42		False	False	0	0		limpa
+travas	sem_acento	537	42		False	False	0	0		limpa
+travas	sem_acento	616	42		False	False	0	0		limpa
+travas	sem_acento	305	42		False	False	0	0		limpa
+travas	sem_acento	589	42		False	False	0	0		limpa
+travas	sem_acento	280	42		False	False	1	0	1	marca indevida
+travas	sem_acento	510	42		False	False	0	0		limpa
+travas	sem_acento	201	42		False	False	0	0		limpa
+travas	sem_acento	631	42		False	False	0	0		limpa
+travas	sem_acento	318	42		False	False	0	0		limpa
+travas	sem_acento	597	42		False	False	1	0	3	marca indevida
+travas	sem_acento	622	42		False	False	0	0		limpa
+travas	sem_acento	547	43		False	False	0	0		limpa
+travas	sem_acento	560	43		False	False	0	0		limpa
+travas	sem_acento	183	43		False	False	1	0	2	marca indevida
+travas	sem_acento	321	43		False	False	0	0		limpa
+travas	sem_acento	590	43		False	False	1	0	4	marca indevida
+travas	sem_acento	583	43		False	False	0	0		limpa
+travas	sem_acento	555	43		False	False	0	0		limpa
+travas	sem_acento	517	43		False	False	0	0		limpa
+travas	sem_acento	580	43		False	False	0	0		limpa
+travas	sem_acento	537	43		False	False	0	0		limpa
+travas	sem_acento	616	43		False	False	0	0		limpa
+travas	sem_acento	305	43		False	False	0	0		limpa
+travas	sem_acento	589	43		False	False	0	0		limpa
+travas	sem_acento	280	43		False	False	0	0		limpa
+travas	sem_acento	510	43		False	False	0	0		limpa
+travas	sem_acento	201	43		False	False	0	0		limpa
+travas	sem_acento	631	43		False	False	0	0		limpa
+travas	sem_acento	318	43		False	False	0	0		limpa
+travas	sem_acento	597	43		False	False	0	0		limpa
+travas	sem_acento	622	43		False	False	0	0		limpa
+layout	sem_acento	547	42		False	False	0	0		limpa
+layout	sem_acento	560	42		False	False	0	0		limpa
+layout	sem_acento	183	42		False	False	0	0		limpa
+layout	sem_acento	321	42		False	False	0	0		limpa
+layout	sem_acento	590	42		False	False	0	0		limpa
+layout	sem_acento	583	42		False	False	0	0		limpa
+layout	sem_acento	555	42		False	False	0	0		limpa
+layout	sem_acento	517	42		False	False	1	0	2	marca indevida
+layout	sem_acento	580	42		False	False	0	0		limpa
+layout	sem_acento	537	42		False	False	0	0		limpa
+layout	sem_acento	616	42		False	False	0	0		limpa
+layout	sem_acento	305	42		False	False	0	0		limpa
+layout	sem_acento	589	42		False	False	0	0		limpa
+layout	sem_acento	280	42		False	False	0	0		limpa
+layout	sem_acento	510	42		False	False	0	0		limpa
+layout	sem_acento	201	42		False	False	0	0		limpa
+layout	sem_acento	631	42		False	False	0	0		limpa
+layout	sem_acento	318	42		False	False	0	0		limpa
+layout	sem_acento	597	42		False	False	0	0		limpa
+layout	sem_acento	622	42		False	False	0	0		limpa
+layout	sem_acento	547	43		False	False	0	0		limpa
+layout	sem_acento	560	43		False	False	0	0		limpa
+layout	sem_acento	183	43		False	False	0	0		limpa
+layout	sem_acento	321	43		False	False	0	0		limpa
+layout	sem_acento	590	43		False	False	0	0		limpa
+layout	sem_acento	583	43		False	False	0	0		limpa
+layout	sem_acento	555	43		False	False	0	0		limpa
+layout	sem_acento	517	43		False	False	0	0		limpa
+layout	sem_acento	580	43		False	False	0	0		limpa
+layout	sem_acento	537	43		False	False	0	0		limpa
+layout	sem_acento	616	43		False	False	0	0		limpa
+layout	sem_acento	305	43		False	False	0	0		limpa
+layout	sem_acento	589	43		False	False	0	0		limpa
+layout	sem_acento	280	43		False	False	0	0		limpa
+layout	sem_acento	510	43		False	False	0	0		limpa
+layout	sem_acento	201	43		False	False	1	0	2 5	marca indevida
+layout	sem_acento	631	43		False	False	0	0		limpa
+layout	sem_acento	318	43		False	False	1	0	2	marca indevida
+layout	sem_acento	597	43		False	False	0	0		limpa
+layout	sem_acento	622	43		False	False	0	0		limpa
+tragada	sem_acento	547	42		False	False	0	0		limpa
+tragada	sem_acento	560	42		False	False	0	0		limpa
+tragada	sem_acento	183	42		False	False	0	0		limpa
+tragada	sem_acento	321	42		False	False	0	0		limpa
+tragada	sem_acento	590	42		False	False	0	0		limpa
+tragada	sem_acento	583	42		False	False	0	0		limpa
+tragada	sem_acento	555	42		False	False	0	0		limpa
+tragada	sem_acento	517	42		False	False	0	0		limpa
+tragada	sem_acento	580	42		False	False	0	0		limpa
+tragada	sem_acento	537	42		False	False	0	0		limpa
+tragada	sem_acento	616	42		False	False	0	0		limpa
+tragada	sem_acento	305	42		False	False	0	0		limpa
+tragada	sem_acento	589	42		False	False	0	0		limpa
+tragada	sem_acento	280	42		False	False	0	0		limpa
+tragada	sem_acento	510	42		False	False	0	0		limpa
+tragada	sem_acento	201	42		False	False	0	0		limpa
+tragada	sem_acento	631	42		False	False	0	0		limpa
+tragada	sem_acento	318	42		False	False	0	0		limpa
+tragada	sem_acento	597	42		False	False	0	0		limpa
+tragada	sem_acento	622	42		False	False	0	0		limpa
+tragada	sem_acento	547	43		False	False	0	0		limpa
+tragada	sem_acento	560	43		False	False	0	0		limpa
+tragada	sem_acento	183	43		False	False	0	0		limpa
+tragada	sem_acento	321	43		False	False	0	0		limpa
+tragada	sem_acento	590	43		False	False	0	0		limpa
+tragada	sem_acento	583	43		False	False	0	0		limpa
+tragada	sem_acento	555	43		False	False	0	0		limpa
+tragada	sem_acento	517	43		False	False	0	0		limpa
+tragada	sem_acento	580	43		False	False	0	0		limpa
+tragada	sem_acento	537	43		False	False	1	0	5	marca indevida
+tragada	sem_acento	616	43		False	False	0	0		limpa
+tragada	sem_acento	305	43		False	False	0	0		limpa
+tragada	sem_acento	589	43		False	False	0	0		limpa
+tragada	sem_acento	280	43		False	False	0	0		limpa
+tragada	sem_acento	510	43		False	False	0	0		limpa
+tragada	sem_acento	201	43		False	False	0	0		limpa
+tragada	sem_acento	631	43		False	False	0	0		limpa
+tragada	sem_acento	318	43		False	False	0	0		limpa
+tragada	sem_acento	597	43		False	False	0	0		limpa
+tragada	sem_acento	622	43		False	False	0	0		limpa
+acento	sem_acento	547	42		False	False	0	0		limpa
+acento	sem_acento	560	42		False	False	0	0		limpa
+acento	sem_acento	183	42		False	False	0	0		limpa
+acento	sem_acento	321	42		False	False	0	0		limpa
+acento	sem_acento	590	42		False	False	0	0		limpa
+acento	sem_acento	583	42		False	False	0	0		limpa
+acento	sem_acento	555	42		False	False	0	0		limpa
+acento	sem_acento	517	42		False	False	0	0		limpa
+acento	sem_acento	580	42		False	False	0	0		limpa
+acento	sem_acento	537	42		False	False	1	0	6	marca indevida
+acento	sem_acento	616	42		False	False	0	0		limpa
+acento	sem_acento	305	42		False	False	0	0		limpa
+acento	sem_acento	589	42		False	False	0	0		limpa
+acento	sem_acento	280	42		False	False	0	0		limpa
+acento	sem_acento	510	42		False	False	0	0		limpa
+acento	sem_acento	201	42		False	False	0	0		limpa
+acento	sem_acento	631	42		False	False	0	0		limpa
+acento	sem_acento	318	42		False	False	0	0		limpa
+acento	sem_acento	597	42		False	False	1	0	5	marca indevida
+acento	sem_acento	622	42		False	False	0	0		limpa
+acento	sem_acento	547	43		False	False	1	0	1 2	marca indevida
+acento	sem_acento	560	43		False	False	0	0		limpa
+acento	sem_acento	183	43		False	False	0	0		limpa
+acento	sem_acento	321	43		False	False	0	0		limpa
+acento	sem_acento	590	43		False	False	0	0		limpa
+acento	sem_acento	583	43		False	False	0	0		limpa
+acento	sem_acento	555	43		False	False	0	0		limpa
+acento	sem_acento	517	43		False	False	0	0		limpa
+acento	sem_acento	580	43		False	False	0	0		limpa
+acento	sem_acento	537	43		False	False	0	0		limpa
+acento	sem_acento	616	43		False	False	0	0		limpa
+acento	sem_acento	305	43		False	False	0	0		limpa
+acento	sem_acento	589	43		False	False	0	0		limpa
+acento	sem_acento	280	43		False	False	0	0		limpa
+acento	sem_acento	510	43		False	False	0	0		limpa
+acento	sem_acento	201	43		False	False	0	0		limpa
+acento	sem_acento	631	43		False	False	0	0		limpa
+acento	sem_acento	318	43		False	False	0	0		limpa
+acento	sem_acento	597	43		False	False	0	0		limpa
+acento	sem_acento	622	43		False	False	0	0		limpa
+atrever	sem_acento	547	42		False	False	0	0		limpa
+atrever	sem_acento	560	42		False	False	0	0		limpa
+atrever	sem_acento	183	42		False	False	0	0		limpa
+atrever	sem_acento	321	42		False	False	0	0		limpa
+atrever	sem_acento	590	42		False	False	0	0		limpa
+atrever	sem_acento	583	42		False	False	0	0		limpa
+atrever	sem_acento	555	42		False	False	0	0		limpa
+atrever	sem_acento	517	42		False	False	0	0		limpa
+atrever	sem_acento	580	42		False	False	0	0		limpa
+atrever	sem_acento	537	42		False	False	1	0	2	marca indevida
+atrever	sem_acento	616	42		False	False	0	0		limpa
+atrever	sem_acento	305	42		False	False	0	0		limpa
+atrever	sem_acento	589	42		False	False	0	0		limpa
+atrever	sem_acento	280	42		False	False	0	0		limpa
+atrever	sem_acento	510	42		False	False	1	0	7	marca indevida
+atrever	sem_acento	201	42		False	False	0	0		limpa
+atrever	sem_acento	631	42		False	False	0	0		limpa
+atrever	sem_acento	318	42		False	False	0	0		limpa
+atrever	sem_acento	597	42		False	False	0	0		limpa
+atrever	sem_acento	622	42		False	False	0	0		limpa
+atrever	sem_acento	547	43		False	False	0	0		limpa
+atrever	sem_acento	560	43		False	False	0	0		limpa
+atrever	sem_acento	183	43		False	False	0	0		limpa
+atrever	sem_acento	321	43		False	False	0	0		limpa
+atrever	sem_acento	590	43		False	False	0	0		limpa
+atrever	sem_acento	583	43		False	False	1	0	6	marca indevida
+atrever	sem_acento	555	43		False	False	0	0		limpa
+atrever	sem_acento	517	43		False	False	0	0		limpa
+atrever	sem_acento	580	43		False	False	0	0		limpa
+atrever	sem_acento	537	43		False	False	0	0		limpa
+atrever	sem_acento	616	43		False	False	0	0		limpa
+atrever	sem_acento	305	43		False	False	0	0		limpa
+atrever	sem_acento	589	43		False	False	0	0		limpa
+atrever	sem_acento	280	43		False	False	0	0		limpa
+atrever	sem_acento	510	43		False	False	0	0		limpa
+atrever	sem_acento	201	43		False	False	0	0		limpa
+atrever	sem_acento	631	43		False	False	0	0		limpa
+atrever	sem_acento	318	43		False	False	0	0		limpa
+atrever	sem_acento	597	43		False	False	0	0		limpa
+atrever	sem_acento	622	43		False	False	0	0		limpa
+pobres	sem_acento	547	42		False	False	0	0		limpa
+pobres	sem_acento	560	42		False	False	0	0		limpa
+pobres	sem_acento	183	42		False	False	0	0		limpa
+pobres	sem_acento	321	42		False	False	0	0		limpa
+pobres	sem_acento	590	42		False	False	0	0		limpa
+pobres	sem_acento	583	42		False	False	0	0		limpa
+pobres	sem_acento	555	42		False	False	0	0		limpa
+pobres	sem_acento	517	42		False	False	0	0		limpa
+pobres	sem_acento	580	42		False	False	0	0		limpa
+pobres	sem_acento	537	42		False	False	0	0		limpa
+pobres	sem_acento	616	42		False	False	0	0		limpa
+pobres	sem_acento	305	42		False	False	0	0		limpa
+pobres	sem_acento	589	42		False	False	0	0		limpa
+pobres	sem_acento	280	42		False	False	0	0		limpa
+pobres	sem_acento	510	42		False	False	0	0		limpa
+pobres	sem_acento	201	42		False	False	0	0		limpa
+pobres	sem_acento	631	42		False	False	0	0		limpa
+pobres	sem_acento	318	42		False	False	0	0		limpa
+pobres	sem_acento	597	42		False	False	0	0		limpa
+pobres	sem_acento	622	42		False	False	0	0		limpa
+pobres	sem_acento	547	43		False	False	0	0		limpa
+pobres	sem_acento	560	43		False	False	0	0		limpa
+pobres	sem_acento	183	43		False	False	0	0		limpa
+pobres	sem_acento	321	43		False	False	0	0		limpa
+pobres	sem_acento	590	43		False	False	0	0		limpa
+pobres	sem_acento	583	43		False	False	0	0		limpa
+pobres	sem_acento	555	43		False	False	0	0		limpa
+pobres	sem_acento	517	43		False	False	0	0		limpa
+pobres	sem_acento	580	43		False	False	0	0		limpa
+pobres	sem_acento	537	43		False	False	0	0		limpa
+pobres	sem_acento	616	43		False	False	0	0		limpa
+pobres	sem_acento	305	43		False	False	0	0		limpa
+pobres	sem_acento	589	43		False	False	0	0		limpa
+pobres	sem_acento	280	43		False	False	0	0		limpa
+pobres	sem_acento	510	43		False	False	0	0		limpa
+pobres	sem_acento	201	43		False	False	0	0		limpa
+pobres	sem_acento	631	43		False	False	0	0		limpa
+pobres	sem_acento	318	43		False	False	0	0		limpa
+pobres	sem_acento	597	43		False	False	0	0		limpa
+pobres	sem_acento	622	43		False	False	0	0		limpa
+sledge	sem_acento	547	42		False	False	0	0		limpa
+sledge	sem_acento	560	42		False	False	0	0		limpa
+sledge	sem_acento	183	42		False	False	0	0		limpa
+sledge	sem_acento	321	42		False	False	0	0		limpa
+sledge	sem_acento	590	42		False	False	0	0		limpa
+sledge	sem_acento	583	42		False	False	0	0		limpa
+sledge	sem_acento	555	42		False	False	0	0		limpa
+sledge	sem_acento	517	42		False	False	1	0	3	marca indevida
+sledge	sem_acento	580	42		False	False	0	0		limpa
+sledge	sem_acento	537	42		False	False	0	0		limpa
+sledge	sem_acento	616	42		False	False	1	0	2	marca indevida
+sledge	sem_acento	305	42		False	False	0	0		limpa
+sledge	sem_acento	589	42		False	False	0	0		limpa
+sledge	sem_acento	280	42		False	False	0	0		limpa
+sledge	sem_acento	510	42		False	False	0	0		limpa
+sledge	sem_acento	201	42		False	False	0	0		limpa
+sledge	sem_acento	631	42		False	False	0	0		limpa
+sledge	sem_acento	318	42		False	False	0	0		limpa
+sledge	sem_acento	597	42		False	False	0	0		limpa
+sledge	sem_acento	622	42		False	False	0	0		limpa
+sledge	sem_acento	547	43		False	False	0	0		limpa
+sledge	sem_acento	560	43		False	False	0	0		limpa
+sledge	sem_acento	183	43		False	False	0	0		limpa
+sledge	sem_acento	321	43		False	False	0	0		limpa
+sledge	sem_acento	590	43		False	False	0	0		limpa
+sledge	sem_acento	583	43		False	False	0	0		limpa
+sledge	sem_acento	555	43		False	False	0	0		limpa
+sledge	sem_acento	517	43		False	False	0	0		limpa
+sledge	sem_acento	580	43		False	False	0	0		limpa
+sledge	sem_acento	537	43		False	False	0	0		limpa
+sledge	sem_acento	616	43		False	False	0	0		limpa
+sledge	sem_acento	305	43		False	False	0	0		limpa
+sledge	sem_acento	589	43		False	False	0	0		limpa
+sledge	sem_acento	280	43		False	False	0	0		limpa
+sledge	sem_acento	510	43		False	False	0	0		limpa
+sledge	sem_acento	201	43		False	False	0	0		limpa
+sledge	sem_acento	631	43		False	False	0	0		limpa
+sledge	sem_acento	318	43		False	False	0	0		limpa
+sledge	sem_acento	597	43		False	False	0	0		limpa
+sledge	sem_acento	622	43		False	False	0	0		limpa

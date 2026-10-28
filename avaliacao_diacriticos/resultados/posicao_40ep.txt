@@ -1,0 +1,7 @@
+Letra do acento: detector do colega contra o gabarito humano letra por letra.
+Modelo de 40 epocas, imagens sem i e j.
+
+todas: 180 imagens, letras iguais em 145 (81%); letras em desacordo: vizinha 6, perdida 17, inventada 14
+com acento em cima: 80 imagens, letras iguais em 51 (64%); letras em desacordo: vizinha 6, perdida 16, inventada 9
+sem acento em cima pedido: 100 imagens, letras iguais em 94 (94%); letras em desacordo: vizinha 0, perdida 1, inventada 5
+sem alinhamento: 0

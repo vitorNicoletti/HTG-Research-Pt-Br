@@ -1,0 +1,1201 @@
+palavra	classe	escritor	semente	cer_acentuada	cer_esqueleto	dcer	presente	categoria
+opressão	til	547	42	0.375	0.375	0.0	True	acerto
+opressão	til	560	42	0.0	0.0	0.0	False	omissao
+opressão	til	183	42	0.25	0.25	0.0	False	omissao
+opressão	til	321	42	0.0	0.0	0.0	False	omissao
+opressão	til	590	42	0.25	0.25	0.0	False	omissao
+opressão	til	583	42	0.375	0.125	0.25	False	degradacao sem diacritico
+opressão	til	555	42	0.375	0.625	-0.25	True	acerto
+opressão	til	517	42	0.0	0.0	0.0	True	acerto
+opressão	til	580	42	0.25	0.375	-0.125	False	omissao
+opressão	til	537	42	0.125	0.25	-0.125	False	omissao
+opressão	til	616	42	0.5	0.125	0.375	True	degradacao com diacritico
+opressão	til	305	42	0.125	0.0	0.125	False	omissao
+opressão	til	589	42	0.375	0.375	0.0	False	omissao
+opressão	til	280	42	0.375	0.125	0.25	False	degradacao sem diacritico
+opressão	til	510	42	0.375	0.125	0.25	True	degradacao com diacritico
+opressão	til	201	42	0.0	0.5	-0.5	True	acerto
+opressão	til	631	42	0.375	0.375	0.0	False	omissao
+opressão	til	318	42	0.25	0.0	0.25	False	degradacao sem diacritico
+opressão	til	597	42	0.0	0.125	-0.125	False	omissao
+opressão	til	622	42	0.375	0.0	0.375	False	degradacao sem diacritico
+opressão	til	547	43	0.375	0.375	0.0	False	omissao
+opressão	til	560	43	0.25	0.25	0.0	False	omissao
+opressão	til	183	43	0.25	0.125	0.125	False	omissao
+opressão	til	321	43	0.25	0.0	0.25	False	degradacao sem diacritico
+opressão	til	590	43	0.25	0.25	0.0	False	omissao
+opressão	til	583	43	0.375	0.125	0.25	False	degradacao sem diacritico
+opressão	til	555	43	0.375	0.375	0.0	True	acerto
+opressão	til	517	43	0.375	0.0	0.375	False	degradacao sem diacritico
+opressão	til	580	43	0.25	0.25	0.0	False	omissao
+opressão	til	537	43	0.0	0.0	0.0	False	omissao
+opressão	til	616	43	0.625	0.25	0.375	False	degradacao sem diacritico
+opressão	til	305	43	0.375	0.25	0.125	False	omissao
+opressão	til	589	43	0.25	0.125	0.125	False	omissao
+opressão	til	280	43	0.25	0.125	0.125	True	acerto
+opressão	til	510	43	0.25	0.25	0.0	False	omissao
+opressão	til	201	43	0.125	0.125	0.0	True	acerto
+opressão	til	631	43	0.625	0.375	0.25	True	degradacao com diacritico
+opressão	til	318	43	0.125	0.125	0.0	True	acerto
+opressão	til	597	43	0.125	0.125	0.0	True	acerto
+opressão	til	622	43	0.0	0.0	0.0	False	omissao
+percussão	til	547	42	0.333	0.111	0.222	True	degradacao com diacritico
+percussão	til	560	42	0.111	0.222	-0.111	True	acerto
+percussão	til	183	42	0.333	0.333	0.0	True	acerto
+percussão	til	321	42	0.444	0.333	0.111	True	acerto
+percussão	til	590	42	0.222	0.222	0.0	False	omissao
+percussão	til	583	42	0.333	0.111	0.222	False	degradacao sem diacritico
+percussão	til	555	42	0.333	0.222	0.111	True	acerto
+percussão	til	517	42	0.333	0.556	-0.222	False	omissao
+percussão	til	580	42	0.333	0.0	0.333	False	degradacao sem diacritico
+percussão	til	537	42	0.333	0.0	0.333	True	degradacao com diacritico
+percussão	til	616	42	0.556	0.222	0.333	False	degradacao sem diacritico
+percussão	til	305	42	0.111	0.0	0.111	True	acerto
+percussão	til	589	42	0.222	0.111	0.111	True	acerto
+percussão	til	280	42	0.222	0.111	0.111	True	acerto
+percussão	til	510	42	0.222	0.222	0.0	True	acerto
+percussão	til	201	42	0.111	0.222	-0.111	True	acerto
+percussão	til	631	42	0.333	0.444	-0.111	True	acerto
+percussão	til	318	42	0.333	0.556	-0.222	False	omissao
+percussão	til	597	42	0.111	0.111	0.0	True	acerto
+percussão	til	622	42	0.444	0.444	0.0	True	acerto
+percussão	til	547	43	0.111	0.111	0.0	True	acerto
+percussão	til	560	43	0.444	0.333	0.111	False	omissao
+percussão	til	183	43	0.333	0.111	0.222	True	degradacao com diacritico
+percussão	til	321	43	0.222	0.333	-0.111	False	omissao
+percussão	til	590	43	0.333	0.111	0.222	True	degradacao com diacritico
+percussão	til	583	43	0.222	0.111	0.111	False	omissao
+percussão	til	555	43	0.111	0.0	0.111	True	acerto
+percussão	til	517	43	0.333	0.222	0.111	False	omissao
+percussão	til	580	43	0.333	0.111	0.222	False	degradacao sem diacritico
+percussão	til	537	43	0.222	0.111	0.111	True	acerto
+percussão	til	616	43	0.222	0.222	0.0	False	omissao
+percussão	til	305	43	0.111	0.0	0.111	True	acerto
+percussão	til	589	43	0.111	0.222	-0.111	True	acerto
+percussão	til	280	43	0.111	0.0	0.111	False	omissao
+percussão	til	510	43	0.222	0.222	0.0	True	acerto
+percussão	til	201	43	0.222	0.111	0.111	True	acerto
+percussão	til	631	43	0.778	0.333	0.444	True	degradacao com diacritico
+percussão	til	318	43	0.444	0.556	-0.111	True	acerto
+percussão	til	597	43	0.556	0.222	0.333	True	degradacao com diacritico
+percussão	til	622	43	0.333	0.111	0.222	False	degradacao sem diacritico
+arregaçar	cedilha	547	42	0.111	0.0	0.111	True	acerto
+arregaçar	cedilha	560	42	0.556	0.444	0.111	False	omissao
+arregaçar	cedilha	183	42	0.333	0.111	0.222	True	degradacao com diacritico
+arregaçar	cedilha	321	42	0.0	0.0	0.0	True	acerto
+arregaçar	cedilha	590	42	0.222	0.111	0.111	True	acerto
+arregaçar	cedilha	583	42	0.444	0.333	0.111	True	acerto
+arregaçar	cedilha	555	42	0.222	0.333	-0.111	True	acerto
+arregaçar	cedilha	517	42	0.111	0.222	-0.111	True	acerto
+arregaçar	cedilha	580	42	0.0	0.0	0.0	False	omissao
+arregaçar	cedilha	537	42	0.333	0.111	0.222	True	degradacao com diacritico
+arregaçar	cedilha	616	42	0.778	0.333	0.444	False	degradacao sem diacritico
+arregaçar	cedilha	305	42	0.0	0.111	-0.111	True	acerto
+arregaçar	cedilha	589	42	0.444	0.222	0.222	False	degradacao sem diacritico
+arregaçar	cedilha	280	42	0.222	0.0	0.222	True	degradacao com diacritico
+arregaçar	cedilha	510	42	0.0	0.0	0.0	True	acerto
+arregaçar	cedilha	201	42	0.111	0.222	-0.111	False	omissao
+arregaçar	cedilha	631	42	0.222	0.111	0.111	True	acerto
+arregaçar	cedilha	318	42	0.222	0.222	0.0	True	acerto
+arregaçar	cedilha	597	42	0.111	0.111	0.0	False	omissao
+arregaçar	cedilha	622	42	0.333	0.111	0.222	True	degradacao com diacritico
+arregaçar	cedilha	547	43	0.222	0.222	0.0	True	acerto
+arregaçar	cedilha	560	43	0.222	0.111	0.111	True	acerto
+arregaçar	cedilha	183	43	0.444	0.333	0.111	True	acerto
+arregaçar	cedilha	321	43	0.111	0.111	0.0	False	omissao
+arregaçar	cedilha	590	43	0.222	0.111	0.111	True	acerto
+arregaçar	cedilha	583	43	0.0	0.0	0.0	True	acerto
+arregaçar	cedilha	555	43	0.333	0.111	0.222	True	degradacao com diacritico
+arregaçar	cedilha	517	43	0.222	0.111	0.111	True	acerto
+arregaçar	cedilha	580	43	0.222	0.111	0.111	False	omissao
+arregaçar	cedilha	537	43	0.111	0.111	0.0	True	acerto
+arregaçar	cedilha	616	43	0.556	0.333	0.222	True	degradacao com diacritico
+arregaçar	cedilha	305	43	0.0	0.0	0.0	True	acerto
+arregaçar	cedilha	589	43	0.222	0.222	0.0	True	acerto
+arregaçar	cedilha	280	43	0.444	0.222	0.222	True	degradacao com diacritico
+arregaçar	cedilha	510	43	0.222	0.111	0.111	True	acerto
+arregaçar	cedilha	201	43	0.222	0.222	0.0	False	omissao
+arregaçar	cedilha	631	43	0.333	0.0	0.333	True	degradacao com diacritico
+arregaçar	cedilha	318	43	0.111	0.111	0.0	True	acerto
+arregaçar	cedilha	597	43	0.222	0.0	0.222	True	degradacao com diacritico
+arregaçar	cedilha	622	43	0.222	0.111	0.111	False	omissao
+estarás	agudo	547	42	0.429	0.143	0.286	True	degradacao com diacritico
+estarás	agudo	560	42	0.143	0.286	-0.143	True	acerto
+estarás	agudo	183	42	0.286	0.143	0.143	False	omissao
+estarás	agudo	321	42	0.286	0.429	-0.143	True	acerto
+estarás	agudo	590	42	0.429	0.571	-0.143	True	acerto
+estarás	agudo	583	42	0.286	0.143	0.143	True	acerto
+estarás	agudo	555	42	0.429	0.0	0.429	True	degradacao com diacritico
+estarás	agudo	517	42	0.286	0.429	-0.143	True	acerto
+estarás	agudo	580	42	0.286	0.143	0.143	True	acerto
+estarás	agudo	537	42	0.0	0.143	-0.143	True	acerto
+estarás	agudo	616	42	0.429	0.286	0.143	True	acerto
+estarás	agudo	305	42	0.429	0.571	-0.143	True	acerto
+estarás	agudo	589	42	0.429	0.286	0.143	True	acerto
+estarás	agudo	280	42	0.143	0.143	0.0	True	acerto
+estarás	agudo	510	42	0.429	0.429	0.0	True	acerto
+estarás	agudo	201	42	0.571	0.571	0.0	True	acerto
+estarás	agudo	631	42	0.286	0.0	0.286	True	degradacao com diacritico
+estarás	agudo	318	42	0.286	0.286	0.0	False	omissao
+estarás	agudo	597	42	0.429	0.286	0.143	True	acerto
+estarás	agudo	622	42	0.286	0.286	0.0	True	acerto
+estarás	agudo	547	43	0.429	0.429	0.0	True	acerto
+estarás	agudo	560	43	0.429	0.286	0.143	True	acerto
+estarás	agudo	183	43	0.0	0.143	-0.143	True	acerto
+estarás	agudo	321	43	0.429	0.0	0.429	True	degradacao com diacritico
+estarás	agudo	590	43	0.286	0.429	-0.143	True	acerto
+estarás	agudo	583	43	0.429	0.286	0.143	True	acerto
+estarás	agudo	555	43	0.286	0.143	0.143	True	acerto
+estarás	agudo	517	43	0.143	0.143	0.0	True	acerto
+estarás	agudo	580	43	0.143	0.0	0.143	True	acerto
+estarás	agudo	537	43	0.143	0.0	0.143	True	acerto
+estarás	agudo	616	43	0.286	0.143	0.143	True	acerto
+estarás	agudo	305	43	0.429	0.143	0.286	True	degradacao com diacritico
+estarás	agudo	589	43	0.286	0.143	0.143	True	acerto
+estarás	agudo	280	43	0.714	0.571	0.143	True	acerto
+estarás	agudo	510	43	0.286	0.286	0.0	True	acerto
+estarás	agudo	201	43	0.429	0.429	0.0	True	acerto
+estarás	agudo	631	43	0.0	0.0	0.0	True	acerto
+estarás	agudo	318	43	0.286	0.286	0.0	True	acerto
+estarás	agudo	597	43	0.571	0.0	0.571	True	degradacao com diacritico
+estarás	agudo	622	43	0.286	0.0	0.286	True	degradacao com diacritico
+recomeça	cedilha	547	42	0.25	0.375	-0.125	True	acerto
+recomeça	cedilha	560	42	0.375	0.125	0.25	True	degradacao com diacritico
+recomeça	cedilha	183	42	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	321	42	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	590	42	0.0	0.0	0.0	True	acerto
+recomeça	cedilha	583	42	0.25	0.0	0.25	True	degradacao com diacritico
+recomeça	cedilha	555	42	0.25	0.375	-0.125	True	acerto
+recomeça	cedilha	517	42	0.375	0.125	0.25	True	degradacao com diacritico
+recomeça	cedilha	580	42	0.25	0.375	-0.125	True	acerto
+recomeça	cedilha	537	42	0.0	0.125	-0.125	True	acerto
+recomeça	cedilha	616	42	0.5	0.0	0.5	True	degradacao com diacritico
+recomeça	cedilha	305	42	0.0	0.0	0.0	True	acerto
+recomeça	cedilha	589	42	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	280	42	0.25	0.0	0.25	True	degradacao com diacritico
+recomeça	cedilha	510	42	0.25	0.125	0.125	True	acerto
+recomeça	cedilha	201	42	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	631	42	0.0	0.0	0.0	True	acerto
+recomeça	cedilha	318	42	0.375	0.125	0.25	True	degradacao com diacritico
+recomeça	cedilha	597	42	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	622	42	0.375	0.0	0.375	True	degradacao com diacritico
+recomeça	cedilha	547	43	0.0	0.0	0.0	True	acerto
+recomeça	cedilha	560	43	0.375	0.375	0.0	True	acerto
+recomeça	cedilha	183	43	0.25	0.125	0.125	True	acerto
+recomeça	cedilha	321	43	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	590	43	0.375	0.0	0.375	False	degradacao sem diacritico
+recomeça	cedilha	583	43	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	555	43	0.125	0.125	0.0	True	acerto
+recomeça	cedilha	517	43	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	580	43	0.625	0.125	0.5	True	degradacao com diacritico
+recomeça	cedilha	537	43	0.0	0.125	-0.125	True	acerto
+recomeça	cedilha	616	43	0.0	0.0	0.0	True	acerto
+recomeça	cedilha	305	43	0.375	0.0	0.375	False	degradacao sem diacritico
+recomeça	cedilha	589	43	0.25	0.0	0.25	False	degradacao sem diacritico
+recomeça	cedilha	280	43	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	510	43	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	201	43	0.125	0.0	0.125	True	acerto
+recomeça	cedilha	631	43	0.375	0.25	0.125	False	omissao
+recomeça	cedilha	318	43	0.0	0.0	0.0	True	acerto
+recomeça	cedilha	597	43	0.25	0.125	0.125	True	acerto
+recomeça	cedilha	622	43	0.375	0.25	0.125	True	acerto
+rapé	agudo	547	42	0.5	0.0	0.5	False	degradacao sem diacritico
+rapé	agudo	560	42	0.25	0.0	0.25	False	degradacao sem diacritico
+rapé	agudo	183	42	0.5	0.0	0.5	False	degradacao sem diacritico
+rapé	agudo	321	42	0.5	0.0	0.5	False	degradacao sem diacritico
+rapé	agudo	590	42	0.5	0.25	0.25	False	degradacao sem diacritico
+rapé	agudo	583	42	0.5	0.25	0.25	False	degradacao sem diacritico
+rapé	agudo	555	42	0.25	0.25	0.0	False	omissao
+rapé	agudo	517	42	0.25	0.0	0.25	False	degradacao sem diacritico
+rapé	agudo	580	42	0.25	0.0	0.25	False	degradacao sem diacritico
+rapé	agudo	537	42	0.5	0.25	0.25	False	degradacao sem diacritico
+rapé	agudo	616	42	0.0	0.25	-0.25	False	omissao
+rapé	agudo	305	42	0.0	0.0	0.0	False	omissao
+rapé	agudo	589	42	0.5	0.0	0.5	False	degradacao sem diacritico
+rapé	agudo	280	42	0.0	0.0	0.0	False	omissao
+rapé	agudo	510	42	0.25	0.25	0.0	False	omissao
+rapé	agudo	201	42	0.0	0.25	-0.25	False	omissao
+rapé	agudo	631	42	0.25	0.25	0.0	False	omissao
+rapé	agudo	318	42	0.5	0.5	0.0	False	omissao
+rapé	agudo	597	42	0.0	0.0	0.0	False	omissao
+rapé	agudo	622	42	0.25	0.0	0.25	True	degradacao com diacritico
+rapé	agudo	547	43	0.25	0.0	0.25	False	degradacao sem diacritico
+rapé	agudo	560	43	0.5	0.25	0.25	False	degradacao sem diacritico
+rapé	agudo	183	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	321	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	590	43	0.25	0.0	0.25	False	degradacao sem diacritico
+rapé	agudo	583	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	555	43	0.25	0.0	0.25	False	degradacao sem diacritico
+rapé	agudo	517	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	580	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	537	43	0.0	0.25	-0.25	False	omissao
+rapé	agudo	616	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	305	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	589	43	0.5	0.0	0.5	False	degradacao sem diacritico
+rapé	agudo	280	43	0.0	0.5	-0.5	False	omissao
+rapé	agudo	510	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	201	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	631	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	318	43	0.0	0.0	0.0	False	omissao
+rapé	agudo	597	43	0.25	0.0	0.25	False	degradacao sem diacritico
+rapé	agudo	622	43	0.0	0.25	-0.25	True	acerto
+pensámos	agudo	547	42	0.25	0.375	-0.125	True	acerto
+pensámos	agudo	560	42	0.0	0.375	-0.375	False	omissao
+pensámos	agudo	183	42	0.5	0.375	0.125	False	omissao
+pensámos	agudo	321	42	0.5	0.375	0.125	True	acerto
+pensámos	agudo	590	42	0.625	0.25	0.375	True	degradacao com diacritico
+pensámos	agudo	583	42	0.625	0.5	0.125	True	acerto
+pensámos	agudo	555	42	0.375	0.25	0.125	True	acerto
+pensámos	agudo	517	42	0.125	0.375	-0.25	True	acerto
+pensámos	agudo	580	42	0.625	0.75	-0.125	False	omissao
+pensámos	agudo	537	42	0.375	0.25	0.125	False	omissao
+pensámos	agudo	616	42	0.75	0.375	0.375	False	degradacao sem diacritico
+pensámos	agudo	305	42	0.5	0.25	0.25	True	degradacao com diacritico
+pensámos	agudo	589	42	0.5	0.375	0.125	False	omissao
+pensámos	agudo	280	42	0.375	0.25	0.125	False	omissao
+pensámos	agudo	510	42	0.25	0.0	0.25	False	degradacao sem diacritico
+pensámos	agudo	201	42	0.25	0.375	-0.125	False	omissao
+pensámos	agudo	631	42	0.5	0.125	0.375	True	degradacao com diacritico
+pensámos	agudo	318	42	0.125	0.375	-0.25	False	omissao
+pensámos	agudo	597	42	0.5	0.625	-0.125	True	acerto
+pensámos	agudo	622	42	0.375	0.25	0.125	True	acerto
+pensámos	agudo	547	43	0.5	0.5	0.0	True	acerto
+pensámos	agudo	560	43	0.625	0.125	0.5	False	degradacao sem diacritico
+pensámos	agudo	183	43	0.375	0.375	0.0	True	acerto
+pensámos	agudo	321	43	0.375	0.25	0.125	True	acerto
+pensámos	agudo	590	43	0.5	0.25	0.25	True	degradacao com diacritico
+pensámos	agudo	583	43	0.75	0.375	0.375	False	degradacao sem diacritico
+pensámos	agudo	555	43	0.5	0.375	0.125	False	omissao
+pensámos	agudo	517	43	0.5	0.25	0.25	False	degradacao sem diacritico
+pensámos	agudo	580	43	0.375	0.375	0.0	False	omissao
+pensámos	agudo	537	43	0.375	0.25	0.125	False	omissao
+pensámos	agudo	616	43	0.375	0.5	-0.125	False	omissao
+pensámos	agudo	305	43	0.25	0.125	0.125	True	acerto
+pensámos	agudo	589	43	0.5	0.0	0.5	False	degradacao sem diacritico
+pensámos	agudo	280	43	0.25	0.375	-0.125	False	omissao
+pensámos	agudo	510	43	0.375	0.375	0.0	False	omissao
+pensámos	agudo	201	43	0.375	0.25	0.125	False	omissao
+pensámos	agudo	631	43	0.25	0.125	0.125	False	omissao
+pensámos	agudo	318	43	0.375	0.25	0.125	True	acerto
+pensámos	agudo	597	43	0.625	0.25	0.375	False	degradacao sem diacritico
+pensámos	agudo	622	43	0.25	0.25	0.0	False	omissao
+haverá	agudo	547	42	0.0	0.0	0.0	True	acerto
+haverá	agudo	560	42	0.0	0.167	-0.167	True	acerto
+haverá	agudo	183	42	0.167	0.0	0.167	True	acerto
+haverá	agudo	321	42	0.167	0.0	0.167	True	acerto
+haverá	agudo	590	42	0.0	0.0	0.0	True	acerto
+haverá	agudo	583	42	0.333	0.0	0.333	True	degradacao com diacritico
+haverá	agudo	555	42	0.333	0.167	0.167	True	acerto
+haverá	agudo	517	42	0.0	0.0	0.0	True	acerto
+haverá	agudo	580	42	0.167	0.167	0.0	True	acerto
+haverá	agudo	537	42	0.0	0.0	0.0	True	acerto
+haverá	agudo	616	42	0.5	0.333	0.167	True	acerto
+haverá	agudo	305	42	0.0	0.0	0.0	True	acerto
+haverá	agudo	589	42	0.0	0.167	-0.167	True	acerto
+haverá	agudo	280	42	0.0	0.0	0.0	True	acerto
+haverá	agudo	510	42	0.0	0.0	0.0	True	acerto
+haverá	agudo	201	42	0.0	0.0	0.0	True	acerto
+haverá	agudo	631	42	0.333	0.0	0.333	True	degradacao com diacritico
+haverá	agudo	318	42	0.0	0.0	0.0	True	acerto
+haverá	agudo	597	42	0.167	0.167	0.0	True	acerto
+haverá	agudo	622	42	0.167	0.167	0.0	True	acerto
+haverá	agudo	547	43	0.0	0.0	0.0	True	acerto
+haverá	agudo	560	43	0.0	0.0	0.0	True	acerto
+haverá	agudo	183	43	0.167	0.333	-0.167	True	acerto
+haverá	agudo	321	43	0.167	0.167	0.0	True	acerto
+haverá	agudo	590	43	0.0	0.0	0.0	True	acerto
+haverá	agudo	583	43	0.0	0.0	0.0	True	acerto
+haverá	agudo	555	43	0.167	0.0	0.167	True	acerto
+haverá	agudo	517	43	0.0	0.0	0.0	True	acerto
+haverá	agudo	580	43	0.0	0.0	0.0	True	acerto
+haverá	agudo	537	43	0.167	0.0	0.167	True	acerto
+haverá	agudo	616	43	0.0	0.333	-0.333	True	acerto
+haverá	agudo	305	43	0.167	0.0	0.167	True	acerto
+haverá	agudo	589	43	0.0	0.167	-0.167	False	omissao
+haverá	agudo	280	43	0.167	0.0	0.167	True	acerto
+haverá	agudo	510	43	0.0	0.167	-0.167	True	acerto
+haverá	agudo	201	43	0.0	0.167	-0.167	True	acerto
+haverá	agudo	631	43	0.667	0.167	0.5	True	degradacao com diacritico
+haverá	agudo	318	43	0.333	0.333	0.0	True	acerto
+haverá	agudo	597	43	0.333	0.333	0.0	False	omissao
+haverá	agudo	622	43	0.0	0.167	-0.167	True	acerto
+pôr	circunflexo	547	42	0.0	0.333	-0.333	True	acerto
+pôr	circunflexo	560	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	183	42	0.667	0.0	0.667	True	degradacao com diacritico
+pôr	circunflexo	321	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	590	42	0.0	0.333	-0.333	False	omissao
+pôr	circunflexo	583	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	555	42	0.667	0.0	0.667	False	degradacao sem diacritico
+pôr	circunflexo	517	42	0.0	0.333	-0.333	False	omissao
+pôr	circunflexo	580	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	537	42	0.333	0.0	0.333	False	degradacao sem diacritico
+pôr	circunflexo	616	42	0.333	0.0	0.333	False	degradacao sem diacritico
+pôr	circunflexo	305	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	589	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	280	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	510	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	201	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	631	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	318	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	597	42	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	622	42	0.333	0.0	0.333	False	degradacao sem diacritico
+pôr	circunflexo	547	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	560	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	183	43	0.0	0.333	-0.333	False	omissao
+pôr	circunflexo	321	43	0.667	0.0	0.667	False	degradacao sem diacritico
+pôr	circunflexo	590	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	583	43	0.333	0.0	0.333	False	degradacao sem diacritico
+pôr	circunflexo	555	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	517	43	0.333	0.0	0.333	False	degradacao sem diacritico
+pôr	circunflexo	580	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	537	43	0.667	0.0	0.667	False	degradacao sem diacritico
+pôr	circunflexo	616	43	0.667	0.0	0.667	False	degradacao sem diacritico
+pôr	circunflexo	305	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	589	43	0.333	0.0	0.333	False	degradacao sem diacritico
+pôr	circunflexo	280	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	510	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	201	43	0.0	0.333	-0.333	False	omissao
+pôr	circunflexo	631	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	318	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	597	43	0.0	0.0	0.0	False	omissao
+pôr	circunflexo	622	43	0.0	0.0	0.0	False	omissao
+mordaça	cedilha	547	42	0.286	0.286	0.0	True	acerto
+mordaça	cedilha	560	42	0.571	0.143	0.429	True	degradacao com diacritico
+mordaça	cedilha	183	42	0.429	0.429	0.0	True	acerto
+mordaça	cedilha	321	42	0.286	0.0	0.286	True	degradacao com diacritico
+mordaça	cedilha	590	42	0.286	0.0	0.286	False	degradacao sem diacritico
+mordaça	cedilha	583	42	0.143	0.0	0.143	False	omissao
+mordaça	cedilha	555	42	0.286	0.143	0.143	False	omissao
+mordaça	cedilha	517	42	0.143	0.0	0.143	True	acerto
+mordaça	cedilha	580	42	0.143	0.0	0.143	True	acerto
+mordaça	cedilha	537	42	0.286	0.0	0.286	True	degradacao com diacritico
+mordaça	cedilha	616	42	0.143	0.0	0.143	True	acerto
+mordaça	cedilha	305	42	0.143	0.0	0.143	True	acerto
+mordaça	cedilha	589	42	0.429	0.143	0.286	True	degradacao com diacritico
+mordaça	cedilha	280	42	0.143	0.143	0.0	True	acerto
+mordaça	cedilha	510	42	0.0	0.0	0.0	True	acerto
+mordaça	cedilha	201	42	0.143	0.0	0.143	True	acerto
+mordaça	cedilha	631	42	0.143	0.143	0.0	False	omissao
+mordaça	cedilha	318	42	0.286	0.143	0.143	True	acerto
+mordaça	cedilha	597	42	0.286	0.0	0.286	False	degradacao sem diacritico
+mordaça	cedilha	622	42	0.286	0.0	0.286	False	degradacao sem diacritico
+mordaça	cedilha	547	43	0.143	0.0	0.143	False	omissao
+mordaça	cedilha	560	43	0.429	0.0	0.429	False	degradacao sem diacritico
+mordaça	cedilha	183	43	0.429	0.0	0.429	True	degradacao com diacritico
+mordaça	cedilha	321	43	0.143	0.0	0.143	True	acerto
+mordaça	cedilha	590	43	0.143	0.429	-0.286	False	omissao
+mordaça	cedilha	583	43	0.143	0.143	0.0	True	acerto
+mordaça	cedilha	555	43	0.286	0.0	0.286	False	degradacao sem diacritico
+mordaça	cedilha	517	43	0.143	0.0	0.143	True	acerto
+mordaça	cedilha	580	43	0.286	0.0	0.286	True	degradacao com diacritico
+mordaça	cedilha	537	43	0.143	0.0	0.143	True	acerto
+mordaça	cedilha	616	43	0.286	0.0	0.286	False	degradacao sem diacritico
+mordaça	cedilha	305	43	0.143	0.0	0.143	False	omissao
+mordaça	cedilha	589	43	0.286	0.0	0.286	True	degradacao com diacritico
+mordaça	cedilha	280	43	0.143	0.0	0.143	False	omissao
+mordaça	cedilha	510	43	0.286	0.0	0.286	False	degradacao sem diacritico
+mordaça	cedilha	201	43	0.143	0.0	0.143	True	acerto
+mordaça	cedilha	631	43	0.429	0.286	0.143	True	acerto
+mordaça	cedilha	318	43	0.429	0.0	0.429	True	degradacao com diacritico
+mordaça	cedilha	597	43	0.429	0.143	0.286	True	degradacao com diacritico
+mordaça	cedilha	622	43	0.429	0.143	0.286	False	degradacao sem diacritico
+terráquea	agudo	547	42	0.667	0.222	0.444	True	degradacao com diacritico
+terráquea	agudo	560	42	0.778	0.333	0.444	True	degradacao com diacritico
+terráquea	agudo	183	42	0.333	0.333	0.0	True	acerto
+terráquea	agudo	321	42	0.333	0.333	0.0	True	acerto
+terráquea	agudo	590	42	0.222	0.667	-0.444	True	acerto
+terráquea	agudo	583	42	0.333	0.333	0.0	True	acerto
+terráquea	agudo	555	42	0.444	0.111	0.333	True	degradacao com diacritico
+terráquea	agudo	517	42	0.222	0.444	-0.222	True	acerto
+terráquea	agudo	580	42	0.333	0.333	0.0	True	acerto
+terráquea	agudo	537	42	0.111	0.111	0.0	True	acerto
+terráquea	agudo	616	42	0.444	0.333	0.111	False	omissao
+terráquea	agudo	305	42	0.333	0.222	0.111	False	omissao
+terráquea	agudo	589	42	0.444	0.444	0.0	True	acerto
+terráquea	agudo	280	42	0.444	0.222	0.222	True	degradacao com diacritico
+terráquea	agudo	510	42	0.556	0.444	0.111	True	acerto
+terráquea	agudo	201	42	0.333	0.222	0.111	True	acerto
+terráquea	agudo	631	42	0.444	0.222	0.222	True	degradacao com diacritico
+terráquea	agudo	318	42	0.444	0.444	0.0	True	acerto
+terráquea	agudo	597	42	0.222	0.444	-0.222	True	acerto
+terráquea	agudo	622	42	0.556	0.111	0.444	True	degradacao com diacritico
+terráquea	agudo	547	43	0.333	0.333	0.0	True	acerto
+terráquea	agudo	560	43	0.556	0.556	0.0	True	acerto
+terráquea	agudo	183	43	0.333	0.222	0.111	True	acerto
+terráquea	agudo	321	43	0.222	0.222	0.0	True	acerto
+terráquea	agudo	590	43	0.222	0.111	0.111	True	acerto
+terráquea	agudo	583	43	0.333	0.222	0.111	True	acerto
+terráquea	agudo	555	43	0.667	0.667	0.0	True	acerto
+terráquea	agudo	517	43	0.667	0.333	0.333	True	degradacao com diacritico
+terráquea	agudo	580	43	0.222	0.333	-0.111	True	acerto
+terráquea	agudo	537	43	0.667	0.667	0.0	True	acerto
+terráquea	agudo	616	43	0.222	0.444	-0.222	True	acerto
+terráquea	agudo	305	43	0.333	0.333	0.0	True	acerto
+terráquea	agudo	589	43	0.333	0.222	0.111	True	acerto
+terráquea	agudo	280	43	0.556	0.111	0.444	False	degradacao sem diacritico
+terráquea	agudo	510	43	0.556	0.333	0.222	True	degradacao com diacritico
+terráquea	agudo	201	43	0.556	0.444	0.111	False	omissao
+terráquea	agudo	631	43	0.444	0.444	0.0	True	acerto
+terráquea	agudo	318	43	0.444	0.444	0.0	True	acerto
+terráquea	agudo	597	43	0.444	0.333	0.111	True	acerto
+terráquea	agudo	622	43	0.333	0.333	0.0	False	omissao
+despedaçar	cedilha	547	42	0.2	0.2	0.0	True	acerto
+despedaçar	cedilha	560	42	0.4	0.1	0.3	True	degradacao com diacritico
+despedaçar	cedilha	183	42	0.2	0.3	-0.1	True	acerto
+despedaçar	cedilha	321	42	0.5	0.3	0.2	True	acerto
+despedaçar	cedilha	590	42	0.1	0.2	-0.1	True	acerto
+despedaçar	cedilha	583	42	0.2	0.1	0.1	True	acerto
+despedaçar	cedilha	555	42	0.3	0.5	-0.2	True	acerto
+despedaçar	cedilha	517	42	0.1	0.1	0.0	True	acerto
+despedaçar	cedilha	580	42	0.1	0.2	-0.1	True	acerto
+despedaçar	cedilha	537	42	0.3	0.2	0.1	True	acerto
+despedaçar	cedilha	616	42	0.4	0.0	0.4	True	degradacao com diacritico
+despedaçar	cedilha	305	42	0.2	0.1	0.1	True	acerto
+despedaçar	cedilha	589	42	0.2	0.3	-0.1	True	acerto
+despedaçar	cedilha	280	42	0.2	0.1	0.1	True	acerto
+despedaçar	cedilha	510	42	0.2	0.2	0.0	True	acerto
+despedaçar	cedilha	201	42	0.4	0.3	0.1	True	acerto
+despedaçar	cedilha	631	42	0.3	0.3	0.0	True	acerto
+despedaçar	cedilha	318	42	0.5	0.3	0.2	True	acerto
+despedaçar	cedilha	597	42	0.0	0.1	-0.1	True	acerto
+despedaçar	cedilha	622	42	0.3	0.2	0.1	True	acerto
+despedaçar	cedilha	547	43	0.1	0.0	0.1	True	acerto
+despedaçar	cedilha	560	43	0.2	0.1	0.1	True	acerto
+despedaçar	cedilha	183	43	0.0	0.0	0.0	True	acerto
+despedaçar	cedilha	321	43	0.0	0.0	0.0	False	omissao
+despedaçar	cedilha	590	43	0.2	0.2	0.0	True	acerto
+despedaçar	cedilha	583	43	0.4	0.3	0.1	True	acerto
+despedaçar	cedilha	555	43	0.0	0.0	0.0	True	acerto
+despedaçar	cedilha	517	43	0.2	0.2	0.0	True	acerto
+despedaçar	cedilha	580	43	0.5	0.3	0.2	True	acerto
+despedaçar	cedilha	537	43	0.1	0.1	0.0	False	omissao
+despedaçar	cedilha	616	43	0.3	0.2	0.1	True	acerto
+despedaçar	cedilha	305	43	0.2	0.1	0.1	True	acerto
+despedaçar	cedilha	589	43	0.2	0.2	0.0	False	omissao
+despedaçar	cedilha	280	43	0.4	0.2	0.2	True	acerto
+despedaçar	cedilha	510	43	0.1	0.1	0.0	True	acerto
+despedaçar	cedilha	201	43	0.3	0.3	0.0	True	acerto
+despedaçar	cedilha	631	43	0.4	0.2	0.2	True	acerto
+despedaçar	cedilha	318	43	0.1	0.0	0.1	True	acerto
+despedaçar	cedilha	597	43	0.1	0.1	0.0	True	acerto
+despedaçar	cedilha	622	43	0.4	0.4	0.0	True	acerto
+reclusão	til	547	42	0.375	0.5	-0.125	True	acerto
+reclusão	til	560	42	0.375	0.5	-0.125	True	acerto
+reclusão	til	183	42	0.5	0.25	0.25	True	degradacao com diacritico
+reclusão	til	321	42	0.25	0.25	0.0	True	acerto
+reclusão	til	590	42	0.375	0.375	0.0	True	acerto
+reclusão	til	583	42	0.375	0.375	0.0	True	acerto
+reclusão	til	555	42	0.375	0.25	0.125	True	acerto
+reclusão	til	517	42	0.625	0.25	0.375	True	degradacao com diacritico
+reclusão	til	580	42	0.375	0.5	-0.125	True	acerto
+reclusão	til	537	42	0.25	0.125	0.125	True	acerto
+reclusão	til	616	42	0.0	0.0	0.0	True	acerto
+reclusão	til	305	42	0.125	0.125	0.0	True	acerto
+reclusão	til	589	42	0.375	0.25	0.125	True	acerto
+reclusão	til	280	42	0.5	0.5	0.0	True	acerto
+reclusão	til	510	42	0.375	0.25	0.125	True	acerto
+reclusão	til	201	42	0.25	0.0	0.25	True	degradacao com diacritico
+reclusão	til	631	42	0.25	0.125	0.125	True	acerto
+reclusão	til	318	42	0.375	0.375	0.0	True	acerto
+reclusão	til	597	42	0.125	0.5	-0.375	True	acerto
+reclusão	til	622	42	0.25	0.25	0.0	True	acerto
+reclusão	til	547	43	0.25	0.375	-0.125	False	omissao
+reclusão	til	560	43	0.375	0.25	0.125	True	acerto
+reclusão	til	183	43	0.5	0.25	0.25	True	degradacao com diacritico
+reclusão	til	321	43	0.125	0.125	0.0	True	acerto
+reclusão	til	590	43	0.25	0.25	0.0	True	acerto
+reclusão	til	583	43	0.375	0.5	-0.125	True	acerto
+reclusão	til	555	43	0.5	0.375	0.125	True	acerto
+reclusão	til	517	43	0.25	0.375	-0.125	True	acerto
+reclusão	til	580	43	0.25	0.25	0.0	True	acerto
+reclusão	til	537	43	0.0	0.0	0.0	True	acerto
+reclusão	til	616	43	0.0	0.0	0.0	False	omissao
+reclusão	til	305	43	0.25	0.0	0.25	True	degradacao com diacritico
+reclusão	til	589	43	0.625	0.375	0.25	True	degradacao com diacritico
+reclusão	til	280	43	0.125	0.25	-0.125	True	acerto
+reclusão	til	510	43	0.125	0.25	-0.125	False	omissao
+reclusão	til	201	43	0.375	0.25	0.125	True	acerto
+reclusão	til	631	43	0.125	0.125	0.0	True	acerto
+reclusão	til	318	43	0.375	0.0	0.375	True	degradacao com diacritico
+reclusão	til	597	43	0.125	0.25	-0.125	True	acerto
+reclusão	til	622	43	0.25	0.25	0.0	True	acerto
+conexões	til	547	42	0.125	0.375	-0.25	True	acerto
+conexões	til	560	42	0.625	0.375	0.25	True	degradacao com diacritico
+conexões	til	183	42	0.25	0.25	0.0	True	acerto
+conexões	til	321	42	0.25	0.125	0.125	True	acerto
+conexões	til	590	42	0.25	0.25	0.0	True	acerto
+conexões	til	583	42	0.5	0.375	0.125	True	acerto
+conexões	til	555	42	0.25	0.375	-0.125	True	acerto
+conexões	til	517	42	0.375	0.25	0.125	True	acerto
+conexões	til	580	42	0.5	0.5	0.0	True	acerto
+conexões	til	537	42	0.25	0.25	0.0	False	omissao
+conexões	til	616	42	0.125	0.125	0.0	True	acerto
+conexões	til	305	42	0.375	0.375	0.0	True	acerto
+conexões	til	589	42	0.5	0.375	0.125	True	acerto
+conexões	til	280	42	0.375	0.25	0.125	True	acerto
+conexões	til	510	42	0.125	0.125	0.0	True	acerto
+conexões	til	201	42	0.25	0.375	-0.125	False	omissao
+conexões	til	631	42	0.5	0.5	0.0	True	acerto
+conexões	til	318	42	0.5	0.25	0.25	True	degradacao com diacritico
+conexões	til	597	42	0.25	0.25	0.0	True	acerto
+conexões	til	622	42	0.25	0.25	0.0	True	acerto
+conexões	til	547	43	0.375	0.25	0.125	True	acerto
+conexões	til	560	43	0.25	0.125	0.125	True	acerto
+conexões	til	183	43	0.375	0.25	0.125	True	acerto
+conexões	til	321	43	0.125	0.25	-0.125	False	omissao
+conexões	til	590	43	0.5	0.5	0.0	True	acerto
+conexões	til	583	43	0.25	0.25	0.0	True	acerto
+conexões	til	555	43	0.25	0.25	0.0	True	acerto
+conexões	til	517	43	0.375	0.25	0.125	True	acerto
+conexões	til	580	43	0.375	0.25	0.125	False	omissao
+conexões	til	537	43	0.375	0.5	-0.125	True	acerto
+conexões	til	616	43	0.625	0.5	0.125	True	acerto
+conexões	til	305	43	0.25	0.25	0.0	True	acerto
+conexões	til	589	43	0.625	0.375	0.25	True	degradacao com diacritico
+conexões	til	280	43	0.375	0.375	0.0	True	acerto
+conexões	til	510	43	0.25	0.5	-0.25	True	acerto
+conexões	til	201	43	0.375	0.625	-0.25	True	acerto
+conexões	til	631	43	0.375	0.5	-0.125	True	acerto
+conexões	til	318	43	0.25	0.25	0.0	True	acerto
+conexões	til	597	43	0.5	0.375	0.125	True	acerto
+conexões	til	622	43	0.375	0.125	0.25	False	degradacao sem diacritico
+florença	cedilha	547	42	0.125	0.0	0.125	True	acerto
+florença	cedilha	560	42	0.0	0.0	0.0	True	acerto
+florença	cedilha	183	42	0.0	0.125	-0.125	True	acerto
+florença	cedilha	321	42	0.5	0.0	0.5	True	degradacao com diacritico
+florença	cedilha	590	42	0.0	0.0	0.0	True	acerto
+florença	cedilha	583	42	0.0	0.125	-0.125	True	acerto
+florença	cedilha	555	42	0.0	0.125	-0.125	True	acerto
+florença	cedilha	517	42	0.125	0.125	0.0	True	acerto
+florença	cedilha	580	42	0.375	0.25	0.125	True	acerto
+florença	cedilha	537	42	0.125	0.25	-0.125	False	omissao
+florença	cedilha	616	42	0.125	0.25	-0.125	True	acerto
+florença	cedilha	305	42	0.25	0.25	0.0	True	acerto
+florença	cedilha	589	42	0.125	0.25	-0.125	True	acerto
+florença	cedilha	280	42	0.25	0.25	0.0	True	acerto
+florença	cedilha	510	42	0.25	0.125	0.125	True	acerto
+florença	cedilha	201	42	0.25	0.0	0.25	True	degradacao com diacritico
+florença	cedilha	631	42	0.25	0.125	0.125	False	omissao
+florença	cedilha	318	42	0.125	0.0	0.125	True	acerto
+florença	cedilha	597	42	0.0	0.0	0.0	True	acerto
+florença	cedilha	622	42	0.125	0.0	0.125	True	acerto
+florença	cedilha	547	43	0.25	0.0	0.25	True	degradacao com diacritico
+florença	cedilha	560	43	0.125	0.0	0.125	True	acerto
+florença	cedilha	183	43	0.125	0.0	0.125	True	acerto
+florença	cedilha	321	43	0.125	0.125	0.0	True	acerto
+florença	cedilha	590	43	0.25	0.0	0.25	True	degradacao com diacritico
+florença	cedilha	583	43	0.125	0.125	0.0	True	acerto
+florença	cedilha	555	43	0.125	0.125	0.0	True	acerto
+florença	cedilha	517	43	0.0	0.125	-0.125	False	omissao
+florença	cedilha	580	43	0.0	0.125	-0.125	True	acerto
+florença	cedilha	537	43	0.125	0.0	0.125	True	acerto
+florença	cedilha	616	43	0.25	0.0	0.25	False	degradacao sem diacritico
+florença	cedilha	305	43	0.25	0.0	0.25	True	degradacao com diacritico
+florença	cedilha	589	43	0.25	0.125	0.125	True	acerto
+florença	cedilha	280	43	0.125	0.125	0.0	True	acerto
+florença	cedilha	510	43	0.25	0.125	0.125	True	acerto
+florença	cedilha	201	43	0.0	0.125	-0.125	True	acerto
+florença	cedilha	631	43	0.25	0.0	0.25	False	degradacao sem diacritico
+florença	cedilha	318	43	0.375	0.125	0.25	True	degradacao com diacritico
+florença	cedilha	597	43	0.0	0.0	0.0	True	acerto
+florença	cedilha	622	43	0.375	0.125	0.25	True	degradacao com diacritico
+unção	cedilha e til	547	42	0.8	0.2	0.6	False	degradacao sem diacritico
+unção	cedilha e til	560	42	0.4	0.2	0.2	False	omissao
+unção	cedilha e til	183	42	0.4	0.4	0.0	False	omissao
+unção	cedilha e til	321	42	0.2	0.0	0.2	False	omissao
+unção	cedilha e til	590	42	0.2	0.4	-0.2	False	omissao
+unção	cedilha e til	583	42	0.4	0.4	0.0	False	omissao
+unção	cedilha e til	555	42	0.4	0.0	0.4	True	degradacao com diacritico
+unção	cedilha e til	517	42	0.4	0.0	0.4	False	degradacao sem diacritico
+unção	cedilha e til	580	42	0.6	0.4	0.2	False	omissao
+unção	cedilha e til	537	42	0.8	0.0	0.8	True	degradacao com diacritico
+unção	cedilha e til	616	42	0.6	0.2	0.4	True	degradacao com diacritico
+unção	cedilha e til	305	42	0.2	0.4	-0.2	False	omissao
+unção	cedilha e til	589	42	0.8	0.6	0.2	False	degradacao sem diacritico
+unção	cedilha e til	280	42	0.2	0.4	-0.2	False	omissao
+unção	cedilha e til	510	42	0.2	0.0	0.2	True	acerto
+unção	cedilha e til	201	42	0.4	0.2	0.2	False	omissao
+unção	cedilha e til	631	42	0.4	0.0	0.4	True	degradacao com diacritico
+unção	cedilha e til	318	42	0.2	0.4	-0.2	False	omissao
+unção	cedilha e til	597	42	0.6	0.4	0.2	False	omissao
+unção	cedilha e til	622	42	0.6	0.6	0.0	True	acerto
+unção	cedilha e til	547	43	0.0	0.0	0.0	True	acerto
+unção	cedilha e til	560	43	0.6	0.2	0.4	False	degradacao sem diacritico
+unção	cedilha e til	183	43	0.6	0.0	0.6	False	degradacao sem diacritico
+unção	cedilha e til	321	43	0.0	0.2	-0.2	True	acerto
+unção	cedilha e til	590	43	0.0	0.4	-0.4	True	acerto
+unção	cedilha e til	583	43	1.0	0.6	0.4	False	degradacao sem diacritico
+unção	cedilha e til	555	43	0.4	0.4	0.0	False	omissao
+unção	cedilha e til	517	43	0.4	0.2	0.2	True	acerto
+unção	cedilha e til	580	43	0.4	0.4	0.0	True	acerto
+unção	cedilha e til	537	43	0.4	0.0	0.4	False	degradacao sem diacritico
+unção	cedilha e til	616	43	0.4	0.0	0.4	False	degradacao sem diacritico
+unção	cedilha e til	305	43	0.2	0.0	0.2	True	acerto
+unção	cedilha e til	589	43	0.4	0.2	0.2	False	omissao
+unção	cedilha e til	280	43	0.2	0.0	0.2	False	omissao
+unção	cedilha e til	510	43	0.2	0.4	-0.2	False	omissao
+unção	cedilha e til	201	43	0.2	0.0	0.2	False	omissao
+unção	cedilha e til	631	43	1.0	0.2	0.8	False	degradacao sem diacritico
+unção	cedilha e til	318	43	0.8	0.0	0.8	False	degradacao sem diacritico
+unção	cedilha e til	597	43	0.6	0.6	0.0	True	acerto
+unção	cedilha e til	622	43	0.4	0.4	0.0	False	omissao
+caçadora	cedilha	547	42	0.125	0.25	-0.125	True	acerto
+caçadora	cedilha	560	42	0.125	0.0	0.125	True	acerto
+caçadora	cedilha	183	42	0.25	0.0	0.25	True	degradacao com diacritico
+caçadora	cedilha	321	42	0.5	0.125	0.375	True	degradacao com diacritico
+caçadora	cedilha	590	42	0.0	0.0	0.0	True	acerto
+caçadora	cedilha	583	42	0.125	0.0	0.125	False	omissao
+caçadora	cedilha	555	42	0.375	0.0	0.375	True	degradacao com diacritico
+caçadora	cedilha	517	42	0.125	0.0	0.125	True	acerto
+caçadora	cedilha	580	42	0.25	0.125	0.125	True	acerto
+caçadora	cedilha	537	42	0.0	0.0	0.0	True	acerto
+caçadora	cedilha	616	42	0.25	0.0	0.25	False	degradacao sem diacritico
+caçadora	cedilha	305	42	0.0	0.0	0.0	True	acerto
+caçadora	cedilha	589	42	0.25	0.125	0.125	True	acerto
+caçadora	cedilha	280	42	0.0	0.0	0.0	True	acerto
+caçadora	cedilha	510	42	0.0	0.0	0.0	True	acerto
+caçadora	cedilha	201	42	0.25	0.0	0.25	True	degradacao com diacritico
+caçadora	cedilha	631	42	0.25	0.125	0.125	True	acerto
+caçadora	cedilha	318	42	0.125	0.0	0.125	True	acerto
+caçadora	cedilha	597	42	0.25	0.125	0.125	False	omissao
+caçadora	cedilha	622	42	0.375	0.0	0.375	True	degradacao com diacritico
+caçadora	cedilha	547	43	0.125	0.0	0.125	True	acerto
+caçadora	cedilha	560	43	0.0	0.0	0.0	True	acerto
+caçadora	cedilha	183	43	0.375	0.25	0.125	True	acerto
+caçadora	cedilha	321	43	0.0	0.0	0.0	True	acerto
+caçadora	cedilha	590	43	0.0	0.125	-0.125	False	omissao
+caçadora	cedilha	583	43	0.25	0.0	0.25	True	degradacao com diacritico
+caçadora	cedilha	555	43	0.125	0.125	0.0	True	acerto
+caçadora	cedilha	517	43	0.0	0.0	0.0	True	acerto
+caçadora	cedilha	580	43	0.125	0.0	0.125	False	omissao
+caçadora	cedilha	537	43	0.125	0.125	0.0	False	omissao
+caçadora	cedilha	616	43	0.125	0.0	0.125	True	acerto
+caçadora	cedilha	305	43	0.0	0.0	0.0	False	omissao
+caçadora	cedilha	589	43	0.25	0.0	0.25	True	degradacao com diacritico
+caçadora	cedilha	280	43	0.25	0.0	0.25	True	degradacao com diacritico
+caçadora	cedilha	510	43	0.25	0.0	0.25	True	degradacao com diacritico
+caçadora	cedilha	201	43	0.375	0.125	0.25	True	degradacao com diacritico
+caçadora	cedilha	631	43	0.125	0.125	0.0	True	acerto
+caçadora	cedilha	318	43	0.125	0.0	0.125	True	acerto
+caçadora	cedilha	597	43	0.125	0.0	0.125	True	acerto
+caçadora	cedilha	622	43	0.0	0.125	-0.125	True	acerto
+engraçadas	cedilha	547	42	0.5	0.4	0.1	True	acerto
+engraçadas	cedilha	560	42	0.5	0.6	-0.1	False	omissao
+engraçadas	cedilha	183	42	0.3	0.3	0.0	True	acerto
+engraçadas	cedilha	321	42	0.3	0.5	-0.2	True	acerto
+engraçadas	cedilha	590	42	0.2	0.2	0.0	True	acerto
+engraçadas	cedilha	583	42	0.2	0.2	0.0	True	acerto
+engraçadas	cedilha	555	42	0.5	0.4	0.1	True	acerto
+engraçadas	cedilha	517	42	0.4	0.3	0.1	True	acerto
+engraçadas	cedilha	580	42	0.4	0.3	0.1	False	omissao
+engraçadas	cedilha	537	42	0.2	0.3	-0.1	True	acerto
+engraçadas	cedilha	616	42	0.4	0.1	0.3	True	degradacao com diacritico
+engraçadas	cedilha	305	42	0.1	0.1	0.0	False	omissao
+engraçadas	cedilha	589	42	0.3	0.1	0.2	True	acerto
+engraçadas	cedilha	280	42	0.3	0.2	0.1	True	acerto
+engraçadas	cedilha	510	42	0.2	0.2	0.0	True	acerto
+engraçadas	cedilha	201	42	0.4	0.4	0.0	True	acerto
+engraçadas	cedilha	631	42	0.7	0.4	0.3	True	degradacao com diacritico
+engraçadas	cedilha	318	42	0.4	0.5	-0.1	True	acerto
+engraçadas	cedilha	597	42	0.3	0.5	-0.2	False	omissao
+engraçadas	cedilha	622	42	0.3	0.2	0.1	False	omissao
+engraçadas	cedilha	547	43	0.2	0.2	0.0	True	acerto
+engraçadas	cedilha	560	43	0.1	0.5	-0.4	True	acerto
+engraçadas	cedilha	183	43	0.3	0.5	-0.2	False	omissao
+engraçadas	cedilha	321	43	0.4	0.4	0.0	True	acerto
+engraçadas	cedilha	590	43	0.2	0.0	0.2	True	acerto
+engraçadas	cedilha	583	43	0.4	0.4	0.0	True	acerto
+engraçadas	cedilha	555	43	0.3	0.3	0.0	True	acerto
+engraçadas	cedilha	517	43	0.5	0.2	0.3	False	degradacao sem diacritico
+engraçadas	cedilha	580	43	0.8	0.6	0.2	True	degradacao com diacritico
+engraçadas	cedilha	537	43	0.2	0.2	0.0	False	omissao
+engraçadas	cedilha	616	43	0.2	0.2	0.0	True	acerto
+engraçadas	cedilha	305	43	0.3	0.2	0.1	True	acerto
+engraçadas	cedilha	589	43	0.3	0.4	-0.1	True	acerto
+engraçadas	cedilha	280	43	0.3	0.4	-0.1	True	acerto
+engraçadas	cedilha	510	43	0.2	0.3	-0.1	False	omissao
+engraçadas	cedilha	201	43	0.2	0.3	-0.1	False	omissao
+engraçadas	cedilha	631	43	0.1	0.2	-0.1	True	acerto
+engraçadas	cedilha	318	43	0.6	0.4	0.2	True	acerto
+engraçadas	cedilha	597	43	0.2	0.2	0.0	True	acerto
+engraçadas	cedilha	622	43	0.1	0.2	-0.1	True	acerto
+relâmpagos	circunflexo	547	42	0.2	0.1	0.1	True	acerto
+relâmpagos	circunflexo	560	42	0.1	0.1	0.0	True	acerto
+relâmpagos	circunflexo	183	42	0.2	0.3	-0.1	True	acerto
+relâmpagos	circunflexo	321	42	0.1	0.1	0.0	False	omissao
+relâmpagos	circunflexo	590	42	0.5	0.3	0.2	True	acerto
+relâmpagos	circunflexo	583	42	0.5	0.2	0.3	True	degradacao com diacritico
+relâmpagos	circunflexo	555	42	0.2	0.1	0.1	True	acerto
+relâmpagos	circunflexo	517	42	0.1	0.0	0.1	False	omissao
+relâmpagos	circunflexo	580	42	0.4	0.3	0.1	True	acerto
+relâmpagos	circunflexo	537	42	0.3	0.5	-0.2	True	acerto
+relâmpagos	circunflexo	616	42	0.4	0.2	0.2	True	acerto
+relâmpagos	circunflexo	305	42	0.4	0.1	0.3	False	degradacao sem diacritico
+relâmpagos	circunflexo	589	42	0.3	0.3	0.0	True	acerto
+relâmpagos	circunflexo	280	42	0.2	0.2	0.0	True	acerto
+relâmpagos	circunflexo	510	42	0.4	0.5	-0.1	True	acerto
+relâmpagos	circunflexo	201	42	0.3	0.1	0.2	True	acerto
+relâmpagos	circunflexo	631	42	0.4	0.3	0.1	True	acerto
+relâmpagos	circunflexo	318	42	0.3	0.3	0.0	True	acerto
+relâmpagos	circunflexo	597	42	0.3	0.3	0.0	False	omissao
+relâmpagos	circunflexo	622	42	0.2	0.1	0.1	True	acerto
+relâmpagos	circunflexo	547	43	0.4	0.2	0.2	True	acerto
+relâmpagos	circunflexo	560	43	0.1	0.2	-0.1	True	acerto
+relâmpagos	circunflexo	183	43	0.3	0.4	-0.1	True	acerto
+relâmpagos	circunflexo	321	43	0.4	0.5	-0.1	True	acerto
+relâmpagos	circunflexo	590	43	0.2	0.0	0.2	True	acerto
+relâmpagos	circunflexo	583	43	0.6	0.4	0.2	True	acerto
+relâmpagos	circunflexo	555	43	0.3	0.3	0.0	True	acerto
+relâmpagos	circunflexo	517	43	0.5	0.3	0.2	True	acerto
+relâmpagos	circunflexo	580	43	0.6	0.7	-0.1	True	acerto
+relâmpagos	circunflexo	537	43	0.6	0.1	0.5	True	degradacao com diacritico
+relâmpagos	circunflexo	616	43	0.5	0.2	0.3	False	degradacao sem diacritico
+relâmpagos	circunflexo	305	43	0.3	0.2	0.1	True	acerto
+relâmpagos	circunflexo	589	43	0.2	0.2	0.0	True	acerto
+relâmpagos	circunflexo	280	43	0.5	0.1	0.4	True	degradacao com diacritico
+relâmpagos	circunflexo	510	43	0.1	0.1	0.0	True	acerto
+relâmpagos	circunflexo	201	43	0.4	0.2	0.2	True	acerto
+relâmpagos	circunflexo	631	43	0.5	0.3	0.2	False	omissao
+relâmpagos	circunflexo	318	43	0.1	0.4	-0.3	False	omissao
+relâmpagos	circunflexo	597	43	0.3	0.2	0.1	True	acerto
+relâmpagos	circunflexo	622	43	0.0	0.1	-0.1	False	omissao
+confusões	til	547	42	0.111	0.222	-0.111	True	acerto
+confusões	til	560	42	0.222	0.556	-0.333	True	acerto
+confusões	til	183	42	0.111	0.222	-0.111	True	acerto
+confusões	til	321	42	0.111	0.0	0.111	True	acerto
+confusões	til	590	42	0.333	0.111	0.222	True	degradacao com diacritico
+confusões	til	583	42	0.222	0.222	0.0	True	acerto
+confusões	til	555	42	0.333	0.111	0.222	True	degradacao com diacritico
+confusões	til	517	42	0.333	0.333	0.0	True	acerto
+confusões	til	580	42	0.222	0.222	0.0	True	acerto
+confusões	til	537	42	0.444	0.111	0.333	True	degradacao com diacritico
+confusões	til	616	42	0.778	0.556	0.222	True	degradacao com diacritico
+confusões	til	305	42	0.333	0.333	0.0	True	acerto
+confusões	til	589	42	0.222	0.444	-0.222	False	omissao
+confusões	til	280	42	0.222	0.222	0.0	True	acerto
+confusões	til	510	42	0.111	0.0	0.111	True	acerto
+confusões	til	201	42	0.222	0.222	0.0	True	acerto
+confusões	til	631	42	0.556	0.556	0.0	True	acerto
+confusões	til	318	42	0.444	0.556	-0.111	True	acerto
+confusões	til	597	42	0.667	0.444	0.222	True	degradacao com diacritico
+confusões	til	622	42	0.111	0.222	-0.111	True	acerto
+confusões	til	547	43	0.222	0.444	-0.222	True	acerto
+confusões	til	560	43	0.333	0.333	0.0	True	acerto
+confusões	til	183	43	0.111	0.222	-0.111	True	acerto
+confusões	til	321	43	0.444	0.444	0.0	True	acerto
+confusões	til	590	43	0.111	0.111	0.0	True	acerto
+confusões	til	583	43	0.333	0.222	0.111	True	acerto
+confusões	til	555	43	0.778	0.333	0.444	True	degradacao com diacritico
+confusões	til	517	43	0.0	0.222	-0.222	True	acerto
+confusões	til	580	43	0.222	0.222	0.0	True	acerto
+confusões	til	537	43	0.111	0.0	0.111	True	acerto
+confusões	til	616	43	0.333	0.333	0.0	True	acerto
+confusões	til	305	43	0.222	0.111	0.111	True	acerto
+confusões	til	589	43	0.222	0.222	0.0	True	acerto
+confusões	til	280	43	0.444	0.444	0.0	True	acerto
+confusões	til	510	43	0.0	0.111	-0.111	True	acerto
+confusões	til	201	43	0.556	0.444	0.111	True	acerto
+confusões	til	631	43	0.333	0.333	0.0	True	acerto
+confusões	til	318	43	0.222	0.111	0.111	True	acerto
+confusões	til	597	43	0.556	0.444	0.111	False	omissao
+confusões	til	622	43	0.222	0.0	0.222	True	degradacao com diacritico
+lançados	cedilha	547	42	0.125	0.0	0.125	True	acerto
+lançados	cedilha	560	42	0.125	0.0	0.125	True	acerto
+lançados	cedilha	183	42	0.25	0.0	0.25	False	degradacao sem diacritico
+lançados	cedilha	321	42	0.0	0.0	0.0	False	omissao
+lançados	cedilha	590	42	0.25	0.125	0.125	True	acerto
+lançados	cedilha	583	42	0.25	0.0	0.25	True	degradacao com diacritico
+lançados	cedilha	555	42	0.25	0.125	0.125	True	acerto
+lançados	cedilha	517	42	0.0	0.0	0.0	True	acerto
+lançados	cedilha	580	42	0.125	0.375	-0.25	False	omissao
+lançados	cedilha	537	42	0.375	0.125	0.25	True	degradacao com diacritico
+lançados	cedilha	616	42	0.0	0.125	-0.125	False	omissao
+lançados	cedilha	305	42	0.0	0.0	0.0	True	acerto
+lançados	cedilha	589	42	0.125	0.0	0.125	False	omissao
+lançados	cedilha	280	42	0.0	0.0	0.0	True	acerto
+lançados	cedilha	510	42	0.25	0.0	0.25	True	degradacao com diacritico
+lançados	cedilha	201	42	0.125	0.0	0.125	True	acerto
+lançados	cedilha	631	42	0.375	0.0	0.375	False	degradacao sem diacritico
+lançados	cedilha	318	42	0.5	0.125	0.375	True	degradacao com diacritico
+lançados	cedilha	597	42	0.625	0.25	0.375	True	degradacao com diacritico
+lançados	cedilha	622	42	0.0	0.125	-0.125	True	acerto
+lançados	cedilha	547	43	0.375	0.125	0.25	True	degradacao com diacritico
+lançados	cedilha	560	43	0.125	0.0	0.125	True	acerto
+lançados	cedilha	183	43	0.125	0.0	0.125	True	acerto
+lançados	cedilha	321	43	0.125	0.0	0.125	True	acerto
+lançados	cedilha	590	43	0.0	0.0	0.0	True	acerto
+lançados	cedilha	583	43	0.125	0.0	0.125	True	acerto
+lançados	cedilha	555	43	0.375	0.0	0.375	True	degradacao com diacritico
+lançados	cedilha	517	43	0.0	0.0	0.0	True	acerto
+lançados	cedilha	580	43	0.5	0.375	0.125	False	omissao
+lançados	cedilha	537	43	0.0	0.0	0.0	False	omissao
+lançados	cedilha	616	43	0.125	0.25	-0.125	True	acerto
+lançados	cedilha	305	43	0.125	0.0	0.125	True	acerto
+lançados	cedilha	589	43	0.5	0.0	0.5	True	degradacao com diacritico
+lançados	cedilha	280	43	0.25	0.0	0.25	True	degradacao com diacritico
+lançados	cedilha	510	43	0.0	0.0	0.0	True	acerto
+lançados	cedilha	201	43	0.375	0.0	0.375	False	degradacao sem diacritico
+lançados	cedilha	631	43	0.0	0.0	0.0	True	acerto
+lançados	cedilha	318	43	0.0	0.0	0.0	True	acerto
+lançados	cedilha	597	43	0.125	0.125	0.0	True	acerto
+lançados	cedilha	622	43	0.125	0.125	0.0	True	acerto
+caçadoras	cedilha	547	42	0.556	0.222	0.333	False	degradacao sem diacritico
+caçadoras	cedilha	560	42	0.222	0.0	0.222	True	degradacao com diacritico
+caçadoras	cedilha	183	42	0.444	0.0	0.444	True	degradacao com diacritico
+caçadoras	cedilha	321	42	0.111	0.111	0.0	False	omissao
+caçadoras	cedilha	590	42	0.222	0.222	0.0	False	omissao
+caçadoras	cedilha	583	42	0.556	0.111	0.444	False	degradacao sem diacritico
+caçadoras	cedilha	555	42	0.444	0.0	0.444	True	degradacao com diacritico
+caçadoras	cedilha	517	42	0.444	0.111	0.333	False	degradacao sem diacritico
+caçadoras	cedilha	580	42	0.333	0.0	0.333	False	degradacao sem diacritico
+caçadoras	cedilha	537	42	0.111	0.111	0.0	True	acerto
+caçadoras	cedilha	616	42	0.333	0.333	0.0	True	acerto
+caçadoras	cedilha	305	42	0.333	0.111	0.222	True	degradacao com diacritico
+caçadoras	cedilha	589	42	0.111	0.222	-0.111	False	omissao
+caçadoras	cedilha	280	42	0.333	0.222	0.111	False	omissao
+caçadoras	cedilha	510	42	0.667	0.222	0.444	True	degradacao com diacritico
+caçadoras	cedilha	201	42	0.333	0.222	0.111	True	acerto
+caçadoras	cedilha	631	42	0.222	0.222	0.0	True	acerto
+caçadoras	cedilha	318	42	0.111	0.0	0.111	True	acerto
+caçadoras	cedilha	597	42	0.222	0.111	0.111	False	omissao
+caçadoras	cedilha	622	42	0.333	0.333	0.0	True	acerto
+caçadoras	cedilha	547	43	0.222	0.0	0.222	False	degradacao sem diacritico
+caçadoras	cedilha	560	43	0.222	0.222	0.0	True	acerto
+caçadoras	cedilha	183	43	0.222	0.333	-0.111	True	acerto
+caçadoras	cedilha	321	43	0.222	0.111	0.111	True	acerto
+caçadoras	cedilha	590	43	0.222	0.222	0.0	False	omissao
+caçadoras	cedilha	583	43	0.444	0.222	0.222	True	degradacao com diacritico
+caçadoras	cedilha	555	43	0.222	0.333	-0.111	True	acerto
+caçadoras	cedilha	517	43	0.222	0.111	0.111	True	acerto
+caçadoras	cedilha	580	43	0.111	0.0	0.111	False	omissao
+caçadoras	cedilha	537	43	0.333	0.222	0.111	False	omissao
+caçadoras	cedilha	616	43	0.333	0.111	0.222	True	degradacao com diacritico
+caçadoras	cedilha	305	43	0.111	0.0	0.111	False	omissao
+caçadoras	cedilha	589	43	0.444	0.333	0.111	True	acerto
+caçadoras	cedilha	280	43	0.0	0.222	-0.222	True	acerto
+caçadoras	cedilha	510	43	0.333	0.333	0.0	True	acerto
+caçadoras	cedilha	201	43	0.444	0.111	0.333	True	degradacao com diacritico
+caçadoras	cedilha	631	43	0.0	0.0	0.0	True	acerto
+caçadoras	cedilha	318	43	0.222	0.222	0.0	True	acerto
+caçadoras	cedilha	597	43	0.333	0.111	0.222	True	degradacao com diacritico
+caçadoras	cedilha	622	43	0.111	0.0	0.111	True	acerto
+bálsamo	agudo	547	42	0.714	0.143	0.571	False	degradacao sem diacritico
+bálsamo	agudo	560	42	0.286	0.0	0.286	True	degradacao com diacritico
+bálsamo	agudo	183	42	0.286	0.286	0.0	True	acerto
+bálsamo	agudo	321	42	0.0	0.143	-0.143	False	omissao
+bálsamo	agudo	590	42	0.286	0.143	0.143	False	omissao
+bálsamo	agudo	583	42	0.143	0.143	0.0	True	acerto
+bálsamo	agudo	555	42	0.0	0.0	0.0	True	acerto
+bálsamo	agudo	517	42	0.286	0.0	0.286	True	degradacao com diacritico
+bálsamo	agudo	580	42	0.571	0.286	0.286	True	degradacao com diacritico
+bálsamo	agudo	537	42	0.571	0.143	0.429	True	degradacao com diacritico
+bálsamo	agudo	616	42	0.857	0.857	0.0	True	acerto
+bálsamo	agudo	305	42	0.143	0.143	0.0	True	acerto
+bálsamo	agudo	589	42	0.429	0.429	0.0	True	acerto
+bálsamo	agudo	280	42	0.143	0.0	0.143	True	acerto
+bálsamo	agudo	510	42	0.571	0.286	0.286	True	degradacao com diacritico
+bálsamo	agudo	201	42	0.143	0.143	0.0	True	acerto
+bálsamo	agudo	631	42	0.429	0.286	0.143	True	acerto
+bálsamo	agudo	318	42	0.143	0.143	0.0	True	acerto
+bálsamo	agudo	597	42	0.143	0.143	0.0	True	acerto
+bálsamo	agudo	622	42	0.571	0.143	0.429	True	degradacao com diacritico
+bálsamo	agudo	547	43	0.286	0.0	0.286	True	degradacao com diacritico
+bálsamo	agudo	560	43	0.286	0.0	0.286	True	degradacao com diacritico
+bálsamo	agudo	183	43	0.571	0.143	0.429	True	degradacao com diacritico
+bálsamo	agudo	321	43	0.143	0.0	0.143	True	acerto
+bálsamo	agudo	590	43	0.429	0.143	0.286	False	degradacao sem diacritico
+bálsamo	agudo	583	43	0.571	0.286	0.286	False	degradacao sem diacritico
+bálsamo	agudo	555	43	0.571	0.571	0.0	True	acerto
+bálsamo	agudo	517	43	0.286	0.143	0.143	False	omissao
+bálsamo	agudo	580	43	0.286	0.286	0.0	False	omissao
+bálsamo	agudo	537	43	0.0	0.143	-0.143	True	acerto
+bálsamo	agudo	616	43	0.429	0.286	0.143	True	acerto
+bálsamo	agudo	305	43	0.0	0.143	-0.143	True	acerto
+bálsamo	agudo	589	43	0.286	0.143	0.143	False	omissao
+bálsamo	agudo	280	43	0.286	0.0	0.286	True	degradacao com diacritico
+bálsamo	agudo	510	43	0.143	0.0	0.143	True	acerto
+bálsamo	agudo	201	43	0.286	0.0	0.286	True	degradacao com diacritico
+bálsamo	agudo	631	43	0.429	0.286	0.143	True	acerto
+bálsamo	agudo	318	43	0.143	0.0	0.143	True	acerto
+bálsamo	agudo	597	43	0.143	0.143	0.0	False	omissao
+bálsamo	agudo	622	43	0.429	0.429	0.0	True	acerto
+léguas	agudo	547	42	0.667	0.167	0.5	True	degradacao com diacritico
+léguas	agudo	560	42	0.0	0.0	0.0	True	acerto
+léguas	agudo	183	42	0.5	0.333	0.167	False	omissao
+léguas	agudo	321	42	0.167	0.0	0.167	False	omissao
+léguas	agudo	590	42	0.333	0.333	0.0	True	acerto
+léguas	agudo	583	42	0.333	0.333	0.0	True	acerto
+léguas	agudo	555	42	0.667	0.0	0.667	True	degradacao com diacritico
+léguas	agudo	517	42	0.333	0.0	0.333	True	degradacao com diacritico
+léguas	agudo	580	42	0.333	0.333	0.0	True	acerto
+léguas	agudo	537	42	0.167	0.167	0.0	True	acerto
+léguas	agudo	616	42	0.667	0.333	0.333	True	degradacao com diacritico
+léguas	agudo	305	42	0.333	0.167	0.167	True	acerto
+léguas	agudo	589	42	0.333	0.333	0.0	False	omissao
+léguas	agudo	280	42	0.333	0.167	0.167	True	acerto
+léguas	agudo	510	42	0.833	0.333	0.5	True	degradacao com diacritico
+léguas	agudo	201	42	0.5	0.167	0.333	True	degradacao com diacritico
+léguas	agudo	631	42	0.333	0.333	0.0	False	omissao
+léguas	agudo	318	42	0.5	0.5	0.0	True	acerto
+léguas	agudo	597	42	0.833	0.333	0.5	True	degradacao com diacritico
+léguas	agudo	622	42	0.167	0.167	0.0	True	acerto
+léguas	agudo	547	43	0.333	0.0	0.333	True	degradacao com diacritico
+léguas	agudo	560	43	0.167	0.167	0.0	True	acerto
+léguas	agudo	183	43	0.167	0.167	0.0	False	omissao
+léguas	agudo	321	43	0.167	0.167	0.0	False	omissao
+léguas	agudo	590	43	0.5	0.333	0.167	True	acerto
+léguas	agudo	583	43	0.333	0.167	0.167	True	acerto
+léguas	agudo	555	43	0.5	0.667	-0.167	True	acerto
+léguas	agudo	517	43	0.5	0.167	0.333	True	degradacao com diacritico
+léguas	agudo	580	43	0.333	0.167	0.167	True	acerto
+léguas	agudo	537	43	0.333	0.333	0.0	True	acerto
+léguas	agudo	616	43	0.5	0.333	0.167	True	acerto
+léguas	agudo	305	43	0.5	0.333	0.167	True	acerto
+léguas	agudo	589	43	0.333	0.0	0.333	True	degradacao com diacritico
+léguas	agudo	280	43	0.0	0.167	-0.167	True	acerto
+léguas	agudo	510	43	0.167	0.333	-0.167	True	acerto
+léguas	agudo	201	43	0.333	0.333	0.0	True	acerto
+léguas	agudo	631	43	0.167	0.0	0.167	False	omissao
+léguas	agudo	318	43	0.0	0.333	-0.333	True	acerto
+léguas	agudo	597	43	0.0	0.0	0.0	True	acerto
+léguas	agudo	622	43	0.333	0.333	0.0	True	acerto
+pás	agudo	547	42	0.333	0.0	0.333	False	degradacao sem diacritico
+pás	agudo	560	42	0.333	0.333	0.0	False	omissao
+pás	agudo	183	42	0.667	0.0	0.667	False	degradacao sem diacritico
+pás	agudo	321	42	0.0	0.0	0.0	False	omissao
+pás	agudo	590	42	0.333	0.0	0.333	False	degradacao sem diacritico
+pás	agudo	583	42	0.333	0.0	0.333	True	degradacao com diacritico
+pás	agudo	555	42	0.667	0.0	0.667	True	degradacao com diacritico
+pás	agudo	517	42	1.0	0.0	1.0	True	degradacao com diacritico
+pás	agudo	580	42	0.0	0.333	-0.333	False	omissao
+pás	agudo	537	42	0.0	0.0	0.0	False	omissao
+pás	agudo	616	42	0.667	0.333	0.333	True	degradacao com diacritico
+pás	agudo	305	42	0.0	0.0	0.0	False	omissao
+pás	agudo	589	42	0.667	0.0	0.667	True	degradacao com diacritico
+pás	agudo	280	42	0.333	0.333	0.0	False	omissao
+pás	agudo	510	42	0.0	0.0	0.0	False	omissao
+pás	agudo	201	42	0.0	0.0	0.0	False	omissao
+pás	agudo	631	42	0.0	0.0	0.0	False	omissao
+pás	agudo	318	42	0.333	0.0	0.333	False	degradacao sem diacritico
+pás	agudo	597	42	0.333	0.0	0.333	False	degradacao sem diacritico
+pás	agudo	622	42	0.333	0.0	0.333	True	degradacao com diacritico
+pás	agudo	547	43	0.333	0.0	0.333	True	degradacao com diacritico
+pás	agudo	560	43	0.333	0.0	0.333	False	degradacao sem diacritico
+pás	agudo	183	43	0.0	0.0	0.0	False	omissao
+pás	agudo	321	43	0.333	0.0	0.333	False	degradacao sem diacritico
+pás	agudo	590	43	0.0	0.0	0.0	False	omissao
+pás	agudo	583	43	0.0	0.0	0.0	False	omissao
+pás	agudo	555	43	0.333	0.0	0.333	True	degradacao com diacritico
+pás	agudo	517	43	0.333	0.0	0.333	False	degradacao sem diacritico
+pás	agudo	580	43	0.333	0.333	0.0	False	omissao
+pás	agudo	537	43	0.0	0.0	0.0	False	omissao
+pás	agudo	616	43	0.333	0.333	0.0	True	acerto
+pás	agudo	305	43	0.0	0.0	0.0	False	omissao
+pás	agudo	589	43	0.333	0.0	0.333	False	degradacao sem diacritico
+pás	agudo	280	43	0.0	0.333	-0.333	False	omissao
+pás	agudo	510	43	0.0	0.0	0.0	False	omissao
+pás	agudo	201	43	0.333	0.0	0.333	False	degradacao sem diacritico
+pás	agudo	631	43	0.333	0.333	0.0	False	omissao
+pás	agudo	318	43	0.667	0.0	0.667	False	degradacao sem diacritico
+pás	agudo	597	43	0.0	0.0	0.0	True	acerto
+pás	agudo	622	43	0.0	0.0	0.0	False	omissao
+sofrerá	agudo	547	42	0.143	0.0	0.143	True	acerto
+sofrerá	agudo	560	42	0.0	0.0	0.0	True	acerto
+sofrerá	agudo	183	42	0.286	0.429	-0.143	True	acerto
+sofrerá	agudo	321	42	0.143	0.143	0.0	True	acerto
+sofrerá	agudo	590	42	0.286	0.143	0.143	True	acerto
+sofrerá	agudo	583	42	0.0	0.143	-0.143	True	acerto
+sofrerá	agudo	555	42	0.143	0.0	0.143	True	acerto
+sofrerá	agudo	517	42	0.286	0.143	0.143	True	acerto
+sofrerá	agudo	580	42	0.571	0.143	0.429	True	degradacao com diacritico
+sofrerá	agudo	537	42	0.143	0.143	0.0	True	acerto
+sofrerá	agudo	616	42	0.143	0.0	0.143	True	acerto
+sofrerá	agudo	305	42	0.143	0.0	0.143	True	acerto
+sofrerá	agudo	589	42	0.714	0.0	0.714	True	degradacao com diacritico
+sofrerá	agudo	280	42	0.0	0.0	0.0	True	acerto
+sofrerá	agudo	510	42	0.143	0.286	-0.143	False	omissao
+sofrerá	agudo	201	42	0.0	0.0	0.0	True	acerto
+sofrerá	agudo	631	42	0.429	0.429	0.0	True	acerto
+sofrerá	agudo	318	42	0.143	0.143	0.0	True	acerto
+sofrerá	agudo	597	42	0.286	0.143	0.143	False	omissao
+sofrerá	agudo	622	42	0.143	0.143	0.0	True	acerto
+sofrerá	agudo	547	43	0.143	0.0	0.143	True	acerto
+sofrerá	agudo	560	43	0.0	0.143	-0.143	True	acerto
+sofrerá	agudo	183	43	0.143	0.143	0.0	True	acerto
+sofrerá	agudo	321	43	0.429	0.286	0.143	True	acerto
+sofrerá	agudo	590	43	0.143	0.143	0.0	True	acerto
+sofrerá	agudo	583	43	0.429	0.286	0.143	True	acerto
+sofrerá	agudo	555	43	0.143	0.143	0.0	True	acerto
+sofrerá	agudo	517	43	0.143	0.0	0.143	True	acerto
+sofrerá	agudo	580	43	0.143	0.143	0.0	True	acerto
+sofrerá	agudo	537	43	0.286	0.0	0.286	True	degradacao com diacritico
+sofrerá	agudo	616	43	0.286	0.143	0.143	True	acerto
+sofrerá	agudo	305	43	0.0	0.0	0.0	True	acerto
+sofrerá	agudo	589	43	0.286	0.286	0.0	True	acerto
+sofrerá	agudo	280	43	0.143	0.0	0.143	True	acerto
+sofrerá	agudo	510	43	0.0	0.143	-0.143	True	acerto
+sofrerá	agudo	201	43	0.143	0.0	0.143	False	omissao
+sofrerá	agudo	631	43	0.714	0.571	0.143	True	acerto
+sofrerá	agudo	318	43	0.286	0.0	0.286	True	degradacao com diacritico
+sofrerá	agudo	597	43	0.286	0.0	0.286	True	degradacao com diacritico
+sofrerá	agudo	622	43	0.0	0.143	-0.143	True	acerto
+terço	cedilha	547	42	0.4	0.0	0.4	True	degradacao com diacritico
+terço	cedilha	560	42	0.2	0.0	0.2	False	omissao
+terço	cedilha	183	42	0.2	0.2	0.0	False	omissao
+terço	cedilha	321	42	0.4	0.2	0.2	False	omissao
+terço	cedilha	590	42	1.0	0.2	0.8	True	degradacao com diacritico
+terço	cedilha	583	42	0.6	0.2	0.4	False	degradacao sem diacritico
+terço	cedilha	555	42	0.4	0.0	0.4	False	degradacao sem diacritico
+terço	cedilha	517	42	0.4	0.0	0.4	False	degradacao sem diacritico
+terço	cedilha	580	42	0.6	0.0	0.6	False	degradacao sem diacritico
+terço	cedilha	537	42	0.6	0.2	0.4	False	degradacao sem diacritico
+terço	cedilha	616	42	0.8	0.6	0.2	False	degradacao sem diacritico
+terço	cedilha	305	42	0.4	0.0	0.4	False	degradacao sem diacritico
+terço	cedilha	589	42	0.2	0.8	-0.6	False	omissao
+terço	cedilha	280	42	0.4	0.2	0.2	False	omissao
+terço	cedilha	510	42	0.4	0.0	0.4	False	degradacao sem diacritico
+terço	cedilha	201	42	0.6	0.6	0.0	False	omissao
+terço	cedilha	631	42	0.8	0.0	0.8	True	degradacao com diacritico
+terço	cedilha	318	42	0.4	0.2	0.2	False	omissao
+terço	cedilha	597	42	0.0	0.0	0.0	False	omissao
+terço	cedilha	622	42	0.6	0.2	0.4	False	degradacao sem diacritico
+terço	cedilha	547	43	0.6	0.4	0.2	True	acerto
+terço	cedilha	560	43	0.8	0.0	0.8	False	degradacao sem diacritico
+terço	cedilha	183	43	0.4	0.0	0.4	True	degradacao com diacritico
+terço	cedilha	321	43	0.2	0.2	0.0	False	omissao
+terço	cedilha	590	43	0.4	0.0	0.4	True	degradacao com diacritico
+terço	cedilha	583	43	0.4	0.6	-0.2	False	omissao
+terço	cedilha	555	43	0.4	0.0	0.4	False	degradacao sem diacritico
+terço	cedilha	517	43	0.4	0.2	0.2	False	omissao
+terço	cedilha	580	43	0.2	0.0	0.2	False	omissao
+terço	cedilha	537	43	0.6	0.2	0.4	True	degradacao com diacritico
+terço	cedilha	616	43	0.4	0.4	0.0	False	omissao
+terço	cedilha	305	43	0.4	0.0	0.4	False	degradacao sem diacritico
+terço	cedilha	589	43	0.8	0.0	0.8	True	degradacao com diacritico
+terço	cedilha	280	43	0.2	0.0	0.2	False	omissao
+terço	cedilha	510	43	0.2	0.2	0.0	False	omissao
+terço	cedilha	201	43	0.6	0.6	0.0	True	acerto
+terço	cedilha	631	43	0.4	0.0	0.4	False	degradacao sem diacritico
+terço	cedilha	318	43	0.6	0.4	0.2	True	acerto
+terço	cedilha	597	43	0.2	0.2	0.0	False	omissao
+terço	cedilha	622	43	0.6	0.0	0.6	False	degradacao sem diacritico
+matarás	agudo	547	42	0.286	0.0	0.286	False	degradacao sem diacritico
+matarás	agudo	560	42	0.286	0.286	0.0	True	acerto
+matarás	agudo	183	42	0.429	0.286	0.143	True	acerto
+matarás	agudo	321	42	0.143	0.286	-0.143	True	acerto
+matarás	agudo	590	42	0.0	0.0	0.0	True	acerto
+matarás	agudo	583	42	0.286	0.143	0.143	True	acerto
+matarás	agudo	555	42	0.0	0.143	-0.143	True	acerto
+matarás	agudo	517	42	0.143	0.143	0.0	True	acerto
+matarás	agudo	580	42	0.286	0.0	0.286	True	degradacao com diacritico
+matarás	agudo	537	42	0.286	0.286	0.0	True	acerto
+matarás	agudo	616	42	0.429	0.0	0.429	True	degradacao com diacritico
+matarás	agudo	305	42	0.286	0.143	0.143	True	acerto
+matarás	agudo	589	42	0.0	0.143	-0.143	True	acerto
+matarás	agudo	280	42	0.429	0.143	0.286	True	degradacao com diacritico
+matarás	agudo	510	42	0.143	0.143	0.0	True	acerto
+matarás	agudo	201	42	0.143	0.143	0.0	True	acerto
+matarás	agudo	631	42	0.286	0.429	-0.143	True	acerto
+matarás	agudo	318	42	0.286	0.143	0.143	True	acerto
+matarás	agudo	597	42	0.143	0.143	0.0	True	acerto
+matarás	agudo	622	42	0.143	0.143	0.0	True	acerto
+matarás	agudo	547	43	0.0	0.286	-0.286	True	acerto
+matarás	agudo	560	43	0.0	0.0	0.0	True	acerto
+matarás	agudo	183	43	0.143	0.0	0.143	True	acerto
+matarás	agudo	321	43	0.143	0.143	0.0	True	acerto
+matarás	agudo	590	43	0.0	0.143	-0.143	True	acerto
+matarás	agudo	583	43	0.286	0.429	-0.143	True	acerto
+matarás	agudo	555	43	0.429	0.143	0.286	True	degradacao com diacritico
+matarás	agudo	517	43	0.429	0.143	0.286	False	degradacao sem diacritico
+matarás	agudo	580	43	0.143	0.0	0.143	True	acerto
+matarás	agudo	537	43	0.0	0.0	0.0	True	acerto
+matarás	agudo	616	43	0.143	0.0	0.143	True	acerto
+matarás	agudo	305	43	0.286	0.143	0.143	True	acerto
+matarás	agudo	589	43	0.143	0.286	-0.143	True	acerto
+matarás	agudo	280	43	0.571	0.143	0.429	True	degradacao com diacritico
+matarás	agudo	510	43	0.143	0.0	0.143	True	acerto
+matarás	agudo	201	43	0.0	0.0	0.0	True	acerto
+matarás	agudo	631	43	0.143	0.286	-0.143	True	acerto
+matarás	agudo	318	43	0.286	0.286	0.0	True	acerto
+matarás	agudo	597	43	0.0	0.143	-0.143	True	acerto
+matarás	agudo	622	43	0.0	0.143	-0.143	True	acerto
+prestação	cedilha e til	547	42	0.333	0.222	0.111	True	acerto
+prestação	cedilha e til	560	42	0.111	0.222	-0.111	False	omissao
+prestação	cedilha e til	183	42	0.556	0.222	0.333	False	degradacao sem diacritico
+prestação	cedilha e til	321	42	0.111	0.0	0.111	True	acerto
+prestação	cedilha e til	590	42	0.222	0.111	0.111	True	acerto
+prestação	cedilha e til	583	42	0.333	0.222	0.111	False	omissao
+prestação	cedilha e til	555	42	0.222	0.111	0.111	True	acerto
+prestação	cedilha e til	517	42	0.222	0.0	0.222	True	degradacao com diacritico
+prestação	cedilha e til	580	42	0.333	0.111	0.222	True	degradacao com diacritico
+prestação	cedilha e til	537	42	0.0	0.0	0.0	True	acerto
+prestação	cedilha e til	616	42	0.222	0.0	0.222	True	degradacao com diacritico
+prestação	cedilha e til	305	42	0.222	0.0	0.222	True	degradacao com diacritico
+prestação	cedilha e til	589	42	0.667	0.222	0.444	False	degradacao sem diacritico
+prestação	cedilha e til	280	42	0.111	0.0	0.111	True	acerto
+prestação	cedilha e til	510	42	0.222	0.0	0.222	False	degradacao sem diacritico
+prestação	cedilha e til	201	42	0.222	0.222	0.0	True	acerto
+prestação	cedilha e til	631	42	0.556	0.444	0.111	True	acerto
+prestação	cedilha e til	318	42	0.444	0.444	0.0	True	acerto
+prestação	cedilha e til	597	42	0.556	0.111	0.444	True	degradacao com diacritico
+prestação	cedilha e til	622	42	0.333	0.222	0.111	True	acerto
+prestação	cedilha e til	547	43	0.333	0.333	0.0	False	omissao
+prestação	cedilha e til	560	43	0.222	0.111	0.111	True	acerto
+prestação	cedilha e til	183	43	0.444	0.111	0.333	True	degradacao com diacritico
+prestação	cedilha e til	321	43	0.111	0.111	0.0	True	acerto
+prestação	cedilha e til	590	43	0.333	0.222	0.111	True	acerto
+prestação	cedilha e til	583	43	0.222	0.111	0.111	True	acerto
+prestação	cedilha e til	555	43	0.444	0.111	0.333	True	degradacao com diacritico
+prestação	cedilha e til	517	43	0.333	0.111	0.222	True	degradacao com diacritico
+prestação	cedilha e til	580	43	0.333	0.111	0.222	True	degradacao com diacritico
+prestação	cedilha e til	537	43	0.333	0.444	-0.111	True	acerto
+prestação	cedilha e til	616	43	0.333	0.111	0.222	True	degradacao com diacritico
+prestação	cedilha e til	305	43	0.222	0.333	-0.111	True	acerto
+prestação	cedilha e til	589	43	0.444	0.333	0.111	True	acerto
+prestação	cedilha e til	280	43	0.444	0.222	0.222	False	degradacao sem diacritico
+prestação	cedilha e til	510	43	0.333	0.111	0.222	True	degradacao com diacritico
+prestação	cedilha e til	201	43	0.0	0.0	0.0	True	acerto
+prestação	cedilha e til	631	43	0.444	0.0	0.444	False	degradacao sem diacritico
+prestação	cedilha e til	318	43	0.333	0.111	0.222	True	degradacao com diacritico
+prestação	cedilha e til	597	43	0.333	0.111	0.222	True	degradacao com diacritico
+prestação	cedilha e til	622	43	0.111	0.0	0.111	False	omissao
+lançaremos	cedilha	547	42	0.4	0.2	0.2	True	acerto
+lançaremos	cedilha	560	42	0.3	0.3	0.0	True	acerto
+lançaremos	cedilha	183	42	0.4	0.3	0.1	True	acerto
+lançaremos	cedilha	321	42	0.6	0.1	0.5	True	degradacao com diacritico
+lançaremos	cedilha	590	42	0.4	0.3	0.1	True	acerto
+lançaremos	cedilha	583	42	0.6	0.3	0.3	True	degradacao com diacritico
+lançaremos	cedilha	555	42	0.5	0.5	0.0	False	omissao
+lançaremos	cedilha	517	42	0.4	0.3	0.1	True	acerto
+lançaremos	cedilha	580	42	0.3	0.3	0.0	True	acerto
+lançaremos	cedilha	537	42	0.2	0.1	0.1	True	acerto
+lançaremos	cedilha	616	42	0.4	0.2	0.2	True	acerto
+lançaremos	cedilha	305	42	0.1	0.1	0.0	True	acerto
+lançaremos	cedilha	589	42	0.2	0.2	0.0	True	acerto
+lançaremos	cedilha	280	42	0.2	0.2	0.0	False	omissao
+lançaremos	cedilha	510	42	0.5	0.3	0.2	True	acerto
+lançaremos	cedilha	201	42	0.3	0.5	-0.2	True	acerto
+lançaremos	cedilha	631	42	0.3	0.4	-0.1	False	omissao
+lançaremos	cedilha	318	42	0.2	0.2	0.0	True	acerto
+lançaremos	cedilha	597	42	0.6	0.3	0.3	True	degradacao com diacritico
+lançaremos	cedilha	622	42	0.2	0.1	0.1	True	acerto
+lançaremos	cedilha	547	43	0.5	0.2	0.3	True	degradacao com diacritico
+lançaremos	cedilha	560	43	0.4	0.3	0.1	False	omissao
+lançaremos	cedilha	183	43	0.7	0.1	0.6	True	degradacao com diacritico
+lançaremos	cedilha	321	43	0.4	0.3	0.1	True	acerto
+lançaremos	cedilha	590	43	0.4	0.3	0.1	True	acerto
+lançaremos	cedilha	583	43	0.4	0.6	-0.2	True	acerto
+lançaremos	cedilha	555	43	0.4	0.5	-0.1	True	acerto
+lançaremos	cedilha	517	43	0.4	0.4	0.0	True	acerto
+lançaremos	cedilha	580	43	0.2	0.4	-0.2	False	omissao
+lançaremos	cedilha	537	43	0.2	0.1	0.1	False	omissao
+lançaremos	cedilha	616	43	0.2	0.2	0.0	False	omissao
+lançaremos	cedilha	305	43	0.1	0.0	0.1	False	omissao
+lançaremos	cedilha	589	43	0.3	0.1	0.2	True	acerto
+lançaremos	cedilha	280	43	0.2	0.2	0.0	False	omissao
+lançaremos	cedilha	510	43	0.3	0.1	0.2	True	acerto
+lançaremos	cedilha	201	43	0.2	0.2	0.0	True	acerto
+lançaremos	cedilha	631	43	0.5	0.3	0.2	True	acerto
+lançaremos	cedilha	318	43	0.2	0.2	0.0	True	acerto
+lançaremos	cedilha	597	43	0.1	0.5	-0.4	True	acerto
+lançaremos	cedilha	622	43	0.1	0.2	-0.1	False	omissao

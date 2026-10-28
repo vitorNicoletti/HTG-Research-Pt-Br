@@ -1,5 +1,16 @@
 # 10 — Problemas em aberto
 
+> Este documento descreve os problemas como estavam ao fim da fase 9, antes do
+> acento separado e do professor. Depois deles ([14](14_acento_separado_e_professor.md)),
+> os problemas 1 e 2 se resolveram nas palavras sem acento pedido: a letra e a
+> marca indevida voltaram ao nível do modelo original. Nas palavras acentuadas
+> a letra continua pior (CER 0,39 contra 0,27 na base). O problema 3 caiu com a
+> zona vogais e passou a ser medido pela métrica final.
+> O que continua aberto hoje está em
+> [15](15_acento_a_mais_e_variantes_do_professor.md), seção "Estado atual e
+> como continuar", e nas limitações da métrica em
+> [avaliacao_diacriticos/README.md](../avaliacao_diacriticos/README.md).
+
 Onde estamos travados. Para cada problema:
 - o que se observa;
 - as hipóteses, com a evidência a favor e contra;

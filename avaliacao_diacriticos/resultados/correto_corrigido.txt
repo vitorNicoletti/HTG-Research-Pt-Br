@@ -1,0 +1,14 @@
+anotacao: 135 palavras, 117 corretas pelas pessoas; sens 0.82, espec 0.72 (18 palavras nao corretas)
+
+modelo | correto medido | correto corrigido | ic95
+fora_16ep | 38.7 | 20.1 | 0 a 48
+professor_11ep | 30.9 | 5.8 | 0 a 34
+professor_16ep | 44.0 | 29.9 | 0 a 54
+sem_pares_16ep | 47.4 | 36.2 | 0 a 61
+so_prof_11ep | 14.5 | 0.0 | 0 a 10
+zona_fora_baixo_16ep | 42.8 | 27.7 | 0 a 53
+zona_vogais_16ep | 54.8 | 49.7 | 9 a 71
+zona_vogais_21ep | 56.7 | 53.2 | 13 a 74
+zona_vogais_30ep | 67.7 | 73.5 | 45 a 92
+zona_vogais_40ep | 71.7 | 80.9 | 58 a 99
+zona_vogais_6ep | 23.7 | 0.0 | 0 a 24

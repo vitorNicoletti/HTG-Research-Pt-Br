@@ -1,11 +1,256 @@
 # Métrica de diacríticos
 
-Mede se um gerador de manuscrito desenha os diacríticos do português. Tem dois
-eixos. O eixo 1 mede a presença do acento na imagem e está pronto. O eixo 2
-mede se a palavra continua legível e depende de um reconhecedor de texto que
-ainda não temos.
+Mede se um gerador de manuscrito desenha os diacríticos do português. A
+métrica final responde, para cada palavra pedida com acento, três perguntas.
 
-## Como o eixo 1 funciona
+| pergunta | como | situação |
+|---|---|---|
+| 1. o sinal pedido está lá? | `sinais.py`: marca solta em cima para acento, tinta abaixo do c para cedilha | validada pela anotação humana |
+| 2. está na letra certa, e só nela? | `sinais.py`: a mesma marca atribuída a uma vogal pelo alinhador | validada pela anotação humana |
+| 3. o acento estragou a palavra? | `integridade.py`: CER da acentuada menos CER do esqueleto, com os sinais apagados | feita, sem validação humana direta |
+
+O planejamento do TCC chama a pergunta 1 e 2 de E1, presença, e a pergunta 3
+de E2, integridade. O cruzamento dos dois dá as quatro categorias do plano:
+acerto, omissão, degradação com diacrítico e degradação sem diacrítico. O tipo
+do sinal (um til no lugar de um agudo) não é medido e fica como trabalho
+futuro.
+
+As seções a partir de "Histórico" registram as tentativas anteriores,
+inclusive o eixo 1 original, que comparava a imagem acentuada com o esqueleto
+e não passou na anotação.
+
+## Arquivos da métrica final
+
+| arquivo | papel |
+|---|---|
+| `sinais.py` | o detector: presença do acento e da cedilha, letra de cada marca, categoria da palavra e a função que apaga os sinais para o E2 |
+| `avaliar_sinais.py` | aplica o E1 a uma avaliação do `scripts/avaliar_pt.py`, uma linha por imagem e um resumo por modelo |
+| `integridade.py` | o E2 em pares e o cruzamento com o E1 nas quatro categorias |
+| `por_classe.py` | o resultado do E1 separado por classe de sinal |
+| `anotacao_dupla.py`, `anotacao_40ep.md` | a anotação humana do modelo de 40 épocas: pacote, concordância, gabarito e o registro |
+| `experimentos/validar_presenca.py`, `validar_categorias.py`, `diagnosticar_posicao.py`, `posicao_v2.py`, `custo_do_acento.py` | as validações citadas nas seções abaixo |
+| `resultados/sinais/`, `resultados/integridade/` | os resultados dos onze modelos de treino |
+| `relatorio.py` | gera `resultados/metrica/` na raiz: a concordância com a anotação, a métrica nos treinos e três figuras |
+
+Os demais arquivos da pasta pertencem às tentativas do histórico.
+
+### Como usar
+
+Da raiz do repositório, no ambiente `nix develop .#cpu`. A entrada é uma
+avaliação do `scripts/avaliar_pt.py`, com o `paineis.tsv` e as imagens.
+
+```bash
+# E1: presença, letra e categoria, por imagem e por modelo
+python avaliacao_diacriticos/avaliar_sinais.py --saida avaliacao_diacriticos/resultados/sinais \
+    --modelo <rotulo>=<pasta das imagens>:<pasta com o paineis.tsv>
+# E1 por classe de sinal
+python avaliacao_diacriticos/por_classe.py
+# E2 e as quatro categorias
+python avaliacao_diacriticos/integridade.py --saida avaliacao_diacriticos/resultados/integridade \
+    --sinais avaliacao_diacriticos/resultados/sinais \
+    --modelo <rotulo>=<pasta das imagens>:<pasta com o paineis.tsv>
+```
+
+Cada um leva cerca de um minuto por modelo na CPU. Os testes sintéticos do
+eixo 1 original continuam em `testes_metrica.py`.
+
+## Métrica final, perguntas 1 e 2 (E1)
+
+`sinais.py` junta as duas medidas que passaram na anotação humana do modelo de
+40 épocas (`anotacao_40ep.md`).
+
+- Acento em cima: manchas de tinta soltas, inteiras acima do corpo da
+  palavra, como no `scripts/medir_marcas.py` do colega.
+- Cedilha: tinta abaixo da linha de base na coluna de cada c, como na sexta
+  tentativa da seção "Cedilha".
+
+Na posição, cada marca vai para a letra cuja coluna, pelo alinhador, contém o
+centro dela. Duas regras foram acrescentadas ao detector do colega:
+
+- alta: aceita uma marca mais alta que a altura-x quando ela está inteira
+  acima do corpo. O detector original a descarta como se fosse haste.
+- vogal: se a marca cai numa consoante, ela vai para a vogal cuja coluna mais
+  se sobrepõe a ela, porque acento em português só cai em vogal.
+
+O `scripts/medir_marcas.py` não foi alterado. Ele continua sendo a régua das
+comparações de treino.
+
+Cada palavra recebe uma categoria.
+
+| categoria | quando |
+|---|---|
+| correto | todos os sinais pedidos, na letra certa, e nada a mais |
+| a mais | os sinais pedidos estão certos, mas há marca em outra letra |
+| letra errada | um acento pedido falta na letra dele, e há marca em outra |
+| ausente | falta um sinal pedido, sem marca em outro lugar |
+| limpa ou marca indevida | palavras sem nada pedido |
+
+### Validação
+
+Contra o gabarito humano das 180 imagens sem i e j do modelo de 40 épocas.
+Detalhes em `resultados/presenca_40ep.txt`, `resultados/posicao_v2_40ep.txt`
+e `resultados/categorias_40ep.txt`.
+
+Presença.
+
+| pergunta | concordam | precisão | recall | kappa |
+|---|---|---|---|---|
+| há marca em cima | 164 de 180 (91%) | 0,91 | 0,88 | 0,82 |
+| há cedilha | 204 de 212 (96%) | 0,97 | 0,90 | 0,91 |
+| todos os sinais pedidos presentes | 119 de 135 (88%) | 0,97 | 0,90 | 0,15 |
+
+O kappa da última linha é baixo porque as pessoas veem o sinal pedido em 130
+das 135 palavras, e quase não há casos negativos. Precisão e recall dizem mais.
+Quando o detector diz que o sinal está lá, acerta 97% das vezes, e ele acha
+90% dos sinais que as pessoas veem.
+
+Posição, por vogal. As palavras foram divididas em duas metades. As regras
+foram decididas olhando a metade A, e a metade B não foi usada em nenhuma
+escolha.
+
+| detector | kappa por vogal, metade A | kappa por vogal, metade B |
+|---|---|---|
+| original | 0,83 | 0,72 |
+| com as regras alta e vogal | 0,87 | 0,75 |
+
+Duas outras correções foram testadas e descartadas. Uma área mínima para a
+marca melhorou a metade A e piorou a B. A tinta acima de cada vogal, desenho
+igual ao da cedilha, achou acentos que encostam na letra, mas inventou marca
+nas palavras sem acento, porque a haste de um l ou t vizinho invade a coluna
+da vogal.
+
+Categoria por palavra, nas 135 palavras pedidas com acento.
+
+| categoria | pessoas | detector |
+|---|---|---|
+| correto | 87% | 75% |
+| a mais | 6% | 6% |
+| letra errada | 4% | 9% |
+| ausente | 4% | 10% |
+
+As duas concordam na categoria em 104 das 135 palavras (77%, kappa 0,33). O
+erro principal é o acento que encosta na letra: as pessoas o veem, o detector
+não acha mancha solta e chama a palavra de ausente (11 casos) ou de letra
+errada (4). Por isso a métrica subestima o "correto" em uns 12 pontos. Para
+comparar modelos entre si ela serve, desde que essa falha atinja os modelos de
+forma parecida. Para dizer quantas palavras um modelo acerta, o número vem com
+essa ressalva.
+
+### Por classe de sinal
+
+`por_classe.py` separa o resultado pelo que a palavra pede: agudo, til,
+circunflexo, cedilha, e cedilha com til. Sai em `resultados/sinais/por_classe.md`
+para cada modelo. No protocolo, circunflexo e cedilha com til têm duas palavras
+cada, e os números delas dependem muito dessas duas palavras.
+
+No modelo de 40 épocas, contra o gabarito humano (`resultados/categorias_40ep.txt`):
+
+| classe | imagens anotadas | correto pelas pessoas | correto pela métrica |
+|---|---|---|---|
+| cedilha | 55 | 96% | 89% |
+| cedilha e til | 8 | 100% | 88% |
+| til | 20 | 90% | 65% |
+| agudo | 36 | 78% | 64% |
+| circunflexo | 16 | 62% | 56% |
+
+As pessoas ordenam as classes assim: cedilha melhor, depois til, agudo e
+circunflexo. A métrica mantém a cedilha no topo e o circunflexo no fundo, mas
+subestima o til em 25 pontos e o põe junto do agudo. Nas palavras com til em
+que métrica e pessoas discordam, o til encosta na letra e não é visto, cobre
+duas vogais (o "ão") e cai na vizinha, ou sai partido em dois pedaços. Por
+isso a comparação entre classes pela métrica deve ser lida com cuidado, e a
+diferença entre til e agudo só vale pelo gabarito humano.
+
+### Limitações
+
+- Palavras com i ou j ficam de fora, porque o pingo é uma marca solta em cima.
+- O tipo do sinal não é julgado. Um til no lugar de um agudo conta como
+  correto.
+- A cedilha conta só como presença. Na anotação, as pessoas às vezes marcaram
+  a letra vizinha do c, e o gabarito da letra dela não é confiável.
+- A validação humana é de um modelo só, o de 40 épocas.
+
+## Métrica final, pergunta 3 (E2) e as quatro categorias
+
+O E2 pergunta se a palavra continua legível, descontando o acento. Em vez do
+CER absoluto de um leitor, ele é medido em pares. Cada palavra acentuada do
+protocolo tem o esqueleto gerado com o mesmo escritor e a mesma semente, e o
+E2 é
+
+```
+dCER = CER(acentuada) - CER(esqueleto)
+```
+
+os dois contra a palavra sem acento, com o leitor do `scripts/avaliar_pt.py`.
+O rigor do leitor e a dificuldade de cada palavra se cancelam na diferença, e
+sobra o que o acento fez com a palavra. É o mesmo desenho pareado da diferença
+pareada do E1.
+
+Antes de ler, as duas imagens passam por `sinais.Detector.apagar_sinais`, que
+tira as manchas soltas em cima e a tinta abaixo dos c. Sem isso o leitor lê o
+próprio acento como letra. Nos pares da base `iam_pt_alinhado`, em que a
+acentuada e o par têm as letras idênticas, o custo do sinal para o leitor fica
+assim (`experimentos/custo_do_acento.py`, `resultados/custo_do_acento.txt`):
+
+| pares da base | lido como está | com os sinais apagados |
+|---|---|---|
+| acento em cima, 536 pares | +0,092 | +0,008, CER idêntico em 89% |
+| com cedilha, 264 pares | +0,110 | +0,029, CER idêntico em 65% |
+
+Uma palavra conta como degradada quando o dCER passa de 0,2. A própria
+variação da geração também produz pares em que a acentuada é lida melhor; a
+fração com dCER abaixo de −0,2 serve de controle desse ruído em cada modelo.
+
+Cruzando com o E1, cada palavra pedida com acento cai numa categoria.
+
+| | não degradada | degradada |
+|---|---|---|
+| sinais pedidos presentes | acerto | degradação com diacrítico |
+| falta algum sinal | omissão | degradação sem diacrítico |
+
+Aplicado aos modelos de treino (`integridade.py`, resultados em
+`resultados/integridade/`):
+
+| modelo | dCER médio, IC95 por palavra | piora > 0,2 | melhora > 0,2 | acerto | omissão | degradação com diacrítico | degradação sem diacrítico |
+|---|---|---|---|---|---|---|---|
+| só professor, 11 ép. | +0,23 (+0,17 a +0,30) | 51% | 3% | 22% | 27% | 31% | 19% |
+| professor, 16 ép. | +0,20 (+0,17 a +0,23) | 46% | 4% | 48% | 6% | 38% | 8% |
+| pares sem professor, 16 ép. | +0,05 (+0,04 a +0,07) | 19% | 8% | 66% | 15% | 14% | 5% |
+| fora da máscara, 16 ép. | +0,07 (+0,06 a +0,08) | 15% | 3% | 53% | 31% | 10% | 5% |
+| fora em ruído baixo, 16 ép. | +0,10 (+0,08 a +0,12) | 25% | 4% | 53% | 21% | 16% | 10% |
+| zona vogais, 16 ép. | +0,19 (+0,16 a +0,22) | 46% | 4% | 45% | 9% | 37% | 9% |
+| zona vogais, 40 ép. | +0,17 (+0,14 a +0,20) | 41% | 4% | 53% | 6% | 36% | 6% |
+
+O E2 confirma, por outro caminho, o que o treino tinha visto pelo CER das
+acentuadas: as variantes com o professor fora da máscara limpam a letra (dCER
+de 0,07) e perdem o acento (omissão de 21% a 31%), e a zona vogais mantém o
+acento com a letra pior que a do esqueleto. Em todos os modelos a piora passa
+muito da melhora, então a degradação não é ruído da geração.
+
+### O que não está validado
+
+O E2 não tem validação humana direta. A anotação perguntou se cada palavra é
+legível, e as duas pessoas concordaram pouco nisso (kappa de 0,15 a 0,44). Só
+5 das 212 imagens anotadas formam par com o próprio esqueleto. A validação que
+falta é pequena: umas 100 duplas, acentuada e esqueleto lado a lado, com a
+pergunta "a palavra de baixo está pior escrita que a de cima?".
+
+### Correção da taxa de acerto, tentada e descartada
+
+`experimentos/corrigir_correto.py` tentou estimar a taxa verdadeira de
+palavras corretas a partir da medida, pela sensibilidade (0,82) e
+especificidade (0,72) da métrica na anotação. Não serve. A especificidade sai
+de 18 palavras e leva a taxa dos modelos piores a zero, com intervalos de 0 a
+50% ou mais (`resultados/correto_corrigido.txt`). E a especificidade medida
+num modelo bom não vale para modelos piores, em que o erro é mais evidente.
+
+## Histórico
+
+As seções daqui para baixo registram o eixo 1 original e as tentativas que
+levaram à métrica final. Ficam como registro do caminho, e os números delas
+não são os da métrica final.
+
+## Como o eixo 1 original funciona
 
 1. Gera a mesma palavra duas vezes, com e sem acento ("ação" e "acao"), com o
    mesmo escritor e a mesma semente. A única diferença entre as duas imagens é
@@ -20,7 +265,7 @@ O escore é uma fração do tamanho da letra. Zero significa que nada foi
 desenhado. Um acento de tamanho normal vale entre 0,13 e 0,18, conforme a
 marca.
 
-## Arquivos
+## Arquivos do eixo 1 original
 
 | arquivo | papel |
 |---|---|
@@ -30,12 +275,13 @@ marca.
 | `avaliar.py` | aplica a métrica a uma pasta de amostras e resume |
 | `metrica.py` | funções de apoio e a variante para imagem sem par |
 | `testes_metrica.py` | testes com figuras sintéticas de resposta conhecida |
-| `experimentos/` | scripts de validação e comparação, e os do eixo 2 |
+| `e1_alinhador.py`, `marcas_do_par.py`, `vazamento.py`, `anotacao.py` | variantes do eixo 1, a marca nova no par, o vazamento por tinta e a primeira anotação (peso 5) |
+| `experimentos/` | scripts de validação e comparação, e os do eixo 2 original |
 | `figuras/` | figuras explicativas, geradas por `experimentos/figuras.py` |
 | `resultados/` | medições em CSV e JSON |
 | `amostras/` | conjuntos de imagem, fora do git |
 
-## Como usar
+## Como usar o eixo 1 original
 
 Todos os comandos rodam da raiz do repositório, dentro do ambiente:
 
@@ -74,7 +320,7 @@ Refazer as figuras:
 python avaliacao_diacriticos/experimentos/figuras.py
 ```
 
-## Como ler o resultado
+## Como ler o resultado do eixo 1 original
 
 O `avaliar.py` imprime, por marca, o escore médio e um intervalo de confiança
 de 95%. O intervalo é calculado reamostrando palavras, porque várias imagens
@@ -394,7 +640,7 @@ cedilha do modelo de 40 épocas ela acusa 15 de 55 imagens, e as pessoas viram
 acento a mais em 1. O lado do treino passou a usar só a marca em cima
 (`diagnostico/marcas_so_cedilha.py`).
 
-## Eixo 2
+## Eixo 2 original: leitores prontos
 
 O eixo 2 precisa de um reconhecedor que leia manuscrito em português. Três
 modelos prontos foram testados em recortes reais do BRESSAY
@@ -410,7 +656,7 @@ O PaddleOCR é o melhor. Em 1.000 palavras acentuadas ele acerta as letras em
 15% e, dessas, acerta também o acento em 28%. Não é suficiente para sustentar
 o eixo. O PaddleOCR roda no shell `nix develop .#htr`, com Python 3.13.
 
-## Limitações
+## Limitações do eixo 1 original
 
 - O controle positivo é um acento pintado. Ainda não há um gerador que
   desenhe acentos para servir de positivo real.

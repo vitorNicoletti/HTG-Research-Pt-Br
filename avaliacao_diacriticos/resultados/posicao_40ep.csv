@@ -1,0 +1,181 @@
+imagem,palavra,grupo,gabarito,detector,vizinha,perdida,inventada
+img_001.png,pôr,com acento em cima,2,,0,1,0
+img_002.png,estaras,sem acento em cima pedido,,,0,0,0
+img_003.png,lançados,sem acento em cima pedido,,,0,0,0
+img_004.png,recomeça,sem acento em cima pedido,,,0,0,0
+img_005.png,terráquea,com acento em cima,5,5,0,0,0
+img_006.png,engraçadas,sem acento em cima pedido,,,0,0,0
+img_008.png,haverá,com acento em cima,6,6,0,0,0
+img_009.png,pás,com acento em cima,2,2,0,0,0
+img_011.png,pôr,com acento em cima,2,2,0,0,0
+img_012.png,prestação,com acento em cima,8,8,0,0,0
+img_013.png,terço,sem acento em cima pedido,,,0,0,0
+img_014.png,caçadoras,sem acento em cima pedido,,,0,0,0
+img_015.png,lancados,sem acento em cima pedido,,,0,0,0
+img_016.png,conexões,com acento em cima,6,6,0,0,0
+img_017.png,bálsamo,com acento em cima,5 7,5 7,0,0,0
+img_018.png,confusões,com acento em cima,7,7,0,0,0
+img_019.png,pôr,com acento em cima,2,2,0,0,0
+img_021.png,caçadoras,sem acento em cima pedido,,,0,0,0
+img_022.png,terço,sem acento em cima pedido,,,0,0,0
+img_023.png,arregacar,sem acento em cima pedido,,,0,0,0
+img_025.png,engraçadas,sem acento em cima pedido,,,0,0,0
+img_027.png,recomeça,sem acento em cima pedido,,,0,0,0
+img_028.png,opressão,com acento em cima,7,7,0,0,0
+img_029.png,caçadora,sem acento em cima pedido,,,0,0,0
+img_030.png,pás,com acento em cima,2,2,0,0,0
+img_031.png,despedaçar,sem acento em cima pedido,,,0,0,0
+img_032.png,engraçadas,sem acento em cima pedido,,,0,0,0
+img_033.png,apanho,sem acento em cima pedido,,,0,0,0
+img_034.png,pensámos,com acento em cima,5,5,0,0,0
+img_035.png,prestacao,sem acento em cima pedido,,,0,0,0
+img_036.png,relâmpagos,com acento em cima,7,7,0,0,0
+img_038.png,pôr,com acento em cima,1 2,2,0,1,0
+img_039.png,florença,sem acento em cima pedido,,,0,0,0
+img_040.png,pôr,com acento em cima,2 3,2,0,1,0
+img_043.png,unção,com acento em cima,4,4,0,0,0
+img_044.png,sofrera,sem acento em cima pedido,,,0,0,0
+img_046.png,estarás,com acento em cima,6,2 6,0,0,1
+img_047.png,balsamo,sem acento em cima pedido,,,0,0,0
+img_048.png,caçadora,sem acento em cima pedido,,,0,0,0
+img_049.png,travas,sem acento em cima pedido,,,0,0,0
+img_050.png,matarás,com acento em cima,6,,0,1,0
+img_052.png,tragada,sem acento em cima pedido,,,0,0,0
+img_053.png,mataras,sem acento em cima pedido,,,0,0,0
+img_054.png,percussão,com acento em cima,8,8,0,0,0
+img_055.png,opressao,sem acento em cima pedido,,,0,0,0
+img_056.png,matarás,com acento em cima,6,6,0,0,0
+img_057.png,recomeça,sem acento em cima pedido,,,0,0,0
+img_059.png,percussão,com acento em cima,8,8,0,0,0
+img_060.png,pas,sem acento em cima pedido,,,0,0,0
+img_061.png,recomeça,sem acento em cima pedido,,8,0,0,1
+img_062.png,estarás,com acento em cima,6,6,0,0,0
+img_063.png,layout,sem acento em cima pedido,,,0,0,0
+img_065.png,pensámos,com acento em cima,5,4,1,0,0
+img_066.png,fletcher,sem acento em cima pedido,,,0,0,0
+img_067.png,caçadora,sem acento em cima pedido,,,0,0,0
+img_068.png,lançados,sem acento em cima pedido,,,0,0,0
+img_070.png,relâmpagos,com acento em cima,4,4,0,0,0
+img_071.png,weller,sem acento em cima pedido,,,0,0,0
+img_072.png,despedaçar,sem acento em cima pedido,,,0,0,0
+img_073.png,reclusão,com acento em cima,7,7,0,0,0
+img_074.png,arregaçar,sem acento em cima pedido,,,0,0,0
+img_075.png,relâmpagos,com acento em cima,4,3,1,0,0
+img_076.png,pensámos,com acento em cima,5 7,5,0,1,0
+img_078.png,cacadora,sem acento em cima pedido,,,0,0,0
+img_079.png,mordaça,sem acento em cima pedido,,,0,0,0
+img_080.png,uncao,sem acento em cima pedido,,,0,0,0
+img_083.png,haverá,com acento em cima,2,2 5,0,0,1
+img_084.png,bálsamo,com acento em cima,2,,0,1,0
+img_085.png,despedaçar,sem acento em cima pedido,,,0,0,0
+img_086.png,conexoes,sem acento em cima pedido,,,0,0,0
+img_087.png,lançaremos,sem acento em cima pedido,9,,0,1,0
+img_088.png,recomeca,sem acento em cima pedido,,,0,0,0
+img_089.png,prestação,com acento em cima,8,8,0,0,0
+img_090.png,relâmpagos,com acento em cima,4,,0,1,0
+img_092.png,terráquea,com acento em cima,5,5,0,0,0
+img_093.png,lembrarem,sem acento em cima pedido,,,0,0,0
+img_095.png,lançaremos,sem acento em cima pedido,,,0,0,0
+img_096.png,arregaçar,sem acento em cima pedido,,,0,0,0
+img_097.png,lançados,sem acento em cima pedido,,,0,0,0
+img_098.png,terço,sem acento em cima pedido,,1,0,0,1
+img_099.png,pôr,com acento em cima,2,,0,1,0
+img_100.png,sofrerá,com acento em cima,7,7,0,0,0
+img_102.png,acento,sem acento em cima pedido,,,0,0,0
+img_103.png,caçadoras,sem acento em cima pedido,,,0,0,0
+img_104.png,haverá,com acento em cima,2 6,2,0,1,0
+img_105.png,confusões,com acento em cima,2 7,,0,2,0
+img_106.png,opressão,com acento em cima,7,,0,1,0
+img_107.png,reclusão,com acento em cima,7,7,0,0,0
+img_108.png,contactos,sem acento em cima pedido,,,0,0,0
+img_109.png,despedaçar,sem acento em cima pedido,,,0,0,0
+img_110.png,léguas,com acento em cima,2 5,5,0,1,0
+img_111.png,lançaremos,sem acento em cima pedido,,1,0,0,1
+img_113.png,relâmpagos,com acento em cima,4,4,0,0,0
+img_114.png,mordaça,sem acento em cima pedido,,,0,0,0
+img_115.png,relâmpagos,com acento em cima,7,7,0,0,0
+img_116.png,central,sem acento em cima pedido,,,0,0,0
+img_117.png,unção,com acento em cima,4,4,0,0,0
+img_118.png,florença,sem acento em cima pedido,,,0,0,0
+img_119.png,mordaça,sem acento em cima pedido,,,0,0,0
+img_120.png,havera,sem acento em cima pedido,,,0,0,0
+img_121.png,unção,com acento em cima,4,4,0,0,0
+img_122.png,pobres,sem acento em cima pedido,,,0,0,0
+img_123.png,mordaça,sem acento em cima pedido,,,0,0,0
+img_124.png,terráquea,com acento em cima,5,,0,1,0
+img_125.png,conexões,com acento em cima,6,6,0,0,0
+img_127.png,lançaremos,sem acento em cima pedido,,,0,0,0
+img_128.png,sofrerá,com acento em cima,,2,0,0,1
+img_129.png,lançados,sem acento em cima pedido,,,0,0,0
+img_130.png,arregaçar,sem acento em cima pedido,,,0,0,0
+img_131.png,por,sem acento em cima pedido,,,0,0,0
+img_132.png,terço,sem acento em cima pedido,,,0,0,0
+img_133.png,florença,sem acento em cima pedido,,,0,0,0
+img_134.png,arregaçar,sem acento em cima pedido,,,0,0,0
+img_135.png,percussao,sem acento em cima pedido,,,0,0,0
+img_136.png,confusoes,sem acento em cima pedido,,,0,0,0
+img_137.png,prestação,com acento em cima,8,7 8,0,0,1
+img_138.png,caçadoras,sem acento em cima pedido,,,0,0,0
+img_139.png,matarás,com acento em cima,6,6,0,0,0
+img_140.png,léguas,com acento em cima,2,,0,1,0
+img_141.png,unção,com acento em cima,4,3,1,0,0
+img_142.png,bálsamo,com acento em cima,2,2,0,0,0
+img_143.png,cacadoras,sem acento em cima pedido,,,0,0,0
+img_144.png,pás,com acento em cima,2,2,0,0,0
+img_145.png,mordaca,sem acento em cima pedido,,,0,0,0
+img_146.png,conexões,com acento em cima,6,6,0,0,0
+img_147.png,florenca,sem acento em cima pedido,,,0,0,0
+img_148.png,haverá,com acento em cima,6,6,0,0,0
+img_149.png,florença,sem acento em cima pedido,,,0,0,0
+img_151.png,relâmpagos,com acento em cima,,4 7,0,0,2
+img_152.png,sledge,sem acento em cima pedido,,,0,0,0
+img_153.png,pás,com acento em cima,2,2,0,0,0
+img_155.png,matarás,com acento em cima,6,6,0,0,0
+img_156.png,lancaremos,sem acento em cima pedido,,,0,0,0
+img_157.png,engraçadas,sem acento em cima pedido,,,0,0,0
+img_158.png,caçadora,sem acento em cima pedido,,,0,0,0
+img_159.png,relampagos,sem acento em cima pedido,,,0,0,0
+img_160.png,caçadora,sem acento em cima pedido,,,0,0,0
+img_162.png,conexões,com acento em cima,6,6,0,0,0
+img_164.png,confusões,com acento em cima,7,8,1,0,0
+img_165.png,reclusão,com acento em cima,7,6,1,0,0
+img_166.png,pôr,com acento em cima,2,2,0,0,0
+img_168.png,terraquea,sem acento em cima pedido,,,0,0,0
+img_169.png,huo,sem acento em cima pedido,,,0,0,0
+img_170.png,caçadoras,sem acento em cima pedido,,,0,0,0
+img_171.png,estarás,com acento em cima,6,6,0,0,0
+img_172.png,mordaça,sem acento em cima pedido,,,0,0,0
+img_173.png,engraçadas,sem acento em cima pedido,,,0,0,0
+img_174.png,léguas,com acento em cima,4,4,0,0,0
+img_175.png,atrever,sem acento em cima pedido,,,0,0,0
+img_176.png,bálsamo,com acento em cima,,,0,0,0
+img_178.png,despedaçar,sem acento em cima pedido,,,0,0,0
+img_179.png,terráquea,com acento em cima,5,4,1,0,0
+img_180.png,pôr,com acento em cima,2,2,0,0,0
+img_181.png,arregaçar,sem acento em cima pedido,,6,0,0,1
+img_182.png,percussão,com acento em cima,8,8,0,0,0
+img_185.png,lançaremos,sem acento em cima pedido,,,0,0,0
+img_186.png,opressão,com acento em cima,7,1 7,0,0,1
+img_187.png,sofrerá,com acento em cima,7,4 7,0,0,1
+img_189.png,terco,sem acento em cima pedido,,,0,0,0
+img_191.png,percussão,com acento em cima,8,7 8,0,0,1
+img_192.png,leguas,sem acento em cima pedido,,,0,0,0
+img_194.png,sofrerá,com acento em cima,7,7,0,0,0
+img_195.png,opressão,com acento em cima,7,7,0,0,0
+img_196.png,cacadoras,sem acento em cima pedido,,,0,0,0
+img_197.png,relâmpagos,com acento em cima,,,0,0,0
+img_198.png,despedacar,sem acento em cima pedido,,,0,0,0
+img_199.png,confusões,com acento em cima,7,7,0,0,0
+img_200.png,reclusão,com acento em cima,5 7,5 7,0,0,0
+img_201.png,terço,sem acento em cima pedido,,,0,0,0
+img_202.png,lançados,sem acento em cima pedido,,,0,0,0
+img_203.png,torresmo,sem acento em cima pedido,,1,0,0,1
+img_204.png,florença,sem acento em cima pedido,,,0,0,0
+img_205.png,léguas,com acento em cima,2,,0,1,0
+img_206.png,engracadas,sem acento em cima pedido,,,0,0,0
+img_207.png,pensámos,com acento em cima,5,5,0,0,0
+img_208.png,estarás,com acento em cima,6,6,0,0,0
+img_209.png,pensamos,sem acento em cima pedido,,,0,0,0
+img_210.png,recomeça,sem acento em cima pedido,,,0,0,0
+img_211.png,prestação,com acento em cima,8,8,0,0,0
+img_212.png,reclusao,sem acento em cima pedido,,,0,0,0
