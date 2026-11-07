@@ -10,8 +10,7 @@ ambiente ativado.
 
 ```bash
 git clone https://github.com/vitorNicoletti/HTG-Research-Pt-Br
-cd HTG-Research-Pt-Br
-git checkout treino-split-reduzido          # a branch com todo o trabalho
+cd HTG-Research-Pt-Br                        # o trabalho está na main
 
 # o DiffusionPen fica ao lado, fora do git
 git clone https://github.com/koninik/DiffusionPen.git DiffusionPen
@@ -28,9 +27,11 @@ Artefatos externos, que não vão para o git:
 | VAE e agendador do SD 1.5 | `stable-diffusion-v1-5/stable-diffusion-v1-5` no Hugging Face | baixado automaticamente |
 | BRESSAY (só para a fase 3) | site oficial do dataset | `bressay/data/words/` |
 
-Os modelos auxiliares treinados por nós (`modelos/alinhador_iam.pt` e
-`modelos/leitor_iam_transformer.pt`) também ficam fora do git. Recrie com o
-passo 4.
+Os modelos treinados por nós (o modelo final `modelos/zona_vogais_40ep.pt`,
+o alinhador `modelos/alinhador_iam.pt` e o leitor
+`modelos/leitor_iam_transformer.pt`) e a base sintética `iam_pt_alinhado/`
+também ficam fora do git. Estão na pasta do Google Drive indicada no
+[`readme.txt`](../readme.txt), ou podem ser refeitos com os passos 4 e 5.
 
 ## 2. Ambiente
 
