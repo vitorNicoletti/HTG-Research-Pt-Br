@@ -17,23 +17,25 @@ formas de avaliar especificamente os diacríticos.
 ## Onde estamos
 
 Para uma visão do trabalho inteiro, fase por fase, com os números e uma figura
-de cada etapa, abra [`resultados/README.md`](resultados/README.md).
+de cada etapa, abra [`resultados/README.md`](resultados/README.md). A lista de
+todos os artefatos entregues, com os parâmetros de execução e o link dos
+modelos treinados, está em [`readme.txt`](readme.txt).
 
-O melhor modelo é o DiffusionPen com o acento separado na entrada de texto, um
+O modelo final é o DiffusionPen com o acento separado na entrada de texto, um
 professor (cópia congelada do modelo original) e peso no acento e nas vogais,
-treinado por 40 épocas sobre uma base de acentos sintéticos. Na validação,
-pelo olho de duas pessoas e pelos detectores:
+treinado por 40 épocas sobre uma base de acentos sintéticos. Na validação:
 
-| | modelo original | melhor modelo |
+| | modelo original | modelo final |
 |---|---|---|
-| acento pedido presente | não desenha | 89% |
-| cedilha pedida desenhada | não desenha | 62 de 63 |
-| acento em palavra que não pede | 5% | no nível do original |
-| letra das palavras sem acento (CER) | 0,195 | 0,186 |
+| palavras acentuadas corretas, pela métrica de diacríticos | quase nenhuma: marca em 6% delas, contra 5% nos esqueletos | 72% |
+| marca em palavra que não pede acento | 5% | 4% a 6% |
+| letra das palavras sem acento pedido (CER) | 0,195 | 0,186 |
 
-Em aberto ficam o acento a mais dentro das palavras acentuadas (15%), a letra
-das palavras acentuadas, pior que a da base de treino, e uma medida automática
-da posição do acento.
+A métrica concorda com a anotação de duas pessoas com kappa 0,82 na marca em
+cima e 0,91 na cedilha ([`resultados/metrica/`](resultados/metrica/README.md)).
+Em aberto ficam a letra das palavras acentuadas (CER 0,39, contra 0,21 das
+palavras sem acento), o acento a mais em 8% das palavras acentuadas e o tipo
+do sinal, que a métrica não mede.
 
 ## Documentação
 
@@ -62,10 +64,14 @@ que apareceram, e [`LOG.md`](LOG.md), o diário de execução.
 git clone https://github.com/koninik/DiffusionPen.git DiffusionPen   # o modelo (fora do git)
 bash scripts/aplicar_mods.sh                                          # aplica as nossas modificações
 python diagnostico/teste_direcao_gradiente.py                         # valide a GPU antes de treinar
-python scripts/treinar.py experimentos/iam_pt_peso5.json --dry-run    # um experimento
+NOME=zona_vogais EPOCAS=40 DESTINO=./copias \
+    ARGS="--acento_separado --peso_zona 5 --zona vogais" \
+    bash scripts/treino_nuvem.sh                                     # o modelo final
 ```
 
-Pesos, dados e todos os passos estão em [docs/11_como_rodar.md](docs/11_como_rodar.md).
+O treino precisa das palavras do IAM e da base `iam_pt_alinhado`. A base e os
+modelos treinados estão na pasta do Drive do [`readme.txt`](readme.txt); o
+resto dos pesos, dados e passos está em [docs/11_como_rodar.md](docs/11_como_rodar.md).
 
 > **Antes de treinar em qualquer GPU nova, rode os testes de `diagnostico/`.**
 > A primeira placa usada (RX 6600 XT) calculava o gradiente na direção errada,
